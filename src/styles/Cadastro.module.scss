@@ -1,0 +1,76 @@
+$azul: #046AD0;
+$cinza: #5D5F5D;
+$botoes:#FDFDFD;
+$azul-indicador:#1165BA;
+$gelo: #C5C7C5;
+$margin-box: 20px ;
+
+.layout{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+.boxLogin{
+    width: 26.3%;
+    min-width: 150px;
+    height: 658px;
+    background-color: $botoes;
+    opacity: 65%;
+    box-shadow: rgba(22, 19, 19, 0.937) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 12px;
+    margin: 60px;
+    margin-left: auto;
+}
+
+.login{
+margin: $margin-box;
+
+}
+
+.title{
+    width: 241px;
+    height: 55px;
+    color: $azul;
+    font-size: 35px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.asteristico{
+color: $azul-indicador;
+}
+
+.indica{
+    color: $cinza;
+    font-family: 'Radio Canada';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    height: 20px;
+}
+
+.nomes{
+font-family: 'Radio Canada';
+font-style: normal;
+font-size: 14px;
+color: $cinza;
+}
+
+.botoes{
+    width: 90%;
+    height: 40px;
+    margin-top: 5px;
+}
+.inputs{
+    position: absolute;
+    width: 23.7%;
+    height: 29px;
+    background: $botoes;
+    border-radius: 5px;
+    border: $cinza 1px solid;
+     
+}
