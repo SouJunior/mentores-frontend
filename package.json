@@ -14,10 +14,14 @@
     "eslint-config-next": "13.2.4",
     "next": "13.2.4",
     "react": "18.2.0",
+<<<<<<< HEAD
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "sass": "^1.61.0",
     "yup": "^1.1.0"
+=======
+    "react-dom": "18.2.0"
+>>>>>>> f7e81fbd2d402aa63a99556e248e556f9509bc3e
   },
   "devDependencies": {
     "jest": "^29.5.0"

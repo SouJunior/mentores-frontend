@@ -1,4 +1,4 @@
-import styles from '../../styles/Cadastro.module.scss'
+import styles from '../Cadastro/Cadastro.module.scss'
 import { useForm } from 'react-hook-form' 
 import Image from 'next/image'
 import { yupResolver } from '@hookform/resolvers/yup';
