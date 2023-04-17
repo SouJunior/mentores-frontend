@@ -1,6 +1,8 @@
 import styles from './formCard.module.scss';
 import Image from 'next/image';
 import Checkbox from "../Checkbox/checkbox";
+import InputSenha from "../InputSenha/inputSenha";
+import InputEmail from "../InputEmail/inputEmail";
 
 export default function FormCard(props) {
   return (
@@ -16,10 +18,10 @@ export default function FormCard(props) {
         <h1 className={styles.titulo}>Bem-vindo de volta</h1>
 
         <h2 className={styles.texto}>E-mail</h2>
-        <input type="email" id="email" className={styles.email} />
+        <InputEmail />
 
         <h2 className={styles.texto}>Senha</h2>
-        <input type="password" id="senha" className={styles.senha} />
+        <InputSenha />
 
         <label>
           <Checkbox />

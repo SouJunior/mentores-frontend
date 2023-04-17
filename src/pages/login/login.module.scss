@@ -1,10 +1,14 @@
 .backgroundImage {
   background: url("../../../public/BackgroundLogin.svg") no-repeat;
   background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .figures {
   position: absolute;
+  width: 70%;
+  height: 90%;
   top: 29px;
-  left: -60px;
+  left: -80px;
 }

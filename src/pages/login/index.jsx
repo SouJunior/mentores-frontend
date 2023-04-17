@@ -9,8 +9,8 @@ export default function LoginPage() {
         className={styles.figures}
         src="BackgroundFigures.svg"
         alt="Figuras do Background"
-        width={1316.51}
-        height={855.58}
+        width={0}
+        height={0}
       />
       <FormCard />
     </div>

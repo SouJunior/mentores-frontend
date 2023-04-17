@@ -6,10 +6,10 @@ $secondary-color: #5D5F5D;
   box-sizing: border-box;
 
   position: absolute;
-  width: 504px;
+  width: 27%;
   height: 587px;
-  left: 1198px;
-  top: 149px;
+  left: 65%;
+  top: 15%;
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -54,8 +54,6 @@ $secondary-color: #5D5F5D;
 label {
   .link {
     float: right;
-    margin-bottom: 32px;
-    margin-top: 24px;
   }
 }
 
@@ -76,10 +74,12 @@ p {
   font-size: 16px;
   text-align: center;
   cursor: pointer;
+  margin-top: 32px;
   margin-bottom: 24px;
   transition: all 0.3s;
-}
 
-.botao:hover {
-  background: #003986;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background: #003986;
+  }
 }
