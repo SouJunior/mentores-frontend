@@ -90,12 +90,12 @@ function Cadastro () {
         <div className={styles.containerModal}>
             <div >
                 <button className={styles.concluir}
-                type="button"
+                type="submit"
                 onClick={() => setshowModal(true)}>
                     Concluir
                 </button>
                 <button className={styles.cancelar}
-                type="button"
+                type="submit"
                 onClick={() => setshowSeconModal(true)}>
                     Cancelar
                 </button>
@@ -142,7 +142,7 @@ function Cadastro () {
 
             {TermodModal ? (
             <div className={styles.termoPai}>
-                <div>
+                <div className={styles.backTermo}>
                 <Image alt="Logo" src='LogoSJ.svg' width={100} height={50}/>
                 <button type='button'className={styles.buttonTermo} onClick={() => setTermoModal(false)}>X</button>
                 </div>
@@ -158,7 +158,7 @@ function Cadastro () {
             </div>): null}
             {showTermodModal ? (
             <div className={styles.termoPai}>
-                <div>
+                <div className={styles.backTermo}>
                     <Image alt="Logo" src='LogoSJ.svg' width={100} height={50}/>
                     <button type='button' className={styles.buttonPolitica} onClick={() => setshowTermoModal(false)}>X</button>
                 </div>
