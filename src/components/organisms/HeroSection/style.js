@@ -5,6 +5,7 @@ export const ContainerHero = styled.div`
 
 	p {
 		margin-bottom: 40px;
+		font-size: ${(props) => props.theme.fontSizes.md};
 	}
 
 	input {
