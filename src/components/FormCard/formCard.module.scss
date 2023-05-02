@@ -4,22 +4,26 @@ $secondary-color: #5D5F5D;
 
 .formCard {
   box-sizing: border-box;
-
   position: absolute;
   width: 27%;
   height: 587px;
   left: 65%;
-  top: 15%;
+  top: 10%;
   padding: 32px;
   display: flex;
   flex-direction: column;
-
   background:
     linear-gradient(303.77deg, rgba(214, 214, 214, 0) -1.3%, rgba(232, 232, 232, 0.79) 54.57%),
     linear-gradient(180deg, rgba(253, 253, 253, 0) 0%, rgba(247, 247, 247, 0.79) 68.75%);
   opacity: 0.9;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.logo{
+
+  width: 80%;
+  height: 39.47px;
 }
 
 .titulo {
@@ -82,4 +86,11 @@ p {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background: #003986;
   }
+}
+
+.error{
+color: red;
+}
+.input-error {
+  background-color: #ffcccc; /* cor de fundo vermelha */
 }

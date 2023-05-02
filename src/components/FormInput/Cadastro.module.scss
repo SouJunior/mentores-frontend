@@ -10,20 +10,75 @@ $error: #C1292E;
 
 
 .divlogo{
-    position: absolute;
     width: 70%;
-    height: 102.5vh;
-    top: -19px;
+    height: 100vh;   
 }
 
 .logo{
-    position: absolute;
-    width: 107%;
-    height: 90%;
-    top: 45px;
-    left: -80px;
+    width: 100%;
+    height: 715px;
+}
+
+.souj{
+    width: 65%;
+    height: 53px;
+}
+.layout{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(303.77deg, rgba(17, 101, 186, 0.79) 34.68%, rgba(90, 156, 255, 0.79) 79.96%), linear-gradient(303.77deg, rgba(217, 217, 217, 0) -1.3%, rgba(17, 101, 186, 0.79) 54.57%);
+}
+
+.boxLogin{
+    width: 26.3%;
+    min-width: 150px;
+    height: 658px;
+    background-color: $botoes;
+    border-radius: 12px;
+    margin: 60px;
+    margin-left: auto;
+ 
+}
+
+.login{
+margin: $margin-box;
 
 }
+
+.title{
+    width: 241px;
+    height: 55px;
+    color: $azul;
+    font-size: 35px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.asteristico{
+color: $azul-indicador;
+}
+
+.indica{
+    color: $cinza;
+    font-family: 'Radio Canada';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    height: 20px;
+}
+
+.nomes{
+    font-family: 'Radio Canada';
+    font-style: normal;
+    font-size: 14px;
+    color: $cinza;
+}
+    
+
 
 .termo{
     margin: 16px;
@@ -78,33 +133,6 @@ outline:none;
     outline:none;
     }
 
-    .containerModal{
-        width: 100%;
-        height: 110px;
-        display: inline-block;
-        text-align: center;
-        justify-content: center;
-    }
-    
-.concluir{
-    display: inline-block;
-    width: 85%;
-    height: 42px;
-    background:$botao;
-    border-radius: 8px;
-    color: $gelo;
-    border: none;
-    margin: 5px;
-    }
-    
-    .cancelar{
-        display: inline-block;
-        width: 85%;
-        height: 42px;
-        background: #FDFDFD;;
-        border-radius: 8px;
-        color: $cinza;
-        }
 
     .error{
         color:$error;
@@ -337,3 +365,4 @@ color: #5D5F5D;
     position: flex;
     width: 100%;
 }
+

@@ -1,11 +1,12 @@
-import Image from 'next/image';
 import styles from './inputEmail.module.scss'
 
-export default function InputEmail() {
+
+export default function InputEmail({setEmail, email}) {
+
   return (
     <div className={styles.container}>
       <span className={styles.image}></span>
-      <input className={styles.input} type="email" placeholder="mentorsoujunior@gmail.com" />
+      <input className={styles.input} type="email" placeholder="mentorsoujunior@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
     </div>
   )
 }
