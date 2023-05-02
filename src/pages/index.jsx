@@ -7,7 +7,6 @@ export default function Home() {
 			<Head>
 				<title>Sou Junior | Mentoria Online Início</title>
 			</Head>
-
 			<HomePage />
 		</>
 	);
