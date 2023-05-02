@@ -3,8 +3,8 @@ import Image from 'next/image';
 import styles from './inputSenha.module.scss'
 
 
-export default function InputSenha() {
-  const inputRef = useRef(null);
+export default function InputSenha({setPassword, password}) {
+  const inputRef = useRef();
   const [eyeIsClosed, setEyeState] = useState(false);
 
   const toggleShow = () => {
@@ -37,8 +37,8 @@ export default function InputSenha() {
   return (
     <div className={styles.container}>
       <span className={styles.image}></span>
-      <input className={styles.input} ref={inputRef} type="password" placeholder="senha123" />
-      <button className={styles.button} type='button' onClick={toggleShow}>{eyeIsClosed ? <EyeClosed /> : <Eye />}</button>
+      <input className={styles.input} ref={inputRef} placeholder="senha123"  value={password} onChange={(e) => setPassword(e.target.value)}/>
+      <button className={styles.button} type='button' onClick={toggleShow}  >{eyeIsClosed ? <EyeClosed /> : <Eye />}</button>
     </div>
   )
 }
