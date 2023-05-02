@@ -7,7 +7,7 @@ export default function LoginPage() {
 		<div className={styles.backgroundImage}>
 			<Image
 				className={styles.figures}
-				src='BackgroundFigures.svg'
+				src='/public/images/BackgroundFigures.svg'
 				alt='Figuras do Background'
 				width={0}
 				height={0}
