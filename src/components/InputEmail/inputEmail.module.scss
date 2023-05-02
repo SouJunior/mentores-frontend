@@ -11,14 +11,13 @@ $secondary-color: #5D5F5D;
   margin-top: 8px;
   margin-bottom: 32px;
   transition: box-shadow 0.3s;
-
   &:hover {
     border: 1px solid $primary-color;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 8px;
 
     .image {
       background: url("../../../public/EmailHover.svg") no-repeat;
-      background-position: 14px 14px;
+      background-position: 10px 10px;
     }
   }
 
@@ -28,14 +27,17 @@ $secondary-color: #5D5F5D;
 
     .image {
       background: url("../../../public/EmailSelected.svg") no-repeat;
-      background-position: 14px 14px;
+      background-position: 10px 10px;
     }
   }
 }
 
 .image {
   background: url("../../../public/EmailDefault.svg") no-repeat;
-  background-position: 14px 14px;
+  position: flex;
+  text-align: center;
+  justify-content: center;
+  background-position: 10px 10px;
   padding-top: 15px;
   padding-left: 15px;
   width: 24px;
@@ -53,4 +55,5 @@ $secondary-color: #5D5F5D;
   font-size: 16px;
   line-height: 24px;
   color: $secondary-color;
+  
 }
