@@ -1,0 +1,43 @@
+$primary-color: #046AD0;
+$secondary-color: #5D5F5D;
+
+.container {
+  border: 1px solid $secondary-color;
+  border-radius: 8px;
+  height: 52px;
+  width: 100%vw;
+  display: flex;
+  flex-direction: row;
+  margin-top: 8px;
+  margin-bottom: 32px;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    border: 1px solid $primary-color;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 8px;
+
+    .image {
+      background: url("/public/images/EmailHover.svg") no-repeat;
+      background-position: 14px 14px;
+    }
+  }
+
+  &:focus-within {
+    border: 2px solid $primary-color;
+    box-shadow: none;
+
+    .image {
+      background: url("/public/images/EmailSelected.svg") no-repeat;
+      background-position: 14px 14px;
+    }
+  }
+}
+
+.image {
+  background: url("/public/images/EmailDefault.svg") no-repeat;
+  background-position: 14px 14px;
+  padding-top: 15px;
+  padding-left: 15px;
+  width: 24px;
+  height: 24px;
+}
