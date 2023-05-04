@@ -6,9 +6,20 @@ import InputEmail from '../InputEmail/inputEmail';
 import { useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
-import { useToast} from "@chakra-ui/react" 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function FormCard(props) {
+	const notify = () => {
+		toast.error(
+			"Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'.",
+			{
+				position: toast.POSITION.TOP_CENTER,
+				toastId: 'customId',
+			},
+		);
+	};
+
 	const [formState, setFormState] = useState({
 		email: '',
 		password: '',
@@ -17,7 +28,7 @@ export default function FormCard(props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [formErrors, setFormErrors] = useState({});
-	const toast = useToast()
+
 	const handleEmailChange = (event) => {
 		setEmail(event.target.value);
 		setFormState({
@@ -46,13 +57,7 @@ export default function FormCard(props) {
 		let errors = {};
 		if (!password) {
 			errors.password = '*E-mail ou senha incorretos.';
-			toast({
-				status: 'error',
-				isClosable: true,
-				position:'top',
-				duration: 9000,
-				description:"Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'."
-			  });
+			notify();
 		}
 		setFormState({
 			...formState,
@@ -76,19 +81,23 @@ export default function FormCard(props) {
 			} catch (error) {
 				console.error(error.response.data);
 				setFormErrors({ ...formErrors, password: error.response.data.message });
-				toast({
-					status: 'error',
-					isClosable: true,
-					position:'top',
-					duration: 9000,
-					description:"Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'."
-				  });
+				notify();
 			}
 		}
 	};
 
 	return (
 		<div>
+			<ToastContainer
+				autoClose={9000}
+				hideProgressBar={true}
+				closeOnClick
+				theme='colored'
+				style={{
+					textAlign: 'center',
+					fontSize: '16px',
+				}}
+			/>
 			<form
 				className={styles.formCard}
 				onSubmit={handleSubmit}>

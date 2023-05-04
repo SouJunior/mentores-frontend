@@ -5,8 +5,8 @@ export const ContainerTitle = styled.div`
 	margin-top: 80px;
 
 	h1 {
-		color: ${(props) => props.theme.colors.gray};
-		font-size: ${(props) => props.theme.fontSizes.xl};
+		color: ${(props) => props.theme.colors.gray[700]};
+		font-size: ${(props) => props.theme.fontSizes.xxl};
 		span {
 			color: ${(props) => props.theme.colors.blue[500]};
 		}

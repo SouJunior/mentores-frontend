@@ -1,8 +1,8 @@
-import { theme } from '@/styles/theme';
 import Head from 'next/head';
+import { theme } from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '@/styles/GlobalStyle';
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
 
 export default function App({ Component, pageProps }) {
 	return (
@@ -38,10 +38,8 @@ export default function App({ Component, pageProps }) {
 						href='/public/favicon.ico'
 					/>
 				</Head>
-				<GlobalStyle />
-				<ChakraProvider>
 				<Component {...pageProps} />
-				</ChakraProvider>
+				<GlobalStyle />
 			</>
 		</ThemeProvider>
 	);
