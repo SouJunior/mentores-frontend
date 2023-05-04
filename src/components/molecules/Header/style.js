@@ -12,7 +12,7 @@ export const ContainerHeader = styled.div`
 		gap: 20px;
 		align-items: center;
 		span {
-			background-color: ${(props) => props.theme.colors.blue[500]};
+			background-color: ${(props) => props.theme.colors.blue[400]};
 			width: 2px;
 			height: 28px;
 		}

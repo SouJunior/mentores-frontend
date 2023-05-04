@@ -17,6 +17,7 @@ body{
     font-family: 'Radio Canada', sans-serif;
     background-color: ${(props) => props.theme.colors.white};
     font-size: ${(props) => props.theme.fontSizes.sm};
+    color: ${(props) => props.theme.colors.black};
 
     button{
       font-family: 'Radio Canada', sans-serif;
@@ -39,7 +40,7 @@ body{
 
     a{
       text-decoration:none;
-      color: ${(props) => props.theme.colors.blue[500]};
+      color: ${(props) => props.theme.colors.blue[400]};
       font-size: ${(props) => props.theme.fontSizes.sm};
       line-height: 150%;
 
