@@ -1,4 +1,4 @@
-import styles from './inputEmail.module.scss'
+import styles from '../InputEmail/inputEmail.module.scss'
 
 
 export default function InputEmail({setEmail, email}) {

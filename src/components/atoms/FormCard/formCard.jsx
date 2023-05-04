@@ -6,6 +6,7 @@ import InputEmail from '../InputEmail/inputEmail';
 import { useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import { useToast} from "@chakra-ui/react" 
 
 export default function FormCard(props) {
 	const [formState, setFormState] = useState({
@@ -16,7 +17,7 @@ export default function FormCard(props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [formErrors, setFormErrors] = useState({});
-
+	const toast = useToast()
 	const handleEmailChange = (event) => {
 		setEmail(event.target.value);
 		setFormState({
@@ -45,6 +46,13 @@ export default function FormCard(props) {
 		let errors = {};
 		if (!password) {
 			errors.password = '*E-mail ou senha incorretos.';
+			toast({
+				status: 'error',
+				isClosable: true,
+				position:'top',
+				duration: 9000,
+				description:"Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'."
+			  });
 		}
 		setFormState({
 			...formState,
@@ -68,6 +76,13 @@ export default function FormCard(props) {
 			} catch (error) {
 				console.error(error.response.data);
 				setFormErrors({ ...formErrors, password: error.response.data.message });
+				toast({
+					status: 'error',
+					isClosable: true,
+					position:'top',
+					duration: 9000,
+					description:"Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'."
+				  });
 			}
 		}
 	};
@@ -79,7 +94,7 @@ export default function FormCard(props) {
 				onSubmit={handleSubmit}>
 				<Image
 					className={styles.logo}
-					src='LogoSouJunior.svg'
+					src='logos/LogoSouJunior.svg'
 					alt='Logo SouJunior'
 					width={0}
 					height={0}
@@ -100,7 +115,7 @@ export default function FormCard(props) {
 					setPassword={setPassword}
 					password={password}
 					onChange={handlePasswordChange}
-					cclassName={formState.errors.password ? styles['input-error'] : ''}
+					className={formState.errors.password ? styles['input-error'] : ''}
 				/>
 				{formErrors.password && (
 					<p className={styles.error}>{formErrors.password}</p>
