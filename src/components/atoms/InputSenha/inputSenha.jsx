@@ -19,7 +19,7 @@ export default function InputSenha({setPassword, password}) {
 
   function Eye() {
     return (<Image
-      src="EyeDefault.svg"
+      src="icons/EyeDefault.svg"
       alt="Eye"
       width={24}
       height={24}
@@ -28,7 +28,7 @@ export default function InputSenha({setPassword, password}) {
 
   function EyeClosed() {
     return (<Image
-      src="EyeClosed.svg"
+      src="icons/EyeClosed.svg"
       alt="EyeClosed"
       width={24}
       height={24} />)
