@@ -1,11 +1,10 @@
-import React from 'react';
-import Header from '@/components/molecules/Header';
-import ButtonPrimary from '@/components/atoms/ButtonPrimary';
-import { ContainerHero, ContainerInput } from './style';
+import Button from '@/components/atoms/Button';
 import PersonTitle from '@/components/atoms/PersonTitle';
-import Image from 'next/image';
-import lupa from '/public/icons/Lupa.svg';
+import Header from '@/components/molecules/Header';
 import ListItemsHero from '@/components/molecules/ListItemsHero';
+import Image from 'next/image';
+import { ContainerHero, ContainerInput } from './style';
+import lupa from '/public/icons/Lupa.svg';
 
 export default function HeroSection() {
 	return (
@@ -33,7 +32,10 @@ export default function HeroSection() {
 								placeholder='Pesquisar por nome ou especialidade'
 							/>
 						</div>
-						<ButtonPrimary text='Encontrar mentor' />
+						<Button
+							text='Encontrar mentor'
+							btnRole={'primary'}
+						/>
 					</ContainerInput>
 				</div>
 				<ListItemsHero />
