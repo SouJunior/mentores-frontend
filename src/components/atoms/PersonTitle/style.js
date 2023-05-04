@@ -8,7 +8,7 @@ export const ContainerTitle = styled.div`
 		color: ${(props) => props.theme.colors.gray[700]};
 		font-size: ${(props) => props.theme.fontSizes.xxl};
 		span {
-			color: ${(props) => props.theme.colors.blue[500]};
+			color: ${(props) => props.theme.colors.blue[400]};
 		}
 	}
 `;

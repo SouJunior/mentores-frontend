@@ -5,33 +5,39 @@ import { ContainerHero, ContainerInput } from './style';
 import PersonTitle from '@/components/atoms/PersonTitle';
 import Image from 'next/image';
 import lupa from '/public/icons/Lupa.svg';
+import ListItemsHero from '@/components/molecules/ListItemsHero';
 
 export default function HeroSection() {
 	return (
 		<ContainerHero>
 			<Header />
-			<PersonTitle
-				textGray='Decole sua carreira mais rápido com'
-				textBlue={'mentorias individuais'}
-			/>
-
-			<p>
-				Tenha acesso a mentorias personalizadas e <br /> gratuitas com
-				profissionais renomados.
-			</p>
-			<ContainerInput>
+			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 				<div>
-					<Image
-						src={lupa}
-						alt='Lupa'
+					<PersonTitle
+						textGray='Decole sua carreira mais rápido com'
+						textBlue={'mentorias individuais'}
 					/>
-					<input
-						type='text'
-						placeholder='Pesquisar por nome ou especialidade'
-					/>
+
+					<p>
+						Tenha acesso a mentorias personalizadas e <br /> gratuitas com
+						profissionais renomados.
+					</p>
+					<ContainerInput>
+						<div>
+							<Image
+								src={lupa}
+								alt='Lupa'
+							/>
+							<input
+								type='text'
+								placeholder='Pesquisar por nome ou especialidade'
+							/>
+						</div>
+						<ButtonPrimary text='Encontrar mentor' />
+					</ContainerInput>
 				</div>
-				<ButtonPrimary text='Encontrar mentor' />
-			</ContainerInput>
+				<ListItemsHero />
+			</div>
 		</ContainerHero>
 	);
 }
