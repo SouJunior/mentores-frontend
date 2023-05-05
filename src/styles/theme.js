@@ -6,7 +6,7 @@ export const colors = {
 		700: '#003986',
 	},
 	gradient:
-		'linear-gradient(303.77deg, rgba(17, 101, 186, 0.79) 34.68%, rgba(90, 156, 255, 0.79) 79.96%), linear-gradient(303.77deg, rgba(217, 217, 217, 0) -1.3%, rgba(17, 101, 186, 0.79) 54.57%), linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(17, 101, 186, 0.79) 68.75%);',
+		'linear-gradient(303.77deg, rgba(17, 101, 186, 0.79) 34.68%, rgba(90, 156, 255, 0.79) 79.96%), linear-gradient(303.77deg, rgba(217, 217, 217, 0) -1.3%, rgba(17, 101, 186, 0.79) 54.57%), linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(17, 101, 186, 0.79) 68.75%)',
 	black: '#212121',
 	white: '#FDFDFD',
 	gray: { 300: '#D7D9D7', 500: '#C5C7C5', 700: '#5D5F5D' },

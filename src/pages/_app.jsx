@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { theme } from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '@/styles/GlobalStyle';
-import { ChakraProvider } from '@chakra-ui/react';
 
 export default function App({ Component, pageProps }) {
 	return (
@@ -26,7 +25,7 @@ export default function App({ Component, pageProps }) {
 					<link
 						rel='preconnect'
 						href='https://fonts.gstatic.com'
-						crossOrigin
+						crossOrigin={true}
 					/>
 					<link
 						href='https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;500;600;700&display=swap'
