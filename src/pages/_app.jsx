@@ -18,24 +18,7 @@ export default function App({ Component, pageProps }) {
 						content='Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnonologia'
 					/>
 
-					<link
-						rel='preconnect'
-						href='https://fonts.googleapis.com'
-					/>
-					<link
-						rel='preconnect'
-						href='https://fonts.gstatic.com'
-						crossOrigin="true"
-					/>
-					<link
-						href='https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;500;600;700&display=swap'
-						rel='stylesheet'
-					/>
-
-					<link
-						rel='icon'
-						href='/public/favicon.ico'
-					/>
+				
 				</Head>
 				<Component {...pageProps} />
 				<GlobalStyle />

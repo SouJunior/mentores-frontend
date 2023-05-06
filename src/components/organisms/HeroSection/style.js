@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export const ContainerHero = styled.div`
 	padding: 0px 64px;
 	margin: 0px 0px 100px;
+	position: relative;
 
 	p {
-		margin-bottom: 40px;
+		margin: 80px 0px 40px;
 		font-size: ${(props) => props.theme.fontSizes.md};
 	}
 
@@ -46,4 +47,11 @@ export const ContainerInput = styled.div`
 		gap: 16px;
 		width: 74%;
 	}
+`;
+
+export const TextAnimated = styled.h3`
+	color: ${(props) => props.theme.colors.blue[400]};
+	font-size: ${(props) => props.theme.fontSizes.xxl};
+	position: absolute;
+	margin-bottom: 40px;
 `;
