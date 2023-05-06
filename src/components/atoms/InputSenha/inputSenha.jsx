@@ -27,8 +27,7 @@ export default function InputSenha({ setPassword, password }) {
 				alt='Ícone de Senha'
 			/>
 			<input
-				type={show === true ? 'text' : 'password'}
-				placeholder='senha123'
+				type={show === false ? 'text' : 'password'}
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 			/>

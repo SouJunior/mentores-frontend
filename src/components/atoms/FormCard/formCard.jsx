@@ -9,10 +9,11 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export default function FormCard(props) {
 	const notify = () => {
 		toast.error(
-			"Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'.",
+			"*E-mail ou senha incorretos.",
 			{
 				position: toast.POSITION.TOP_CENTER,
 				toastId: 'customId',

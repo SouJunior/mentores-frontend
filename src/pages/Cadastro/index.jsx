@@ -1,24 +1,19 @@
-import styles from '../Cadastro/cadastro.module.scss';
-import Image from 'next/image';
-import FormInput from '../../components/atoms/FormInput/FormInput';
+import FormInput from '../../components/atoms/FormCadastro/FormInput';
+import { ContainerCadastro, ContainerImageCadastro, MyImageCadastro } from './styles';
 
 function Cadastro() {
 	return (
-		<main>
-			<div>
-				<FormInput />
-			</div>
-			<div className={styles.divlogo}>
-				<Image
-					className={styles.logo}
-					src='/ilustracao.svg'
-					alt='logo'
-					width={0}
-					height={0}
-				/>
-			</div>
-		</main>
+		<ContainerCadastro> 
+			<ContainerImageCadastro>
+				<FormInput/>
+			<MyImageCadastro
+					src='/images/ilustracao.svg'
+					alt='Figuras do Background'
+					/>
+			</ContainerImageCadastro>				
+		</ContainerCadastro>
 	);
 }
 
 export default Cadastro;
+
