@@ -5,11 +5,11 @@ $secondary-color: #5D5F5D;
 .formCard {
   box-sizing: border-box;
   position: absolute;
-  width: 27%;
-  height: 587px;
+  width: 30%;
+  height: fit-content;
   left: 65%;
   top: 10%;
-  padding: 32px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
   background-color: #FDFDFD;

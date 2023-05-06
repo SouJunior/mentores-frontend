@@ -8,12 +8,12 @@ export const ContainerLogin = styled.div`
 `;
 
 export const ContainerImage = styled.div`
-	top: 10%;
+	top: 1%;
 	position: absolute;
 `;
 
 export const MyImage = styled.img`
 	object-fit: cover;
-	width: 100%;
-	height: 100%;
+	width: 118%;
+	height: 118%;
 `;
