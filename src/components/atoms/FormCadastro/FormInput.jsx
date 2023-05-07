@@ -16,6 +16,8 @@ export default function FormCadastro(props) {
 	const [valueValidationEmail, setValueValidationEmail] = useState();
 	const [valuePassword, setValuePassword] = useState();
 	const [valueValidationPassword, setValueValidationPassword] = useState();
+	const [errorEmail, setErrorEmail] = useState("");
+	const [errorPassword, setErrorPassword] = useState("");
 	const [user, setUser] = useState ({
 		name:'',
 		date:'',
@@ -36,15 +38,19 @@ export default function FormCadastro(props) {
 	}
 	function handleEmailChange(prop){
 		setValueEmail(prop)
+		setErrorEmail("");
 	}
 	function handlValidationEmailChange(prop){
 		setValueValidationEmail(prop)
+		setErrorEmail("");
 	}
 	function handlePasswordChange(prop){
 		setValuePassword(prop)
+		setErrorPassword("");
 	}
 	function handleValidationPasswordChange(prop){
 		setValueValidationPassword(prop)
+		setErrorPassword("");
 	}
 
 
@@ -81,26 +87,19 @@ export default function FormCadastro(props) {
 		}
 	}
 	async function validate(){
-		let schema = yup.object().shape({
-			email:yup.string('E-mail inválido.')
-			.required('E-mail inválido.'),
-			password:yup.string('senha inválida').required('senha inválida')
+		const schema = yup.object().shape({
+		  email: yup.string().email("E-mail inválido.").required("E-mail obrigatório."),
+		  password: yup.string().max(8, "Senha deve ter no máximo 8 caracteres").required("Senha obrigatória.")
 		});
 		try {
-			await schema.validate(user)
-			return true;
-		}catch(err){
-			setStatus({
-				type:'error',
-				message:err.errors,
-			});
-			setStatusPassword({
-				type:'error',
-				message:err.errors,
-			});
-			return false;
-		}
-	}
+		  await schema.validate(user);
+		  return true;
+		} catch (err) {
+		  setErrorEmail(err.errors.includes("E-mail obrigatório.") ? "E-mail obrigatório." : "E-mail inválido.");
+		  setErrorPassword(err.errors.includes("Senha obrigatória.") ? "Senha obrigatória." : "Senha deve ter no máximo 8 caracteres");
+return false;
+}
+}
 	return (
 	
 		<ContainerForm>
@@ -127,27 +126,23 @@ export default function FormCadastro(props) {
 					<p>
 						E-mail<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={Email.type} placeholder={Email.placeholder} value={Email.value} valueChange={Email.valueChange} />
-					{status.type === 'sucess' ? <span className={styles.error}>{status.message}</span>:""}
-					{status.type === 'error' ? <span className={styles.error}>{status.message}</span>:""}
+					<InputForm type={Email.type} placeholder={Email.placeholder} value={Email.value} valueChange={Email.valueChange} error={errorEmail} />
+					{status.type === 'error' && emailError && <p>{emailError}</p>}
 					<p>
 						Confirma e-mail<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={ValidationEmail.type} placeholder={ValidationEmail.placeholder} value={ValidationEmail.value} valueChange={ValidationEmail.valueChange}/>
-					{status.type === 'sucess' ? <span className={styles.error}>{status.message}</span>:""}
-					{status.type === 'error' ? <span className={styles.error}>{status.message}</span>:""}
+					<InputForm type={ValidationEmail.type} placeholder={ValidationEmail.placeholder} value={ValidationEmail.value} valueChange={ValidationEmail.valueChange}  error={errorEmail}/>
+					{status.type === 'error' && emailValidationError && <p>{emailValidationError}</p>}
 					<p>
 						Senha<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={Password.type} placeholder={Password.placeholder} value={Password.value} valueChange={Password.valueChange} />
-					{status.type === 'sucess' ? <span className={styles.error}>{status.message}</span>:""}
-					{status.type === 'error' ? <span className={styles.error}>{status.message}</span>:""}
+					<InputForm type={Password.type} placeholder={Password.placeholder} value={Password.value} valueChange={Password.valueChange} error={errorPassword} />
+					{statusPassword.type === 'error' && passwordError && <p>{passwordError}</p>}
 					<p>
 						Confirmar senha<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={ValidationPassword.type} placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange}/>			
-					{statusPassword.type === 'sucess' ? <span className={styles.error}>{status.message}</span>:""}
-					{statusPassword.type === 'error' ? <span className={styles.error}>{status.message}</span>:""}
+					<InputForm type={ValidationPassword.type} placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange} error={errorPassword}/>			
+					{statusPassword.type === 'error' && passwordError && <p>{passwordError}</p>}
 					<FormButtonConcluir />
 					<FormButtonDescarta />
 				</form>

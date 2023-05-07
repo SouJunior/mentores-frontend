@@ -5,8 +5,7 @@ export default function FormButtonDescarta(){
         <div className={styles.containerModal}>
         <div >
             <button className={styles.cancelar}
-            type="submit"
-            onClick={() => setshowSeconModal(true)}>
+            type="submit">
                 Cancelar
             </button>
         </div>
