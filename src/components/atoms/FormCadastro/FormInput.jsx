@@ -1,5 +1,5 @@
 import styles from '../FormCadastro/Cadastro.module.scss';
-import FormDate from '../FormDate/formDate';
+import { format, compareAsc } from 'date-fns'
 import FormButtonDescarta from '../FormButtonDescarta/formButtonDescarta';
 import FormButtonConcluir from '../FormButtonConcluir/formButtonConcluir';
 import Image from 'next/image';
@@ -9,103 +9,73 @@ import * as yup from 'yup';
 import React, { useState } from 'react';
 import { ContainerCadastro, ContainerForm } from './style';
 import InputForm from '../InputForm';
+import axios from 'axios';
+
 
 export default function FormCadastro(props) {
-	const [valueNome, setValueNome] = useState();
-	const [valueEmail, setValueEmail] = useState();
-	const [valueValidationEmail, setValueValidationEmail] = useState();
-	const [valuePassword, setValuePassword] = useState();
-	const [valueValidationPassword, setValueValidationPassword] = useState();
-	const [errorEmail, setErrorEmail] = useState("");
-	const [errorPassword, setErrorPassword] = useState("");
-	const [user, setUser] = useState ({
-		name:'',
-		date:'',
-		email:'',
-		password:'',
-	})
-	const [status, setStatus] = useState ({
-		type:'',
-		message:'',
-	})
-	const [statusPassword, setStatusPassword] = useState ({
-		type:'',
-		message:'',
-	})
+	const [valueNome, setValueNome] = useState('');
+	const [valueEmail, setValueEmail] = useState('');
+	const [valueValidationEmail, setValueValidationEmail] = useState('');
+	const [valuePassword, setValuePassword] = useState('');
+	const [valueValidationPassword, setValueValidationPassword] = useState('');
+	const [valuedate, setValueDate] = useState('');
+
 
 	function handleNomeChange(prop){
 		setValueNome(prop)
+		console.log(prop)
 	}
 	function handleEmailChange(prop){
 		setValueEmail(prop)
-		setErrorEmail("");
 	}
 	function handlValidationEmailChange(prop){
 		setValueValidationEmail(prop)
-		setErrorEmail("");
 	}
 	function handlePasswordChange(prop){
 		setValuePassword(prop)
-		setErrorPassword("");
 	}
 	function handleValidationPasswordChange(prop){
 		setValueValidationPassword(prop)
-		setErrorPassword("");
 	}
-
+	function handleDateChange(prop){
+		const myDate = new Date(prop);
+		const newDate = format(myDate, 'yyyy-MM-dd');
+		setValueDate(newDate)
+		console.log(newDate);
+	}
+	
 
 	const Email= {type:'email', placeholder:'Preencha com seu e-mail', value:valueEmail, valueChange:handleEmailChange}
 	const ValidationEmail= {type:'email', placeholder:'Preencha com seu e-mail', value:valueValidationEmail, valueChange:handlValidationEmailChange}
 	const Password = {type:'password', placeholder:'********', value:valuePassword, valueChange:handlePasswordChange}
 	const ValidationPassword = {type:'password', placeholder:'********', value:valueValidationPassword, valueChange:handleValidationPasswordChange}
 	const Name = {type:'text', placeholder:'Preencha com seu nome', value:valueNome, valueChange:handleNomeChange}
+	const DateForm = {type:'date', value:valuedate, placeholder:'ANO/MES/DIA',  valueChange: handleDateChange}
 	
-	const schema = yup
-	.object({
-		email: yup.string().email().required('E-mail inválido'),
-		password: yup.string().max(8).required('senha inválida'),
-	})
-	.required();
 
 	//Enviar dados pro back end
-	const addDados = async e => {
-		e.preventDefault();
+	
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+				const response = await axios.post(
+					'https://mentores-backend.onrender.com/user',
+					{
+						fullName: Name.value,
+						email: Email.value,
+						dateOfBirth: DateForm.value,
+						emailConfirm:ValidationEmail.value,
+						password: Password.value,
+						passwordConfirmation:ValidationPassword.value
+					},
+				);
+				console.log(response.data);
+			} 
 		
-		if(!(await validate())) return;
-
-
-		if(Savedados){
-			setStatus({
-				type:'sucess',
-				message:'Dados Enviados com Sucesso!'
-			});
-		} else {
-			setStatus({
-				type:'error',
-				message:'Dados não enviados'
-			})
-		}
-	}
-	async function validate(){
-		const schema = yup.object().shape({
-		  email: yup.string().email("E-mail inválido.").required("E-mail obrigatório."),
-		  password: yup.string().max(8, "Senha deve ter no máximo 8 caracteres").required("Senha obrigatória.")
-		});
-		try {
-		  await schema.validate(user);
-		  return true;
-		} catch (err) {
-		  setErrorEmail(err.errors.includes("E-mail obrigatório.") ? "E-mail obrigatório." : "E-mail inválido.");
-		  setErrorPassword(err.errors.includes("Senha obrigatória.") ? "Senha obrigatória." : "Senha deve ter no máximo 8 caracteres");
-return false;
-}
-}
 	return (
 	
 		<ContainerForm>
 			<ContainerCadastro>
-				<form
-					onSubmit={addDados}>
+				<form onSubmit={handleSubmit}> 
 					<Image
 						className={styles.souj}
 						src='logos/LogoSJ.svg'
@@ -113,6 +83,7 @@ return false;
 						width={100}
 						height={200}
 					/>
+					<p><span className={styles.asteristico}>*</span> Indica um campo obrigatório</p>
 					<p>
 						Nome completo<span className={styles.asteristico}>*</span>
 					</p>
@@ -122,27 +93,27 @@ return false;
 					<p>
 						Data de nascimento<span className={styles.asteristico}>*</span>
 					</p>
-					<FormDate />
+					<InputForm value={DateForm.value} type={DateForm.type} placeholder={DateForm.placeholder} valueChange={DateForm.valueChange}/>
 					<p>
 						E-mail<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={Email.type} placeholder={Email.placeholder} value={Email.value} valueChange={Email.valueChange} error={errorEmail} />
-					{status.type === 'error' && emailError && <p>{emailError}</p>}
+					<InputForm type={Email.type} placeholder={Email.placeholder} value={Email.value} valueChange={Email.valueChange}  />
+
 					<p>
 						Confirma e-mail<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={ValidationEmail.type} placeholder={ValidationEmail.placeholder} value={ValidationEmail.value} valueChange={ValidationEmail.valueChange}  error={errorEmail}/>
-					{status.type === 'error' && emailValidationError && <p>{emailValidationError}</p>}
+					<InputForm type={ValidationEmail.type} placeholder={ValidationEmail.placeholder} value={ValidationEmail.value} valueChange={ValidationEmail.valueChange}  />
+
 					<p>
 						Senha<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={Password.type} placeholder={Password.placeholder} value={Password.value} valueChange={Password.valueChange} error={errorPassword} />
-					{statusPassword.type === 'error' && passwordError && <p>{passwordError}</p>}
+					<InputForm type={Password.type} placeholder={Password.placeholder} value={Password.value} valueChange={Password.valueChange}  />
+
 					<p>
 						Confirmar senha<span className={styles.asteristico}>*</span>
 					</p>
-					<InputForm type={ValidationPassword.type} placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange} error={errorPassword}/>			
-					{statusPassword.type === 'error' && passwordError && <p>{passwordError}</p>}
+					<InputForm type={ValidationPassword.type} placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange}  />	
+						<input type="radio"/><span className='termo'>Concordo com os <button className='termo-button'>Termos de uso</button>e <button className='termo-button'>Políticas de privacidade</button> do SouJunior.</span>
 					<FormButtonConcluir />
 					<FormButtonDescarta />
 				</form>

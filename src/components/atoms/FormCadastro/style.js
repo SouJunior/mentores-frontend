@@ -20,7 +20,29 @@ p{
     font-style: normal;
     font-size: ${(props) => props.theme.fontSizes.xs};
     color: ${(props) => props.theme.colors.gray[700]};
+    margin: 10px 0px;
 }
 
+input[type="radio"] {
+    top: 10px;
+    margin: 10px 0px;
+    width: 20px;                         
+    height: 20px;
+}
+
+.termo{
+    position: absolute;
+    top: 528px;
+    font-size: ${(props) => props.theme.fontSizes.xs};
+    color: ${(props) => props.theme.colors.blue[500]};
+}
+
+.termo-button{
+    border: none;
+    background: none;
+    text-decoration: underline;
+    height: 10px;
+    color: ${(props) => props.theme.colors.blue[500]};
+}
 `
 
