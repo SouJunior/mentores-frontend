@@ -44,5 +44,13 @@ input[type="radio"] {
     height: 10px;
     color: ${(props) => props.theme.colors.blue[500]};
 }
+.asteristico{
+    color: ${(props) => props.theme.colors.blue[500]};
+    }
+
+.souj{
+    width: 65%;
+    height: 53px;
+}
 `
 
