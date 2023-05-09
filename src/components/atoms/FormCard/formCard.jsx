@@ -6,8 +6,21 @@ import InputEmail from '../InputEmail/inputEmail';
 import { useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function FormCard(props) {
+	const notify = () => {
+		toast.error(
+			"*E-mail ou senha incorretos.",
+			{
+				position: toast.POSITION.TOP_CENTER,
+				toastId: 'customId',
+			},
+		);
+	};
+
 	const [formState, setFormState] = useState({
 		email: '',
 		password: '',
@@ -45,6 +58,7 @@ export default function FormCard(props) {
 		let errors = {};
 		if (!password) {
 			errors.password = '*E-mail ou senha incorretos.';
+			notify();
 		}
 		setFormState({
 			...formState,
@@ -68,18 +82,29 @@ export default function FormCard(props) {
 			} catch (error) {
 				console.error(error.response.data);
 				setFormErrors({ ...formErrors, password: error.response.data.message });
+				notify();
 			}
 		}
 	};
 
 	return (
 		<div>
+			<ToastContainer
+				autoClose={9000}
+				hideProgressBar={true}
+				closeOnClick
+				theme='colored'
+				style={{
+					textAlign: 'center',
+					fontSize: '16px',
+				}}
+			/>
 			<form
 				className={styles.formCard}
 				onSubmit={handleSubmit}>
 				<Image
 					className={styles.logo}
-					src='LogoSouJunior.svg'
+					src='logos/LogoSouJunior.svg'
 					alt='Logo SouJunior'
 					width={0}
 					height={0}
@@ -100,7 +125,7 @@ export default function FormCard(props) {
 					setPassword={setPassword}
 					password={password}
 					onChange={handlePasswordChange}
-					cclassName={formState.errors.password ? styles['input-error'] : ''}
+					className={formState.errors.password ? styles['input-error'] : ''}
 				/>
 				{formErrors.password && (
 					<p className={styles.error}>{formErrors.password}</p>

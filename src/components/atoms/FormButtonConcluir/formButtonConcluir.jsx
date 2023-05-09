@@ -5,8 +5,7 @@ export default function FormButtonConcluir(){
         <div className={styles.containerModal}>
         <div >
             <button className={styles.concluir}
-            type="submit"
-            onClick={() => setshowModal(true)}>
+            type="submit">
                 Concluir
             </button>
         </div>

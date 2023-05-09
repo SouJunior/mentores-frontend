@@ -1,44 +1,43 @@
-import { useRef, useState } from "react";
 import Image from 'next/image';
-import styles from './inputSenha.module.scss'
+import { useState } from 'react';
+import { ContainerPassword, ContainerEye } from './style';
+import PassDefault from '/public/icons/SenhaDefault.svg';
+import PassHover from '/public/icons/SenhaHover.svg';
+import PassFocus from '/public/icons/SenhaSelected.svg';
+import EyeComponent from './EyeComponent';
 
+export default function InputSenha({ setPassword, password }) {
+	const [icon, setIcon] = useState(PassDefault);
+	const [show, setShow] = useState(true);
+	const [eye, setEye] = useState(true);
 
-export default function InputSenha({setPassword, password}) {
-  const inputRef = useRef();
-  const [eyeIsClosed, setEyeState] = useState(false);
+	function toggleShow(e) {
+		e.preventDefault();
+		setEye(!eye);
+		setShow(!show);
+	}
 
-  const toggleShow = () => {
-    if (inputRef.current.type === "password") {
-      setEyeState(true)
-      inputRef.current.type = "text";
-    } else {
-      setEyeState(false)
-      inputRef.current.type = "password";
-    }
-  };
-
-  function Eye() {
-    return (<Image
-      src="EyeDefault.svg"
-      alt="Eye"
-      width={24}
-      height={24}
-    />)
-  }
-
-  function EyeClosed() {
-    return (<Image
-      src="EyeClosed.svg"
-      alt="EyeClosed"
-      width={24}
-      height={24} />)
-  }
-
-  return (
-    <div className={styles.container}>
-      <span className={styles.image}></span>
-      <input className={styles.input} ref={inputRef} placeholder="senha123"  value={password} onChange={(e) => setPassword(e.target.value)}/>
-      <button className={styles.button} type='button' onClick={toggleShow}  >{eyeIsClosed ? <EyeClosed /> : <Eye />}</button>
-    </div>
-  )
+	return (
+		<ContainerPassword
+			onClick={() => setIcon(PassFocus)}
+			onChange={() => setIcon(PassFocus)}
+			onMouseEnter={() => setIcon(PassHover)}>
+			<Image
+				src={icon}
+				alt='Ícone de Senha'
+			/>
+			<input
+				type={show === false ? 'text' : 'password'}
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}
+			/>
+			<ContainerEye>
+				<button
+					type='button'
+					onClick={(e) => toggleShow(e)}>
+					<EyeComponent eye={eye} />
+				</button>
+			</ContainerEye>
+		</ContainerPassword>
+	);
 }
