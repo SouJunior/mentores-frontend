@@ -7,6 +7,7 @@ import { ContainerHero, ContainerInput, TextAnimated } from './style';
 import lupa from '/public/icons/Lupa.svg';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { AnimationTextHero } from '../../../styles/animations';
 
 export default function HeroSection() {
 	const text = [
@@ -45,15 +46,15 @@ export default function HeroSection() {
 			<Header />
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 				<div>
-					<AnimatePresence>
+					<AnimatePresence >
 						<PersonTitle textGray={'Decole sua carreira mais rápido com'} />
 						<TextAnimated
 							as={motion.h3}
 							key={textHero}
-							transition={{ type: 'tween', duration: 0.3, ease: 'anticipate' }}
-							initial={{ y: -15, opacity: 0 }}
-							animate={{ y: 0, opacity: 1 }}
-							exit={{ y: 25, opacity: 0 }}>
+							variants={AnimationTextHero}
+							initial={'initial'}
+							animate={'animate'}
+							exit={'exit'}>
 							{textHero}
 						</TextAnimated>
 					</AnimatePresence>
