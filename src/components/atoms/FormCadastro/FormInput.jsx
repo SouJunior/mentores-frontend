@@ -6,12 +6,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import React, { useState } from 'react';
-import { ContainerCadastro, ContainerForm } from './style';
+import { ContainerCadastro, ContainerForm, ContainerEye } from './style';
 import InputForm from '../InputForm';
 import axios from 'axios';
 import Modal from 'react-modal';
+import EyeComponent from '../InputSenha/EyeComponent';
 
-export default function FormCadastro(props) {
+export default function FormCadastro(props, setPassword) {
+	const [show, setShow] = useState(true);
+	const [eye, setEye] = useState(true);
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [valueNome, setValueNome] = useState('');
 	const [valueEmail, setValueEmail] = useState('');
@@ -19,6 +22,12 @@ export default function FormCadastro(props) {
 	const [valuePassword, setValuePassword] = useState('');
 	const [valueValidationPassword, setValueValidationPassword] = useState('');
 	const [valuedate, setValueDate] = useState('');
+
+	function toggleShow(e) {
+		e.preventDefault();
+		setEye(!eye);
+		setShow(!show);
+	}
 
 	function handleOpenModal(){
 		setIsOpen(true)
@@ -38,7 +47,6 @@ export default function FormCadastro(props) {
 
 	function handleNomeChange(prop){
 		setValueNome(prop)
-		console.log(prop)
 	}
 	function handleEmailChange(prop){
 		setValueEmail(prop)
@@ -56,7 +64,6 @@ export default function FormCadastro(props) {
 		const myDate = new Date(prop);
 		const newDate = format(myDate, 'yyyy-MM-dd');
 		setValueDate(newDate)
-		console.log(newDate);
 	}
 	
 
@@ -122,12 +129,19 @@ export default function FormCadastro(props) {
 					<p>
 						Senha<span className='asteristico'>*</span>
 					</p>
-					<InputForm type={Password.type} placeholder={Password.placeholder} value={Password.value} valueChange={Password.valueChange}  />
-
+					<InputForm  placeholder={Password.placeholder} value={Password.value} valueChange={Password.valueChange} type={show === false ? 'text' : 'password'}
+				onChange={(e) => setPassword(e.target.value)} />
+					<ContainerEye>
+					<button
+						type='button'
+						onClick={(e) => toggleShow(e)}>
+						<EyeComponent eye={eye} />
+					</button>
+					</ContainerEye>
 					<p>
 						Confirmar senha<span className='asteristico'>*</span>
 					</p>
-					<InputForm type={ValidationPassword.type} placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange}  />	
+					<InputForm  placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange} 	type={show === false ? 'text' : 'password'}/>					
 						<input type="radio"/><span className='termo'>Concordo com os <button className='termo-button' onClick={handleOpenModal}>Termos de uso</button>e <button className='termo-button'>Políticas de privacidade</button> do SouJunior.</span>
 						<Modal
 						isOpen={modalIsOpen}

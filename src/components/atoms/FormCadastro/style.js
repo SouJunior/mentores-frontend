@@ -53,4 +53,17 @@ input[type="radio"] {
     height: 53px;
 }
 `
+export const ContainerEye = styled.div`
+	position: absolute;
+	right: 15px;
+    top:415px;
+    background-color: transparent;
 
+	button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+        border: none;
+        background: none;
+	}
+`;
