@@ -8,6 +8,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CardLoading from '../../../../public/images/loadingGif.gif'
 
 export default function FormCard(props) {
 	const notify = () => {
@@ -20,6 +21,8 @@ export default function FormCard(props) {
 		);
 	};
 
+
+	const [loading, setLoading] = useState(false)
 	const [formState, setFormState] = useState({
 		email: '',
 		password: '',
@@ -67,9 +70,13 @@ export default function FormCard(props) {
 	};
 
 	const handleSubmit = async (event) => {
+		setLoading(true);
 		event.preventDefault();
 		if (validateForm()) {
 			try {
+				setTimeout(()=>{
+					setLoading(false);
+				},500)
 				const response = await axios.post(
 					'https://mentores-backend.onrender.com/auth/login',
 					{
@@ -79,11 +86,18 @@ export default function FormCard(props) {
 				);
 				console.log(response.data);
 			} catch (error) {
+				setTimeout(()=>{
+					setLoading(false);
+				},500)
 				console.error(error.response.data);
 				setFormErrors({ ...formErrors, password: error.response.data.message });
 				notify();
 			}
 		}
+		setTimeout(()=>{
+			setLoading(false);
+			console.log(loading)
+		},500)
 	};
 
 	return (
@@ -94,7 +108,7 @@ export default function FormCard(props) {
 				closeOnClick
 				theme='colored'
 				style={{
-					textAlign: 'center',
+					textAlign: 'justify',
 					fontSize: '16px',
 				}}
 			/>
@@ -127,7 +141,7 @@ export default function FormCard(props) {
 					className={formState.errors.password ? styles['input-error'] : ''}
 				/>
 				{formErrors.password && (
-					<p className={styles.error}>{formErrors.password}</p>
+					<span className={styles.error}>{formErrors.password}</span>
 				)}
 				<label>
 					<Checkbox />
@@ -140,8 +154,10 @@ export default function FormCard(props) {
 
 				<button
 					className={styles.botao}
-					type='submit'>
-					Entrar
+					type='submit'
+					>
+					
+					{loading ? <Image style={{scale:1.2}} alt='loading' src={CardLoading} width={24} height={24}/>: 'Entrar'}
 				</button>
 
 				<p className={styles.texto}>
