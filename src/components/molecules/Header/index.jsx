@@ -1,5 +1,6 @@
 import Button from '@/components/atoms/Button';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ContainerHeader, GroupBtn } from './style';
 import logo from '/public/logos/LogoSJ.svg';
 
@@ -22,10 +23,12 @@ export default function Header() {
 					text='Cadastro de Mentores'
 					btnRole={'primary'}
 				/>
-				<Button
-					text='Login para Mentores'
-					btnRole={'secondary'}
-				/>
+				<Link href={'/LoginPage'}>
+					<Button
+						text='Login para Mentores'
+						btnRole={'secondary'}
+					/>
+				</Link>
 			</GroupBtn>
 		</ContainerHeader>
 	);

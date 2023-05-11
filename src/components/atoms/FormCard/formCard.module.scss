@@ -40,6 +40,7 @@ $secondary-color: #5D5F5D;
   font-size: 16px;
   line-height: 150%;
   color: $secondary-color;
+  
 }
 
 .link {
@@ -51,12 +52,13 @@ $secondary-color: #5D5F5D;
 
   a {
     text-decoration: underline;
-  }
+    }
 }
 
 label {
   .link {
     float: right;
+
   }
 }
 
@@ -67,11 +69,14 @@ p {
 }
 
 .botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 48px;
   background: $primary-color;
   border-radius: 8px;
   border: none;
-  color: #D7D9D7;
+  color: #FDFDFD;
   font: 100% $font-form;
   font-weight: 400;
   font-size: 16px;
@@ -81,6 +86,7 @@ p {
   margin-bottom: 24px;
   transition: all 0.3s;
 
+
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background: #003986;
@@ -89,7 +95,5 @@ p {
 
 .error{
 color: red;
-}
-.input-error {
-  background-color: #ffcccc; /* cor de fundo vermelha */
+margin: 4px 0px 16px;
 }

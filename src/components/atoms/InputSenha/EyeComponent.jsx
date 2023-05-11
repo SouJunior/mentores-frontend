@@ -8,7 +8,7 @@ import { useState } from 'react';
 export default function EyeComponent({ eye }) {
 	return (
 		<>
-			{eye === true ? (
+			{eye === false ? (
 				<Image
 					src={EyeOpen}
 					alt='Olho'

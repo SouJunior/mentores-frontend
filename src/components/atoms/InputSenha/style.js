@@ -7,7 +7,7 @@ export const ContainerPassword = styled.div`
 	gap: 16px;
 	position: relative;
 	border-radius: 8px;
-	margin: 8px 0px 32px;
+	margin: 8px 0px 16px;
 
 	&:hover {
 		box-shadow: 0px 3px 6px rgba(17, 101, 186, 0.6);
@@ -27,6 +27,7 @@ export const ContainerPassword = styled.div`
 		background-color: '#fff';
 		border: 2px solid ${(props) => props.theme.colors.gray[700]};
 		border-radius: 8px;
+
 
 		&:focus-visible {
 			border: 2px solid ${(props) => props.theme.colors.blue[400]};
