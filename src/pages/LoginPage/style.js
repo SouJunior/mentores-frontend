@@ -10,10 +10,12 @@ export const ContainerLogin = styled.div`
 export const ContainerImage = styled.div`
 	top: 1%;
 	position: absolute;
+	width: 50%;
 `;
 
 export const MyImage = styled.img`
 	object-fit: cover;
 	width: 118%;
 	height: 118%;
+
 `;
