@@ -13,6 +13,7 @@ export default function Header() {
 						src={logo}
 						alt='Logo Sou Júnior'
 					/>
+					
 				</Link>
 				<span />
 				<Link href='#'>Como Funciona</Link>
