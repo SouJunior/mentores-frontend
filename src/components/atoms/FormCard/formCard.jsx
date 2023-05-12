@@ -145,11 +145,11 @@ export default function FormCard(props) {
 				)}
 				<label>
 					<Checkbox />
-					<a
+					<Link
 						href='#'
 						className={styles.link}>
 						Esqueci a senha
-					</a>
+					</Link>
 				</label>
 
 				<button
