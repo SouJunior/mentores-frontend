@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ContainerHeader, GroupBtn } from './style';
 import logo from '/public/logos/LogoSJ.svg';
-import Link from 'next/link';
+
 
 export default function Header() {
 	return (
