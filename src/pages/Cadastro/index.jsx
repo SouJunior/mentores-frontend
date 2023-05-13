@@ -1,19 +1,22 @@
 import FormInput from '../../components/atoms/FormCadastro/FormInput';
-import { ContainerCadastro, ContainerImageCadastro, MyImageCadastro } from '../../styles/pages/CadastroStyles';
+import {
+	ContainerCadastro,
+	ContainerImageCadastro,
+	MyImageCadastro,
+} from '../../styles/pages/CadastroStyles';
 
 function Cadastro() {
 	return (
-		<ContainerCadastro> 
+		<ContainerCadastro>
 			<ContainerImageCadastro>
-				<FormInput/>
-			<MyImageCadastro
+				<FormInput />
+				<MyImageCadastro
 					src='/images/ilustracao.svg'
 					alt='Figuras do Background'
-					/>
-			</ContainerImageCadastro>				
+				/>
+			</ContainerImageCadastro>
 		</ContainerCadastro>
 	);
 }
 
 export default Cadastro;
-

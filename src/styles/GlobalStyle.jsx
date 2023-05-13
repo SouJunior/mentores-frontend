@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   padding:0;
   box-sizing:border-box;
   transition: all 0.3s ease;  
+  font-family: 'Radio Canada', sans-serif;
 }
 
 body{
