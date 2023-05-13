@@ -1,5 +1,5 @@
 import FormInput from '../../components/atoms/FormCadastro/FormInput';
-import { ContainerCadastro, ContainerImageCadastro, MyImageCadastro } from './styles';
+import { ContainerCadastro, ContainerImageCadastro, MyImageCadastro } from '../../styles/pages/CadastroStyles';
 
 function Cadastro() {
 	return (

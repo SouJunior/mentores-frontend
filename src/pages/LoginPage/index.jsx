@@ -1,5 +1,5 @@
 import FormCard from '../../components/atoms/FormCard/formCard';
-import { ContainerImage, ContainerLogin, MyImage } from './style';
+import { ContainerImage, ContainerLogin, MyImage } from '../../styles/pages/LoginStyles';
 
 export default function LoginPage() {
 	return (
