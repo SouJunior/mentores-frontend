@@ -18,7 +18,6 @@ export default function InputEmail({ setEmail, email }) {
 			/>
 			<input
 				type='email'
-				placeholder='mentorsoujunior@gmail.com'
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 			/>

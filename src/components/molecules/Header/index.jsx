@@ -4,19 +4,21 @@ import Link from 'next/link';
 import { ContainerHeader, GroupBtn } from './style';
 import logo from '/public/logos/LogoSJ.svg';
 
+
 export default function Header() {
 	return (
 		<ContainerHeader>
 			<div>
-				<a href='/'>
+				<Link href='/'>
 					<Image
 						src={logo}
 						alt='Logo Sou Júnior'
 					/>
-				</a>
+					
+				</Link>
 				<span />
-				<a href='#'>Como Funciona</a>
-				<a href='#'>Encontre Seu Mentor</a>
+				<Link href='#'>Como Funciona</Link>
+				<Link href='#'>Encontre Seu Mentor</Link>
 			</div>
 			<GroupBtn>
 				<Button

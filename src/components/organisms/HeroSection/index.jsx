@@ -39,14 +39,14 @@ export default function HeroSection() {
 
 	useEffect(() => {
 		textSwitch();
-	}, [textHero]);
+	}, []);
 
 	return (
 		<ContainerHero>
 			<Header />
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 				<div>
-					<AnimatePresence >
+					<AnimatePresence>
 						<PersonTitle textGray={'Decole sua carreira mais rápido com'} />
 						<TextAnimated
 							as={motion.h3}

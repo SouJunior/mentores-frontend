@@ -12,6 +12,7 @@ export const colors = {
 	gray: { 300: '#D7D9D7', 500: '#C5C7C5', 700: '#5D5F5D' },
 	opacityGray: 'rgba(197, 199, 197, 0.56)',
 	placeholder: '#C5C7C5',
+	error: '#C1292E',
 };
 
 export const fontSizes = {
