@@ -67,3 +67,8 @@ export const ContainerEye = styled.div`
         background: none;
 	}
 `;
+
+export const ContainerModal = styled.div`
+font-weight: bold;
+margin: 5px 0px;
+`

@@ -11,6 +11,7 @@ import InputForm from '../InputForm';
 import axios from 'axios';
 import Modal from 'react-modal';
 import EyeComponent from '../InputSenha/EyeComponent';
+import ModalText  from './Modal'
 
 export default function FormCadastro(props, setPassword) {
 	const [show, setShow] = useState(true);
@@ -29,7 +30,8 @@ export default function FormCadastro(props, setPassword) {
 		setShow(!show);
 	}
 
-	function handleOpenModal(){
+	function handleOpenModal(ev){
+		ev.preventDefault()
 		setIsOpen(true)
 	}
 	function handleCloseModal(){
@@ -37,11 +39,48 @@ export default function FormCadastro(props, setPassword) {
 	}
 	const customStyles = {
 		content: {
-			top:'30%',
-			left:'50%',
+			borderRadius:'8px',
+			padding:'0px',
+			width:'400px',
+			height:'400px',
+			top:'20%',
+			left:'35%',
 			right:'auto',
 			bottom:'auto',
-			trasnform:'translate(-50%, -50%)'
+			trasnform:'translate(-50%, -50%)',
+			overflowY: 'scroll !important',
+		},
+		modalPai:{
+			width:'100%',
+			background:'#D7D9D7',
+			padding:'32px',
+			display:'flex',
+			alignItens:'center',
+			justifyContent:'center',
+			flexDirection:'column',
+			border:'1px solid red',
+			gap:'8px'
+		},
+		div:{
+			color:'#1165BA',
+			fontSize:'14px',
+			display:'flex',
+			textAlign:'center',
+			justifyContent:'center',
+		},
+		imagem:{
+			margin:'0 auto'
+		},
+		modalFilho:{
+			color:'#1165BA',
+			fontSize:'14px',
+			margin:'15px 0px',
+		},
+		fechar:{
+			border:'1px solid #046AD0',
+			width:'100%',
+			color:'#046AD0',
+			background:'#FFFFFF'
 		}
 	}
 
@@ -67,12 +106,12 @@ export default function FormCadastro(props, setPassword) {
 	}
 	
 
-	const Email= {type:'email', placeholder:'Preencha com seu e-mail', value:valueEmail, valueChange:handleEmailChange}
-	const ValidationEmail= {type:'email', placeholder:'Preencha com seu e-mail', value:valueValidationEmail, valueChange:handlValidationEmailChange}
-	const Password = {type:'password', placeholder:'********', value:valuePassword, valueChange:handlePasswordChange}
-	const ValidationPassword = {type:'password', placeholder:'********', value:valueValidationPassword, valueChange:handleValidationPasswordChange}
-	const Name = {type:'text', placeholder:'Preencha com seu nome', value:valueNome, valueChange:handleNomeChange}
-	const DateForm = {type:'date', value:valuedate, placeholder:'ANO/MES/DIA',  valueChange: handleDateChange}
+	const Email= {type:'email', placeholder:'  Preencha com seu e-mail', value:valueEmail, valueChange:handleEmailChange}
+	const ValidationEmail= {type:'email', placeholder:'  Preencha com seu e-mail', value:valueValidationEmail, valueChange:handlValidationEmailChange}
+	const Password = {type:'password', placeholder:'  ********', value:valuePassword, valueChange:handlePasswordChange}
+	const ValidationPassword = {type:'password', placeholder:'  ********', value:valueValidationPassword, valueChange:handleValidationPasswordChange}
+	const Name = {type:'text', placeholder:'  Preencha com seu nome', value:valueNome, valueChange:handleNomeChange}
+	const DateForm = {type:'date', value:valuedate, valueChange: handleDateChange}
 	
 
 	//Enviar dados pro back end
@@ -97,7 +136,7 @@ export default function FormCadastro(props, setPassword) {
 	
 		<ContainerForm>
 			<ContainerCadastro>
-				<form onSubmit={handleSubmit}> 
+				<form > 
 					<Image
 						className='souj'
 						src='logos/LogoSJ.svg'
@@ -148,11 +187,21 @@ export default function FormCadastro(props, setPassword) {
 						onRequestClose={handleCloseModal}
 						style={customStyles}
 						>
-						<h2>Teste</h2>
-						<button onClick={handleCloseModal}>close</button>
-						<div>Termos de uso</div>
+						<div style={customStyles.modalPai}>
+						<Image
+						style={customStyles.imagem}
+							src='logos/logoSj.svg'
+							alt='logo'
+							width={110}
+							height={17}
+						/>
+						<h2 style={customStyles.div}>#MovimentoSouJunior</h2>
+						</div>
+						<div style={customStyles.modalFilho}>Termos e condições gerais de uso SouJunior </div>
+						<ModalText/>
+						<button onClick={handleCloseModal} style={customStyles.fechar}>Fechar</button>
 						</Modal>
-					<FormButtonConcluir />
+					<FormButtonConcluir onSubmit={handleSubmit}/>
 					<FormButtonDescarta />
 				</form>
 				</ContainerCadastro>
