@@ -14,17 +14,18 @@ export default function Header() {
 						src={logo}
 						alt='Logo Sou Júnior'
 					/>
-					
 				</Link>
 				<span />
 				<Link href='#'>Como Funciona</Link>
 				<Link href='#'>Encontre Seu Mentor</Link>
 			</div>
 			<GroupBtn>
-				<Button
-					text='Cadastro de Mentores'
-					btnRole={'primary'}
-				/>
+				<Link href={'/Cadastro'}>
+					<Button
+						text='Cadastro de Mentores'
+						btnRole={'primary'}
+					/>
+				</Link>
 				<Link href={'/LoginPage'}>
 					<Button
 						text='Login para Mentores'
