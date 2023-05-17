@@ -1,9 +1,8 @@
-import React from 'react';
-import { ContainerList } from './style';
 import ItemHero from '@/components/atoms/ItemHero';
-import mentor1 from '/public/images/homepage/mentor1.svg';
-import mentor2 from '/public/images/homepage/mentor2.svg';
-import mentor3 from '/public/images/homepage/mentor3.svg';
+import { ContainerList } from './style';
+import mentor1Png from '/public/images/homepage/mentor1-png.png';
+import mentor2Png from '/public/images/homepage/mentor2-png.png';
+import mentor3Png from '/public/images/homepage/mentor3-png.png';
 
 export default function ListItemsHero() {
 	return (
@@ -15,7 +14,7 @@ export default function ListItemsHero() {
 				/>
 				<ItemHero
 					type={'image'}
-					image={mentor1}
+					image={mentor1Png}
 				/>
 				<ItemHero
 					type={'secondary'}
@@ -37,7 +36,7 @@ export default function ListItemsHero() {
 				/>
 				<ItemHero
 					type={'image'}
-					image={mentor2}
+					image={mentor2Png}
 				/>
 				<ItemHero
 					type={'primary'}
@@ -51,7 +50,7 @@ export default function ListItemsHero() {
 				/>
 				<ItemHero
 					type={'image'}
-					image={mentor3}
+					image={mentor3Png}
 				/>
 				<ItemHero
 					type={'secondary'}
