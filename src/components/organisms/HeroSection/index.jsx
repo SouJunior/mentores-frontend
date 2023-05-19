@@ -39,7 +39,7 @@ export default function HeroSection() {
 
 	useEffect(() => {
 		textSwitch();
-	}, []);
+	}, [textHero]);
 
 	return (
 		<ContainerHero>

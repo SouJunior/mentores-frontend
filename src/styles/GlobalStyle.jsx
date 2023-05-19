@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   padding:0;
   box-sizing:border-box;
   transition: all 0.3s ease;  
-  font-family: 'Radio Canada', sans-serif;
+ font-family: 'Radio Canada',sans-serif;
 }
 
 body{
@@ -16,13 +16,12 @@ body{
     max-width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-    font-family: 'Radio Canada', sans-serif;
     background-color: ${(props) => props.theme.colors.white};
     font-size: ${(props) => props.theme.fontSizes.sm};
     color: ${(props) => props.theme.colors.black};
+    font: 400 16px Radio Canada, sans-serif;
 
     button{
-      font-family: 'Radio Canada', sans-serif;
       padding: 12px 16px;
       text-align: center;
       border-radius: 8px;

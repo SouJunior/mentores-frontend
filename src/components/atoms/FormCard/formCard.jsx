@@ -8,22 +8,17 @@ import Link from 'next/link';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CardLoading from '../../../../public/images/loadingGif.gif'
-
+import CardLoading from '../../../../public/images/loadingGif.gif';
 
 export default function FormCard(props) {
 	const notify = () => {
-		toast.error(
-			"*E-mail ou senha incorretos.",
-			{
-				position: toast.POSITION.TOP_CENTER,
-				toastId: 'customId',
-			},
-		);
+		toast.error('*E-mail ou senha incorretos.', {
+			position: toast.POSITION.TOP_CENTER,
+			toastId: 'customId',
+		});
 	};
 
-
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
 	const [formState, setFormState] = useState({
 		email: '',
 		password: '',
@@ -75,9 +70,10 @@ export default function FormCard(props) {
 		event.preventDefault();
 		if (validateForm()) {
 			try {
-				setTimeout(()=>{
+				setFormErrors({});
+				setTimeout(() => {
 					setLoading(false);
-				},500)
+				}, 500);
 				const response = await axios.post(
 					'https://mentores-backend.onrender.com/auth/login',
 					{
@@ -86,19 +82,21 @@ export default function FormCard(props) {
 					},
 				);
 				console.log(response.data);
+				console.log('USUÁRIO LOGADO');
 			} catch (error) {
-				setTimeout(()=>{
+				console.log('erro de login');
+				setTimeout(() => {
 					setLoading(false);
-				},500)
+				}, 500);
 				console.error(error.response.data);
 				setFormErrors({ ...formErrors, password: error.response.data.message });
 				notify();
 			}
 		}
-		setTimeout(()=>{
+		setTimeout(() => {
 			setLoading(false);
-			console.log(loading)
-		},500)
+			console.log(loading);
+		}, 500);
 	};
 
 	return (
@@ -155,10 +153,18 @@ export default function FormCard(props) {
 
 				<button
 					className={styles.botao}
-					type='submit'
-					>
-					
-					{loading ? <Image style={{scale:1.2}} alt='loading' src={CardLoading} width={24} height={24}/>: 'Entrar'}
+					type='submit'>
+					{loading ? (
+						<Image
+							style={{ scale: 1.2 }}
+							alt='loading'
+							src={CardLoading}
+							width={24}
+							height={24}
+						/>
+					) : (
+						'Entrar'
+					)}
 				</button>
 
 				<p className={styles.texto}>
