@@ -8,7 +8,8 @@ export const GlobalStyle = createGlobalStyle`
   padding:0;
   box-sizing:border-box;
   transition: all 0.3s ease;  
- font-family: 'Radio Canada',sans-serif;
+  font-family: 'Radio Canada',sans-serif;
+  scroll-behavior: smooth;
 }
 
 body{
@@ -20,6 +21,7 @@ body{
     font-size: ${(props) => props.theme.fontSizes.sm};
     color: ${(props) => props.theme.colors.black};
     font: 400 16px Radio Canada, sans-serif;
+     scroll-behavior: smooth;
 
     button{
       padding: 12px 16px;
@@ -28,6 +30,7 @@ body{
       border: 2px solid;
       cursor: pointer;
       line-height: 150%;
+      scroll-behavior: smooth;
     }
   
     p{
@@ -44,6 +47,7 @@ body{
       color: ${(props) => props.theme.colors.blue[400]};
       font-size: ${(props) => props.theme.fontSizes.sm};
       line-height: 150%;
+      
 
       &:hover{
         text-decoration:none;
