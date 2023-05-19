@@ -1,6 +1,4 @@
 import { format, compareAsc } from 'date-fns'
-import FormButtonDescarta from '../FormButtonDescarta/formButtonDescarta';
-import FormButtonConcluir from '../FormButtonConcluir/formButtonConcluir';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,6 +10,7 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import EyeComponent from '../InputSenha/EyeComponent';
 import ModalText  from './Modal'
+import FormButton from '../FormButton';
 
 export default function FormCadastro(props, setPassword) {
 	const [show, setShow] = useState(true);
@@ -23,6 +22,7 @@ export default function FormCadastro(props, setPassword) {
 	const [valuePassword, setValuePassword] = useState('');
 	const [valueValidationPassword, setValueValidationPassword] = useState('');
 	const [valuedate, setValueDate] = useState('');
+
 
 	function toggleShow(e) {
 		e.preventDefault();
@@ -112,7 +112,8 @@ export default function FormCadastro(props, setPassword) {
 	const ValidationPassword = {type:'password', placeholder:'  ********', value:valueValidationPassword, valueChange:handleValidationPasswordChange}
 	const Name = {type:'text', placeholder:'  Preencha com seu nome', value:valueNome, valueChange:handleNomeChange}
 	const DateForm = {type:'date', value:valuedate, valueChange: handleDateChange}
-	
+	const ButtonConcluir = {type:'submit', value:'Concluir', role:'primary'}
+	const ButtonDescarta = {type:'submit', value:'Decarta', role:'secondary'}
 
 	//Enviar dados pro back end
 	
@@ -137,12 +138,12 @@ export default function FormCadastro(props, setPassword) {
 		<ContainerForm>
 			<ContainerCadastro>
 				<form > 
-					<Image
+				<Image
 						className='souj'
 						src='logos/LogoSJ.svg'
 						alt='logo'
-						width={100}
-						height={200}
+						width={241}
+						height={36}
 					/>
 					<p><span className='asteristico'>*</span> Indica um campo obrigatório</p>
 					<p>
@@ -181,7 +182,7 @@ export default function FormCadastro(props, setPassword) {
 						Confirmar senha<span className='asteristico'>*</span>
 					</p>
 					<InputForm  placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange} 	type={show === false ? 'text' : 'password'}/>					
-						<input type="radio"/><span className='termo'>Concordo com os <button className='termo-button' onClick={handleOpenModal}>Termos de uso</button>e <button className='termo-button'>Políticas de privacidade</button> do SouJunior.</span>
+					<input type="checkbox"/><span className='termo'>Concordo com os <button className='termo-button' onClick={handleOpenModal}>Termos de uso</button>e <button className='termo-button'>Políticas de privacidade</button> do SouJunior.</span>
 						<Modal
 						isOpen={modalIsOpen}
 						onRequestClose={handleCloseModal}
@@ -201,8 +202,8 @@ export default function FormCadastro(props, setPassword) {
 						<ModalText/>
 						<button onClick={handleCloseModal} style={customStyles.fechar}>Fechar</button>
 						</Modal>
-					<FormButtonConcluir onSubmit={handleSubmit}/>
-					<FormButtonDescarta />
+					<FormButton type={ButtonConcluir.type} value={ButtonConcluir.value} role={ButtonConcluir.role} onSubmit={handleSubmit}/>
+					<FormButton type={ButtonDescarta.type} value={ButtonDescarta.value} role={ButtonDescarta.role}/> 
 				</form>
 				</ContainerCadastro>
 			</ContainerForm>

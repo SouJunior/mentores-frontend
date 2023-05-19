@@ -31,17 +31,18 @@ input[type="radio"] {
 }
 
 .termo{
-    position: absolute;
+    display: flex;
     top: 528px;
     font-size: ${(props) => props.theme.fontSizes.xs};
     color: ${(props) => props.theme.colors.blue[500]};
 }
 
 .termo-button{
-    border: none;
+
+    border: 1px solid red;
     background: none;
     text-decoration: underline;
-    height: 10px;
+    height: 5px;
     color: ${(props) => props.theme.colors.blue[500]};
 }
 .asteristico{
@@ -56,7 +57,7 @@ input[type="radio"] {
 export const ContainerEye = styled.div`
 	position: absolute;
 	right: 15px;
-    top:415px;
+    top:453px;
     background-color: transparent;
 
 	button {
