@@ -1,8 +1,17 @@
 import React from 'react';
-import { ButtonDefault, ButtonVariant } from './style';
+import { ButtonDefault, ButtonForm, ButtonVariant } from './style';
 
-export default function Button({ text, btnRole }) {
-	if (btnRole === 'primary') return <ButtonDefault>{text}</ButtonDefault>;
+export default function Button({ content, btnRole, disabled }) {
+	if (btnRole === 'primary') return <ButtonDefault>{content}</ButtonDefault>;
 
-	if (btnRole === 'secondary') return <ButtonVariant>{text}</ButtonVariant>;
+	if (btnRole === 'secondary') return <ButtonVariant>{content}</ButtonVariant>;
+
+	if (btnRole === 'form')
+		return (
+			<ButtonForm
+				type='submit'
+				disabled={disabled}>
+				{content}
+			</ButtonForm>
+		);
 }

@@ -1,16 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const ConatinerCheckbox = styled.label`
-  display: inline-block;
-  position: relative;
-  padding-left: 10px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font: 100% ${(props)=> props.theme.fontSizes.sm};
-  font-weight: 400;
-  font-size: 16px;
-  color: ${(props)=> props.theme.colors.blue[400]};
-`
+export const CheckboxContainer = styled.div`
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: flex-start;
+
+	input {
+		border: 1px solid ${(props) => props.theme.colors.blue[400]} !important;
+		border-radius: 4px !important;
+		width: 16px !important;
+		height: 16px !important;
+		color: ${(props) => props.theme.colors.blue[400]} !important;
+	}
+
+	label {
+		color: ${(props) => props.theme.colors.blue[400]};
+		font-size: ${(props) => props.theme.fontSizes.sm};
+		cursor: pointer;
+	}
+`;

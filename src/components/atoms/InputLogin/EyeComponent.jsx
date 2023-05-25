@@ -1,9 +1,6 @@
-import React from 'react';
-import EyeOpen from '/public/icons/EyeDefault.svg';
-import EyeClose from '/public/icons/EyeClosed.svg';
 import Image from 'next/image';
-import { useState } from 'react';
-
+import EyeClose from '/public/icons/EyeClosed.svg';
+import EyeOpen from '/public/icons/EyeDefault.svg';
 
 export default function EyeComponent({ eye }) {
 	return (
