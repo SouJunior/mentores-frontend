@@ -1,4 +1,4 @@
-import FormCard from '../../components/atoms/FormCard/formCard';
+import FormCard from '../../components/molecules/FormLogin';
 import {
 	ContainerImage,
 	ContainerLogin,

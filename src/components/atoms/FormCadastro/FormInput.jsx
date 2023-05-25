@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import React, { useState } from 'react';
 import { ContainerCadastro, ContainerForm } from './style';
-import InputForm from '../InputForm';
+import InputForm from '../InputRegister';
 import axios from 'axios';
 import Modal from 'react-modal';
 
