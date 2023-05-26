@@ -22,13 +22,13 @@ export default function Header() {
 			<GroupBtn>
 				<Link href={'/Cadastro'}>
 					<Button
-						text='Cadastro de Mentores'
+						content='Cadastro de Mentores'
 						btnRole={'primary'}
 					/>
 				</Link>
 				<Link href={'/LoginPage'}>
 					<Button
-						text='Login para Mentores'
+						content='Login para Mentores'
 						btnRole={'secondary'}
 					/>
 				</Link>
