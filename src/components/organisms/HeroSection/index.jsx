@@ -74,7 +74,7 @@ export default function HeroSection() {
 							/>
 						</div>
 						<Button
-							text='Encontrar mentor'
+							content='Encontrar mentor'
 							btnRole={'primary'}
 						/>
 					</ContainerInput>
