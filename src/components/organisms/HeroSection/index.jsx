@@ -11,9 +11,9 @@ import { AnimationTextHero } from '../../../styles/animations';
 
 export default function HeroSection() {
 	const text = [
-		'mentorias individuais',
 		'mentorias personalizadas',
 		'profissionais experientes',
+		'mentorias individuais',
 	];
 	const [textHero, setTextHero] = useState(text[0]);
 
@@ -59,7 +59,7 @@ export default function HeroSection() {
 						</TextAnimated>
 					</AnimatePresence>
 					<p>
-						Tenha acesso a mentorias personalizadas e <br /> gratuitas com
+						Tenha acesso a mentorias individuais e <br /> gratuitas com
 						profissionais renomados.
 					</p>
 					<ContainerInput>

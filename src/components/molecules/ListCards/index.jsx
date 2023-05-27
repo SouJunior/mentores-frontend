@@ -11,7 +11,7 @@ export default function ListCards() {
 		{
 			id: 1,
 			cardContent: {
-				title: 'Encontre seu mentor',
+				title: 'Pesquise',
 				description:
 					'Encontre seu mentor especializado na área desejada e mais adequado para você.',
 				img: imgCard2,
@@ -20,7 +20,7 @@ export default function ListCards() {
 		{
 			id: 2,
 			cardContent: {
-				title: 'Marque um horário ',
+				title: 'Agende',
 				description:
 					'Marque um horário disponível na agenda do mentor,  que melhor  se encaixa para vocês.',
 				img: imgCard1,
@@ -29,7 +29,7 @@ export default function ListCards() {
 		{
 			id: 3,
 			cardContent: {
-				title: 'Descreva seu objetivo',
+				title: 'Explique',
 				description:
 					'Descreva o seu objetivo com a mentoria, para que o mentor possa se preparar.',
 				img: imgCard3,

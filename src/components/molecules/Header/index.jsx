@@ -22,7 +22,7 @@ export default function Header() {
 			<GroupBtn>
 				<Link href={'/Cadastro'}>
 					<Button
-						content='Cadastro de Mentores'
+						content='Quero Mentorar'
 						btnRole={'primary'}
 					/>
 				</Link>
