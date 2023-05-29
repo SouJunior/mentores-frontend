@@ -10,11 +10,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { AnimationTextHero } from '../../../styles/animations';
 
 export default function HeroSection() {
-	const text = [
-		'mentorias personalizadas',
-		'profissionais experientes',
-		'mentorias individuais',
-	];
+	const text = ['mentorias personalizadas', 'profissionais experientes'];
 	const [textHero, setTextHero] = useState(text[0]);
 
 	function textSwitch() {
@@ -26,12 +22,6 @@ export default function HeroSection() {
 
 		setTimeout(() => {
 			if (textHero === text[1]) {
-				setTextHero(text[2]);
-			}
-		}, 1500);
-
-		setTimeout(() => {
-			if (textHero === text[2]) {
 				setTextHero(text[0]);
 			}
 		}, 1500);
