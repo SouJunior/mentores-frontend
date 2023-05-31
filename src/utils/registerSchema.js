@@ -1,6 +1,10 @@
 import * as yup from 'yup'
 
-const cadastroSchema = yup.object({
+const registerSchema = yup.object({
+    name:yup
+    .string()
+    .required('O nome é obrigatório')
+    ,
     email:yup
     .string()
     .email('E-mail inválido')
@@ -22,4 +26,4 @@ const cadastroSchema = yup.object({
 
 })
 
-export default cadastroSchema
+export default registerSchema

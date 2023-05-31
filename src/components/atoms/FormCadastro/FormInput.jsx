@@ -1,22 +1,16 @@
-import { format, compareAsc } from "date-fns";
 import FormButtonDescarta from "../FormButtonDescarta/formButtonDescarta";
 import FormButtonConcluir from "../FormButtonConcluir/formButtonConcluir";
 import Image from "next/image";
-
+import { useFormik } from "formik";
 import React, { useState } from "react";
 import { ContainerCadastro, ContainerForm } from "./style";
 import InputForm from "../InputRegister";
 import axios from "axios";
 import Modal from "react-modal";
+import registerSchema from "@/utils/registerSchema";
 
 export default function FormCadastro(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [valueNome, setValueNome] = useState("");
-  const [valueEmail, setValueEmail] = useState("");
-  const [valueValidationEmail, setValueValidationEmail] = useState("");
-  const [valuePassword, setValuePassword] = useState("");
-  const [valueValidationPassword, setValueValidationPassword] = useState("");
-  const [valuedate, setValueDate] = useState("");
 
   function handleOpenModal() {
     setIsOpen(true);
@@ -24,6 +18,45 @@ export default function FormCadastro(props) {
   function handleCloseModal() {
     setIsOpen(false);
   }
+
+  const handleSubmit = async (event) => {
+	event.preventDefault();
+  
+	if (formik.isValid) {
+	  try {
+		const response = await axios.post(
+		  'https://mentores-backend.onrender.com/user',
+		  {
+			fullName: formik.values.name,
+			email: formik.values.email,
+			dateOfBirth: formik.values.dataBirthday,
+			emailConfirm: formik.values.confirmEmail,
+			password: formik.values.password,
+			passwordConfirmation: formik.values.confirmPassword
+		  }
+		);
+  
+		console.log(response.data);
+	  } catch (error) {
+		console.error(error);
+	  }
+	}
+  };
+  
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      dataBirthday: "",
+      email: "",
+      confirmEmail: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: registerSchema,
+    onSubmit: handleSubmit,
+  });
   const customStyles = {
     content: {
       top: "30%",
@@ -32,84 +65,6 @@ export default function FormCadastro(props) {
       bottom: "auto",
       trasnform: "translate(-50%, -50%)",
     },
-  };
-
-  function handleNomeChange(prop) {
-    setValueNome(prop);
-    console.log(prop);
-  }
-  function handleEmailChange(prop) {
-    setValueEmail(prop);
-  }
-  function handlValidationEmailChange(prop) {
-    setValueValidationEmail(prop);
-  }
-  function handlePasswordChange(prop) {
-    setValuePassword(prop);
-  }
-  function handleValidationPasswordChange(prop) {
-    setValueValidationPassword(prop);
-  }
-  function handleDateChange(prop) {
-    const myDate = new Date(prop);
-    const newDate = format(myDate, "yyyy-MM-dd");
-    setValueDate(newDate);
-    console.log(newDate);
-  }
-
-  const Email = {
-    type: "email",
-    placeholder: "Preencha com seu e-mail",
-    value: valueEmail,
-    valueChange: handleEmailChange,
-  };
-  const ValidationEmail = {
-    type: "email",
-    placeholder: "Preencha com seu e-mail",
-    value: valueValidationEmail,
-    valueChange: handlValidationEmailChange,
-  };
-  const Password = {
-    type: "password",
-    placeholder: "********",
-    value: valuePassword,
-    valueChange: handlePasswordChange,
-  };
-  const ValidationPassword = {
-    type: "password",
-    placeholder: "********",
-    value: valueValidationPassword,
-    valueChange: handleValidationPasswordChange,
-  };
-  const Name = {
-    type: "text",
-    placeholder: "Preencha com seu nome",
-    value: valueNome,
-    valueChange: handleNomeChange,
-  };
-  const DateForm = {
-    type: "date",
-    value: valuedate,
-    placeholder: "ANO/MES/DIA",
-    valueChange: handleDateChange,
-  };
-
-  //Enviar dados pro back end
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await axios.post(
-      "https://mentores-backend.onrender.com/user",
-      {
-        fullName: Name.value,
-        email: Email.value,
-        dateOfBirth: DateForm.value,
-        emailConfirm: ValidationEmail.value,
-        password: Password.value,
-        passwordConfirmation: ValidationPassword.value,
-      }
-    );
-    console.log(response.data);
   };
 
   return (
@@ -131,59 +86,71 @@ export default function FormCadastro(props) {
           </p>
           <div>
             <InputForm
-              type={Name.type}
-              placeholder={Name.placeholder}
-              value={Name.value}
-              valueChange={Name.valueChange}
+              type={"text"}
+              name={"name"}
+              placeholder={"Preencha com seu nome"}
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              error={formik.touched.name && formik.errors.name}
             />
           </div>
           <p>
             Data de nascimento<span className="asteristico">*</span>
           </p>
           <InputForm
-            value={DateForm.value}
-            type={DateForm.type}
-            placeholder={DateForm.placeholder}
-            valueChange={DateForm.valueChange}
+            name={"dataBirthday"}
+            value={formik.values.dataBirthday}
+            type={"date"}
+            placeholder={"MM/DD/YYY"}
+            onChange={formik.handleChange}
           />
           <p>
             E-mail<span className="asteristico">*</span>
           </p>
           <InputForm
-            type={Email.type}
-            placeholder={Email.placeholder}
-            value={Email.value}
-            valueChange={Email.valueChange}
+            name={"email"}
+            type={"email"}
+            placeholder={"Preencha com o seu email"}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && formik.errors.email}
           />
 
           <p>
             Confirma e-mail<span className="asteristico">*</span>
           </p>
           <InputForm
-            type={ValidationEmail.type}
-            placeholder={ValidationEmail.placeholder}
-            value={ValidationEmail.value}
-            valueChange={ValidationEmail.valueChange}
+            name={"confirmEmail"}
+            type={"email"}
+            placeholder={"Confirme seu email"}
+            value={formik.values.confirmEmail}
+            onChange={formik.handleChange}
+            error={formik.touched.password && formik.errors.password}
           />
 
           <p>
             Senha<span className="asteristico">*</span>
           </p>
           <InputForm
-            type={Password.type}
-            placeholder={Password.placeholder}
-            value={Password.value}
-            valueChange={Password.valueChange}
+            name={"password"}
+            type={"password"}
+            placeholder={"*******"}
+            value={formik.values.password}
+            onChange={formik.handleChange}
           />
+          {formik.touched.password && formik.errors.password && (
+            <p>{formik.errors.password}</p>
+          )}
 
           <p>
             Confirmar senha<span className="asteristico">*</span>
           </p>
           <InputForm
-            type={ValidationPassword.type}
-            placeholder={ValidationPassword.placeholder}
-            value={ValidationPassword.value}
-            valueChange={ValidationPassword.valueChange}
+            name={"confirmPassword"}
+            type={"password"}
+            placeholder={"******"}
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
           />
           <input type="radio" />
           <span className="termo">
