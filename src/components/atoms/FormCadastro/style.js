@@ -1,32 +1,31 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
+export const ContainerForm = styled.div`
 
-// Estilos do componente
- export const ContainerForm = styled.div`
   width: 30%;
-  height: fit-content;
   position: absolute;
   left: 65%;
   top: 30px;
   background: ${(props) => props.theme.colors.white};
   border-radius: 12px;
   margin-left: auto;
-`; 
+`;
 
 export const ContainerCadastro = styled.div`
   form {
     margin: 20px;
+    height:100%;
   }
 
   p {
-    font-family: 'Radio Canada';
+    font-family: "Radio Canada";
     font-style: normal;
     font-size: ${(props) => props.theme.fontSizes.xs};
     color: ${(props) => props.theme.colors.gray[700]};
     margin: 10px 0px;
   }
 
-  input[type='radio'] {
+  input[type="radio"] {
     vertical-align: middle;
     margin-right: 5px;
   }
@@ -58,7 +57,7 @@ export const ContainerCadastro = styled.div`
 export const ContainerTerms = styled.div`
   display: flex;
   max-height: 100px;
+  text-align:center;
 `;
 
-
-export const TxtTerms = styled.div ``
+export const TxtTerms = styled.div``;

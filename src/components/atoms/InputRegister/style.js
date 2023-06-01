@@ -44,8 +44,5 @@ export const StyledLabel = styled.label`
 export const StyledLabelError = styled(StyledLabel)`
 	color: ${(props) => props.theme.colors.error};
 
-  .asteristico {
-    color: ${(props) => props.theme.colors.blue[500]};
-  }
 `;
 
