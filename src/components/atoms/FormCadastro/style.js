@@ -11,7 +11,7 @@ import styled from 'styled-components';
   background: ${(props) => props.theme.colors.white};
   border-radius: 12px;
   margin-left: auto;
-`;
+`; 
 
 export const ContainerCadastro = styled.div`
   form {

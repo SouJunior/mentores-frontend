@@ -3,12 +3,16 @@ import FormButtonConcluir from "../FormButtonConcluir/formButtonConcluir";
 import Image from "next/image";
 import { Formik, Field, Form } from "formik";
 import React, { useState } from "react";
-import { ContainerCadastro, ContainerForm, ContainerTerms, TxtTerms } from "./style";
+import {
+  ContainerCadastro,
+  ContainerForm,
+  ContainerTerms,
+  TxtTerms,
+} from "./style";
 import InputForm from "../InputRegister";
 import axios from "axios";
 import Modal from "react-modal";
 import registerSchema from "@/utils/registerSchema";
-
 export default function FormCadastro(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -87,6 +91,7 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="text"
               name="name"
+              label='Nome completo'
               placeholder="Preencha com seu nome"
             />
 
@@ -94,57 +99,64 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="date"
               name="dataBirthday"
+              label='Data de nascimento'
               placeholder="MM/DD/YYY"
             />
 
             <Field
               as={InputForm}
               type="email"
-              name="email"
+              label="E-mail"
+              name='email'
               placeholder="Preencha com o seu email"
             />
 
             <Field
               as={InputForm}
               type="email"
-              name="confirmEmail"
+              label="Confirmar E-mail"
+              name='confirmEmail'
               placeholder="Confirme seu email"
             />
 
             <Field
               as={InputForm}
               type="password"
-              name="password"
+              label="Senha"
+              name='password'
               placeholder="*******"
             />
 
             <Field
               as={InputForm}
               type="password"
-              name="confirmPassword"
+              label="Confirmar Senha"
+              name='confirmPassword'
               placeholder="******"
             />
             <ContainerTerms>
-            <input type="radio" />
-            <TxtTerms className="termo">
-              Concordo com os{" "}
-              <button className="termo-button" onClick={handleOpenModal}>
-                Termos de uso
-              </button>
-              e{" "}
-              <button className="termo-button">Políticas de privacidade</button>{" "}
-              do SouJunior.
-            </TxtTerms>
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={handleCloseModal}
-              style={customStyles}
-            >
-              <h2>Teste</h2>
-              <button onClick={handleCloseModal}>close</button>
-              <div>Termos de uso</div>
-            </Modal>
-              </ContainerTerms>
+              <input type="radio" />
+              <TxtTerms className="termo">
+                Concordo com os{" "}
+                <button className="termo-button" onClick={handleOpenModal}>
+                  Termos de uso
+                </button>
+                e{" "}
+                <button className="termo-button">
+                  Políticas de privacidade
+                </button>{" "}
+                do SouJunior.
+              </TxtTerms>
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={handleCloseModal}
+                style={customStyles}
+              >
+                <h2>Teste</h2>
+                <button onClick={handleCloseModal}>close</button>
+                <div>Termos de uso</div>
+              </Modal>
+            </ContainerTerms>
             <FormButtonConcluir />
             <FormButtonDescarta />
           </Form>
