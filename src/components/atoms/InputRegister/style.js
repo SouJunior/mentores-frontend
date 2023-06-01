@@ -33,6 +33,6 @@ input:focus{
 export const ContainerError = styled.div`
   .error-message{
     color: ${(props) => props.theme.colors.error};
-    font-size: 14px;
+    font-size: 12px;
   }
 `

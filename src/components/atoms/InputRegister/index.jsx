@@ -1,27 +1,19 @@
 import { ContainerError, ContainerInput } from "./style";
 import { ContainerDiv } from "./style";
+import { Field, ErrorMessage } from "formik";
 
 export default function InputForm({
-    name,
+  name,
   type,
-  value,
   placeholder,
-  onChange,
-  error,
 }) {
   return (
     <ContainerDiv>
       <ContainerInput>
-        <input
-        name={name}
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          value={value}
-        ></input>
+        <Field as="input" name={name} type={type} placeholder={placeholder} />
       </ContainerInput>
       <ContainerError>
-        {error && <p className="error-message">{error}</p>}
+        <ErrorMessage name={name} component="div" className="error-message" />
       </ContainerError>
     </ContainerDiv>
   );
