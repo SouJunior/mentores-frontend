@@ -1,147 +1,167 @@
-import { format, compareAsc } from 'date-fns'
-import FormButtonDescarta from '../FormButtonDescarta/formButtonDescarta';
-import FormButtonConcluir from '../FormButtonConcluir/formButtonConcluir';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import React, { useState } from 'react';
-import { ContainerCadastro, ContainerForm } from './style';
-import InputForm from '../InputRegister';
-import axios from 'axios';
-import Modal from 'react-modal';
-
+import FormButtonDescarta from "../FormButtonDescarta/formButtonDescarta";
+import FormButtonConcluir from "../FormButtonConcluir/formButtonConcluir";
+import Image from "next/image";
+import { Formik, Field, Form } from "formik";
+import React, { useState } from "react";
+import {
+  ContainerCadastro,
+  ContainerForm,
+  ContainerTerms,
+  TxtTerms,
+} from "./style";
+import InputForm from "../InputRegister";
+import axios from "axios";
+import Modal from "react-modal";
+import registerSchema from "@/utils/registerSchema";
 export default function FormCadastro(props) {
-	const [modalIsOpen, setIsOpen] = useState(false);
-	const [valueNome, setValueNome] = useState('');
-	const [valueEmail, setValueEmail] = useState('');
-	const [valueValidationEmail, setValueValidationEmail] = useState('');
-	const [valuePassword, setValuePassword] = useState('');
-	const [valueValidationPassword, setValueValidationPassword] = useState('');
-	const [valuedate, setValueDate] = useState('');
+  const [modalIsOpen, setIsOpen] = useState(false);
 
-	function handleOpenModal(){
-		setIsOpen(true)
-	}
-	function handleCloseModal(){
-		setIsOpen(false)
-	}
-	const customStyles = {
-		content: {
-			top:'30%',
-			left:'50%',
-			right:'auto',
-			bottom:'auto',
-			trasnform:'translate(-50%, -50%)'
-		}
-	}
+  function handleOpenModal() {
+    setIsOpen(true);
+  }
+  function handleCloseModal() {
+    setIsOpen(false);
+  }
 
-	function handleNomeChange(prop){
-		setValueNome(prop)
-		console.log(prop)
-	}
-	function handleEmailChange(prop){
-		setValueEmail(prop)
-	}
-	function handlValidationEmailChange(prop){
-		setValueValidationEmail(prop)
-	}
-	function handlePasswordChange(prop){
-		setValuePassword(prop)
-	}
-	function handleValidationPasswordChange(prop){
-		setValueValidationPassword(prop)
-	}
-	function handleDateChange(prop){
-		const myDate = new Date(prop);
-		const newDate = format(myDate, 'yyyy-MM-dd');
-		setValueDate(newDate)
-		console.log(newDate);
-	}
-	
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-	const Email= {type:'email', placeholder:'Preencha com seu e-mail', value:valueEmail, valueChange:handleEmailChange}
-	const ValidationEmail= {type:'email', placeholder:'Preencha com seu e-mail', value:valueValidationEmail, valueChange:handlValidationEmailChange}
-	const Password = {type:'password', placeholder:'********', value:valuePassword, valueChange:handlePasswordChange}
-	const ValidationPassword = {type:'password', placeholder:'********', value:valueValidationPassword, valueChange:handleValidationPasswordChange}
-	const Name = {type:'text', placeholder:'Preencha com seu nome', value:valueNome, valueChange:handleNomeChange}
-	const DateForm = {type:'date', value:valuedate, placeholder:'ANO/MES/DIA',  valueChange: handleDateChange}
-	
+    if (formik.isValid) {
+      try {
+        const response = await axios.post(
+          "https://mentores-backend.onrender.com/user",
+          {
+            fullName: formik.values.name,
+            email: formik.values.email,
+            dateOfBirth: formik.values.dataBirthday,
+            emailConfirm: formik.values.confirmEmail,
+            password: formik.values.password,
+            passwordConfirmation: formik.values.confirmPassword,
+          }
+        );
 
-	//Enviar dados pro back end
-	
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-				const response = await axios.post(
-					'https://mentores-backend.onrender.com/user',
-					{
-						fullName: Name.value,
-						email: Email.value,
-						dateOfBirth: DateForm.value,
-						emailConfirm:ValidationEmail.value,
-						password: Password.value,
-						passwordConfirmation:ValidationPassword.value
-					},
-				);
-				console.log(response.data);
-			} 
-		
-	return (
-	
-		<ContainerForm>
-			<ContainerCadastro>
-				<form onSubmit={handleSubmit}> 
-					<Image
-						className='souj'
-						src='logos/LogoSJ.svg'
-						alt='logo'
-						width={100}
-						height={200}
-					/>
-					<p><span className='asteristico'>*</span> Indica um campo obrigatório</p>
-					<p>
-						Nome completo<span className='asteristico'>*</span>
-					</p>
-					<div>
-					<InputForm type={Name.type} placeholder={Name.placeholder} value={Name.value} valueChange={Name.valueChange} />
-					</div>
-					<p>
-						Data de nascimento<span className='asteristico'>*</span>
-					</p>
-					<InputForm value={DateForm.value} type={DateForm.type} placeholder={DateForm.placeholder} valueChange={DateForm.valueChange}/>
-					<p>
-						E-mail<span className='asteristico'>*</span>
-					</p>
-					<InputForm type={Email.type} placeholder={Email.placeholder} value={Email.value} valueChange={Email.valueChange}  />
+        console.log(response.data);
+        console.log(formik.touched);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
-					<p>
-						Confirma e-mail<span className='asteristico'>*</span>
-					</p>
-					<InputForm type={ValidationEmail.type} placeholder={ValidationEmail.placeholder} value={ValidationEmail.value} valueChange={ValidationEmail.valueChange}  />
+  const initialValues = {
+    name: "",
+    email: "",
+    dataBirthday: "",
+    email: "",
+    confirmEmail: "",
+    password: "",
+    confirmPassword: "",
+  };
 
-					<p>
-						Senha<span className='asteristico'>*</span>
-					</p>
-					<InputForm type={Password.type} placeholder={Password.placeholder} value={Password.value} valueChange={Password.valueChange}  />
+  const customStyles = {
+    content: {
+      top: "30%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      trasnform: "translate(-50%, -50%)",
+    },
+  };
 
-					<p>
-						Confirmar senha<span className='asteristico'>*</span>
-					</p>
-					<InputForm type={ValidationPassword.type} placeholder={ValidationPassword.placeholder} value={ValidationPassword.value} valueChange={ValidationPassword.valueChange}  />	
-						<input type="radio"/><span className='termo'>Concordo com os <button className='termo-button' onClick={handleOpenModal}>Termos de uso</button>e <button className='termo-button'>Políticas de privacidade</button> do SouJunior.</span>
-						<Modal
-						isOpen={modalIsOpen}
-						onRequestClose={handleCloseModal}
-						style={customStyles}
-						>
-						<h2>Teste</h2>
-						<button onClick={handleCloseModal}>close</button>
-						<div>Termos de uso</div>
-						</Modal>
-					<FormButtonConcluir />
-					<FormButtonDescarta />
-				</form>
-				</ContainerCadastro>
-			</ContainerForm>
-	);
+  return (
+    <ContainerForm>
+      <ContainerCadastro>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={registerSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Image
+              className="souj"
+              src="logos/LogoSJ.svg"
+              alt="logo"
+              width={100}
+              height={200}
+            />
+            <p>
+              <span className="asteristico">*</span> Indica um campo obrigatório
+            </p>
+            <Field
+              as={InputForm}
+              type="text"
+              name="name"
+              label='Nome completo'
+              placeholder="Preencha com seu nome"
+            />
+
+            <Field
+              as={InputForm}
+              type="date"
+              name="dataBirthday"
+              label='Data de nascimento'
+              placeholder="MM/DD/YYY"
+            />
+
+            <Field
+              as={InputForm}
+              type="email"
+              label="E-mail"
+              name='email'
+              placeholder="Preencha com o seu email"
+            />
+
+            <Field
+              as={InputForm}
+              type="email"
+              label="Confirmar E-mail"
+              name='confirmEmail'
+              placeholder="Confirme seu email"
+            />
+
+            <Field
+              as={InputForm}
+              type="password"
+              label="Senha"
+              name='password'
+              placeholder="*******"
+            />
+
+            <Field
+              as={InputForm}
+              type="password"
+              label="Confirmar Senha"
+              name='confirmPassword'
+              placeholder="******"
+            />
+            <ContainerTerms>
+              <input type="radio" />
+              <TxtTerms className="termo">
+                Concordo com os{" "}
+                <button className="termo-button" onClick={handleOpenModal}>
+                  Termos de uso
+                </button>
+                e{" "}
+                <button className="termo-button">
+                  Políticas de privacidade
+                </button>{" "}
+                do SouJunior.
+              </TxtTerms>
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={handleCloseModal}
+                style={customStyles}
+              >
+                <h2>Teste</h2>
+                <button onClick={handleCloseModal}>close</button>
+                <div>Termos de uso</div>
+              </Modal>
+            </ContainerTerms>
+            <FormButtonConcluir />
+            <FormButtonDescarta />
+          </Form>
+        </Formik>
+      </ContainerCadastro>
+    </ContainerForm>
+  );
 }
