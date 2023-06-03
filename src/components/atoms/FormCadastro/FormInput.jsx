@@ -13,8 +13,11 @@ import InputForm from "../InputRegister";
 import axios from "axios";
 import Modal from "react-modal";
 import registerSchema from "@/utils/registerSchema";
+import RadioAgree from "../RadioAgree";
 export default function FormCadastro(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  
+  const[agree, setIsAgree] = useState(false)
 
   function handleOpenModal() {
     setIsOpen(true);
@@ -22,6 +25,7 @@ export default function FormCadastro(props) {
   function handleCloseModal() {
     setIsOpen(false);
   }
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -135,7 +139,10 @@ export default function FormCadastro(props) {
               placeholder="******"
             />
             <ContainerTerms>
-              <input type="radio" />
+              <RadioAgree
+              checked={agree}
+              onChange={(e) => setIsAgree(e.target.checked)}
+               />
               <TxtTerms className="termo">
                 Concordo com os{" "}
                 <button className="termo-button" onClick={handleOpenModal}>
@@ -157,7 +164,7 @@ export default function FormCadastro(props) {
                 <div>Termos de uso</div>
               </Modal>
             </ContainerTerms>
-            <FormButtonConcluir />
+            <FormButtonConcluir disabled={!agree} />
             <FormButtonDescarta />
           </Form>
         </Formik>
