@@ -1,3 +1,4 @@
+
 import { format, compareAsc } from "date-fns";
 import FormButtonDescarta from "../FormButtonDescarta/formButtonDescarta";
 import FormButtonConcluir from "../FormButtonConcluir/formButtonConcluir";
@@ -6,36 +7,37 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import React, { useState } from "react";
-import { ContainerCadastro, ContainerForm } from "./style";
+import {
+  ContainerCadastro,
+  ContainerForm,
+  ContainerTerms,
+  TxtTerms,
+} from "./style";
 import InputForm from "../InputRegister";
 import axios from "axios";
 import ModalComponent from "../Modal";
-// import Modal from "react-modal";
+import { Formik, Field, Form } from "formik";
+import registerSchema from "@/utils/registerSchema";
+import RadioAgree from "../RadioAgree";
 
 export default function FormCadastro(props) {
-  // const [modalIsOpen, setIsOpen] = useState(false);
+   const [modalIsOpen, setIsOpen] = useState(false);
   const [valueNome, setValueNome] = useState("");
   const [valueEmail, setValueEmail] = useState("");
   const [valueValidationEmail, setValueValidationEmail] = useState("");
   const [valuePassword, setValuePassword] = useState("");
   const [valueValidationPassword, setValueValidationPassword] = useState("");
   const [valuedate, setValueDate] = useState("");
+  const [openTermos, setOpenTermos] = useState(false);
+  const [openPoliticas, setOpenPoliticas] = useState(false);
+  //const [modalIsOpen, setIsOpen] = useState(false);
+  //const [modalEmail, setOpenEmail] = useState(false)
 
-  // function handleOpenModal() {
-  //   setIsOpen(true);
-  // }
-  // function handleCloseModal() {
-  //   setIsOpen(false);
-  // }
-  // const customStyles = {
-  //   content: {
-  //     top: "30%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     trasnform: "translate(-50%, -50%)",
-  //   },
-  // };
+  const [agree, setIsAgree] = useState(false);
+  const handleOpenTermos = () => setOpenTermos(true);
+  const handleCloseTermos = () => setOpenTermos(false);
+  const handleOpenPoliticas = () => setOpenPoliticas(true);
+  const handleClosePoliticas = () => setOpenPoliticas(false);
 
   function handleNomeChange(prop) {
     setValueNome(prop);
@@ -59,6 +61,21 @@ export default function FormCadastro(props) {
     setValueDate(newDate);
     console.log(newDate);
   }
+  
+    function handleOpenModal() {
+    setIsOpen(true);
+  }
+  function handleCloseModal() {
+    setIsOpen(false);
+  }
+
+  function handleModalEmail(){
+    setOpenEmail(true)
+  }
+  function closeModalEmail(){
+    setOpenEmail(false)
+  }
+
 
   const Email = {
     type: "email",
@@ -99,105 +116,114 @@ export default function FormCadastro(props) {
 
   //Enviar dados pro back end
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await axios.post(
-      "https://mentores-backend.onrender.com/user",
-      {
-        fullName: Name.value,
-        email: Email.value,
-        dateOfBirth: DateForm.value,
-        emailConfirm: ValidationEmail.value,
-        password: Password.value,
-        passwordConfirmation: ValidationPassword.value,
-      }
-    );
-    console.log(response.data);
+    const handleSubmit = async (values, {resetForm}) => {
+    event.preventDefault()
+    try {
+      const response = await axios.post(
+        "https://mentores-backend.onrender.com/user",
+        {
+          fullName: values.name,
+          email: values.email,
+          dateOfBirth: values.dataBirthday,
+          emailConfirm: values.confirmEmail,
+          password: values.password,
+          passwordConfirmation: values.confirmPassword,
+        }
+      );
+
+      console.log(response.data);
+      resetForm()
+      handleModalEmail()
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const [openTermos, setOpenTermos] = useState(false);
-  const [openPoliticas, setOpenPoliticas] = useState(false);
+  const initialValues = {
+    name: "",
+    email: "",
+    dataBirthday: "",
+    email: "",
+    confirmEmail: "",
+    password: "",
+    confirmPassword: "",
+  };
 
-  const handleOpenTermos = () => setOpenTermos(true);
-  const handleCloseTermos = () => setOpenTermos(false);
-  const handleOpenPoliticas = () => setOpenPoliticas(true);
-  const handleClosePoliticas = () => setOpenPoliticas(false);
+
 
   return (
     <ContainerForm>
       <ContainerCadastro>
-        <form onSubmit={handleSubmit}>
-          <Image
-            className="souj"
-            src="logos/LogoSJ.svg"
-            alt="logo"
-            width={100}
-            height={200}
-          />
-          <p>
-            <span className="asteristico">*</span> Indica um campo obrigatório
-          </p>
-          <p>
-            Nome completo<span className="asteristico">*</span>
-          </p>
-          <div>
-            <InputForm
-              type={Name.type}
-              placeholder={Name.placeholder}
-              value={Name.value}
-              valueChange={Name.valueChange}
+
+        <Formik
+          initialValues={initialValues}
+          validationSchema={registerSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Image
+              className="souj"
+              src="logos/LogoSJ.svg"
+              alt="logo"
+              width={100}
+              height={200}
             />
-          </div>
-          <p>
-            Data de nascimento<span className="asteristico">*</span>
-          </p>
-          <InputForm
-            value={DateForm.value}
-            type={DateForm.type}
-            placeholder={DateForm.placeholder}
-            valueChange={DateForm.valueChange}
-          />
-          <p>
-            E-mail<span className="asteristico">*</span>
-          </p>
-          <InputForm
-            type={Email.type}
-            placeholder={Email.placeholder}
-            value={Email.value}
-            valueChange={Email.valueChange}
-          />
+            <p>
+              <span className="asteristico">*</span> Indica um campo obrigatório
+            </p>
+            <Field
+              as={InputForm}
+              type="text"
+              name="name"
+              label="Nome completo"
+              placeholder="Preencha com seu nome"
+            />
 
-          <p>
-            Confirma e-mail<span className="asteristico">*</span>
-          </p>
-          <InputForm
-            type={ValidationEmail.type}
-            placeholder={ValidationEmail.placeholder}
-            value={ValidationEmail.value}
-            valueChange={ValidationEmail.valueChange}
-          />
+            <Field
+              as={InputForm}
+              type="date"
+              name="dataBirthday"
+              label="Data de nascimento"
+              placeholder="MM/DD/YYY"
+            />
 
-          <p>
-            Senha<span className="asteristico">*</span>
-          </p>
-          <InputForm
-            type={Password.type}
-            placeholder={Password.placeholder}
-            value={Password.value}
-            valueChange={Password.valueChange}
-          />
+            <Field
+              as={InputForm}
+              type="email"
+              label="E-mail"
+              name="email"
+              placeholder="Preencha com o seu email"
+            />
 
-          <p>
-            Confirmar senha<span className="asteristico">*</span>
-          </p>
-          <InputForm
-            type={ValidationPassword.type}
-            placeholder={ValidationPassword.placeholder}
-            value={ValidationPassword.value}
-            valueChange={ValidationPassword.valueChange}
-          />
-          <input type="radio" />
-          <span className="termo">
+            <Field
+              as={InputForm}
+              type="email"
+              label="Confirmar E-mail"
+              name="confirmEmail"
+              placeholder="Confirme seu email"
+            />
+
+            <Field
+              as={InputForm}
+              type="password"
+              label="Senha"
+              name="password"
+              placeholder="*******"
+            />
+
+            <Field
+              as={InputForm}
+              type="password"
+              label="Confirmar Senha"
+              name="confirmPassword"
+              placeholder="******"
+            />
+            <ContainerTerms>
+              <RadioAgree
+                checked={agree}
+                onChange={(e) => setIsAgree(e.target.checked)}
+              />
+            <span className="termo">
             Concordo com os{" "}
             <button
               type="button"
@@ -217,7 +243,7 @@ export default function FormCadastro(props) {
             do SouJunior.
           </span>
 
-          <ModalComponent open={openTermos} onClose={handleCloseTermos}>
+           <ModalComponent open={openTermos} onClose={handleCloseTermos}>
             <h2>Título do Modal Termos</h2>
             <p>Conteúdo do modal Termos</p>
           </ModalComponent>
@@ -226,18 +252,21 @@ export default function FormCadastro(props) {
             <h2>Título do Modal Politicas</h2>
             <p>Conteúdo do modal Politicas</p>
           </ModalComponent>
-          {/* <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={handleCloseModal}
-            style={customStyles}
-          >
-            <h2>Teste</h2>
-            <button onClick={handleCloseModal}>close</button>
-            <div>Termos de uso</div>
-          </Modal> */}
-          <FormButtonConcluir />
-          <FormButtonDescarta />
-        </form>
+             
+            </ContainerTerms>
+            <FormButtonConcluir disabled={!agree} />
+           // <Modal
+            //isOpen={modalEmail}
+            //onRequestClose={!handleModalEmail}
+          // style={customStyles}
+           // >
+             // <button onClick={closeModalEmail}>X</button>
+             // <h1>Modal envio email</h1>
+            //  <span>Aqui será o componente modal de confirmação de email!</span>
+           // </Modal>
+            <FormButtonDescarta />
+          </Form>
+        </Formik>
       </ContainerCadastro>
     </ContainerForm>
   );
