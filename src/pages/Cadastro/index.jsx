@@ -1,4 +1,4 @@
-import FormInput from '../../components/atoms/FormCadastro/FormInput';
+import FormInput from '../../components/atoms/FormRegister/FormRegister';
 import {
 	ContainerCadastro,
 	ContainerImageCadastro,

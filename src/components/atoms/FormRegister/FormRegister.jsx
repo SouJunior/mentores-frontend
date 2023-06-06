@@ -13,14 +13,14 @@ import {
   ContainerTerms,
   TxtTerms,
 } from "./style";
-import InputForm from "../InputRegister";
+import InputForm from "../InputForm";
 import axios from "axios";
 import ModalComponent from "../Modal";
 import { Formik, Field, Form } from "formik";
 import registerSchema from "@/utils/registerSchema";
 import RadioAgree from "../RadioAgree";
 
-export default function FormCadastro(props) {
+export default function FormRegister(props) {
    const [modalIsOpen, setIsOpen] = useState(false);
   const [valueNome, setValueNome] = useState("");
   const [valueEmail, setValueEmail] = useState("");
@@ -255,15 +255,15 @@ export default function FormCadastro(props) {
              
             </ContainerTerms>
             <FormButtonConcluir disabled={!agree} />
-           // <Modal
-            //isOpen={modalEmail}
-            //onRequestClose={!handleModalEmail}
-          // style={customStyles}
-           // >
-             // <button onClick={closeModalEmail}>X</button>
-             // <h1>Modal envio email</h1>
-            //  <span>Aqui será o componente modal de confirmação de email!</span>
-           // </Modal>
+           {/* <Modal
+            isOpen={modalEmail}
+            onRequestClose={!handleModalEmail}
+          style={customStyles}
+           >
+             <button onClick={closeModalEmail}>X</button>
+             <h1>Modal envio email</h1>
+             <span>Aqui será o componente modal de confirmação de email!</span>
+           </Modal> */}
             <FormButtonDescarta />
           </Form>
         </Formik>
