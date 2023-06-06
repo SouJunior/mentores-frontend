@@ -127,7 +127,7 @@ export default function FormCard(props) {
 						type='email'
 						value={email}
 						setValue={setEmail}
-						placeholder='Digite seu e-mail'
+						placeholder=''
 						label='E-mail'
 						id='emailID'
 					/>
@@ -138,7 +138,7 @@ export default function FormCard(props) {
 							type='password'
 							value={password}
 							setValue={setPassword}
-							placeholder='**********'
+							placeholder=''
 							label='Senha'
 							id='passID'
 						/>
@@ -158,7 +158,7 @@ export default function FormCard(props) {
 							id='connected'
 							text='Me manter conectado'
 						/>
-						<a href='#'>Esqueci a senha</a>
+						<a href='#' style={{textDecoration: 'underline'}}>Esqueci a senha</a>
 					</div>
 
 					<Button
