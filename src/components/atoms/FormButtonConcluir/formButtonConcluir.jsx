@@ -1,10 +1,10 @@
 import styles from '../FormButtonConcluir/FormButtonConcluir.module.scss'
 
-export default function FormButtonConcluir({disabled}){
+export default function FormButtonConcluir(){
     return(
         <div className={styles.containerModal}>
         <div >
-            <button disabled={disabled}  className={styles.concluir}
+            <button className={styles.concluir}
             type="submit">
                 Concluir
             </button>
