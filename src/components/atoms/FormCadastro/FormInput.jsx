@@ -1,5 +1,6 @@
 import FormButtonDescarta from "../FormButtonDescarta/formButtonDescarta";
 import FormButtonConcluir from "../FormButtonConcluir/formButtonConcluir";
+import { customStyles } from "@/utils/modalStyles";
 import Image from "next/image";
 import { Formik, Field, Form } from "formik";
 import React, { useState } from "react";
@@ -13,8 +14,13 @@ import InputForm from "../InputRegister";
 import axios from "axios";
 import Modal from "react-modal";
 import registerSchema from "@/utils/registerSchema";
+import RadioAgree from "../RadioAgree";
 export default function FormCadastro(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalEmail, setOpenEmail] = useState(false)
+
+  const [agree, setIsAgree] = useState(false);
+
 
   function handleOpenModal() {
     setIsOpen(true);
@@ -23,28 +29,34 @@ export default function FormCadastro(props) {
     setIsOpen(false);
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  function handleModalEmail(){
+    setOpenEmail(true)
+  }
+  function closeModalEmail(){
+    setOpenEmail(false)
+  }
 
-    if (formik.isValid) {
-      try {
-        const response = await axios.post(
-          "https://mentores-backend.onrender.com/user",
-          {
-            fullName: formik.values.name,
-            email: formik.values.email,
-            dateOfBirth: formik.values.dataBirthday,
-            emailConfirm: formik.values.confirmEmail,
-            password: formik.values.password,
-            passwordConfirmation: formik.values.confirmPassword,
-          }
-        );
 
-        console.log(response.data);
-        console.log(formik.touched);
-      } catch (error) {
-        console.error(error);
-      }
+  const handleSubmit = async (values, {resetForm}) => {
+    event.preventDefault()
+    try {
+      const response = await axios.post(
+        "https://mentores-backend.onrender.com/user",
+        {
+          fullName: values.name,
+          email: values.email,
+          dateOfBirth: values.dataBirthday,
+          emailConfirm: values.confirmEmail,
+          password: values.password,
+          passwordConfirmation: values.confirmPassword,
+        }
+      );
+
+      console.log(response.data);
+      resetForm()
+      handleModalEmail()
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -58,15 +70,7 @@ export default function FormCadastro(props) {
     confirmPassword: "",
   };
 
-  const customStyles = {
-    content: {
-      top: "30%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      trasnform: "translate(-50%, -50%)",
-    },
-  };
+
 
   return (
     <ContainerForm>
@@ -91,7 +95,7 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="text"
               name="name"
-              label='Nome completo'
+              label="Nome completo"
               placeholder="Preencha com seu nome"
             />
 
@@ -99,7 +103,7 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="date"
               name="dataBirthday"
-              label='Data de nascimento'
+              label="Data de nascimento"
               placeholder="MM/DD/YYY"
             />
 
@@ -107,7 +111,7 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="email"
               label="E-mail"
-              name='email'
+              name="email"
               placeholder="Preencha com o seu email"
             />
 
@@ -115,7 +119,7 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="email"
               label="Confirmar E-mail"
-              name='confirmEmail'
+              name="confirmEmail"
               placeholder="Confirme seu email"
             />
 
@@ -123,7 +127,7 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="password"
               label="Senha"
-              name='password'
+              name="password"
               placeholder="*******"
             />
 
@@ -131,11 +135,14 @@ export default function FormCadastro(props) {
               as={InputForm}
               type="password"
               label="Confirmar Senha"
-              name='confirmPassword'
+              name="confirmPassword"
               placeholder="******"
             />
             <ContainerTerms>
-              <input type="radio" />
+              <RadioAgree
+                checked={agree}
+                onChange={(e) => setIsAgree(e.target.checked)}
+              />
               <TxtTerms className="termo">
                 Concordo com os{" "}
                 <button className="termo-button" onClick={handleOpenModal}>
@@ -157,7 +164,16 @@ export default function FormCadastro(props) {
                 <div>Termos de uso</div>
               </Modal>
             </ContainerTerms>
-            <FormButtonConcluir />
+            <FormButtonConcluir disabled={!agree} />
+            <Modal
+            isOpen={modalEmail}
+            onRequestClose={!handleModalEmail}
+            style={customStyles}
+            >
+              <button onClick={closeModalEmail}>X</button>
+              <h1>Modal envio email</h1>
+              <span>Aqui será o componente modal de confirmação de email!</span>
+            </Modal>
             <FormButtonDescarta />
           </Form>
         </Formik>
