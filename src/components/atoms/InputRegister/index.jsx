@@ -1,16 +1,24 @@
-import { ContainerError, ContainerInput } from "./style"
-import { ContainerDiv } from "./style";
+import {
+  ContainerDiv,
+  ContainerError,
+  ContainerInput,
+} from "./style";
+import { Field, ErrorMessage } from "formik";
+import Label from "./label";
 
-
-export default function InputForm({type, value, placeholder, valueChange, error}){
-    return(
-        <ContainerDiv>
-            <ContainerInput>
-        <input type={type} placeholder={placeholder} onChange={(e)=>valueChange(e.target.value)} value={value}></input>
-            </ContainerInput>
-            <ContainerError>
-            {error && <p className="error-message">{error}</p>}
-            </ContainerError>
-        </ContainerDiv>
-    )
+export default function InputForm({ name, type, placeholder, label }) {
+  return (
+    <ContainerDiv>
+        <Label name={label} /><span className="asteristico">*</span>
+      <ContainerInput>
+        <Field as="input" name={name} type={type} placeholder={placeholder} />
+      </ContainerInput>
+      <ContainerError>
+        <ErrorMessage name={name} component="div" className="error-message" />
+      </ContainerError>
+    </ContainerDiv>
+  );
 }
+
+
+
