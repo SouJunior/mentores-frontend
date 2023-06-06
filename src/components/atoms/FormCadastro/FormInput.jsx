@@ -37,7 +37,7 @@ export default function FormCadastro(props) {
   }
 
 
-  const handleSubmit = async (values, {resetForm}) => {
+  const handleSubmit = async (event, values, {resetForm}) => {
     event.preventDefault()
     try {
       const response = await axios.post(
