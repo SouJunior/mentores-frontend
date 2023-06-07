@@ -8,9 +8,9 @@ export const ButtonClose = styled.button`
   border: none;
   background-color: transparent;
   border-radius: 50%;
-  color: white;
-  background-color: #f44336;
+  color: black;
+  background-color: rgba(255, 255, 255, 0);
   &:hover {
-    background-color: #d32f2f;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
