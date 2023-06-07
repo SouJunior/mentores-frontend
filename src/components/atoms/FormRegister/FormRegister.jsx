@@ -15,7 +15,7 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import registerSchema from '@/utils/registerSchema';
 import RadioAgree from '../RadioAgree';
-export default function FormCadastro(props) {
+export default function FormRegister(props) {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [modalEmail, setOpenEmail] = useState(false);
 
