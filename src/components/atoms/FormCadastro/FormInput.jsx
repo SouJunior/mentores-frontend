@@ -10,7 +10,7 @@ import {
   ContainerTerms,
   TxtTerms,
 } from "./style";
-import InputForm from "../InputRegister";
+import InputForm from "../InputForm";
 import axios from "axios";
 import Modal from "react-modal";
 import registerSchema from "@/utils/registerSchema";
