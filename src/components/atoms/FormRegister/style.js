@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const ContainerForm = styled.div`
-	width: 30%;
+	width: 35%;
 	height: fit-content;
 	position: absolute;
-	left: 65%;
+	left: 60%;
 	top: 30px;
 	background: ${(props) => props.theme.colors.white};
 	border-radius: 12px;
 	margin-left: auto;
-  padding: 12px 0px;
+	padding: 12px 0px;
 `;
 
 export const ContainerCadastro = styled.div`
@@ -50,8 +50,9 @@ export const ContainerCadastro = styled.div`
 	}
 
 	.souj {
-		width: 65%;
-		height: 53px;
+		width: 240px;
+		height: 36px;
+	
 	}
 `;
 

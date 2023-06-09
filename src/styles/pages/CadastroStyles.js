@@ -2,20 +2,20 @@ import styled from 'styled-components';
 
 export const ContainerCadastro = styled.div`
 	width: 100%;
-	min-height: 100vh;
-	height: 100%;
+	height: 100vh;
+	height: fit-content;
+	display: flex;
+	padding-bottom: 140px;
 	background: ${(props) => props.theme.colors.gradient};
 `;
 
 export const ContainerImageCadastro = styled.div`
-    width: 60%;
-    min-height: 100vh;
-		height: 100%;
+	height: 100%;
+	width: 50%;
 `;
 
 export const MyImageCadastro = styled.img`
 	width: 100%;
-	height:100%;
+	height: 100vh;
 	object-fit: cover;
-
 `;

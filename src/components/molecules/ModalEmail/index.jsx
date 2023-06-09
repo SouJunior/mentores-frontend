@@ -21,7 +21,7 @@ export default function ModalEmail({ open, onClose, height }) {
 					src='images/ConfirmEmail.png'
 					alt='Garoto mexendo em nootebook'
 				/>
-				<Message>Enviamos um email para você de confirmação.</Message>
+				<Message>Enviamos um email para você de confirmação.</Message>S
 				<FooterModal>
 					<Image
 						src={'logos/LogoSJ.svg'}

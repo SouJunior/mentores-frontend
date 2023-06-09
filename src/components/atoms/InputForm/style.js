@@ -10,7 +10,7 @@ export const ContainerInput = styled.div`
 	input {
 		height: 100%;
 		width: 100%;
-    margin: 8px 0px;
+		margin: 4px 0px 16px;
 		padding: 12px 32px 12px;
 		font-size: 14px;
 		outline: none;
@@ -44,11 +44,13 @@ export const ContainerError = styled.div`
 	.error-message {
 		color: ${(props) => props.theme.colors.error};
 		font-size: 12px;
-		margin-bottom: 8px;
+		margin-bottom: 12px;
+		margin-top: -8px;
 	}
 `;
 
 export const StyledLabel = styled.label`
+	font-size: 14px;
 	color: ${(props) => props.theme.colors.gray[700]};
 `;
 
