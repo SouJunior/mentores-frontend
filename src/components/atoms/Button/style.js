@@ -40,3 +40,10 @@ export const ButtonForm = styled(ButtonDefault)`
 
 	}
 `;
+
+export const ButtonFormVariant = styled(ButtonForm)`
+	width: 100%;
+	border-color: ${(props) => props.theme.colors.blue[400]};
+	color: ${(props) => props.theme.colors.blue[400]};
+	background-color: ${(props) => props.theme.colors.white};
+`;
