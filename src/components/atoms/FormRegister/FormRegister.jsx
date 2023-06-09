@@ -233,7 +233,7 @@ export default function FormRegister(props) {
             <ModalEmail
             open={openEmail}
             onClose={closeModalEmail}
-            height={"430px"}
+            height={"730px"}
             >
 
             </ModalEmail>
