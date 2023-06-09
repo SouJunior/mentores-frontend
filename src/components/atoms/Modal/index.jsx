@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog, Box } from "@mui/material";
 import { ButtonClose } from "./style";
-const ModalComponent = ({ open, onClose, children }) => {
+const ModalComponent = ({ open, onClose, children, height }) => {
   return (
     <Dialog
       open={open}
@@ -18,7 +18,6 @@ const ModalComponent = ({ open, onClose, children }) => {
       <Box
         sx={{
           borderRadius: "8px 8px 0px 0px",
-          // p: 4,
           background: "#d7d9d7",
           padding: "0px",
           paddingTop: "32px",
@@ -28,6 +27,7 @@ const ModalComponent = ({ open, onClose, children }) => {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          maxHeight: height,
         }}
       >
         {children}
