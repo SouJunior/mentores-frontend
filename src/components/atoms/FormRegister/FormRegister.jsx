@@ -39,25 +39,25 @@ export default function FormRegister(props) {
   const handleSubmit = async (values, { resetForm }) => {
     event.preventDefault();
     handleModalEmail();
-    // try {
-    //   const response = await axios.post(
-    //     "https://mentores-backend.onrender.com/user",
-    //     {
-    //       fullName: values.name,
-    //       email: values.email,
-    //       dateOfBirth: values.dataBirthday,
-    //       emailConfirm: values.confirmEmail,
-    //       password: values.password,
-    //       passwordConfirmation: values.confirmPassword,
-    //     }
-    //   );
+    try {
+      const response = await axios.post(
+        "https://mentores-backend.onrender.com/user",
+        {
+          fullName: values.name,
+          email: values.email,
+          dateOfBirth: values.dataBirthday,
+          emailConfirm: values.confirmEmail,
+          password: values.password,
+          passwordConfirmation: values.confirmPassword,
+        }
+      );
 
-    //   console.log(response.data);
-    //   resetForm();
-    //   handleModalEmail();
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      console.log(response.data);
+      resetForm();
+      handleModalEmail();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
 
