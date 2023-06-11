@@ -6,7 +6,7 @@ import {
 	ButtonVariant,
 } from './style';
 
-export default function Button({ content, btnRole, disabled, onClick }) {
+export default function Button({content, btnRole, disabled, onClick }) {
 	if (btnRole === 'primary') return <ButtonDefault>{content}</ButtonDefault>;
 
 	if (btnRole === 'secondary')
