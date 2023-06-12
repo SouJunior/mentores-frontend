@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-const registerSchema = yup.object({
+export const registerSchema = yup.object({
     name:yup
     .string()
     .required('O nome é obrigatório')
@@ -26,4 +26,12 @@ const registerSchema = yup.object({
 
 })
 
-export default registerSchema
+export const initialValues = {
+    name: "",
+    email: "",
+    dataBirthday: "",
+    confirmEmail: "",
+    password: "",
+    confirmPassword: "",
+  };
+

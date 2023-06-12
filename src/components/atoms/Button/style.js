@@ -35,7 +35,7 @@ export const ButtonForm = styled(ButtonDefault)`
 	}
 
 	&:disabled {
-		cursor: default;
+		cursor: not-allowed;
 		filter: grayscale(100%);
 
 	}
