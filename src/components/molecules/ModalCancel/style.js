@@ -29,7 +29,8 @@ export const HeadingModal = styled.h2`
 
 export const ContainerBtn = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content:center;
+  gap: 16px;
 	width: 100%;
 	color: #c1292e;
 `;
