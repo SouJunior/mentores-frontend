@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 
 export const ContainerForm = styled.div`
-	width: 35%;
+	width: 100%;
+	max-width: 500px;
 	height: fit-content;
 	position: absolute;
-	left: 60%;
+	right: 180px;
 	top: 30px;
 	background: ${(props) => props.theme.colors.white};
 	border-radius: 12px;
-	margin-left: auto;
 	padding: 12px 0px;
 `;
 
 export const ContainerCadastro = styled.div`
 	form {
-		margin: 20px;
+		margin: 8px 20px;
 		height: 100%;
 
 		img {
@@ -50,7 +50,7 @@ export const ContainerTerms = styled.div`
 	display: flex;
 	max-height: 100px;
 	text-align: justify;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 `;
 
