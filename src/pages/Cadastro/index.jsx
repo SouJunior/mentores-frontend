@@ -1,4 +1,4 @@
-import FormRegister from '../../components/atoms/FormRegister/FormRegister';
+import FormRegister from '../../components/molecules/FormRegister/FormRegister';
 import {
 	ContainerCadastro,
 	ContainerImageCadastro,

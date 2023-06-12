@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import Image from 'next/image';
 import { useState } from 'react';
-import Button from '../Button';
-import InputForm from '../InputForm';
-import ModalComponent from '../Modal';
-import RadioAgree from '../RadioAgree';
+import Button from '../../atoms/Button';
+import InputForm from '../../atoms/InputForm';
+import ModalComponent from '../../atoms/Modal';
+import RadioAgree from '../../atoms/RadioAgree';
 import ModalEmail from '@/components/molecules/ModalEmail';
 import { Politicas, Termos } from './Text';
 import {
