@@ -43,6 +43,7 @@ export const ContainerInput = styled.div`
 export const ContainerError = styled.div`
 	.error-message {
 		color: ${(props) => props.theme.colors.error};
+		font-weight: bold;
 		font-size: 12px;
 		margin-bottom: 12px;
 		margin-top: -8px;

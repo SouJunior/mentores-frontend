@@ -11,11 +11,11 @@ export const ContainerCadastro = styled.div`
 
 export const ContainerImageCadastro = styled.div`
 	height: 100%;
-	width: 50%;
+	width: 55%;
 `;
 
 export const MyImageCadastro = styled.img`
 	width: 100%;
 	height: 100vh;
-	object-fit: cover;
+	object-fit: contain;
 `;

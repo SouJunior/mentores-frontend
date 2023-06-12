@@ -99,7 +99,7 @@ export default function FormRegister(props) {
 							type='email'
 							label='E-mail'
 							name='email'
-							placeholder='Preencha com o seu email'
+							placeholder='Preencha com o seu e-mail'
 						/>
 
 						<Field
@@ -107,7 +107,7 @@ export default function FormRegister(props) {
 							type='email'
 							label='Confirmar E-mail'
 							name='confirmEmail'
-							placeholder='Confirme seu email'
+							placeholder='Confirme seu e-mail'
 						/>
 
 						<Field
