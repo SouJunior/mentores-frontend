@@ -1,4 +1,4 @@
-import ModalComponent from '@/components/atoms/Modal';
+import ModalComponent from '@/components/atoms/ModalComponent';
 import {
 	ContainerModal,
 	ImageEmail,

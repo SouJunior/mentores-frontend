@@ -1,24 +1,36 @@
 import React from 'react';
 import { Dialog, Box } from '@mui/material';
 import { ButtonClose } from './style';
-const ModalComponent = ({ open, onClose, children, height }) => {
+const ModalComponent = ({
+	open,
+	onClose,
+	children,
+	height,
+	width,
+	showBtn = false,
+	bgColor = '#d7d9d7',
+}) => {
 	return (
 		<Dialog
 			open={open}
 			onClose={onClose}
 			maxWidth='sm'
-			fullWidth
 			PaperProps={{
 				style: {
 					boxShadow: 'none',
 					backgroundColor: 'transparent',
+					position: 'absolute',
 					zIndex: '999999',
+					maxWidth: width,
+					maxHeight: height,
+					overflow: 'hidden',
+					borderRadius: '8px',
 				},
 			}}>
 			<Box
 				sx={{
 					borderRadius: '8px 8px 0px 0px',
-					background: '#d7d9d7',
+					background: bgColor,
 					padding: '0px',
 					paddingTop: '32px',
 					boxShadow: 'none',
@@ -28,9 +40,14 @@ const ModalComponent = ({ open, onClose, children, height }) => {
 					alignItems: 'center',
 					flexDirection: 'column',
 					maxHeight: height,
+					maxWidth: width,
 				}}>
 				{children}
-				<ButtonClose onClick={onClose}>X</ButtonClose>
+				<ButtonClose
+					showBtn={showBtn}
+					onClick={onClose}>
+					X
+				</ButtonClose>
 			</Box>
 		</Dialog>
 	);

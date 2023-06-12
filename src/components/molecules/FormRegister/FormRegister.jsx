@@ -1,17 +1,18 @@
-import { registerSchema, initialValues } from '@/utils/registerSchema';
+import Checkbox from '@/components/atoms/Checkbox';
+import ModalEmail from '@/components/molecules/ModalEmail';
+import { initialValues, registerSchema } from '@/utils/registerSchema';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import Image from 'next/image';
 import { useState } from 'react';
 import Button from '../../atoms/Button';
 import InputForm from '../../atoms/InputForm';
-import ModalComponent from '../../atoms/Modal';
-import RadioAgree from '../../atoms/RadioAgree';
-import ModalEmail from '@/components/molecules/ModalEmail';
+import ModalComponent from '../../atoms/ModalComponent';
+import ModalCancel from '../ModalCancel';
 import { Politicas, Termos } from './Text';
 import {
-	ContainerCadastro,
 	ContainerBtn,
+	ContainerCadastro,
 	ContainerForm,
 	ContainerTerms,
 	ModalBox,
@@ -25,8 +26,8 @@ import {
 export default function FormRegister(props) {
 	const [openTermos, setOpenTermos] = useState(false);
 	const [openPoliticas, setOpenPoliticas] = useState(false);
-	const [openDescard, setOpenDiscard] = useState(false);
-	const [agree, setIsAgree] = useState(false);
+	const [openModalCancel, setOpenModalCancel] = useState(false);
+	const [agree, setIsAgree] = useState('');
 	const [openEmail, setOpenEmail] = useState(false);
 
 	const handleOpenTermos = () => setOpenTermos(true);
@@ -34,7 +35,9 @@ export default function FormRegister(props) {
 	const handleOpenPoliticas = () => setOpenPoliticas(true);
 	const handleClosePoliticas = () => setOpenPoliticas(false);
 	const handleModalEmail = () => setOpenEmail(true);
+	const handleModalCancel = () => setOpenModalCancel(true);
 	const closeModalEmail = () => setOpenEmail(false);
+	const closeModalCancel = () => setOpenModalCancel(false);
 
 	const handleSubmit = async (values, { resetForm }) => {
 		event.preventDefault();
@@ -126,9 +129,9 @@ export default function FormRegister(props) {
 							placeholder='********'
 						/>
 						<ContainerTerms>
-							<RadioAgree
-								checked={agree}
-								onChange={(e) => setIsAgree(e.target.checked)}
+							<Checkbox
+								setValue={setIsAgree}
+								value={agree}
 							/>
 							<TxtTerms>
 								Concordo com os{' '}
@@ -225,15 +228,17 @@ export default function FormRegister(props) {
 							<Button
 								btnRole={'formSecondary'}
 								content={'Cancelar'}
-								onClick={() => setOpenDiscard(true)}
+								onClick={handleModalCancel}
 							/>
 						</ContainerBtn>
-						{openDescard && (
-							<p style={{ position: 'absolute' }}>
-								Espaço reservado para modal de cancelamento de cadastro do
-								usário
-							</p>
-						)}
+
+						<ModalCancel
+							open={openModalCancel}
+							width={'400px'}
+							height={'216px'}
+							bgColor={'#fff'}
+							onClose={closeModalCancel}
+						/>
 					</Form>
 				</Formik>
 			</ContainerCadastro>
