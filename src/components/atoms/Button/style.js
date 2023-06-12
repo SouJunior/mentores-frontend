@@ -25,7 +25,6 @@ export const ButtonVariant = styled(ButtonDefault)`
 
 export const ButtonForm = styled(ButtonDefault)`
 	width: 100%;
-	margin-top: 32px;
 	height: 48px;
 
 	&:hover {
@@ -50,5 +49,6 @@ export const ButtonFormVariant = styled(ButtonForm)`
 export const ButtonUnstyled = styled.button`
 	all: unset;
 	cursor: pointer;
+	margin: 0px;
 	text-decoration: underline;
 `;

@@ -11,6 +11,7 @@ import ModalEmail from '@/components/molecules/ModalEmail';
 import { Politicas, Termos } from './Text';
 import {
 	ContainerCadastro,
+	ContainerBtn,
 	ContainerForm,
 	ContainerTerms,
 	ModalBox,
@@ -71,8 +72,8 @@ export default function FormRegister(props) {
 							className='souj'
 							src='logos/LogoSJ.svg'
 							alt='logo'
-							width={100}
-							height={200}
+							width={240}
+							height={36}
 						/>
 						<p>
 							<span className='asteristico'>*</span> Indica um campo obrigatório
@@ -214,18 +215,19 @@ export default function FormRegister(props) {
 							onClose={closeModalEmail}
 							height={'730px'}
 						/>
+						<ContainerBtn>
+							<Button
+								btnRole={'form'}
+								content={'Concluir'}
+								disabled={!agree}
+							/>
 
-						<Button
-							btnRole={'form'}
-							content={'Concluir'}
-							disabled={!agree}
-						/>
-
-						<Button
-							btnRole={'formSecondary'}
-							content={'Cancelar'}
-							onClick={() => setOpenDiscard(true)}
-						/>
+							<Button
+								btnRole={'formSecondary'}
+								content={'Cancelar'}
+								onClick={() => setOpenDiscard(true)}
+							/>
+						</ContainerBtn>
 						{openDescard && (
 							<p style={{ position: 'absolute' }}>
 								Espaço reservado para modal de cancelamento de cadastro do

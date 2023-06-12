@@ -16,6 +16,11 @@ export const ContainerCadastro = styled.div`
 	form {
 		margin: 20px;
 		height: 100%;
+
+		img {
+			width: 240px;
+			height: 36px;
+		}
 	}
 
 	p {
@@ -23,7 +28,7 @@ export const ContainerCadastro = styled.div`
 		font-style: normal;
 		font-size: ${(props) => props.theme.fontSizes.xs};
 		color: ${(props) => props.theme.colors.gray[700]};
-		margin: 10px 0px;
+		margin: 8px 0px;
 	}
 
 	input[type='radio'] {
@@ -44,13 +49,14 @@ export const ContainerCadastro = styled.div`
 export const ContainerTerms = styled.div`
 	display: flex;
 	max-height: 100px;
-	text-align: center;
+	text-align: justify;
 	align-items: center;
 	justify-content: center;
 `;
 
 export const TxtTerms = styled.div`
 	font-size: 14px;
+	width: 100%;
 	color: ${(props) => props.theme.colors.blue[500]};
 `;
 
@@ -92,7 +98,6 @@ export const ModalBox = styled.div`
 export const ModalBoxTitulo = styled.h2`
 	width: 521px;
 	height: 24px;
-
 	font-family: 'Radio Canada';
 	font-style: normal;
 	font-weight: 700;
@@ -119,4 +124,12 @@ export const ModalBoxParagrafo = styled.p`
 	font-size: 14px;
 	line-height: 150%;
 	color: #000000;
+`;
+
+export const ContainerBtn = styled.div`
+	display: flex;
+	flex-direction: column;
+	padding: 12px 0px 0px;
+	margin: 0px;
+	gap: 16px;
 `;
