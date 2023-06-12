@@ -37,7 +37,6 @@ export const ButtonForm = styled(ButtonDefault)`
 	&:disabled {
 		cursor: not-allowed;
 		filter: grayscale(100%);
-
 	}
 `;
 
@@ -46,4 +45,10 @@ export const ButtonFormVariant = styled(ButtonForm)`
 	border-color: ${(props) => props.theme.colors.blue[400]};
 	color: ${(props) => props.theme.colors.blue[400]};
 	background-color: ${(props) => props.theme.colors.white};
+`;
+
+export const ButtonUnstyled = styled.button`
+	all: unset;
+	cursor: pointer;
+	text-decoration: underline;
 `;

@@ -31,20 +31,6 @@ export const ContainerCadastro = styled.div`
 		margin-right: 5px;
 	}
 
-	.termo {
-		font-size: ${(props) => props.theme.fontSizes.xs};
-		color: ${(props) => props.theme.colors.blue[500]};
-		margin-top: 10px;
-	}
-
-	.termo-button {
-		border: none;
-		background: none;
-		text-decoration: underline;
-		height: 10px;
-		color: ${(props) => props.theme.colors.blue[500]};
-	}
-
 	.asteristico {
 		color: ${(props) => props.theme.colors.blue[500]};
 	}
@@ -52,7 +38,6 @@ export const ContainerCadastro = styled.div`
 	.souj {
 		width: 240px;
 		height: 36px;
-	
 	}
 `;
 
@@ -60,9 +45,14 @@ export const ContainerTerms = styled.div`
 	display: flex;
 	max-height: 100px;
 	text-align: center;
+	align-items: center;
+	justify-content: center;
 `;
 
-export const TxtTerms = styled.div``;
+export const TxtTerms = styled.div`
+	font-size: 14px;
+	color: ${(props) => props.theme.colors.blue[500]};
+`;
 
 export const ModalLogo = styled.img`
 	max-width: 120px;
@@ -84,6 +74,7 @@ export const ModalBox = styled.div`
 	padding: 24px;
 	margin-top: 30px;
 	font-family: 'Radio Canada';
+
 	&::-webkit-scrollbar {
 		width: 15px;
 	}
@@ -101,6 +92,7 @@ export const ModalBox = styled.div`
 export const ModalBoxTitulo = styled.h2`
 	width: 521px;
 	height: 24px;
+
 	font-family: 'Radio Canada';
 	font-style: normal;
 	font-weight: 700;
@@ -119,8 +111,8 @@ export const ModalBoxSubTitulo = styled.h2`
 	margin-top: 15px;
 `;
 export const ModalBoxParagrafo = styled.p`
-	width: 521px;
-	height: 2289px;
+	width: 100%;
+	margin: 12px 0px;
 	font-family: 'Radio Canada';
 	font-style: normal;
 	font-weight: 400;
