@@ -145,13 +145,15 @@ export default function FormRegister(props) {
             <ModalTerms
               open={openTermos}
               onClose={handleCloseTermos}
-              height={"600px"}
+              height={"590px"}
+			  width={'600px'}
             />
 
             <ModalPoliticas
               open={openPoliticas}
               onClose={handleClosePoliticas}
-              height={"600px"}
+              height={"590px"}
+			  width={'600px'}
             />
 
             <ModalEmail

@@ -10,9 +10,9 @@ import {
 import { Termos } from "../FormRegister/Text";
 import ModalComponent from "@/components/atoms/ModalComponent";
 
-export default function ModalTerms({ open, onClose, height }) {
+export default function ModalTerms({ open, onClose, height, width }) {
   return (
-    <ModalComponent open={open} onClose={onClose} height={height}>
+    <ModalComponent open={open} onClose={onClose} height={height} width={width}>
       <ModalLogo src="logos/LogoSJ.svg" />
       <ModalHash>#MovimentoSouJunior</ModalHash>
       <ModalBox>
