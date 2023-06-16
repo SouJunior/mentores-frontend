@@ -17,6 +17,7 @@ import {
   ContainerTerms,
   TxtTerms,
 } from "./style";
+import CardComponent from "@/components/atoms/CardComponent";
 export default function FormRegister(props) {
   const [openTermos, setOpenTermos] = useState(false);
   const [openPoliticas, setOpenPoliticas] = useState(false);
@@ -146,14 +147,14 @@ export default function FormRegister(props) {
               open={openTermos}
               onClose={handleCloseTermos}
               height={"590px"}
-			  width={'600px'}
+              width={"600px"}
             />
 
             <ModalPoliticas
               open={openPoliticas}
               onClose={handleClosePoliticas}
               height={"590px"}
-			  width={'600px'}
+              width={"600px"}
             />
 
             <ModalEmail
