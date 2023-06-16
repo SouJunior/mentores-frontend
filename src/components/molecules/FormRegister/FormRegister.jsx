@@ -18,6 +18,7 @@ import {
   TxtTerms,
 } from "./style";
 import CardComponent from "@/components/atoms/CardComponent";
+import CardMentor from "../CardMentor";
 export default function FormRegister(props) {
   const [openTermos, setOpenTermos] = useState(false);
   const [openPoliticas, setOpenPoliticas] = useState(false);

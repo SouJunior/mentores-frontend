@@ -6,9 +6,12 @@ const CardComponent = ({ children, height, width, backgroundColor }) => {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    boxShadow: "none",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "8px",
     border: "none",
     padding: "0px",
+    marginLeft: "30px",
+    border: "1px solid #D7D9D7",
   };
   return (
     <Box
