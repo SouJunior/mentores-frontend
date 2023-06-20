@@ -1,8 +1,8 @@
 import ItemHero from '@/components/atoms/ItemHero';
 import { ContainerList } from './style';
-import mentor1Png from '/public/images/homepage/mentor1-png.png';
-import mentor2Png from '/public/images/homepage/mentor2-png.png';
-import mentor3Png from '/public/images/homepage/mentor3-png.png';
+import mentor1Png from '/public/images/homepage/heroSection/mentor1-png.png';
+import mentor2Png from '/public/images/homepage/heroSection/mentor2-png.png';
+import mentor3Png from '/public/images/homepage/heroSection/mentor3-png.png';
 
 export default function ListItemsHero() {
 	return (
