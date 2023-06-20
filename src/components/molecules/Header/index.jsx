@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ContainerHeader, GroupBtn } from './style';
 import logo from '/public/logos/LogoSJ.svg';
 
-
 export default function Header() {
 	return (
 		<ContainerHeader>
@@ -17,7 +16,7 @@ export default function Header() {
 				</Link>
 				<span />
 				<a href='#onboarding'>Como Funciona</a>
-				<Link href='#'>Encontre Seu Mentor</Link>
+				<a href='#'>Encontre Seu Mentor</a>
 			</div>
 			<GroupBtn>
 				<Link href={'/Cadastro'}>
