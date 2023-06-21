@@ -1,26 +1,26 @@
 import CardComponent from "@/components/atoms/CardComponent";
 import React from "react";
 import {
-  CardAgendar,
-  CardArea,
-  CardImagem,
-  CardSecaoAreas,
-  CardSubtitulo,
-  CardTitulo,
+  CardStack,
+  CardButton,
+  CardImage,
+  CardStacks,
+  CardSubtitle,
+  CardTitle,
 } from "./style";
 
-export default function CardMentor({ imagem, nome, cargo, areas }) {
+export default function CardMentor({ image, name, role, stacks }) {
   return (
     <CardComponent width={"288px"} height={"443px"}>
-      <CardImagem src={`images/${imagem}`} alt="imagem" />
-      <CardTitulo>{nome}</CardTitulo>
-      <CardSubtitulo>{cargo}</CardSubtitulo>
-      <CardSecaoAreas>
-        {areas.map((area) => (
-          <CardArea>{area}</CardArea>
+      <CardImage src={`images/${image}`} alt={name} />
+      <CardTitle>{name}</CardTitle>
+      <CardSubtitle>{role}</CardSubtitle>
+      <CardStacks>
+        {stacks.map((stack) => (
+          <CardStack>{stack}</CardStack>
         ))}
-      </CardSecaoAreas>
-      <CardAgendar>Agendar um horário</CardAgendar>
+      </CardStacks>
+      <CardButton>Agendar um horário</CardButton>
     </CardComponent>
   );
 }

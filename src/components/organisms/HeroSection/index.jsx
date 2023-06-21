@@ -8,6 +8,7 @@ import lupa from "/public/icons/Lupa.svg";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationTextHero } from "../../../styles/animations";
+import CardMentor from "@/components/molecules/CardMentor";
 
 export default function HeroSection() {
   const text = ["mentorias personalizadas", "profissionais experientes"];
@@ -67,12 +68,12 @@ export default function HeroSection() {
         <ListItemsHero />
       </div>
       {/* CÓDIGO DE REFERÊNCIA PARA CHAMADA DO CARD DE MENTOR */}
-      {/* <CardMentor
-        imagem={"vanessa.png"}
-        nome={"Vanêssa Santana"}
-        cargo={"Head de Produto - Bayer"}
-        areas={["Agile Coach", "Product Manager"]}
-      /> */}
+      <CardMentor
+        image={"vanessa.png"}
+        name={"Vanêssa Santana"}
+        role={"Head de Produto - Bayer"}
+        stacks={["Agile Coach", "Product Manager"]}
+      />
     </ContainerHero>
   );
 }

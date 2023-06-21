@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const CardImagem = styled.img`
+export const CardImage = styled.img`
   max-width: 200px;
   border-radius: 50%;
   margin-bottom: 20px;
 `;
 
-export const CardTitulo = styled.h1`
+export const CardTitle = styled.h1`
   font-family: "Radio Canada";
   font-style: normal;
   font-weight: 700;
@@ -18,7 +18,7 @@ export const CardTitulo = styled.h1`
   margin-bottom: 5px;
 `;
 
-export const CardSubtitulo = styled.h2`
+export const CardSubtitle = styled.h2`
   font-family: "Radio Canada";
   font-style: normal;
   font-weight: 400;
@@ -29,7 +29,7 @@ export const CardSubtitulo = styled.h2`
   margin-left: 20px;
 `;
 
-export const CardSecaoAreas = styled.div`
+export const CardStacks = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,7 +38,7 @@ export const CardSecaoAreas = styled.div`
   margin-top: 35px;
 `;
 
-export const CardArea = styled.div`
+export const CardStack = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -54,7 +54,7 @@ export const CardArea = styled.div`
   color: #fdfdfd;
 `;
 
-export const CardAgendar = styled.button`
+export const CardButton = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
