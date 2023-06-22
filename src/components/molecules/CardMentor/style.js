@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CardImage = styled.img`
   max-width: 200px;
   border-radius: 50%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const CardTitle = styled.h1`
@@ -27,15 +27,18 @@ export const CardSubtitle = styled.h2`
   color: #5d5f5d;
   align-self: flex-start;
   margin-left: 20px;
+  height: 60px;
 `;
 
 export const CardStacks = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 6px 12px;
   gap: 10px;
-  margin-top: 35px;
+  margin-top: 25px;
+  width: 100%;
+  margin-left: 10px;
 `;
 
 export const CardStack = styled.div`
@@ -61,7 +64,7 @@ export const CardButton = styled.button`
   align-items: center;
   padding: 12px 16px;
   gap: 8px;
-
+  border-color: #046ad0;
   width: 256px;
   height: 48px;
 
@@ -77,4 +80,8 @@ export const CardButton = styled.button`
   color: #fdfdfd;
 
   margin-top: 10px;
+  &:hover {
+    background-color: #fdfdfd;
+    color: #046ad0;
+  }
 `;
