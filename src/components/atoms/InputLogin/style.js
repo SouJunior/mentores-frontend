@@ -42,7 +42,6 @@ export const ContainerInput = styled.div`
 		height: 100%;
 		width: 100%;
 		padding: 16px 48px 16px;
-		width: 100%;
 		outline: none;
 		background-color: '#fff';
 		border: 1px solid ${(props) => props.theme.colors.gray[700]};
