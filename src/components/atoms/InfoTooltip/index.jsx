@@ -6,7 +6,7 @@ import {
   CriteriaList,
   Criterion,
   Title,
-  Line
+  Line,
 } from "./style";
 import { useState } from "react";
 
@@ -18,7 +18,9 @@ export default function InfoTooltip() {
   };
 
   const handleMouseLeave = () => {
-    setTooltipVisible(false);
+    setTimeout(() => {
+      setTooltipVisible(false);
+    }, 2000);
   };
   return (
     <InfoContainer>
@@ -30,12 +32,12 @@ export default function InfoTooltip() {
       <Tooltip visible={tooltipVisible}>
         <TooltipContainer>
           <Title>Regras do Password</Title>
-          <Line/>
+          <Line />
           <CriteriaList>
-            <Criterion>1. Critério 1</Criterion>
-            <Criterion>2. Critério 2</Criterion>
-            <Criterion>3. Critério 3</Criterion>
-            <Criterion>4. Critério 4</Criterion>
+            <Criterion>Máximo 8 caracteres.</Criterion>
+            <Criterion>Pelo menos uma letra maiúsculo.</Criterion>
+            <Criterion>Pelo menos um número.</Criterion>
+            <Criterion>Pelo menos um caractere especial (ex: @#$)</Criterion>
           </CriteriaList>
         </TooltipContainer>
       </Tooltip>

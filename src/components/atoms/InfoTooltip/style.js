@@ -26,16 +26,21 @@ export const TooltipContainer = styled.div`
   height: 145px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 0px 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 export const Title = styled.h3`
-  color: blue;
+  color: ${(props) => props.theme.colors.blue[400]};
+  font-size:14px;
 `;
 
 export const CriteriaList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 10px 0;
+  margin: 10px 15px;
 `;
 
 export const Criterion = styled.li`
@@ -46,10 +51,10 @@ export const Criterion = styled.li`
 
 export const Line = styled.span`
 position: absolute;
-left: 0;
-top: 0;
+left: 10px;
+top: 45px;
 bottom: 0;
 width: 2px;
-height:80%;
-background-color: #000;
+height:50%;
+background-color: ${(props) => props.theme.colors.gray[700]};
 `;
