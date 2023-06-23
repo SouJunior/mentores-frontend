@@ -51,6 +51,7 @@ export default function FormRegister(props) {
 			);
 
 			console.log(response.data);
+			console.log('CADASTRADO');
 			resetForm();
 			handleModalEmail();
 		} catch (error) {
