@@ -16,9 +16,7 @@ const MentorSection = () => {
 		<MentorsComponent id='mentor'>
 			<MentorsContent>
 				<SeeAll>Ver todos</SeeAll>
-				<MentorsTitle>
-					Encontre seu mentor
-				</MentorsTitle>
+				<MentorsTitle>Encontre seu mentor</MentorsTitle>
 				<SliderComponent
 					cols={4}
 					row={1}
@@ -26,11 +24,8 @@ const MentorSection = () => {
 					gap={'20px'}>
 					{mentores.map((mentor) => {
 						return (
-							<Carousel.Item>
-								<CardMentor
-									key={mentor.name}
-									mentor={mentor}
-								/>
+							<Carousel.Item key={mentor.name}>
+								<CardMentor mentor={mentor} />
 							</Carousel.Item>
 						);
 					})}
