@@ -4,9 +4,9 @@ import imgCard2 from '/public/images/homepage/onboarding/encontre.svg';
 import imgCard3 from '/public/images/homepage/onboarding/descreva.svg';
 import imgCard4 from '/public/images/homepage/onboarding/conecte.svg';
 import { ContainerListCard } from './style';
-import Card from '@/components/atoms/Card';
+import Card from '@/components/atoms/CardOnboarding';
 
-export default function ListCards() {
+export default function ListCardsOnboarding() {
 	const dataCards = [
 		{
 			id: 1,

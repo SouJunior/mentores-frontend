@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ContainerCard } from './style';
 
-export default function Card({ title, description, img }) {
+export default function CardOnboarding({ title, description, img }) {
 	return (
 		<ContainerCard>
 			<Image
