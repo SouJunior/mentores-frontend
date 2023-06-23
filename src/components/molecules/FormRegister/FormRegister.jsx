@@ -10,7 +10,6 @@ import InputForm from "../../atoms/InputForm";
 import ModalPoliticas from "../ModalPoliticas";
 import ModalCancel from "../ModalCancel";
 import ModalTerms from "../ModalTerms";
-import InfoTooltip from "@/components/atoms/TooltipPassword";
 import {
   ContainerBtn,
   ContainerCadastro,
@@ -18,7 +17,8 @@ import {
   ContainerTerms,
   TxtTerms,
 } from "./style";
-
+import CardComponent from "@/components/atoms/CardComponent";
+import CardMentor from "../CardMentor";
 export default function FormRegister(props) {
   const [openTermos, setOpenTermos] = useState(false);
   const [openPoliticas, setOpenPoliticas] = useState(false);
@@ -109,7 +109,7 @@ export default function FormRegister(props) {
               name="confirmEmail"
               placeholder="Confirme seu e-mail"
             />
-    <InfoTooltip/>
+
             <Field
               as={InputForm}
               type="password"
