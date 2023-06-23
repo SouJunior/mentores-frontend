@@ -31,7 +31,7 @@ export default function InfoTooltip() {
       />
       <Tooltip visible={tooltipVisible}>
         <TooltipContainer>
-          <Title>Regras do Password</Title>
+          <Title>Sua senha deve conter:</Title>
           <Line />
           <CriteriaList>
             <Criterion>Máximo 8 caracteres.</Criterion>
