@@ -11,7 +11,7 @@ import { ContainerForm } from './style';
 import Button from '@/components/atoms/Button';
 import { setCookies } from 'cookies-next';
 
-export default function FormCard(props) {
+export default function FormLogin(props) {
 	const [loading, setLoading] = useState(false);
 	const [formState, setFormState] = useState({
 		email: '',
@@ -142,7 +142,7 @@ export default function FormCard(props) {
 							label='Senha'
 							id='passID'
 						/>
-						{formState.errors && !disable && <span>{formState.errors}</span>}
+						{!disable && <span>{formState.errors}</span>}
 					</div>
 					{disable && (
 						<span>
