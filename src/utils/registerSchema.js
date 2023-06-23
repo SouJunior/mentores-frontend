@@ -32,7 +32,6 @@ export const initialValues = {
 	email: '',
 	dataBirthday: '',
 	confirmEmail: '',
-	specialty: '',
 	password: '',
 	confirmPassword: '',
 };

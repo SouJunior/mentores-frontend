@@ -94,7 +94,7 @@ export default function FormLogin(props) {
 			notify();
 			setDisable(true);
 		}
-	}, [formState, countError, notify()]);
+	}, [formState, countError]);
 
 	return (
 		<>
