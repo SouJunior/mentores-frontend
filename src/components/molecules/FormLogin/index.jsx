@@ -94,7 +94,7 @@ export default function FormCard(props) {
 			notify();
 			setDisable(true);
 		}
-	}, [formState, countError]);
+	}, [formState, countError, notify()]);
 
 	return (
 		<>
