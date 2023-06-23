@@ -21,6 +21,8 @@ const MentorSection = () => {
 					cols={4}
 					row={1}
 					autoplay={2000}
+					arrowLeft={true}
+					arrowRight={true}
 					gap={'20px'}>
 					{mentores.map((mentor) => {
 						return (
