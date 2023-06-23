@@ -1,4 +1,4 @@
-import FormCard from '../../components/molecules/FormLogin';
+import FormLogin from '../../components/molecules/FormLogin';
 import {
 	ContainerImage,
 	ContainerLogin,
@@ -14,7 +14,7 @@ export default function LoginPage() {
 					alt='Figuras do Background'
 				/>
 			</ContainerImage>
-			<FormCard />
+			<FormLogin />
 		</ContainerLogin>
 	);
 }

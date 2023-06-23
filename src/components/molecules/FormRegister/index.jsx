@@ -45,7 +45,6 @@ export default function FormRegister(props) {
 					email: values.email,
 					dateOfBirth: values.dataBirthday,
 					emailConfirm: values.confirmEmail,
-					specialty: values.specialty,
 					password: values.password,
 					passwordConfirmation: values.confirmPassword,
 				},
@@ -91,14 +90,6 @@ export default function FormRegister(props) {
 							name='dataBirthday'
 							label='Data de nascimento'
 							placeholder='MM/DD/YYY'
-						/>
-
-						<Field
-							as={InputForm}
-							type='text'
-							name='specialty'
-							label='Especialidade'
-							placeholder='Preencha com sua especialidade'
 						/>
 
 						<Field
