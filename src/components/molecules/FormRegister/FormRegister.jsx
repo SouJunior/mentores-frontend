@@ -19,6 +19,7 @@ import {
 } from "./style";
 import CardComponent from "@/components/atoms/CardComponent";
 import CardMentor from "../CardMentor";
+import InfoTooltip from "@/components/atoms/InfoTooltip";
 export default function FormRegister(props) {
   const [openTermos, setOpenTermos] = useState(false);
   const [openPoliticas, setOpenPoliticas] = useState(false);
@@ -109,7 +110,7 @@ export default function FormRegister(props) {
               name="confirmEmail"
               placeholder="Confirme seu e-mail"
             />
-
+            <InfoTooltip/>
             <Field
               as={InputForm}
               type="password"

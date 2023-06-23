@@ -16,7 +16,7 @@ export default function Header() {
 				</Link>
 				<span />
 				<a href='#onboarding'>Como Funciona</a>
-				<a href='#'>Encontre Seu Mentor</a>
+				<a href='#mentor'>Encontre Seu Mentor</a>
 			</div>
 			<GroupBtn>
 				<Link href={'/Cadastro'}>
