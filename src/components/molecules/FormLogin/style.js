@@ -32,8 +32,8 @@ export const ContainerForm = styled.div`
 
 		span {
 			color: ${(props) => props.theme.colors.error};
-			position: absolute;
-			bottom: 0;
+			/* position: absolute;
+			bottom: 0; */
 		}
 
 		p {

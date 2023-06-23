@@ -99,7 +99,7 @@ export default function FormCard(props) {
 	return (
 		<>
 			<ToastContainer
-				autoClose={2500}
+				autoClose={3500}
 				hideProgressBar={true}
 				closeOnClick
 				theme='colored'
@@ -142,8 +142,15 @@ export default function FormCard(props) {
 							label='Senha'
 							id='passID'
 						/>
-						{formState.errors && <span>{formState.errors}</span>}
+						{formState.errors && !disable && <span>{formState.errors}</span>}
 					</div>
+					{disable && (
+						<span>
+							Seu acesso a conta continua bloqueado, pois você não redefiniu sua
+							senha após as cinco tentativas de acesso incorretas. Por favor,
+							clique em 'Esqueci minha senha' para realizar a recuperação
+						</span>
+					)}
 
 					<div
 						style={{
@@ -158,7 +165,11 @@ export default function FormCard(props) {
 							id='connected'
 							text='Me manter conectado'
 						/>
-						<a href='#' style={{textDecoration: 'underline'}}>Esqueci a senha</a>
+						<a
+							href='#'
+							style={{ textDecoration: 'underline' }}>
+							Esqueci a senha
+						</a>
 					</div>
 
 					<Button
@@ -187,27 +198,3 @@ export default function FormCard(props) {
 		</>
 	);
 }
-
-// const handleEmailChange = (event) => {
-// 	setEmail(event.target.value);
-// 	setFormState({
-// 		...formState,
-// 		email: event.target.value,
-// 		errors: {
-// 			...formState.errors,
-// 			email: '',
-// 		},
-// 	});
-// };
-
-// const handlePasswordChange = (event) => {
-// 	setPassword(event.target.value);
-// 	setFormState({
-// 		...formState,
-// 		password: event.target.value,
-// 		errors: {
-// 			...formState.errors,
-// 			password: '',
-// 		},
-// 	});
-// };
