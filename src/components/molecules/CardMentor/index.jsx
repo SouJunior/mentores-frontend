@@ -8,20 +8,24 @@ import {
 	CardSubtitle,
 	CardTitle,
 } from './style';
+import Image from 'next/image';
 
-export default function CardMentor({ image, name, role, stacks }) {
+export default function CardMentor({ mentor }) {
 	return (
 		<CardComponent
 			width={'288px'}
 			height={'443px'}>
-			<CardImage
-				src={`images/${image}`}
-				alt={name}
+			<Image
+				src={mentor.image}
+				width={200}
+				height={200}
+				style={{ borderRadius: '500%', objectFit: 'cover' }}
+				alt={mentor.name}
 			/>
-			<CardTitle>{name}</CardTitle>
-			<CardSubtitle>{role}</CardSubtitle>
+			<CardTitle>{mentor.name}</CardTitle>
+			<CardSubtitle>{mentor.role}</CardSubtitle>
 			<CardStacks>
-				{stacks.map((stack) => (
+				{mentor.stacks.map((stack) => (
 					<CardStack key={stack}>{stack}</CardStack>
 				))}
 			</CardStacks>

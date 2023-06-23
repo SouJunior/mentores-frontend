@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContainerOnboarding } from './style';
-import ListCards from '../../molecules/ListCards';
+import ListCards from '../../molecules/ListCardsOnboarding';
 
 export default function Onboarding() {
 	return (
