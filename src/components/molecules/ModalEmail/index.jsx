@@ -14,7 +14,9 @@ export default function ModalEmail({ open, onClose, height }) {
 		<ModalComponent
 			open={open}
 			onClose={onClose}
-			height={height}>
+			height={height}
+			bgColor={'#fff'}
+			>
 			<ContainerModal>
 				<TitleModal>Cheque seu email</TitleModal>
 				<ImageEmail
