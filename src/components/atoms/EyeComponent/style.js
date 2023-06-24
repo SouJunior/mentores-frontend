@@ -6,7 +6,8 @@ export const EyeContainer = styled.button`
   height: 48px;
   background-color: transparent;
   color:${(props) => props.theme.colors.gray[400]};
-  left:430px;
-  margin-top: 23px;
+  left:${(props)=>props.left};
+  margin-top: ${(props) => props.marginTop};
   cursor:pointer;
+  outline: none;
 `;
