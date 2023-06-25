@@ -131,8 +131,9 @@ export default function FormRegister(props) {
               onClick={(e) => handleShowPassword(e)}
               eye={eye}
               size={20}
-              left="430px"
+              left="410px"
               marginTop="23px"
+              color={'#5D5F5D'}
             />
             <Field
               as={InputForm}
@@ -145,8 +146,9 @@ export default function FormRegister(props) {
               onClick={(e) => handleConfirmPassword(e)}
               eye={eyeConfirm}
               size={20}
-              left={"430px"}
+              left={"410px"}
               marginTop="23px"
+              color={'#5D5F5D'}
             />
 
             <Field

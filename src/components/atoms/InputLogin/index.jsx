@@ -81,6 +81,7 @@ export default function Input({
               onClick={(e) => toggleShow(e)}
               size={20}
               marginTop="10px"
+              color={'#046AD0'}
             />
           )}
         </ContainerInput>
