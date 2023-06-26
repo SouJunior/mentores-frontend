@@ -5,7 +5,7 @@ export const ContainerCadastro = styled.div`
 	height: 100vh;
 	height: fit-content;
 	display: flex;
-	padding-bottom: 140px;
+	padding-bottom: 36vh;
 	background: ${(props) => props.theme.colors.gradient};
 `;
 
