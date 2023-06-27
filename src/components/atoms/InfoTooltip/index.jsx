@@ -34,7 +34,7 @@ export default function InfoTooltip() {
           <Title>Sua senha deve conter:</Title>
           <Line />
           <CriteriaList>
-            <Criterion>Máximo 8 caracteres.</Criterion>
+            <Criterion>Mínimo 8 caracteres.</Criterion>
             <Criterion>Pelo menos uma letra maiúsculo.</Criterion>
             <Criterion>Pelo menos um número.</Criterion>
             <Criterion>Pelo menos um caractere especial (ex: @#$)</Criterion>
