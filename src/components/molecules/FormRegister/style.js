@@ -5,7 +5,7 @@ export const ContainerForm = styled.div`
 	max-width: 500px;
 	height: fit-content;
 	position: absolute;
-	right: 180px;
+	right: 70px;
 	top: 30px;
 	background: ${(props) => props.theme.colors.white};
 	border-radius: 12px;
