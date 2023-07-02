@@ -10,9 +10,12 @@ const Confirmacao = () => {
 
   const handleConfirmation = async (code, email) => {
     try {
+      const encodedEmail = encodeURIComponent(email);
       const response = await axios.patch(
-        `https://mentores-backend.onrender.com/user/active?code=${decodedCode}&email=${decodedEmail}`
+        `https://mentores-backend.onrender.com/user/active?code=${code}&email=${encodedEmail}`
       );
+
+      console.log(response);
 
       if (response.status === 200) {
         toast.success("Email confirmado com sucesso!");
@@ -22,9 +25,11 @@ const Confirmacao = () => {
         }, 1000);
       } else {
         toast.error("Erro ao confirmar o email. Tente novamente mais tarde.");
+        router.push("/LoginPage");
       }
     } catch (error) {
       toast.error("Erro ao confirmar o email. Tente novamente mais tarde.");
+      router.push("/LoginPage");
     }
   };
 
