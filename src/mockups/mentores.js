@@ -7,7 +7,7 @@ import leonardoImage from '/public/images/homepage/mentores/leonardo.png';
 
 export const mentores = [
 	{
-		name: 'MATEUS LEONARDO',
+		name: 'Mateus Leonardo',
 		stacks: ['Head Mobile'],
 		image: mateusImage,
 		role: 'Back-end Developer - Teddy Open Finance',
@@ -15,7 +15,7 @@ export const mentores = [
 			'Ser mentor e apoiar profissionais juniores/em transição de carreira é crucial para o crescimento individual e coletivo. Compartilhar conhecimento, experiências e orientação não apenas fortalece o desenvolvimento profissional dessas pessoas, mas também constrói uma comunidade mais colaborativa e preparada para enfrentar desafios futuros.',
 	},
 	{
-		name: 'GUSTAVO ROBERTO',
+		name: 'Gustavo Roberto',
 		stacks: ['Mentor Front-end'],
 		role: 'Lead UX Design | Research | IA - FortBrasil',
 		image: gustavoImage,
@@ -23,7 +23,7 @@ export const mentores = [
 			'A mentoria possibilita o desenvolvimento e nascimento de juniors competentes e motivados, facilitando sua caminhada profissional. Um caminho tranquilo para alcançar o conhecimento nos permite ir mais longe.',
 	},
 	{
-		name: 'WANDERSON SANTOS',
+		name: 'Wanderson Santos',
 		stacks: ['Head Back-end'],
 		image: wandersonImage,
 		role: 'Back-end Developer - Teddy Open Finance',
@@ -31,7 +31,7 @@ export const mentores = [
 			'Ser mentor é uma oportunidade única de transformar vidas e impulsionar o crescimento profissional. Ao compartilhar conhecimento e experiência com profissionais juniores ou em transição de carreira, abrimos portas para novas possibilidades e contribuímos para um futuro mais promissor. Torne-se um mentor e faça a diferença na jornada de outros profissionais!',
 	},
 	{
-		name: 'JÚLIO MASSON',
+		name: 'Júlio Masson',
 		stacks: ['Head de Business'],
 		role: 'Lead UX Design | Research | IA - FortBrasil',
 		image: julioImage,
@@ -39,7 +39,7 @@ export const mentores = [
 			'Mentorar é transformar vidas. É uma via de mão dupla, onde pessoas mentoras e mentoradas crescem juntas. Assistir o progresso de quem você ajudou é uma das recompensas mais gratificantes da vida. Sempre compartilhe conhecimento e seja fonte de inspiração.',
 	},
 	{
-		name: 'LEONARDO ABREU',
+		name: 'Leonardo Abreu',
 		stacks: ['Mentor UX'],
 		image: leonardoImage,
 		role: 'Lead UX Design | Research | IA - FortBrasil',
@@ -47,7 +47,7 @@ export const mentores = [
 			'É comum ficar perdido quanto se está começando, por isso ser mentor para profissionais em início de carreira é crucial para o seu desenvolvimento. É gratificante ajudar a moldar os profissionais do futuro.',
 	},
 	{
-		name: 'RARIELLY JANUÁRIO',
+		name: 'Rarielly Januário',
 		stacks: ['Head Tech Recruit'],
 		role: 'Lead UX Design | Research | IA - FortBrasil',
 		image: rariellyImage,
