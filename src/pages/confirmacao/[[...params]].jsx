@@ -14,21 +14,8 @@ const Confirmacao = () => {
       const response = await axios.patch(
         `https://mentores-backend.onrender.com/user/active?code=${code}&email=${encodedEmail}`
       );
-
-      console.log(response);
-
-      if (response.status === 200) {
-        toast.success("Email confirmado com sucesso!");
-
-        setTimeout(() => {
-          router.push("/LoginPage");
-        }, 1000);
-      } else {
-        toast.error("Erro ao confirmar o email. Tente novamente mais tarde.");
-        router.push("/LoginPage");
-      }
+        router.push('/LoginPage')
     } catch (error) {
-      toast.error("Erro ao confirmar o email. Tente novamente mais tarde.");
       router.push("/LoginPage");
     }
   };
