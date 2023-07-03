@@ -10,12 +10,13 @@ export const CardTitle = styled.h1`
   font-family: "Radio Canada";
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 120%;
   color: #5d5f5d;
   align-self: flex-start;
   margin-left: 20px;
   margin-bottom: 5px;
+  margin-top:5px;
 `;
 
 export const CardSubtitle = styled.h2`
