@@ -7,11 +7,11 @@ export const MentorsComponent = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px 0;
+  padding: 90px 0;
 `;
 
 export const MentorsContent = styled.div`
-  max-width: 1400px;
+  max-width: 1300px;
   margin: 0 auto;
   position: relative;
 `;

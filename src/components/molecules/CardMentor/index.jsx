@@ -13,12 +13,12 @@ import Image from 'next/image';
 export default function CardMentor({ mentor }) {
 	return (
 		<CardComponent
-			width={'288px'}
-			height={'443px'}>
+			width={'270px'}
+			height={'400px'}>
 			<Image
 				src={mentor.image}
-				width={200}
-				height={200}
+				width={150}
+				height={150}
 				style={{ borderRadius: '500%', objectFit: 'cover' }}
 				alt={mentor.name}
 			/>

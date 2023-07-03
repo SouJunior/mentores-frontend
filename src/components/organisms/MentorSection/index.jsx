@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-	MentorsTitleDetach,
 	MentorsComponent,
 	MentorsContent,
 	SeeAll,
@@ -23,7 +22,7 @@ const MentorSection = () => {
 					autoplay={2000}
 					arrowLeft={true}
 					arrowRight={true}
-					gap={'20px'}>
+					gap={'0px'}>
 					{mentores.map((mentor) => {
 						return (
 							<Carousel.Item key={mentor.name}>
