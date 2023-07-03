@@ -10,7 +10,7 @@ import CardDepo from '@/components/molecules/CardDepo';
 export default function DepoSection() {
 	return (
 		<ContainerDepo>
-			<h2>Participe desse movimento</h2>
+			<h2>Seja um mentor</h2>
 
 			<SliderComponent
 				cols={3}
