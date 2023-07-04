@@ -9,7 +9,7 @@ import CardLoading from '../../../../public/images/loadingGif.gif';
 import Checkbox from '../../atoms/Checkbox';
 import { ContainerForm } from './style';
 import Button from '@/components/atoms/Button';
-import { setCookies } from 'cookies-next';
+import { setCookie,getCookie } from 'cookies-next';
 
 export default function FormLogin(props) {
 	const [loading, setLoading] = useState(false);
@@ -23,6 +23,7 @@ export default function FormLogin(props) {
 	const [keepConnected, setKeepConnected] = useState('');
 	const [countError, setCountError] = useState(0);
 	const [disable, setDisable] = useState(false);
+	const [shoudlNotify, setShoudlNotify] = useState(false)
 	const [toastMessage, setToastMessage] = useState(
 		'Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em "Esqueci a senha".',
 	);
@@ -60,7 +61,7 @@ export default function FormLogin(props) {
 					},
 				);
 				if (keepConnected) {
-					setCookies('U', response.data);
+					setCookie('U', response.data);
 				}
 				console.log(response.data);
 				console.log('USUÁRIO LOGADO');
@@ -91,9 +92,12 @@ export default function FormLogin(props) {
 			notify();
 		}
 		if (countError > 4) {
-			notify();
-			setDisable(true);
+			setCookie('disable', 'true');
+			setShoudlNotify(true)
 		}
+
+		shoudlNotify ? setDisable(true) && setShoudlNotify(false) : setDisable(false)
+
 	}, [formState, countError]);
 
 	return (
