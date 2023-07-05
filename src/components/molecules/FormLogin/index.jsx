@@ -82,18 +82,29 @@ export default function FormLogin(props) {
 		setTimeout(() => {
 			setLoading(false);
 		}, 500);
+
 	};
 
 	useEffect(() => {
-		if (countError > 3) {
+
+		if (countError == 3) {
 			setToastMessage(
 				'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".',
 			);
 			notify();
 		}
-		if (countError > 4) {
+		if (countError == 4) {
+			console.log('foi o 3')
+			setToastMessage(
+				'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".',
+			);
+			notify();
+		}
+		if (countError == 5) {
+			console.log(countError)
 			setCookie('disable', 'true');
 			setShoudlNotify(true)
+			console.log('foi')
 		}
 
 		shoudlNotify ? setDisable(true) && setShoudlNotify(false) : setDisable(false)
