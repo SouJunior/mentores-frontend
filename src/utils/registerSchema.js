@@ -5,7 +5,7 @@ export const registerSchema = yup.object({
 	email: yup
 		.string()
 		.email('E-mail inválido')
-		.required('O email é obrigatório')
+		.required('')
 		.matches(
 			/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
 			'E-mail inválido',
@@ -26,6 +26,7 @@ export const registerSchema = yup.object({
 		.string()
 		.oneOf([yup.ref('password'), null], 'Os campos informados não coincidem')
 		.required('Confirme a sua senha'),
+	dataBirthday: yup.date().required('')
 });
 
 export const initialValues = {

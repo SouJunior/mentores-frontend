@@ -66,8 +66,6 @@ export default function FormRegister(props) {
           passwordConfirmation: values.confirmPassword,
         }
       );
-
-      console.log(response.data);
       console.log("CADASTRADO");
       resetForm();
       handleModalEmail();
