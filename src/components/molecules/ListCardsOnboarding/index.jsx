@@ -11,7 +11,7 @@ export default function ListCardsOnboarding() {
 		{
 			id: 1,
 			cardContent: {
-				title: 'Pesquise',
+				title: '1. Pesquise',
 				description:
 					'Encontre seu mentor especializado na área desejada e mais adequado para você.',
 				img: imgCard2,
@@ -20,7 +20,7 @@ export default function ListCardsOnboarding() {
 		{
 			id: 2,
 			cardContent: {
-				title: 'Agende',
+				title: '2. Agende',
 				description:
 					'Marque um horário disponível na agenda do mentor,  que melhor  se encaixa para vocês.',
 				img: imgCard1,
@@ -29,7 +29,7 @@ export default function ListCardsOnboarding() {
 		{
 			id: 3,
 			cardContent: {
-				title: 'Explique',
+				title: '3. Explique',
 				description:
 					'Descreva o seu objetivo com a mentoria, para que o mentor possa se preparar.',
 				img: imgCard3,
@@ -38,7 +38,7 @@ export default function ListCardsOnboarding() {
 		{
 			id: 4,
 			cardContent: {
-				title: 'Conecte-se',
+				title: '4. Conecte-se',
 				description: 'Compareça no dia e horário agendado e comece a aprender.',
 				img: imgCard4,
 			},

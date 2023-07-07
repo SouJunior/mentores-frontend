@@ -9,7 +9,7 @@ import CardLoading from '../../../../public/images/loadingGif.gif';
 import Checkbox from '../../atoms/Checkbox';
 import { ContainerForm } from './style';
 import Button from '@/components/atoms/Button';
-import { setCookies } from 'cookies-next';
+import { setCookie,getCookie } from 'cookies-next';
 
 export default function FormLogin(props) {
 	const [loading, setLoading] = useState(false);
@@ -23,6 +23,7 @@ export default function FormLogin(props) {
 	const [keepConnected, setKeepConnected] = useState('');
 	const [countError, setCountError] = useState(0);
 	const [disable, setDisable] = useState(false);
+	const [shoudlNotify, setShoudlNotify] = useState(false)
 	const [toastMessage, setToastMessage] = useState(
 		'Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em "Esqueci a senha".',
 	);
@@ -60,7 +61,7 @@ export default function FormLogin(props) {
 					},
 				);
 				if (keepConnected) {
-					setCookies('U', response.data);
+					setCookie('U', response.data);
 				}
 				console.log(response.data);
 				console.log('USUÁRIO LOGADO');
@@ -81,19 +82,33 @@ export default function FormLogin(props) {
 		setTimeout(() => {
 			setLoading(false);
 		}, 500);
+
 	};
 
 	useEffect(() => {
-		if (countError > 3) {
+
+		if (countError == 3) {
 			setToastMessage(
 				'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".',
 			);
 			notify();
 		}
-		if (countError > 4) {
+		if (countError == 4) {
+			console.log('foi o 3')
+			setToastMessage(
+				'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".',
+			);
 			notify();
-			setDisable(true);
 		}
+		if (countError == 5) {
+			console.log(countError)
+			setCookie('disable', 'true');
+			setShoudlNotify(true)
+			console.log('foi')
+		}
+
+		shoudlNotify ? setDisable(true) && setShoudlNotify(false) : setDisable(false)
+
 	}, [formState, countError]);
 
 	return (
