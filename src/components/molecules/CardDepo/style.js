@@ -42,7 +42,7 @@ export const GreatContainer = styled.div`
 	flex-direction: column;
 	gap: 12px;
 	height: 280px;
-	min-width: 300px;
+	min-width: 270px;
 
 	p {
 		font-family: 'Radio Canada';

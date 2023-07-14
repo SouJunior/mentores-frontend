@@ -13,10 +13,10 @@ export default function DepoSection() {
 			<h2>Seja um mentor</h2>
 
 			<SliderComponent
-				cols={3}
+				cols={4}
 				row={1}
-				autoplay={3000}
-				gap={'20px'}>
+				//autoplay={3000}
+				>
 				{mentores.map((mentor) => {
 					return (
 						<Carousel.Item key={mentor.name}>
