@@ -14,7 +14,7 @@ export const CardTitle = styled.h1`
   line-height: 120%;
   color: #5d5f5d;
   align-self: flex-start;
-  margin-left: 20px;
+  margin-left: 15px;
   margin-bottom: 5px;
   margin-top:5px;
 `;
@@ -27,7 +27,7 @@ export const CardSubtitle = styled.h2`
   line-height: 150%;
   color: #5d5f5d;
   align-self: flex-start;
-  margin-left: 20px;
+  margin-left: 15px;
   height: 60px;
 `;
 
@@ -35,11 +35,11 @@ export const CardStacks = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 6px 12px;
+  padding: 6px 0px;
   gap: 10px;
-  margin-top: 25px;
+  margin-top: 1px;
   width: 100%;
-  margin-left: 10px;
+  margin-left: 25px;
 `;
 
 export const CardStack = styled.div`

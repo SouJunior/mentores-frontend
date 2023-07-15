@@ -12,7 +12,7 @@ import "swiper/css/scrollbar";
 const SliderComponent = () => {
 
 	const styleSlide = {
-		width: '10px',
+		width: '320px',
 		marginRight:'0px',
 		marginLeft:'0px',
 		gap:'0px'
@@ -21,7 +21,7 @@ const SliderComponent = () => {
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={0}
-      slidesPerView={3}
+      slidesPerView={4}
       navigation
      
     >
