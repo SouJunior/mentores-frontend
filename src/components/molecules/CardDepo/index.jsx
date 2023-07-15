@@ -4,7 +4,7 @@ import { GreatContainer, HeaderCardDepo } from './style';
 
 export default function CardDepo({ mentor }) {
 	return (
-		<CardComponent backgroundColor={'#fdfdfd'}>
+		<CardComponent backgroundColor={'#fdfdfd'} height={310} width={370} justifyContent={"flex-start"}>
 			<GreatContainer>
 				<HeaderCardDepo>
 					<Image
