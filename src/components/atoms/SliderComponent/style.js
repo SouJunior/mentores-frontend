@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SwiperSlide as SwiperSlideComponent } from "swiper/react";
 
 export const ArrowLeft = styled.button`
   position: absolute;
@@ -45,4 +46,15 @@ export const ArrowRight = styled.button`
   &:hover {
     color: #95c6ff;
   }
+`;
+
+export const SwiperContainer = styled.div`
+  position: relative;
+`;
+
+export const SwiperSlide = styled(SwiperSlideComponent)`
+  width: 320px;
+  marginright: 0;
+  marginleft: 0;
+  gap: 0;
 `;

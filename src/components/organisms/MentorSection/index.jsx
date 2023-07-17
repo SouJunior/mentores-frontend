@@ -1,11 +1,10 @@
-import React from "react";
+import SliderComponent from "@/components/atoms/SliderComponent";
 import {
   MentorsComponent,
   MentorsContent,
-  SeeAll,
   MentorsTitle,
+  SeeAll,
 } from "./style";
-import SliderComponent from "@/components/atoms/SliderComponent";
 
 const MentorSection = () => {
   return (
@@ -13,7 +12,7 @@ const MentorSection = () => {
       <MentorsContent>
         <SeeAll>Ver todos</SeeAll>
         <MentorsTitle>Encontre seu mentor</MentorsTitle>
-        <SliderComponent></SliderComponent>
+        <SliderComponent />
       </MentorsContent>
     </MentorsComponent>
   );
