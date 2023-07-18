@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 
 .swiper-slide {
   margin-right: -25px;
-}
+} 
 
 *{
   margin:0;
