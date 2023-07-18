@@ -5,7 +5,7 @@ import { Swiper } from "swiper/react";
 import { ArrowLeft, ArrowRight, SwiperContainer, SwiperSlide } from "./style";
 
 // Import Swiper styles
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,6 +14,9 @@ import "swiper/css/scrollbar";
 const SliderComponent = () => {
   const swiperRef = useRef(null);
 
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   const handleNext = () => {
     swiperRef.current?.swiper?.slideNext();
   };
@@ -21,6 +24,16 @@ const SliderComponent = () => {
   const handlePrev = () => {
     swiperRef.current?.swiper?.slidePrev();
   };
+
+  useEffect(() => {
+    const swiper = swiperRef.current?.swiper;
+    if (swiper) {
+      swiper.on("slideChange", () => {
+        setIsEnd(swiper.isEnd);
+        setIsBeginning(swiper.isBeginning);
+      });
+    }
+  }, []);
 
   return (
     <SwiperContainer>
@@ -38,8 +51,12 @@ const SliderComponent = () => {
           );
         })}
       </Swiper>
-      <ArrowRight onClick={handleNext}>{"❯"}</ArrowRight>
-      <ArrowLeft onClick={handlePrev}>{"❮"}</ArrowLeft>
+      <ArrowRight onClick={handleNext} isDisabled={isEnd}>
+        {"❯"}
+      </ArrowRight>
+      <ArrowLeft onClick={handlePrev} isDisabled={isBeginning}>
+        {"❮"}
+      </ArrowLeft>
     </SwiperContainer>
   );
 };

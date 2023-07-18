@@ -12,13 +12,13 @@ export const ArrowLeft = styled.button`
   width: 40px;
   height: 40px;
   font-size: 25px;
-  color: #046ad0;
+  color: ${(props) => (props.isDisabled ? "#95c6ff" : "#046ad0")};
   font-weight: 100;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: visible !important;
+  cursor: ${(props) => (props.isDisabled ? "not-allowed" : "pointer")};
 
   &:hover {
     color: #95c6ff;
@@ -36,13 +36,14 @@ export const ArrowRight = styled.button`
   width: 40px;
   height: 40px;
   font-size: 25px;
-  color: #046ad0;
+  color: ${(props) => (props.isDisabled ? "#95c6ff" : "#046ad0")};
   font-weight: 100;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: visible !important;
+  cursor: ${(props) => (props.isDisabled ? "not-allowed" : "pointer")};
+
   &:hover {
     color: #95c6ff;
   }
@@ -54,7 +55,7 @@ export const SwiperContainer = styled.div`
 
 export const SwiperSlide = styled(SwiperSlideComponent)`
   width: 320px;
-  marginright: 0;
-  marginleft: 0;
+  margin-right: 0;
+  margin-left: 0;
   gap: 0;
 `;
