@@ -1,11 +1,12 @@
 import Checkbox from "@/components/atoms/Checkbox";
+import EyeComponent from "@/components/atoms/EyeComponent";
 import InfoTooltip from "@/components/atoms/InfoTooltip";
 import ModalEmail from "@/components/molecules/ModalEmail";
 import { initialValues, registerSchema } from "@/utils/registerSchema";
 import axios from "axios";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, FormikProvider, useFormik } from "formik";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../atoms/Button";
 import InputForm from "../../atoms/InputForm";
 import ModalCancel from "../ModalCancel";
@@ -18,12 +19,12 @@ import {
   ContainerTerms,
   TxtTerms,
 } from "./style";
-import EyeComponent from "@/components/atoms/EyeComponent";
 export default function FormRegister(props) {
   const [openTermos, setOpenTermos] = useState(false);
   const [openPoliticas, setOpenPoliticas] = useState(false);
   const [openModalCancel, setOpenModalCancel] = useState(false);
-  const [agree, setIsAgree] = useState("");
+  const [agree, setIsAgree] = useState(false);
+  const [concluidoDesabilitado, setIsConcluidoDesabilitado] = useState(true);
   const [openEmail, setOpenEmail] = useState(false);
   const [show, setShow] = useState(true);
   const [eye, setEye] = useState(true);
@@ -74,14 +75,25 @@ export default function FormRegister(props) {
     }
   };
 
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: registerSchema,
+    onSubmit: handleSubmit,
+  });
+
+  useEffect(() => {
+    if (agree && formik.isValid && Object.keys(formik.touched).length > 0) {
+      setIsConcluidoDesabilitado(false)
+    } else {
+      setIsConcluidoDesabilitado(true)
+    }
+  }, [agree, formik.isValid, formik.touched]);
+  
+
   return (
     <ContainerForm>
       <ContainerCadastro>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={registerSchema}
-          onSubmit={handleSubmit}
-        >
+        <FormikProvider value={formik}>
           <Form>
             <Image
               className="souj"
@@ -107,6 +119,7 @@ export default function FormRegister(props) {
               name="dataBirthday"
               label="Data de nascimento"
               placeholder="DD/MM/YYY"
+              onKeyDown={(event) => event.preventDefault()}
             />
 
             <Field
@@ -131,7 +144,7 @@ export default function FormRegister(props) {
               size={20}
               left="410px"
               marginTop="23px"
-              color={'#5D5F5D'}
+              color={"#5D5F5D"}
             />
             <Field
               as={InputForm}
@@ -146,7 +159,7 @@ export default function FormRegister(props) {
               size={20}
               left={"410px"}
               marginTop="23px"
-              color={'#5D5F5D'}
+              color={"#5D5F5D"}
             />
 
             <Field
@@ -195,7 +208,7 @@ export default function FormRegister(props) {
               height={"730px"}
             />
             <ContainerBtn>
-              <Button btnRole={"form"} content={"Concluir"} disabled={!agree} />
+              <Button btnRole={"form"} content={"Concluir"} disabled={concluidoDesabilitado} />
 
               <Button
                 btnRole={"formSecondary"}
@@ -212,7 +225,7 @@ export default function FormRegister(props) {
               onClose={closeModalCancel}
             />
           </Form>
-        </Formik>
+        </FormikProvider>
       </ContainerCadastro>
     </ContainerForm>
   );

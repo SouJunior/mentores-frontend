@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SwiperSlide as SwiperSlideComponent } from "swiper/react";
 
 export const ArrowLeft = styled.button`
   position: absolute;
@@ -11,13 +12,13 @@ export const ArrowLeft = styled.button`
   width: 40px;
   height: 40px;
   font-size: 25px;
-  color: #046ad0;
+  color: ${(props) => (props.isDisabled ? "#95c6ff" : "#046ad0")};
   font-weight: 100;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: visible !important;
+  cursor: ${(props) => (props.isDisabled ? "not-allowed" : "pointer")};
 
   &:hover {
     color: #95c6ff;
@@ -35,14 +36,26 @@ export const ArrowRight = styled.button`
   width: 40px;
   height: 40px;
   font-size: 25px;
-  color: #046ad0;
+  color: ${(props) => (props.isDisabled ? "#95c6ff" : "#046ad0")};
   font-weight: 100;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: visible !important;
+  cursor: ${(props) => (props.isDisabled ? "not-allowed" : "pointer")};
+
   &:hover {
     color: #95c6ff;
   }
+`;
+
+export const SwiperContainer = styled.div`
+  position: relative;
+`;
+
+export const SwiperSlide = styled(SwiperSlideComponent)`
+  width: 320px;
+  margin-right: 0;
+  margin-left: 0;
+  gap: 0;
 `;

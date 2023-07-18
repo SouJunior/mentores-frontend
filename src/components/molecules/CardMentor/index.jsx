@@ -14,7 +14,8 @@ export default function CardMentor({ mentor }) {
 	return (
 		<CardComponent
 			width={'270px'}
-			height={'400px'}>
+			height={'400px'}
+			justifyContent={"center"}>
 			<Image
 				src={mentor.image}
 				width={150}
