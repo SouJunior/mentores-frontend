@@ -5,6 +5,7 @@ export const HeaderCardDepo = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 	gap: 20px;
+	
 
 	img {
 		width: 56px;
@@ -42,7 +43,10 @@ export const GreatContainer = styled.div`
 	flex-direction: column;
 	gap: 12px;
 	height: 280px;
-	min-width: 300px;
+	width: 302px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+
 
 	p {
 		font-family: 'Radio Canada';
@@ -51,5 +55,7 @@ export const GreatContainer = styled.div`
 		font-size: 14px;
 		line-height: 24px;
 		color: #5d5f5d;
+
+		
 	}
 `;
