@@ -1,4 +1,5 @@
 import Checkbox from "@/components/atoms/Checkbox";
+import EyeComponent from "@/components/atoms/EyeComponent";
 import InfoTooltip from "@/components/atoms/InfoTooltip";
 import ModalEmail from "@/components/molecules/ModalEmail";
 import { initialValues, registerSchema } from "@/utils/registerSchema";
@@ -18,7 +19,6 @@ import {
   ContainerTerms,
   TxtTerms,
 } from "./style";
-import EyeComponent from "@/components/atoms/EyeComponent";
 export default function FormRegister(props) {
   const [openTermos, setOpenTermos] = useState(false);
   const [openPoliticas, setOpenPoliticas] = useState(false);
@@ -119,6 +119,7 @@ export default function FormRegister(props) {
               name="dataBirthday"
               label="Data de nascimento"
               placeholder="DD/MM/YYY"
+              onKeyDown={(event) => event.preventDefault()}
             />
 
             <Field
@@ -143,7 +144,7 @@ export default function FormRegister(props) {
               size={20}
               left="410px"
               marginTop="23px"
-              color={'#5D5F5D'}
+              color={"#5D5F5D"}
             />
             <Field
               as={InputForm}
@@ -158,7 +159,7 @@ export default function FormRegister(props) {
               size={20}
               left={"410px"}
               marginTop="23px"
-              color={'#5D5F5D'}
+              color={"#5D5F5D"}
             />
 
             <Field
