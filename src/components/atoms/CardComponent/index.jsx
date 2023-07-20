@@ -12,7 +12,8 @@ const CardComponent = ({ children, height, width, backgroundColor }) => {
     padding: "0px",
     marginLeft: "30px",
     border: "1px solid #D7D9D7",
-    marginTop: "20px"
+    marginTop: "20px",
+    marginBottom: "15px"
   };
   return (
     <Box
