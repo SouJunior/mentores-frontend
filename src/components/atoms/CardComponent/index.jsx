@@ -1,9 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
-const CardComponent = ({ children, height, width, backgroundColor }) => {
+const CardComponent = ({ children, height, width, backgroundColor, justifyContent }) => {
   const padrao = {
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -21,6 +20,7 @@ const CardComponent = ({ children, height, width, backgroundColor }) => {
         height: height,
         width: width,
         backgroundColor: backgroundColor,
+        justifyContent: justifyContent,
         ...padrao,
       }}
     >
