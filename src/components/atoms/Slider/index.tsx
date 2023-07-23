@@ -1,9 +1,9 @@
 import { CardMentor } from "@/components/molecules/CardMentor";
 import { mentores } from "@/mockups/mentores";
 import { useEffect, useRef, useState } from "react";
-import { Pagination, Scrollbar } from "swiper/modules";
-import { Swiper, SwiperClass } from "swiper/react";
-import { ArrowLeft, ArrowRight, SwiperContainer, SwiperSlide } from "./style";
+import { A11y, Pagination, Scrollbar } from "swiper/modules";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+import { ArrowLeft, ArrowRight, SwiperContainer } from "./style";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -37,7 +37,7 @@ export const Slider = () => {
   return (
     <SwiperContainer>
       <Swiper
-        modules={[Pagination, Scrollbar]}
+        modules={[Pagination, Scrollbar, A11y]}
         spaceBetween={28}
         slidesPerView={4}
         ref={swiperRef}

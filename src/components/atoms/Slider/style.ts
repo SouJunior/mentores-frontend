@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SwiperSlide as SwiperSlideComponent } from "swiper/react";
 
 export const ArrowLeft = styled.button<Partial<{ isDisabled: boolean }>>`
   position: absolute;
@@ -51,13 +50,4 @@ export const ArrowRight = styled.button<Partial<{ isDisabled: boolean }>>`
 
 export const SwiperContainer = styled.div`
   position: relative;
-
-  /* .MuiBox-root .css-1xqre0n {
-    margin: 0 !important;
-  } */
-`;
-
-export const SwiperSlide = styled(SwiperSlideComponent)`
-  margin: 0;
-  padding-bottom: 5px;
 `;

@@ -35,6 +35,7 @@ export const Card = ({
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     borderRadius: "8px",
     padding: "0px",
+    marginBottom: "5px",
     border: "1px solid #D7D9D7",
   };
 
