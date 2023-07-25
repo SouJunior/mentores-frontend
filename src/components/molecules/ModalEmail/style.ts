@@ -18,11 +18,6 @@ export const TitleModal = styled.h1`
 	font-size: ${(props) => props.theme.fontSizes.lg};
 `;
 
-export const ImageEmail = styled.img`
-	width: 285px;
-	height: 278px;
-`;
-
 export const Message = styled.span`
 	color: ${(props) => props.theme.colors.gray[700]};
 	font-size: ${(props) => props.theme.fontSizes.sm};

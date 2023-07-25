@@ -107,6 +107,16 @@ export function FormRegister() {
     }
   }, [agree, formik.isValid, formik.touched]);
 
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const maxDate = yesterday.toISOString().split("T")[0];
+
+ 
+  const hundredYearsAgo = new Date();
+  hundredYearsAgo.setFullYear(hundredYearsAgo.getFullYear() - 100);
+  const minDate = hundredYearsAgo.toISOString().split("T")[0];
+
   return (
     <ContainerForm>
       <ContainerRegister>
@@ -130,6 +140,8 @@ export function FormRegister() {
               name="dataBirthday"
               label="Data de nascimento"
               placeholder="DD/MM/YYY"
+              min={minDate}
+              max={maxDate}
               onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
                 event.preventDefault()
               }
