@@ -1,6 +1,6 @@
 import { Modal } from "@/components/atoms/Modal";
 import Image from "next/image";
-import confirmEmail from "@/assets/confirmEmail.png";
+import confirmEmail from "@/assets/ConfirmEmail.png";
 import logo from "@/assets/logos/sou-junior.svg";
 import {
   ContainerModal,
