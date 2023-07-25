@@ -19,7 +19,7 @@ export const registerSchema = yup.object({
     .required("A senha é obrigatória")
     .min(8, "Senha inválida")
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
       "Senha inválida"
     ),
   confirmPassword: yup
