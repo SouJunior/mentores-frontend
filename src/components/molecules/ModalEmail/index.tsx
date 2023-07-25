@@ -1,10 +1,11 @@
 import { Modal } from "@/components/atoms/Modal";
 import Image from "next/image";
+import confirmEmail from "@/assets/confirmEmail.png";
+import logo from "@/assets/logos/sou-junior.svg";
 import {
   ContainerModal,
   FooterModal,
   Hash,
-  ImageEmail,
   Message,
   TitleModal,
 } from "./style";
@@ -20,14 +21,16 @@ export default function ModalEmail({ open, onClose, height }: ModalEmailProps) {
     <Modal open={open} onClose={onClose} height={height} bgColor="#fff">
       <ContainerModal>
         <TitleModal>Cheque seu email</TitleModal>
-        <ImageEmail
-          src="images/ConfirmEmail.png"
-          alt="Garoto mexendo em nootebook"
-        />
+        <Image
+            src={confirmEmail}
+            alt="Garoto mexendo em nootebook"
+            width={285}
+            height={278}
+          />
         <Message>Enviamos um email para você de confirmação.</Message>
         <FooterModal>
           <Image
-            src={"logos/LogoSJ.svg"}
+            src={logo}
             alt="logo da SouJunior"
             width={108}
             height={17}
