@@ -9,8 +9,6 @@ Projeto Opensource que visa melhorar o match entre Mentores e Juniors.
 >Antes de iniciar a instalação, lembre-se de fazer um fork do repositório oficial e realizar as alterações no repositório "forkado" enviando modificações através de Pull Requests. Nunca modifique diretamente o repositório oficial.
 
 
-## Instalação
-
 Clone o projeto:
 
 ```bash
