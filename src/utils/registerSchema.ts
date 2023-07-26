@@ -1,7 +1,6 @@
 import * as yup from "yup";
 
 export const registerSchema = yup.object({
-  name: yup.string().required("O nome é obrigatório"),
   email: yup
     .string()
     .email("E-mail inválido")
@@ -13,7 +12,7 @@ export const registerSchema = yup.object({
   confirmEmail: yup
     .string()
     .oneOf([yup.ref("email")], "Os campos informados não coincidem")
-    .required("Confirme seu e-mail"),
+    .required(""),
   password: yup
     .string()
     .required("A senha é obrigatória")
@@ -25,7 +24,8 @@ export const registerSchema = yup.object({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Os campos informados não coincidem")
-    .required("Confirme a sua senha"),
+    .required(""),
+    
   dataBirthday: yup.date().required(""),
 });
 
@@ -36,4 +36,13 @@ export const initialValues = {
   confirmEmail: "",
   password: "",
   confirmPassword: "",
+};
+
+export type ValuesFormType = {
+  name: string;
+  email: string;
+  dataBirthday: string;
+  confirmEmail: string;
+  password: string;
+  confirmPassword: string;
 };
