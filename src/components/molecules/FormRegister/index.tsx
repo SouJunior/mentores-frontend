@@ -3,7 +3,7 @@ import { Checkbox } from "@/components/atoms/Checkbox";
 import { Eye } from "@/components/atoms/Eye";
 import { InfoTooltip } from "@/components/atoms/InfoTooltip";
 import ModalEmail from "@/components/molecules/ModalEmail";
-import { initialValues, registerSchema } from "@/utils/registerSchema";
+import { ValuesFormType, registerSchema, initialValues } from "@/utils/registerSchema";
 import axios from "axios";
 import { Field, Form, FormikProvider, useFormik } from "formik";
 import Image from "next/image";
@@ -22,14 +22,6 @@ import {
   TxtTerms,
 } from "./style";
 
-type ValuesFormType = {
-  name: string;
-  email: string;
-  dataBirthday: string;
-  confirmEmail: string;
-  password: string;
-  confirmPassword: string;
-};
 
 export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false);
@@ -97,6 +89,7 @@ export function FormRegister() {
     initialValues: initialValues,
     validationSchema: registerSchema,
     onSubmit: handleSubmit,
+    validateOnChange: true
   });
 
   useEffect(() => {
@@ -106,6 +99,11 @@ export function FormRegister() {
       setIsConcluidoDesabilitado(true);
     }
   }, [agree, formik.isValid, formik.touched]);
+
+
+
+
+
 
   const today = new Date();
   const yesterday = new Date();
