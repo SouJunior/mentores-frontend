@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 
 export const ContainerForm = styled.div
 `
+
 margin:0 auto;
 width:504px;
 height: 570px;

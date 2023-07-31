@@ -1,17 +1,29 @@
 import axios from "axios";
 import { IUsePasswordService, UserPasswordServiceDTO } from "./interfaces/IUsePasswordResetServices";
 import { apiURL } from "@/utils/globals";
+import { useState } from "react";
 
 
 const usePasswordResetService = () : IUsePasswordService => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
     const sendResetLink = async(data: UserPasswordServiceDTO) => {
-        try {
-            await axios.post(`${apiURL}/resetPassword`, data)
-        } catch (error) {
-            console.log(error)
-        }
+      try {
+        console.log(data)
+        setIsModalOpen(true)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
-    return  { sendResetLink }
+
+    const closeModal = () => {
+      setIsModalOpen(false)
+    }
+   
+
+    return  { sendResetLink, closeModal, isModalOpen }
 }
+
+
+export default usePasswordResetService

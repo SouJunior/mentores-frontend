@@ -7,6 +7,7 @@ interface InputFormProps {
   type: string;
   placeholder: string;
   label: string;
+  showAsterisk?: boolean;
 }
 
 export function InputForm({
@@ -14,12 +15,13 @@ export function InputForm({
   type,
   placeholder,
   label,
+  showAsterisk = true,
   ...rest
 }: InputFormProps) {
   return (
     <ContainerDiv>
       <Label name={label} />
-      <span className="asterisk">*</span>
+      {showAsterisk && <span className="asterisk">*</span>}
       <ContainerInput>
         <Field
           as="input"

@@ -4,15 +4,30 @@ import { InputForm } from "@/components/atoms/InputForm"
 import { Button } from "@/components/atoms/Button";
 import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
 import Image from "next/image";
+import usePasswordResetService from "@/services/usePasswordResetService";
+import { UserPasswordServiceDTO } from "@/services/interfaces/IUsePasswordResetServices";
+import { resetPasswordSchema } from "../../../utils/resetPassSchema";
+import ModalResetPass from "../ModalResetPass";
+
+
+
 export default function FormEmailToReset () {
-  
+
+  const { sendResetLink, closeModal, isModalOpen } = usePasswordResetService();  
+
      const initialValues = {
         email: "",   
       };
     const formik = useFormik({
         initialValues: initialValues,
-        onSubmit:(values) => {
-            console.log(values)
+        validationSchema:resetPasswordSchema,
+        onSubmit:async (data: UserPasswordServiceDTO, {resetForm}) => {
+          try {
+            await sendResetLink(data)
+            resetForm()
+          } catch (error) {
+            console.log(error)
+          }
         }
       });
 
@@ -28,9 +43,10 @@ export default function FormEmailToReset () {
             </MessagesContainer>
                 <Field as={InputForm}
                   type="text"
-                  name="name"
-                  label="Email"
+                  name="email"
+                  label="Email:"
                   placeholder="Preencha com seu email"
+                  showAsterisk={false}
                 />
                 <Button
                   btnRole={"form"}
@@ -40,6 +56,12 @@ export default function FormEmailToReset () {
            </FormikProvider>
                         <a href="/login">Voltar ao login</a>
             </FormWrapper>
+
+            <ModalResetPass
+            open={isModalOpen}
+            onClose={closeModal}
+            height={700}
+            />
 
         </ContainerForm>
     )
