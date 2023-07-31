@@ -84,13 +84,12 @@ export function FormRegister() {
     }
   };
 
+  
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: registerSchema,
     onSubmit: handleSubmit,
-    validateOnChange: true,
-
-   
+    validateOnChange: true,   
   });
 
   useEffect(() => {
