@@ -116,6 +116,16 @@ export function FormLogin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState, countError]);
 
+  function checkFields() {
+    return email.trim() !== "" && password.trim() !== "";
+  }
+
+  useEffect(() => {
+    setDisable(!checkFields());
+  }, [email, password]);
+
+ 
+
   return (
     <>
       <ToastContainer
