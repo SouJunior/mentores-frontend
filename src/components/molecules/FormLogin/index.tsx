@@ -19,7 +19,7 @@ export function FormLogin() {
   const [keepConnected, setKeepConnected] = useState(false);
   const [countError, setCountError] = useState(0);
   const [disable, setDisable] = useState(false);
-  const [shoudlNotify, setShoudlNotify] = useState(false);
+  const [botaoConcluir, setBotaoConcluir] = useState(false)
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -87,32 +87,22 @@ export function FormLogin() {
   };
 
   useEffect(() => {
-    if (countError == 3) {
-      setToastMessage(
-        'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".'
-      );
-      notify();
-    }
     if (countError == 4) {
-      console.log("foi o 3");
+      console.log(countError, 'aqui');
       setToastMessage(
-        'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".'
+        'Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em "Esqueci minha senha".'
       );
-      notify();
+      notify()
     }
-    if (countError == 5) {
-      console.log(countError);
-      setCookie("disable", "true");
-      setShoudlNotify(true);
-      console.log("foi");
+    if (countError >= 5) {
+      setToastMessage(
+        'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha"'
+      )
+     notify()
+     setDisable(true)
+     setBotaoConcluir(true)
     }
 
-    if (shoudlNotify) {
-      setDisable(true);
-      setShoudlNotify(false);
-    } else {
-      setDisable(false);
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState, countError]);
 
@@ -121,7 +111,7 @@ export function FormLogin() {
   }
 
   useEffect(() => {
-    setDisable(!checkFields());
+    setBotaoConcluir(!checkFields());
   }, [email, password]);
 
  
@@ -203,7 +193,7 @@ export function FormLogin() {
           </div>
 
           <Button
-            disabled={disable}
+            disabled={botaoConcluir}
             btnRole={"form"}
             content={
               loading ? (
