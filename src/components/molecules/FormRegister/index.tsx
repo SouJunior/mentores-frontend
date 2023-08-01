@@ -64,7 +64,6 @@ export function FormRegister() {
     values: ValuesFormType,
     { resetForm }: { resetForm: () => void }
   ) => {
-    handleModalEmail();
     try {
       const response = await axios.post(
         "https://mentores-backend.onrender.com/user",
@@ -85,11 +84,12 @@ export function FormRegister() {
     }
   };
 
+  
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: registerSchema,
     onSubmit: handleSubmit,
-    validateOnChange: true
+    validateOnChange: true,   
   });
 
   useEffect(() => {
@@ -105,7 +105,6 @@ export function FormRegister() {
 
 
 
-  const today = new Date();
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const maxDate = yesterday.toISOString().split("T")[0];
