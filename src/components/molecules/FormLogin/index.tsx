@@ -10,20 +10,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "../../atoms/Checkbox";
 import { ContainerForm } from "./style";
 import userLoginService from "@/services/userLoginService";
-import { UserLoginDTO } from "@/services/interfaces/IUserLoginService";
-import { useRouter } from "next/router";
+
 
 export function FormLogin() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepConnected, setKeepConnected] = useState(false);
-  const [countError, setCountError] = useState(0);
   const [disable, setDisable] = useState(false);
   const [botaoConcluir, setBotaoConcluir] = useState(false);
 
-  const { sendLogin, formState } = userLoginService();
+  const { sendLogin, formState, countError } = userLoginService();
 
   const notify = (message: string) => {
     toast.error(message, {
@@ -34,8 +31,8 @@ export function FormLogin() {
 
   
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();    
-      setLoading(true);
+    event.preventDefault();
+    setLoading(true);
       await sendLogin({ email, password });
       setTimeout(() => {
         setLoading(false);
@@ -44,17 +41,7 @@ export function FormLogin() {
 
 
   useEffect(() => {
-    if (countError === 4) {
-      notify(
-        'Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em "Esqueci minha senha".'
-      );
-    }
-    if (countError >= 5) {
-      setBotaoConcluir(true);
-      notify(
-        'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha"'
-      );
-    }
+  
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countError]);

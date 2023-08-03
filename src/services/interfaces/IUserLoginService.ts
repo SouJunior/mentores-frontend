@@ -5,7 +5,8 @@ export interface IUserLoginService {
     email:string,
     password:string,
     errors:string
-  }
+  };
+  countError: number;
 }
 
 export type UserLoginDTO = {

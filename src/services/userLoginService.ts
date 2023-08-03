@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const userLoginService = (): IUserLoginService => {
 
   const router = useRouter()
-
+  const [countError, setCountError] = useState(0);
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -34,11 +34,12 @@ const userLoginService = (): IUserLoginService => {
         ...formState,
         errors:"*E-mail ou senha incorretos."
       })
+      setCountError(countError + 1)
+      console.log(countError)
     }
   };
 
-  const validateForm = async(data:UserLoginDTO):Promise<boolean> => {
- 
+  const validateForm = async(data:UserLoginDTO):Promise<boolean> => { 
     if(!data.email || !data.password){
       setFormState({
         ...formState,
@@ -47,12 +48,10 @@ const userLoginService = (): IUserLoginService => {
       return false
     }else {
       return true
-    }
-    
-  
+    }   
   }
 
-  return { sendLogin, validateForm, formState};
+  return { sendLogin, validateForm, formState, countError};
 };
 
 
