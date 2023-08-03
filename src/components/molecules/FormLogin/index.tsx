@@ -2,8 +2,6 @@ import CardLoading from "@/assets/loading.gif";
 import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
 import { Button } from "@/components/atoms/Button";
 import { InputLogin } from "@/components/atoms/InputLogin";
-import axios from "axios";
-import { setCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
@@ -11,100 +9,55 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "../../atoms/Checkbox";
 import { ContainerForm } from "./style";
+import userLoginService from "@/services/userLoginService";
+import { UserLoginDTO } from "@/services/interfaces/IUserLoginService";
+import { useRouter } from "next/router";
 
 export function FormLogin() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepConnected, setKeepConnected] = useState(false);
   const [countError, setCountError] = useState(0);
   const [disable, setDisable] = useState(false);
-  const [botaoConcluir, setBotaoConcluir] = useState(false)
-  const [formState, setFormState] = useState({
-    email: "",
-    password: "",
-    errors: "",
-  });
-  const [toastMessage, setToastMessage] = useState(
-    'Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em "Esqueci a senha".'
-  );
+  const [botaoConcluir, setBotaoConcluir] = useState(false);
 
-  const notify = () => {
-    toast.error(toastMessage, {
+  const { sendLogin, formState } = userLoginService();
+
+  const notify = (message: string) => {
+    toast.error(message, {
       position: toast.POSITION.TOP_CENTER,
       toastId: "customId",
     });
   };
 
-  function validateForm() {
-    if (!password || !email) {
-      setFormState({
-        ...formState,
-        errors: "*E-mail ou senha incorretos.",
-      });
-      setCountError(countError + 1);
-      return;
-    } else {
-      return true;
-    }
-  }
-
+  
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    setLoading(true);
-    event.preventDefault();
-
-    if (validateForm()) {
-      try {
-        const response = await axios.post(
-          "https://mentores-backend.onrender.com/auth/login",
-          {
-            email: email,
-            password: password,
-          }
-        );
-        if (keepConnected) {
-          setCookie("U", response.data);
-        }
-        console.log(response.data);
-        console.log("USUÁRIO LOGADO");
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      } catch (error) {
-        console.log(error);
-
-        console.log("ERRO AO FAZER O LOGIN");
-        setFormState({ ...formState, errors: "*E-mail ou senha incorretos." });
-        setCountError(countError + 1);
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      }
-    }
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    event.preventDefault();    
+      setLoading(true);
+      await sendLogin({ email, password });
+      setTimeout(() => {
+        setLoading(false);
+      }, 500); 
   };
 
+
   useEffect(() => {
-    if (countError == 4) {
-      console.log(countError, 'aqui');
-      setToastMessage(
+    if (countError === 4) {
+      notify(
         'Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em "Esqueci minha senha".'
       );
-      notify()
     }
     if (countError >= 5) {
-      setToastMessage(
+      setBotaoConcluir(true);
+      notify(
         'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha"'
-      )
-     notify()
-     setDisable(true)
-     setBotaoConcluir(true)
+      );
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formState, countError]);
+  }, [countError]);
 
   function checkFields() {
     return email.trim() !== "" && password.trim() !== "";
@@ -113,8 +66,6 @@ export function FormLogin() {
   useEffect(() => {
     setBotaoConcluir(!checkFields());
   }, [email, password]);
-
- 
 
   return (
     <>
