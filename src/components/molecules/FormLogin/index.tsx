@@ -18,7 +18,7 @@ export function FormLogin() {
   const [password, setPassword] = useState("");
   const [keepConnected, setKeepConnected] = useState(false);
   const [disable, setDisable] = useState(false);
-  const [botaoConcluir, setBotaoConcluir] = useState(false);
+  const [submitButton, setSubmitButton] = useState(false);
 
   const { sendLogin, formState, countError } = userLoginService();
 
@@ -40,8 +40,7 @@ export function FormLogin() {
   };
 
 
-  useEffect(() => {
-  
+  useEffect(() => { 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countError]);
@@ -51,7 +50,7 @@ export function FormLogin() {
   }
 
   useEffect(() => {
-    setBotaoConcluir(!checkFields());
+    setSubmitButton(!checkFields());
   }, [email, password]);
 
   return (
@@ -131,7 +130,7 @@ export function FormLogin() {
           </div>
 
           <Button
-            disabled={botaoConcluir}
+            disabled={submitButton}
             btnRole={"form"}
             content={
               loading ? (
