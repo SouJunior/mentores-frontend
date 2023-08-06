@@ -66,7 +66,7 @@ export default function FormNewPass() {
               eye={eye}
               size={20}
               left={850}
-              marginTop={53}
+              paddingTop={25}
               color={"#5D5F5D"}
             />
             <Field
@@ -82,7 +82,7 @@ export default function FormNewPass() {
               eye={eyeConfirm}
               size={20}
               left={850}
-              marginTop={53}
+              paddingTop={20}
               color={"#5D5F5D"}
             />
             <Field

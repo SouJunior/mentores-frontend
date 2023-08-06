@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const EyeContainer = styled.button<
-  Partial<{ left: number; marginTop: number }>
+  Partial<{ left: number; marginTop: number; paddingTop:number }>
 >`
   position: absolute;
   border: none;
@@ -12,4 +12,5 @@ export const EyeContainer = styled.button<
   margin-top: ${(props) => props.marginTop}px;
   cursor: pointer;
   outline: none;
+  padding-top:${(props) => props.paddingTop}px;
 `;

@@ -7,17 +7,19 @@ interface EyeProps {
   size: number;
   onClick: (e: MouseEvent<HTMLElement>) => void;
   left: number;
-  marginTop: number;
+  marginTop?: number;
   color?: string;
+  paddingTop?:number;
 }
 
-export function Eye({ eye, size, onClick, left, marginTop, color }: EyeProps) {
+export function Eye({ eye, size, onClick, left, marginTop, color, paddingTop }: EyeProps) {
   return (
     <EyeContainer
       type="button"
       onClick={onClick}
       left={left}
       marginTop={marginTop}
+      paddingTop={paddingTop}
     >
       {" "}
       {eye === false ? (
