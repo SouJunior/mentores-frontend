@@ -2,6 +2,7 @@ import { Field, Form, FormikProvider, useFormik } from "formik";
 import { InputForm } from "@/components/atoms/InputForm";
 import { Button } from "@/components/atoms/Button";
 import { Eye } from "@/components/atoms/Eye";
+import { registerSchema } from "@/utils/registerSchema";
 import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,6 +38,7 @@ export default function FormNewPass() {
 
   const formik = useFormik({
     initialValues: initialValues,
+    validationSchema:registerSchema,
     onSubmit: async (values, formikHelpers) => {
       const { password, confirmPassword } = values;
 
