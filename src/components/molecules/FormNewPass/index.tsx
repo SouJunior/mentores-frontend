@@ -2,6 +2,7 @@ import { Field, Form, FormikProvider, useFormik } from "formik";
 import { InputForm } from "@/components/atoms/InputForm";
 import { Button } from "@/components/atoms/Button";
 import { Eye } from "@/components/atoms/Eye";
+import { InfoTooltip } from "@/components/atoms/InfoTooltip";
 import { registerSchema } from "@/utils/registerSchema";
 import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
 import Image from "next/image";
@@ -61,6 +62,7 @@ export default function FormNewPass() {
                 Preencha os campos abaixo com sua nova senha e confirme-a.
               </span>
             </MessagesContainer>
+            <InfoTooltip right={445} />
             <Eye
               onClick={(e) => handleShowPassword(e)}
               eye={eye}
