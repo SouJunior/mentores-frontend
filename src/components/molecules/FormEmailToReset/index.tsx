@@ -8,6 +8,7 @@ import usePasswordResetService from "@/services/usePasswordResetService";
 import { UserPasswordServiceDTO } from "@/services/interfaces/IUsePasswordResetServices";
 import { resetPasswordSchema } from "../../../utils/resetPassSchema";
 import ModalResetPass from "../ModalResetPass";
+import Link from "next/link";
 
 
 
@@ -54,7 +55,7 @@ export default function FormEmailToReset () {
                 />
             </Form>
            </FormikProvider>
-                        <a href="/login">Voltar ao login</a>
+                        <Link href="/login"></Link>
             </FormWrapper>
 
             <ModalResetPass

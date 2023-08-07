@@ -159,7 +159,7 @@ export function FormRegister() {
               name="confirmEmail"
               placeholder="Confirme seu e-mail"
             />
-            <InfoTooltip />
+            <InfoTooltip right={15}/>
             <Eye
               onClick={(e) => handleShowPassword(e)}
               eye={eye}
