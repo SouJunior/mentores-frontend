@@ -9,6 +9,7 @@ export interface IUserLoginService {
   countError: number;
   submitButton: boolean;
   disable:boolean;
+  loading:boolean;
   checkFields:(data:UserLoginDTO) => boolean;
   setSubmitButton: (isEnabled: boolean) => void;
 } 

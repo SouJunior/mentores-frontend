@@ -12,7 +12,6 @@ import { ContainerForm } from "./style";
 import UserLoginService from "@/services/userLoginService";
 
 export function FormLogin() {
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepConnected, setKeepConnected] = useState(false);
@@ -24,15 +23,12 @@ export function FormLogin() {
     disable,
     setSubmitButton,
     submitButton,
+    loading
   } = UserLoginService();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true);
-    await sendLogin({ email, password });
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    await sendLogin({ email, password }); 
   };
 
   useEffect(() => {
