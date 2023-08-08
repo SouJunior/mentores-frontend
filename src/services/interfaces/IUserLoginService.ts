@@ -7,7 +7,11 @@ export interface IUserLoginService {
     errors:string
   };
   countError: number;
-}
+  submitButton: boolean;
+  disable:boolean;
+  checkFields:(data:UserLoginDTO) => boolean;
+  setSubmitButton: (isEnabled: boolean) => void;
+} 
 
 export type UserLoginDTO = {
   email: string;
