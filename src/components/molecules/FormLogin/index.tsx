@@ -107,9 +107,9 @@ export function FormLogin() {
               id="connected"
               text="Me manter conectado"
             />
-            <a href="#" style={{ textDecoration: "underline" }}>
+            <Link href="/resetPassword" style={{ textDecoration: "underline" }}>
               Esqueci a senha
-            </a>
+            </Link>
           </div>
 
           <Button
