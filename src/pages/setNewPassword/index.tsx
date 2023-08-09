@@ -1,5 +1,5 @@
 import FormNewPass from "@/components/molecules/FormNewPass";
-import { SetPassContainer } from "./styled";
+import { SetPassContainer } from "../../styles/pages/setNewPassword";
 
 function SetNewPassword() {
   return (

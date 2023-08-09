@@ -1,5 +1,5 @@
 import FormEmailToReset from "@/components/molecules/FormEmailToReset";
-import { ResetPassContainer } from "./styled";
+import { ResetPassContainer } from "../../styles/pages/resetPassword";
 
  function ResetPassword() {
   return (
