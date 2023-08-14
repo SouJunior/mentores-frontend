@@ -53,7 +53,7 @@ export default function FormEmailToReset() {
             <Button btnRole={"form"} content={"Enviar"} />
           </Form>
         </FormikProvider>
-        <Link href="/login"></Link>
+        <Link href="/login">Voltar ao login</Link>
       </FormWrapper>
 
       <ModalResetPass open={isModalOpen} onClose={closeModal} height={700} />

@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "../../atoms/Checkbox";
 import { ContainerForm } from "./style";
 import UserLoginService from "@/services/userLoginService";
+import { getCookie} from "cookies-next"
 
 export function FormLogin() {
   const [email, setEmail] = useState("");
@@ -35,6 +36,7 @@ export function FormLogin() {
     const data = { email, password };
     setSubmitButton(!checkFields(data));
   }, [email, password]);
+
 
   return (
     <>

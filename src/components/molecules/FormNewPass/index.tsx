@@ -9,12 +9,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, MouseEvent, KeyboardEvent } from "react";
 import { ContainerForm, FormWrapper, MessagesContainer } from "./styled";
+import { setCookie, getCookie } from "cookies-next";
 
 export default function FormNewPass() {
   const [show, setShow] = useState(true);
   const [eye, setEye] = useState(true);
   const [showConfirm, setShowConfirm] = useState(true);
   const [eyeConfirm, setEyeConfirm] = useState(true);
+  const[password, setPassword] = useState("")
+  const[confirmPassword, confirmSetPassword] = useState("")
+
 
   const initialValues = {
     password: "",
@@ -39,10 +43,12 @@ export default function FormNewPass() {
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema:registerSchema,
+    validationSchema: registerSchema,
     onSubmit: async (values, formikHelpers) => {
+      console.log(formikHelpers)
       const { password, confirmPassword } = values;
 
+      setCookie("disable", "false");
       try {
         console.log(password, confirmPassword);
       } catch (error) {
@@ -79,7 +85,7 @@ export default function FormNewPass() {
               placeholder="*******"
               showAsterisk={false}
             />
-              <Eye
+            <Eye
               onClick={(e) => handleConfirmPassword(e)}
               eye={eyeConfirm}
               size={20}
