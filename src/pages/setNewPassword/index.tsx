@@ -1,14 +1,12 @@
-import FormNewPass from "@/components/molecules/FormNewPass"
-import { SetPassContainer } from "./styled"
+import FormNewPass from "@/components/molecules/FormNewPass";
+import { SetPassContainer } from "../../styles/pages/setNewPassword";
 
-export default function setNewPassword () {
-
-   
-   
-    return (
-        <SetPassContainer>
-            <FormNewPass/>
-        </SetPassContainer>
-        
-    )
+function SetNewPassword() {
+  return (
+    <SetPassContainer>
+      <FormNewPass />
+    </SetPassContainer>
+  );
 }
+
+export default SetNewPassword

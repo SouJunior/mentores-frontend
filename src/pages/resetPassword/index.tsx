@@ -1,14 +1,12 @@
-import FormEmailToReset from "@/components/molecules/FormEmailToReset"
-import { ResetPassContainer } from "./styled"
+import FormEmailToReset from "@/components/molecules/FormEmailToReset";
+import { ResetPassContainer } from "../../styles/pages/resetPassword";
 
-export default function resetPassword () {
-
-   
-   
-    return (
-        <ResetPassContainer>
-            <FormEmailToReset/>         
-        </ResetPassContainer>
-        
-    )
+ function ResetPassword() {
+  return (
+    <ResetPassContainer>
+      <FormEmailToReset />
+    </ResetPassContainer>
+  );
 }
+
+export default ResetPassword

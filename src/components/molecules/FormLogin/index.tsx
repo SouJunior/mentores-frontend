@@ -9,47 +9,31 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "../../atoms/Checkbox";
 import { ContainerForm } from "./style";
-import userLoginService from "@/services/userLoginService";
-
+import UserLoginService from "@/services/userLoginService";
 
 export function FormLogin() {
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepConnected, setKeepConnected] = useState(false);
-  const [disable, setDisable] = useState(false);
-  const [submitButton, setSubmitButton] = useState(false);
 
-  const { sendLogin, formState, countError } = userLoginService();
+  const {
+    sendLogin,
+    formState,
+    checkFields,
+    disable,
+    setSubmitButton,
+    submitButton,
+    loading
+  } = UserLoginService();
 
-  const notify = (message: string) => {
-    toast.error(message, {
-      position: toast.POSITION.TOP_CENTER,
-      toastId: "customId",
-    });
-  };
-
-  
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true);
-      await sendLogin({ email, password });
-      setTimeout(() => {
-        setLoading(false);
-      }, 500); 
+    await sendLogin({ email, password }); 
   };
 
-
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countError]);
-
-  function checkFields() {
-    return email.trim() !== "" && password.trim() !== "";
-  }
-
-  useEffect(() => {
-    setSubmitButton(!checkFields());
+    const data = { email, password };
+    setSubmitButton(!checkFields(data));
   }, [email, password]);
 
   return (
@@ -123,9 +107,9 @@ export function FormLogin() {
               id="connected"
               text="Me manter conectado"
             />
-            <a href="#" style={{ textDecoration: "underline" }}>
+            <Link href="/resetPassword" style={{ textDecoration: "underline" }}>
               Esqueci a senha
-            </a>
+            </Link>
           </div>
 
           <Button
