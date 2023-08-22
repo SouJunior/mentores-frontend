@@ -1,5 +1,5 @@
 export interface IUserSetNewPassword {
-  handle: (data: SetNewPasswordDTO) => Promise<void>;
+  handle: (data: SetNewPasswordDTO, options: { code: string, email: string }) => Promise<void>;
 }
 
 export type SetNewPasswordDTO = {
