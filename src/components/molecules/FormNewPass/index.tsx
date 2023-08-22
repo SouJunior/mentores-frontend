@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, MouseEvent, KeyboardEvent } from "react";
 import { ContainerForm, FormWrapper, MessagesContainer } from "./styled";
-import { setCookie, getCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
 
 export default function FormNewPass() {
   const [show, setShow] = useState(true);
@@ -39,7 +39,7 @@ export default function FormNewPass() {
     e.preventDefault();
     setEyeConfirm(!eyeConfirm);
     setShowConfirm(!showConfirm);
-  };
+  }; 
 
   const formik = useFormik({
     initialValues: initialValues,
