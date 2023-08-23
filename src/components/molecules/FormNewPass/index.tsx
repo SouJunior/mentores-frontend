@@ -23,7 +23,6 @@ export default function FormNewPass() {
   const router = useRouter();
   const { undefinedcode, email } = router.query as { undefinedcode: string; email: string };
   useEffect(() => {
-    console.log(undefinedcode, email)
   }, [undefinedcode, email]);  
 
   const initialValues = {
