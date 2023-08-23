@@ -21,9 +21,9 @@ export default function FormNewPass() {
   const [eyeConfirm, setEyeConfirm] = useState(true);
 
   const router = useRouter();
-  const { undefinedcode, email } = router.query as { undefinedcode: string; email: string };
+  const { code, email } = router.query as { code: string; email: string };
   useEffect(() => {
-  }, [undefinedcode, email]);  
+  }, [code, email]);  
 
   const initialValues = {
     password: "",
@@ -54,7 +54,7 @@ export default function FormNewPass() {
     initialValues: initialValues,
     validationSchema: setNewPassSchema,
     onSubmit: async (data:SetNewPasswordDTO, {resetForm}) => {
-      await handle(data, { code: undefinedcode, email: email });
+      await handle(data, { code: code, email: email });
       setCookie('disable', 'false')
       resetForm()
     },
