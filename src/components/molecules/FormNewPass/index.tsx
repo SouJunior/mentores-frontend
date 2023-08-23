@@ -3,12 +3,16 @@ import { InputForm } from "@/components/atoms/InputForm";
 import { Button } from "@/components/atoms/Button";
 import { Eye } from "@/components/atoms/Eye";
 import { InfoTooltip } from "@/components/atoms/InfoTooltip";
-import { registerSchema } from "@/utils/registerSchema";
 import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, MouseEvent, KeyboardEvent } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 import { ContainerForm, FormWrapper, MessagesContainer } from "./styled";
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/router";
+import { SetNewPasswordDTO } from "@/services/interfaces/IUserSetNewPassword";
+import setNewPasswordService from "@/services/useSetNewPassword";
+import { setNewPassSchema } from "@/utils/setNewPassschema";
 
 export default function FormNewPass() {
   const [show, setShow] = useState(true);
@@ -16,9 +20,16 @@ export default function FormNewPass() {
   const [showConfirm, setShowConfirm] = useState(true);
   const [eyeConfirm, setEyeConfirm] = useState(true);
 
+  const router = useRouter();
+  const { undefinedcode, email } = router.query as { undefinedcode: string; email: string };
+  useEffect(() => {
+  }, [undefinedcode, email]);  
+
   const initialValues = {
     password: "",
     confirmPassword: "",
+    code:"",
+    email:""
   };
 
   const handleShowPassword = (
@@ -34,20 +45,18 @@ export default function FormNewPass() {
   ) => {
     e.preventDefault();
     setEyeConfirm(!eyeConfirm);
-    setShowConfirm(!showConfirm);
+    setShowConfirm(!showConfirm); 
   };
+
+  const { handle } = setNewPasswordService();
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema:registerSchema,
-    onSubmit: async (values, formikHelpers) => {
-      const { password, confirmPassword } = values;
-
-      try {
-        console.log(password, confirmPassword);
-      } catch (error) {
-        console.log(error);
-      }
+    validationSchema: setNewPassSchema,
+    onSubmit: async (data:SetNewPasswordDTO, {resetForm}) => {
+      await handle(data, { code: undefinedcode, email: email });
+      setCookie('disable', 'false')
+      resetForm()
     },
   });
   return (
@@ -79,7 +88,7 @@ export default function FormNewPass() {
               placeholder="*******"
               showAsterisk={false}
             />
-              <Eye
+            <Eye
               onClick={(e) => handleConfirmPassword(e)}
               eye={eyeConfirm}
               size={20}

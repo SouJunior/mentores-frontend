@@ -3,9 +3,10 @@ import {
   IUserLoginService,
   UserLoginDTO,
 } from "./interfaces/IUserLoginService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { setCookie, getCookie } from "cookies-next";
 
 const UserLoginService = (): IUserLoginService => {
   const router = useRouter();
@@ -39,6 +40,7 @@ const UserLoginService = (): IUserLoginService => {
       );
       setDisable(true);
       setSubmitButton(true);
+      setCookie("disable", "true");
     }
   };
 
@@ -69,6 +71,13 @@ const UserLoginService = (): IUserLoginService => {
       setLoading(false);
     }, 500);
   };
+
+  useEffect(() => {
+    const isDisable = getCookie("disable");
+
+    isDisable ? setDisable(false) : setDisable(false)
+
+  }, [disable]);
 
   const validateForm = async (data: UserLoginDTO): Promise<boolean> => {
     if (!data.email || !data.password) {
