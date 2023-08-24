@@ -13,6 +13,8 @@ import { useRouter } from "next/router";
 import { SetNewPasswordDTO } from "@/services/interfaces/IUserSetNewPassword";
 import setNewPasswordService from "@/services/useSetNewPassword";
 import { setNewPassSchema } from "@/utils/setNewPassschema";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FormNewPass() {
   const [show, setShow] = useState(true);
@@ -61,6 +63,7 @@ export default function FormNewPass() {
   });
   return (
     <ContainerForm>
+      <ToastContainer/>
       <FormWrapper>
         <FormikProvider value={formik}>
           <Form>
