@@ -13,6 +13,8 @@ import { useRouter } from "next/router";
 import { SetNewPasswordDTO } from "@/services/interfaces/IUserSetNewPassword";
 import setNewPasswordService from "@/services/useSetNewPassword";
 import { setNewPassSchema } from "@/utils/setNewPassschema";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FormNewPass() {
   const [show, setShow] = useState(true);
@@ -54,13 +56,33 @@ export default function FormNewPass() {
     initialValues: initialValues,
     validationSchema: setNewPassSchema,
     onSubmit: async (data:SetNewPasswordDTO, {resetForm}) => {
-      await handle(data, { code: code, email: email });
-      setCookie('disable', 'false')
+      toast.success('🦄 Modal de sucesso provisório!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
       resetForm()
     },
   });
   return (
     <ContainerForm>
+       <ToastContainer
+        autoClose={3500}
+        hideProgressBar={true}
+        closeOnClick
+        theme="colored"
+        style={{
+          textAlign: "justify",
+          fontSize: "16px",
+          width: "550px",
+          lineHeight: "32px",
+        }}
+      />
       <FormWrapper>
         <FormikProvider value={formik}>
           <Form>

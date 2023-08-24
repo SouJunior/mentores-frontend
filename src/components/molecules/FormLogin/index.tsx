@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"; 
 import { Checkbox } from "../../atoms/Checkbox";
 import { ContainerForm } from "./style";
 import UserLoginService from "@/services/userLoginService";
