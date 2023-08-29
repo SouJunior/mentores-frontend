@@ -107,7 +107,7 @@ export default function FormNewPass() {
               placeholder="*******"
               showAsterisk={false}
             />
-            <Button btnRole={"form"} content={"Enviar"} />
+            <Button btnRole={"form"} content={"Redefinir senha"} />
           </Form>
         </FormikProvider>
         <Link href="/login">Voltar ao login</Link>
