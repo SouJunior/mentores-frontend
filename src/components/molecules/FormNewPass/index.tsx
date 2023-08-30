@@ -25,13 +25,13 @@ export default function FormNewPass() {
   const router = useRouter();
   const { code, email } = router.query as { code: string; email: string };
   useEffect(() => {
-  }, [code, email]);  
+  }, [code, email]);
 
   const initialValues = {
     password: "",
     confirmPassword: "",
-    code:"",
-    email:""
+    code: "",
+    email: ""
   };
 
   const handleShowPassword = (
@@ -47,7 +47,7 @@ export default function FormNewPass() {
   ) => {
     e.preventDefault();
     setEyeConfirm(!eyeConfirm);
-    setShowConfirm(!showConfirm); 
+    setShowConfirm(!showConfirm);
   };
 
   const { handle } = setNewPasswordService();
@@ -55,7 +55,7 @@ export default function FormNewPass() {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: setNewPassSchema,
-    onSubmit: async (data:SetNewPasswordDTO, {resetForm}) => {
+    onSubmit: async (data: SetNewPasswordDTO, { resetForm }) => {
       await handle(data, { code: code, email: email });
       setCookie('disable', 'false')
       resetForm()
@@ -63,7 +63,7 @@ export default function FormNewPass() {
   });
   return (
     <ContainerForm>
-      <ToastContainer/>
+      <ToastContainer />
       <FormWrapper>
         <FormikProvider value={formik}>
           <Form>
