@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import ArrowSuccess from '../../../assets/icons/ArrowSuccess.svg';
+import ArrowSuccess from '../../../assets/icons/arrowSuccess.svg';
 import { BackgroundOverlay, ToastContainer, ContainerToastTitle, ContainerToastIcon, ContainerButton, ContainerContentToast, ContainerToastIconWrapper, ContainerToastIconClose } from './styles';
 import { X } from 'lucide-react';
 
