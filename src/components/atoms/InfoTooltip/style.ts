@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
-export const InfoContainer = styled.span`
+export const InfoContainer = styled.span<
+Partial<{ right:number }>
+>`
   display: flex;
   justify-content: flex-end;
   height: 24px;
   position: absolute;
-  right: 0;
+  right: ${(props) => props.right}px;
   margin-right: 30px;
 `;
 

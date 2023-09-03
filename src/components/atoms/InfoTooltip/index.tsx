@@ -10,7 +10,11 @@ import {
   TooltipContainer,
 } from "./style";
 
-export function InfoTooltip() {
+interface ToolTipProps {
+  right?: number;
+}
+
+export function InfoTooltip({ right }: ToolTipProps) {
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const handleMouseEnter = () => {
@@ -23,7 +27,7 @@ export function InfoTooltip() {
     }, 2000);
   };
   return (
-    <InfoContainer>
+    <InfoContainer right={right}>
       <InfoIcon
         size={16}
         onMouseEnter={handleMouseEnter}

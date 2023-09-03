@@ -2,119 +2,40 @@ import CardLoading from "@/assets/loading.gif";
 import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
 import { Button } from "@/components/atoms/Button";
 import { InputLogin } from "@/components/atoms/InputLogin";
-import axios from "axios";
-import { setCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"; 
 import { Checkbox } from "../../atoms/Checkbox";
 import { ContainerForm } from "./style";
+import UserLoginService from "@/services/userLoginService";
 
 export function FormLogin() {
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepConnected, setKeepConnected] = useState(false);
-  const [countError, setCountError] = useState(0);
-  const [disable, setDisable] = useState(false);
-  const [shoudlNotify, setShoudlNotify] = useState(false);
-  const [formState, setFormState] = useState({
-    email: "",
-    password: "",
-    errors: "",
-  });
-  const [toastMessage, setToastMessage] = useState(
-    'Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em "Esqueci a senha".'
-  );
 
-  const notify = () => {
-    toast.error(toastMessage, {
-      position: toast.POSITION.TOP_CENTER,
-      toastId: "customId",
-    });
-  };
-
-  function validateForm() {
-    if (!password || !email) {
-      setFormState({
-        ...formState,
-        errors: "*E-mail ou senha incorretos.",
-      });
-      setCountError(countError + 1);
-      return;
-    } else {
-      return true;
-    }
-  }
+  const {
+    sendLogin,
+    formState,
+    checkFields,
+    disable,
+    setSubmitButton,
+    submitButton,
+    loading
+  } = UserLoginService();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    setLoading(true);
     event.preventDefault();
-
-    if (validateForm()) {
-      try {
-        const response = await axios.post(
-          "https://mentores-backend.onrender.com/auth/login",
-          {
-            email: email,
-            password: password,
-          }
-        );
-        if (keepConnected) {
-          setCookie("U", response.data);
-        }
-        console.log(response.data);
-        console.log("USUÁRIO LOGADO");
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      } catch (error) {
-        console.log(error);
-
-        console.log("ERRO AO FAZER O LOGIN");
-        setFormState({ ...formState, errors: "*E-mail ou senha incorretos." });
-        setCountError(countError + 1);
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      }
-    }
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    await sendLogin({ email, password }); 
   };
 
   useEffect(() => {
-    if (countError == 3) {
-      setToastMessage(
-        'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".'
-      );
-      notify();
-    }
-    if (countError == 4) {
-      console.log("foi o 3");
-      setToastMessage(
-        'Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em "Esqueci minha senha".'
-      );
-      notify();
-    }
-    if (countError == 5) {
-      console.log(countError);
-      setCookie("disable", "true");
-      setShoudlNotify(true);
-      console.log("foi");
-    }
+    const data = { email, password };
+    setSubmitButton(!checkFields(data));
+  }, [email, password]);
 
-    if (shoudlNotify) {
-      setDisable(true);
-      setShoudlNotify(false);
-    } else {
-      setDisable(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formState, countError]);
 
   return (
     <>
@@ -187,13 +108,13 @@ export function FormLogin() {
               id="connected"
               text="Me manter conectado"
             />
-            <a href="#" style={{ textDecoration: "underline" }}>
+            <Link href="/resetPassword" style={{ textDecoration: "underline" }}>
               Esqueci a senha
-            </a>
+            </Link>
           </div>
 
           <Button
-            disabled={disable}
+            disabled={submitButton}
             btnRole={"form"}
             content={
               loading ? (
