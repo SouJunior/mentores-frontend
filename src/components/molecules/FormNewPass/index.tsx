@@ -15,12 +15,14 @@ import setNewPasswordService from "@/services/useSetNewPassword";
 import { setNewPassSchema } from "@/utils/setNewPassschema";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ToastSuccess from "../ToastSuccess";
 
 export default function FormNewPass() {
   const [show, setShow] = useState(true);
   const [eye, setEye] = useState(true);
   const [showConfirm, setShowConfirm] = useState(true);
   const [eyeConfirm, setEyeConfirm] = useState(true);
+  const [toast, setToast] = useState(false)
 
   const router = useRouter();
   const { code, email } = router.query as { code: string; email: string };
@@ -59,11 +61,12 @@ export default function FormNewPass() {
       await handle(data, { code: code, email: email });
       setCookie('disable', 'false')
       resetForm()
+      setToast(true)
     },
   });
   return (
     <ContainerForm>
-      <ToastContainer />
+      {toast && <ToastSuccess message="Ok"/>}
       <FormWrapper>
         <FormikProvider value={formik}>
           <Form>
