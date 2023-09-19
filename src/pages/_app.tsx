@@ -1,3 +1,4 @@
+import { UserProvider } from "@/context/userContext";
 import { GlobalStyle } from "@/styles/GlobalStyle";
 import { theme } from "@/styles/theme";
 import { AppProps } from "next/app";
@@ -7,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
+    <UserProvider>
     <ThemeProvider theme={theme}>
       <>
         <Head>
@@ -21,6 +23,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         <GlobalStyle />
       </>
     </ThemeProvider>
+    </UserProvider>
   );
 };
 

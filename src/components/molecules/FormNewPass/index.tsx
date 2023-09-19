@@ -11,7 +11,7 @@ import { ContainerForm, FormWrapper, MessagesContainer } from "./styled";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { SetNewPasswordDTO } from "@/services/interfaces/IUserSetNewPassword";
-import setNewPasswordService from "@/services/useSetNewPassword";
+import setNewPasswordService from "@/services/user/useSetNewPassword";
 import { setNewPassSchema } from "@/utils/setNewPassschema";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

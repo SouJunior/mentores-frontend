@@ -1,5 +1,5 @@
-import { IUserSetNewPassword } from "./interfaces/IUserSetNewPassword";
-import { SetNewPasswordDTO } from "./interfaces/IUserSetNewPassword";
+import { IUserSetNewPassword } from "../interfaces/IUserSetNewPassword";
+import { SetNewPasswordDTO } from "../interfaces/IUserSetNewPassword";
 import axios from "axios";
 
 const setNewPasswordService = (): IUserSetNewPassword => {

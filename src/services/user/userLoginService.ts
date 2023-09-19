@@ -1,15 +1,18 @@
-import axios from "axios";
 import {
   IUserLoginService,
   UserLoginDTO,
-} from "./interfaces/IUserLoginService";
+} from "../interfaces/IUserLoginService";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { setCookie, getCookie } from "cookies-next";
+import useUser from "@/context/useUser";
+import { createUserFromResponseData } from "./userService";
+import { loginApi } from "../loginApi";
 
 const UserLoginService = (): IUserLoginService => {
   const router = useRouter();
+  const user = useUser();
   const [countError, setCountError] = useState(0);
   const [submitButton, setSubmitButtonState] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -49,15 +52,14 @@ const UserLoginService = (): IUserLoginService => {
     if (isValid) {
       setLoading(true);
       try {
-        const response = await axios.post(
-          "https://mentores-backend.onrender.com/auth/login",
-          data
-        );
+        const response = await loginApi(data);
+        const userFromResponse = createUserFromResponseData(response);
+        user.setUser(userFromResponse);
+
         setFormState({
           ...formState,
           errors: "",
         });
-        console.log(response)
         router.push("/genericPage");
       } catch (error) {
         setFormState({
@@ -76,8 +78,7 @@ const UserLoginService = (): IUserLoginService => {
   useEffect(() => {
     const isDisable = getCookie("disable");
 
-    isDisable ? setDisable(false) : setDisable(false)
-
+    isDisable ? setDisable(false) : setDisable(false);
   }, [disable]);
 
   const validateForm = async (data: UserLoginDTO): Promise<boolean> => {

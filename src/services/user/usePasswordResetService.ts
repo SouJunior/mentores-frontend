@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   IUsePasswordService,
   UserPasswordServiceDTO,
-} from "./interfaces/IUsePasswordResetServices";
+} from "../interfaces/IUsePasswordResetServices";
 import { useState } from "react";
 
 const usePasswordResetService = (): IUsePasswordService => {

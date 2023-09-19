@@ -4,7 +4,7 @@ import { InputForm } from "@/components/atoms/InputForm";
 import { Button } from "@/components/atoms/Button";
 import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
 import Image from "next/image";
-import usePasswordResetService from "@/services/usePasswordResetService";
+import usePasswordResetService from "@/services/user/usePasswordResetService";
 import { UserPasswordServiceDTO } from "@/services/interfaces/IUsePasswordResetServices";
 import { resetPasswordSchema } from "../../../utils/resetPassSchema";
 import ModalResetPass from "../ModalResetPass";
