@@ -31,7 +31,7 @@ export default function OnBoardModal() {
         </TabWrapper>
       </TabsContainer>
       <StyledSpan>Olá, Fulano!</StyledSpan>
-      <StyledTitle>Em quais áreas você deseja mentorar?</StyledTitle>
+      <StyledTitle>Em quais áreas você deseja mentorar?<span className="last">*</span></StyledTitle>
       <StyledImportant>
         <>*</> Indica um campo obrigatório
       </StyledImportant>

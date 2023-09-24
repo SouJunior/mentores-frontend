@@ -64,6 +64,10 @@ export const StyledTitle = styled.span`
   letter-spacing: 0em;
   text-align: center;
   margin-top: 25px;
+
+  .last {
+    color: ${(props) => props.theme.colors.blue[600]};
+  }
 `;
 
 export const StyledImportant = styled.span`
@@ -87,16 +91,15 @@ export const StyledHR = styled.div`
   margin-top: 30px;
 `;
 
-export const NextButton = styled.button `
-width: 106px;
-height:48px;
-padding: 12px, 16px, 12px, 16px;
-border-radius: 8px;
-background-color: ${(props) => props.theme.colors.blue[700]};
-border:none;
-color: white;
-font-size: 16px;
-margin-top: 15px;
-align-self: flex-end;
-
-`
+export const NextButton = styled.button`
+  width: 106px;
+  height: 48px;
+  padding: 12px, 16px, 12px, 16px;
+  border-radius: 8px;
+  background-color: ${(props) => props.theme.colors.blue[700]};
+  border: none;
+  color: white;
+  font-size: 16px;
+  margin-top: 15px;
+  align-self: flex-end;
+`;
