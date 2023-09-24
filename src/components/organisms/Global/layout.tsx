@@ -1,16 +1,18 @@
-import { Header } from "@/components/molecules/Header"
-import { ReactNode } from "react"
+import { Header } from "@/components/molecules/Header";
+import { ReactNode } from "react";
+import { ContainerLayoyt } from "./styled";
 
 type LayoutProps = {
-    children: ReactNode
-}
+  children: ReactNode;
+};
 
-
-export  const Layout = ({children} : LayoutProps) => {
-    return (
-        <>
-        <Header/>
-        {children}
-        </>
-    )
-} 
+export const Layout = ({ children }: LayoutProps) => {
+  return (
+    <>
+      <ContainerLayoyt>
+        <Header />
+      </ContainerLayoyt>
+      {children}
+    </>
+  );
+};

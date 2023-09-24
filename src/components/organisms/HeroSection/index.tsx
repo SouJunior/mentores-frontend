@@ -34,7 +34,6 @@ export function HeroSection() {
 
   return (
     <ContainerHero>
-      <Header />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <AnimatePresence>

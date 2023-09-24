@@ -1,3 +1,4 @@
+import { Layout } from "@/components/organisms/Global/layout";
 import { UserProvider } from "@/context/userContext";
 import { GlobalStyle } from "@/styles/GlobalStyle";
 import { theme } from "@/styles/theme";
@@ -6,23 +7,35 @@ import Head from "next/head";
 import { FC } from "react";
 import { ThemeProvider } from "styled-components";
 
-const App: FC<AppProps> = ({ Component, pageProps }) => {
+const excludeRoutes = ["/login", "/cadastro"];
+
+const App: FC<AppProps> = ({ Component, pageProps, router }) => {
+  const shouldRenderLayout = !excludeRoutes.includes(router.pathname);
   return (
     <UserProvider>
-    <ThemeProvider theme={theme}>
-      <>
-        <Head>
-          <title>Sou Junior | Mentoria Online</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta
-            name="description"
-            content="Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia"
-          />
-        </Head>
-        <Component {...pageProps} />
-        <GlobalStyle />
-      </>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <>
+          <Head>
+            <title>Sou Junior | Mentoria Online</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <meta
+              name="description"
+              content="Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia"
+            />
+          </Head>
+          {shouldRenderLayout ? (
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          ) : (
+            <Component {...pageProps} />
+          )}
+          <GlobalStyle />
+        </>
+      </ThemeProvider>
     </UserProvider>
   );
 };
