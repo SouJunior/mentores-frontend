@@ -1,6 +1,6 @@
 import useUser from "@/context/useUser"
 
-export default function genericPage (){
+export default function GenericPage (){
     const user = useUser()
     return (
         <>
