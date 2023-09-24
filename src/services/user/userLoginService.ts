@@ -60,7 +60,7 @@ const UserLoginService = (): IUserLoginService => {
           ...formState,
           errors: "",
         });
-        router.push("/GenericPage");
+        router.push("/genericPage");
       } catch (error) {
         setFormState({
           ...formState,
