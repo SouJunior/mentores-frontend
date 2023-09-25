@@ -49,7 +49,7 @@ export default function GridSpecialities() {
           <StyledTitle>
             Em quais áreas você deseja mentorar?<span className="last">*</span>
           </StyledTitle>
-          <StyledImportant>
+          <StyledImportant> 
             <>*</> Indica um campo obrigatório
           </StyledImportant>
       <GridContainer>
