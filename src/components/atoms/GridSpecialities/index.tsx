@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import { GridContainer, SpecialityItem, StyledCount } from "./styled";
-import  {Check } from 'lucide-react'
+import {
+  GridContainer,
+  SpecialityItem,
+  StyledCount,
+  StyledSpan,
+  StyledTitle,
+  StyledImportant,
+  StyledHR,
+  NextButton,
+} from "./styled";
+import { Check } from "lucide-react";
 export default function GridSpecialities() {
   const specialities: string[] = [
     "Carreira",
@@ -36,6 +45,13 @@ export default function GridSpecialities() {
 
   return (
     <>
+          <StyledSpan>Olá, Fulano!</StyledSpan>
+          <StyledTitle>
+            Em quais áreas você deseja mentorar?<span className="last">*</span>
+          </StyledTitle>
+          <StyledImportant>
+            <>*</> Indica um campo obrigatório
+          </StyledImportant>
       <GridContainer>
         {specialities.map((speciality, index) => (
           <SpecialityItem
@@ -43,14 +59,14 @@ export default function GridSpecialities() {
             onClick={() => toggleSpeciality(speciality)}
             selected={selectedSpecialities.includes(speciality)}
           >
-              {selectedSpecialities.includes(speciality) && (
-                <Check/>
-            )}
+            {selectedSpecialities.includes(speciality) && <Check />}
             {speciality}
           </SpecialityItem>
         ))}
       </GridContainer>
       <StyledCount>{`${selectedCount}/6 especialidades `}</StyledCount>
+      <StyledHR />
+      <NextButton>Continuar</NextButton>
     </>
   );
 }
