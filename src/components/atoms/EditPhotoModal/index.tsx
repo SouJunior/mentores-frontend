@@ -13,10 +13,10 @@ import { Camera, ImagePlus, Pencil } from "lucide-react";
 interface EditPhotoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddPhoto: () => void;
-  onEditPhoto: () => void;
-  onTakePhoto: () => void;
-  hasSelectedPhoto: boolean;
+  onAddPhoto?: () => void;
+  onEditPhoto?: () => void;
+  onTakePhoto?: () => void;
+  hasSelectedPhoto?: boolean;
 }
 
 export default function EditPhotoModal({
