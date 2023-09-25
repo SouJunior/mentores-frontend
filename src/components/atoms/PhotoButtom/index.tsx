@@ -1,10 +1,16 @@
 import { UserCircle } from "lucide-react";
 import { UserProfileButtom } from "./styled";
 
-export default function PhotoButtom() {
+interface PhotoButtomProps {
+  onClick?: () => void;
+}
+
+export default function PhotoButtom({ onClick }: PhotoButtomProps) {
   return (
-    <UserProfileButtom>
-      <UserCircle className="icon" /> 
-    </UserProfileButtom>
+    <>
+      <UserProfileButtom onClick={onClick}>
+        <UserCircle className="icon" />
+      </UserProfileButtom>
+    </>
   );
 }
