@@ -10,6 +10,7 @@ import {
   NextButton,
 } from "./styled";
 import { Check } from "lucide-react";
+
 export default function GridSpecialities() {
   const specialities: string[] = [
     "Carreira",
@@ -45,13 +46,13 @@ export default function GridSpecialities() {
 
   return (
     <>
-          <StyledSpan>Olá, Fulano!</StyledSpan>
-          <StyledTitle>
-            Em quais áreas você deseja mentorar?<span className="last">*</span>
-          </StyledTitle>
-          <StyledImportant> 
-            <>*</> Indica um campo obrigatório
-          </StyledImportant>
+      <StyledSpan>Olá, Fulano!</StyledSpan>
+      <StyledTitle>
+        Em quais áreas você deseja mentorar?<span className="last">*</span>
+      </StyledTitle>
+      <StyledImportant> 
+        <>*</> Indica um campo obrigatório
+      </StyledImportant>
       <GridContainer>
         {specialities.map((speciality, index) => (
           <SpecialityItem
