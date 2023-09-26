@@ -2,10 +2,27 @@ import PhotoButtom from "@/components/atoms/PhotoButtom";
 import { Dotted, StyledImportant, StyledInfo } from "./styled";
 import { useState } from "react";
 import EditPhotoModal from "@/components/atoms/EditPhotoModal";
+import { Field, Form, FormikProvider, useFormik } from "formik";
 
-export default function MentorPhoto() {
+export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+
+  const initialValues = {
+    imageUrl: "",
+    description: "",
+    gender: "",
+  };
+
+  const handleSubmit = (values: any) => {
+    console.log(values);
+    console.log(selectedPhoto)
+  };
+  
+  const formik = useFormik({
+    initialValues: initialValues,
+    onSubmit: handleSubmit,
+  });
 
   const handleOpenEditModal = () => {
     setIsEditModalOpen(true);
@@ -17,11 +34,13 @@ export default function MentorPhoto() {
     setSelectedPhoto(editedImage);
   };
 
+  
+
   return (
     <>
       <Dotted>
         <PhotoButtom
-          size={80} 
+          size={80}
           selectedPhoto={selectedPhoto}
           onClick={handleOpenEditModal}
         />
@@ -35,8 +54,26 @@ export default function MentorPhoto() {
         onAddPhoto={(photo) => setSelectedPhoto(photo)}
         onClose={closeModal}
         onImageEdit={handleImageEdit}
-        onEditPhoto={() => handleOpenEditModal()} 
+        onEditPhoto={() => handleOpenEditModal()}
       />
+
+      <FormikProvider value={formik}>
+        <Form>
+          <Field type="text" component="textarea" name="description" />
+          <Field
+            name="gender"
+            placeholder="Selecione um gênero"
+            component="select"
+          >
+            <option value="red">Red</option>
+
+            <option value="green">Green</option>
+
+            <option value="blue">Blue</option>
+          </Field>
+          <button type="submit">send</button>
+        </Form>
+      </FormikProvider>
     </>
   );
 }

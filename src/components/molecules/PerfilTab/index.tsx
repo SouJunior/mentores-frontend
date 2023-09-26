@@ -1,4 +1,4 @@
-import MentorPhoto from "@/components/molecules/MentorPhoto";
+import FormOnboard2 from "@/components/molecules/FormOnboard2";
 import { PerfilContainer, StyledImportant } from "./styled";
 
 export default function PerfilTab() {
@@ -7,7 +7,7 @@ export default function PerfilTab() {
       <StyledImportant>
         <>*</> Indica um campo obrigatório
       </StyledImportant>{" "}
-      <MentorPhoto />
+      <FormOnboard2 />
     </PerfilContainer>
   );
 }
