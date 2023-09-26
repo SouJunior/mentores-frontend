@@ -16,4 +16,9 @@ export const UserProfileButtom = styled.button`
     width: 80px;
     height: 80px;
   }
+
+  img {
+    
+    border-radius: 50%;
+  }
 `;

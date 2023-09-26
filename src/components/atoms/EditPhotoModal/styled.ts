@@ -5,11 +5,13 @@ export const EditPhotoContainer = styled.div`
   height: 388px;
   padding: 24px;
   border-radius: 16px;
-  gap: 16px;
+  gap: 26px;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+ 
 `;
 
 export const StyledInfo = styled.span`
@@ -26,6 +28,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-top: 10px;
 `;
 
 export const StyledButton = styled.button`

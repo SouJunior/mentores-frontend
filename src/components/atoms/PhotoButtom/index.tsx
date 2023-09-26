@@ -4,18 +4,23 @@ import Image from "next/image";
 
 interface PhotoButtomProps {
   onClick?: () => void;
-  selectedPhoto?: string;
+  selectedPhoto?: string | null;
+  size?:number;
 }
 
-export default function PhotoButtom({ onClick, selectedPhoto }: PhotoButtomProps) {
+export default function PhotoButtom({
+  onClick,
+  selectedPhoto,
+  size = 80
+}: PhotoButtomProps) {
   return (
     <>
       <UserProfileButtom onClick={onClick}>
         {selectedPhoto ? (
-          <Image src={selectedPhoto} alt="UserImage"/>
-        ): (        <UserCircle className="icon" />
-)}
-
+          <img width={size} height={size}  src={selectedPhoto} alt="Selected" />
+        ) : (
+          <UserCircle className="icon" />
+        )}
       </UserProfileButtom>
     </>
   );

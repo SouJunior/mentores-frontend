@@ -26,6 +26,7 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
               content="Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia"
             />
           </Head>
+          
           {shouldRenderLayout ? (
             <Layout>
               <Component {...pageProps} />

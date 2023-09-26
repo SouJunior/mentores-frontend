@@ -11,14 +11,16 @@ import {
 import PhotoButtom from "../PhotoButtom";
 import { Camera, ImagePlus, Pencil } from "lucide-react";
 import { useState } from "react";
+import ModalImageEditor from "../ModalImageEditor";
 
 interface EditPhotoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddPhoto?: () => void;
+  onAddPhoto?: (photo:string | null) => void;
   onEditPhoto?: () => void;
   onTakePhoto?: () => void;
   hasSelectedPhoto?: boolean;
+  
 }
 
 export default function EditPhotoModal({
@@ -30,10 +32,33 @@ export default function EditPhotoModal({
   hasSelectedPhoto,
 }: EditPhotoModalProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [modalEditor, setModalEditor] = useState(false)
 
-  const handleAddPhoto = () => {
-    console.log("aqui");
+  const handleOpenEditModal = () => {
+    setModalEditor(true);
   };
+
+  const closeModal = () => setModalEditor(false);
+
+  const handleAddPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if(file) {
+      const reader = new FileReader()
+      reader.onload= async (e) => {
+        await setSelectedPhoto(e.target?.result as string)
+      }
+      console.log(selectedPhoto)
+      reader.readAsDataURL(file)
+    } 
+  };
+
+  const handleSavePhoto = () => {
+    if (selectedPhoto && onAddPhoto) {
+      onAddPhoto(selectedPhoto);
+    }
+    onClose();
+  };
+
   return (
     <Modal
       open={isOpen}
@@ -44,10 +69,10 @@ export default function EditPhotoModal({
     >
       <EditPhotoContainer>
         <StyledInfo>Insira sua foto</StyledInfo>
-        <PhotoButtom />
+        <PhotoButtom size={128} selectedPhoto={selectedPhoto} />
 
         <ButtonsContainer>
-          <StyledButton>
+          <StyledButton onClick={handleOpenEditModal}>
             <Pencil className="icon" />
             Editar
           </StyledButton>
@@ -62,8 +87,9 @@ export default function EditPhotoModal({
           </AddPhotoButton>
         </ButtonsContainer>
         <StyledHR />
-        <NextButton>Salvar</NextButton>
+        <NextButton onClick={handleSavePhoto}>Salvar</NextButton>
       </EditPhotoContainer>
+      <ModalImageEditor src={selectedPhoto || undefined} isOpen={modalEditor} onClose={closeModal}/>
     </Modal>
   );
 }
