@@ -12,7 +12,7 @@ const usePasswordResetService = (): IUsePasswordService => {
     try {
       const email = data.email;
       const response = await axios.post(
-        `https://mentores-backend.onrender.com/user/restoreAccount/${email}`,
+        `https://mentores-backend.onrender.com/mentor/restoreAccount/${email}`,
       );
       if (response.status === 201) {
         setIsModalOpen(true);

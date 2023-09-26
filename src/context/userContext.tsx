@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { IUserContextType, User } from "./interfaces/IUser";
 
 export const UserContext = createContext<IUserContextType | undefined>(

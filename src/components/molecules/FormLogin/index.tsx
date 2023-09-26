@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "../../atoms/Checkbox";
 import { ContainerForm } from "./style";
 import UserLoginService from "@/services/user/userLoginService";
@@ -15,6 +15,7 @@ export function FormLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepConnected, setKeepConnected] = useState(false);
+  const type: string = "mentor";
 
   const {
     sendLogin,
@@ -23,19 +24,18 @@ export function FormLogin() {
     disable,
     setSubmitButton,
     submitButton,
-    loading
+    loading,
   } = UserLoginService();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await sendLogin({ email, password }); 
+    await sendLogin({ email, password, type });
   };
 
   useEffect(() => {
-    const data = { email, password };
+    const data = { email, password, type };
     setSubmitButton(!checkFields(data));
-  }, [email, password]);
-
+  }, [email, password, type]);
 
   return (
     <>

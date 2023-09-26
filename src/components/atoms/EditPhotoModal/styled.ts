@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+
+
 export const EditPhotoContainer = styled.div`
   width: 387px;
   height: 388px;

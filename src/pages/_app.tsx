@@ -12,8 +12,8 @@ const excludeRoutes = ["/login", "/cadastro"];
 const App: FC<AppProps> = ({ Component, pageProps, router }) => {
   const shouldRenderLayout = !excludeRoutes.includes(router.pathname);
   return (
-    <UserProvider>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <UserProvider>
         <>
           <Head>
             <title>Sou Junior | Mentoria Online</title>
@@ -35,8 +35,8 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
           )}
           <GlobalStyle />
         </>
-      </ThemeProvider>
-    </UserProvider>
+      </UserProvider>
+    </ThemeProvider>
   );
 };
 

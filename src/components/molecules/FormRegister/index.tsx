@@ -66,7 +66,7 @@ export function FormRegister() {
   ) => {
     try {
       const response = await axios.post(
-        "https://mentores-backend.onrender.com/user",
+        "https://mentores-backend.onrender.com/mentor",
         {
           fullName: values.name,
           email: values.email,
