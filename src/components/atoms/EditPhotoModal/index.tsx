@@ -16,11 +16,11 @@ import ModalImageEditor from "../ModalImageEditor";
 interface EditPhotoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddPhoto?: (photo:string | null) => void;
+  onAddPhoto?: (photo: string | null) => void;
   onEditPhoto?: () => void;
   onTakePhoto?: () => void;
   hasSelectedPhoto?: boolean;
-  
+  onImageEdit?: (editedImage: string | null) => void;
 }
 
 export default function EditPhotoModal({
@@ -30,11 +30,15 @@ export default function EditPhotoModal({
   onEditPhoto,
   onTakePhoto,
   hasSelectedPhoto,
+  onImageEdit,
 }: EditPhotoModalProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
-  const [modalEditor, setModalEditor] = useState(false)
+  const [modalEditor, setModalEditor] = useState(false);
 
   const handleOpenEditModal = () => {
+    if (onEditPhoto) {
+      onEditPhoto();
+    }
     setModalEditor(true);
   };
 
@@ -42,19 +46,21 @@ export default function EditPhotoModal({
 
   const handleAddPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if(file) {
-      const reader = new FileReader()
-      reader.onload= async (e) => {
-        await setSelectedPhoto(e.target?.result as string)
-      }
-      console.log(selectedPhoto)
-      reader.readAsDataURL(file)
-    } 
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        await setSelectedPhoto(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
-  const handleSavePhoto = () => {
+  const handleSavePhoto = (editedImage: string | null) => {
     if (selectedPhoto && onAddPhoto) {
       onAddPhoto(selectedPhoto);
+    }
+    if (onImageEdit) {
+      onImageEdit(editedImage); 
     }
     onClose();
   };
@@ -87,9 +93,16 @@ export default function EditPhotoModal({
           </AddPhotoButton>
         </ButtonsContainer>
         <StyledHR />
-        <NextButton onClick={handleSavePhoto}>Salvar</NextButton>
+        <NextButton onClick={() => handleSavePhoto(selectedPhoto)}>
+          Salvar
+        </NextButton>
       </EditPhotoContainer>
-      <ModalImageEditor src={selectedPhoto || undefined} isOpen={modalEditor} onClose={closeModal}/>
+      <ModalImageEditor
+        src={selectedPhoto || undefined}
+        onSave={handleSavePhoto}
+        isOpen={modalEditor}
+        onClose={closeModal}
+      />
     </Modal>
   );
 }

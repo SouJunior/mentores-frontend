@@ -13,14 +13,18 @@ export default function MentorPhoto() {
 
   const closeModal = () => setIsEditModalOpen(false);
 
-  const handleAddPhoto = (photo: string | null) => {
-    setSelectedPhoto(photo);
+  const handleImageEdit = (editedImage: string | null) => {
+    setSelectedPhoto(editedImage);
   };
 
   return (
     <>
       <Dotted>
-        <PhotoButtom size={80} selectedPhoto={selectedPhoto} onClick={handleOpenEditModal} />
+        <PhotoButtom
+          size={80} 
+          selectedPhoto={selectedPhoto}
+          onClick={handleOpenEditModal}
+        />
         <StyledImportant>
           Para inserir sua foto, clique aqui.<span className="last">*</span>
         </StyledImportant>
@@ -28,8 +32,10 @@ export default function MentorPhoto() {
       </Dotted>
       <EditPhotoModal
         isOpen={isEditModalOpen}
-        onAddPhoto={handleAddPhoto}
+        onAddPhoto={(photo) => setSelectedPhoto(photo)}
         onClose={closeModal}
+        onImageEdit={handleImageEdit}
+        onEditPhoto={() => handleOpenEditModal()} 
       />
     </>
   );
