@@ -6,6 +6,7 @@ import {
   StyledInfo,
   StyledHR,
   NextButton,
+  AddPhotoButton,
 } from "./styled";
 import PhotoButtom from "../PhotoButtom";
 import { Camera, ImagePlus, Pencil } from "lucide-react";
@@ -31,8 +32,8 @@ export default function EditPhotoModal({
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
 
   const handleAddPhoto = () => {
-    console.log('aqui')
-  }
+    console.log("aqui");
+  };
   return (
     <Modal
       open={isOpen}
@@ -43,7 +44,8 @@ export default function EditPhotoModal({
     >
       <EditPhotoContainer>
         <StyledInfo>Insira sua foto</StyledInfo>
-        <PhotoButtom/>
+        <PhotoButtom />
+
         <ButtonsContainer>
           <StyledButton>
             <Pencil className="icon" />
@@ -53,10 +55,11 @@ export default function EditPhotoModal({
             <Camera className="icon" />
             Câmera
           </StyledButton>
-          <StyledButton onClick={handleAddPhoto}>
+          <AddPhotoButton>
+            <input type="file" accept="image/*" onChange={handleAddPhoto} />
             <ImagePlus className="icon" />
             Adicionar
-          </StyledButton>
+          </AddPhotoButton>
         </ButtonsContainer>
         <StyledHR />
         <NextButton>Salvar</NextButton>
