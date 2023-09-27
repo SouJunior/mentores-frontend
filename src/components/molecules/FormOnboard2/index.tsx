@@ -16,9 +16,9 @@ export default function FormOnboard2() {
 
   const handleSubmit = (values: any) => {
     console.log(values);
-    console.log(selectedPhoto)
+    console.log(selectedPhoto);
   };
-  
+
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: handleSubmit,
@@ -32,9 +32,8 @@ export default function FormOnboard2() {
 
   const handleImageEdit = (editedImage: string | null) => {
     setSelectedPhoto(editedImage);
+    formik.setFieldValue("imageUrl", editedImage || "");
   };
-
-  
 
   return (
     <>
