@@ -2,7 +2,17 @@ import React, { useState } from "react";
 import Cropper from "react-easy-crop";
 import { Point, Area } from "react-easy-crop";
 import { Slider } from "@mui/material";
-import { Container, CropContainer, Controls, SaveButton } from "./styled";
+import {
+  Container,
+  CropContainer,
+  Controls,
+  SaveButton,
+  ControlButton,
+  CropInfo,
+  StyledHR,
+  CancelButtom,
+  ButtomsContainer,
+} from "./styled";
 import { Modal } from "../Modal";
 
 const ModalImageEditor: React.FC<{
@@ -20,8 +30,6 @@ const ModalImageEditor: React.FC<{
     const y = croppedAreaPixels.y;
     const width = croppedAreaPixels.width;
     const height = croppedAreaPixels.height;
-    
-  
 
     const canvas = document.createElement("canvas");
     canvas.width = width;
@@ -40,6 +48,16 @@ const ModalImageEditor: React.FC<{
     }
   };
 
+  const handlePLusZoom = () => {
+    const zoomIncrement = zoom + 0.2;
+    setZoom(zoomIncrement);
+  };
+
+  const handleMenusZoom = () => {
+    const zoomIncrement = zoom - 0.2;
+    setZoom(zoomIncrement);
+  };
+
   const handleSaveClick = () => {
     if (onSave) {
       onSave(croppedImage);
@@ -48,21 +66,34 @@ const ModalImageEditor: React.FC<{
   };
 
   return (
-    <Modal height={528} width={387} open={isOpen} onClose={onClose}>
+    <Modal
+      bgColor="white"
+      height={528}
+      width={387}
+      open={isOpen}
+      onClose={onClose}
+    >
       <Container>
+        <CropInfo>Editar foto</CropInfo>
         <CropContainer>
           <Cropper
             image={src}
             crop={crop}
             zoom={zoom}
             aspect={1}
+            cropShape="round"
+            showGrid={false}
             onCropChange={setCrop}
             onCropComplete={onCropComplete}
             onZoomChange={setZoom}
+            objectFit="horizontal-cover"
           />
         </CropContainer>
+        <CropInfo>Zoom</CropInfo>
         <Controls>
+          <ControlButton onClick={handleMenusZoom}>-</ControlButton>
           <Slider
+            style={{ color: "#003986", width: "200px" }}
             value={zoom}
             min={1}
             max={3}
@@ -70,8 +101,13 @@ const ModalImageEditor: React.FC<{
             aria-labelledby="Zoom"
             onChange={(e, zoom) => setZoom(Number(zoom))}
           />
-          <SaveButton onClick={handleSaveClick}>Salvar</SaveButton>
+          <ControlButton onClick={handlePLusZoom}>+</ControlButton>
         </Controls>
+        <StyledHR />
+        <ButtomsContainer>
+          <CancelButtom onClick={onClose}>Descartar</CancelButtom>
+          <SaveButton onClick={handleSaveClick}>Salvar</SaveButton>
+        </ButtomsContainer>
       </Container>
     </Modal>
   );
