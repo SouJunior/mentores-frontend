@@ -7,6 +7,7 @@ interface InputFormProps {
   type: string;
   placeholder: string;
   label: string;
+  inputType?:string;
   showAsterisk?: boolean;
 }
 
@@ -15,6 +16,7 @@ export function InputForm({
   type,
   placeholder,
   label,
+  inputType,
   showAsterisk = true,
   ...rest
 }: InputFormProps) {
@@ -26,7 +28,7 @@ export function InputForm({
         <Field
           as={type}
           name={name}
-          type={type}
+          type={inputType}
           placeholder={placeholder}
           {...rest}
         />
