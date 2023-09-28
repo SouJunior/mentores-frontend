@@ -7,6 +7,7 @@ import {
   StyledHR,
   NextButton,
   AddPhotoButton,
+  EditButton,
 } from "./styled";
 import PhotoButtom from "../PhotoButtom";
 import { Camera, ImagePlus, Pencil } from "lucide-react";
@@ -60,7 +61,7 @@ export default function EditPhotoModal({
       onAddPhoto(selectedPhoto);
     }
     if (onImageEdit) {
-      onImageEdit(editedImage); 
+      onImageEdit(editedImage);
     }
     onClose();
   };
@@ -78,10 +79,10 @@ export default function EditPhotoModal({
         <PhotoButtom size={128} selectedPhoto={selectedPhoto} />
 
         <ButtonsContainer>
-          <StyledButton onClick={handleOpenEditModal}>
+          <EditButton disabled={!selectedPhoto} onClick={handleOpenEditModal}>
             <Pencil className="icon" />
             Editar
-          </StyledButton>
+          </EditButton>
           <StyledButton>
             <Camera className="icon" />
             Câmera
@@ -93,7 +94,10 @@ export default function EditPhotoModal({
           </AddPhotoButton>
         </ButtonsContainer>
         <StyledHR />
-        <NextButton onClick={() => handleSavePhoto(selectedPhoto)}>
+        <NextButton
+          disabled={!selectedPhoto}
+          onClick={() => handleSavePhoto(selectedPhoto)}
+        >
           Salvar
         </NextButton>
       </EditPhotoContainer>

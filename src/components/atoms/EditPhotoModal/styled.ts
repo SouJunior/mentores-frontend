@@ -10,8 +10,6 @@ export const EditPhotoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
- 
 `;
 
 export const StyledInfo = styled.span`
@@ -50,6 +48,28 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const EditButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 56px;
+  padding: 0px 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: ${(props) => props.theme.colors.gray1.neutral};
+  color: ${(props) => (props.disabled ? "#ccc" : "#666")}; 
+  font-weight: bold;
+  cursor: ${(props) =>
+    props.disabled ? "not-allowed" : "pointer"};
+
+  .icon {
+    font-size: 30px;
+    opacity: ${(props) => (props.disabled ? 0.6 : 1)}; 
+  }
+`;
+
 export const StyledHR = styled.div`
   width: 100%;
   height: 2px;
@@ -61,11 +81,12 @@ export const NextButton = styled.button`
   height: 48px;
   padding: 12px, 16px, 12px, 16px;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.colors.blue[700]};
+  background-color: ${(props) => (props.disabled ? "#ACACAC" : props.theme.colors.blue[700])};
   border: none;
   color: white;
   font-size: 16px;
   align-self: flex-end;
+  margin-top: -10px;
 `;
 
 export const AddPhotoButton = styled.label`

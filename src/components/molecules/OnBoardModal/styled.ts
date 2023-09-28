@@ -5,13 +5,12 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 596px;
-  height: 547px;
   border-radius: 16px;
   padding: 24px;
   background-color: white;
   position: absolute;
-  top: 50px;
-  left: 390px;
+  top: 10%;
+  left: 470px;
 `;
 
 export const TabsContainer = styled.div`

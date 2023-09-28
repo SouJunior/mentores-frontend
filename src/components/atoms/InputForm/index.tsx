@@ -24,7 +24,7 @@ export function InputForm({
       {showAsterisk && <span className="asterisk">*</span>}
       <ContainerInput>
         <Field
-          as="input"
+          as={type}
           name={name}
           type={type}
           placeholder={placeholder}

@@ -1,6 +1,7 @@
 import { UserCircle } from "lucide-react";
 import { UserProfileButtom } from "./styled";
 import Image from "next/image";
+import userAvatar from '@/assets/icons/userAvatar.png'
 
 interface PhotoButtomProps {
   onClick?: () => void;
@@ -19,7 +20,7 @@ export default function PhotoButtom({
         {selectedPhoto ? (
           <img width={size} height={size}  src={selectedPhoto} alt="Selected" />
         ) : (
-          <UserCircle className="icon" />
+         <Image src={userAvatar} alt="Avatar usuário."/>
         )}
       </UserProfileButtom>
     </>

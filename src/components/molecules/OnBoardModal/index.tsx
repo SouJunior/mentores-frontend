@@ -18,22 +18,23 @@ export default function OnBoardModal() {
   };
 
   return (
-    <ModalContainer>
+    <ModalContainer style={{ height: activeTab === 0 ? "547px" : "767px" }}>
       <TabsContainer>
         <TabWrapper>
           <Tab>
             <TabLabel onClick={() => handleTabs(0)}>ESPECIALIDADES</TabLabel>
-            <TabLine style={{ width: activeTab === 0 ? '258px' : '0' }} />
+            <TabLine style={{ width: activeTab === 0 ? "258px" : "0" }} />
           </Tab>
         </TabWrapper>
         <TabWrapper>
           <Tab>
             <TabLabel onClick={() => handleTabs(1)}>PERFIL</TabLabel>
-            <TabLine style={{ width: activeTab === 1 ? '258px' : '0' }} />
+            <TabLine style={{ width: activeTab === 1 ? "258px" : "0" }} />
           </Tab>
-        </TabWrapper>      </TabsContainer>
+        </TabWrapper>{" "}
+      </TabsContainer>
       {activeTab === 0 && <GridSpecialities />}
-      {activeTab === 1 && <PerfilTab/>}
+      {activeTab === 1 && <PerfilTab />}
     </ModalContainer>
   );
 }

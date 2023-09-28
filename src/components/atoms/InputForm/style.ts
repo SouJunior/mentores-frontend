@@ -8,7 +8,8 @@ export const ContainerDiv = styled.div`
   }
 `;
 export const ContainerInput = styled.div`
-  input {
+  input, textarea, select {
+    resize: none;
     height: 100%;
     width: 100%;
     margin: 4px 0px 16px;
@@ -40,6 +41,12 @@ export const ContainerInput = styled.div`
       outline: none;
     }
   }
+
+  textarea{
+    height:168px;
+  }
+
+
 `;
 
 export const ContainerError = styled.div`

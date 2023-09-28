@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ContainerOnBoarding = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 125vh;
   margin-top: -100px;
   background: ${(props) => props.theme.colors.gradient};
   position: relative;
@@ -11,6 +11,6 @@ export const ContainerOnBoarding = styled.div`
 
 export const OnBoardImage = styled(Image)`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   object-fit: contain;
 `;

@@ -1,12 +1,24 @@
 import PhotoButtom from "@/components/atoms/PhotoButtom";
-import { Dotted, StyledImportant, StyledInfo } from "./styled";
-import { useState } from "react";
+import {
+  BackButton,
+  ButtonContainer,
+  Dotted,
+  FormContainer,
+  NextButton,
+  StyledHR,
+  StyledImportant,
+  StyledInfo,
+  StyledInfoContainer,
+} from "./styled";
+import { useEffect, useState } from "react";
 import EditPhotoModal from "@/components/atoms/EditPhotoModal";
 import { Field, Form, FormikProvider, useFormik } from "formik";
+import { InputForm } from "@/components/atoms/InputForm";
 
 export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [isCompleted, setCompleted] = useState(false);
 
   const initialValues = {
     imageUrl: "",
@@ -16,7 +28,6 @@ export default function FormOnboard2() {
 
   const handleSubmit = (values: any) => {
     console.log(values);
-    console.log(selectedPhoto);
   };
 
   const formik = useFormik({
@@ -29,6 +40,14 @@ export default function FormOnboard2() {
   };
 
   const closeModal = () => setIsEditModalOpen(false);
+
+  useEffect(() => {
+    if (Object.keys(formik.touched).length > 0) {
+      setCompleted(true);
+    } else {
+      setCompleted(false);
+    }
+  }, [formik.touched]);
 
   const handleImageEdit = (editedImage: string | null) => {
     setSelectedPhoto(editedImage);
@@ -56,23 +75,45 @@ export default function FormOnboard2() {
         onEditPhoto={() => handleOpenEditModal()}
       />
 
-      <FormikProvider value={formik}>
-        <Form>
-          <Field type="text" component="textarea" name="description" />
-          <Field
-            name="gender"
-            placeholder="Selecione um gênero"
-            component="select"
-          >
-            <option value="red">Red</option>
+      <FormContainer>
+        <FormikProvider value={formik}>
+          <Form>
+            <Field
+              as={InputForm}
+              label="Conte mais sobre você:"
+              type="textarea"
+              name="description"
+              placeholder="Fale sobre sua trajetória profissional para que possam lhe conhecer melhor;"
+              required
+            />
+            <StyledInfoContainer>
+              <StyledInfo>Máximo 600 caracteres.</StyledInfo>
+            </StyledInfoContainer>
+            <Field
+              as={InputForm}
+              label="Gênero:"
+              name="gender"
+              placeholder="Selecione um gênero"
+              type="select"
+              required
+            >
+              <option value="">Gênero</option>
 
-            <option value="green">Green</option>
+              <option value="red">Red</option>
 
-            <option value="blue">Blue</option>
-          </Field>
-          <button type="submit">send</button>
-        </Form>
-      </FormikProvider>
+              <option value="green">Green</option>
+
+              <option value="blue">Blue</option>
+            </Field>
+            <StyledHR />
+
+            <ButtonContainer>
+              <BackButton>Voltar</BackButton>
+              <NextButton disabled={!isCompleted}>Concluir</NextButton>
+            </ButtonContainer>
+          </Form>
+        </FormikProvider>
+      </FormContainer>
     </>
   );
 }
