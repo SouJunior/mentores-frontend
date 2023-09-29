@@ -9,8 +9,8 @@ export const ModalContainer = styled.div`
   padding: 24px;
   background-color: white;
   position: absolute;
-  top: 10%;
-  left: 470px;
+  top: 5%;
+  left: 430px;
 `;
 
 export const TabsContainer = styled.div`

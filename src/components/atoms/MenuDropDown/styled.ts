@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface DropDownProps {
-  isVisible: boolean;
+  isvisible: boolean;
 }
 
 export const MenuContainer = styled.div<DropDownProps>`
@@ -13,9 +13,10 @@ export const MenuContainer = styled.div<DropDownProps>`
   border-radius: 15px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
   padding: 10px 15px;
-  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-
+  opacity: ${({ isvisible }) => (isvisible ? "1" : "0")};
+  visibility: ${({ isvisible }) => (isvisible ? "visible" : "hidden")};
+  z-index:9999;
+  background-color:white;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 `;
 

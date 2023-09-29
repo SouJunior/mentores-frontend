@@ -9,13 +9,13 @@ import {
 } from "./styled";
 
 interface MenuDropDown {
-  isVisible: boolean;
+  isvisible: boolean;
 }
 
-export default function MenuDropDown({ isVisible }: MenuDropDown) {
+export default function MenuDropDown({ isvisible }: MenuDropDown) {
   const { user } = useUser();
   return (
-    <MenuContainer isVisible={isVisible}>
+    <MenuContainer isvisible={isvisible}>
       <StyleWrapper>
         <UserName>{user?.fullName}</UserName>
         <UserType>Mentor</UserType>
