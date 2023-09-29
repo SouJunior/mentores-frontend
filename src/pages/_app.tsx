@@ -1,5 +1,4 @@
 import { Layout } from "@/components/organisms/Global/layout";
-import { UserProvider } from "@/context/userContext";
 import { GlobalStyle } from "@/styles/GlobalStyle";
 import { theme } from "@/styles/theme";
 import { AppProps } from "next/app";
@@ -13,7 +12,6 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
   const shouldRenderLayout = !excludeRoutes.includes(router.pathname);
   return (
     <ThemeProvider theme={theme}>
-      <UserProvider>
         <>
           <Head>
             <title>Sou Junior | Mentoria Online</title>
@@ -26,7 +24,7 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
               content="Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia"
             />
           </Head>
-          
+
           {shouldRenderLayout ? (
             <Layout>
               <Component {...pageProps} />
@@ -36,8 +34,7 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
           )}
           <GlobalStyle />
         </>
-      </UserProvider>
-    </ThemeProvider>
+      </ThemeProvider>
   );
 };
 

@@ -4,15 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ContainerHeader, GroupBtn } from "./style";
 import { UserAvatar } from "@/components/atoms/UserAvatar";
-import useUser from "@/context/useUser";
-import { useEffect } from "react";
 export function Header() {
-
-  useEffect(() => {
-    console.log(user)
-  }, [])
-
-  const user = useUser()
   return (
     <ContainerHeader>
       <div>
@@ -24,7 +16,6 @@ export function Header() {
         <a href="#mentor">Encontre Seu Mentor</a>
       </div>
       <GroupBtn>
-        
         <UserAvatar />
         <span>vem nenem</span>
 

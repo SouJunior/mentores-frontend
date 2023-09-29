@@ -55,6 +55,7 @@ const UserLoginService = (): IUserLoginService => {
         const response = await loginApi(data);
         const userFromResponse = createUserFromResponseData(response);
         user.setUser(userFromResponse);
+        console.log(response)
 
         setFormState({
           ...formState,
