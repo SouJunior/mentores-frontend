@@ -59,7 +59,7 @@ const UserLoginService = (): IUserLoginService => {
           fullName: "Luiz Bello",
           dateOfBirth: "15/12/1991",
           email: "luiz@luiz.com",
-          avatar: "",
+          avatar: "https://img.freepik.com/vetores-premium/imagem-de-perfil-de-personagem-de-desenho-animado-avatar-jovem_18591-55058.jpg",
           token: "aksjdakl2390uksajdkals",
           specialities: [],
         });
@@ -71,7 +71,7 @@ const UserLoginService = (): IUserLoginService => {
           ...formState,
           errors: "",
         });
-        router.push("/genericPage");
+        router.push("/onBoarding");
       } catch (error) {
         setFormState({
           ...formState,

@@ -2,7 +2,7 @@ import logoImg from "@/assets/logos/sou-junior.svg";
 import { Button } from "@/components/atoms/Button";
 import Image from "next/image";
 import Link from "next/link";
-import { ContainerHeader, GroupBtn } from "./style";
+import { AvatarGroup, ContainerHeader, GroupBtn } from "./style";
 import { UserAvatar } from "@/components/atoms/UserAvatar";
 import useUser from "@/context/Auth/useUser";
 import { useEffect } from "react";
@@ -11,18 +11,18 @@ export function Header() {
 
   return (
     <ContainerHeader>
-      <div>
+      <div className="header">
         <Link href="/">
           <Image src={logoImg} alt="Logo Sou Júnior" />
         </Link>
-        <span />
+        <span className="mySpan" />
         <a href="#onboarding">Como Funciona</a>
         <a href="#mentor">Encontre Seu Mentor</a>
       </div>
+
       {user != null ? (
         <GroupBtn>
           <UserAvatar />
-          <span>{user?.fullName}</span>
         </GroupBtn>
       ) : (
         <GroupBtn>

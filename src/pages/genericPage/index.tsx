@@ -11,4 +11,4 @@ function GenericPage (){
     )
 }
 
-export default withAuth(GenericPage)
+export default GenericPage
