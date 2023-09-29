@@ -5,9 +5,10 @@ export interface User {
   email: string;
   avatar?:string;
   token:string;
+  specialities?:[]
 }
 
-export interface IUserContextType {
+export interface IAuthContextType {
   user: User | null;
   setUser: (user: User | null) => void;
 }

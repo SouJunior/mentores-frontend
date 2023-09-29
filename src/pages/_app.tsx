@@ -1,4 +1,5 @@
 import { Layout } from "@/components/organisms/Global/layout";
+import { AuthProvider } from "@/context/Auth/AuthContext";
 import { GlobalStyle } from "@/styles/GlobalStyle";
 import { theme } from "@/styles/theme";
 import { AppProps } from "next/app";
@@ -11,7 +12,8 @@ const excludeRoutes = ["/login", "/cadastro"];
 const App: FC<AppProps> = ({ Component, pageProps, router }) => {
   const shouldRenderLayout = !excludeRoutes.includes(router.pathname);
   return (
-    <ThemeProvider theme={theme}>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
         <>
           <Head>
             <title>Sou Junior | Mentoria Online</title>
@@ -35,6 +37,7 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
           <GlobalStyle />
         </>
       </ThemeProvider>
+    </AuthProvider>
   );
 };
 

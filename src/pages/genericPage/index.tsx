@@ -1,6 +1,7 @@
-import useUser from "@/context/useUser"
+import useUser from "@/context/Auth/useUser"
+import { withAuth } from "@/context/Auth/withAuth"
 
-export default function GenericPage (){
+function GenericPage (){
     const user = useUser()
     return (
         <>
@@ -9,3 +10,5 @@ export default function GenericPage (){
         </>
     )
 }
+
+export default withAuth(GenericPage)

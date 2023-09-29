@@ -1,4 +1,4 @@
-import { User } from "../../context/interfaces/IUser";
+import { User } from "../../context/interfaces/IAuth";
 
 export function createUserFromResponseData(responseData: any): User | null {
   if (!responseData || !responseData.user) {

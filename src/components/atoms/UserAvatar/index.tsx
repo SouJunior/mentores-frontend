@@ -1,4 +1,4 @@
-import { IUserContextType } from "@/context/interfaces/IUser";
+import { IUserContextType } from "@/context/interfaces/IAuth";
 import UserDefault from '@/assets/userDefault.png'
 import Image from "next/image";
 
