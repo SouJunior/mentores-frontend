@@ -53,7 +53,6 @@ const UserLoginService = (): IUserLoginService => {
       setLoading(true);
       try {
         const response = await loginApi(data);
-        console.log(response);
 
         const user2 = response;
         const userFromResponse = await createUserFromResponseData(user2);
@@ -80,10 +79,8 @@ const UserLoginService = (): IUserLoginService => {
 
   useEffect(() => {
     const newUser = userContext.user;
-    console.log(newUser);
     if (newUser) {
       const userStringify = JSON.stringify(newUser);
-      console.log(userStringify);
       localStorage.setItem("user", userStringify);
     }
   }, [userContext.user]);
