@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   GridContainer,
   SpecialityItem,
@@ -10,6 +10,7 @@ import {
   NextButton,
 } from "./styled";
 import { Check } from "lucide-react";
+import axios from "axios";
 
 export default function GridSpecialities() {
   const specialities: string[] = [
@@ -31,6 +32,7 @@ export default function GridSpecialities() {
     []
   );
   const [selectedCount, setSelectedCount] = useState<number>(0);
+  const [isComplete, setComplete] =  useState(false)
 
   const toggleSpeciality = (speciality: string): void => {
     if (selectedSpecialities.includes(speciality)) {
@@ -43,6 +45,20 @@ export default function GridSpecialities() {
       setSelectedCount(selectedCount + 1);
     }
   };
+
+  useEffect(() => {
+   selectedCount === 6 ? setComplete(true) : setComplete(false)
+  }, [selectedCount, isComplete])
+
+
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.put('https://mentores-backend.onrender.com/mentor/df54ca54-60dc-40ee-9e10-2f5b66e66857', selectedSpecialities)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -67,7 +83,7 @@ export default function GridSpecialities() {
       </GridContainer>
       <StyledCount>{`${selectedCount}/6 especialidades `}</StyledCount>
       <StyledHR />
-      <NextButton>Continuar</NextButton>
+      <NextButton onClick={handleUpdate} disabled={!isComplete}>Continuar</NextButton>
     </>
   );
 }

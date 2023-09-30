@@ -85,10 +85,14 @@ export const NextButton = styled.button`
   height: 48px;
   padding: 12px, 16px, 12px, 16px;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.colors.blue[700]};
+  background-color: ${(props) => (props.disabled ? "#ACACAC" : props.theme.colors.blue[700])};
   border: none;
   color: white;
   font-size: 16px;
   margin-top: 15px;
   align-self: flex-end;
+
+  && disable {
+
+  }
 `;

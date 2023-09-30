@@ -51,22 +51,15 @@ const UserLoginService = (): IUserLoginService => {
     const isValid = await validateForm(data);
     if (isValid) {
       setLoading(true);
-      try {
-        // const response = await loginApi(data);
-        // const userFromResponse = createUserFromResponseData(response);
-        const newUser = userContext.setUser({
-          id: "1", 
-          fullName: "Luiz Bello",
-          dateOfBirth: "15/12/1991",
-          email: "luiz@luiz.com",
-          avatar: "https://img.freepik.com/vetores-premium/imagem-de-perfil-de-personagem-de-desenho-animado-avatar-jovem_18591-55058.jpg",
-          token: "aksjdakl2390uksajdkals",
-          specialities: [],
-        });
-
-        const userStringfy = JSON.stringify(newUser)
-
-        localStorage.setItem('user', userStringfy)
+      try{
+        const response = await loginApi(data);
+        console.log(response)
+        
+        const user2 = response
+        const userFromResponse = await createUserFromResponseData(user2);
+        userContext.setUser(userFromResponse);
+        
+    
         setFormState({
           ...formState,
           errors: "",
@@ -85,6 +78,16 @@ const UserLoginService = (): IUserLoginService => {
       setLoading(false);
     }, 500);
   };
+
+  useEffect(() => {
+    const newUser = userContext.user;
+    console.log(newUser);
+    if (newUser) {
+      const userStringify = JSON.stringify(newUser);
+      console.log(userStringify);
+      localStorage.setItem('user', userStringify);
+    }
+  }, [userContext.user]);
 
   useEffect(() => {
     const isDisable = getCookie("disable");
