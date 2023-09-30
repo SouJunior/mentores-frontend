@@ -11,8 +11,10 @@ import {
 } from "./styled";
 import { Check } from "lucide-react";
 import axios from "axios";
+import useUser from "@/context/Auth/useUser";
 
 export default function GridSpecialities() {
+  const { user } = useUser();
   const specialities: string[] = [
     "Carreira",
     "Liderança",
@@ -32,7 +34,7 @@ export default function GridSpecialities() {
     []
   );
   const [selectedCount, setSelectedCount] = useState<number>(0);
-  const [isComplete, setComplete] =  useState(false)
+  const [isComplete, setComplete] = useState(false);
 
   const toggleSpeciality = (speciality: string): void => {
     if (selectedSpecialities.includes(speciality)) {
@@ -47,18 +49,35 @@ export default function GridSpecialities() {
   };
 
   useEffect(() => {
-   selectedCount === 6 ? setComplete(true) : setComplete(false)
-  }, [selectedCount, isComplete])
-
+    selectedCount === 6 ? setComplete(true) : setComplete(false);
+  }, [selectedCount, isComplete]);
 
   const handleUpdate = async () => {
-    try {
-      const response = await axios.put('https://mentores-backend.onrender.com/mentor/df54ca54-60dc-40ee-9e10-2f5b66e66857', selectedSpecialities)
-      console.log(response)
-    } catch (error) {
-      console.log(error)
+    const token = user?.token;
+    const id = user?.id;
+
+    if (!token || !id) {
+      console.error("Token ou ID não disponíveis.");
+      return;
     }
-  }
+
+    const data = {
+      specialties: selectedSpecialities,
+    };
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const url = `https://mentores-backend.onrender.com/mentor/${id}`;
+      const response = await axios.put(url, data, config);
+    } catch (error) {
+      console.error("Erro ao atualizar:", error);
+    }
+  };
 
   return (
     <>
@@ -66,7 +85,7 @@ export default function GridSpecialities() {
       <StyledTitle>
         Em quais áreas você deseja mentorar?<span className="last">*</span>
       </StyledTitle>
-      <StyledImportant> 
+      <StyledImportant>
         <>*</> Indica um campo obrigatório
       </StyledImportant>
       <GridContainer>
@@ -83,7 +102,9 @@ export default function GridSpecialities() {
       </GridContainer>
       <StyledCount>{`${selectedCount}/6 especialidades `}</StyledCount>
       <StyledHR />
-      <NextButton onClick={handleUpdate} disabled={!isComplete}>Continuar</NextButton>
+      <NextButton onClick={handleUpdate} disabled={!isComplete}>
+        Continuar
+      </NextButton>
     </>
   );
 }
