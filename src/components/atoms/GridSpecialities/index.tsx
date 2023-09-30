@@ -10,11 +10,10 @@ import {
   NextButton,
 } from "./styled";
 import { Check } from "lucide-react";
-import axios from "axios";
-import useUser from "@/context/Auth/useUser";
+import userUpdateService from "@/services/user/userUpdateService";
 
 export default function GridSpecialities() {
-  const { user } = useUser();
+  const { handle } = userUpdateService();
   const specialities: string[] = [
     "Carreira",
     "Liderança",
@@ -53,30 +52,10 @@ export default function GridSpecialities() {
   }, [selectedCount, isComplete]);
 
   const handleUpdate = async () => {
-    const token = user?.token;
-    const id = user?.id;
-
-    if (!token || !id) {
-      console.error("Token ou ID não disponíveis.");
-      return;
-    }
-
     const data = {
       specialties: selectedSpecialities,
     };
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    try {
-      const url = `https://mentores-backend.onrender.com/mentor/${id}`;
-      const response = await axios.put(url, data, config);
-    } catch (error) {
-      console.error("Erro ao atualizar:", error);
-    }
+    await handle(data);
   };
 
   return (
