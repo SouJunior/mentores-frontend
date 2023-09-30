@@ -11,13 +11,13 @@ export function UserAvatar() {
     <>
       <UserAvatarContainer>
         {user ? (
-          user.avatar ? (
+          user.profile ? (
               <Image
                 width={44}
                 height={44}
                 style={{borderRadius:'50%'}}
                 alt="User Avatar"
-                src={user.avatar}
+                src={user.profile}
               />
           ) : (
             <Image alt="User Avatar" src={UserDefault} />
