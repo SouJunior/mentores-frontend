@@ -1,7 +1,6 @@
 import { Header } from "@/components/molecules/Header";
 import { ReactNode, useContext } from "react";
 import { ContainerLayoyt } from "./styled";
-import useUser from "@/context/useUser";
 
 type LayoutProps = {
   children: ReactNode;
