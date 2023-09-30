@@ -51,15 +51,14 @@ const UserLoginService = (): IUserLoginService => {
     const isValid = await validateForm(data);
     if (isValid) {
       setLoading(true);
-      try{
+      try {
         const response = await loginApi(data);
-        console.log(response)
-        
-        const user2 = response
+        console.log(response);
+
+        const user2 = response;
         const userFromResponse = await createUserFromResponseData(user2);
         userContext.setUser(userFromResponse);
-        
-    
+
         setFormState({
           ...formState,
           errors: "",
@@ -85,7 +84,7 @@ const UserLoginService = (): IUserLoginService => {
     if (newUser) {
       const userStringify = JSON.stringify(newUser);
       console.log(userStringify);
-      localStorage.setItem('user', userStringify);
+      localStorage.setItem("user", userStringify);
     }
   }, [userContext.user]);
 

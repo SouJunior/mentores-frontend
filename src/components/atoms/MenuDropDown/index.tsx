@@ -13,7 +13,7 @@ interface MenuDropDown {
 }
 
 export default function MenuDropDown({ isvisible }: MenuDropDown) {
-  const { user } = useUser();
+  const { user, logout } = useUser();
   return (
     <MenuContainer isvisible={isvisible}>
       <StyleWrapper>
@@ -23,7 +23,7 @@ export default function MenuDropDown({ isvisible }: MenuDropDown) {
       <StyledHR />
       <ButtonsContainer>
         <span>Minha Conta</span>
-        <span>Sair</span>
+        <span onClick={logout}>Sair</span>
       </ButtonsContainer>
     </MenuContainer>
   );
