@@ -14,11 +14,14 @@ import { useEffect, useState } from "react";
 import EditPhotoModal from "@/components/atoms/EditPhotoModal";
 import { Field, Form, FormikProvider, useFormik } from "formik";
 import { InputForm } from "@/components/atoms/InputForm";
+import userUpdateService from "@/services/user/userUpdateService";
 
 export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   const [isCompleted, setCompleted] = useState(false);
+
+  const { handle } = userUpdateService();
 
   const initialValues = {
     imageUrl: "",
@@ -26,8 +29,18 @@ export default function FormOnboard2() {
     gender: "",
   };
 
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const handleSubmit = async (values: any) => {
+    const data = {
+      profile: values.description,
+      profileKey: values.imageUrl,
+    };
+  
+    try {
+      await handle(data);
+      console.log(values);
+    } catch (error) {
+      console.error("Erro ao atualizar:", error);
+    }
   };
 
   const formik = useFormik({

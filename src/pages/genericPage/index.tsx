@@ -1,5 +1,4 @@
 import useUser from "@/context/Auth/useUser"
-import { withAuth } from "@/context/Auth/withAuth"
 
 function GenericPage (){
     const user = useUser()
