@@ -3,5 +3,10 @@ export interface IUserUpdate {
 }
 
 export type UserUpdateDTO = {
-  specialties: string[];
+  specialties?: string[];
+  id?:string;
+  profile?:string;
+  profileKey?:string;
+  registerComplete?:boolean
 };
+

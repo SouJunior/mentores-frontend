@@ -1,5 +1,8 @@
 import axios from "axios";
-import { IUserUpdate, UserUpdateDTO } from "../interfaces/IUserUpdate";
+import {
+  IUserUpdate,
+  UserUpdateDTO,
+} from "../interfaces/IUserUpdate";
 import useUser from "@/context/Auth/useUser";
 
 const userUpdateService = (): IUserUpdate => {
@@ -7,6 +10,7 @@ const userUpdateService = (): IUserUpdate => {
 
   const token = user?.token;
   const id = user?.id;
+  const url = `https://mentores-backend.onrender.com/mentor/${id}`;
 
   const config = {
     headers: {
@@ -16,12 +20,14 @@ const userUpdateService = (): IUserUpdate => {
 
   const handle = async (data: UserUpdateDTO) => {
     try {
-      const url = `https://mentores-backend.onrender.com/mentor/${id}`;
       const response = await axios.put(url, data, config);
+      console.log(response)
     } catch (error) {
       console.error("Erro ao atualizar:", error);
     }
   };
+
+
 
   return { handle };
 };
