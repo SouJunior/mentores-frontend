@@ -10,24 +10,17 @@ import {
   NextButton,
 } from "./styled";
 import { Check } from "lucide-react";
-<<<<<<< HEAD
-import axios from "axios";
-import useUser from "@/context/Auth/useUser";
-
-export default function GridSpecialities() {
-  const { user } = useUser()
-=======
-import userUpdateService from "@/services/user/userUpdateService";
+import UserUpdateService from "@/services/user/userUpdateService";
 
 interface GridSpecialitiesProps {
   onRequestSuccess: (success: boolean) => void;
-  stepNumber:(step:number) => void
+  stepNumber: (step: number) => void;
 }
 export default function GridSpecialities({
-  onRequestSuccess, stepNumber
+  onRequestSuccess,
+  stepNumber,
 }: GridSpecialitiesProps) {
-  const { handle } = userUpdateService();
->>>>>>> 87595df8976b886b66285ada693cb30a28bdc6d1
+  const { handle } = UserUpdateService();
   const specialities: string[] = [
     "Carreira",
     "Liderança",
@@ -66,19 +59,6 @@ export default function GridSpecialities({
   }, [selectedCount, isComplete]);
 
   const handleUpdate = async () => {
-<<<<<<< HEAD
-    const token = user?.token;
-    const id = user?.id
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }; 
-    
-    try {
-      const response = await axios.put(`https://mentores-backend.onrender.com/mentor/${id}`, selectedSpecialities, config)
-      console.log(response)
-=======
     const data = {
       specialties: selectedSpecialities,
     };
@@ -86,7 +66,6 @@ export default function GridSpecialities({
       const apiRequest = await handle(data);
       onRequestSuccess(true);
       stepNumber(2)
->>>>>>> 87595df8976b886b66285ada693cb30a28bdc6d1
     } catch (error) {
       console.error("Erro ao atualizar:", error);
     }

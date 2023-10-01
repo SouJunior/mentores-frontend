@@ -15,9 +15,7 @@ export default function OnBoardModal() {
   const [requestSuccess, setRequestSuccess] = useState(false);
   const [step, setStep] = useState(1)
 
-  const handleTabs = (tabIndex: number) => {
-    setActiveTab(tabIndex);
-  };
+
 
   const handleStep = (success: boolean) => {
     setRequestSuccess(success);
@@ -30,7 +28,7 @@ export default function OnBoardModal() {
   }
 
   return (
-    <ModalContainer style={{ height: activeTab === 0 ? "547px" : "767px" }}>
+    <ModalContainer style={{ height: step === 1 ? "547px" : "767px" }}>
       <TabsContainer>
         <TabWrapper>
           <Tab>
