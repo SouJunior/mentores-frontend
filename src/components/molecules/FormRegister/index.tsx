@@ -3,7 +3,11 @@ import { Checkbox } from "@/components/atoms/Checkbox";
 import { Eye } from "@/components/atoms/Eye";
 import { InfoTooltip } from "@/components/atoms/InfoTooltip";
 import ModalEmail from "@/components/molecules/ModalEmail";
-import { ValuesFormType, registerSchema, initialValues } from "@/utils/registerSchema";
+import {
+  ValuesFormType,
+  registerSchema,
+  initialValues,
+} from "@/utils/registerSchema";
 import axios from "axios";
 import { Field, Form, FormikProvider, useFormik } from "formik";
 import Image from "next/image";
@@ -21,7 +25,6 @@ import {
   ContainerTerms,
   TxtTerms,
 } from "./style";
-
 
 export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false);
@@ -66,7 +69,7 @@ export function FormRegister() {
   ) => {
     try {
       const response = await axios.post(
-        "https://mentores-backend.onrender.com/user",
+        "https://mentores-backend.onrender.com/mentor",
         {
           fullName: values.name,
           email: values.email,
@@ -74,6 +77,7 @@ export function FormRegister() {
           emailConfirm: values.confirmEmail,
           password: values.password,
           passwordConfirmation: values.confirmPassword,
+          specialties:['Frontend']
         }
       );
       console.log("CADASTRADO");
@@ -84,12 +88,11 @@ export function FormRegister() {
     }
   };
 
-  
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: registerSchema,
     onSubmit: handleSubmit,
-    validateOnChange: true,   
+    validateOnChange: true,
   });
 
   useEffect(() => {
@@ -100,16 +103,10 @@ export function FormRegister() {
     }
   }, [agree, formik.isValid, formik.touched]);
 
-
-
-
-
-
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const maxDate = yesterday.toISOString().split("T")[0];
 
- 
   const hundredYearsAgo = new Date();
   hundredYearsAgo.setFullYear(hundredYearsAgo.getFullYear() - 100);
   const minDate = hundredYearsAgo.toISOString().split("T")[0];
@@ -125,18 +122,20 @@ export function FormRegister() {
             </p>
             <Field
               as={InputForm}
-              type="text"
+              type="input"
               name="name"
               label="Nome completo"
               placeholder="Preencha com seu nome"
+              inputType="text"
             />
 
             <Field
               as={InputForm}
-              type="date"
+              type="input"
               name="dataBirthday"
               label="Data de nascimento"
               placeholder="DD/MM/YYY"
+              inputType="date"
               min={minDate}
               max={maxDate}
               onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
@@ -146,20 +145,22 @@ export function FormRegister() {
 
             <Field
               as={InputForm}
-              type="email"
+              type="input"
               label="E-mail"
               name="email"
               placeholder="Preencha com o seu e-mail"
+              inputType="text"
             />
 
             <Field
               as={InputForm}
-              type="email"
+              type="input"
               label="Confirmar E-mail"
               name="confirmEmail"
               placeholder="Confirme seu e-mail"
+              inputType="email"
             />
-            <InfoTooltip right={15}/>
+            <InfoTooltip right={15} />
             <Eye
               onClick={(e) => handleShowPassword(e)}
               eye={eye}
@@ -170,10 +171,11 @@ export function FormRegister() {
             />
             <Field
               as={InputForm}
-              type={show ? "password" : "text"}
+              type="input"
               label="Senha"
               name="password"
               placeholder="********"
+              inputType={show ? "password" : "text"}
             />
             <Eye
               onClick={(e) => handleConfirmPassword(e)}
@@ -186,10 +188,11 @@ export function FormRegister() {
 
             <Field
               as={InputForm}
-              type={showConfirm ? "password" : "text"}
+              type="input"
               label="Confirmar Senha"
               name="confirmPassword"
               placeholder="********"
+              inputType={showConfirm ? "password" : "text"}
             />
             <ContainerTerms>
               <Checkbox setValue={setIsAgree} isChecked={agree} />

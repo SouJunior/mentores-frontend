@@ -1,12 +1,12 @@
-import { IUserSetNewPassword } from "./interfaces/IUserSetNewPassword";
-import { SetNewPasswordDTO } from "./interfaces/IUserSetNewPassword";
+import { IUserSetNewPassword } from "../interfaces/IUserSetNewPassword";
+import { SetNewPasswordDTO } from "../interfaces/IUserSetNewPassword";
 import axios from "axios";
 
 const setNewPasswordService = (): IUserSetNewPassword => {
   const handle = async (data: SetNewPasswordDTO, { code, email }: { code: string, email: string }) => {
     try {
       const response = await axios.patch(
-        `https://mentores-backend.onrender.com/user/restoreAccount/redefinePass`,
+        `https://mentores-backend.onrender.com/mentor/restoreAccount/redefinePass`,
         {
           password: data.password,
           confirmPassword: data.confirmPassword,

@@ -7,11 +7,11 @@ export const ContainerHeader = styled.div`
   align-items: center;
   margin-bottom: 40px;
 
-  div {
+  .header {
     display: flex;
     gap: 20px;
     align-items: center;
-    span {
+    .mySpan {
       background-color: ${(props) => props.theme.colors.blue[400]};
       width: 2px;
       height: 28px;
@@ -24,4 +24,12 @@ export const GroupBtn = styled.div`
   justify-content: center;
   gap: 12px;
   align-items: center;
+`;
+
+
+export const AvatarGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100px;
 `;

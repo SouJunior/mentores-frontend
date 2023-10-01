@@ -1,15 +1,18 @@
-import axios from "axios";
 import {
   IUserLoginService,
   UserLoginDTO,
-} from "./interfaces/IUserLoginService";
+} from "../interfaces/IUserLoginService";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { setCookie, getCookie } from "cookies-next";
+import useUser from "@/context/Auth/useUser";
+import { createUserFromResponseData } from "./userService";
+import { loginApi } from "../loginApi";
 
 const UserLoginService = (): IUserLoginService => {
   const router = useRouter();
+  const userContext = useUser();
   const [countError, setCountError] = useState(0);
   const [submitButton, setSubmitButtonState] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -49,15 +52,17 @@ const UserLoginService = (): IUserLoginService => {
     if (isValid) {
       setLoading(true);
       try {
-        const response = await axios.post(
-          "https://mentores-backend.onrender.com/auth/login",
-          data
-        );
+        const response = await loginApi(data);
+
+        const user2 = response;
+        const userFromResponse = await createUserFromResponseData(user2);
+        userContext.setUser(userFromResponse);
+
         setFormState({
           ...formState,
           errors: "",
         });
-        router.push("/genericPage");
+        router.push("/onBoarding");
       } catch (error) {
         setFormState({
           ...formState,
@@ -73,10 +78,17 @@ const UserLoginService = (): IUserLoginService => {
   };
 
   useEffect(() => {
+    const newUser = userContext.user;
+    if (newUser) {
+      const userStringify = JSON.stringify(newUser);
+      localStorage.setItem("user", userStringify);
+    }
+  }, [userContext.user]);
+
+  useEffect(() => {
     const isDisable = getCookie("disable");
 
-    isDisable ? setDisable(false) : setDisable(false)
-
+    isDisable ? setDisable(false) : setDisable(false);
   }, [disable]);
 
   const validateForm = async (data: UserLoginDTO): Promise<boolean> => {

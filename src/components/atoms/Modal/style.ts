@@ -4,7 +4,7 @@ export const ButtonClose = styled.button<Partial<{ showBtn: boolean }>>`
   position: absolute;
   top: 3px;
   right: 3px;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   border: none;
   background-color: transparent;
   border-radius: 50%;

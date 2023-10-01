@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   IUsePasswordService,
   UserPasswordServiceDTO,
-} from "./interfaces/IUsePasswordResetServices";
+} from "../interfaces/IUsePasswordResetServices";
 import { useState } from "react";
 
 const usePasswordResetService = (): IUsePasswordService => {
@@ -12,7 +12,7 @@ const usePasswordResetService = (): IUsePasswordService => {
     try {
       const email = data.email;
       const response = await axios.post(
-        `https://mentores-backend.onrender.com/user/restoreAccount/${email}`,
+        `https://mentores-backend.onrender.com/mentor/restoreAccount/${email}`,
       );
       if (response.status === 201) {
         setIsModalOpen(true);

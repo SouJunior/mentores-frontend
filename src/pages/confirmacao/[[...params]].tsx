@@ -16,10 +16,11 @@ const ConfirmationPage = ({ code, email }: ConfirmationPageProps) => {
     try {
       const encodedEmail = encodeURIComponent(email);
       const response = await axios.patch(
-        `https://mentores-backend.onrender.com/user/active?code=${code}&email=${encodedEmail}`
+        `https://mentores-backend.onrender.com/mentor/active?code=${code}&email=${encodedEmail}`
       );
       router.push("/login");
     } catch (error) {
+      console.log(error)
       router.push("/login");
     }
   };

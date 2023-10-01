@@ -17,4 +17,7 @@ export interface IUserLoginService {
 export type UserLoginDTO = {
   email: string;
   password: string;
+  type:string;
 };
+
+
