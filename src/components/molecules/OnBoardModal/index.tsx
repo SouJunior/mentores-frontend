@@ -19,7 +19,7 @@ export default function OnBoardModal() {
   };
 
   const changeSteps = (step: number) => {
-   requestSuccess === true ? setStep(2) : setStep(1)
+  setStep(2)
   };
 
   return (

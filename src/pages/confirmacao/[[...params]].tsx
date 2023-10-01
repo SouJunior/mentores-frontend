@@ -20,6 +20,7 @@ const ConfirmationPage = ({ code, email }: ConfirmationPageProps) => {
       );
       router.push("/login");
     } catch (error) {
+      console.log(error)
       router.push("/login");
     }
   };
