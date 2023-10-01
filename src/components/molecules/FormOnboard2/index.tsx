@@ -99,11 +99,11 @@ export default function FormOnboard2() {
             >
               <option value="">Gênero</option>
 
-              <option value="red">Red</option>
+              <option value="red">Masculino</option>
 
-              <option value="green">Green</option>
+              <option value="green">Feminino</option>
 
-              <option value="blue">Blue</option>
+              <option value="blue">Prefiro não dizer</option>
             </Field>
             <StyledHR />
 

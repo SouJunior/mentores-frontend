@@ -11,8 +11,10 @@ import {
 } from "./styled";
 import { Check } from "lucide-react";
 import axios from "axios";
+import useUser from "@/context/Auth/useUser";
 
 export default function GridSpecialities() {
+  const { user } = useUser()
   const specialities: string[] = [
     "Carreira",
     "Liderança",
@@ -52,8 +54,16 @@ export default function GridSpecialities() {
 
 
   const handleUpdate = async () => {
+    const token = user?.token;
+    const id = user?.id
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }; 
+    
     try {
-      const response = await axios.put('https://mentores-backend.onrender.com/mentor/df54ca54-60dc-40ee-9e10-2f5b66e66857', selectedSpecialities)
+      const response = await axios.put(`https://mentores-backend.onrender.com/mentor/${id}`, selectedSpecialities, config)
       console.log(response)
     } catch (error) {
       console.log(error)
