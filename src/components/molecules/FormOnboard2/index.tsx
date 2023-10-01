@@ -14,14 +14,14 @@ import { useEffect, useState } from "react";
 import EditPhotoModal from "@/components/atoms/EditPhotoModal";
 import { Field, Form, FormikProvider, useFormik } from "formik";
 import { InputForm } from "@/components/atoms/InputForm";
-import userUpdateService from "@/services/user/userUpdateService";
+import UserUpdateService from "@/services/user/userUpdateService";
 
 export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   const [isCompleted, setCompleted] = useState(false);
 
-  const { handle } = userUpdateService();
+  const { handle } = UserUpdateService();
 
   const initialValues = {
     imageUrl: "",

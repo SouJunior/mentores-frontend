@@ -5,7 +5,7 @@ import {
 } from "../interfaces/IUserUpdate";
 import useUser from "@/context/Auth/useUser";
 
-const userUpdateService = (): IUserUpdate => {
+const UserUpdateService = (): IUserUpdate => {
   const { user } = useUser();
 
   const token = user?.token;
@@ -32,4 +32,4 @@ const userUpdateService = (): IUserUpdate => {
   return { handle };
 };
 
-export default userUpdateService;
+export default UserUpdateService;
