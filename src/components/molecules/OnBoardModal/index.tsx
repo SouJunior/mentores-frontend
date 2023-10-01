@@ -12,29 +12,41 @@ import PerfilTab from "../PerfilTab";
 
 export default function OnBoardModal() {
   const [activeTab, setActiveTab] = useState(0);
+  const [requestSuccess, setRequestSuccess] = useState(false);
+  const [step, setStep] = useState(1)
 
   const handleTabs = (tabIndex: number) => {
     setActiveTab(tabIndex);
   };
+
+  const handleStep = (success: boolean) => {
+    setRequestSuccess(success);
+    console.log(success);
+  };
+
+  const changeSteps = (step:number) => {
+    setStep(2)
+    console.log(step)
+  }
 
   return (
     <ModalContainer style={{ height: activeTab === 0 ? "547px" : "767px" }}>
       <TabsContainer>
         <TabWrapper>
           <Tab>
-            <TabLabel onClick={() => handleTabs(0)}>ESPECIALIDADES</TabLabel>
-            <TabLine style={{ width: activeTab === 0 ? "258px" : "0" }} />
+            <TabLabel >ESPECIALIDADES</TabLabel>
+            <TabLine style={{ width: step === 1 ? "258px" : "0" }} />
           </Tab>
         </TabWrapper>
         <TabWrapper>
           <Tab>
-            <TabLabel onClick={() => handleTabs(1)}>PERFIL</TabLabel>
-            <TabLine style={{ width: activeTab === 1 ? "258px" : "0" }} />
+            <TabLabel >PERFIL</TabLabel>
+            <TabLine style={{ width: step === 2 ? "258px" : "0" }} />
           </Tab>
         </TabWrapper>{" "}
       </TabsContainer>
-      {activeTab === 0 && <GridSpecialities />}
-      {activeTab === 1 && <PerfilTab />}
+      {step === 1 && <GridSpecialities stepNumber={changeSteps} onRequestSuccess={handleStep} />}
+      {step === 2 && <PerfilTab />}
     </ModalContainer>
   );
 }

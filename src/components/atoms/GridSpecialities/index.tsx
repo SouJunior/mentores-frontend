@@ -12,7 +12,13 @@ import {
 import { Check } from "lucide-react";
 import userUpdateService from "@/services/user/userUpdateService";
 
-export default function GridSpecialities() {
+interface GridSpecialitiesProps {
+  onRequestSuccess: (success: boolean) => void;
+  stepNumber:(step:number) => void
+}
+export default function GridSpecialities({
+  onRequestSuccess, stepNumber
+}: GridSpecialitiesProps) {
   const { handle } = userUpdateService();
   const specialities: string[] = [
     "Carreira",
@@ -55,7 +61,13 @@ export default function GridSpecialities() {
     const data = {
       specialties: selectedSpecialities,
     };
-    await handle(data);
+    try {
+      const apiRequest = await handle(data);
+      onRequestSuccess(true);
+      stepNumber(2)
+    } catch (error) {
+      console.error("Erro ao atualizar:", error);
+    }
   };
 
   return (
