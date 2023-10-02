@@ -9,7 +9,7 @@ import {
   StyledHR,
   NextButton,
 } from "./styled";
-import { Check } from "lucide-react";
+import CheckIcon from '@mui/icons-material/Check';
 import UserUpdateService from "@/services/user/userUpdateService";
 import useUser from "@/context/Auth/useUser";
 
@@ -89,7 +89,7 @@ export default function GridSpecialities({
             onClick={() => toggleSpeciality(speciality)}
             selected={selectedSpecialities.includes(speciality)}
           >
-            {selectedSpecialities.includes(speciality) && <Check />}
+            {selectedSpecialities.includes(speciality) && <CheckIcon fontSize={'small'} />}
             {speciality}
           </SpecialityItem>
         ))}
