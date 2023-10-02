@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MenuDropDown from "@/components/atoms/MenuDropDown";
-import { ChevronUp, ChevronDown } from "lucide-react";
+// import { ChevronUp, ChevronDown } from "lucide-react";
 import { DropDownContainer } from "./styled";
 
 export default function DropDownUserMenu() {
@@ -13,7 +13,7 @@ export default function DropDownUserMenu() {
   return (
     <DropDownContainer>
       <div onClick={toggleDropDown}>
-        {isDropDownVisible ? <ChevronDown /> : <ChevronUp />}
+        {/* {isDropDownVisible ? <ChevronDown /> : <ChevronUp />} */}
       </div>
       {isDropDownVisible && <MenuDropDown isvisible={isDropDownVisible} />}
     </DropDownContainer>

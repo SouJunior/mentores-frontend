@@ -1,4 +1,4 @@
-import { InfoIcon } from "lucide-react";
+// import { InfoIcon } from "lucide-react";
 import { useState } from "react";
 import {
   CriteriaList,
@@ -28,11 +28,11 @@ export function InfoTooltip({ right }: ToolTipProps) {
   };
   return (
     <InfoContainer right={right}>
-      <InfoIcon
+      {/* <InfoIcon
         size={16}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-      />
+      /> */}
       <Tooltip isVisible={tooltipVisible}>
         <TooltipContainer>
           <Title>Sua senha deve conter:</Title>

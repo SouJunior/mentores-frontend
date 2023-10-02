@@ -2,10 +2,9 @@ import logoImg from "@/assets/logos/sou-junior.svg";
 import { Button } from "@/components/atoms/Button";
 import Image from "next/image";
 import Link from "next/link";
-import { AvatarGroup, ContainerHeader, GroupBtn } from "./style";
+import {  ContainerHeader, GroupBtn } from "./style";
 import { UserAvatar } from "@/components/atoms/UserAvatar";
 import useUser from "@/context/Auth/useUser";
-import { useEffect } from "react";
 export function Header() {
   const { user } = useUser();
 

@@ -1,4 +1,4 @@
-import { Eye as EyeIcon, EyeOff } from "lucide-react";
+// import { Eye as EyeIcon, EyeOff } from "lucide-react";
 import { MouseEvent } from "react";
 import { EyeContainer } from "./style";
 
@@ -21,12 +21,12 @@ export function Eye({ eye, size, onClick, left, marginTop, color, paddingTop }: 
       marginTop={marginTop}
       paddingTop={paddingTop}
     >
-      {" "}
+      {/* {" "}
       {eye === false ? (
         <EyeOff {...(color && { color: color })} size={size} />
       ) : (
         <EyeIcon {...(color && { color: color })} size={size} />
-      )}
+      )} */}
     </EyeContainer>
   );
 }
