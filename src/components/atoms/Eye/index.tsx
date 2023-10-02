@@ -1,4 +1,5 @@
-// import { Eye as EyeIcon, EyeOff } from "lucide-react";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { MouseEvent } from "react";
 import { EyeContainer } from "./style";
 
@@ -9,7 +10,7 @@ interface EyeProps {
   left: number;
   marginTop?: number;
   color?: string;
-  paddingTop?:number;
+  paddingTop?: number;
 }
 
 export function Eye({ eye, size, onClick, left, marginTop, color, paddingTop }: EyeProps) {
@@ -21,12 +22,12 @@ export function Eye({ eye, size, onClick, left, marginTop, color, paddingTop }: 
       marginTop={marginTop}
       paddingTop={paddingTop}
     >
-      {/* {" "}
+      {" "}
       {eye === false ? (
-        <EyeOff {...(color && { color: color })} size={size} />
+        <VisibilityOffIcon style={{ color: color }} fontSize={'small'} />
       ) : (
-        <EyeIcon {...(color && { color: color })} size={size} />
-      )} */}
+        <VisibilityIcon style={{ color: color }} fontSize={'small'} />
+      )}
     </EyeContainer>
   );
 }
