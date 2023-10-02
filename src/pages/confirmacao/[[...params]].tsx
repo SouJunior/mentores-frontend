@@ -30,7 +30,11 @@ const ConfirmationPage = ({ code, email }: ConfirmationPageProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <></>;
+  return (
+    <>
+    <div>Carregando...</div>
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
