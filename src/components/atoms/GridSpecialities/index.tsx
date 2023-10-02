@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   GridContainer,
   SpecialityItem,
@@ -11,6 +11,7 @@ import {
 } from "./styled";
 import { Check } from "lucide-react";
 import UserUpdateService from "@/services/user/userUpdateService";
+import useUser from "@/context/Auth/useUser";
 
 interface GridSpecialitiesProps {
   onRequestSuccess: (success: boolean) => void;
@@ -20,6 +21,7 @@ export default function GridSpecialities({
   onRequestSuccess,
   stepNumber,
 }: GridSpecialitiesProps) {
+  const { user } = useUser();
   const { handle } = UserUpdateService();
   const specialities: string[] = [
     "Carreira",
@@ -65,7 +67,7 @@ export default function GridSpecialities({
     try {
       const apiRequest = await handle(data);
       onRequestSuccess(true);
-      stepNumber(2)
+      stepNumber(2);
     } catch (error) {
       console.error("Erro ao atualizar:", error);
     }
@@ -73,7 +75,7 @@ export default function GridSpecialities({
 
   return (
     <>
-      <StyledSpan>Olá, Fulano!</StyledSpan>
+      <StyledSpan>Olá, {user?.fullName}!</StyledSpan>
       <StyledTitle>
         Em quais áreas você deseja mentorar?<span className="last">*</span>
       </StyledTitle>
