@@ -1,4 +1,4 @@
-import { Lock, User2Icon } from "lucide-react";
+// import { Lock, User2Icon } from "lucide-react";
 import { MouseEvent, useState } from "react";
 import { Eye } from "../Eye";
 import {
@@ -42,11 +42,11 @@ export function InputLogin({
       <>
         <LabelError htmlFor={id}>{label}</LabelError>
         <ContainerInputError>
-          {type === "email" ? (
+          {/* {type === "email" ? (
             <User2Icon className="icon" />
           ) : (
             <Lock className="icon" />
-          )}
+          )} */}
           <InputError
             id={id}
             type={show === false ? "text" : type}
@@ -71,11 +71,11 @@ export function InputLogin({
       <>
         <Label htmlFor={id}>{label}</Label>
         <ContainerInput>
-          {type === "email" ? (
+          {/* {type === "email" ? (
             <User2Icon className="icon" />
           ) : (
             <Lock className="icon" />
-          )}
+          )} */}
 
           <input
             id={id}
