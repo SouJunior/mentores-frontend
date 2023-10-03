@@ -30,7 +30,6 @@ export default function FormOnboard2() {
   };
 
   const handleSubmit = async (values: any) => {
-    //descrição aboutMe
     const data = {
       profile: values.description,
       profileKey: values.imageUrl,

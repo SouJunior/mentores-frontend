@@ -21,8 +21,6 @@ interface EditPhotoModalProps {
   onClose: () => void;
   onAddPhoto?: (photo: string | null) => void;
   onEditPhoto?: () => void;
-  onTakePhoto?: () => void;
-  hasSelectedPhoto?: boolean;
   onImageEdit?: (editedImage: string | null) => void;
 }
 
@@ -31,8 +29,6 @@ export default function EditPhotoModal({
   onAddPhoto,
   onClose,
   onEditPhoto,
-  onTakePhoto,
-  hasSelectedPhoto,
   onImageEdit,
 }: EditPhotoModalProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);

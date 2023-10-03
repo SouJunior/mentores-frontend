@@ -1,5 +1,5 @@
 import { ContainerOnBoarding, OnBoardImage } from "@/styles/pages/onBoarding";
-import onBoardImage from '@/assets/onBoarding/Ilustrações.png'
+import onBoardImage from '@/assets/onBoarding/Ilustrações.svg'
 import OnBoardModal from "@/components/molecules/OnBoardModal";
 import { withAuth } from "@/context/Auth/withAuth"
 
