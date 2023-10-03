@@ -1,4 +1,4 @@
-import { InfoIcon } from "lucide-react";
+import InfoIcon from "@mui/icons-material/Info";
 import { useState } from "react";
 import {
   CriteriaList,
@@ -29,7 +29,7 @@ export function InfoTooltip({ right }: ToolTipProps) {
   return (
     <InfoContainer right={right}>
       <InfoIcon
-        size={16}
+        fontSize={"small"}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />

@@ -1,4 +1,3 @@
-import { UserCircle } from "lucide-react";
 import { UserProfileButtom } from "./styled";
 import Image from "next/image";
 import userAvatar from '@/assets/icons/userAvatar.png'

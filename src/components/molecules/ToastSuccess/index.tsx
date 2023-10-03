@@ -3,8 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ArrowSuccess from '../../../assets/icons/arrowSuccess.svg';
 import { BackgroundOverlay, ToastContainer, ContainerToastTitle, ContainerToastIcon, ContainerButton, ContainerContentToast, ContainerToastIconWrapper, ContainerToastIconClose } from './styles';
-import { X } from 'lucide-react';
-
+import CloseIcon from '@mui/icons-material/Close';
 interface CustomToastProps {
   message: string;
   onClose?: () => void;
@@ -34,7 +33,7 @@ const ToastSuccess: React.FC<CustomToastProps> = ({
                 <Image src={ArrowSuccess} alt='Icone de Seta Sucesso' />
               </ContainerToastIcon>
               <ContainerToastIconClose>
-                <X className='iconClose' onClick={handleOverlayClick} color='#5D5F5D' />
+                <CloseIcon className='iconClose' onClick={handleOverlayClick} style={{color:'#5D5F5D'}}  />
               </ContainerToastIconClose >
             </ContainerToastIconWrapper>
             <ContainerToastTitle>

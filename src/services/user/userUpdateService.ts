@@ -19,11 +19,7 @@ const UserUpdateService = (): IUserUpdate => {
   };
 
   const handle = async (data: UserUpdateDTO) => {
-    try {
-      const response = await axios.put(url, data, config);
-    } catch (error) {
-      console.error("Erro ao atualizar:", error);
-    }
+   console.log(data)
   };
 
 

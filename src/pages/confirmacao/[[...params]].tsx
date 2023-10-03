@@ -2,7 +2,6 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
 
 interface ConfirmationPageProps {
   code: string;
@@ -30,7 +29,11 @@ const ConfirmationPage = ({ code, email }: ConfirmationPageProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <></>;
+  return (
+    <>
+   
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

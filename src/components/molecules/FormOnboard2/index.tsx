@@ -30,6 +30,7 @@ export default function FormOnboard2() {
   };
 
   const handleSubmit = async (values: any) => {
+    //descrição aboutMe
     const data = {
       profile: values.description,
       profileKey: values.imageUrl,
@@ -121,7 +122,7 @@ export default function FormOnboard2() {
             <StyledHR />
 
             <ButtonContainer>
-              <BackButton>Voltar</BackButton>
+              <BackButton >Voltar</BackButton>
               <NextButton disabled={!isCompleted}>Concluir</NextButton>
             </ButtonContainer>
           </Form>

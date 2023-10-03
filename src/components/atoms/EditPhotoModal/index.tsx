@@ -10,7 +10,9 @@ import {
   EditButton,
 } from "./styled";
 import PhotoButtom from "../PhotoButtom";
-import { Camera, ImagePlus, Pencil } from "lucide-react";
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import ModeIcon from '@mui/icons-material/Mode';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useState } from "react";
 import ModalImageEditor from "../ModalImageEditor";
 
@@ -80,16 +82,16 @@ export default function EditPhotoModal({
 
         <ButtonsContainer>
           <EditButton disabled={!selectedPhoto} onClick={handleOpenEditModal}>
-            <Pencil className="icon" />
+            <ModeIcon fontSize={'small'} className="icon" />
             Editar
           </EditButton>
           <StyledButton>
-            <Camera className="icon" />
+            <CameraAltIcon fontSize={'small'} className="icon" />
             Câmera
           </StyledButton>
           <AddPhotoButton>
             <input type="file" accept="image/*" onChange={handleAddPhoto} />
-            <ImagePlus className="icon" />
+            <AddPhotoAlternateIcon fontSize={'small'} className="icon" />
             Adicionar
           </AddPhotoButton>
         </ButtonsContainer>
