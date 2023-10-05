@@ -15,7 +15,7 @@ export default function DropDownUserMenu() {
   return (
     <DropDownContainer>
       <div onClick={toggleDropDown}>
-        {isDropDownVisible ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+        {isDropDownVisible ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </div>
       {isDropDownVisible && <MenuDropDown isvisible={isDropDownVisible} />}
     </DropDownContainer>

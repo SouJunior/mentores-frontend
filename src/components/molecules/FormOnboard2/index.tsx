@@ -15,11 +15,13 @@ import EditPhotoModal from "@/components/atoms/EditPhotoModal";
 import { Field, Form, FormikProvider, useFormik } from "formik";
 import { InputForm } from "@/components/atoms/InputForm";
 import UserUpdateService from "@/services/user/userUpdateService";
+import { useRouter } from "next/router";
 
 export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   const [isCompleted, setCompleted] = useState(false);
+  const router = useRouter()
 
   const genders = [
     "Homem cis",
@@ -51,7 +53,7 @@ export default function FormOnboard2() {
 
     try {
       await handle(data);
-      console.log(values);
+      router.push('/genericPage')
     } catch (error) {
       console.error("Erro ao atualizar:", error);
     }

@@ -62,7 +62,10 @@ const UserLoginService = (): IUserLoginService => {
           ...formState,
           errors: "",
         });
-        router.push("/onBoarding");
+
+        response.info.registerComplete === true
+          ? router.push("/genericPage")
+          : router.push("/onBoarding");
       } catch (error) {
         setFormState({
           ...formState,
