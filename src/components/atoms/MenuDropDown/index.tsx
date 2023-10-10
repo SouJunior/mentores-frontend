@@ -23,7 +23,7 @@ export default function MenuDropDown({ isvisible }: MenuDropDown) {
       <StyledHR />
       <ButtonsContainer>
         <span>Minha Conta</span>
-        <span onClick={logout}>Sair</span>
+        <span style={{color:'red'}} onClick={logout}>Sair</span>
       </ButtonsContainer>
     </MenuContainer>
   );

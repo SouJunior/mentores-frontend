@@ -8,5 +8,6 @@ export type UserUpdateDTO = {
   profile?:string;
   profileKey?:string;
   registerComplete?:boolean
+  gender?:string;
 };
 

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { IAuthContextType, User } from "../interfaces/IAuth";
 import { useRouter } from "next/router";
 
@@ -15,6 +15,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     router.push("/login");
     localStorage.removeItem("user");
   };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user')
+    if(storedUser) {
+      const userParsed = JSON.parse(storedUser)
+      setUser(userParsed)
+    }
+  }, [])
 
   return (
     <AuthContent.Provider value={{ user, setUser, logout }}>

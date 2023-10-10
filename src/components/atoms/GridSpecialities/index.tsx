@@ -38,6 +38,8 @@ export default function GridSpecialities({
     "Dados",
   ];
 
+ 
+
   const [selectedSpecialities, setSelectedSpecialities] = useState<string[]>(
     []
   );
@@ -57,10 +59,12 @@ export default function GridSpecialities({
   };
 
   useEffect(() => {
-    selectedCount === 6 ? setComplete(true) : setComplete(false);
+    selectedCount >= 1 ? setComplete(true) : setComplete(false);
   }, [selectedCount, isComplete]);
 
   const handleUpdate = async () => {
+
+    
     const data = {
       specialties: selectedSpecialities,
     };

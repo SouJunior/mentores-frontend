@@ -15,30 +15,45 @@ import EditPhotoModal from "@/components/atoms/EditPhotoModal";
 import { Field, Form, FormikProvider, useFormik } from "formik";
 import { InputForm } from "@/components/atoms/InputForm";
 import UserUpdateService from "@/services/user/userUpdateService";
+import { useRouter } from "next/router";
 
 export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   const [isCompleted, setCompleted] = useState(false);
+  const router = useRouter()
+
+  const genders = [
+    "Homem cis",
+    "Mulher cis",
+    "Homem trans",
+    "Mulher trans",
+    "Bigenero",
+    "Genero fluido",
+    "Nao Binario",
+    "Agenero",
+    "Prefiro não dizer",
+    "Outros",
+  ];
 
   const { handle } = UserUpdateService();
 
   const initialValues = {
-    imageUrl: "",
+    imageFile: null,
     description: "",
     gender: "",
   };
 
   const handleSubmit = async (values: any) => {
-    //descrição aboutMe
     const data = {
-      profile: values.description,
-      profileKey: values.imageUrl,
+      aboutMe: values.description,
+      profile: values.imageUrl,
+      gender: values.gender,
     };
-  
+
     try {
       await handle(data);
-      console.log(values);
+      router.push('/genericPage')
     } catch (error) {
       console.error("Erro ao atualizar:", error);
     }
@@ -53,6 +68,10 @@ export default function FormOnboard2() {
     setIsEditModalOpen(true);
   };
 
+  const handleStep = () => {
+    console.log("ok");
+  };
+
   const closeModal = () => setIsEditModalOpen(false);
 
   useEffect(() => {
@@ -62,7 +81,7 @@ export default function FormOnboard2() {
       setCompleted(false);
     }
   }, [formik.touched]);
-
+  
   const handleImageEdit = (editedImage: string | null) => {
     setSelectedPhoto(editedImage);
     formik.setFieldValue("imageUrl", editedImage || "");
@@ -111,19 +130,22 @@ export default function FormOnboard2() {
               type="select"
               required
             >
-              <option value="">Gênero</option>
-
-              <option value="red">Masculino</option>
-
-              <option value="green">Feminino</option>
-
-              <option value="blue">Prefiro não dizer</option>
+              <option disabled value="">
+                Gênero
+              </option>
+              {genders.map((gender) => (
+                <option key={gender} value={gender}>
+                  {gender}
+                </option>
+              ))}
             </Field>
             <StyledHR />
 
             <ButtonContainer>
-              <BackButton >Voltar</BackButton>
-              <NextButton disabled={!isCompleted}>Concluir</NextButton>
+              <BackButton onClick={handleStep}>Voltar</BackButton>
+              <NextButton type="submit" disabled={!isCompleted}>
+                Concluir
+              </NextButton>
             </ButtonContainer>
           </Form>
         </FormikProvider>
