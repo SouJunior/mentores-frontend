@@ -3,11 +3,11 @@ import DropDownUserMenu from "@/components/molecules/DropdownUserMenu";
 import Image from "next/image";
 import { UserAvatarContainer } from "./styled";
 import useUser from "@/context/Auth/useUser";
-import { useState } from "react"; // Importe o useState
+import { useState } from "react";
 
 export function UserAvatar() {
   const { user } = useUser();
-  const [imageError, setImageError] = useState(false); // Estado para controlar erros de imagem
+  const [imageError, setImageError] = useState(false); 
 
   return (
     <>

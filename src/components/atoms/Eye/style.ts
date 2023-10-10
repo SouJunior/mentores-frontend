@@ -13,4 +13,5 @@ export const EyeContainer = styled.button<
   cursor: pointer;
   outline: none;
   padding-top:${(props) => props.paddingTop}px;
+  z-index:1;
 `;

@@ -9,6 +9,7 @@ Partial<{ right:number }>
   position: absolute;
   right: ${(props) => props.right}px;
   margin-right: 30px;
+
 `;
 
 export const Tooltip = styled.div<{ isVisible: boolean }>`
@@ -20,6 +21,8 @@ export const Tooltip = styled.div<{ isVisible: boolean }>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
   transition: opacity 0.3s ease-in-out;
+  z-index:9999;
+
 `;
 
 export const TooltipContainer = styled.div`
