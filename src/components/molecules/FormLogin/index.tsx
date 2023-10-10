@@ -127,7 +127,7 @@ export function FormLogin() {
 
           <p>
             Ainda não possui cadastro?{" "}
-            <Link href="/cadastro">Cique aqui e cadastre-se</Link>
+            <Link href="/cadastro">Clique aqui e cadastre-se</Link>
           </p>
         </form>
       </ContainerForm>
