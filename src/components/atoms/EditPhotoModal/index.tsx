@@ -15,6 +15,7 @@ import ModeIcon from '@mui/icons-material/Mode';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useState } from "react";
 import ModalImageEditor from "../ModalImageEditor";
+import { handleError } from "@/utils/handleError";
 
 interface EditPhotoModalProps {
   isOpen: boolean;
@@ -47,9 +48,22 @@ export default function EditPhotoModal({
 
   const closeModal = () => setModalEditor(false);
 
+  const MAX_IMAGE_SIZE = 8 * 1024 * 1024; 
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png'];
+
   const handleAddPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      if (file.size > MAX_IMAGE_SIZE) {
+       handleError('A foto selecionada ultrapassa o tamanho permitido. Tamanho máximo aceito 8MP')
+        return;
+      }
+  
+      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+       handleError('A foto deve estar em um dos formatos permitidos. Formatos aceitos: jpg ou png.')
+        return;
+      }
+  
       const reader = new FileReader();
       reader.onload = async (e) => {
         await setSelectedPhoto(e.target?.result as string);
