@@ -24,7 +24,7 @@ export function UserAvatar() {
                   style={{ borderRadius: '50%' }}
                   alt="User Avatar"
                   src={user.profile}
-                  onError={() => setImageError(true)} // Trate erros de carregamento de imagem
+                  onError={() => setImageError(true)} 
                 />
               )}
             </div>

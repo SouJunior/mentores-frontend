@@ -10,7 +10,7 @@ export type MentorType = {
   name: string;
   stacks: string[];
   image: StaticImageData;
-  role: string;
+  role?: string;
   description: string;
 };
 
