@@ -5,5 +5,6 @@ export interface MentorCardProp {
   fullName: string;
   aboutMe?: string | null;
   profile: string;
+  gender?:string;
   specialties: string[];
 }

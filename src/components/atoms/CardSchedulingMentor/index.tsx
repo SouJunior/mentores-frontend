@@ -16,7 +16,6 @@ interface MentorsProps {
   mentor: MentorCardProp;
 }
 
-
 export default function CardScheduling({ mentor }: MentorsProps) {
   return (
     <CardContainer>

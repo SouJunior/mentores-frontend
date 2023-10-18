@@ -9,6 +9,9 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  &:hover {
+    box-shadow: 4px 4px 4px 0px #000000;
+  }
 `;
 
 export const TitleContainer = styled.div`
