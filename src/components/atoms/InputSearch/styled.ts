@@ -9,6 +9,9 @@ border-radius: 8px;
 padding:8px;
 border:1px solid #acacac;
 position: relative;
+&:focus, &:active{
+    border: 2px solid #002C66;
+}
 `
 export const StyledSearchIcon = styled(SearchIcon)`
 position: absolute;
