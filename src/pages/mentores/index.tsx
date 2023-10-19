@@ -24,7 +24,7 @@ export default function MentorPage() {
   const [mentors, setMentors] = useState([]);
   const [filteredMentors, setFilteredMentors] = useState([]);
   const [genderFilter, setGenderFilter] = useState("");
-  const [specialtyFilter, setSpecialtyFilter] = useState("");
+  const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([]);
   const [mentorNameFilter, setMentorNameFilter] = useState("");
 
   const fetchMentors = async () => {
@@ -44,15 +44,20 @@ export default function MentorPage() {
 
   const filterMentors = (mentor: MentorCardProp) => {
     const nameFilter = mentorNameFilter.toLowerCase();
+  
+    const hasSelectedSpecialty = specialtyFilter.length === 0 || specialtyFilter.some(selectedSpecialty => mentor.specialties.includes(selectedSpecialty));
+  
     if (
       (!genderFilter || mentor.gender === genderFilter) &&
-      (!specialtyFilter || mentor.specialties.includes(specialtyFilter)) &&
-      (!mentorNameFilter || mentor.fullName.toLowerCase().includes(nameFilter))
+      hasSelectedSpecialty && 
+      (!mentorNameFilter || mentor.fullName.toLowerCase().includes(nameFilter)) 
+      // mentor.registerComplete === true
     ) {
       return true;
     }
     return false;
   };
+   
 
   useEffect(() => {
     const filtered = mentors.filter(filterMentors);
@@ -77,15 +82,17 @@ export default function MentorPage() {
         </CTAMain>
       </SubHeaderContainer>
       <MentorSubHeader
-        onGenderChange={(e) => setGenderFilter(e.target.value)}
-        onSpecialtyChange={(e) => setSpecialtyFilter(e.target.value)}
+        onGenderChange={(selectedOptions) => setGenderFilter(selectedOptions[0])}
+        onSpecialtyChange={(selectedOptions) => setSpecialtyFilter(selectedOptions)}
         onMentorSearch={(query) => setMentorNameFilter(query)}
       />
-      {specialtyFilter && (
-        <StacksContainer>
-          <Stack> {specialtyFilter}</Stack>
-        </StacksContainer>
-      )}
+     {specialtyFilter.length > 0 && (
+      <StacksContainer>
+        {specialtyFilter.map((selectedSpecialty) => (
+          <Stack key={selectedSpecialty}>{selectedSpecialty}</Stack>
+        ))}
+      </StacksContainer>
+    )}
       <MentorsContainer>
         {filteredMentors.length > 0 ? (
           filteredMentors.map((mentor: MentorCardProp) => (

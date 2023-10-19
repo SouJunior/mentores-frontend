@@ -1,28 +1,54 @@
-import React, { useState } from "react";
-import { StyledSelect } from "./styled";
-
-interface SelecProps {
+import { useState } from "react";
+import {
+  CheckboxLabel,
+  DropdownButton,
+  DropdownContainer,
+  DropdownMenu,
+} from "./styled";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+interface SelectFilterProps {
   options: string[];
-  selectName?:string;
- onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  selectName?: string;
+  onChange: (selectedOptions: string[]) => void;
 }
 
-export default function SelectFilter({ options, onChange, selectName }: SelecProps) {
-  const [espec, setEspec] = useState('')
+export default function SelectFilter({
+  options,
+  onChange,
+  selectName,
+}: SelectFilterProps) {
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [open, setOpen] = useState(false);
 
-  const handle = () => {
-    
-  }
+  const handleOptionChange = (option: string) => {
+    const newSelectedOptions = [...selectedOptions];
+    if (newSelectedOptions.includes(option)) {
+      newSelectedOptions.splice(newSelectedOptions.indexOf(option), 1);
+    } else {
+      newSelectedOptions.push(option);
+    }
+    setSelectedOptions(newSelectedOptions);
+    onChange(newSelectedOptions);
+  };
   return (
-    <>
-    <StyledSelect onChange={onChange}>
-      <option value="">{selectName}</option>
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </StyledSelect>
-    </>
+    <DropdownContainer>
+      <DropdownButton onClick={() => setOpen(!open)}>
+        {selectName} {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+      </DropdownButton>
+      <DropdownMenu open={open}>
+        {options.map((option) => (
+          <CheckboxLabel key={option}>
+            <input
+              type="checkbox"
+              value={option}
+              checked={selectedOptions.includes(option)}
+              onChange={() => handleOptionChange(option)}
+            />
+            {option}
+          </CheckboxLabel>
+        ))}
+      </DropdownMenu>
+    </DropdownContainer>
   );
 }
