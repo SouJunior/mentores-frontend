@@ -9,7 +9,7 @@ export const StyledSelect = styled.select`
   color: #666666;
   border-radius: 8px;
   font-size: 16px;
-  &:focus {
+  &:hover {
     border: 1px solid #003986;
     border-radius: 8px 8px 0px 0px;
     color: #003986;

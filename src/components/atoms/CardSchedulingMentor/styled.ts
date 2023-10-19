@@ -10,7 +10,8 @@ export const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   &:hover {
-    box-shadow: 4px 4px 4px 0px #000000;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 24px;
   }
 `;
 
@@ -29,7 +30,7 @@ export const StyledName = styled.div`
 
 export const StacksContainer = styled.span`
   display: flex;
-  gap: 5px;
+  gap: 8px;
   width: 100%;
   flex-wrap: wrap;
 `;
@@ -59,6 +60,9 @@ export const SchedButton = styled.button`
   line-height: 19.2px;
   display: flex;
   align-items: center;
+  &:hover {
+    background-color: #002c66;
+  }
 `;
 
 export const InfoButton = styled.button`
@@ -73,6 +77,9 @@ export const InfoButton = styled.button`
   font-size: 16px;
   line-height: 19.2px;
   text-align: center;
+  &:hover {
+    color: #002c66;
+  }
 `;
 
 export const ButtonsContainer = styled.span`

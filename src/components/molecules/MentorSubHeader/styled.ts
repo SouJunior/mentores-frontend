@@ -7,7 +7,8 @@ export const ContainerControls = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 90px;
+  padding: 0px 170px;
+  margin-top:34px;
 `;
 
 export const ContainerSelects = styled.div`
