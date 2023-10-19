@@ -50,8 +50,8 @@ export default function MentorPage() {
     if (
       (!genderFilter || mentor.gender === genderFilter) &&
       hasSelectedSpecialty && 
-      (!mentorNameFilter || mentor.fullName.toLowerCase().includes(nameFilter)) &&
-      mentor.registerComplete === true
+      (!mentorNameFilter || mentor.fullName.toLowerCase().includes(nameFilter)) 
+      // mentor.registerComplete === true
     ) {
       return true;
     }

@@ -76,7 +76,7 @@ export const AboutContainer = styled.div`
 font-size: 16px;
 line-height: 24px;
 color:#666666;
-margin-top: 8px;
+margin-top:24px;
 
 `
 
@@ -103,7 +103,7 @@ border:none;
 color:#666666;
 width: 32px;
 height: 32px;
-font-size: 32px;
+font-size: 26px;
 background-color: white;
 
 `

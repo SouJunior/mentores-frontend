@@ -20,6 +20,7 @@ const UserUpdateService = (): IUserUpdate => {
 
   const handle = async (data: UserUpdateDTO) => {
     try {
+      console.log(data)
       const response = await axios.put(url, data, config)
       console.log(response)
     } catch (error) {
