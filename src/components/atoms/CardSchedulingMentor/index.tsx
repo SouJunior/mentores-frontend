@@ -45,8 +45,8 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         </>
       </StacksContainer>
       <ButtonsContainer>
-        <SchedButton onClick={handleModal}>Agendar Mentoria</SchedButton>
-        <InfoButton>Saiba mais</InfoButton>
+        <SchedButton>Agendar Mentoria</SchedButton>
+        <InfoButton  onClick={handleModal}>Saiba mais</InfoButton>
       </ButtonsContainer>
     </CardContainer>
   );
