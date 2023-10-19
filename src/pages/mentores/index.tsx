@@ -14,8 +14,11 @@ import {
   CTASub,
   NoResultContainer,
   NoResultMain,
+  StacksContainer,
+  Stack,
 } from "@/styles/pages/mentors";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function MentorPage() {
   const [mentors, setMentors] = useState([]);
@@ -60,7 +63,10 @@ export default function MentorPage() {
     <MainContainer>
       <SubHeaderContainer>
         <TitleContainer>
-          Início <b>°</b>{" "}
+          <Link href={"/"}>
+            Início <b>°</b>
+          </Link>
+
           <SubTitleContainer>Encontre seu mentor</SubTitleContainer>
         </TitleContainer>
         <CTAMain>
@@ -75,6 +81,11 @@ export default function MentorPage() {
         onSpecialtyChange={(e) => setSpecialtyFilter(e.target.value)}
         onMentorSearch={(query) => setMentorNameFilter(query)}
       />
+      {specialtyFilter && (
+        <StacksContainer>
+          <Stack> {specialtyFilter}</Stack>
+        </StacksContainer>
+      )}
       <MentorsContainer>
         {filteredMentors.length > 0 ? (
           filteredMentors.map((mentor: MentorCardProp) => (

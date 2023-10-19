@@ -15,7 +15,7 @@ export const MentorsContainer = styled.div`
   grid-gap: 30px;
   width: 100vw;
   min-height: 100vh;
-  padding: 20px 50px;
+  padding: 20px 170px;
   align-items: start;
   position: relative;
 `;
@@ -24,14 +24,17 @@ export const SubHeaderContainer = styled.div`
   display: flex;
   height: 100px;
   flex-direction: column;
-  padding: 10px 50px;
+  padding: 24px 120px;
 `;
 
 export const TitleContainer = styled.span`
-  font-size: 14px;
-  padding: 0px 50px;
-  color: #666666;
-  font-weight: 400;
+  padding: 5px 50px;
+  a{
+    color: #666666;
+    font-weight: 400;
+    font-size: 14px;
+    
+  }
 `;
 
 export const SubTitleContainer = styled.span`
@@ -69,4 +72,24 @@ export const NoResultMain = styled.span`
   font-weight: 600;
   color: #003986;
   margin-top: 10px;
+`;
+
+export const StacksContainer = styled.span`
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  flex-wrap: wrap;
+  padding:24px 0px 0px 170px;
+`;
+
+export const Stack = styled.span`
+  background: #fff;
+  font-size: 12px;
+  line-height: 14px;
+  height: 30px;
+  min-width: 73px;
+  color: #001633;
+  padding: 8px;
+  border-radius: 40px;
+  text-align: center;
 `;

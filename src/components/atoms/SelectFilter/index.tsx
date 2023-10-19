@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyledSelect } from "./styled";
 
 interface SelecProps {
@@ -8,7 +8,13 @@ interface SelecProps {
 }
 
 export default function SelectFilter({ options, onChange, selectName }: SelecProps) {
+  const [espec, setEspec] = useState('')
+
+  const handle = () => {
+    
+  }
   return (
+    <>
     <StyledSelect onChange={onChange}>
       <option value="">{selectName}</option>
       {options.map((option) => (
@@ -17,5 +23,6 @@ export default function SelectFilter({ options, onChange, selectName }: SelecPro
         </option>
       ))}
     </StyledSelect>
+    </>
   );
 }
