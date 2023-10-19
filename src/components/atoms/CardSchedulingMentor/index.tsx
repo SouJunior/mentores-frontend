@@ -11,14 +11,22 @@ import {
 import Image from "next/image";
 import UserDefault from "@/assets/userDefault.png";
 import { MentorCardProp } from "@/utils/globals";
+import ModalSchedMentor from "../ModalSchedMentor";
+import { useState } from "react";
 
 interface MentorsProps {
   mentor: MentorCardProp;
 }
 
 export default function CardScheduling({ mentor }: MentorsProps) {
+  const [open, setOpen] = useState(false)
+
+  function handleModal(){
+    setOpen(!open)
+  }
   return (
     <CardContainer>
+      <ModalSchedMentor onClose={handleModal} mentor={mentor} open={open}/>
       <TitleContainer>
         <Image
           width={80}
@@ -37,7 +45,7 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         </>
       </StacksContainer>
       <ButtonsContainer>
-        <SchedButton>Agendar Mentoria</SchedButton>
+        <SchedButton onClick={handleModal}>Agendar Mentoria</SchedButton>
         <InfoButton>Saiba mais</InfoButton>
       </ButtonsContainer>
     </CardContainer>

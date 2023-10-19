@@ -7,4 +7,5 @@ export interface MentorCardProp {
   profile: string;
   gender?:string;
   specialties: string[];
+  registerComplete?:boolean;
 }

@@ -4,8 +4,8 @@ import { ContainerControls, ContainerSelects } from "./styled";
 import SelectFilter from "@/components/atoms/SelectFilter";
 
 interface SubHeaderProps {
-  onGenderChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onSpecialtyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onGenderChange: (selectedOptions: string[]) => void;
+  onSpecialtyChange: (selectedOptions: string[]) => void;
   onMentorSearch: (query: string) => void;
 }
 

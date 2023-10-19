@@ -15,6 +15,7 @@ export const CardContainer = styled.div`
   }
 `;
 
+
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
