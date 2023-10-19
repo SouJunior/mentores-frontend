@@ -1,8 +1,9 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import MentorSubHeader from "@/components/molecules/MentorSubHeader";
 import CardScheduling from "@/components/atoms/CardSchedulingMentor";
 import { MentorCardProp } from "@/utils/globals";
+import NoResult from "@/assets/noresult.svg";
 import {
   MainContainer,
   MentorsContainer,
@@ -11,7 +12,10 @@ import {
   SubTitleContainer,
   CTAMain,
   CTASub,
+  NoResultContainer,
+  NoResultMain,
 } from "@/styles/pages/mentors";
+import Image from "next/image";
 
 export default function MentorPage() {
   const [mentors, setMentors] = useState([]);
@@ -72,9 +76,18 @@ export default function MentorPage() {
         onMentorSearch={(query) => setMentorNameFilter(query)}
       />
       <MentorsContainer>
-        {filteredMentors.map((mentor: MentorCardProp) => (
-          <CardScheduling key={mentor.fullName} mentor={mentor} />
-        ))}
+        {filteredMentors.length > 0 ? (
+          filteredMentors.map((mentor: MentorCardProp) => (
+            <CardScheduling key={mentor.fullName} mentor={mentor} />
+          ))
+        ) : (
+          <NoResultContainer>
+            <Image src={NoResult} alt="Sem resultado" />
+            <NoResultMain>Nada por aqui!</NoResultMain>
+            <CTASub>Não conseguimos encontrar resultados pra sua busca.</CTASub>
+            <CTASub>Tente alterar os filtros de pesquisa.</CTASub>
+          </NoResultContainer>
+        )}
       </MentorsContainer>
     </MainContainer>
   );
