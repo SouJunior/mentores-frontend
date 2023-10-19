@@ -76,7 +76,7 @@ export function Footer() {
         </SectionFooterLinks>
         <SectionFooterLinks>
           <h2>Suporte</h2>
-          <Link href="#">FAQ</Link>
+          <Link href="/faq">FAQ</Link>
         </SectionFooterLinks>
       </ContainerFooter>
       <ContainerSocialMedias>
