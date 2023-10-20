@@ -11,12 +11,9 @@ import { useState } from "react";
 import PerfilTab from "../PerfilTab";
 
 export default function OnBoardModal() {
-  const [requestSuccess, setRequestSuccess] = useState(false);
   const [step, setStep] = useState(1);
 
-  const handleStep = (success: boolean) => {
-    setRequestSuccess(success);
-  };
+
 
   const changeSteps = (step: number) => {
   setStep(2)
@@ -41,7 +38,6 @@ export default function OnBoardModal() {
       {step === 1 && (
         <GridSpecialities
           stepNumber={changeSteps}
-          onRequestSuccess={handleStep}
         />
       )}
       {step === 2 && <PerfilTab />}

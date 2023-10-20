@@ -1,5 +1,5 @@
 export interface IUserUpdate {
-  handle: (data: UserUpdateDTO) => Promise<void>;
+  handle: (data: UserUpdateDTO) => Promise<boolean>;
 }
 
 export type UserUpdateDTO = {
