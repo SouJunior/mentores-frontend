@@ -16,27 +16,45 @@ import { Field, Form, FormikProvider, useFormik } from "formik";
 import { InputForm } from "@/components/atoms/InputForm";
 import UserUpdateService from "@/services/user/userUpdateService";
 import { useRouter } from "next/router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {toast} from 'react-toastify'
 
 export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   const [isCompleted, setCompleted] = useState(false);
-  const router = useRouter()
+  const[requestError, setError] = useState(false)
+
+  const router = useRouter();
 
   const genders = [
-    "Homem cis",
-    "Mulher cis",
-    "Homem trans",
-    "Mulher trans",
-    "Bigenero",
-    "Genero fluido",
-    "Nao Binario",
-    "Agenero",
+    "Homem Cis",
+    "Mulher Cis",
+    "Homem Trans",
+    "Mulher Trans",
+    "Bigênero",
+    "Gênero-fluido",
+    "Não Binário",
+    "Agênero",
     "Prefiro não dizer",
     "Outros",
   ];
 
   const { handle } = UserUpdateService();
+
+  const handleError = (message: string) => {
+    toast.error(message, {
+      position: toast.POSITION.TOP_CENTER,
+      toastId: "customId",
+    });
+  };
+
+  const handleNotification = () => {
+    if(requestError){
+      handleError('Algum erro aconteceu. Entre em contato com a gente.')
+    }
+  }
 
   const initialValues = {
     imageFile: null,
@@ -51,12 +69,15 @@ export default function FormOnboard2() {
       gender: values.gender,
     };
 
-    try {
-      await handle(data);
-      router.push('/genericPage')
-    } catch (error) {
-      console.error("Erro ao atualizar:", error);
-    }
+
+      const response = await handle(data);
+      if(response){
+        setError(false)
+        router.push("/genericPage");
+      }else {
+        setError(true)
+      }
+ 
   };
 
   const formik = useFormik({
@@ -81,7 +102,13 @@ export default function FormOnboard2() {
       setCompleted(false);
     }
   }, [formik.touched]);
-  
+
+  useEffect(() => {
+    if (requestError) {
+      handleNotification();
+    }
+  }, [requestError]);
+
   const handleImageEdit = (editedImage: string | null) => {
     setSelectedPhoto(editedImage);
     formik.setFieldValue("imageUrl", editedImage || "");

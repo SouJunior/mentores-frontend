@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  IUserUpdate,
-  UserUpdateDTO,
-} from "../interfaces/IUserUpdate";
+import { IUserUpdate, UserUpdateDTO } from "../interfaces/IUserUpdate";
 import useUser from "@/context/Auth/useUser";
 
 const UserUpdateService = (): IUserUpdate => {
@@ -20,15 +17,12 @@ const UserUpdateService = (): IUserUpdate => {
 
   const handle = async (data: UserUpdateDTO) => {
     try {
-      console.log(data)
-      const response = await axios.put(url, data, config)
-      console.log(response)
+      const response = await axios.put(url, data, config);
+      return true;
     } catch (error) {
-      console.log(error)
+      return false;
     }
   };
-
-
 
   return { handle };
 };
