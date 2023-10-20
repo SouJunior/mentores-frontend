@@ -23,7 +23,7 @@ import Link from "next/link";
 export default function MentorPage() {
   const [mentors, setMentors] = useState([]);
   const [filteredMentors, setFilteredMentors] = useState([]);
-  const [genderFilter, setGenderFilter] = useState("");
+  const [genderFilter, setGenderFilter] = useState<string[]>([]);
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([]);
   const [mentorNameFilter, setMentorNameFilter] = useState("");
 
@@ -44,20 +44,31 @@ export default function MentorPage() {
 
   const filterMentors = (mentor: MentorCardProp) => {
     const nameFilter = mentorNameFilter.toLowerCase();
-  
-    const hasSelectedSpecialty = specialtyFilter.length === 0 || specialtyFilter.some(selectedSpecialty => mentor.specialties.includes(selectedSpecialty));
-  
+
+    const hasSelectedSpecialty =
+      specialtyFilter.length === 0 ||
+      specialtyFilter.some((selectedSpecialty) =>
+        mentor.specialties.includes(selectedSpecialty)
+      );
+
+      const hasSelectedGenders =
+      genderFilter.length === 0 ||
+      genderFilter.some((selectedGender) => 
+        mentor.gender.includes(selectedGender)
+      )
+    
+
     if (
-      (!genderFilter || mentor.gender === genderFilter) &&
-      hasSelectedSpecialty && 
-      (!mentorNameFilter || mentor.fullName.toLowerCase().includes(nameFilter)) &&
+      hasSelectedGenders &&
+      hasSelectedSpecialty &&
+      (!mentorNameFilter ||
+        mentor.fullName.toLowerCase().includes(nameFilter)) &&
       mentor.registerComplete === true
     ) {
       return true;
     }
     return false;
   };
-   
 
   useEffect(() => {
     const filtered = mentors.filter(filterMentors);
@@ -82,17 +93,21 @@ export default function MentorPage() {
         </CTAMain>
       </SubHeaderContainer>
       <MentorSubHeader
-        onGenderChange={(selectedOptions) => setGenderFilter(selectedOptions[0])}
-        onSpecialtyChange={(selectedOptions) => setSpecialtyFilter(selectedOptions)}
+        onGenderChange={(selectedOptions) =>
+          setGenderFilter(selectedOptions)
+        }
+        onSpecialtyChange={(selectedOptions) =>
+          setSpecialtyFilter(selectedOptions)
+        }
         onMentorSearch={(query) => setMentorNameFilter(query)}
       />
-     {specialtyFilter.length > 0 && (
-      <StacksContainer>
-        {specialtyFilter.map((selectedSpecialty) => (
-          <Stack key={selectedSpecialty}>{selectedSpecialty}</Stack>
-        ))}
-      </StacksContainer>
-    )}
+      {specialtyFilter.length > 0 && (
+        <StacksContainer>
+          {specialtyFilter.map((selectedSpecialty) => (
+            <Stack key={selectedSpecialty}>{selectedSpecialty}</Stack>
+          ))}
+        </StacksContainer>
+      )}
       <MentorsContainer>
         {filteredMentors.length > 0 ? (
           filteredMentors.map((mentor: MentorCardProp) => (
