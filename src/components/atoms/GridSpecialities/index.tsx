@@ -32,7 +32,7 @@ export default function GridSpecialities({
     "Liderança",
     "Produto",
     "Agilidade",
-    "UX22 Design",
+    "UX Design",
     "UI Design",
     "Front-End",
     "Back-End",
