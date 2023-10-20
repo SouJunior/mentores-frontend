@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {toast} from 'react-toastify'
+import useUser from "@/context/Auth/useUser";
 
 export default function FormOnboard2() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -26,6 +27,7 @@ export default function FormOnboard2() {
   const [isCompleted, setCompleted] = useState(false);
   const[requestError, setError] = useState(false)
 
+  const user = useUser()
   const router = useRouter();
 
   const genders = [
@@ -73,6 +75,7 @@ export default function FormOnboard2() {
       const response = await handle(data);
       if(response){
         setError(false)
+        user.updateUser({...user, ...data})
         router.push("/genericPage");
       }else {
         setError(true)
@@ -87,10 +90,6 @@ export default function FormOnboard2() {
 
   const handleOpenEditModal = () => {
     setIsEditModalOpen(true);
-  };
-
-  const handleStep = () => {
-    console.log("ok");
   };
 
   const closeModal = () => setIsEditModalOpen(false);
@@ -116,6 +115,18 @@ export default function FormOnboard2() {
 
   return (
     <>
+    <ToastContainer
+     autoClose={3500}
+     hideProgressBar={true}
+     closeOnClick
+     theme="colored"
+     style={{
+       textAlign: "justify",
+       fontSize: "16px",
+       width: "550px",
+       lineHeight: "32px",
+     }}
+    />
       <Dotted>
         <PhotoButtom
           size={80}
@@ -169,7 +180,7 @@ export default function FormOnboard2() {
             <StyledHR />
 
             <ButtonContainer>
-              <BackButton onClick={handleStep}>Voltar</BackButton>
+              <BackButton>Voltar</BackButton>
               <NextButton type="submit" disabled={!isCompleted}>
                 Concluir
               </NextButton>
