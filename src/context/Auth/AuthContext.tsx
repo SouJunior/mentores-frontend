@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { IAuthContextType, User } from "../interfaces/IAuth";
 import { useRouter } from "next/router";
-
 export const AuthContent = createContext<IAuthContextType | undefined>(
   undefined
 );
@@ -16,6 +15,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("user");
   };
 
+  const updateUser = (updatedUser: User | null) => {
+    if (updatedUser) {
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    }
+  };
+
   useEffect(() => {
     const storedUser = localStorage.getItem('user')
     if(storedUser) {
@@ -25,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AuthContent.Provider value={{ user, setUser, logout }}>
+    <AuthContent.Provider value={{ user, setUser, logout, updateUser }}>
       {children}
     </AuthContent.Provider>
   );
