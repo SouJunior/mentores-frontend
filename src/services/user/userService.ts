@@ -13,7 +13,7 @@ export function createUserFromResponseData(responseData: any): User | null {
     email: responseData.info.email || "",
     specialties:responseData.specialties,
     profile:responseData.info.profile,
-    profileKey: responseData.info.profileKey,
+    aboutMe: responseData.info.aboutMe,
     registerComplete: responseData.info.registerComplete,
     createdAt:responseData.info.createdAt,
     updatedAt:responseData.info.updatedAt
