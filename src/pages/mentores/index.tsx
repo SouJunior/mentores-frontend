@@ -30,22 +30,21 @@ export default function MentorPage() {
   const [mentorNameFilter, setMentorNameFilter] = useState("");
 
   const fetchMentors = async () => {
+    setLoading(true); 
     try {
       const response = await axios.get(
         "https://mentores-backend.onrender.com/mentor"
       );
-      setLoading(true);
       setMentors(response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
-    setLoading(false)
   };
 
   useEffect(() => {
     fetchMentors();
-    console.log(loading);
-  }, [loading]);
+  }, []);
 
   const filterMentors = (mentor: MentorCardProp) => {
     const nameFilter = mentorNameFilter.toLowerCase();
