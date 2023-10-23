@@ -44,12 +44,13 @@ export default function FormEmailToReset() {
             </MessagesContainer>
             <Field
               as={InputForm}
-              type="text"
+              inputType="text"
               name="email"
               label="Email:"
               placeholder="Preencha com seu email"
               showAsterisk={false}
             />
+            
             <Button btnRole={"form"} content={"Enviar"} />
           </Form>
         </FormikProvider>
