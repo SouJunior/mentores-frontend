@@ -77,18 +77,18 @@ export default function FormNewPass() {
                 Preencha os campos abaixo com sua nova senha e confirme-a.
               </span>
             </MessagesContainer>
-            <InfoTooltip right={515} />
+            <InfoTooltip right={455} />
             <Eye
               onClick={(e) => handleShowPassword(e)}
               eye={eye}
               size={20}
-              left={930}
+              left={850}
               paddingTop={25}
               color={"#5D5F5D"}
             />
             <Field
               as={InputForm}
-              type={show ? "password" : "text"}
+              inputType={show ? "password" : "text"}
               name="password"
               label="Nova senha"
               placeholder="*******"
@@ -98,13 +98,13 @@ export default function FormNewPass() {
               onClick={(e) => handleConfirmPassword(e)}
               eye={eyeConfirm}
               size={20}
-              left={930}
+              left={850}
               paddingTop={20}
               color={"#5D5F5D"}
             />
             <Field
               as={InputForm}
-              type={showConfirm ? "password" : "text"}
+              inputType={showConfirm ? "password" : "text"}
               name="confirmPassword"
               label="Confirmar senha"
               placeholder="*******"
