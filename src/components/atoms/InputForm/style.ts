@@ -37,7 +37,7 @@ export const ContainerInput = styled.div`
       -moz-box-shadow: 0px 0px 15px 1px
         ${(props) => props.theme.colors.blue[700]};
       box-shadow: 0px 0px 5px 0px ${(props) => props.theme.colors.blue[700]};
-      border: ${(props) => props.theme.colors.blue[700]};
+      border: 1px solid ${(props) => props.theme.colors.blue[700]};
       outline: none;
     }
   }
