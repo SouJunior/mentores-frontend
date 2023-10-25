@@ -1,30 +1,29 @@
-import axios from "axios";
-import { IUserUpdate, UserUpdateDTO } from "../interfaces/IUserUpdate";
-import useUser from "@/context/Auth/useUser";
+import { IUserUpdate, UserUpdateDTO } from '../interfaces/IUserUpdate'
+import useUser from '@/context/Auth/useUser'
+import { api } from '@/lib/axios'
 
 const UserUpdateService = (): IUserUpdate => {
-  const { user } = useUser();
+  const { user } = useUser()
 
-  const token = user?.token;
-  const id = user?.id;
-  const url = `https://mentores-backend.onrender.com/mentor/${id}`;
+  const token = user?.token
+  const id = user?.id
 
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  };
+  }
 
   const handle = async (data: UserUpdateDTO) => {
     try {
-      const response = await axios.put(url, data, config);
-      return true;
+      await api.put(`/mentor/${id}`, data, config)
+      return true
     } catch (error) {
-      return false;
+      return false
     }
-  };
+  }
 
-  return { handle };
-};
+  return { handle }
+}
 
-export default UserUpdateService;
+export default UserUpdateService
