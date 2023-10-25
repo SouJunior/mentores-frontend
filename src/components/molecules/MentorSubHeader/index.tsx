@@ -16,7 +16,7 @@ export default function MentorSubHeader({
 }: SubHeaderProps) {
   const [mentorSearchQuery, setMentorSearchQuery] = useState("");
   const genderOptions = [
-    "Homem cis",
+    "Homem Cis",
     "Mulher cis",
     "Homem trans",
     "Mulher trans",
@@ -49,7 +49,7 @@ export default function MentorSubHeader({
 
   return (
     <ContainerControls>
-      <InputSearch onSearch={handleMentorSearch} />{" "}
+      <InputSearch onSearch={handleMentorSearch} />
       <ContainerSelects>
         <SelectFilter
           options={specialtyOptions}
