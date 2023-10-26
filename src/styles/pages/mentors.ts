@@ -15,7 +15,7 @@ export const MentorsContainer = styled.div`
   grid-gap: 30px;
   width: 100vw;
   min-height: 100vh;
-  padding: 20px 170px;
+  padding: 20px 8%;
   align-items: start;
   position: relative;
 `;

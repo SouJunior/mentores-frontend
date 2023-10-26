@@ -5,6 +5,7 @@ import {
   MentorsTitle,
   SeeAll,
 } from "./style";
+import Link from "next/link";
 
 export const MentorSection = () => {
   return (
