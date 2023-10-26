@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerForm = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ export const ContainerForm = styled.div`
   background: ${(props) => props.theme.colors.white};
   border-radius: 12px;
   padding: 12px 0px;
-`;
+`
 
 export const ContainerRegister = styled.div`
   form {
@@ -24,14 +24,14 @@ export const ContainerRegister = styled.div`
   }
 
   p {
-    font-family: "Radio Canada";
+    font-family: 'Radio Canada';
     font-style: normal;
     font-size: ${(props) => props.theme.fontSizes.xs};
     color: ${(props) => props.theme.colors.gray[700]};
     margin: 8px 0px;
   }
 
-  input[type="radio"] {
+  input[type='radio'] {
     vertical-align: middle;
     margin-right: 5px;
   }
@@ -39,7 +39,7 @@ export const ContainerRegister = styled.div`
   .asterisk {
     color: ${(props) => props.theme.colors.blue[500]};
   }
-`;
+`
 
 export const ContainerTerms = styled.div`
   display: flex;
@@ -47,14 +47,14 @@ export const ContainerTerms = styled.div`
   text-align: justify;
   align-items: flex-start;
   justify-content: center;
-`;
+`
 
 export const TxtTerms = styled.div`
   font-size: 14px;
   width: 100%;
   margin-left: 8px;
   color: ${(props) => props.theme.colors.blue[500]};
-`;
+`
 
 export const ContainerBtn = styled.div`
   display: flex;
@@ -62,4 +62,25 @@ export const ContainerBtn = styled.div`
   padding: 12px 0px 0px;
   margin: 0px;
   gap: 16px;
-`;
+`
+
+export const DatePickerContainer = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  font-size: 0.875rem;
+  color: ${(props) => props.theme.colors.gray[700]};
+
+  margin-bottom: 1rem;
+
+  span {
+    span {
+      color: ${(props) => props.theme.colors.blue[500]};
+    }
+  }
+
+  [data-placeholder] {
+    color: ${(props) => props.theme.colors.gray[300]};
+  }
+`

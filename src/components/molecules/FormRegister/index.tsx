@@ -10,7 +10,7 @@ import {
 } from '@/utils/registerSchema'
 import { Field, Form, FormikProvider, useFormik } from 'formik'
 import Image from 'next/image'
-import { KeyboardEvent, MouseEvent, useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import { Button } from '../../atoms/Button'
 import { InputForm } from '../../atoms/InputForm'
 import { ModalCancel } from '../ModalCancel'
@@ -22,9 +22,13 @@ import {
   ContainerForm,
   ContainerRegister,
   ContainerTerms,
+  DatePickerContainer,
   TxtTerms,
 } from './style'
 import { api } from '@/lib/axios'
+import { Calendar } from '../Calendar'
+import EventRoundedIcon from '@mui/icons-material/EventRounded'
+import dayjs from 'dayjs'
 
 export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false)
@@ -37,6 +41,7 @@ export function FormRegister() {
   const [eye, setEye] = useState(true)
   const [showConfirm, setShowConfirm] = useState(true)
   const [eyeConfirm, setEyeConfirm] = useState(true)
+  const [showCalendar, setShowCalendar] = useState(false)
 
   const handleOpenTermos = () => setOpenTermos(true)
   const handleCloseTermos = () => setOpenTermos(false)
@@ -126,19 +131,37 @@ export function FormRegister() {
               inputType="text"
             />
 
-            <Field
-              as={InputForm}
-              type="input"
-              name="dataBirthday"
-              label="Data de nascimento"
-              placeholder="DD/MM/YYY"
-              inputType="date"
-              min={minDate}
-              max={maxDate}
-              onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
-                event.preventDefault()
-              }
-            />
+            <Calendar.Root
+              open={showCalendar}
+              onOpenChange={() => setShowCalendar(!showCalendar)}
+            >
+              <DatePickerContainer>
+                <span>
+                  Data de nascimento <span>*</span>
+                </span>
+                <Calendar.Control>
+                  {formik.values.dataBirthday ? (
+                    <span>
+                      {dayjs(formik.values.dataBirthday).format('DD/MM/YYYY')}
+                    </span>
+                  ) : (
+                    <span data-placeholder>dd/mm/aaaa</span>
+                  )}
+                  <EventRoundedIcon />
+                </Calendar.Control>
+              </DatePickerContainer>
+
+              <Calendar.Content
+                selected={formik.values.dataBirthday}
+                onSelected={(date: Date) => {
+                  formik.setValues({
+                    ...formik.values,
+                    dataBirthday: date,
+                  })
+                  setShowCalendar(false)
+                }}
+              />
+            </Calendar.Root>
 
             <Field
               as={InputForm}

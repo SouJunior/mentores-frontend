@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   margin:0;
   padding:0;
   box-sizing:border-box;
-  transition: all 0.3s ease;  
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;  
   font-family: 'Radio Canada',sans-serif;
   scroll-behavior: smooth;
 }
@@ -58,4 +58,4 @@ body{
       }
     }
 }
-`;
+`

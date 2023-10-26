@@ -1,16 +1,18 @@
-import { Layout } from "@/components/organisms/Global/layout";
-import { AuthProvider } from "@/context/Auth/AuthContext";
-import { GlobalStyle } from "@/styles/GlobalStyle";
-import { theme } from "@/styles/theme";
-import { AppProps } from "next/app";
-import Head from "next/head";
-import { FC } from "react";
-import { ThemeProvider } from "styled-components";
+import '@/lib/dayjs'
 
-const excludeRoutes = ["/login", "/cadastro"];
+import { Layout } from '@/components/organisms/Global/layout'
+import { AuthProvider } from '@/context/Auth/AuthContext'
+import { GlobalStyle } from '@/styles/GlobalStyle'
+import { theme } from '@/styles/theme'
+import { AppProps } from 'next/app'
+import Head from 'next/head'
+import { FC } from 'react'
+import { ThemeProvider } from 'styled-components'
+
+const excludeRoutes = ['/login', '/cadastro']
 
 const App: FC<AppProps> = ({ Component, pageProps, router }) => {
-  const shouldRenderLayout = !excludeRoutes.includes(router.pathname);
+  const shouldRenderLayout = !excludeRoutes.includes(router.pathname)
   return (
     <AuthProvider>
       <ThemeProvider theme={theme}>
@@ -38,7 +40,7 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
         </>
       </ThemeProvider>
     </AuthProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App
