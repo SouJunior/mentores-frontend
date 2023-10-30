@@ -1,4 +1,4 @@
-import GridSpecialities from "@/components/atoms/GridSpecialities";
+import GridSpecialities from '@/components/atoms/GridSpecialities'
 import {
   ModalContainer,
   TabsContainer,
@@ -6,41 +6,35 @@ import {
   TabLabel,
   TabWrapper,
   TabLine,
-} from "./styled";
-import { useState } from "react";
-import PerfilTab from "../PerfilTab";
+} from './styled'
+import { useState } from 'react'
+import PerfilTab from '../PerfilTab'
 
 export default function OnBoardModal() {
-  const [step, setStep] = useState(1);
-
-
+  const [step, setStep] = useState<1 | 2>(1)
 
   const changeSteps = (step: number) => {
-  setStep(2)
-  };
+    setStep(2)
+  }
 
   return (
-    <ModalContainer style={{ height: step === 1 ? "547px" : "767px" }}>
+    <ModalContainer style={{ height: step === 1 ? '547px' : '767px' }}>
       <TabsContainer>
         <TabWrapper>
           <Tab>
             <TabLabel>ESPECIALIDADES</TabLabel>
-            <TabLine style={{ width: step === 1 ? "258px" : "0" }} />
+            <TabLine style={{ width: step === 1 ? '258px' : '0' }} />
           </Tab>
         </TabWrapper>
         <TabWrapper>
           <Tab>
             <TabLabel>PERFIL</TabLabel>
-            <TabLine style={{ width: step === 2 ? "258px" : "0" }} />
+            <TabLine style={{ width: step === 2 ? '258px' : '0' }} />
           </Tab>
-        </TabWrapper>{" "}
+        </TabWrapper>{' '}
       </TabsContainer>
-      {step === 1 && (
-        <GridSpecialities
-          stepNumber={changeSteps}
-        />
-      )}
-      {step === 2 && <PerfilTab />}
+      {step === 1 && <GridSpecialities stepNumber={changeSteps} />}
+      {step === 2 && <PerfilTab onStep={setStep} />}
     </ModalContainer>
-  );
+  )
 }

@@ -1,13 +1,18 @@
-import FormOnboard2 from "@/components/molecules/FormOnboard2";
-import { PerfilContainer, StyledImportant } from "./styled";
+import FormOnboard2 from '@/components/molecules/FormOnboard2'
+import { PerfilContainer, StyledImportant } from './styled'
+import { Dispatch, SetStateAction } from 'react'
 
-export default function PerfilTab() {
+interface PerfilTabProps {
+  onStep?: Dispatch<SetStateAction<1 | 2>>
+}
+
+export default function PerfilTab({ onStep }: PerfilTabProps) {
   return (
     <PerfilContainer>
       <StyledImportant>
         <>*</> Indica um campo obrigatório
-      </StyledImportant>{" "}
-      <FormOnboard2 />
+      </StyledImportant>{' '}
+      <FormOnboard2 onStep={onStep} />
     </PerfilContainer>
-  );
+  )
 }
