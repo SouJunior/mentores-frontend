@@ -18,6 +18,7 @@ import { ModalPrivacyPolicy } from '../ModalPrivacyPolicy'
 import ModalTerms from '../ModalTerms'
 
 import {
+  ButtonLoading,
   ContainerBtn,
   ContainerForm,
   ContainerRegister,
@@ -29,6 +30,7 @@ import { api } from '@/lib/axios'
 import { Calendar } from '../Calendar'
 import EventRoundedIcon from '@mui/icons-material/EventRounded'
 import dayjs from 'dayjs'
+import { AxiosError } from 'axios'
 
 export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false)
@@ -82,10 +84,19 @@ export function FormRegister() {
         passwordConfirmation: values.confirmPassword,
         specialties: ['Frontend'],
       })
-      console.log('CADASTRADO')
       resetForm()
       handleModalEmail()
     } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error?.response?.status === 400) {
+          alert(`${error?.response.status} ${error?.response.data.message[0]}`)
+          return
+        }
+  
+        alert("Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.")
+        return
+      }
+
       console.error(error)
     }
   }
@@ -107,11 +118,9 @@ export function FormRegister() {
 
   const yesterday = new Date()
   yesterday.setDate(yesterday.getDate() - 1)
-  const maxDate = yesterday.toISOString().split('T')[0]
 
   const hundredYearsAgo = new Date()
   hundredYearsAgo.setFullYear(hundredYearsAgo.getFullYear() - 100)
-  const minDate = hundredYearsAgo.toISOString().split('T')[0]
 
   return (
     <ContainerForm>
@@ -253,11 +262,17 @@ export function FormRegister() {
               height={730}
             />
             <ContainerBtn>
-              <Button
-                btnRole={'form'}
-                content={'Concluir'}
-                disabled={concluidoDesabilitado}
-              />
+              {formik.isSubmitting ? 
+                <ButtonLoading disabled>
+                  <span className='loader' />
+                </ButtonLoading>
+              : (
+                <Button
+                  btnRole={'form'}
+                  content={'Concluir'}
+                  disabled={concluidoDesabilitado}
+                />
+              )}
 
               <Button
                 btnRole={'form-secondary'}

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const ContainerForm = styled.div`
   width: 100%;
@@ -82,5 +82,61 @@ export const DatePickerContainer = styled.label`
 
   [data-placeholder] {
     color: ${(props) => props.theme.colors.gray[300]};
+  }
+`
+
+const animloader = keyframes`
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+`
+
+export const ButtonLoading = styled.button`
+  display: grid;
+  place-content: center;
+  font-size: ${(props) => props.theme.fontSizes.sm};
+  border-color: ${(props) => props.theme.colors.blue[400]};
+  color: ${(props) => props.theme.colors.white};
+  width: 100%;
+  height: 48px;
+
+  background: ${(props) => props.theme.colors.blue[400]};
+
+  &:not(:disabled):hover {
+    background-color: ${(props) => props.theme.colors.blue[700]};
+    color: ${(props) => props.theme.colors.white};
+    box-shadow: 0px 1px 15px rgba(17, 101, 186, 0.4);
+  }
+
+  &:disabled {
+    cursor: wait;
+  }
+
+  .loader {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  } 
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #FFF;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: ${animloader} 2s linear infinite;
+  }
+  .loader::after {
+    animation-delay: 1s;
   }
 `
