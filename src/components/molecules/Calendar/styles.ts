@@ -69,7 +69,7 @@ export const CalendarTable = styled.table`
 `
 
 interface CalendarDayProps {
-  isNotCurrentMonth: boolean
+  isDisabled: boolean
 }
 
 export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
@@ -78,18 +78,22 @@ export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
   width: 1.1rem;
   transition: 0.3s;
   text-align: center;
-  color: ${(props) => props.isNotCurrentMonth && props.theme.colors.gray[300]};
+  color: ${(props) => props.isDisabled && props.theme.colors.gray[300]};
 
   line-height: 150%;
   padding: 0.5rem;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: rgba(215, 217, 215, 0.3);
   }
 
   &[data-state='on'] {
     color: ${(props) => props.theme.colors.blue[500]};
     font-weight: 700;
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
   }
 
   &:focus-visible {
