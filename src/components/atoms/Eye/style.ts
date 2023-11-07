@@ -7,7 +7,7 @@ export const EyeContainer = styled.button<
   border: none;
   height: 48px;
   background-color: transparent;
-  color: ${(props) => props.theme.colors.gray[400]};
+  color: ${(props) => props.theme.colors.gray[700]};
   left: ${(props) => props.left}px;
   margin-top: ${(props) => props.marginTop}px;
   cursor: pointer;
