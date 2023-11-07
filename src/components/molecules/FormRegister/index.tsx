@@ -31,6 +31,7 @@ import { Calendar } from '../Calendar'
 import EventRoundedIcon from '@mui/icons-material/EventRounded'
 import dayjs from 'dayjs'
 import { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 
 export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false)
@@ -45,12 +46,13 @@ export function FormRegister() {
   const [eyeConfirm, setEyeConfirm] = useState(true)
   const [showCalendar, setShowCalendar] = useState(false)
 
+  const router = useRouter()
+
   const handleOpenTermos = () => setOpenTermos(true)
   const handleCloseTermos = () => setOpenTermos(false)
   const handleOpenPoliticas = () => setOpenPoliticas(true)
   const handleClosePoliticas = () => setOpenPoliticas(false)
   const handleModalEmail = () => setOpenEmail(true)
-  const handleModalCancel = () => setOpenModalCancel(true)
   const closeModalEmail = () => setOpenEmail(false)
   const closeModalCancel = () => setOpenModalCancel(false)
 
@@ -107,6 +109,18 @@ export function FormRegister() {
     onSubmit: handleSubmit,
     validateOnChange: true,
   })
+
+  const handleModalCancel = () => {
+    const { name, password, confirmEmail, confirmPassword, dataBirthday, email } = formik.values
+    const isSomeFieldFilled = name || password || email || dataBirthday || confirmEmail || confirmPassword
+
+    if (isSomeFieldFilled) {
+      setOpenModalCancel(true)
+      return
+    }
+
+    router.back()
+  }
 
   useEffect(() => {
     if (agree && formik.isValid && Object.keys(formik.touched).length > 0) {
