@@ -18,6 +18,7 @@ import { ModalPrivacyPolicy } from '../ModalPrivacyPolicy'
 import ModalTerms from '../ModalTerms'
 
 import {
+  ButtonLoading,
   ContainerBtn,
   ContainerForm,
   ContainerRegister,
@@ -29,6 +30,8 @@ import { api } from '@/lib/axios'
 import { Calendar } from '../Calendar'
 import EventRoundedIcon from '@mui/icons-material/EventRounded'
 import dayjs from 'dayjs'
+import { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 
 export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false)
@@ -43,12 +46,13 @@ export function FormRegister() {
   const [eyeConfirm, setEyeConfirm] = useState(true)
   const [showCalendar, setShowCalendar] = useState(false)
 
+  const router = useRouter()
+
   const handleOpenTermos = () => setOpenTermos(true)
   const handleCloseTermos = () => setOpenTermos(false)
   const handleOpenPoliticas = () => setOpenPoliticas(true)
   const handleClosePoliticas = () => setOpenPoliticas(false)
   const handleModalEmail = () => setOpenEmail(true)
-  const handleModalCancel = () => setOpenModalCancel(true)
   const closeModalEmail = () => setOpenEmail(false)
   const closeModalCancel = () => setOpenModalCancel(false)
 
@@ -82,10 +86,19 @@ export function FormRegister() {
         passwordConfirmation: values.confirmPassword,
         specialties: ['Frontend'],
       })
-      console.log('CADASTRADO')
       resetForm()
       handleModalEmail()
     } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error?.response?.status === 400) {
+          alert(`${error?.response.status} ${error?.response.data.message[0]}`)
+          return
+        }
+  
+        alert("Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.")
+        return
+      }
+
       console.error(error)
     }
   }
@@ -97,6 +110,18 @@ export function FormRegister() {
     validateOnChange: true,
   })
 
+  const handleModalCancel = () => {
+    const { name, password, confirmEmail, confirmPassword, dataBirthday, email } = formik.values
+    const isSomeFieldFilled = name || password || email || dataBirthday || confirmEmail || confirmPassword
+
+    if (isSomeFieldFilled) {
+      setOpenModalCancel(true)
+      return
+    }
+
+    router.back()
+  }
+
   useEffect(() => {
     if (agree && formik.isValid && Object.keys(formik.touched).length > 0) {
       setIsConcluidoDesabilitado(false)
@@ -107,11 +132,9 @@ export function FormRegister() {
 
   const yesterday = new Date()
   yesterday.setDate(yesterday.getDate() - 1)
-  const maxDate = yesterday.toISOString().split('T')[0]
 
   const hundredYearsAgo = new Date()
   hundredYearsAgo.setFullYear(hundredYearsAgo.getFullYear() - 100)
-  const minDate = hundredYearsAgo.toISOString().split('T')[0]
 
   return (
     <ContainerForm>
@@ -253,11 +276,17 @@ export function FormRegister() {
               height={730}
             />
             <ContainerBtn>
-              <Button
-                btnRole={'form'}
-                content={'Concluir'}
-                disabled={concluidoDesabilitado}
-              />
+              {formik.isSubmitting ? 
+                <ButtonLoading disabled>
+                  <span className='loader' />
+                </ButtonLoading>
+              : (
+                <Button
+                  btnRole={'form'}
+                  content={'Concluir'}
+                  disabled={concluidoDesabilitado}
+                />
+              )}
 
               <Button
                 btnRole={'form-secondary'}

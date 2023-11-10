@@ -20,7 +20,7 @@ interface CalendarWeek {
   week: number
   days: {
     date: dayjs.Dayjs
-    notCurrentMonth?: boolean
+    disabled?: boolean
   }[]
 }
 
@@ -64,10 +64,13 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
     const calendarDays = [
       ...previousMonthFillArray.map((date) => ({
         date,
-        notCurrentMonth: true,
+        disabled: true,
       })),
-      ...daysInMonthArray.map((date) => ({ date })),
-      ...nextMonthFillArray.map((date) => ({ date, notCurrentMonth: true })),
+      ...daysInMonthArray.map((date) => {
+        const isDateAfterCurrentDate = date.isAfter(dayjs())
+        return { date, disabled: isDateAfterCurrentDate }
+      }),
+      ...nextMonthFillArray.map((date) => ({ date, disabled: true })),
     ]
 
     const calendarWeeks = calendarDays.reduce<CalendarWeeks>(
@@ -99,8 +102,6 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
     setCurrentDate(nextMonthDate)
   }
 
-  const currentYear = new Date().getFullYear()
-
   return (
     <Popover.Portal>
       <Container align="start" {...props}>
@@ -109,7 +110,7 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
             <ArrowBackIosIcon />
           </LeftCalendarAction>
           <RightCalendarAction
-            disabled={currentDate.isAfter(dayjs(`${currentYear}-12`))}
+            disabled={currentDate.isAfter(dayjs())}
             onClick={handleNextMonth}
           >
             <ArrowForwardIosIcon />
@@ -131,19 +132,20 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
           <tbody>
             {calendarWeeks.map(({ days, week }) => (
               <tr key={week}>
-                {days.map(({ date, notCurrentMonth }) => (
-                  <td key={date.toString()}>
-                    <CalendarDay
-                      pressed={date.isSame(dayjs(selected))}
-                      onPressedChange={() =>
-                        onSelected && onSelected(date.toDate())
-                      }
-                      isNotCurrentMonth={notCurrentMonth ?? false}
-                    >
-                      {date.get('date')}
-                    </CalendarDay>
-                  </td>
-                ))}
+                {days.map(({ date, disabled }) => (
+                    <td key={date.toString()}>
+                      <CalendarDay
+                        pressed={date.isSame(dayjs(selected))}
+                        onPressedChange={() =>
+                          onSelected && onSelected(date.toDate())
+                        }
+                        isDisabled={disabled ?? false}
+                        disabled={date.isAfter(dayjs())}
+                      >
+                        {date.get('date')}
+                      </CalendarDay>
+                    </td>
+                  ))}
               </tr>
             ))}
           </tbody>
