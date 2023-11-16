@@ -17,6 +17,7 @@ export const MentorsContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
   padding: 20px 8%;
+  padding-bottom: 2rem;
   position: relative;
 `
 
