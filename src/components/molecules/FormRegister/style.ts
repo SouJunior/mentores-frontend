@@ -122,15 +122,15 @@ export const ButtonLoading = styled.button`
     height: 24px;
     display: inline-block;
     position: relative;
-  } 
+  }
   .loader::after,
   .loader::before {
-    content: '';  
+    content: '';
     box-sizing: border-box;
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #FFF;
+    background: #fff;
     position: absolute;
     left: 0;
     top: 0;
@@ -139,4 +139,8 @@ export const ButtonLoading = styled.button`
   .loader::after {
     animation-delay: 1s;
   }
+`
+
+export const WrapperInput = styled.label`
+  position: relative;
 `

@@ -1,22 +1,22 @@
 // import { Lock, User2Icon } from "lucide-react";
-import { MouseEvent, useState } from "react";
-import { Eye } from "../Eye";
+import { MouseEvent, useState } from 'react'
+import { Eye } from '../Eye'
 import {
   ContainerInput,
   ContainerInputError,
   InputError,
   Label,
   LabelError,
-} from "./style";
+} from './style'
 
 interface InputProps {
-  type: string;
-  value: string;
-  error: string;
-  setValue: (e: string) => void;
-  placeholder: string;
-  label: string;
-  id: string;
+  type: string
+  value: string
+  error: string
+  setValue: (e: string) => void
+  placeholder: string
+  label: string
+  id: string
 }
 
 export function InputLogin({
@@ -28,16 +28,16 @@ export function InputLogin({
   label,
   id,
 }: InputProps) {
-  const [eye, setEye] = useState(true);
-  const [show, setShow] = useState(true);
+  const [eye, setEye] = useState(true)
+  const [show, setShow] = useState(true)
 
   function toggleShow(e: MouseEvent<HTMLElement>) {
-    e.preventDefault();
-    setEye(!eye);
-    setShow(!show);
+    e.preventDefault()
+    setEye(!eye)
+    setShow(!show)
   }
 
-  if (error !== "") {
+  if (error !== '') {
     return (
       <>
         <LabelError htmlFor={id}>{label}</LabelError>
@@ -49,23 +49,22 @@ export function InputLogin({
           )} */}
           <InputError
             id={id}
-            type={show === false ? "text" : type}
+            type={show === false ? 'text' : type}
             placeholder={placeholder}
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          {type === "password" && (
+          {type === 'password' && (
             <Eye
-              left={380}
+              right="1rem"
               eye={eye}
               onClick={(e) => toggleShow(e)}
               size={20}
-              marginTop={10}
             />
           )}
         </ContainerInputError>
       </>
-    );
+    )
   } else {
     return (
       <>
@@ -79,23 +78,22 @@ export function InputLogin({
 
           <input
             id={id}
-            type={show === false ? "text" : type}
+            type={show === false ? 'text' : type}
             placeholder={placeholder}
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          {type === "password" && (
+          {type === 'password' && (
             <Eye
-              left={380}
+              right="1rem"
               eye={eye}
               onClick={(e) => toggleShow(e)}
               size={20}
-              marginTop={10}
               color="#046AD0"
             />
           )}
         </ContainerInput>
       </>
-    );
+    )
   }
 }

@@ -1,17 +1,35 @@
-import styled from "styled-components";
+import styled, { css } from 'styled-components'
 
 export const EyeContainer = styled.button<
-  Partial<{ left: number; marginTop: number; paddingTop:number }>
+  Partial<{
+    marginTop: number
+    position: {
+      left: string
+      right: string
+      top: string
+      bottom: string
+    }
+  }>
 >`
   position: absolute;
   border: none;
-  height: 48px;
   background-color: transparent;
   color: ${(props) => props.theme.colors.gray[700]};
-  left: ${(props) => props.left}px;
   margin-top: ${(props) => props.marginTop}px;
   cursor: pointer;
   outline: none;
-  padding-top:${(props) => props.paddingTop}px;
-  z-index:1;
-`;
+  padding: 0;
+  z-index: 1;
+  line-height: 0;
+
+  ${(props) => {
+    if (props.position) {
+      return css`
+        top: ${props.position.top};
+        bottom: ${props.position.bottom};
+        left: ${props.position.left};
+        right: ${props.position.right};
+      `
+    }
+  }}
+`
