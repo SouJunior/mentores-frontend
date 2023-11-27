@@ -24,6 +24,7 @@ import {
   ContainerRegister,
   ContainerTerms,
   DatePickerContainer,
+  WrapperInput,
   TxtTerms,
 } from './style'
 import { api } from '@/lib/axios'
@@ -94,8 +95,10 @@ export function FormRegister() {
           alert(`${error?.response.status} ${error?.response.data.message[0]}`)
           return
         }
-  
-        alert("Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.")
+
+        alert(
+          'Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.'
+        )
         return
       }
 
@@ -111,8 +114,21 @@ export function FormRegister() {
   })
 
   const handleModalCancel = () => {
-    const { name, password, confirmEmail, confirmPassword, dataBirthday, email } = formik.values
-    const isSomeFieldFilled = name || password || email || dataBirthday || confirmEmail || confirmPassword
+    const {
+      name,
+      password,
+      confirmEmail,
+      confirmPassword,
+      dataBirthday,
+      email,
+    } = formik.values
+    const isSomeFieldFilled =
+      name ||
+      password ||
+      email ||
+      dataBirthday ||
+      confirmEmail ||
+      confirmPassword
 
     if (isSomeFieldFilled) {
       setOpenModalCancel(true)
@@ -203,40 +219,48 @@ export function FormRegister() {
               placeholder="Confirme seu e-mail"
               inputType="email"
             />
-            <InfoTooltip right={15} />
-            <Eye
-              onClick={(e) => handleShowPassword(e)}
-              eye={eye}
-              size={20}
-              left={410}
-              marginTop={23}
-              color={'#5D5F5D'}
-            />
-            <Field
-              as={InputForm}
-              type="input"
-              label="Senha"
-              name="password"
-              placeholder="********"
-              inputType={show ? 'password' : 'text'}
-            />
-            <Eye
-              onClick={(e) => handleConfirmPassword(e)}
-              eye={eyeConfirm}
-              size={20}
-              left={410}
-              marginTop={23}
-              color={'#5D5F5D'}
-            />
 
-            <Field
-              as={InputForm}
-              type="input"
-              label="Confirmar Senha"
-              name="confirmPassword"
-              placeholder="********"
-              inputType={showConfirm ? 'password' : 'text'}
-            />
+            <InfoTooltip right={-6} />
+
+            <WrapperInput>
+              <Eye
+                onClick={(e) => handleShowPassword(e)}
+                eye={eye}
+                size={20}
+                right="1rem"
+                top="2.1rem"
+                color={'#5D5F5D'}
+              />
+
+              <Field
+                as={InputForm}
+                type="input"
+                label="Senha"
+                name="password"
+                placeholder="********"
+                inputType={show ? 'password' : 'text'}
+              />
+            </WrapperInput>
+
+            <WrapperInput>
+              <Eye
+                onClick={(e) => handleConfirmPassword(e)}
+                eye={eyeConfirm}
+                size={20}
+                right="1rem"
+                top="2.1rem"
+                color={'#5D5F5D'}
+              />
+
+              <Field
+                as={InputForm}
+                type="input"
+                label="Confirmar senha"
+                name="confirmPassword"
+                placeholder="********"
+                inputType={showConfirm ? 'password' : 'text'}
+              />
+            </WrapperInput>
             <ContainerTerms>
               <Checkbox setValue={setIsAgree} isChecked={agree} />
               <TxtTerms>
@@ -276,11 +300,11 @@ export function FormRegister() {
               height={730}
             />
             <ContainerBtn>
-              {formik.isSubmitting ? 
+              {formik.isSubmitting ? (
                 <ButtonLoading disabled>
-                  <span className='loader' />
+                  <span className="loader" />
                 </ButtonLoading>
-              : (
+              ) : (
                 <Button
                   btnRole={'form'}
                   content={'Concluir'}

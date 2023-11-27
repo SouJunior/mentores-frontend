@@ -1,40 +1,40 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const CardContainer = styled.div`
-  max-width: 389px;
   height: 272px;
+  width: 100%;
   background-color: #ffff;
   border-radius: 16px;
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   &:hover {
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
     border-radius: 24px;
   }
-`;
-
+`
 
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-`;
+`
 
 export const StyledName = styled.div`
   font-size: 24px;
   line-height: 28.8px;
   width: 50%;
-`;
+`
 
 export const StacksContainer = styled.span`
   display: flex;
   gap: 8px;
   width: 100%;
   flex-wrap: wrap;
-`;
+`
 
 export const Stack = styled.span`
   background: #f5f1f3;
@@ -46,7 +46,7 @@ export const Stack = styled.span`
   padding: 8px;
   border-radius: 40px;
   text-align: center;
-`;
+`
 
 export const SchedButton = styled.button`
   width: 174.5px;
@@ -64,7 +64,7 @@ export const SchedButton = styled.button`
   &:hover {
     background-color: #002c66;
   }
-`;
+`
 
 export const InfoButton = styled.button`
   width: 174.5px;
@@ -81,9 +81,9 @@ export const InfoButton = styled.button`
   &:hover {
     color: #002c66;
   }
-`;
+`
 
 export const ButtonsContainer = styled.span`
   display: flex;
   height: 44px;
-`;
+`

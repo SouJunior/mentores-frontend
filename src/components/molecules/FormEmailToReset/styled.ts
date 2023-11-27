@@ -1,13 +1,11 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components'
 
 export const ContainerForm = styled.div`
-  margin: 0 auto;
-  width: 504px;
-  height: 570px;
+  width: 31.5rem;
+  height: 36.875rem;
   background: ${(props) => props.theme.colors.white};
   border-radius: 12px;
   padding: 12px 0px;
-  margin-top: 30px;
 
   form {
     p {
@@ -31,14 +29,14 @@ export const ContainerForm = styled.div`
       margin-top: 10px;
     }
   }
-`;
+`
 
 export const MessagesContainer = styled.div`
   margin: 30px 0px;
   p {
     margin-bottom: 20px;
   }
-`;
+`
 
 // ... seu código anterior ...
 
@@ -59,4 +57,4 @@ export const FormWrapper = styled.div`
     text-align: center;
     cursor: pointer;
   }
-`;
+`

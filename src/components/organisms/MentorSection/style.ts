@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import Link from 'next/link'
+import styled from 'styled-components'
 
 export const MentorsComponent = styled.section`
   background: #fff;
@@ -8,33 +9,33 @@ export const MentorsComponent = styled.section`
   justify-content: center;
   align-items: center;
   padding: 90px 0;
-`;
+`
 
 export const MentorsContent = styled.div`
   max-width: 1300px;
   margin: 0 auto;
   position: relative;
-`;
+`
 
 export const MentorsTitle = styled.h1`
   color: #5d5f5d;
   font-size: 40px;
-  font-family: "Radio Canada";
+  font-family: 'Radio Canada';
   font-weight: 700;
   line-height: 120%;
   margin-left: 50px;
   margin-bottom: 30px;
-`;
+`
 
 export const MentorsTitleDetach = styled.span`
   color: #046ad0;
   font-size: 40px;
-  font-family: "Radio Canada";
+  font-family: 'Radio Canada';
   font-weight: 700;
   line-height: 120%;
-`;
+`
 
-export const SeeAll = styled.a`
+export const SeeAll = styled(Link)`
   display: inline-flex;
   height: 42px;
   padding: 12px 16px;
@@ -45,7 +46,7 @@ export const SeeAll = styled.a`
 
   color: #046ad0;
   font-size: 16px;
-  font-family: "Radio Canada";
+  font-family: 'Radio Canada';
   line-height: 150%;
 
   background: transparent;
@@ -59,4 +60,4 @@ export const SeeAll = styled.a`
   right: 140px;
   cursor: pointer;
   z-index: 10;
-`;
+`

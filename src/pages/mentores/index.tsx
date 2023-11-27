@@ -20,6 +20,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { api } from '@/lib/axios'
+import { Footer } from '@/components/molecules/Footer'
 
 export default function MentorPage() {
   const [loading, setLoading] = useState(false)
@@ -77,58 +78,63 @@ export default function MentorPage() {
   }, [mentors, genderFilter, specialtyFilter, mentorNameFilter])
 
   return (
-    <MainContainer>
-      <SubHeaderContainer>
-        <TitleContainer>
-          <Link href={'/'}>
-            Início <b>°</b>
-          </Link>
+    <>
+      <MainContainer>
+        <SubHeaderContainer>
+          <TitleContainer>
+            <Link href={'/'}>
+              Início <b>°</b>
+            </Link>
 
-          <SubTitleContainer>Encontre seu mentor</SubTitleContainer>
-        </TitleContainer>
-        <CTAMain>
-          Conheça nossos mentores
-          <CTASub>
-            Mentorias individuais e personalizadas à um toque de você
-          </CTASub>
-        </CTAMain>
-      </SubHeaderContainer>
-      <MentorSubHeader
-        onGenderChange={(selectedOptions) => setGenderFilter(selectedOptions)}
-        onSpecialtyChange={(selectedOptions) =>
-          setSpecialtyFilter(selectedOptions)
-        }
-        onMentorSearch={(query) => setMentorNameFilter(query)}
-      />
-      {specialtyFilter.length > 0 && (
-        <StacksContainer>
-          {specialtyFilter.map((selectedSpecialty) => (
-            <Stack key={selectedSpecialty}>{selectedSpecialty}</Stack>
-          ))}
-        </StacksContainer>
-      )}
-      <MentorsContainer>
-        {loading ? (
-          <>
-            <Image
-              style={{ position: 'absolute', top: '10%', left: '45%' }}
-              src={Loading}
-              alt="Loading"
-            />
-          </>
-        ) : filteredMentors.length > 0 ? (
-          filteredMentors.map((mentor: MentorCardProp) => (
-            <CardScheduling key={mentor.fullName} mentor={mentor} />
-          ))
-        ) : (
-          <NoResultContainer>
-            <Image src={NoResult} alt="Sem resultado" />
-            <NoResultMain>Nada por aqui!</NoResultMain>
-            <CTASub>Não conseguimos encontrar resultados pra sua busca.</CTASub>
-            <CTASub>Tente alterar os filtros de pesquisa.</CTASub>
-          </NoResultContainer>
+            <SubTitleContainer>Encontre seu mentor</SubTitleContainer>
+          </TitleContainer>
+          <CTAMain>
+            Conheça nossos mentores
+            <CTASub>
+              Mentorias individuais e personalizadas à um toque de você
+            </CTASub>
+          </CTAMain>
+        </SubHeaderContainer>
+        <MentorSubHeader
+          onGenderChange={(selectedOptions) => setGenderFilter(selectedOptions)}
+          onSpecialtyChange={(selectedOptions) =>
+            setSpecialtyFilter(selectedOptions)
+          }
+          onMentorSearch={(query) => setMentorNameFilter(query)}
+        />
+        {specialtyFilter.length > 0 && (
+          <StacksContainer>
+            {specialtyFilter.map((selectedSpecialty) => (
+              <Stack key={selectedSpecialty}>{selectedSpecialty}</Stack>
+            ))}
+          </StacksContainer>
         )}
-      </MentorsContainer>
-    </MainContainer>
+        <MentorsContainer>
+          {loading ? (
+            <>
+              <Image
+                style={{ position: 'absolute', top: '10%', left: '45%' }}
+                src={Loading}
+                alt="Loading"
+              />
+            </>
+          ) : filteredMentors.length > 0 ? (
+            filteredMentors.map((mentor: MentorCardProp) => (
+              <CardScheduling key={mentor.fullName} mentor={mentor} />
+            ))
+          ) : (
+            <NoResultContainer>
+              <Image src={NoResult} alt="Sem resultado" />
+              <NoResultMain>Nada por aqui!</NoResultMain>
+              <CTASub>
+                Não conseguimos encontrar resultados pra sua busca.
+              </CTASub>
+              <CTASub>Tente alterar os filtros de pesquisa.</CTASub>
+            </NoResultContainer>
+          )}
+        </MentorsContainer>
+      </MainContainer>
+      <Footer />
+    </>
   )
 }

@@ -1,64 +1,64 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const InfoContainer = styled.span<
-Partial<{ right:number }>
->`
+export const InfoContainer = styled.span<Partial<{ right: number }>>`
   display: flex;
   justify-content: flex-end;
   height: 24px;
   position: absolute;
   right: ${(props) => props.right}px;
   margin-right: 30px;
+  cursor: pointer;
+  z-index: 40;
 
-`;
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+`
 
 export const Tooltip = styled.div<{ isVisible: boolean }>`
   position: absolute;
-  color: #fff;
-  padding: 5px;
-  font-size: 12px;
-  border-radius: 3px;
+  background-color: #fff;
+  border-radius: 0.5rem;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
   transition: opacity 0.3s ease-in-out;
-  z-index:9999;
+  z-index: 9999;
 
-`;
-
-export const TooltipContainer = styled.div`
-  background-color: white;
-  width: 400px;
-  height: 145px;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 0px 5px;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-`;
+  width: 400px;
+`
 
 export const Title = styled.h3`
   color: ${(props) => props.theme.colors.blue[400]};
-  font-size: 14px;
-`;
+  font-size: 1rem;
+  font-weight: 700;
+`
 
 export const CriteriaList = styled.ul`
   list-style: none;
-  padding: 0;
-  margin: 10px 15px;
-`;
+  margin-top: 0.8rem;
+  position: relative;
+  padding: 0 1rem;
+`
 
 export const Criterion = styled.li`
-  margin-bottom: 5px;
-  color: black;
-`;
+  color: ${(props) => props.theme.colors.gray[700]};
+  line-height: 150%;
+`
 
 export const Line = styled.span`
   position: absolute;
-  left: 10px;
-  top: 45px;
+  left: 0rem;
+  top: 50%;
+  transform: translateY(-50%);
   bottom: 0;
-  width: 2px;
-  height: 50%;
+  width: 3px;
+  height: 80%;
+  border-radius: 9999px;
   background-color: ${(props) => props.theme.colors.gray[700]};
-`;
+`
