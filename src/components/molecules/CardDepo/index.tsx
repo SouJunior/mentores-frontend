@@ -2,12 +2,13 @@ import { Card } from "@/components/atoms/Card";
 import { MentorType } from "@/mockups/mentores";
 import Image from "next/image";
 import { GreatContainer, HeaderCardDepo } from "./style";
+import { ITestimony } from "@/services/interfaces/IUseTestimonyService";
 
 interface CardDepoProps {
-  mentor: MentorType;
+  testimony: ITestimony;
 }
 
-export function CardDepo({ mentor }: CardDepoProps) {
+export function CardDepo({ testimony }: CardDepoProps) {
   return (
     <div style={{ marginLeft: "20px", paddingBottom: "5px" }}>
       <Card
@@ -19,17 +20,17 @@ export function CardDepo({ mentor }: CardDepoProps) {
         <GreatContainer>
           <HeaderCardDepo>
             <Image
-              src={mentor.image}
-              alt={mentor.name}
+              src=""
+              alt={testimony.userName}
               width={56}
               height={56}
             />
             <div>
-              <h4>{mentor.name}</h4>
-              <h5>{mentor.role}</h5>
+              <h4>{testimony.userName}</h4>
+              <h5>{testimony.role}</h5>
             </div>
           </HeaderCardDepo>
-          <p>{mentor.description}</p>
+          <p>{testimony.description}</p>
         </GreatContainer>
       </Card>
     </div>
