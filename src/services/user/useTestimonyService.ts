@@ -1,10 +1,10 @@
 import { api } from "@/lib/axios"
 import { useState } from "react"
-import { ITestimony } from "../interfaces/IUseTestimonyService"
+import { ITestimony, IuseTestimonyService } from "../interfaces/IUseTestimonyService"
 
-export const useTestimonyService = () => {
-    const [ testimonies, setTestimonies ] = useState<ITestimony[]>()
-    const [ testimoniesErrors, setTestimoniesErrors ] = useState<string>()
+export const useTestimonyService = (): IuseTestimonyService => {
+    const [ testimonies, setTestimonies ] = useState<ITestimony[]>([])
+    const [ testimoniesErrors, setTestimoniesErrors ] = useState<string>("")
 
     const handleGetTestimonies = async () => {
         try {
@@ -22,6 +22,6 @@ export const useTestimonyService = () => {
     }
 
     return {
-        testimonies, setTestimonies, handleGetTestimonies, testimoniesErrors
+        testimonies, setTestimonies, handleGetTestimonies, testimoniesErrors, setTestimoniesErrors
     }
 }

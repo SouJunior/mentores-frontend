@@ -9,13 +9,12 @@ import {
   InfoButton,
 } from "./styled";
 import Image from "next/image";
-import UserDefault from "@/assets/userDefault.png";
-import { MentorCardProp } from "@/utils/globals";
 import ModalSchedMentor from "../ModalSchedMentor";
 import { useState } from "react";
+import { IMentors } from "@/services/interfaces/IUseMentorsService";
 
 interface MentorsProps {
-  mentor: MentorCardProp;
+  mentor: IMentors;
 }
 
 export default function CardScheduling({ mentor }: MentorsProps) {
@@ -28,19 +27,21 @@ export default function CardScheduling({ mentor }: MentorsProps) {
     <CardContainer>
       <ModalSchedMentor onClose={handleModal} mentor={mentor} open={open}/>
       <TitleContainer>
+        { mentor.profile &&
         <Image
           width={80}
           height={80}
-          src={mentor.profile || UserDefault}
+          src={mentor.profile}
           alt={mentor.fullName}
           style={{ borderRadius: "80px", objectFit: "cover" }}
         />
+        }
         <StyledName>{mentor.fullName}</StyledName>
       </TitleContainer>
       <StacksContainer>
         <>
-          {mentor.specialties.map((stack) => {
-            return <Stack key={stack}>{stack}</Stack>;
+          {mentor.specialties.map((specialty) => {
+            return <Stack key={specialty}>{specialty}</Stack>;
           })}
         </>
       </StacksContainer>
