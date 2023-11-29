@@ -1,3 +1,4 @@
+"use client"
 import {
   CardContainer,
   StacksContainer,
@@ -10,8 +11,9 @@ import {
 } from "./styled";
 import Image from "next/image";
 import ModalSchedMentor from "../ModalSchedMentor";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IMentors } from "@/services/interfaces/IUseMentorsService";
+import { PopupButton } from "react-calendly"
 
 interface MentorsProps {
   mentor: IMentors;
@@ -46,7 +48,20 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         </>
       </StacksContainer>
       <ButtonsContainer>
-        <SchedButton>Agendar Mentoria</SchedButton>
+      <PopupButton styles={{
+          width: "174.5px",
+          height: "44px",
+          padding: "16px 24px 16px 24px",
+          borderRadius: '8px',
+          gap: "8px",
+          backgroundColor: "#003986",
+          border: 'none',
+          color: "white",
+          fontSize: '15px',
+          lineHeight: "19.2px",
+          display: "flex",
+          alignItems: "center",
+         }} url="https://calendly.com/sou-junior-tech" text="Agendar Mentoria" rootElement={document.getElementById("__next")!}/>
         <InfoButton  onClick={handleModal}>Saiba mais</InfoButton>
       </ButtonsContainer>
     </CardContainer>
