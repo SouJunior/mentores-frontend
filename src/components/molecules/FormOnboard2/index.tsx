@@ -79,7 +79,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
     if (response) {
       setError(false)
       user.updateUser({ ...user, ...data })
-      router.push('/genericPage')
+      router.push('/?connect-calendly=true')
     } else {
       setError(true)
     }

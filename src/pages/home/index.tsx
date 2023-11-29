@@ -3,8 +3,31 @@ import { DepoSection } from "@/components/organisms/DepoSection";
 import { MentorSection } from "@/components/organisms/MentorSection";
 import { Onboarding } from "@/components/organisms/Onboarding";
 import { HeroSection } from "../../components/organisms/HeroSection";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { Modal } from "@/components/atoms/Modal";
+import { ModalButton, ModalContainer, ModalDescription, ModalTitle } from "./styles";
+
 
 export default function HomePage() {
+  const [isConnectCalendly, setIsConnectCalendly] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.query["connect-calendly"]) {
+      setIsConnectCalendly(true)
+    } else {
+      setIsConnectCalendly(false)
+    }
+  }, [router.query])
+
+  const handleCloseModal = () => {
+    router.replace('/', undefined, {
+      shallow: true
+    })
+    setIsConnectCalendly(false)
+  }
+
   return (
     <>
       <HeroSection />
@@ -12,6 +35,22 @@ export default function HomePage() {
       <MentorSection />
       <DepoSection />
       <Footer />
+
+      <Modal
+        open={isConnectCalendly}
+        bgColor="#fff"
+        onClose={handleCloseModal}
+        height={286}
+        width={500}
+      >
+        <ModalContainer>
+          <ModalTitle>Falta pouco para você se tornar um mentor.</ModalTitle>
+          <ModalDescription>
+            Para compartilhar seus horários disponíveis você deve criar a sua agenda pelo Calendly. 
+          </ModalDescription>
+          <ModalButton href="https://calendly.com/pt" target="_blank">Ir para o Calendly</ModalButton>
+        </ModalContainer>
+      </Modal>
     </>
   );
 }
