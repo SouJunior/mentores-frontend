@@ -14,7 +14,7 @@ import {
   ButtonClose,
   ModalOverlay,
 } from "./styled";
-import { IMentors } from "@/services/interfaces/IUseMentorsService.ts";
+import { IMentors } from "../../services/interfaces/IUseMentorsService.ts";
 import UserDefault from "@/assets/userDefault.png";
 
 interface ModalSchedProps {
