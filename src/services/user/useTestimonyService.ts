@@ -13,7 +13,9 @@ export const useTestimonyService = () => {
         if (response.status === 200) {
             setTestimonies(response.data)
         }
+
         } catch (error: any){
+            console.log(error.response)
             setTestimoniesErrors(error.response.message)
         }
 

@@ -5,6 +5,7 @@ export interface ITestimony {
     userName: string,
     role: string,
     description: string
+    imageUrl: string
 }
 
 export interface IuseTestimonyService {
