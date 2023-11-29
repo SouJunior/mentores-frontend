@@ -1,5 +1,4 @@
 import { CardMentor } from "@/components/molecules/CardMentor";
-import { mentores } from "@/mockups/mentores";
 import { useEffect, useRef, useState } from "react";
 import { A11y, Pagination, Scrollbar } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
@@ -9,8 +8,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { useMentorsService } from "@/services/user/useMentorsService";
 
 export const Slider = () => {
+  const { mentors, mentorsErrors, fetchMentors } = useMentorsService()
+
   const swiperRef = useRef<{ swiper: SwiperClass }>(null);
 
   const [isBeginning, setIsBeginning] = useState(true);
@@ -23,6 +25,13 @@ export const Slider = () => {
   const handlePrev = () => {
     swiperRef.current?.swiper?.slidePrev();
   };
+
+  useEffect(() => {
+    const handleLoadFetchMentors = async () => {
+      await fetchMentors()
+    }
+    handleLoadFetchMentors()
+  }, [])
 
   useEffect(() => {
     const swiper = swiperRef.current?.swiper;
@@ -42,9 +51,9 @@ export const Slider = () => {
         slidesPerView={4}
         ref={swiperRef}
       >
-        {mentores.map((mentor) => {
+        {mentors.map((mentor) => {
           return (
-            <SwiperSlide key={mentor.name}>
+            <SwiperSlide key={mentor.id}>
               <CardMentor mentor={mentor} />
             </SwiperSlide>
           );
