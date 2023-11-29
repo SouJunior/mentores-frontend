@@ -1,5 +1,4 @@
 import { Card } from "@/components/atoms/Card";
-import { MentorType } from "@/mockups/mentores";
 import Image from "next/image";
 import { GreatContainer, HeaderCardDepo } from "./style";
 import { ITestimony } from "@/services/interfaces/IUseTestimonyService";
@@ -19,12 +18,14 @@ export function CardDepo({ testimony }: CardDepoProps) {
       >
         <GreatContainer>
           <HeaderCardDepo>
+           { testimony.imageUrl &&
             <Image
-              src=""
+              src={testimony.imageUrl}
               alt={testimony.userName}
               width={56}
               height={56}
             />
+           }
             <div>
               <h4>{testimony.userName}</h4>
               <h5>{testimony.role}</h5>
