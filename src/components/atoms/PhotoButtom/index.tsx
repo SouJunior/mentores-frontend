@@ -17,7 +17,7 @@ export default function PhotoButtom({
     <>
       <UserProfileButtom onClick={onClick}>
         {selectedPhoto ? (
-          <img width={size} height={size}  src={selectedPhoto} alt="Selected" />
+          <Image width={size} height={size}  src={selectedPhoto} alt="Selected" />
         ) : (
          <Image src={userAvatar} alt="Avatar usuário."/>
         )}

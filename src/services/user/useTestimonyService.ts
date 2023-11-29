@@ -16,7 +16,7 @@ export const useTestimonyService = (): IuseTestimonyService => {
 
         } catch (error: any){
             console.log(error.response)
-            setTestimoniesErrors(error.response.message)
+            setTestimoniesErrors(error.response?.message)
         }
 
     }

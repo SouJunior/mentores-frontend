@@ -1,8 +1,7 @@
 import UserDefault from "@/assets/userDefault.png";
-import DropDownUserMenu from "@/components/molecules/DropdownUserMenu";
 import Image from "next/image";
-import { UserAvatarContainer } from "./styled";
 import useUser from "@/context/Auth/useUser";
+import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import { useState } from "react";
 
 export function UserAvatar() {
@@ -10,8 +9,7 @@ export function UserAvatar() {
   const [imageError, setImageError] = useState(false); 
 
   return (
-    <>
-      <UserAvatarContainer>
+      <>
         {user ? (
           user.profile ? (
             <div>
@@ -34,8 +32,8 @@ export function UserAvatar() {
         ) : (
           <Image alt="User Avatar" src={UserDefault} />
         )}
-        <DropDownUserMenu />
-      </UserAvatarContainer>
-    </>
+        
+        <ArrowBackIosOutlinedIcon />
+      </>
   );
 }
