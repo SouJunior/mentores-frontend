@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import MentorSubHeader from '@/components/molecules/MentorSubHeader'
-import CardScheduling from '@/components/atoms/CardSchedulingMentor'
+// import CardScheduling from '@/components/atoms/CardSchedulingMentor'
 import NoResult from '@/assets/noresult.svg'
 import Loading from '@/assets/loading.gif'
 import {
@@ -22,12 +22,17 @@ import { api } from '@/lib/axios'
 import { Footer } from '@/components/molecules/Footer'
 import { useMentorsService } from '@/services/user/useMentorsService'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
+import dynamic from 'next/dynamic'
 
 export default function MentorPage() {
   const [filteredMentors, setFilteredMentors] = useState([])
   const [genderFilter, setGenderFilter] = useState<string[]>([])
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([])
   const [mentorNameFilter, setMentorNameFilter] = useState('')
+
+  const CardScheduling = dynamic(() => import("@/components/atoms/CardSchedulingMentor"), {
+    ssr: false
+  })
 
   const { fetchMentors, loading, mentors, mentorsErrors } = useMentorsService()
 
@@ -72,7 +77,7 @@ export default function MentorPage() {
 
   return (
     <>
-      <MainContainer>
+      <MainContainer id='__next'>
         <SubHeaderContainer>
           <TitleContainer>
             <Link href={'/'}>
