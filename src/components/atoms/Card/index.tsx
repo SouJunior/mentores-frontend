@@ -1,34 +1,15 @@
-import { Box } from "@mui/material";
+import { Box, BoxProps } from "@mui/material";
 import { ReactNode } from "react";
 
-interface CardProps {
+interface CardProps extends BoxProps {
   children: ReactNode;
-  height: number;
-  width?: number;
-  backgroundColor?: string;
-  justifyContent:
-    | "start"
-    | "end"
-    | "flex-start"
-    | "flex-end"
-    | "center"
-    | "left"
-    | "right"
-    | "normal"
-    | "space-between"
-    | "space-around"
-    | "space-evenly"
-    | "stretch";
 }
 
 export const Card = ({
   children,
-  height,
-  width,
-  backgroundColor,
-  justifyContent,
+  ...props
 }: CardProps) => {
-  const propsDefault = {
+  const propsDefault: BoxProps = {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
@@ -41,13 +22,8 @@ export const Card = ({
 
   return (
     <Box
-      sx={{
-        height: height,
-        ...(width && { width: width }),
-        backgroundColor: backgroundColor || "transparent",
-        justifyContent: justifyContent,
-        ...propsDefault,
-      }}
+      {...propsDefault}
+      {...props}
     >
       {children}
     </Box>
