@@ -6,8 +6,7 @@ import { HeroSection } from "../../components/organisms/HeroSection";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Modal } from "@/components/atoms/Modal";
-import { ModalButton, ModalContainer, ModalDescription, ModalTitle } from "./styles";
-
+import { ModalButton, ModalContainer, ModalDescription, ModalTitle } from "../../styles/pages/home";
 
 export default function HomePage() {
   const [isConnectCalendly, setIsConnectCalendly] = useState(false)
