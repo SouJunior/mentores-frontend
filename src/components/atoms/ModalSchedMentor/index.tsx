@@ -14,12 +14,12 @@ import {
   ButtonClose,
   ModalOverlay,
 } from "./styled";
-import { MentorCardProp } from "@/utils/globals";
+import { IMentors } from "@/services/interfaces/IUseMentorsService"
 import UserDefault from "@/assets/userDefault.png";
 
 interface ModalSchedProps {
   open: boolean;
-  mentor: MentorCardProp;
+  mentor: IMentors;
   onClose: () => void;
 }
 
