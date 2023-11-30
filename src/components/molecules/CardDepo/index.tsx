@@ -11,7 +11,7 @@ export function CardDepo({ testimony }: CardDepoProps) {
   return (
     <div style={{ marginLeft: "20px", paddingBottom: "5px" }}>
       <Card
-        backgroundColor={"#fdfdfd"}
+        bgcolor={"#fdfdfd"}
         height={310}
         width={330}
         justifyContent={"flex-start"}
