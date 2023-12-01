@@ -1,6 +1,6 @@
 import { Card } from '@/components/atoms/Card'
 import {
-  CalendlyButton,
+  CardButton,
   CardImage,
   CardStack,
   CardStacks,
@@ -8,12 +8,23 @@ import {
   CardTitle,
 } from './style'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
+import { useEffect, useState } from 'react'
 
 interface CardMentorProps {
   mentor: IMentors
 }
 
 export function CardMentor({ mentor }: CardMentorProps) {
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!mentor.calendlyName || !mentor.agendaName) {
+      setButtonDisabled(true)
+    } else {
+      setButtonDisabled(false)
+    }
+  }, [])
+
   return (
     <Card gap={'1rem'} alignItems={'flex-start'} padding={'1rem'}>
       {mentor.profile && (
@@ -33,11 +44,12 @@ export function CardMentor({ mentor }: CardMentorProps) {
           <CardStack key={specialty}>{specialty}</CardStack>
         ))}
       </CardStacks>
-      <CalendlyButton
-        url="https://calendly.com/sou-junior-tech"
-        text="Agendar Mentoria"
-        rootElement={document.getElementById('__next')!}
-      />
+      <CardButton
+        target="_blank"
+        href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}?embed_domain=mentora.webflow.io&embed_type=Inline`}
+      >
+        <button disabled={buttonDisabled}> Agendar um horário </button>
+      </CardButton>
     </Card>
   )
 }

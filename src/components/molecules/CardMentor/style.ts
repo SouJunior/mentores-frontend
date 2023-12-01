@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { PopupButton } from 'react-calendly'
 import Image from 'next/image'
 
 export const CardImage = styled(Image)`
@@ -61,20 +60,32 @@ export const CardStack = styled.div`
   color: #fdfdfd;
 `
 
-export const CalendlyButton = styled(PopupButton)`
-  padding: 0.75rem 1rem;
-  border-color: #046ad0;
+export const CardButton = styled.a`
+  display: block;
   width: 100%;
 
-  background: #046ad0;
-  border-radius: 8px;
+  button {
+    padding: 0.75rem 1rem;
+    width: 100%;
+    gap: 8px;
+    border-color: ${(props) => props.theme.colors.blue[400]};
 
-  font-family: 'Radio Canada';
-  font-size: 1rem;
-  color: #fdfdfd;
+    background: ${(props) => props.theme.colors.blue[400]};
+    border-radius: 8px;
 
-  &:hover {
-    background-color: #fdfdfd;
-    color: #046ad0;
+    font-family: 'Radio Canada';
+    font-size: 1rem;
+    color: ${(props) => props.theme.colors.white};
+
+    &:disabled {
+      background-color: 'gray';
+      color: 'grey';
+      cursor: 'not-allowed';
+    }
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.white};
+      color: #046ad0;
+    }
   }
 `
