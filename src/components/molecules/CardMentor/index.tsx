@@ -8,37 +8,23 @@ import {
   CardTitle,
 } from "./style";
 import { IMentors } from "@/services/interfaces/IUseMentorsService";
-import { PopupButton } from "react-calendly";
+import { useEffect, useState } from "react";
+import { grey } from "@mui/material/colors";
 
 interface CardMentorProps {
   mentor: IMentors;
 }
 
 export function CardMentor({ mentor }: CardMentorProps) {
-  const popUpButtonStyles = {
-    display: "flex",
-    FlexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "12px 16px",
-    gap: "8px",
-    borderColor: '#046ad0',
-    width: "calc(100% - 40px)",
-    height: "48px",
-  
-    background: "#046ad0",
-    borderRadius: "8px",
-  
-    fontFamily: "Radio Canada",
-    fontStyle: "normal",
-    fontWeight: "400",
-    fontSize: "16px",
-    lineHeight: "150%",
-  
-    color: "#fdfdfd",
-  
-    marginTop: "10px"
-  }
+  const [ buttonDisabled, setButtonDisabled ] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!mentor.calendlyName || !mentor.agendaName) {
+      setButtonDisabled(true)
+    } else {
+      setButtonDisabled(false)
+    }
+  }, [])
 
   return (
     <Card height={443} justifyContent={"center"}>
@@ -58,7 +44,9 @@ export function CardMentor({ mentor }: CardMentorProps) {
           <CardStack key={specialty}>{specialty}</CardStack>
         ))}
       </CardStacks>
-      <PopupButton styles={popUpButtonStyles} url="https://calendly.com/sou-junior-tech" text="Agendar Mentoria" rootElement={document.getElementById("__next")!}/>
+      <a href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}?embed_domain=mentora.webflow.io&embed_type=Inline`}>
+      <CardButton disabled={buttonDisabled}> Agendar um horário </CardButton>
+      </a>
     </Card>
   );
 }

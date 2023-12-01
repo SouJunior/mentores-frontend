@@ -48,20 +48,11 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         </>
       </StacksContainer>
       <ButtonsContainer>
-      <PopupButton styles={{
-          width: "174.5px",
-          height: "44px",
-          padding: "16px 24px 16px 24px",
-          borderRadius: '8px',
-          gap: "8px",
-          backgroundColor: "#003986",
-          border: 'none',
-          color: "white",
-          fontSize: '15px',
-          lineHeight: "19.2px",
-          display: "flex",
-          alignItems: "center",
-         }} url="https://calendly.com/sou-junior-tech" text="Agendar Mentoria" rootElement={document.getElementById("__next")!}/>
+        <a href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}?embed_domain=mentora.webflow.io&embed_type=Inline`}>
+          <SchedButton>
+            Agendar Mentoria
+         </SchedButton>
+        </a>
         <InfoButton  onClick={handleModal}>Saiba mais</InfoButton>
       </ButtonsContainer>
     </CardContainer>
