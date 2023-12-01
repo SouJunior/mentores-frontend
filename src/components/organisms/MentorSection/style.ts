@@ -38,6 +38,7 @@ export const MentorsTitle = styled.h1`
 
 export const SeeAll = styled(Link)`
   padding: 0.75rem 1rem;
+  line-height: normal;
   border-radius: 0.5rem;
   border: 1px solid ${(props) => props.theme.colors.blue[400]};
   color: ${(props) => props.theme.colors.blue[400]};
