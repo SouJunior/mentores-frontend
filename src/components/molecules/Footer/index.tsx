@@ -33,7 +33,7 @@ export function Footer() {
   const handleClosePoliticas = () => setOpenPoliticas(false);
 
   return (
-    <>
+    <footer>
       <ContainerFooter>
         <SectionFooter>
           <Image src={logo} alt="Logo" width={260} height={40} />
@@ -146,6 +146,6 @@ export function Footer() {
           <Image width={40} height={40} src={twitch} alt="logo twitch" />
         </Link>
       </ContainerSocialMedias>
-    </>
+    </footer>
   );
 }
