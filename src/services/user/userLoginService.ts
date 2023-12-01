@@ -64,7 +64,7 @@ const UserLoginService = (): IUserLoginService => {
         });
 
         response.info.registerComplete === true
-          ? router.push("/genericPage")
+          ? router.push("/?connect-calendly=true")
           : router.push("/onBoarding");
       } catch (error) {
         setFormState({
