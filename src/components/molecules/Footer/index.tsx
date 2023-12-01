@@ -66,8 +66,8 @@ export function Footer() {
         </SectionFooter>
         <SectionFooterLinks>
           <h2>Seja mentorado</h2>
-          <a href="#mentor">Encontre seu mentor</a>
-          <a href="#onboarding">Como funciona</a>
+          <Link href="/#mentor">Encontre seu mentor</Link>
+          <Link href="/#onboarding">Como funciona</Link>
         </SectionFooterLinks>
         <SectionFooterLinks>
           <h2>Mentore</h2>
