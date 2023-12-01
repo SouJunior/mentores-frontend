@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerModalCancel = styled.div`
   width: 100%;
@@ -16,7 +16,7 @@ export const ContainerModalCancel = styled.div`
     line-height: 150%;
     color: #5d5f5d;
   }
-`;
+`
 
 export const HeadingModal = styled.h2`
   font-style: normal;
@@ -25,7 +25,7 @@ export const HeadingModal = styled.h2`
   line-height: 120%;
   color: #5d5f5d;
   text-align: center;
-`;
+`
 
 export const ContainerBtn = styled.div`
   display: flex;
@@ -33,4 +33,4 @@ export const ContainerBtn = styled.div`
   gap: 16px;
   width: 100%;
   color: #c1292e;
-`;
+`

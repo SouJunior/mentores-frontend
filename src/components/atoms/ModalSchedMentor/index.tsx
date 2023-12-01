@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 import {
   AboutContainer,
   MentorName,
@@ -13,14 +13,14 @@ import {
   MainContainer,
   ButtonClose,
   ModalOverlay,
-} from "./styled";
-import { IMentors } from "@/services/interfaces/IUseMentorsService"
-import UserDefault from "@/assets/userDefault.png";
+} from './styled'
+import { IMentors } from '@/services/interfaces/IUseMentorsService'
+import UserDefault from '@/assets/userDefault.png'
 
 interface ModalSchedProps {
-  open: boolean;
-  mentor: IMentors;
-  onClose: () => void;
+  open: boolean
+  mentor: IMentors
+  onClose: () => void
 }
 
 export default function ModalSchedMentor({
@@ -39,7 +39,7 @@ export default function ModalSchedMentor({
                 height={88}
                 src={mentor.profile || UserDefault}
                 alt="Mentor Photo"
-                style={{ borderRadius: "80px", objectFit: "cover" }}
+                style={{ borderRadius: '80px', objectFit: 'cover' }}
               />
               <MentorName> {mentor.fullName}</MentorName>
             </PhotoContainer>
@@ -50,7 +50,7 @@ export default function ModalSchedMentor({
             <StacksContainer>
               <>
                 {mentor.specialties.map((stack) => {
-                  return <Stack key={stack}>{stack}</Stack>;
+                  return <Stack key={stack}>{stack}</Stack>
                 })}
               </>
             </StacksContainer>
@@ -60,5 +60,5 @@ export default function ModalSchedMentor({
         <SchedButton>Agendar mentoria</SchedButton>
       </ModalContainer>
     </ModalOverlay>
-  );
+  )
 }

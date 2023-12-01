@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerInput = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ export const ContainerInput = styled.div`
     width: 100%;
     padding: 16px 48px 16px;
     outline: none;
-    background-color: "#fff";
+    background-color: '#fff';
     border: 1px solid ${(props) => props.theme.colors.gray[700]};
     border-radius: 8px;
 
@@ -51,11 +51,11 @@ export const ContainerInput = styled.div`
       color: ${(props) => props.theme.colors.gray[700]};
     }
   }
-`;
+`
 
 export const Label = styled.label`
   color: ${(props) => props.theme.colors.gray[700]};
-`;
+`
 
 export const ContainerEye = styled.button`
   position: absolute;
@@ -63,7 +63,7 @@ export const ContainerEye = styled.button`
   height: 48px;
   background-color: transparent;
   right: 0px;
-`;
+`
 
 export const InputError = styled.input`
   height: 100%;
@@ -71,14 +71,14 @@ export const InputError = styled.input`
   padding: 16px 48px 16px;
   width: 100%;
   outline: none;
-  background-color: "#fff";
+  background-color: '#fff';
   border: 1px solid ${(props) => props.theme.colors.error};
   border-radius: 8px;
-`;
+`
 
 export const LabelError = styled(Label)`
   color: ${(props) => props.theme.colors.error};
-`;
+`
 
 export const ContainerInputError = styled(ContainerInput)`
   input {
@@ -87,4 +87,4 @@ export const ContainerInputError = styled(ContainerInput)`
   .icon {
     color: ${(props) => props.theme.colors.error};
   }
-`;
+`

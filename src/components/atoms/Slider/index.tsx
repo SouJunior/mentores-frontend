@@ -1,14 +1,14 @@
-import { CardMentor } from "@/components/molecules/CardMentor";
-import { MutableRefObject, useEffect } from "react";
-import { A11y, Pagination, Scrollbar } from "swiper/modules";
-import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import {  SwiperContainer } from "./style";
+import { CardMentor } from '@/components/molecules/CardMentor'
+import { MutableRefObject, useEffect } from 'react'
+import { A11y, Pagination, Scrollbar } from 'swiper/modules'
+import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
+import { SwiperContainer } from './style'
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { useMentorsService } from "@/services/user/useMentorsService";
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import { useMentorsService } from '@/services/user/useMentorsService'
 
 interface SliderProps {
   swiperRef: MutableRefObject<{
@@ -26,7 +26,6 @@ export const Slider = ({ swiperRef }: SliderProps) => {
     handleLoadFetchMentors()
   }, [])
 
-
   return (
     <SwiperContainer>
       <Swiper
@@ -40,9 +39,9 @@ export const Slider = ({ swiperRef }: SliderProps) => {
             <SwiperSlide key={mentor.id}>
               <CardMentor mentor={mentor} />
             </SwiperSlide>
-          );
+          )
         })}
       </Swiper>
     </SwiperContainer>
-  );
-};
+  )
+}

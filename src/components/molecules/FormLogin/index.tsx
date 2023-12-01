@@ -1,21 +1,21 @@
-import CardLoading from "@/assets/loading.gif";
-import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
-import { Button } from "@/components/atoms/Button";
-import { InputLogin } from "@/components/atoms/InputLogin";
-import Image from "next/image";
-import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Checkbox } from "../../atoms/Checkbox";
-import { ContainerForm } from "./style";
-import UserLoginService from "@/services/user/userLoginService";
+import CardLoading from '@/assets/loading.gif'
+import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
+import { Button } from '@/components/atoms/Button'
+import { InputLogin } from '@/components/atoms/InputLogin'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FormEvent, useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { Checkbox } from '../../atoms/Checkbox'
+import { ContainerForm } from './style'
+import UserLoginService from '@/services/user/userLoginService'
 
 export function FormLogin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [keepConnected, setKeepConnected] = useState(false);
-  const type: string = "mentor";
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [keepConnected, setKeepConnected] = useState(false)
+  const type = 'mentor'
 
   const {
     sendLogin,
@@ -25,17 +25,17 @@ export function FormLogin() {
     setSubmitButton,
     submitButton,
     loading,
-  } = UserLoginService();
+  } = UserLoginService()
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    await sendLogin({ email, password, type });
-  };
+    event.preventDefault()
+    await sendLogin({ email, password, type })
+  }
 
   useEffect(() => {
-    const data = { email, password, type };
-    setSubmitButton(!checkFields(data));
-  }, [email, password, type]);
+    const data = { email, password, type }
+    setSubmitButton(!checkFields(data))
+  }, [email, password, type])
 
   return (
     <>
@@ -45,10 +45,10 @@ export function FormLogin() {
         closeOnClick
         theme="colored"
         style={{
-          textAlign: "justify",
-          fontSize: "16px",
-          width: "550px",
-          lineHeight: "32px",
+          textAlign: 'justify',
+          fontSize: '16px',
+          width: '550px',
+          lineHeight: '32px',
         }}
       />
       <ContainerForm>
@@ -64,7 +64,7 @@ export function FormLogin() {
 
           <InputLogin
             error={formState.errors}
-            key={"email"}
+            key={'email'}
             type="email"
             value={email}
             setValue={setEmail}
@@ -72,10 +72,10 @@ export function FormLogin() {
             label="E-mail"
             id="emailID"
           />
-          <div style={{ position: "relative" }}>
+          <div style={{ position: 'relative' }}>
             <InputLogin
               error={formState.errors}
-              key={"pass"}
+              key={'pass'}
               type="password"
               value={password}
               setValue={setPassword}
@@ -96,10 +96,10 @@ export function FormLogin() {
 
           <div
             style={{
-              position: "relative",
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "16px",
+              position: 'relative',
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: '16px',
             }}
           >
             <Checkbox
@@ -108,29 +108,29 @@ export function FormLogin() {
               id="connected"
               text="Me manter conectado"
             />
-            <Link href="/resetPassword" style={{ textDecoration: "underline" }}>
+            <Link href="/resetPassword" style={{ textDecoration: 'underline' }}>
               Esqueci a senha
             </Link>
           </div>
 
           <Button
             disabled={submitButton}
-            btnRole={"form"}
+            btnRole={'form'}
             content={
               loading ? (
                 <Image alt="loading" src={CardLoading} width={24} height={24} />
               ) : (
-                "Entrar"
+                'Entrar'
               )
             }
           />
 
           <p>
-            Ainda não possui cadastro?{" "}
+            Ainda não possui cadastro?{' '}
             <Link href="/cadastro">Clique aqui e cadastre-se</Link>
           </p>
         </form>
       </ContainerForm>
     </>
-  );
+  )
 }

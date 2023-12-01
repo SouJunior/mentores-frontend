@@ -44,8 +44,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      code: code,
-      email: email,
+      code,
+      email,
     },
   }
 }

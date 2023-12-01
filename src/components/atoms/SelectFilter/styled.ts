@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 interface DropdownMenuProps {
-  open: boolean;
+  open: boolean
 }
 
 export const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
-`;
+`
 
 export const DropdownButton = styled.button`
   background-color: white;
@@ -27,7 +27,7 @@ export const DropdownButton = styled.button`
     color: #003986;
     border: 1px solid #003986;
   }
-`;
+`
 
 export const DropdownMenu = styled.div<DropdownMenuProps>`
   position: absolute;
@@ -38,9 +38,9 @@ export const DropdownMenu = styled.div<DropdownMenuProps>`
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px;
-  display: ${({ open }) => (open ? "block" : "none")};
+  display: ${({ open }) => (open ? 'block' : 'none')};
   z-index: 9999;
-`;
+`
 
 export const CheckboxLabel = styled.label`
   display: block;
@@ -50,4 +50,4 @@ export const CheckboxLabel = styled.label`
     width: 16px;
     height: 16px;
   }
-`;
+`

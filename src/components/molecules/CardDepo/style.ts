@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HeaderCardDepo = styled.div`
   display: flex;
@@ -23,18 +23,18 @@ export const HeaderCardDepo = styled.div`
     font-size: 16px;
     line-height: 150%;
     color: #212121;
-    font-family: "Radio Canada";
+    font-family: 'Radio Canada';
   }
 
   h5 {
-    font-family: "Radio Canada";
+    font-family: 'Radio Canada';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
     color: #5d5f5d;
   }
-`;
+`
 
 export const GreatContainer = styled.div`
   padding: 20px;
@@ -47,11 +47,11 @@ export const GreatContainer = styled.div`
   text-overflow: ellipsis;
 
   p {
-    font-family: "Radio Canada";
+    font-family: 'Radio Canada';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     color: #5d5f5d;
   }
-`;
+`

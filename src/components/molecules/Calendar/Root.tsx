@@ -39,7 +39,7 @@ export function Root({ children, ...props }: RootProps) {
     const lessYearRange = currentYear - 80
     const range = Array.from(
       { length: (lessYearRange - currentYear) / -1 + 1 },
-      (_, i) => currentYear + i * -1
+      (_, i) => currentYear + i * -1,
     )
     return range
   }, [])

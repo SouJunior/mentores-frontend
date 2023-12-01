@@ -16,9 +16,8 @@ import { Field, Form, FormikProvider, useFormik } from 'formik'
 import { InputForm } from '@/components/atoms/InputForm'
 import UserUpdateService from '@/services/user/userUpdateService'
 import { useRouter } from 'next/router'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { toast } from 'react-toastify'
 import useUser from '@/context/Auth/useUser'
 
 interface FormOnBoardProps {
@@ -86,7 +85,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
   }
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues,
     onSubmit: handleSubmit,
   })
 

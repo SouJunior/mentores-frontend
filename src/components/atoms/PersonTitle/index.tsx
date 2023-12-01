@@ -1,7 +1,7 @@
-import { ContainerTitle } from "./style";
+import { ContainerTitle } from './style'
 
 interface PersonTitleProps {
-  text: string;
+  text: string
 }
 
 export function PersonTitle({ text }: PersonTitleProps) {
@@ -9,5 +9,5 @@ export function PersonTitle({ text }: PersonTitleProps) {
     <ContainerTitle>
       <h2>{text}</h2>
     </ContainerTitle>
-  );
+  )
 }

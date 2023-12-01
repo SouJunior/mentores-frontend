@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   CheckboxLabel,
   DropdownButton,
   DropdownContainer,
   DropdownMenu,
-} from "./styled";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+} from './styled'
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 interface SelectFilterProps {
-  options: string[];
-  selectName?: string;
-  onChange: (selectedOptions: string[]) => void;
+  options: string[]
+  selectName?: string
+  onChange: (selectedOptions: string[]) => void
 }
 
 export default function SelectFilter({
@@ -18,19 +18,19 @@ export default function SelectFilter({
   onChange,
   selectName,
 }: SelectFilterProps) {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [open, setOpen] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
+  const [open, setOpen] = useState(false)
 
   const handleOptionChange = (option: string) => {
-    const newSelectedOptions = [...selectedOptions];
+    const newSelectedOptions = [...selectedOptions]
     if (newSelectedOptions.includes(option)) {
-      newSelectedOptions.splice(newSelectedOptions.indexOf(option), 1);
+      newSelectedOptions.splice(newSelectedOptions.indexOf(option), 1)
     } else {
-      newSelectedOptions.push(option);
+      newSelectedOptions.push(option)
     }
-    setSelectedOptions(newSelectedOptions);
-    onChange(newSelectedOptions);
-  };
+    setSelectedOptions(newSelectedOptions)
+    onChange(newSelectedOptions)
+  }
   return (
     <DropdownContainer>
       <DropdownButton onClick={() => setOpen(!open)}>
@@ -50,5 +50,5 @@ export default function SelectFilter({
         ))}
       </DropdownMenu>
     </DropdownContainer>
-  );
+  )
 }

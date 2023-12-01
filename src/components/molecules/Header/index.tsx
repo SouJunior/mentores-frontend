@@ -1,14 +1,23 @@
-import logoImg from "@/assets/logos/sou-junior.svg";
-import { Button } from "@/components/atoms/Button";
-import Image from "next/image";
-import Link from "next/link";
-import {  ContainerHeader, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, GroupBtn, LinkUserAccount, SignOutBtn } from "./style";
-import { UserAvatar } from "@/components/atoms/UserAvatar";
-import useUser from "@/context/Auth/useUser";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
+import logoImg from '@/assets/logos/sou-junior.svg'
+import { Button } from '@/components/atoms/Button'
+import Image from 'next/image'
+import Link from 'next/link'
+import {
+  ContainerHeader,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  GroupBtn,
+  LinkUserAccount,
+  SignOutBtn,
+} from './style'
+import { UserAvatar } from '@/components/atoms/UserAvatar'
+import useUser from '@/context/Auth/useUser'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 export function Header() {
-  const { user, logout } = useUser();
+  const { user, logout } = useUser()
 
   return (
     <ContainerHeader>
@@ -29,10 +38,8 @@ export function Header() {
 
           <DropdownMenu.Portal>
             <DropdownMenuContent side="bottom" align="end" sideOffset={20}>
-              <DropdownMenuLabel>
-                {user?.fullName}
-              </DropdownMenuLabel>
-              
+              <DropdownMenuLabel>{user?.fullName}</DropdownMenuLabel>
+
               <span>Mentor</span>
               <DropdownMenuSeparator />
 
@@ -43,14 +50,14 @@ export function Header() {
         </DropdownMenu.Root>
       ) : (
         <GroupBtn>
-          <Link href={"/cadastro"}>
-            <Button content="Quero Mentorar" btnRole={"primary"} />
+          <Link href={'/cadastro'}>
+            <Button content="Quero Mentorar" btnRole={'primary'} />
           </Link>
-          <Link href={"/login"}>
-            <Button content="Login para Mentores" btnRole={"secondary"} />
+          <Link href={'/login'}>
+            <Button content="Login para Mentores" btnRole={'secondary'} />
           </Link>
         </GroupBtn>
       )}
     </ContainerHeader>
-  );
+  )
 }

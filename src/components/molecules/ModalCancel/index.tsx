@@ -1,13 +1,13 @@
-import { Button } from "@/components/atoms/Button";
-import { Modal } from "@/components/atoms/Modal";
-import { ContainerBtn, ContainerModalCancel, HeadingModal } from "./style";
+import { Button } from '@/components/atoms/Button'
+import { Modal } from '@/components/atoms/Modal'
+import { ContainerBtn, ContainerModalCancel, HeadingModal } from './style'
 
 interface ModalCancelProps {
-  open: boolean;
-  onClose: () => void;
-  height: number;
-  width: number;
-  bgColor: string;
+  open: boolean
+  onClose: () => void
+  height: number
+  width: number
+  bgColor: string
 }
 
 export function ModalCancel({
@@ -32,12 +32,12 @@ export function ModalCancel({
         <ContainerBtn>
           <Button
             onClick={onClose}
-            content={"Cancelar"}
-            btnRole={"modal-secondary"}
+            content={'Cancelar'}
+            btnRole={'modal-secondary'}
           />
-          <Button content={"Descartar"} btnRole={"modal-default"} />
+          <Button content={'Descartar'} btnRole={'modal-default'} />
         </ContainerBtn>
       </ContainerModalCancel>
     </Modal>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const EditPhotoContainer = styled.div`
   width: 387px;
@@ -10,7 +10,7 @@ export const EditPhotoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
+`
 
 export const StyledInfo = styled.span`
   width: 100%;
@@ -19,7 +19,7 @@ export const StyledInfo = styled.span`
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
-`;
+`
 
 export const ButtonsContainer = styled.div`
   width: 100%;
@@ -27,7 +27,7 @@ export const ButtonsContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-top: 10px;
-`;
+`
 
 export const StyledButton = styled.button`
   display: flex;
@@ -46,7 +46,7 @@ export const StyledButton = styled.button`
   .icon {
     font-size: 30px;
   }
-`;
+`
 
 export const EditButton = styled.button`
   display: flex;
@@ -59,35 +59,35 @@ export const EditButton = styled.button`
   border-radius: 8px;
   border: none;
   background-color: ${(props) => props.theme.colors.gray1.neutral};
-  color: ${(props) => (props.disabled ? "#ccc" : "#666")}; 
+  color: ${(props) => (props.disabled ? '#ccc' : '#666')};
   font-weight: bold;
-  cursor: ${(props) =>
-    props.disabled ? "not-allowed" : "pointer"};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 
   .icon {
     font-size: 30px;
-    opacity: ${(props) => (props.disabled ? 0.6 : 1)}; 
+    opacity: ${(props) => (props.disabled ? 0.6 : 1)};
   }
-`;
+`
 
 export const StyledHR = styled.div`
   width: 100%;
   height: 2px;
   background-color: #6666;
-`;
+`
 
 export const NextButton = styled.button`
   width: 78px;
   height: 48px;
   padding: 12px, 16px, 12px, 16px;
   border-radius: 8px;
-  background-color: ${(props) => (props.disabled ? "#ACACAC" : props.theme.colors.blue[700])};
+  background-color: ${(props) =>
+    props.disabled ? '#ACACAC' : props.theme.colors.blue[700]};
   border: none;
   color: white;
   font-size: 16px;
   align-self: flex-end;
   margin-top: -10px;
-`;
+`
 
 export const AddPhotoButton = styled.label`
   width: 96px;
@@ -105,7 +105,7 @@ export const AddPhotoButton = styled.label`
     font-size: 30px;
   }
 
-  input[type="file"] {
+  input[type='file'] {
     display: none;
   }
-`;
+`

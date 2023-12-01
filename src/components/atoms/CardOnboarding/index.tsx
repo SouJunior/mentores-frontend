@@ -1,10 +1,10 @@
-import Image from "next/image";
-import { ContainerCard } from "./style";
+import Image from 'next/image'
+import { ContainerCard } from './style'
 
 interface CardOnboardingProps {
-  title: string;
-  description: string;
-  img: string;
+  title: string
+  description: string
+  img: string
 }
 
 export function CardOnboarding({
@@ -18,5 +18,5 @@ export function CardOnboarding({
       <h3>{title}</h3>
       <p>{description}</p>
     </ContainerCard>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerForm = styled.div`
   max-width: 500px;
@@ -42,4 +42,4 @@ export const ContainerForm = styled.div`
       margin-top: 12px;
     }
   }
-`;
+`

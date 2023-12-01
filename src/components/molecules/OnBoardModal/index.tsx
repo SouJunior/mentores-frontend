@@ -13,7 +13,7 @@ import PerfilTab from '../PerfilTab'
 export default function OnBoardModal() {
   const [step, setStep] = useState<1 | 2>(1)
 
-  const changeSteps = (step: number) => {
+  const changeSteps = () => {
     setStep(2)
   }
 

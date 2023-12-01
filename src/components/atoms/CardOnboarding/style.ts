@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerCard = styled.div`
   display: flex;
@@ -23,4 +23,4 @@ export const ContainerCard = styled.div`
     color: ${(props) => props.theme.colors.gray[700]} !important;
     font-size: ${(props) => props.theme.fontSizes.sm} !important;
   }
-`;
+`
