@@ -28,6 +28,24 @@ export const Accordion = styled(MuiAccordion)`
     rotate: 270deg;
     color: #323232;
   }
+
+  & {
+    [aria-expanded] {
+      padding: 0 1.5rem;
+    }
+
+    [aria-expanded='false']:hover {
+      background-color: #dedede;
+    }
+
+    .MuiAccordionSummary-content {
+      margin: 1rem 0;
+    }
+
+    .MuiAccordionDetails-root {
+      padding: 1rem 1.5rem;
+    }
+  }
 `
 
 export const AccordionContent = styled.span`
