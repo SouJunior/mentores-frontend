@@ -59,14 +59,15 @@ export const CardStack = styled.div`
 `;
 
 export const CardButton = styled.button`
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 16px;
+  padding: 12px 14px;
   gap: 8px;
   border-color: #046ad0;
-  width: calc(100% - 40px);
+  // width: calc(100% - 40px);
   height: 48px;
 
   background: #046ad0;
@@ -79,6 +80,12 @@ export const CardButton = styled.button`
   line-height: 150%;
 
   color: #fdfdfd;
+
+  &:disabled {
+    background-color: "gray";
+    color: 'grey';
+    cursor: 'not-allowed';
+  }
 
   margin-top: 10px;
   &:hover {

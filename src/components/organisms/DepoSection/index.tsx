@@ -1,19 +1,31 @@
 import { Button } from "@/components/atoms/Button";
 import { MarqueeRolagem } from "@/components/atoms/MarqueeRolagem";
 import { CardDepo } from "@/components/molecules/CardDepo";
-import { mentores } from "@/mockups/mentores2";
 import Link from "next/link";
 import { ContainerBtn, ContainerDepo } from "./style";
+import { useEffect } from "react";
+import { useTestimonyService } from "../../../services/user/useTestimonyService"
 
 export function DepoSection() {
+
+  const { handleGetTestimonies, testimonies, testimoniesErrors } = useTestimonyService()
+
+  useEffect(() => {
+    const handleLoadGetTestimonies = async () => {
+      await handleGetTestimonies()
+    }
+
+    handleLoadGetTestimonies()
+  }, [])
   return (
     <ContainerDepo>
       <h2>Seja um mentor</h2>
 
       <MarqueeRolagem pauseOnHover={true} speed={30}>
-        {mentores.map((mentor) => {
-          return <CardDepo key={mentor.name} mentor={mentor} />;
+        {testimonies?.length && testimonies?.map((testimony) => {
+          return <CardDepo key={testimony.id} testimony={testimony} />;
         })}
+        {!testimonies?.length && <b>{testimoniesErrors}</b>}
       </MarqueeRolagem>
 
       <ContainerBtn>

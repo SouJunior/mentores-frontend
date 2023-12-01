@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import MentorSubHeader from '@/components/molecules/MentorSubHeader'
-import CardScheduling from '@/components/atoms/CardSchedulingMentor'
-import { MentorCardProp } from '@/utils/globals'
+// import CardScheduling from '@/components/atoms/CardSchedulingMentor'
 import NoResult from '@/assets/noresult.svg'
 import Loading from '@/assets/loading.gif'
 import {
@@ -21,31 +20,30 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { api } from '@/lib/axios'
 import { Footer } from '@/components/molecules/Footer'
+import { useMentorsService } from '@/services/user/useMentorsService'
+import { IMentors } from '@/services/interfaces/IUseMentorsService'
+import dynamic from 'next/dynamic'
 
 export default function MentorPage() {
-  const [loading, setLoading] = useState(false)
-  const [mentors, setMentors] = useState([])
   const [filteredMentors, setFilteredMentors] = useState([])
   const [genderFilter, setGenderFilter] = useState<string[]>([])
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([])
   const [mentorNameFilter, setMentorNameFilter] = useState('')
 
-  const fetchMentors = async () => {
-    setLoading(true)
-    try {
-      const response = await api.get('/mentor')
-      setMentors(response.data)
-      setLoading(false)
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  const CardScheduling = dynamic(() => import("@/components/atoms/CardSchedulingMentor"), {
+    ssr: false
+  })
+
+  const { fetchMentors, loading, mentors, mentorsErrors } = useMentorsService()
 
   useEffect(() => {
-    fetchMentors()
+    const handleLoadFetchMentors = async () => {
+      await fetchMentors()
+    }
+    handleLoadFetchMentors()
   }, [])
 
-  const filterMentors = (mentor: MentorCardProp) => {
+  const filterMentors = (mentor: IMentors) => {
     const nameFilter = mentorNameFilter.toLowerCase()
 
     const hasSelectedSpecialty =
@@ -73,13 +71,13 @@ export default function MentorPage() {
   }
 
   useEffect(() => {
-    const filtered = mentors.filter(filterMentors)
+    const filtered: any = mentors.filter(filterMentors)
     setFilteredMentors(filtered)
   }, [mentors, genderFilter, specialtyFilter, mentorNameFilter])
 
   return (
     <>
-      <MainContainer>
+      <MainContainer id='__next'>
         <SubHeaderContainer>
           <TitleContainer>
             <Link href={'/'}>
@@ -119,8 +117,8 @@ export default function MentorPage() {
               />
             </>
           ) : filteredMentors.length > 0 ? (
-            filteredMentors.map((mentor: MentorCardProp) => (
-              <CardScheduling key={mentor.fullName} mentor={mentor} />
+            filteredMentors.map((mentor: IMentors) => (
+              <CardScheduling key={mentor.id} mentor={mentor} />
             ))
           ) : (
             <NoResultContainer>
