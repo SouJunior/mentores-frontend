@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const UserProfileButtom = styled.button`
   cursor: pointer;
@@ -18,7 +18,6 @@ export const UserProfileButtom = styled.button`
   }
 
   img {
-    
     border-radius: 50%;
   }
-`;
+`

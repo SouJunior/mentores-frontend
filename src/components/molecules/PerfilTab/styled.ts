@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const PerfilContainer = styled.div`
   display: flex;
@@ -6,7 +6,7 @@ export const PerfilContainer = styled.div`
   width: 100%;
   align-items: center;
   gap: 20px;
-`;
+`
 
 export const StyledImportant = styled.span`
   font-size: 14px;
@@ -20,4 +20,4 @@ export const StyledImportant = styled.span`
   &::first-letter {
     color: ${(props) => props.theme.colors.blue[600]};
   }
-`;
+`

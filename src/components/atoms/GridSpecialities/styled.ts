@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 interface SpecialityItemProps {
-  selected: boolean;
+  selected: boolean
 }
 
 export const GridContainer = styled.div`
@@ -9,7 +9,7 @@ export const GridContainer = styled.div`
   gap: 20px;
 
   margin-top: 30px;
-`;
+`
 
 export const SpecialityItem = styled.div<SpecialityItemProps>`
   width: 172px;
@@ -17,7 +17,7 @@ export const SpecialityItem = styled.div<SpecialityItemProps>`
   border-radius: 50px;
   padding: 8px 12px 8px 4px;
   background-color: ${(props) =>
-    props.selected ? props.theme.colors.blue[600] : "gray"};
+    props.selected ? props.theme.colors.blue[600] : 'gray'};
   color: white;
   text-align: center;
   cursor: pointer;
@@ -25,7 +25,7 @@ export const SpecialityItem = styled.div<SpecialityItemProps>`
   align-items: center;
   justify-content: center;
   gap: 2px;
-`;
+`
 
 export const StyledCount = styled.span`
   font-family: Radio Canada;
@@ -37,14 +37,14 @@ export const StyledCount = styled.span`
   width: 100%;
   color: green;
   margin-top: 15px;
-`;
+`
 
 export const StyledSpan = styled.span`
   margin-top: 20px;
   font-size: 16px;
   font-weight: 400;
   line-height: 19.2px;
-`;
+`
 
 export const StyledTitle = styled.span`
   font-size: 20px;
@@ -57,7 +57,7 @@ export const StyledTitle = styled.span`
   .last {
     color: ${(props) => props.theme.colors.blue[600]};
   }
-`;
+`
 
 export const StyledImportant = styled.span`
   font-size: 14px;
@@ -71,21 +71,22 @@ export const StyledImportant = styled.span`
   &::first-letter {
     color: ${(props) => props.theme.colors.blue[600]};
   }
-`;
+`
 
 export const StyledHR = styled.div`
   width: 100%;
   height: 2px;
   background-color: #6666;
   margin-top: 30px;
-`;
+`
 
 export const NextButton = styled.button`
   width: 106px;
   height: 48px;
   padding: 12px, 16px, 12px, 16px;
   border-radius: 8px;
-  background-color: ${(props) => (props.disabled ? "#ACACAC" : props.theme.colors.blue[700])};
+  background-color: ${(props) =>
+    props.disabled ? '#ACACAC' : props.theme.colors.blue[700]};
   border: none;
   color: white;
   font-size: 16px;
@@ -93,6 +94,5 @@ export const NextButton = styled.button`
   align-self: flex-end;
 
   && disable {
-
   }
-`;
+`

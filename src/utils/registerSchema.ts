@@ -7,7 +7,7 @@ export const registerSchema = yup.object({
     .required('')
     .matches(
       /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
-      'E-mail inválido'
+      'E-mail inválido',
     ),
   confirmEmail: yup
     .string()
@@ -19,7 +19,7 @@ export const registerSchema = yup.object({
     .min(8, 'Senha inválida')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
-      'Senha inválida'
+      'Senha inválida',
     ),
   confirmPassword: yup
     .string()
@@ -29,15 +29,6 @@ export const registerSchema = yup.object({
   dataBirthday: yup.date().required(''),
 })
 
-export const initialValues: ValuesFormType = {
-  name: '',
-  email: '',
-  dataBirthday: null,
-  confirmEmail: '',
-  password: '',
-  confirmPassword: '',
-}
-
 export type ValuesFormType = {
   name: string
   email: string
@@ -45,4 +36,13 @@ export type ValuesFormType = {
   confirmEmail: string
   password: string
   confirmPassword: string
+}
+
+export const initialValues: ValuesFormType = {
+  name: '',
+  email: '',
+  dataBirthday: null,
+  confirmEmail: '',
+  password: '',
+  confirmPassword: '',
 }

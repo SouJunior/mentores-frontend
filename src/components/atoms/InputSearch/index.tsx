@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-import { StyledInputSearch, StyledSearchIcon } from "./styled";
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState } from 'react'
+import { StyledInputSearch, StyledSearchIcon } from './styled'
 
 interface InputSearchProps {
-  onSearch: (query: string) => void;
+  onSearch: (query: string) => void
 }
 
 export default function InputSearch({ onSearch }: InputSearchProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setSearchQuery(inputValue);
+    const inputValue = e.target.value
+    setSearchQuery(inputValue)
 
     if (inputValue.length) {
-      onSearch(inputValue);
+      onSearch(inputValue)
     } else {
-      onSearch("");
+      onSearch('')
     }
-  };
+  }
 
   return (
     <>
@@ -28,7 +27,7 @@ export default function InputSearch({ onSearch }: InputSearchProps) {
         value={searchQuery}
         onChange={handleInputChange}
       />
-      <StyledSearchIcon/>
+      <StyledSearchIcon />
     </>
-  );
+  )
 }

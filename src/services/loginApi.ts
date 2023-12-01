@@ -6,6 +6,6 @@ export async function loginApi(data: UserLoginDTO) {
     const response = await api.post('/auth/login', data)
     return response.data
   } catch (error) {
-    throw error
+    throw new Error(`Error: ${error}`)
   }
 }

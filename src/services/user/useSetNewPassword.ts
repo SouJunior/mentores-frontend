@@ -1,11 +1,13 @@
 import { api } from '@/lib/axios'
-import { IUserSetNewPassword } from '../interfaces/IUserSetNewPassword'
-import { SetNewPasswordDTO } from '../interfaces/IUserSetNewPassword'
+import {
+  IUserSetNewPassword,
+  SetNewPasswordDTO,
+} from '../interfaces/IUserSetNewPassword'
 
 const setNewPasswordService = (): IUserSetNewPassword => {
   const handle = async (
     data: SetNewPasswordDTO,
-    { code, email }: { code: string; email: string }
+    { code, email }: { code: string; email: string },
   ) => {
     try {
       const response = await api.patch(
@@ -16,10 +18,10 @@ const setNewPasswordService = (): IUserSetNewPassword => {
         },
         {
           params: {
-            code: code,
-            email: email,
+            code,
+            email,
           },
-        }
+        },
       )
 
       console.log(response)

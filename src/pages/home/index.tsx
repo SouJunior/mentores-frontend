@@ -1,19 +1,24 @@
-import { Footer } from "@/components/molecules/Footer";
-import { DepoSection } from "@/components/organisms/DepoSection";
-import { MentorSection } from "@/components/organisms/MentorSection";
-import { Onboarding } from "@/components/organisms/Onboarding";
-import { HeroSection } from "../../components/organisms/HeroSection";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Modal } from "@/components/atoms/Modal";
-import { ModalButton, ModalContainer, ModalDescription, ModalTitle } from "../../styles/pages/home";
+import { Footer } from '@/components/molecules/Footer'
+import { DepoSection } from '@/components/organisms/DepoSection'
+import { MentorSection } from '@/components/organisms/MentorSection'
+import { Onboarding } from '@/components/organisms/Onboarding'
+import { HeroSection } from '../../components/organisms/HeroSection'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { Modal } from '@/components/atoms/Modal'
+import {
+  ModalButton,
+  ModalContainer,
+  ModalDescription,
+  ModalTitle,
+} from '../../styles/pages/home'
 
 export default function HomePage() {
   const [isConnectCalendly, setIsConnectCalendly] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
-    if (router.query["connect-calendly"]) {
+    if (router.query['connect-calendly']) {
       setIsConnectCalendly(true)
     } else {
       setIsConnectCalendly(false)
@@ -22,7 +27,7 @@ export default function HomePage() {
 
   const handleCloseModal = () => {
     router.replace('/', undefined, {
-      shallow: true
+      shallow: true,
     })
     setIsConnectCalendly(false)
   }
@@ -45,11 +50,14 @@ export default function HomePage() {
         <ModalContainer>
           <ModalTitle>Falta pouco para você se tornar um mentor.</ModalTitle>
           <ModalDescription>
-            Para compartilhar seus horários disponíveis você deve criar a sua agenda pelo Calendly. 
+            Para compartilhar seus horários disponíveis você deve criar a sua
+            agenda pelo Calendly.
           </ModalDescription>
-          <ModalButton href="https://calendly.com/pt" target="_blank">Ir para o Calendly</ModalButton>
+          <ModalButton href="https://calendly.com/pt" target="_blank">
+            Ir para o Calendly
+          </ModalButton>
         </ModalContainer>
       </Modal>
     </>
-  );
+  )
 }

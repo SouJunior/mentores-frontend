@@ -29,7 +29,7 @@ export const ContainerButtons = styled.div`
 `
 
 export const MentorsTitle = styled.h1`
-  color: ${props => props.theme.colors.gray[700]};
+  color: ${(props) => props.theme.colors.gray[700]};
   font-size: 2.5rem;
   font-family: 'Radio Canada';
   font-weight: 700;
@@ -39,13 +39,13 @@ export const MentorsTitle = styled.h1`
 export const SeeAll = styled(Link)`
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-  border: 1px solid ${props => props.theme.colors.blue[400]};
-  color: ${props => props.theme.colors.blue[400]};
+  border: 1px solid ${(props) => props.theme.colors.blue[400]};
+  color: ${(props) => props.theme.colors.blue[400]};
 
   margin-right: 1.5rem;
 
   &:hover {
-    background-color: ${props => props.theme.colors.blue[400]};
+    background-color: ${(props) => props.theme.colors.blue[400]};
     color: #fff;
   }
 `
@@ -54,8 +54,8 @@ export const ArrowSliderBtn = styled.button`
   all: unset;
   width: 2.2rem;
   height: 2.2rem;
-  border: 1px solid ${props => props.theme.colors.blue[400]};
-  color: ${props => props.theme.colors.blue[400]};
+  border: 1px solid ${(props) => props.theme.colors.blue[400]};
+  color: ${(props) => props.theme.colors.blue[400]};
   border-radius: 9999px;
   cursor: pointer;
 

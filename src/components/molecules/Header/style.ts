@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
-import Link from "next/link";
+import styled, { css } from 'styled-components'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import Link from 'next/link'
 
 export const ContainerHeader = styled.header`
   padding: 16px 0px;
@@ -18,22 +18,21 @@ export const ContainerHeader = styled.header`
       height: 28px;
     }
   }
-`;
+`
 
 export const GroupBtn = styled.div`
   display: flex;
   justify-content: center;
   gap: 12px;
   align-items: center;
-`;
-
+`
 
 export const AvatarGroup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width:100px;
-`;
+  width: 100px;
+`
 
 export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   all: unset;
@@ -55,10 +54,10 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
     height: 1.2rem;
     color: #666;
     rotate: 270deg;
-    transition: rotate .3s;
+    transition: rotate 0.3s;
   }
 
-  &[data-state="open"] svg {
+  &[data-state='open'] svg {
     rotate: 90deg;
   }
 
@@ -84,7 +83,7 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
 `
 
 export const DropdownMenuLabel = styled.strong`
-  font: 500 1.25rem "Radio Canada";
+  font: 500 1.25rem 'Radio Canada';
   line-height: 120%;
   padding: 0.5rem 1rem;
 `
@@ -103,11 +102,11 @@ const baseBtnStyles = css`
   padding: 1rem;
   line-height: 120%;
   flex: 1;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover,
-  &:focus  {
-    background-color: ${props => props.theme.colors.gray[300]};
+  &:focus {
+    background-color: ${(props) => props.theme.colors.gray[300]};
   }
 `
 
@@ -115,13 +114,13 @@ export const LinkUserAccount = styled(Link)`
   ${baseBtnStyles}
 
   &:hover,
-  &:focus  {
+  &:focus {
     color: #323232;
-    background-color: ${props => props.theme.colors.gray[300]};
+    background-color: ${(props) => props.theme.colors.gray[300]};
   }
 `
 
 export const SignOutBtn = styled(DropdownMenu.Item)`
   ${baseBtnStyles}
-  color: ${props => props.theme.colors.red[300]};
+  color: ${(props) => props.theme.colors.red[300]};
 `

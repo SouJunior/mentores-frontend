@@ -1,31 +1,31 @@
-import { Card } from "@/components/atoms/Card";
-import Image from "next/image";
-import { GreatContainer, HeaderCardDepo } from "./style";
-import { ITestimony } from "@/services/interfaces/IUseTestimonyService";
+import { Card } from '@/components/atoms/Card'
+import Image from 'next/image'
+import { GreatContainer, HeaderCardDepo } from './style'
+import { ITestimony } from '@/services/interfaces/IUseTestimonyService'
 
 interface CardDepoProps {
-  testimony: ITestimony;
+  testimony: ITestimony
 }
 
 export function CardDepo({ testimony }: CardDepoProps) {
   return (
-    <div style={{ marginLeft: "20px", paddingBottom: "5px" }}>
+    <div style={{ marginLeft: '20px', paddingBottom: '5px' }}>
       <Card
-        bgcolor={"#fdfdfd"}
+        bgcolor={'#fdfdfd'}
         height={310}
         width={330}
-        justifyContent={"flex-start"}
+        justifyContent={'flex-start'}
       >
         <GreatContainer>
           <HeaderCardDepo>
-           { testimony.imageUrl &&
-            <Image
-              src={testimony.imageUrl}
-              alt={testimony.userName}
-              width={56}
-              height={56}
-            />
-           }
+            {testimony.imageUrl && (
+              <Image
+                src={testimony.imageUrl}
+                alt={testimony.userName}
+                width={56}
+                height={56}
+              />
+            )}
             <div>
               <h4>{testimony.userName}</h4>
               <h5>{testimony.role}</h5>
@@ -35,5 +35,5 @@ export function CardDepo({ testimony }: CardDepoProps) {
         </GreatContainer>
       </Card>
     </div>
-  );
+  )
 }

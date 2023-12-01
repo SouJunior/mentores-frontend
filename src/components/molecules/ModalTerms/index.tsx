@@ -1,4 +1,4 @@
-import { Terms } from "../FormRegister/text";
+import { Terms } from '../FormRegister/text'
 import {
   ModalBox,
   ModalBoxParagraph,
@@ -6,15 +6,15 @@ import {
   ModalBoxTitle,
   ModalHash,
   ModalLogo,
-} from "./style";
+} from './style'
 
-import { Modal } from "@/components/atoms/Modal";
+import { Modal } from '@/components/atoms/Modal'
 
 interface ModalTermsProps {
-  open: boolean;
-  onClose: () => void;
-  height: number;
-  width: number;
+  open: boolean
+  onClose: () => void
+  height: number
+  width: number
 }
 
 export default function ModalTerms({
@@ -45,5 +45,5 @@ export default function ModalTerms({
         <ModalBoxParagraph>{Terms.doubt}</ModalBoxParagraph>
       </ModalBox>
     </Modal>
-  );
+  )
 }

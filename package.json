@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",

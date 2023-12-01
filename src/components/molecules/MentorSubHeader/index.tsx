@@ -1,12 +1,12 @@
-import  { useState } from "react";
-import InputSearch from "@/components/atoms/InputSearch";
-import { ContainerControls, ContainerSelects } from "./styled";
-import SelectFilter from "@/components/atoms/SelectFilter";
+import { useState } from 'react'
+import InputSearch from '@/components/atoms/InputSearch'
+import { ContainerControls, ContainerSelects } from './styled'
+import SelectFilter from '@/components/atoms/SelectFilter'
 
 interface SubHeaderProps {
-  onGenderChange: (selectedOptions: string[]) => void;
-  onSpecialtyChange: (selectedOptions: string[]) => void;
-  onMentorSearch: (query: string) => void;
+  onGenderChange: (selectedOptions: string[]) => void
+  onSpecialtyChange: (selectedOptions: string[]) => void
+  onMentorSearch: (query: string) => void
 }
 
 export default function MentorSubHeader({
@@ -14,38 +14,38 @@ export default function MentorSubHeader({
   onSpecialtyChange,
   onMentorSearch,
 }: SubHeaderProps) {
-  const [mentorSearchQuery, setMentorSearchQuery] = useState("");
+  const [mentorSearchQuery, setMentorSearchQuery] = useState('')
   const genderOptions = [
-    "Homem Cis",
-    "Mulher cis",
-    "Homem trans",
-    "Mulher trans",
-    "Bigenero",
-    "Genero fluido",
-    "Nao Binario",
-    "Agenero",
-    "Prefiro não dizer",
-    "Outros",
-  ];
+    'Homem Cis',
+    'Mulher cis',
+    'Homem trans',
+    'Mulher trans',
+    'Bigenero',
+    'Genero fluido',
+    'Nao Binario',
+    'Agenero',
+    'Prefiro não dizer',
+    'Outros',
+  ]
   const specialtyOptions = [
-    "Carreira",
-    "Liderança",
-    "Produto",
-    "Agilidade",
-    "UX Design",
-    "UI Design",
-    "Front-End",
-    "Back-End",
-    "Mobile",
-    "QA",
-    "Dev Ops",
-    "Dados",
-  ];
+    'Carreira',
+    'Liderança',
+    'Produto',
+    'Agilidade',
+    'UX Design',
+    'UI Design',
+    'Front-End',
+    'Back-End',
+    'Mobile',
+    'QA',
+    'Dev Ops',
+    'Dados',
+  ]
 
   const handleMentorSearch = (query: string) => {
-    setMentorSearchQuery(query);
-    onMentorSearch(query);
-  };
+    setMentorSearchQuery(query)
+    onMentorSearch(query)
+  }
 
   return (
     <ContainerControls>
@@ -63,5 +63,5 @@ export default function MentorSubHeader({
         />
       </ContainerSelects>
     </ContainerControls>
-  );
+  )
 }
