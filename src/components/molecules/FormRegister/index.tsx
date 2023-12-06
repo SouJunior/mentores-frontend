@@ -58,7 +58,7 @@ export function FormRegister() {
   const closeModalCancel = () => setOpenModalCancel(false)
 
   const handleShowPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>
+    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
   ) => {
     e.preventDefault()
     setEye(!eye)
@@ -66,7 +66,7 @@ export function FormRegister() {
   }
 
   const handleConfirmPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>
+    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
   ) => {
     e.preventDefault()
     setEyeConfirm(!eyeConfirm)
@@ -75,7 +75,7 @@ export function FormRegister() {
 
   const handleSubmit = async (
     values: ValuesFormType,
-    { resetForm }: { resetForm: () => void }
+    { resetForm }: { resetForm: () => void },
   ) => {
     try {
       await api.post('/mentor', {
@@ -97,7 +97,7 @@ export function FormRegister() {
         }
 
         alert(
-          'Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.'
+          'Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.',
         )
         return
       }
@@ -107,7 +107,7 @@ export function FormRegister() {
   }
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues,
     validationSchema: registerSchema,
     onSubmit: handleSubmit,
     validateOnChange: true,

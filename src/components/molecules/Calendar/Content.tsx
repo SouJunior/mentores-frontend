@@ -1,7 +1,7 @@
 import { getWeekDays } from '@/utils/get-week-days'
 import * as Popover from '@radix-ui/react-popover'
 import dayjs from 'dayjs'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import {
   CalendarActions,
   CalendarDay,
@@ -51,7 +51,7 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
 
     const lastDayInCurrentMonth = currentDate.set(
       'date',
-      currentDate.daysInMonth()
+      currentDate.daysInMonth(),
     )
     const lastWeekDay = lastDayInCurrentMonth.get('day')
 
@@ -86,7 +86,7 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
 
         return weeks
       },
-      []
+      [],
     )
 
     return calendarWeeks
@@ -133,19 +133,19 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
             {calendarWeeks.map(({ days, week }) => (
               <tr key={week}>
                 {days.map(({ date, disabled }) => (
-                    <td key={date.toString()}>
-                      <CalendarDay
-                        pressed={date.isSame(dayjs(selected))}
-                        onPressedChange={() =>
-                          onSelected && onSelected(date.toDate())
-                        }
-                        isDisabled={disabled ?? false}
-                        disabled={date.isAfter(dayjs())}
-                      >
-                        {date.get('date')}
-                      </CalendarDay>
-                    </td>
-                  ))}
+                  <td key={date.toString()}>
+                    <CalendarDay
+                      pressed={date.isSame(dayjs(selected))}
+                      onPressedChange={() =>
+                        onSelected && onSelected(date.toDate())
+                      }
+                      isDisabled={disabled ?? false}
+                      disabled={date.isAfter(dayjs())}
+                    >
+                      {date.get('date')}
+                    </CalendarDay>
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>

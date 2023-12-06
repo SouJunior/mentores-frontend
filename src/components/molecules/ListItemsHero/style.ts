@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerList = styled.div`
   margin: 20px 0px 0px 0px;
@@ -14,4 +14,4 @@ export const ContainerList = styled.div`
     gap: 20px;
     border-radius: 24px;
   }
-`;
+`

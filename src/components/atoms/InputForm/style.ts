@@ -1,14 +1,16 @@
-import { Field as FieldComponent } from "formik";
-import styled from "styled-components";
+import { Field as FieldComponent } from 'formik'
+import styled from 'styled-components'
 
 export const ContainerDiv = styled.div`
   div {
     display: flex;
     width: 100%;
   }
-`;
+`
 export const ContainerInput = styled.div`
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     resize: none;
     height: 100%;
     width: 100%;
@@ -42,12 +44,10 @@ export const ContainerInput = styled.div`
     }
   }
 
-  textarea{
-    height:168px;
+  textarea {
+    height: 168px;
   }
-
-
-`;
+`
 
 export const ContainerError = styled.div`
   .error-message {
@@ -57,16 +57,16 @@ export const ContainerError = styled.div`
     margin-bottom: 12px;
     margin-top: -8px;
   }
-`;
+`
 
 export const StyledLabel = styled.label`
   font-size: 14px;
   color: ${(props) => props.theme.colors.gray[700]};
-`;
+`
 
 export const StyledLabelError = styled(StyledLabel)`
   color: ${(props) => props.theme.colors.error};
-`;
+`
 
 export const Field = styled(FieldComponent)`
   color: ${(props) => props.theme.colors.gray[700]} !important;
@@ -74,4 +74,4 @@ export const Field = styled(FieldComponent)`
   &::placeholder {
     color: ${(props) => props.theme.colors.gray[300]};
   }
-`;
+`

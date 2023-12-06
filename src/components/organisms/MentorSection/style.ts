@@ -11,53 +11,64 @@ export const MentorsComponent = styled.section`
   padding: 90px 0;
 `
 
-export const MentorsContent = styled.div`
+export const MentorsContentContainer = styled.div`
   max-width: 1300px;
   margin: 0 auto;
   position: relative;
 `
 
-export const MentorsTitle = styled.h1`
-  color: #5d5f5d;
-  font-size: 40px;
-  font-family: 'Radio Canada';
-  font-weight: 700;
-  line-height: 120%;
-  margin-left: 50px;
-  margin-bottom: 30px;
+export const MentorsContent = styled.section`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 `
 
-export const MentorsTitleDetach = styled.span`
-  color: #046ad0;
-  font-size: 40px;
+export const ContainerButtons = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const MentorsTitle = styled.h1`
+  color: ${(props) => props.theme.colors.gray[700]};
+  font-size: 2.5rem;
   font-family: 'Radio Canada';
   font-weight: 700;
   line-height: 120%;
 `
 
 export const SeeAll = styled(Link)`
-  display: inline-flex;
-  height: 42px;
-  padding: 12px 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  line-height: normal;
+  border-radius: 0.5rem;
+  border: 1px solid ${(props) => props.theme.colors.blue[400]};
+  color: ${(props) => props.theme.colors.blue[400]};
 
-  color: #046ad0;
-  font-size: 16px;
-  font-family: 'Radio Canada';
-  line-height: 150%;
+  margin-right: 1.5rem;
 
-  background: transparent;
-  border-radius: 8px;
-  border: 1px solid #046ad0;
-  box-shadow: 0px 1px 15px 0px rgba(17, 101, 186, 0.4);
-  backdrop-filter: blur(8px);
+  &:hover {
+    background-color: ${(props) => props.theme.colors.blue[400]};
+    color: #fff;
+  }
+`
 
-  position: absolute;
-  top: 18px;
-  right: 140px;
+export const ArrowSliderBtn = styled.button`
+  all: unset;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid ${(props) => props.theme.colors.blue[400]};
+  color: ${(props) => props.theme.colors.blue[400]};
+  border-radius: 9999px;
   cursor: pointer;
-  z-index: 10;
+
+  display: grid;
+  place-content: center;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  & + & {
+    margin-left: 0.75rem;
+  }
 `

@@ -31,6 +31,7 @@ export default function FormNewPass() {
 
   const router = useRouter()
   const { code, email } = router.query as { code: string; email: string }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   useEffect(() => {}, [code, email])
 
   const initialValues = {
@@ -41,7 +42,7 @@ export default function FormNewPass() {
   }
 
   const handleShowPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>
+    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
   ) => {
     e.preventDefault()
     setEye(!eye)
@@ -49,7 +50,7 @@ export default function FormNewPass() {
   }
 
   const handleConfirmPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>
+    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
   ) => {
     e.preventDefault()
     setEyeConfirm(!eyeConfirm)
@@ -59,10 +60,10 @@ export default function FormNewPass() {
   const { handle } = setNewPasswordService()
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues,
     validationSchema: setNewPassSchema,
     onSubmit: async (data: SetNewPasswordDTO, { resetForm }) => {
-      await handle(data, { code: code, email: email })
+      await handle(data, { code, email })
       setCookie('disable', 'false')
       resetForm()
       setToast(true)

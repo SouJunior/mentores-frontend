@@ -1,10 +1,10 @@
-import backgroundImg from "@/assets/ilustracao.svg";
-import { FormRegister } from "../../components/molecules/FormRegister";
+import backgroundImg from '@/assets/ilustracao.svg'
+import { FormRegister } from '../../components/molecules/FormRegister'
 import {
   ImageRegisterContainer,
   MyImageRegister,
   RegisterContainer,
-} from "../../styles/pages/cadastro";
+} from '../../styles/pages/cadastro'
 
 function RegisterPage() {
   return (
@@ -14,7 +14,7 @@ function RegisterPage() {
         <MyImageRegister src={backgroundImg} alt="Figuras do Background" />
       </ImageRegisterContainer>
     </RegisterContainer>
-  );
+  )
 }
 
-export default RegisterPage;
+export default RegisterPage

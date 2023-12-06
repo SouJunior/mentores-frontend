@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
-import Marquee from "react-fast-marquee";
+import { ReactNode } from 'react'
+import Marquee from 'react-fast-marquee'
 
 interface MarqueeRolagemProps {
-  children: ReactNode;
-  pauseOnHover: boolean;
-  speed: number;
+  children: ReactNode
+  pauseOnHover: boolean
+  speed: number
 }
 
 export function MarqueeRolagem({
@@ -16,5 +16,5 @@ export function MarqueeRolagem({
     <Marquee pauseOnHover={pauseOnHover} speed={speed}>
       {children}
     </Marquee>
-  );
+  )
 }

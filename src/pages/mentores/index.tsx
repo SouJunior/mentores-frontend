@@ -18,7 +18,6 @@ import {
 } from '@/styles/pages/mentors'
 import Image from 'next/image'
 import Link from 'next/link'
-import { api } from '@/lib/axios'
 import { Footer } from '@/components/molecules/Footer'
 import { useMentorsService } from '@/services/user/useMentorsService'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
@@ -30,11 +29,14 @@ export default function MentorPage() {
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([])
   const [mentorNameFilter, setMentorNameFilter] = useState('')
 
-  const CardScheduling = dynamic(() => import("@/components/atoms/CardSchedulingMentor"), {
-    ssr: false
-  })
+  const CardScheduling = dynamic(
+    () => import('@/components/atoms/CardSchedulingMentor'),
+    {
+      ssr: false,
+    },
+  )
 
-  const { fetchMentors, loading, mentors, mentorsErrors } = useMentorsService()
+  const { fetchMentors, loading, mentors } = useMentorsService()
 
   useEffect(() => {
     const handleLoadFetchMentors = async () => {
@@ -49,13 +51,13 @@ export default function MentorPage() {
     const hasSelectedSpecialty =
       specialtyFilter.length === 0 ||
       specialtyFilter.some((selectedSpecialty) =>
-        mentor.specialties.includes(selectedSpecialty)
+        mentor.specialties.includes(selectedSpecialty),
       )
 
     const hasSelectedGenders =
       genderFilter.length === 0 ||
       genderFilter.some((selectedGender) =>
-        mentor.gender.includes(selectedGender)
+        mentor.gender.includes(selectedGender),
       )
 
     if (
@@ -77,7 +79,7 @@ export default function MentorPage() {
 
   return (
     <>
-      <MainContainer id='__next'>
+      <MainContainer id="__next">
         <SubHeaderContainer>
           <TitleContainer>
             <Link href={'/'}>

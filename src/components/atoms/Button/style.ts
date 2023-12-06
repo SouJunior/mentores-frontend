@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ButtonDefault = styled.button`
   font-size: ${(props) => props.theme.fontSizes.sm};
@@ -10,7 +10,7 @@ export const ButtonDefault = styled.button`
     background-color: transparent;
     color: ${(props) => props.theme.colors.blue[400]};
   }
-`;
+`
 
 export const ButtonVariant = styled(ButtonDefault)`
   border-color: ${(props) => props.theme.colors.blue[400]};
@@ -21,7 +21,7 @@ export const ButtonVariant = styled(ButtonDefault)`
     background-color: ${(props) => props.theme.colors.blue[400]};
     color: ${(props) => props.theme.colors.white};
   }
-`;
+`
 
 export const ButtonForm = styled(ButtonDefault)`
   width: 100%;
@@ -39,14 +39,14 @@ export const ButtonForm = styled(ButtonDefault)`
     cursor: not-allowed;
     filter: grayscale(100%);
   }
-`;
+`
 
 export const ButtonFormVariant = styled(ButtonForm)`
   width: 100%;
   border-color: ${(props) => props.theme.colors.blue[400]};
   color: ${(props) => props.theme.colors.blue[400]};
   background-color: ${(props) => props.theme.colors.white};
-`;
+`
 
 export const ButtonUnstyled = styled.button`
   all: unset;
@@ -58,7 +58,7 @@ export const ButtonUnstyled = styled.button`
   &:hover {
     color: ${(props) => props.theme.colors.blue[300]};
   }
-`;
+`
 
 export const ButtonModal = styled.button`
   font-style: normal;
@@ -82,7 +82,7 @@ export const ButtonModal = styled.button`
     background-color: transparent;
     border-color: #5d5f5d;
   }
-`;
+`
 
 export const ButtonModalSecondary = styled(ButtonModal)`
   color: #5d5f5d;
@@ -94,4 +94,4 @@ export const ButtonModalSecondary = styled(ButtonModal)`
     color: #fff;
     border-color: ${(props) => props.theme.colors.red[500]};
   }
-`;
+`

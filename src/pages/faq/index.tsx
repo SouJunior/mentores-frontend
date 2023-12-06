@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import {
+  Accordion,
   AccordionContainer,
   AccordionTitle,
   FaqContainer,
@@ -7,22 +9,35 @@ import {
 } from '@/styles/pages/faq'
 import Image from 'next/image'
 import ImagemFAQ from '@/assets/seo.svg'
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { AccordionDetails, AccordionSummary } from '@mui/material'
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
 import { Footer } from '@/components/molecules/Footer'
 import Link from 'next/link'
 
 export default function FaqPage() {
+  const [expanded, setExpanded] = useState<null | number>(null)
+
+  function handleChangeAccordion(id: number) {
+    setExpanded(expanded === id ? null : id)
+  }
+
   return (
     <>
       <FaqContainer>
         <ImageContainer>
           <Image src={ImagemFAQ} alt="Image" width={493} height={324} />
         </ImageContainer>
+
         <AccordionContainer>
           <TitleSpan>Ficou com alguma dúvida?</TitleSpan>
-          <Accordion style={{ marginTop: '24px', width: '699px' }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+
+          <Accordion
+            expanded={expanded === 1}
+            onChange={() => handleChangeAccordion(1)}
+            elevation={0}
+            disableGutters
+          >
+            <AccordionSummary expandIcon={<ArrowBackIosNewRoundedIcon />}>
               <AccordionTitle>A SouJunior é gratuita?</AccordionTitle>
             </AccordionSummary>
             <AccordionDetails>
@@ -30,8 +45,14 @@ export default function FaqPage() {
               mentorar.
             </AccordionDetails>
           </Accordion>
-          <Accordion style={{ width: '699px' }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+
+          <Accordion
+            expanded={expanded === 2}
+            onChange={() => handleChangeAccordion(2)}
+            elevation={0}
+            disableGutters
+          >
+            <AccordionSummary expandIcon={<ArrowBackIosNewRoundedIcon />}>
               <AccordionTitle>Quem pode ser mentor?</AccordionTitle>
             </AccordionSummary>
             <AccordionDetails>
@@ -41,8 +62,14 @@ export default function FaqPage() {
               compartilhando conhecimento e experiências.
             </AccordionDetails>
           </Accordion>
-          <Accordion style={{ width: '699px' }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+
+          <Accordion
+            expanded={expanded === 3}
+            onChange={() => handleChangeAccordion(3)}
+            elevation={0}
+            disableGutters
+          >
+            <AccordionSummary expandIcon={<ArrowBackIosNewRoundedIcon />}>
               <AccordionTitle>Quem pode ser mentorado?</AccordionTitle>
             </AccordionSummary>
             <AccordionDetails>
@@ -50,8 +77,14 @@ export default function FaqPage() {
               especialidades disponibilizadas pela plataforma
             </AccordionDetails>
           </Accordion>
-          <Accordion style={{ width: '699px' }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+
+          <Accordion
+            expanded={expanded === 4}
+            onChange={() => handleChangeAccordion(4)}
+            elevation={0}
+            disableGutters
+          >
+            <AccordionSummary expandIcon={<ArrowBackIosNewRoundedIcon />}>
               <AccordionTitle>
                 Como funciona uma sessão de mentoria?
               </AccordionTitle>
@@ -61,8 +94,14 @@ export default function FaqPage() {
               deseja desenvolver com o(a) mentor(a)
             </AccordionDetails>
           </Accordion>
-          <Accordion style={{ width: '699px' }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+
+          <Accordion
+            expanded={expanded === 5}
+            onChange={() => handleChangeAccordion(5)}
+            elevation={0}
+            disableGutters
+          >
+            <AccordionSummary expandIcon={<ArrowBackIosNewRoundedIcon />}>
               <AccordionTitle>Onde agendar minha mentoria?</AccordionTitle>
             </AccordionSummary>
             <AccordionDetails>
@@ -76,8 +115,14 @@ export default function FaqPage() {
               <Link href="/mentores">aqui</Link>.
             </AccordionDetails>
           </Accordion>
-          <Accordion style={{ width: '699px' }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+
+          <Accordion
+            expanded={expanded === 6}
+            onChange={() => handleChangeAccordion(6)}
+            elevation={0}
+            disableGutters
+          >
+            <AccordionSummary expandIcon={<ArrowBackIosNewRoundedIcon />}>
               <AccordionTitle>Qual o tempo de cada sessão?</AccordionTitle>
             </AccordionSummary>
             <AccordionDetails>

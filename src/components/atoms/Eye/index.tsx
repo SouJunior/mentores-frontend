@@ -17,7 +17,6 @@ interface EyeProps {
 
 export function Eye({
   eye,
-  size,
   onClick,
   marginTop,
   color,
@@ -40,9 +39,9 @@ export function Eye({
     >
       {' '}
       {eye === false ? (
-        <VisibilityOffIcon style={{ color: color }} fontSize={'small'} />
+        <VisibilityOffIcon style={{ color }} fontSize={'small'} />
       ) : (
-        <VisibilityIcon style={{ color: color }} fontSize={'small'} />
+        <VisibilityIcon style={{ color }} fontSize={'small'} />
       )}
     </EyeContainer>
   )

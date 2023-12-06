@@ -1,18 +1,18 @@
-import { useRouter } from "next/router";
-import useUser from "./useUser";
-import { useEffect } from "react";
+import { useRouter } from 'next/router'
+import useUser from './useUser'
+import { useEffect } from 'react'
 
 export const withAuth = (WrappedComponent: React.FC) => {
   return function AuthenticationProps() {
-    const { user } = useUser();
-    const router = useRouter();
+    const { user } = useUser()
+    const router = useRouter()
 
     useEffect(() => {
       if (!user || user === null) {
-        router.push("/login");
+        router.push('/login')
       }
-    }, [user]);
+    }, [user])
 
-    return user ? <WrappedComponent /> : null;
-  };
-};
+    return user ? <WrappedComponent /> : null
+  }
+}

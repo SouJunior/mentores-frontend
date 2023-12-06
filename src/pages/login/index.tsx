@@ -1,10 +1,10 @@
-import backgroundImg from "@/assets/BackgroundFigures.svg";
-import { FormLogin } from "../../components/molecules/FormLogin";
+import backgroundImg from '@/assets/BackgroundFigures.svg'
+import { FormLogin } from '../../components/molecules/FormLogin'
 import {
   ContainerImage,
   ContainerLogin,
   MyImage,
-} from "../../styles/pages/login";
+} from '../../styles/pages/login'
 
 export default function LoginPage() {
   return (
@@ -14,5 +14,5 @@ export default function LoginPage() {
       </ContainerImage>
       <FormLogin />
     </ContainerLogin>
-  );
+  )
 }

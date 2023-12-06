@@ -1,22 +1,21 @@
-import { Card } from "@/components/atoms/Card";
-import Image from "next/image";
+import { Card } from '@/components/atoms/Card'
 import {
   CardButton,
+  CardImage,
   CardStack,
   CardStacks,
   CardSubtitle,
   CardTitle,
-} from "./style";
-import { IMentors } from "@/services/interfaces/IUseMentorsService";
-import { useEffect, useState } from "react";
-import { grey } from "@mui/material/colors";
+} from './style'
+import { IMentors } from '@/services/interfaces/IUseMentorsService'
+import { useEffect, useState } from 'react'
 
 interface CardMentorProps {
-  mentor: IMentors;
+  mentor: IMentors
 }
 
 export function CardMentor({ mentor }: CardMentorProps) {
-  const [ buttonDisabled, setButtonDisabled ] = useState<boolean>(false)
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
 
   useEffect(() => {
     if (!mentor.calendlyName || !mentor.agendaName) {
@@ -27,26 +26,30 @@ export function CardMentor({ mentor }: CardMentorProps) {
   }, [])
 
   return (
-    <Card height={443} justifyContent={"center"}>
-      { mentor.profile &&
-      <Image
-        src={mentor.profile}
-        width={150}
-        height={150}
-        style={{ borderRadius: "100%", objectFit: "cover" }}
-        alt={mentor.fullName}
-      />
-      }
-      <CardTitle>{mentor.fullName}</CardTitle>
-      <CardSubtitle>{mentor.role}</CardSubtitle>
+    <Card gap={'1rem'} alignItems={'flex-start'} padding={'1rem'}>
+      {mentor.profile && (
+        <CardImage
+          src={mentor.profile}
+          width={150}
+          height={150}
+          alt={mentor.fullName}
+        />
+      )}
+      <section>
+        <CardTitle>{mentor.fullName}</CardTitle>
+        <CardSubtitle>{mentor.aboutMe}</CardSubtitle>
+      </section>
       <CardStacks>
         {mentor.specialties.map((specialty: string) => (
           <CardStack key={specialty}>{specialty}</CardStack>
         ))}
       </CardStacks>
-      <a href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}?embed_domain=mentora.webflow.io&embed_type=Inline`}>
-      <CardButton disabled={buttonDisabled}> Agendar um horário </CardButton>
-      </a>
+      <CardButton
+        target="_blank"
+        href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}?embed_domain=mentora.webflow.io&embed_type=Inline`}
+      >
+        <button disabled={buttonDisabled}> Agendar um horário </button>
+      </CardButton>
     </Card>
-  );
+  )
 }

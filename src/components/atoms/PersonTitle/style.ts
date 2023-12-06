@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerTitle = styled.div`
   margin-bottom: 8px;
@@ -8,4 +8,4 @@ export const ContainerTitle = styled.div`
     color: ${(props) => props.theme.colors.gray[700]};
     font-size: ${(props) => props.theme.fontSizes.xxl};
   }
-`;
+`

@@ -1,53 +1,53 @@
-import { Button } from "@/components/atoms/Button";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { ModalPrivacyPolicy } from "../ModalPrivacyPolicy";
-import ModalTerms from "../ModalTerms";
+import { Button } from '@/components/atoms/Button'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { ModalPrivacyPolicy } from '../ModalPrivacyPolicy'
+import ModalTerms from '../ModalTerms'
 import {
   ContainerFooter,
   ContainerModais,
   ContainerSocialMedias,
   SectionFooter,
   SectionFooterLinks,
-} from "./style";
+} from './style'
 
-import discord from "@/assets/homepage/footer/discord.webp";
-import facebook from "@/assets/homepage/footer/face.webp";
-import github from "@/assets/homepage/footer/github.webp";
-import insta from "@/assets/homepage/footer/insta.webp";
-import linkedin from "@/assets/homepage/footer/linkedin.webp";
-import telegram from "@/assets/homepage/footer/telegram.webp";
-import twitch from "@/assets/homepage/footer/twitch.webp";
-import twitter from "@/assets/homepage/footer/twitter.webp";
-import youtube from "@/assets/homepage/footer/youtube.webp";
-import logo from "@/assets/logos/sou-junior-black.webp";
+import discord from '@/assets/homepage/footer/discord.webp'
+import facebook from '@/assets/homepage/footer/face.webp'
+import github from '@/assets/homepage/footer/github.webp'
+import insta from '@/assets/homepage/footer/insta.webp'
+import linkedin from '@/assets/homepage/footer/linkedin.webp'
+import telegram from '@/assets/homepage/footer/telegram.webp'
+import twitch from '@/assets/homepage/footer/twitch.webp'
+import twitter from '@/assets/homepage/footer/twitter.webp'
+import youtube from '@/assets/homepage/footer/youtube.webp'
+import logo from '@/assets/logos/sou-junior-black.webp'
 
 export function Footer() {
-  const [openTermos, setOpenTermos] = useState(false);
-  const [openPoliticas, setOpenPoliticas] = useState(false);
+  const [openTermos, setOpenTermos] = useState(false)
+  const [openPoliticas, setOpenPoliticas] = useState(false)
 
-  const handleOpenTermos = () => setOpenTermos(true);
-  const handleCloseTermos = () => setOpenTermos(false);
-  const handleOpenPoliticas = () => setOpenPoliticas(true);
-  const handleClosePoliticas = () => setOpenPoliticas(false);
+  const handleOpenTermos = () => setOpenTermos(true)
+  const handleCloseTermos = () => setOpenTermos(false)
+  const handleOpenPoliticas = () => setOpenPoliticas(true)
+  const handleClosePoliticas = () => setOpenPoliticas(false)
 
   return (
-    <>
+    <footer>
       <ContainerFooter>
         <SectionFooter>
           <Image src={logo} alt="Logo" width={260} height={40} />
           <ContainerModais>
             <Button
-              content={"Termos de uso"}
-              btnRole={"unstyled"}
+              content={'Termos de uso'}
+              btnRole={'unstyled'}
               onClick={handleOpenTermos}
             />
 
             <span />
             <Button
-              content={"Políticas de Privacidade"}
-              btnRole={"unstyled"}
+              content={'Políticas de Privacidade'}
+              btnRole={'unstyled'}
               onClick={handleOpenPoliticas}
             />
           </ContainerModais>
@@ -66,8 +66,8 @@ export function Footer() {
         </SectionFooter>
         <SectionFooterLinks>
           <h2>Seja mentorado</h2>
-          <a href="#mentor">Encontre seu mentor</a>
-          <a href="#onboarding">Como funciona</a>
+          <Link href="/#mentor">Encontre seu mentor</Link>
+          <Link href="/#onboarding">Como funciona</Link>
         </SectionFooterLinks>
         <SectionFooterLinks>
           <h2>Mentore</h2>
@@ -81,14 +81,14 @@ export function Footer() {
       </ContainerFooter>
       <ContainerSocialMedias>
         <Link
-          href={"https://www.linkedin.com/company/soujunior/"}
+          href={'https://www.linkedin.com/company/soujunior/'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
           <Image width={40} height={40} src={linkedin} alt="logo Linkedin" />
         </Link>
         <Link
-          href={"https://github.com/SouJunior"}
+          href={'https://github.com/SouJunior'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
@@ -96,7 +96,7 @@ export function Footer() {
         </Link>
         <Link
           href={
-            "https://discord.com/invite/soujunior-community-759176734460346423"
+            'https://discord.com/invite/soujunior-community-759176734460346423'
           }
           target="_blank"
           referrerPolicy="no-referrer"
@@ -104,48 +104,48 @@ export function Footer() {
           <Image width={40} height={40} src={discord} alt="logo discord" />
         </Link>
         <Link
-          href={"https://www.youtube.com/@soujuniortech"}
+          href={'https://www.youtube.com/@soujuniortech'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
           <Image width={40} height={40} src={youtube} alt="logo youtube" />
-        </Link>{" "}
+        </Link>{' '}
         <Link
-          href={"https://twitter.com/SouJunior_Tech"}
+          href={'https://twitter.com/SouJunior_Tech'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
           <Image width={40} height={40} src={twitter} alt="logo twitter" />
-        </Link>{" "}
+        </Link>{' '}
         <Link
-          href={"https://www.instagram.com/soujunior.tech/"}
+          href={'https://www.instagram.com/soujunior.tech/'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
           <Image width={40} height={40} src={insta} alt="logo instagram" />
-        </Link>{" "}
+        </Link>{' '}
         <Link
-          href={"https://www.facebook.com/people/SouJunior/100086671131030"}
+          href={'https://www.facebook.com/people/SouJunior/100086671131030'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
           <Image width={40} height={40} src={facebook} alt="logo facebook" />
-        </Link>{" "}
+        </Link>{' '}
         <Link
-          href={"https://t.me/soujuniortech"}
+          href={'https://t.me/soujuniortech'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
           <Image width={40} height={40} src={telegram} alt="logo telegram" />
-        </Link>{" "}
+        </Link>{' '}
         <Link
-          href={"https://www.twitch.tv/soujuniortech"}
+          href={'https://www.twitch.tv/soujuniortech'}
           target="_blank"
           referrerPolicy="no-referrer"
         >
           <Image width={40} height={40} src={twitch} alt="logo twitch" />
         </Link>
       </ContainerSocialMedias>
-    </>
-  );
+    </footer>
+  )
 }

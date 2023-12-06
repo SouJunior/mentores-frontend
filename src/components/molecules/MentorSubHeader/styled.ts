@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerControls = styled.div`
   width: 100%;
@@ -8,11 +8,10 @@ export const ContainerControls = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0px 170px;
-  margin-top:34px;
-`;
+  margin-top: 34px;
+`
 
 export const ContainerSelects = styled.div`
   display: flex;
   gap: 10px;
-`;
-
+`

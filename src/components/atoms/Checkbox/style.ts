@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const CheckboxContainer = styled.div`
   display: flex;
@@ -20,4 +20,4 @@ export const CheckboxContainer = styled.div`
     font-size: ${(props) => props.theme.fontSizes.sm};
     cursor: pointer;
   }
-`;
+`

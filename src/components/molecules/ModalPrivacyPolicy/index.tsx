@@ -1,5 +1,5 @@
-import { Modal } from "@/components/atoms/Modal";
-import { Policies, Terms } from "../FormRegister/text";
+import { Modal } from '@/components/atoms/Modal'
+import { Policies, Terms } from '../FormRegister/text'
 import {
   ModalBox,
   ModalBoxParagrafo,
@@ -7,13 +7,13 @@ import {
   ModalBoxTitulo,
   ModalHash,
   ModalLogo,
-} from "./style";
+} from './style'
 
 interface ModalPrivacyPolicyProps {
-  open: boolean;
-  onClose: () => void;
-  height: number;
-  width: number;
+  open: boolean
+  onClose: () => void
+  height: number
+  width: number
 }
 
 export function ModalPrivacyPolicy({
@@ -43,5 +43,5 @@ export function ModalPrivacyPolicy({
         <ModalBoxParagrafo>{Policies.moreInfo}</ModalBoxParagrafo>
       </ModalBox>
     </Modal>
-  );
+  )
 }
