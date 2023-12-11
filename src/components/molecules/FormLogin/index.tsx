@@ -5,7 +5,7 @@ import { InputLogin } from '@/components/atoms/InputLogin'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Checkbox } from '../../atoms/Checkbox'
 import { ContainerForm } from './style'
@@ -14,7 +14,7 @@ import UserLoginService from '@/services/user/userLoginService'
 export function FormLogin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [keepConnected, setKeepConnected] = useState(false)
+  const [isKeepConnected, setIsKeepConnected] = useState(false)
   const type = 'mentor'
 
   const {
@@ -29,12 +29,19 @@ export function FormLogin() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await sendLogin({ email, password, type })
+    const user = await sendLogin({ email, password, type })
+
+    const userStringify = JSON.stringify(user)
+
+    if (isKeepConnected) {
+      localStorage.setItem('user', userStringify)
+    }
   }
 
   useEffect(() => {
-    const data = { email, password, type }
+    const data = { email, password, type, isKeepConnected }
     setSubmitButton(!checkFields(data))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, password, type])
 
   return (
@@ -103,8 +110,8 @@ export function FormLogin() {
             }}
           >
             <Checkbox
-              isChecked={keepConnected}
-              setValue={setKeepConnected}
+              isChecked={isKeepConnected}
+              setValue={setIsKeepConnected}
               id="connected"
               text="Me manter conectado"
             />

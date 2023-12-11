@@ -1,3 +1,5 @@
+import { User } from '@/context/interfaces/IAuth'
+
 export type UserLoginDTO = {
   email: string
   password: string
@@ -5,7 +7,7 @@ export type UserLoginDTO = {
 }
 
 export interface IUserLoginService {
-  sendLogin: (data: UserLoginDTO) => Promise<void>
+  sendLogin: (data: UserLoginDTO) => Promise<User | null | undefined>
   validateForm: (data: UserLoginDTO) => Promise<boolean>
   formState: {
     email: string

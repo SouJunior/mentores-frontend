@@ -14,8 +14,11 @@ interface CardMentorProps {
   mentor: IMentors
 }
 
+const MAX_SPECIALTIES_NUMBER = 3
+
 export function CardMentor({ mentor }: CardMentorProps) {
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
+  const specialties = mentor.specialties.slice(0, MAX_SPECIALTIES_NUMBER)
 
   useEffect(() => {
     if (!mentor.calendlyName || !mentor.agendaName) {
@@ -40,7 +43,7 @@ export function CardMentor({ mentor }: CardMentorProps) {
         <CardSubtitle>{mentor.aboutMe}</CardSubtitle>
       </section>
       <CardStacks>
-        {mentor.specialties.map((specialty: string) => (
+        {specialties.map((specialty: string) => (
           <CardStack key={specialty}>{specialty}</CardStack>
         ))}
       </CardStacks>

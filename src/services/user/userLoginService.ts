@@ -55,7 +55,7 @@ const UserLoginService = (): IUserLoginService => {
         const response = await loginApi(data)
 
         const user2 = response
-        const userFromResponse = await createUserFromResponseData(user2)
+        const userFromResponse = createUserFromResponseData(user2)
         userContext.setUser(userFromResponse)
 
         setFormState({
@@ -66,6 +66,8 @@ const UserLoginService = (): IUserLoginService => {
         response.info.registerComplete === true
           ? router.push('/?connect-calendly=true')
           : router.push('/onBoarding')
+
+        return userFromResponse
       } catch (error) {
         setFormState({
           ...formState,
@@ -79,14 +81,6 @@ const UserLoginService = (): IUserLoginService => {
       setLoading(false)
     }, 500)
   }
-
-  useEffect(() => {
-    const newUser = userContext.user
-    if (newUser) {
-      const userStringify = JSON.stringify(newUser)
-      localStorage.setItem('user', userStringify)
-    }
-  }, [userContext.user])
 
   useEffect(() => {
     const isDisable = getCookie('disable')
