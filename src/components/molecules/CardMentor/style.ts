@@ -58,6 +58,10 @@ export const CardStack = styled.div`
   font-size: 14px;
   line-height: 100%;
   color: #fdfdfd;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 
 export const CardButton = styled.a`
