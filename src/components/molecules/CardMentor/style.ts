@@ -22,7 +22,7 @@ export const CardTitle = styled.h1`
   margin-bottom: 0.25rem;
 `
 
-export const CardSubtitle = styled.h2`
+export const CardSubtitle = styled.p`
   font-family: 'Radio Canada';
   font-style: normal;
   font-weight: 400;
@@ -81,15 +81,15 @@ export const CardButton = styled.a`
     font-size: 1rem;
     color: ${(props) => props.theme.colors.white};
 
-    &:disabled {
-      background-color: 'gray';
-      color: 'grey';
-      cursor: 'not-allowed';
-    }
-
-    &:hover {
+    &:not(:disabled):hover {
       background-color: ${(props) => props.theme.colors.white};
       color: #046ad0;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: ${(props) => props.theme.colors.gray[700]};
+      border-color: ${(props) => props.theme.colors.gray[700]};
     }
   }
 `

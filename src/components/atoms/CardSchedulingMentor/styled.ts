@@ -61,8 +61,14 @@ export const SchedButton = styled.button`
   line-height: 19.2px;
   display: flex;
   align-items: center;
-  &:hover {
+
+  &:not(:disabled):hover {
     background-color: #002c66;
+  }
+
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.gray[700]};
+    cursor: not-allowed;
   }
 `
 

@@ -16,6 +16,7 @@ import {
 } from './styled'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
 import UserDefault from '@/assets/userDefault.png'
+import Link from 'next/link'
 
 interface ModalSchedProps {
   open: boolean
@@ -57,7 +58,11 @@ export default function ModalSchedMentor({
           </SpecialityContainer>
           <AboutContainer>{mentor.aboutMe}</AboutContainer>
         </MainContainer>
-        <SchedButton>Agendar mentoria</SchedButton>
+        <Link href={`https://calendly.com/${mentor.calendlyName}`}>
+          <SchedButton disabled={!mentor.calendlyName}>
+            Agendar mentoria
+          </SchedButton>
+        </Link>
       </ModalContainer>
     </ModalOverlay>
   )
