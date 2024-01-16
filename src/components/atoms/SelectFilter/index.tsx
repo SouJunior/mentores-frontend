@@ -1,13 +1,18 @@
 import { useState } from 'react'
-import {
-  CheckboxLabel,
-  DropdownButton,
-  DropdownContainer,
-  DropdownMenu,
-} from './styled'
-import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-interface SelectFilterProps {
+
+import * as Select from '@radix-ui/react-select'
+import * as Checkbox from '@radix-ui/react-checkbox'
+
+import {
+  CheckboxIndicator,
+  CheckboxLabel,
+  CheckboxRoot,
+  SelectContent,
+  SelectTrigger,
+} from './styled'
+
+interface SelectFilterProps extends Select.SelectProps {
   options: string[]
   selectName?: string
   onChange: (selectedOptions: string[]) => void
@@ -15,8 +20,9 @@ interface SelectFilterProps {
 
 export default function SelectFilter({
   options,
-  onChange,
   selectName,
+  onChange,
+  ...props
 }: SelectFilterProps) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [open, setOpen] = useState(false)
@@ -32,23 +38,33 @@ export default function SelectFilter({
     onChange(newSelectedOptions)
   }
   return (
-    <DropdownContainer>
-      <DropdownButton onClick={() => setOpen(!open)}>
-        {selectName} {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-      </DropdownButton>
-      <DropdownMenu open={open}>
-        {options.map((option) => (
-          <CheckboxLabel key={option}>
-            <input
-              type="checkbox"
-              value={option}
-              checked={selectedOptions.includes(option)}
-              onChange={() => handleOptionChange(option)}
-            />
-            {option}
-          </CheckboxLabel>
-        ))}
-      </DropdownMenu>
-    </DropdownContainer>
+    <Select.Root {...props} open={open} onOpenChange={setOpen}>
+      <SelectTrigger>
+        <Select.Value placeholder={selectName} />
+        <Select.Icon asChild>
+          <ExpandMoreIcon />
+        </Select.Icon>
+      </SelectTrigger>
+
+      <Select.Portal>
+        <SelectContent side="bottom" position="popper" sideOffset={8}>
+          <Select.Viewport>
+            {options.map((option) => (
+              <CheckboxLabel key={option}>
+                <CheckboxRoot
+                  checked={selectedOptions.includes(option)}
+                  onCheckedChange={() => handleOptionChange(option)}
+                >
+                  <Checkbox.Indicator>
+                    <CheckboxIndicator />
+                  </Checkbox.Indicator>
+                </CheckboxRoot>
+                {option}
+              </CheckboxLabel>
+            ))}
+          </Select.Viewport>
+        </SelectContent>
+      </Select.Portal>
+    </Select.Root>
   )
 }

@@ -33,7 +33,7 @@ export const PhotoContainer = styled.div`
 export const MentorName = styled.span`
   font-size: 2.5rem;
   line-height: 3rem;
-  max-width: 13rem;
+  max-width: 15rem;
   font-weight: 600;
   color: #323232;
 `

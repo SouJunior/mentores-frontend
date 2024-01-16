@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const MainContainer = styled.div`
+export const Container = styled.div`
   background-color: #f1f3f5;
   display: flex;
   flex-direction: column;
@@ -8,16 +8,21 @@ export const MainContainer = styled.div`
   gap: 10px;
 `
 
+export const MainContent = styled.main``
+
 export const MentorsContainer = styled.div`
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   grid-auto-rows: max-content;
   grid-gap: 30px;
-  width: 100vw;
+
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+
   min-height: 100vh;
-  padding: 20px 8%;
-  padding-bottom: 2rem;
+  padding: 2rem;
   position: relative;
 `
 
@@ -25,30 +30,49 @@ export const SubHeaderContainer = styled.div`
   display: flex;
   height: 100px;
   flex-direction: column;
-  padding: 24px 120px;
+  padding: 1.5rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
 `
 
-export const TitleContainer = styled.span`
-  padding: 5px 50px;
+export const TitleContainer = styled.section`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
   a {
     color: #666666;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 1.05rem;
+
+    &:hover {
+      color: #666666;
+      text-decoration: underline;
+    }
+  }
+
+  div[aria-hidden] {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #666666;
+    border-radius: 100%;
   }
 `
 
 export const SubTitleContainer = styled.span`
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #003986;
+  line-height: 1.05rem;
 `
 
 export const CTAMain = styled.span`
   font-size: 32px;
   font-weight: 600;
-  padding: 15px 50px;
   color: #003986;
   display: flex;
   flex-direction: column;
+  margin-top: 1.5rem;
 `
 export const CTASub = styled.span`
   font-size: 16px;
@@ -76,20 +100,43 @@ export const NoResultMain = styled.span`
 
 export const StacksContainer = styled.span`
   display: flex;
-  gap: 8px;
+  gap: 0.75rem;
   width: 100%;
   flex-wrap: wrap;
-  padding: 24px 0px 0px 170px;
+  padding: 1.6rem 2rem 0;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
 `
 
 export const Stack = styled.span`
   background: #fff;
-  font-size: 12px;
-  line-height: 14px;
-  height: 30px;
-  min-width: 73px;
-  color: #001633;
-  padding: 8px;
-  border-radius: 40px;
+  font-size: 0.875rem;
+  line-height: 1.05rem;
+  color: #323232;
+  padding: 0.5rem 1rem;
+  border-radius: 2.5rem;
   text-align: center;
+`
+
+export const Divider = styled.div`
+  width: 2px;
+  height: 2rem;
+
+  background-color: #cbcbcb;
+`
+
+export const RemoveFiltersBtn = styled.button`
+  all: unset;
+  cursor: pointer;
+
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
+
+  color: #003986;
+
+  &:hover {
+    color: #002c66;
+  }
 `

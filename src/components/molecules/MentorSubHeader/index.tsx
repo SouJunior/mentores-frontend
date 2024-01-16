@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import InputSearch from '@/components/atoms/InputSearch'
-import { ContainerControls, ContainerSelects } from './styled'
+import { ContainerControls, ContainerSelects, Content } from './styled'
 import SelectFilter from '@/components/atoms/SelectFilter'
 
 interface SubHeaderProps {
@@ -9,38 +9,39 @@ interface SubHeaderProps {
   onMentorSearch: (query: string) => void
 }
 
+const genderOptions = [
+  'Homem Cis',
+  'Mulher cis',
+  'Homem trans',
+  'Mulher trans',
+  'Bigenero',
+  'Genero fluido',
+  'Nao Binario',
+  'Agenero',
+  'Prefiro não dizer',
+  'Outros',
+]
+const specialtyOptions = [
+  'Carreira',
+  'Liderança',
+  'Produto',
+  'Agilidade',
+  'UX Design',
+  'UI Design',
+  'Front-End',
+  'Back-End',
+  'Mobile',
+  'QA',
+  'Dev Ops',
+  'Dados',
+]
+
 export default function MentorSubHeader({
   onGenderChange,
   onSpecialtyChange,
   onMentorSearch,
 }: SubHeaderProps) {
-  const [mentorSearchQuery, setMentorSearchQuery] = useState('')
-  const genderOptions = [
-    'Homem Cis',
-    'Mulher cis',
-    'Homem trans',
-    'Mulher trans',
-    'Bigenero',
-    'Genero fluido',
-    'Nao Binario',
-    'Agenero',
-    'Prefiro não dizer',
-    'Outros',
-  ]
-  const specialtyOptions = [
-    'Carreira',
-    'Liderança',
-    'Produto',
-    'Agilidade',
-    'UX Design',
-    'UI Design',
-    'Front-End',
-    'Back-End',
-    'Mobile',
-    'QA',
-    'Dev Ops',
-    'Dados',
-  ]
+  const [_, setMentorSearchQuery] = useState('')
 
   const handleMentorSearch = (query: string) => {
     setMentorSearchQuery(query)
@@ -49,19 +50,21 @@ export default function MentorSubHeader({
 
   return (
     <ContainerControls>
-      <InputSearch onSearch={handleMentorSearch} />
-      <ContainerSelects>
-        <SelectFilter
-          options={specialtyOptions}
-          selectName="Especialidades"
-          onChange={onSpecialtyChange}
-        />
-        <SelectFilter
-          options={genderOptions}
-          selectName="Gênero"
-          onChange={onGenderChange}
-        />
-      </ContainerSelects>
+      <Content>
+        <InputSearch onSearch={handleMentorSearch} />
+        <ContainerSelects>
+          <SelectFilter
+            options={specialtyOptions}
+            selectName="Especialidades"
+            onChange={onSpecialtyChange}
+          />
+          <SelectFilter
+            options={genderOptions}
+            selectName="Gênero"
+            onChange={onGenderChange}
+          />
+        </ContainerSelects>
+      </Content>
     </ContainerControls>
   )
 }
