@@ -11,7 +11,7 @@ export const MainContainer = styled.div`
 export const MentorsContainer = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(23.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   grid-auto-rows: max-content;
   grid-gap: 30px;
   width: 100vw;

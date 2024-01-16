@@ -34,7 +34,7 @@ export default function CardScheduling({ mentor }: MentorsProps) {
           height={80}
           src={mentor.profile ?? userWithoutImage}
           alt={mentor.fullName}
-          style={{ borderRadius: '80px', objectFit: 'cover' }}
+          style={{ borderRadius: '9999px', objectFit: 'cover' }}
         />
         <StyledName>{mentor.fullName}</StyledName>
       </TitleContainer>
