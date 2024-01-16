@@ -13,6 +13,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null)
     router.push('/login')
     localStorage.removeItem('user')
+    sessionStorage.removeItem('user')
   }
 
   const updateUser = (updatedUser: User | null) => {
@@ -23,7 +24,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user')
+    const storedUser =
+      localStorage.getItem('user') ?? sessionStorage.getItem('user')
     if (storedUser) {
       const userParsed = JSON.parse(storedUser)
       setUser(userParsed)

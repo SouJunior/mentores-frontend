@@ -35,6 +35,8 @@ export function FormLogin() {
 
     if (isKeepConnected) {
       localStorage.setItem('user', userStringify)
+    } else {
+      sessionStorage.setItem('user', userStringify)
     }
   }
 
