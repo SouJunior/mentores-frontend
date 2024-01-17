@@ -45,7 +45,12 @@ export default function SelectFilter({
       </SelectTrigger>
 
       <Select.Portal>
-        <SelectContent side="bottom" position="popper" sideOffset={8}>
+        <SelectContent
+          side="bottom"
+          position="popper"
+          sideOffset={8}
+          avoidCollisions={false}
+        >
           <Select.Viewport>
             {options.map((option) => (
               <CheckboxLabel key={option}>

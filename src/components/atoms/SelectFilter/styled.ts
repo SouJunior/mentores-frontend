@@ -38,6 +38,7 @@ export const SelectTrigger = styled(Select.Trigger)`
 
 export const SelectContent = styled(Select.Content)`
   width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
   background-color: #fff;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
