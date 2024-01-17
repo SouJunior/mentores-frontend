@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import MentorSubHeader from '@/components/molecules/MentorSubHeader'
-// import CardScheduling from '@/components/atoms/CardSchedulingMentor'
 import NoResult from '@/assets/noresult.svg'
 import Loading from '@/assets/loading.gif'
 import {
@@ -25,19 +24,17 @@ import { Footer } from '@/components/molecules/Footer'
 import { useMentorsService } from '@/services/user/useMentorsService'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
 import dynamic from 'next/dynamic'
+const CardScheduling = dynamic(
+  () => import('@/components/atoms/CardSchedulingMentor'),
+  {
+    ssr: false,
+  },
+)
 
 export default function MentorPage() {
-  const [filteredMentors, setFilteredMentors] = useState([])
   const [genderFilter, setGenderFilter] = useState<string[]>([])
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([])
   const [mentorNameFilter, setMentorNameFilter] = useState('')
-
-  const CardScheduling = dynamic(
-    () => import('@/components/atoms/CardSchedulingMentor'),
-    {
-      ssr: false,
-    },
-  )
 
   const { fetchMentors, loading, mentors } = useMentorsService()
 
@@ -48,7 +45,7 @@ export default function MentorPage() {
     handleLoadFetchMentors()
   }, [])
 
-  const filterMentors = (mentor: IMentors) => {
+  const mentorsFiltered = mentors.filter((mentor: IMentors) => {
     const nameFilter = mentorNameFilter.toLowerCase()
 
     const hasSelectedSpecialty =
@@ -59,31 +56,23 @@ export default function MentorPage() {
 
     const hasSelectedGenders =
       genderFilter.length === 0 ||
-      genderFilter.some((selectedGender) =>
-        mentor.gender.includes(selectedGender),
-      )
+      genderFilter
+        .map((gender) => gender.toLowerCase())
+        .includes(mentor.gender.toLowerCase())
 
-    if (
+    return (
       hasSelectedGenders &&
       hasSelectedSpecialty &&
       (!mentorNameFilter ||
         mentor.fullName.toLowerCase().includes(nameFilter)) &&
       mentor.registerComplete === true
-    ) {
-      return true
-    }
-    return false
-  }
+    )
+  })
 
   function handleClearFilters() {
     setSpecialtyFilter([])
     setGenderFilter([])
   }
-
-  useEffect(() => {
-    const filtered: any = mentors.filter(filterMentors)
-    setFilteredMentors(filtered)
-  }, [mentors, genderFilter, specialtyFilter, mentorNameFilter])
 
   return (
     <>
@@ -134,8 +123,8 @@ export default function MentorPage() {
                   alt="Loading"
                 />
               </>
-            ) : filteredMentors.length > 0 ? (
-              filteredMentors.map((mentor: IMentors) => (
+            ) : mentorsFiltered.length > 0 ? (
+              mentorsFiltered.map((mentor: IMentors) => (
                 <CardScheduling key={mentor.id} mentor={mentor} />
               ))
             ) : (

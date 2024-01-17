@@ -14,6 +14,7 @@ import UserUpdateService from '@/services/user/userUpdateService'
 import useUser from '@/context/Auth/useUser'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { specialties } from '@/data/static-info'
 
 interface GridSpecialitiesProps {
   stepNumber: (step: number) => void
@@ -24,21 +25,6 @@ export default function GridSpecialities({
   const { user } = useUser()
   const { handle } = UserUpdateService()
   const [requestError, setError] = useState(false)
-
-  const specialities: string[] = [
-    'Carreira',
-    'Liderança',
-    'Produto',
-    'Agilidade',
-    'UX Design',
-    'UI Design',
-    'Front-End',
-    'Back-End',
-    'Mobile',
-    'QA',
-    'Dev Ops',
-    'Dados',
-  ]
 
   const [selectedSpecialities, setSelectedSpecialities] = useState<string[]>([])
   const [selectedCount, setSelectedCount] = useState<number>(0)
@@ -117,7 +103,7 @@ export default function GridSpecialities({
         <>*</> Indica um campo obrigatório
       </StyledImportant>
       <GridContainer>
-        {specialities.map((speciality, index) => (
+        {specialties.map((speciality, index) => (
           <SpecialityItem
             key={index}
             onClick={() => toggleSpeciality(speciality)}

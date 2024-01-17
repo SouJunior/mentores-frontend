@@ -2,39 +2,13 @@ import { useState } from 'react'
 import InputSearch from '@/components/atoms/InputSearch'
 import { ContainerControls, ContainerSelects, Content } from './styled'
 import SelectFilter from '@/components/atoms/SelectFilter'
+import { genders, specialties } from '@/data/static-info'
 
 interface SubHeaderProps {
   onGenderChange: (selectedOptions: string[]) => void
   onSpecialtyChange: (selectedOptions: string[]) => void
   onMentorSearch: (query: string) => void
 }
-
-const genderOptions = [
-  'Homem Cis',
-  'Mulher cis',
-  'Homem trans',
-  'Mulher trans',
-  'Bigenero',
-  'Genero fluido',
-  'Nao Binario',
-  'Agenero',
-  'Prefiro não dizer',
-  'Outros',
-]
-const specialtyOptions = [
-  'Carreira',
-  'Liderança',
-  'Produto',
-  'Agilidade',
-  'UX Design',
-  'UI Design',
-  'Front-End',
-  'Back-End',
-  'Mobile',
-  'QA',
-  'Dev Ops',
-  'Dados',
-]
 
 export default function MentorSubHeader({
   onGenderChange,
@@ -54,12 +28,12 @@ export default function MentorSubHeader({
         <InputSearch onSearch={handleMentorSearch} />
         <ContainerSelects>
           <SelectFilter
-            options={specialtyOptions}
+            options={specialties}
             selectName="Especialidades"
             onChange={onSpecialtyChange}
           />
           <SelectFilter
-            options={genderOptions}
+            options={genders}
             selectName="Gênero"
             onChange={onGenderChange}
           />
