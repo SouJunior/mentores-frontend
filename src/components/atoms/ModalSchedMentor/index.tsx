@@ -10,12 +10,13 @@ import {
   Stack,
   StacksContainer,
   TitleContainer,
-  MainContainer,
   ButtonClose,
   ModalOverlay,
 } from './styled'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
 import UserDefault from '@/assets/userDefault.png'
+import Link from 'next/link'
+import Close from '@mui/icons-material/Close'
 
 interface ModalSchedProps {
   open: boolean
@@ -31,33 +32,35 @@ export default function ModalSchedMentor({
   return (
     <ModalOverlay open={open}>
       <ModalContainer open={open}>
-        <MainContainer>
-          <TitleContainer>
-            <PhotoContainer>
-              <Image
-                width={88}
-                height={88}
-                src={mentor.profile || UserDefault}
-                alt="Mentor Photo"
-                style={{ borderRadius: '80px', objectFit: 'cover' }}
-              />
-              <MentorName> {mentor.fullName}</MentorName>
-            </PhotoContainer>
-            <ButtonClose onClick={onClose}>X</ButtonClose>
-          </TitleContainer>
-          <SpecialityContainer>
-            <Specialitytitle>Especialidades</Specialitytitle>
-            <StacksContainer>
-              <>
-                {mentor.specialties.map((stack) => {
-                  return <Stack key={stack}>{stack}</Stack>
-                })}
-              </>
-            </StacksContainer>
-          </SpecialityContainer>
-          <AboutContainer>{mentor.aboutMe}</AboutContainer>
-        </MainContainer>
-        <SchedButton>Agendar mentoria</SchedButton>
+        <TitleContainer>
+          <PhotoContainer>
+            <Image
+              width={88}
+              height={88}
+              src={mentor.profile || UserDefault}
+              alt="Mentor Photo"
+              style={{ borderRadius: '80px', objectFit: 'cover' }}
+            />
+            <MentorName>{mentor.fullName}</MentorName>
+          </PhotoContainer>
+          <ButtonClose onClick={onClose}>
+            <Close />
+          </ButtonClose>
+        </TitleContainer>
+        <SpecialityContainer>
+          <Specialitytitle>Especialidades</Specialitytitle>
+          <StacksContainer>
+            {mentor.specialties.map((stack) => {
+              return <Stack key={stack}>{stack}</Stack>
+            })}
+          </StacksContainer>
+        </SpecialityContainer>
+        <AboutContainer>{mentor.aboutMe}</AboutContainer>
+        <Link href={`https://calendly.com/${mentor.calendlyName}`}>
+          <SchedButton disabled={!mentor.calendlyName}>
+            Agendar mentoria
+          </SchedButton>
+        </Link>
       </ModalContainer>
     </ModalOverlay>
   )

@@ -2,13 +2,18 @@ import styled from 'styled-components'
 
 export const ContainerControls = styled.div`
   width: 100%;
-  height: 100px;
-  background-color: white;
+  background-color: #fff;
+  padding: 2rem 0;
+  margin-top: 50px;
+`
+
+export const Content = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0px 170px;
-  margin-top: 34px;
+  padding: 0 2rem;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
 `
 
 export const ContainerSelects = styled.div`

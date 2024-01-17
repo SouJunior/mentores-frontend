@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { StyledInputSearch, StyledSearchIcon } from './styled'
+import {
+  ContainerInput,
+  PlaceholderInput,
+  StyledInputSearch,
+  StyledSearchIcon,
+} from './styled'
 
 interface InputSearchProps {
   onSearch: (query: string) => void
@@ -20,14 +25,18 @@ export default function InputSearch({ onSearch }: InputSearchProps) {
   }
 
   return (
-    <>
+    <ContainerInput>
       <StyledInputSearch
         type="text"
-        placeholder="Pesquisar por nome"
         value={searchQuery}
         onChange={handleInputChange}
+        hasValue={Boolean(searchQuery)}
+        id="input-search-mentors"
       />
-      <StyledSearchIcon />
-    </>
+      <PlaceholderInput htmlFor="input-search-mentors">
+        Pesquise por nome
+      </PlaceholderInput>
+      <StyledSearchIcon aria-hidden />
+    </ContainerInput>
   )
 }
