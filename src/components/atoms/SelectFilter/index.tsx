@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import * as Select from '@radix-ui/react-select'
@@ -16,17 +15,16 @@ interface SelectFilterProps extends Select.SelectProps {
   options: string[]
   selectName?: string
   onChange: (selectedOptions: string[]) => void
+  selectedOptions: string[]
 }
 
 export default function SelectFilter({
   options,
   selectName,
   onChange,
+  selectedOptions,
   ...props
 }: SelectFilterProps) {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
-  const [open, setOpen] = useState(false)
-
   const handleOptionChange = (option: string) => {
     const newSelectedOptions = [...selectedOptions]
     if (newSelectedOptions.includes(option)) {
@@ -34,11 +32,11 @@ export default function SelectFilter({
     } else {
       newSelectedOptions.push(option)
     }
-    setSelectedOptions(newSelectedOptions)
     onChange(newSelectedOptions)
   }
+
   return (
-    <Select.Root {...props} open={open} onOpenChange={setOpen}>
+    <Select.Root {...props}>
       <SelectTrigger>
         <Select.Value placeholder={selectName} />
         <Select.Icon asChild>
