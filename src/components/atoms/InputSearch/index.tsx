@@ -30,7 +30,6 @@ export default function InputSearch({ onSearch }: InputSearchProps) {
         type="text"
         value={searchQuery}
         onChange={handleInputChange}
-        hasValue={Boolean(searchQuery)}
         id="input-search-mentors"
       />
       <PlaceholderInput htmlFor="input-search-mentors">
