@@ -50,7 +50,7 @@ export function CardMentor({ mentor }: CardMentorProps) {
       </CardStacks>
       <CardButton
         target="_blank"
-        href={`https://calendly.com/${mentor.calendlyName}`}
+        href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}`}
       >
         <button disabled={buttonDisabled}> Agendar um horário </button>
       </CardButton>

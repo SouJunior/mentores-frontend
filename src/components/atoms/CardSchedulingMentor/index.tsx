@@ -46,7 +46,7 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         </>
       </StacksContainer>
       <ButtonsContainer>
-        <a target="_blank" href={`https://calendly.com/${mentor.calendlyName}`}>
+        <a target="_blank" href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}`}>
           <SchedButton disabled={!mentor.calendlyName}>
             Agendar Mentoria
           </SchedButton>
