@@ -56,7 +56,7 @@ export default function ModalSchedMentor({
           </StacksContainer>
         </SpecialityContainer>
         <AboutContainer>{mentor.aboutMe}</AboutContainer>
-        <Link href={`https://calendly.com/${mentor.calendlyName}`}>
+        <Link href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}`}>
           <SchedButton disabled={!mentor.calendlyName}>
             Agendar mentoria
           </SchedButton>

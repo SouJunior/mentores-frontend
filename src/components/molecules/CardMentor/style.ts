@@ -65,7 +65,7 @@ export const CardStack = styled.div`
 `
 
 export const CardButton = styled.a`
-  display: block;
+  display: flex;
   width: 100%;
 
   button {
