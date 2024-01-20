@@ -18,6 +18,9 @@ interface SliderProps {
 
 export const Slider = ({ swiperRef }: SliderProps) => {
   const { mentors, fetchMentors } = useMentorsService()
+  const completedProfileMentors = mentors.filter(
+    (mentor) => mentor.registerComplete,
+  )
 
   useEffect(() => {
     const handleLoadFetchMentors = async () => {
@@ -34,7 +37,7 @@ export const Slider = ({ swiperRef }: SliderProps) => {
         slidesPerView={4}
         ref={swiperRef}
       >
-        {mentors.map((mentor) => {
+        {completedProfileMentors.map((mentor) => {
           return (
             <SwiperSlide key={mentor.id}>
               <CardMentor mentor={mentor} />

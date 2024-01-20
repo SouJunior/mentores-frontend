@@ -21,6 +21,10 @@ interface MentorsProps {
 
 export default function CardScheduling({ mentor }: MentorsProps) {
   const [open, setOpen] = useState(false)
+  const calendlyUrl = new URL(
+    `${mentor.calendlyName}/${mentor.agendaName}`,
+    'https://calendly.com',
+  ).toString()
 
   function handleModal() {
     setOpen(!open)
@@ -46,7 +50,7 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         </>
       </StacksContainer>
       <ButtonsContainer>
-        <a target="_blank" href={`https://calendly.com/${mentor.calendlyName}`}>
+        <a target="_blank" href={calendlyUrl}>
           <SchedButton disabled={!mentor.calendlyName}>
             Agendar Mentoria
           </SchedButton>

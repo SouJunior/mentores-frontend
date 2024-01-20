@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from './style'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
-import { useEffect, useState } from 'react'
 import userWithoutImage from '@/assets/userDefault.png'
 
 interface CardMentorProps {
@@ -18,17 +17,8 @@ interface CardMentorProps {
 const MAX_SPECIALTIES_NUMBER = 3
 
 export function CardMentor({ mentor }: CardMentorProps) {
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
   const specialties = mentor.specialties.slice(0, MAX_SPECIALTIES_NUMBER)
   const allSpecialtiesString = mentor.specialties.join(', ')
-
-  useEffect(() => {
-    if (!mentor.calendlyName || !mentor.agendaName) {
-      setButtonDisabled(true)
-    } else {
-      setButtonDisabled(false)
-    }
-  }, [])
 
   return (
     <Card gap={'1rem'} alignItems={'flex-start'} padding={'1rem'}>
@@ -50,9 +40,12 @@ export function CardMentor({ mentor }: CardMentorProps) {
       </CardStacks>
       <CardButton
         target="_blank"
-        href={`https://calendly.com/${mentor.calendlyName}`}
+        href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}`}
       >
-        <button disabled={buttonDisabled}> Agendar um horário </button>
+        <button disabled={!mentor.calendlyName || !mentor.agendaName}>
+          {' '}
+          Agendar um horário{' '}
+        </button>
       </CardButton>
     </Card>
   )
