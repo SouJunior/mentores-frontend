@@ -3,20 +3,12 @@ import { MarqueeRolagem } from '@/components/atoms/MarqueeRolagem'
 import { CardDepo } from '@/components/molecules/CardDepo'
 import Link from 'next/link'
 import { ContainerBtn, ContainerDepo } from './style'
-import { useEffect } from 'react'
 import { useTestimonyService } from '../../../services/user/useTestimonyService'
+import { AxiosError } from 'axios'
 
 export function DepoSection() {
-  const { handleGetTestimonies, testimonies, testimoniesErrors } =
-    useTestimonyService()
+  const { data: testimonies, error } = useTestimonyService()
 
-  useEffect(() => {
-    const handleLoadGetTestimonies = async () => {
-      await handleGetTestimonies()
-    }
-
-    handleLoadGetTestimonies()
-  }, [])
   return (
     <ContainerDepo>
       <h2>Seja um mentor</h2>
@@ -26,7 +18,8 @@ export function DepoSection() {
           testimonies?.map((testimony) => {
             return <CardDepo key={testimony.id} testimony={testimony} />
           })}
-        {!testimonies?.length && <b>{testimoniesErrors}</b>}
+
+        {error instanceof AxiosError && <b>{error?.response?.data.message}</b>}
       </MarqueeRolagem>
 
       <ContainerBtn>

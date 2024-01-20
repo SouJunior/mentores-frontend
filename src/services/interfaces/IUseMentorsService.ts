@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
-
 export interface IMentors {
   id?: string
   fullName: string
@@ -21,15 +19,4 @@ export interface IMentors {
   createdAt?: string | Date
   updatedAt?: string | Date
   deleted?: boolean
-}
-
-export interface IuseMentorsService {
-  fetchMentors: () => Promise<void>
-
-  mentors: IMentors[]
-  setMentors: Dispatch<SetStateAction<IMentors[]>>
-  mentorsErrors: string
-  setMentorsErrors: Dispatch<SetStateAction<string>>
-  loading: boolean
-  setLoading: Dispatch<SetStateAction<boolean>>
 }

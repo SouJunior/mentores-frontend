@@ -8,15 +8,17 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { FC } from 'react'
 import { ThemeProvider } from 'styled-components'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from '@/lib/react-query'
 
 const excludeRoutes = ['/login', '/cadastro']
 
 const App: FC<AppProps> = ({ Component, pageProps, router }) => {
   const shouldRenderLayout = !excludeRoutes.includes(router.pathname)
   return (
-    <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
           <Head>
             <title>Sou Junior | Mentoria Online</title>
             <meta
@@ -37,9 +39,9 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
             <Component {...pageProps} />
           )}
           <GlobalStyle />
-        </>
-      </ThemeProvider>
-    </AuthProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   )
 }
 

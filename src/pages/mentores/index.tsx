@@ -33,9 +33,9 @@ export default function MentorPage() {
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([])
   const [queryMentor, setQueryMentor] = useState('')
 
-  const { fetchMentors, loading, mentors } = useMentorsService()
+  const { data: mentors, isLoading } = useMentorsService()
 
-  const mentorsFiltered = mentors.filter((mentor: IMentors) => {
+  const mentorsFiltered = mentors?.filter((mentor: IMentors) => {
     const nameFilter = queryMentor.toLowerCase()
 
     const hasSelectedSpecialty =
@@ -62,13 +62,6 @@ export default function MentorPage() {
     setSpecialtyFilter([])
     setGenderFilter([])
   }
-
-  useEffect(() => {
-    const handleLoadFetchMentors = async () => {
-      await fetchMentors()
-    }
-    handleLoadFetchMentors()
-  }, [])
 
   useEffect(() => {
     if (queryMentor) {
@@ -142,7 +135,7 @@ export default function MentorPage() {
             </StacksContainer>
           )}
 
-          <MentorsGrid loading={loading} mentors={mentorsFiltered} />
+          <MentorsGrid loading={isLoading} mentors={mentorsFiltered ?? []} />
         </MainContent>
       </Container>
       <Footer />
