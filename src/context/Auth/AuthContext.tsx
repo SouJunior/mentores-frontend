@@ -26,8 +26,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const storedUser =
       localStorage.getItem('user') ?? sessionStorage.getItem('user')
+
     if (storedUser) {
-      const userParsed = JSON.parse(storedUser)
+      let userParsed
+      try {
+        userParsed = JSON.parse(storedUser)
+      } catch {
+        userParsed = undefined
+      }
       setUser(userParsed)
     }
   }, [])
