@@ -139,11 +139,9 @@ export function FormRegister() {
   }
 
   useEffect(() => {
-    if (agree && formik.isValid && Object.keys(formik.touched).length > 0) {
-      setIsConcluidoDesabilitado(false)
-    } else {
-      setIsConcluidoDesabilitado(true)
-    }
+    setIsConcluidoDesabilitado(
+      agree && formik.isValid && Object.keys(formik.touched).length > 0,
+    )
   }, [agree, formik.isValid, formik.touched])
 
   const yesterday = new Date()

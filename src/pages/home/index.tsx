@@ -18,11 +18,7 @@ export default function HomePage() {
   const router = useRouter()
 
   useEffect(() => {
-    if (router.query['connect-calendly']) {
-      setIsConnectCalendly(true)
-    } else {
-      setIsConnectCalendly(false)
-    }
+    setIsConnectCalendly(Boolean(router.query['connect-calendly']))
   }, [router.query])
 
   const handleCloseModal = () => {

@@ -66,7 +66,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
     if (response) {
       setError(false)
       user.updateUser({ ...user, ...data })
-      router.push('/?connect-calendly=true')
+      router.push('/?connect-calendly')
     } else {
       setError(true)
     }
@@ -84,11 +84,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
   const closeModal = () => setIsEditModalOpen(false)
 
   useEffect(() => {
-    if (Object.keys(formik.touched).length > 0) {
-      setCompleted(true)
-    } else {
-      setCompleted(false)
-    }
+    setCompleted(Object.keys(formik.touched).length > 0)
   }, [formik.touched])
 
   useEffect(() => {

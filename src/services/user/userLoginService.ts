@@ -54,8 +54,7 @@ const UserLoginService = (): IUserLoginService => {
       try {
         const response = await loginApi(data)
 
-        const user2 = response
-        const userFromResponse = createUserFromResponseData(user2)
+        const userFromResponse = createUserFromResponseData(response)
         userContext.setUser(userFromResponse)
 
         setFormState({
@@ -64,7 +63,7 @@ const UserLoginService = (): IUserLoginService => {
         })
 
         response.info.registerComplete === true
-          ? router.push('/?connect-calendly=true')
+          ? router.push('/?connect-calendly')
           : router.push('/onBoarding')
 
         return userFromResponse
@@ -85,7 +84,7 @@ const UserLoginService = (): IUserLoginService => {
   useEffect(() => {
     const isDisable = getCookie('disable')
 
-    isDisable ? setDisable(false) : setDisable(false)
+    setDisable(Boolean(isDisable))
   }, [disable])
 
   const validateForm = async (data: UserLoginDTO): Promise<boolean> => {
