@@ -140,7 +140,7 @@ export function FormRegister() {
 
   useEffect(() => {
     setIsConcluidoDesabilitado(
-      agree && formik.isValid && Object.keys(formik.touched).length > 0,
+      !(agree && formik.isValid && Object.keys(formik.touched).length > 0),
     )
   }, [agree, formik.isValid, formik.touched])
 
