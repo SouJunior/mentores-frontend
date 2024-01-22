@@ -1,16 +1,23 @@
-import lupa from '@/assets/icons/Lupa.svg'
-import { Button } from '@/components/atoms/Button'
 import { PersonTitle } from '@/components/atoms/PersonTitle'
 import { ListItemsHero } from '@/components/molecules/ListItemsHero'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { AnimationTextHero } from '../../../styles/animations'
-import { ContainerHero, ContainerInput, TextAnimated } from './style'
+import {
+  ButtonMentor,
+  ContainerHero,
+  ContainerInputForm,
+  TextAnimated,
+} from './style'
+import Search from '@mui/icons-material/Search'
+import { useRouter } from 'next/router'
+
+const text = ['mentorias personalizadas', 'profissionais experientes']
 
 export function HeroSection() {
-  const text = ['mentorias personalizadas', 'profissionais experientes']
+  const router = useRouter()
   const [textHero, setTextHero] = useState(text[0])
+  const [queryMentor, setQueryMentor] = useState('')
 
   function textSwitch() {
     setTimeout(() => {
@@ -24,6 +31,11 @@ export function HeroSection() {
         setTextHero(text[0])
       }
     }, 1500)
+  }
+
+  function handleSearchMentor(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    router.push(`/mentores?q=${queryMentor}`)
   }
 
   useEffect(() => {
@@ -52,16 +64,21 @@ export function HeroSection() {
             Tenha acesso a mentorias individuais e <br /> gratuitas com
             profissionais renomados.
           </p>
-          <ContainerInput>
+          <ContainerInputForm onSubmit={handleSearchMentor}>
             <div>
-              <Image src={lupa} alt="Lupa" />
+              <Search />
               <input
                 type="text"
                 placeholder="Pesquisar por nome ou especialidade"
+                aria-label="Pesquisar por nome ou especialidade"
+                value={queryMentor}
+                onChange={(e) => setQueryMentor(e.target.value)}
               />
             </div>
-            <Button content="Encontrar mentor" btnRole={'primary'} />
-          </ContainerInput>
+            <ButtonMentor disabled={!queryMentor}>
+              Encontre seu mentor
+            </ButtonMentor>
+          </ContainerInputForm>
         </div>
         <ListItemsHero />
       </div>

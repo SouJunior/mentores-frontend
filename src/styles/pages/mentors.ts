@@ -10,22 +10,6 @@ export const Container = styled.div`
 
 export const MainContent = styled.main``
 
-export const MentorsContainer = styled.div`
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-  grid-auto-rows: max-content;
-  grid-gap: 30px;
-
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-
-  min-height: 100vh;
-  padding: 2rem;
-  position: relative;
-`
-
 export const SubHeaderContainer = styled.div`
   display: flex;
   height: 100px;
@@ -80,24 +64,6 @@ export const CTASub = styled.span`
   font-weight: 400;
 `
 
-export const NoResultContainer = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-`
-
-export const NoResultMain = styled.span`
-  font-size: 24px;
-  font-weight: 600;
-  color: #003986;
-  margin-top: 10px;
-`
-
 export const StacksContainer = styled.span`
   display: flex;
   gap: 0.75rem;
@@ -139,4 +105,25 @@ export const RemoveFiltersBtn = styled.button`
   &:hover {
     color: #002c66;
   }
+`
+
+export const ContainerControls = styled.div`
+  width: 100%;
+  background-color: #fff;
+  padding: 2rem 0;
+  margin-top: 50px;
+`
+
+export const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+`
+
+export const ContainerSelects = styled.div`
+  display: flex;
+  gap: 10px;
 `

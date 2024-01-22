@@ -1,5 +1,5 @@
 import { CardMentor } from '@/components/molecules/CardMentor'
-import { MutableRefObject, useEffect } from 'react'
+import { MutableRefObject } from 'react'
 import { A11y, Pagination, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import { SwiperContainer } from './style'
@@ -17,14 +17,11 @@ interface SliderProps {
 }
 
 export const Slider = ({ swiperRef }: SliderProps) => {
-  const { mentors, fetchMentors } = useMentorsService()
+  const { data: mentors } = useMentorsService()
 
-  useEffect(() => {
-    const handleLoadFetchMentors = async () => {
-      await fetchMentors()
-    }
-    handleLoadFetchMentors()
-  }, [])
+  const completedProfileMentors = mentors?.filter(
+    (mentor) => mentor.registerComplete,
+  )
 
   return (
     <SwiperContainer>
@@ -34,7 +31,7 @@ export const Slider = ({ swiperRef }: SliderProps) => {
         slidesPerView={4}
         ref={swiperRef}
       >
-        {mentors.map((mentor) => {
+        {completedProfileMentors?.map((mentor) => {
           return (
             <SwiperSlide key={mentor.id}>
               <CardMentor mentor={mentor} />

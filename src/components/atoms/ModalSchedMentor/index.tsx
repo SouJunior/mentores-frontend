@@ -29,6 +29,11 @@ export default function ModalSchedMentor({
   mentor,
   onClose,
 }: ModalSchedProps) {
+  const calendlyUrl = new URL(
+    `${mentor.calendlyName}/${mentor.agendaName}`,
+    'https://calendly.com',
+  ).toString()
+
   return (
     <ModalOverlay open={open}>
       <ModalContainer open={open}>
@@ -56,7 +61,7 @@ export default function ModalSchedMentor({
           </StacksContainer>
         </SpecialityContainer>
         <AboutContainer>{mentor.aboutMe}</AboutContainer>
-        <Link href={`https://calendly.com/${mentor.calendlyName}`}>
+        <Link href={calendlyUrl}>
           <SchedButton disabled={!mentor.calendlyName}>
             Agendar mentoria
           </SchedButton>

@@ -19,11 +19,7 @@ export const ContainerInput = styled.div`
   }
 `
 
-interface StyledInputSearchProps {
-  hasValue: boolean
-}
-
-export const StyledInputSearch = styled.input<StyledInputSearchProps>`
+export const StyledInputSearch = styled.input`
   border: 0;
   flex: 1;
   padding: 0.68rem;
@@ -42,7 +38,7 @@ export const StyledInputSearch = styled.input<StyledInputSearchProps>`
 
   & ~ label {
     ${(props) =>
-      props.hasValue &&
+      Boolean(props.value) &&
       css`
         transform: translateY(-1.5rem);
         padding: 0 0.25rem;

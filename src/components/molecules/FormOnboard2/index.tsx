@@ -19,6 +19,7 @@ import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import useUser from '@/context/Auth/useUser'
+import { genders } from '@/data/static-info'
 
 interface FormOnBoardProps {
   onStep?: Dispatch<SetStateAction<1 | 2>>
@@ -32,19 +33,6 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
   const user = useUser()
   const router = useRouter()
-
-  const genders = [
-    'Homem Cis',
-    'Mulher Cis',
-    'Homem Trans',
-    'Mulher Trans',
-    'Bigênero',
-    'Gênero-fluido',
-    'Não Binário',
-    'Agênero',
-    'Prefiro não dizer',
-    'Outros',
-  ]
 
   const { handle } = UserUpdateService()
 
@@ -78,7 +66,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
     if (response) {
       setError(false)
       user.updateUser({ ...user, ...data })
-      router.push('/?connect-calendly=true')
+      router.push('/?connect-calendly')
     } else {
       setError(true)
     }
@@ -96,11 +84,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
   const closeModal = () => setIsEditModalOpen(false)
 
   useEffect(() => {
-    if (Object.keys(formik.touched).length > 0) {
-      setCompleted(true)
-    } else {
-      setCompleted(false)
-    }
+    setCompleted(Object.keys(formik.touched).length > 0)
   }, [formik.touched])
 
   useEffect(() => {

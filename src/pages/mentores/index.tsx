@@ -1,55 +1,42 @@
 import { useState, useEffect } from 'react'
-import MentorSubHeader from '@/components/molecules/MentorSubHeader'
-// import CardScheduling from '@/components/atoms/CardSchedulingMentor'
-import NoResult from '@/assets/noresult.svg'
-import Loading from '@/assets/loading.gif'
+
 import {
   Container,
-  MentorsContainer,
   SubHeaderContainer,
   TitleContainer,
   SubTitleContainer,
   CTAMain,
   CTASub,
-  NoResultContainer,
-  NoResultMain,
   StacksContainer,
   Stack,
   MainContent,
   Divider,
   RemoveFiltersBtn,
+  ContainerControls,
+  ContainerSelects,
+  Content,
 } from '@/styles/pages/mentors'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Footer } from '@/components/molecules/Footer'
 import { useMentorsService } from '@/services/user/useMentorsService'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
-import dynamic from 'next/dynamic'
+import InputSearch from '@/components/atoms/InputSearch'
+import SelectFilter from '@/components/atoms/SelectFilter'
+import { genders, specialties } from '@/data/static-info'
+import { MentorsGrid } from '@/components/organisms/MentorsGrid'
+import { useRouter } from 'next/router'
 
 export default function MentorPage() {
-  const [filteredMentors, setFilteredMentors] = useState([])
+  const router = useRouter()
+
   const [genderFilter, setGenderFilter] = useState<string[]>([])
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([])
-  const [mentorNameFilter, setMentorNameFilter] = useState('')
+  const [queryMentor, setQueryMentor] = useState('')
 
-  const CardScheduling = dynamic(
-    () => import('@/components/atoms/CardSchedulingMentor'),
-    {
-      ssr: false,
-    },
-  )
+  const { data: mentors, isLoading } = useMentorsService()
 
-  const { fetchMentors, loading, mentors } = useMentorsService()
-
-  useEffect(() => {
-    const handleLoadFetchMentors = async () => {
-      await fetchMentors()
-    }
-    handleLoadFetchMentors()
-  }, [])
-
-  const filterMentors = (mentor: IMentors) => {
-    const nameFilter = mentorNameFilter.toLowerCase()
+  const mentorsFiltered = mentors?.filter((mentor: IMentors) => {
+    const nameFilter = queryMentor.toLowerCase()
 
     const hasSelectedSpecialty =
       specialtyFilter.length === 0 ||
@@ -59,21 +46,17 @@ export default function MentorPage() {
 
     const hasSelectedGenders =
       genderFilter.length === 0 ||
-      genderFilter.some((selectedGender) =>
-        mentor.gender.includes(selectedGender),
-      )
+      genderFilter
+        .map((gender) => gender.toLowerCase())
+        .includes(mentor.gender.toLowerCase())
 
-    if (
+    return (
       hasSelectedGenders &&
       hasSelectedSpecialty &&
-      (!mentorNameFilter ||
-        mentor.fullName.toLowerCase().includes(nameFilter)) &&
+      (!queryMentor || mentor.fullName.toLowerCase().includes(nameFilter)) &&
       mentor.registerComplete === true
-    ) {
-      return true
-    }
-    return false
-  }
+    )
+  })
 
   function handleClearFilters() {
     setSpecialtyFilter([])
@@ -81,9 +64,20 @@ export default function MentorPage() {
   }
 
   useEffect(() => {
-    const filtered: any = mentors.filter(filterMentors)
-    setFilteredMentors(filtered)
-  }, [mentors, genderFilter, specialtyFilter, mentorNameFilter])
+    if (queryMentor) {
+      router.replace('/mentores', {
+        query: {
+          q: queryMentor,
+        },
+      })
+    }
+  }, [queryMentor])
+
+  useEffect(() => {
+    if (router.query.q) {
+      setQueryMentor(String(router.query.q))
+    }
+  }, [router.query.q])
 
   return (
     <>
@@ -102,15 +96,30 @@ export default function MentorPage() {
               </CTASub>
             </CTAMain>
           </SubHeaderContainer>
-          <MentorSubHeader
-            onGenderChange={(selectedOptions) =>
-              setGenderFilter(selectedOptions)
-            }
-            onSpecialtyChange={(selectedOptions) =>
-              setSpecialtyFilter(selectedOptions)
-            }
-            onMentorSearch={(query) => setMentorNameFilter(query)}
-          />
+
+          <ContainerControls>
+            <Content>
+              <InputSearch
+                value={queryMentor ?? ''}
+                onChange={(e) => setQueryMentor(e.target.value)}
+              />
+              <ContainerSelects>
+                <SelectFilter
+                  options={specialties}
+                  selectName="Especialidades"
+                  onChange={(option) => setSpecialtyFilter(option)}
+                  selectedOptions={specialtyFilter}
+                />
+                <SelectFilter
+                  options={genders}
+                  selectName="Gênero"
+                  onChange={(option) => setGenderFilter(option)}
+                  selectedOptions={genderFilter}
+                />
+              </ContainerSelects>
+            </Content>
+          </ContainerControls>
+
           {(specialtyFilter.length > 0 || genderFilter.length > 0) && (
             <StacksContainer>
               {specialtyFilter.map((selectedSpecialty) => (
@@ -125,30 +134,8 @@ export default function MentorPage() {
               </RemoveFiltersBtn>
             </StacksContainer>
           )}
-          <MentorsContainer>
-            {loading ? (
-              <>
-                <Image
-                  style={{ position: 'absolute', top: '10%', left: '45%' }}
-                  src={Loading}
-                  alt="Loading"
-                />
-              </>
-            ) : filteredMentors.length > 0 ? (
-              filteredMentors.map((mentor: IMentors) => (
-                <CardScheduling key={mentor.id} mentor={mentor} />
-              ))
-            ) : (
-              <NoResultContainer>
-                <Image src={NoResult} alt="Sem resultado" />
-                <NoResultMain>Nada por aqui!</NoResultMain>
-                <CTASub>
-                  Não conseguimos encontrar resultados pra sua busca.
-                </CTASub>
-                <CTASub>Tente alterar os filtros de pesquisa.</CTASub>
-              </NoResultContainer>
-            )}
-          </MentorsContainer>
+
+          <MentorsGrid loading={isLoading} mentors={mentorsFiltered ?? []} />
         </MainContent>
       </Container>
       <Footer />
