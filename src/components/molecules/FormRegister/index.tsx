@@ -92,17 +92,15 @@ export function FormRegister() {
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error?.response?.status === 400) {
-          alert(`${error?.response.status} ${error?.response.data.message[0]}`)
+          alert(`${error?.response.status} ${error?.response.data.message}`)
+          console.error(error)
           return
         }
 
         alert(
           'Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.',
         )
-        return
       }
-
-      console.error(error)
     }
   }
 
