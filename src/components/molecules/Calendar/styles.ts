@@ -125,12 +125,17 @@ export const CalendarTrigger = styled(Popover.Trigger)`
     box-shadow: 0 3px 6px 0 rgba(17, 101, 186, 0.6);
   }
 
-  &[data-state='open'] {
+  &[data-state='open'],
+  &:focus-visible {
     border: 1px solid ${(props) => props.theme.colors.blue[400]};
     box-shadow: 0 0 0 1px ${(props) => props.theme.colors.blue[400]};
 
     svg {
       color: ${(props) => props.theme.colors.blue[400]};
     }
+  }
+
+  &.error {
+    border: 1px solid ${(props) => props.theme.colors.red[500]};
   }
 `

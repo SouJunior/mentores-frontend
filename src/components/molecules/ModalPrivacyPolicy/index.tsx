@@ -1,5 +1,5 @@
 import { Modal } from '@/components/atoms/Modal'
-import { Policies, Terms } from '../FormRegister/text'
+import { Policies } from '../FormRegister/text'
 import {
   ModalBox,
   ModalBoxParagrafo,
@@ -27,7 +27,7 @@ export function ModalPrivacyPolicy({
       <ModalLogo src="logos/LogoSJ.svg" />
       <ModalHash>#MovimentoSouJunior</ModalHash>
       <ModalBox>
-        <ModalBoxTitulo>{Terms.title}</ModalBoxTitulo>
+        <ModalBoxTitulo>{Policies.title}</ModalBoxTitulo>
         {Policies.paragraphs.map((paragrafo) => (
           <ModalBoxParagrafo key={paragrafo}>{paragrafo}</ModalBoxParagrafo>
         ))}

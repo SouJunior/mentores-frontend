@@ -38,8 +38,6 @@ export const MessagesContainer = styled.div`
   }
 `
 
-// ... seu código anterior ...
-
 export const FormWrapper = styled.div`
   padding: 10px 30px;
   height: 100%;
@@ -57,20 +55,12 @@ export const FormWrapper = styled.div`
     text-align: center;
     cursor: pointer;
   }
+
+  button {
+    margin-top: 1.5rem !important;
+  }
 `
 
 export const WrapperInput = styled.div`
   position: relative;
-`
-
-export const LabelInput = styled.label`
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-
-  span {
-    color: ${(props) => props.theme.colors.gray[700]};
-    font-size: 1rem;
-    line-height: 150%;
-  }
 `

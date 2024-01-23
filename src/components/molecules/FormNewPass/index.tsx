@@ -10,7 +10,6 @@ import { useState, MouseEvent, useEffect } from 'react'
 import {
   ContainerForm,
   FormWrapper,
-  LabelInput,
   MessagesContainer,
   WrapperInput,
 } from './styled'
@@ -89,20 +88,18 @@ export default function FormNewPass() {
                 onClick={(e) => handleShowPassword(e)}
                 eye={eye}
                 size={20}
-                top="2rem"
+                top="1.4rem"
                 color={'#5D5F5D'}
               />
 
-              <LabelInput>
-                <span>Nova senha</span>
-                <Field
-                  as={InputForm}
-                  inputType={show ? 'password' : 'text'}
-                  name="password"
-                  placeholder="*******"
-                  showAsterisk={false}
-                />
-              </LabelInput>
+              <Field
+                as={InputForm}
+                inputType={show ? 'password' : 'text'}
+                name="password"
+                placeholder="*******"
+                isRequired={false}
+                label="Nova senha"
+              />
             </WrapperInput>
 
             <WrapperInput>
@@ -110,19 +107,18 @@ export default function FormNewPass() {
                 onClick={(e) => handleConfirmPassword(e)}
                 eye={eyeConfirm}
                 size={20}
-                top="2rem"
+                top="1.4rem"
                 color={'#5D5F5D'}
               />
-              <LabelInput>
-                <span>Confirmar senha</span>
-                <Field
-                  as={InputForm}
-                  inputType={showConfirm ? 'password' : 'text'}
-                  name="confirmPassword"
-                  placeholder="*******"
-                  showAsterisk={false}
-                />
-              </LabelInput>
+
+              <Field
+                as={InputForm}
+                inputType={showConfirm ? 'password' : 'text'}
+                name="confirmPassword"
+                placeholder="*******"
+                isRequired={false}
+                label="Confirmar senha"
+              />
             </WrapperInput>
 
             <Button btnRole={'form'} content={'Redefinir senha'} />

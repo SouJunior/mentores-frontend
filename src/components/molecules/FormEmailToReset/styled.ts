@@ -57,4 +57,8 @@ export const FormWrapper = styled.div`
     text-align: center;
     cursor: pointer;
   }
+
+  button {
+    margin-top: 1.5rem !important;
+  }
 `

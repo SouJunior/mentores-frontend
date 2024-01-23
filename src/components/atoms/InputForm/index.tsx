@@ -1,6 +1,11 @@
-import { ErrorMessage } from 'formik'
-import { Label } from './label'
-import { ContainerDiv, ContainerError, ContainerInput, Field } from './style'
+import { ErrorMessage, useFormikContext } from 'formik'
+import {
+  ContainerInputLabel,
+  ContainerError,
+  ContainerInput,
+  Field,
+  StyledLabel,
+} from './style'
 
 interface InputFormProps {
   name: string
@@ -8,7 +13,7 @@ interface InputFormProps {
   placeholder: string
   label: string
   inputType?: string
-  showAsterisk?: boolean
+  isRequired?: boolean
 }
 
 export function InputForm({
@@ -17,14 +22,18 @@ export function InputForm({
   placeholder,
   label,
   inputType,
-  showAsterisk = true,
+  isRequired = true,
   ...rest
 }: InputFormProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { errors } = useFormikContext<any>()
+
   return (
-    <ContainerDiv>
-      <Label name={label} />
-      {showAsterisk && <span className="asterisk">*</span>}
-      <ContainerInput>
+    <ContainerInputLabel>
+      <StyledLabel>
+        {label} {isRequired && <span className="asterisk">*</span>}
+      </StyledLabel>
+      <ContainerInput className={errors[name] && 'error'}>
         <Field
           as={type}
           name={name}
@@ -33,9 +42,11 @@ export function InputForm({
           {...rest}
         />
       </ContainerInput>
-      <ContainerError>
-        <ErrorMessage name={name} component="div" className="error-message" />
-      </ContainerError>
-    </ContainerDiv>
+      {errors[name] && (
+        <ContainerError>
+          <ErrorMessage name={name} className="error-message" />
+        </ContainerError>
+      )}
+    </ContainerInputLabel>
   )
 }

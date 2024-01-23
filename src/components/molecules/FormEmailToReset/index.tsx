@@ -48,7 +48,7 @@ export default function FormEmailToReset() {
               name="email"
               label="Email:"
               placeholder="Preencha com seu email"
-              showAsterisk={false}
+              isRequired={false}
             />
 
             <Button btnRole={'form'} content={'Enviar'} />
