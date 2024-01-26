@@ -13,6 +13,7 @@ export const MentorsComponent = styled.section`
 
 export const MentorsContentContainer = styled.div`
   max-width: 1300px;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 `
