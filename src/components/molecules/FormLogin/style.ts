@@ -7,9 +7,6 @@ export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   background: rgba(253, 253, 253, 0.9);
-  position: absolute;
-  top: 10%;
-  right: 5%;
   border-radius: 0.75rem;
   padding: 2rem;
 

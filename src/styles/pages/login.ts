@@ -2,20 +2,30 @@ import Image from 'next/image'
 import styled from 'styled-components'
 
 export const ContainerLogin = styled.div`
-  width: 100%;
-  height: 100vh;
   background: ${(props) => props.theme.colors.gradient};
-  position: relative;
+
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    padding: 2rem 0;
+    padding-right: 2.75rem;
+
+    width: 100%;
+    min-height: 100vh;
+  }
 `
 
 export const ContainerImage = styled.div`
-  top: 1%;
-  position: absolute;
-  width: 50%;
+  width: 100%;
+  height: 100%;
+  max-width: 1280px;
 `
 
 export const MyImage = styled(Image)`
   object-fit: cover;
-  width: 118%;
-  height: 118%;
+  width: 100%;
+  height: 100%;
 `

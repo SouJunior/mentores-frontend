@@ -22,10 +22,12 @@ export default function LoginPage() {
 
   return (
     <ContainerLogin>
-      <ContainerImage>
-        <MyImage src={backgroundImg} alt="Figuras do Background" />
-      </ContainerImage>
-      <FormLogin />
+      <main>
+        <ContainerImage>
+          <MyImage src={backgroundImg} alt="Figuras do Background" />
+        </ContainerImage>
+        <FormLogin />
+      </main>
     </ContainerLogin>
   )
 }
