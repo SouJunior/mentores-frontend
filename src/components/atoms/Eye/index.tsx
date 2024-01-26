@@ -9,9 +9,9 @@ export function Eye({ pressed, ...props }: EyeProps) {
   return (
     <EyeContainer {...props} pressed={pressed} type="button">
       {pressed ? (
-        <VisibilityIcon fontSize={'small'} />
-      ) : (
         <VisibilityOffIcon fontSize={'small'} />
+      ) : (
+        <VisibilityIcon fontSize={'small'} />
       )}
     </EyeContainer>
   )

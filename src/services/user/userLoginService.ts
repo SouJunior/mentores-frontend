@@ -17,11 +17,6 @@ const UserLoginService = (): IUserLoginService => {
   const [submitButton, setSubmitButtonState] = useState(false)
   const [disable, setDisable] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [formState, setFormState] = useState({
-    email: '',
-    password: '',
-    errors: '',
-  })
 
   const handleError = (message: string) => {
     toast.error(message, {
@@ -49,6 +44,7 @@ const UserLoginService = (): IUserLoginService => {
 
   const sendLogin = async (data: UserLoginDTO) => {
     const isValid = await validateForm(data)
+
     if (isValid) {
       setLoading(true)
       try {
@@ -57,21 +53,12 @@ const UserLoginService = (): IUserLoginService => {
         const userFromResponse = createUserFromResponseData(response)
         userContext.setUser(userFromResponse)
 
-        setFormState({
-          ...formState,
-          errors: '',
-        })
-
         response.info.registerComplete === true
           ? router.push('/?connect-calendly')
           : router.push('/onBoarding')
 
         return userFromResponse
       } catch (error) {
-        setFormState({
-          ...formState,
-          errors: '*E-mail ou senha incorretos.',
-        })
         setCountError(countError + 1)
         handleErrorNotifications()
       }
@@ -88,15 +75,7 @@ const UserLoginService = (): IUserLoginService => {
   }, [disable])
 
   const validateForm = async (data: UserLoginDTO): Promise<boolean> => {
-    if (!data.email || !data.password) {
-      setFormState({
-        ...formState,
-        errors: '*E-mail ou senha incorretos.',
-      })
-      return false
-    } else {
-      return true
-    }
+    return Boolean(data.email || data.password)
   }
 
   function checkFields(data: UserLoginDTO) {
@@ -110,7 +89,6 @@ const UserLoginService = (): IUserLoginService => {
   return {
     sendLogin,
     validateForm,
-    formState,
     countError,
     disable,
     loading,

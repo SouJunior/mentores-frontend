@@ -26,14 +26,14 @@ export function InputForm({
   ...rest
 }: InputFormProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { errors } = useFormikContext<any>()
+  const { errors, touched } = useFormikContext<any>()
 
   return (
     <ContainerInputLabel>
       <StyledLabel>
         {label} {isRequired && <span className="asterisk">*</span>}
       </StyledLabel>
-      <ContainerInput className={errors[name] && 'error'}>
+      <ContainerInput className={errors[name] && touched[name] ? 'error' : ''}>
         <Field
           as={type}
           name={name}
@@ -42,7 +42,7 @@ export function InputForm({
           {...rest}
         />
       </ContainerInput>
-      {errors[name] && (
+      {errors[name] && touched[name] && (
         <ContainerError>
           <ErrorMessage name={name} className="error-message" />
         </ContainerError>
