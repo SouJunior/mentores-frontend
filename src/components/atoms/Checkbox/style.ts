@@ -5,7 +5,6 @@ export const CheckboxContainer = styled.div`
   gap: 12px;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 16px;
 
   input {
     border: 1px solid ${(props) => props.theme.colors.blue[400]} !important;
