@@ -22,10 +22,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import ToastSuccess from '../ToastSuccess'
 
 export default function FormNewPass() {
-  const [show, setShow] = useState(true)
-  const [eye, setEye] = useState(true)
-  const [showConfirm, setShowConfirm] = useState(true)
-  const [eyeConfirm, setEyeConfirm] = useState(true)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false)
   const [toast, setToast] = useState(false)
 
   const router = useRouter()
@@ -38,22 +37,6 @@ export default function FormNewPass() {
     confirmPassword: '',
     code: '',
     email: '',
-  }
-
-  const handleShowPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
-  ) => {
-    e.preventDefault()
-    setEye(!eye)
-    setShow(!show)
-  }
-
-  const handleConfirmPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
-  ) => {
-    e.preventDefault()
-    setEyeConfirm(!eyeConfirm)
-    setShowConfirm(!showConfirm)
   }
 
   const { handle } = setNewPasswordService()
@@ -82,19 +65,17 @@ export default function FormNewPass() {
               </span>
             </MessagesContainer>
 
-            <WrapperInput>
-              <InfoTooltip right={-30} />
+            <WrapperInput className="new-password-field">
+              <InfoTooltip right={0} />
               <Eye
-                onClick={(e) => handleShowPassword(e)}
-                eye={eye}
-                size={20}
-                top="1.4rem"
-                color={'#5D5F5D'}
+                aria-label="Mostrar senha"
+                pressed={isPasswordVisible}
+                onPressedChange={setIsPasswordVisible}
               />
 
               <Field
                 as={InputForm}
-                inputType={show ? 'password' : 'text'}
+                inputType={isPasswordVisible ? 'text' : 'password'}
                 name="password"
                 placeholder="*******"
                 isRequired={false}
@@ -104,16 +85,14 @@ export default function FormNewPass() {
 
             <WrapperInput>
               <Eye
-                onClick={(e) => handleConfirmPassword(e)}
-                eye={eyeConfirm}
-                size={20}
-                top="1.4rem"
-                color={'#5D5F5D'}
+                aria-label="Mostrar confirmação da senha"
+                pressed={isConfirmPasswordVisible}
+                onPressedChange={setIsConfirmPasswordVisible}
               />
 
               <Field
                 as={InputForm}
-                inputType={showConfirm ? 'password' : 'text'}
+                inputType={isConfirmPasswordVisible ? 'text' : 'password'}
                 name="confirmPassword"
                 placeholder="*******"
                 isRequired={false}

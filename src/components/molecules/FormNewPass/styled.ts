@@ -16,6 +16,7 @@ export const ContainerForm = styled.div`
       letter-spacing: 0em;
       text-align: left;
     }
+
     span {
       color: ${(props) => props.theme.colors.gray[700]};
       font-size: 16px;
@@ -27,6 +28,10 @@ export const ContainerForm = styled.div`
 
     button {
       margin-top: 10px;
+    }
+
+    .new-password-field {
+      margin-bottom: 1rem;
     }
   }
 `
@@ -63,4 +68,9 @@ export const FormWrapper = styled.div`
 
 export const WrapperInput = styled.div`
   position: relative;
+
+  button {
+    right: 1rem;
+    top: 1.4rem;
+  }
 `
