@@ -46,6 +46,26 @@ export const fontSizes = {
   xs: '0.875rem',
 } as const
 
+const breakpoints = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  desktopS: '1024px',
+  desktopM: '1440px',
+  desktopL: '2560px',
+} as const
+
+export const device = {
+  mobileS: `(max-width: ${breakpoints.mobileS})`,
+  mobileM: `(max-width: ${breakpoints.mobileM})`,
+  mobileL: `(max-width: ${breakpoints.mobileL})`,
+  tablet: `(max-width: ${breakpoints.tablet})`,
+  desktopS: `(max-width: ${breakpoints.desktopS})`,
+  desktopM: `(max-width: ${breakpoints.desktopM})`,
+  desktopL: `(max-width: ${breakpoints.desktopL})`,
+} as const
+
 export const theme = {
   colors,
   fontSizes,
