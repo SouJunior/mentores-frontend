@@ -32,6 +32,7 @@ export function ItemHero<
           src={imageSrc}
           alt="Imagem de um Mentor"
           loading="eager"
+          quality={100}
         />
       </ItemImage>
     )

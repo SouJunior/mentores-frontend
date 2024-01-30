@@ -51,7 +51,7 @@ const breakpoints = {
   mobileM: '375px',
   mobileL: '425px',
   tablet: '768px',
-  desktopS: '1024px',
+  desktopS: '1133px',
   desktopM: '1440px',
   desktopL: '2560px',
 } as const

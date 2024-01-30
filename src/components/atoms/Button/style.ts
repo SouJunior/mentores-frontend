@@ -12,7 +12,7 @@ const BaseStylesButton = styled.button`
 
   font-size: 1rem;
   font-weight: 500;
-  line-height: 0;
+  line-height: 0.5;
 `
 
 export interface ButtonStyleProps {

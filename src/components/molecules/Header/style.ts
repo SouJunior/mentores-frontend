@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import Link from 'next/link'
+import { device } from '@/styles/theme'
 
 export const ContainerHeader = styled.header`
   display: flex;
@@ -9,7 +10,7 @@ export const ContainerHeader = styled.header`
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-  @media (max-width: 1133px) {
+  @media ${device.desktopS} {
     padding: 1rem;
   }
 

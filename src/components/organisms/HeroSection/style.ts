@@ -1,95 +1,98 @@
+import { device } from '@/styles/theme'
 import styled from 'styled-components'
 
 export const ContainerHero = styled.div`
-  padding: 0px 64px;
-  margin: 0px 0px 100px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  padding: 12.5rem 2rem;
   position: relative;
 
-  p {
-    margin: 80px 0px 40px;
-    font-size: ${(props) => props.theme.fontSizes.md};
+  @media ${device.desktopS} {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  input {
-    background-color: transparent;
-    border: none;
-    height: 100%;
-    width: 100%;
-    padding: 24px 0px;
-    font-size: ${(props) => props.theme.fontSizes.md};
+  .hero-texts {
+    display: flex;
+    flex-direction: column;
+  }
 
-    &:focus-visible {
-      outline: none;
-    }
+  p {
+    max-width: 23rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    color: ${(props) => props.theme.colors.gray[700]};
+    margin-top: 3.5rem;
 
-    &::placeholder {
-      color: ${(props) => props.theme.colors.placeholder};
-      font-size: ${(props) => props.theme.fontSizes.md};
+    @media (max-width: 1230px) {
+      margin-top: 2.5rem;
     }
+  }
+`
+
+export const Title = styled.h1`
+  color: ${(props) => props.theme.colors.gray[750]};
+  font-size: ${(props) => props.theme.fontSizes.xxl};
+  font-weight: 600;
+  line-height: 3rem;
+
+  span {
+    display: block;
+    color: ${(props) => props.theme.colors.blue[800]};
   }
 `
 
 export const ContainerInputForm = styled.form`
-  border-radius: 8px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.13);
-  background-color: '#FAFAFA';
-  width: 680px;
-  border: 1px solid ${(props) => props.theme.colors.opacityGray};
-  padding: 0.5rem 0.75rem;
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
+
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+  background-color: ${(props) => props.theme.colors.white};
+
+  width: 100%;
+  max-width: 42.7rem;
+  padding: 0.5rem;
+  margin-top: auto;
 
   div {
     display: flex;
-    align-items: center;
-    gap: 1rem;
     flex: 1;
+    position: relative;
 
     svg {
-      color: ${(props) => props.theme.colors.blue[400]};
+      align-self: center;
+      width: 2rem;
+      height: 2rem;
+
+      position: absolute;
+      right: 1rem;
+
+      color: ${(props) => props.theme.colors.black[200]};
+      opacity: 0.6;
+      pointer-events: none;
     }
 
     input {
-      padding: 0.75rem 0;
-      padding-right: 1rem;
-      font-size: 1.125rem;
-      line-height: 1.7rem;
+      width: 100%;
+      border: 1px solid ${(props) => props.theme.colors.gray[600]};
+      border-radius: 0.5rem;
+
+      padding: 0.5rem 1rem;
+      padding-right: 3rem;
+
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: ${(props) => props.theme.colors.black[200]};
+      outline: 0;
 
       &::placeholder {
-        color: ${(props) => props.theme.colors.gray[500]};
+        font-size: 1rem;
+        color: ${(props) => props.theme.colors.black[200]};
       }
     }
-  }
-`
-
-export const TextAnimated = styled.h3`
-  color: ${(props) => props.theme.colors.blue[400]};
-  font-size: ${(props) => props.theme.fontSizes.xxl};
-  position: absolute;
-  margin-bottom: 40px;
-`
-
-export const ButtonMentor = styled.button`
-  display: block;
-  max-width: 13.5rem;
-  width: 100%;
-  padding: 0.75rem;
-
-  background-color: ${(props) => props.theme.colors.blue[400]};
-  color: ${(props) => props.theme.colors.white};
-  line-height: 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid ${(props) => props.theme.colors.blue[400]};
-
-  text-align: center;
-  font-size: 1rem;
-
-  &:not(:disabled):hover {
-    background-color: #fff;
-    color: ${(props) => props.theme.colors.blue[400]};
-  }
-
-  &:disabled {
-    cursor: not-allowed;
   }
 `
