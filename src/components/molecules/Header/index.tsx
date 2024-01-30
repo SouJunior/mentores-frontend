@@ -21,13 +21,16 @@ export function Header() {
 
   return (
     <ContainerHeader>
-      <nav className="header">
-        <Link href="/">
+      <nav className="navigation">
+        <Link href="/" className="nav-logo">
           <Image src={logoImg} alt="Logo Sou Júnior" />
         </Link>
-        <span className="mySpan" />
-        <Link href="/#onboarding">Como Funciona</Link>
-        <Link href="/#mentor">Encontre Seu Mentor</Link>
+        <div aria-hidden className="mySpan" />
+
+        <div className="nav-links">
+          <Link href="/#onboarding">Como Funciona</Link>
+          <Link href="/#mentor">Encontre Seu Mentor</Link>
+        </div>
       </nav>
 
       {user != null ? (
@@ -50,12 +53,12 @@ export function Header() {
         </DropdownMenu.Root>
       ) : (
         <GroupBtn>
-          <Link href={'/cadastro'}>
-            <Button content="Quero Mentorar" btnRole={'primary'} />
-          </Link>
-          <Link href={'/login'}>
-            <Button content="Login para Mentores" btnRole={'secondary'} />
-          </Link>
+          <Button as={Link} href="/login" variant="secondary">
+            Login mentores
+          </Button>
+          <Button as={Link} href="/cadastro">
+            Cadastro mentores
+          </Button>
         </GroupBtn>
       )}
     </ContainerHeader>

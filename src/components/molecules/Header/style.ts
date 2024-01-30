@@ -3,28 +3,63 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import Link from 'next/link'
 
 export const ContainerHeader = styled.header`
-  padding: 16px 0px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  padding: 1rem 2rem;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-  .header {
+  @media (max-width: 1133px) {
+    padding: 1rem;
+  }
+
+  .navigation {
     display: flex;
-    gap: 20px;
+    gap: 0.5rem;
     align-items: center;
+    padding: 0.25rem 0;
+
     .mySpan {
-      background-color: ${(props) => props.theme.colors.blue[400]};
+      background-color: ${(props) => props.theme.colors.blue[800]};
       width: 2px;
-      height: 28px;
+      height: 2.5rem;
+    }
+
+    .nav-logo {
+      width: 15.5rem;
+      height: 2.5rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      a {
+        padding: 0.25rem 0.5rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        color: ${(props) => props.theme.colors.blue[800]};
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+
+        &:hover {
+          font-weight: 600;
+          font-size: 1.225rem;
+        }
+      }
     }
   }
 `
 
 export const GroupBtn = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  align-items: center;
+  gap: 1rem;
 `
 
 export const AvatarGroup = styled.div`
@@ -46,7 +81,7 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   img {
     width: 2.75rem;
     height: 2.75rem;
-    border: 2px solid #666;
+    border-radius: 50%;
   }
 
   svg {
@@ -91,7 +126,7 @@ export const DropdownMenuLabel = styled.strong`
 export const DropdownMenuSeparator = styled(DropdownMenu.Separator)`
   width: 100%;
   height: 1px;
-  background-color: #acacac;
+  background-color: ${(props) => props.theme.colors.gray[600]};
   margin: 0.5rem 0;
 `
 
@@ -106,7 +141,7 @@ const baseBtnStyles = css`
 
   &:hover,
   &:focus {
-    background-color: ${(props) => props.theme.colors.gray[300]};
+    background-color: ${(props) => props.theme.colors.gray[250]};
   }
 `
 
@@ -115,8 +150,8 @@ export const LinkUserAccount = styled(Link)`
 
   &:hover,
   &:focus {
-    color: #323232;
-    background-color: ${(props) => props.theme.colors.gray[300]};
+    color: ${(props) => props.theme.colors.black[200]};
+    background-color: ${(props) => props.theme.colors.gray[250]};
   }
 `
 

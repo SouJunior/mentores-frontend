@@ -19,9 +19,9 @@ export function UserAvatar() {
               <Image
                 width={44}
                 height={44}
-                style={{ borderRadius: '50%' }}
                 alt="User Avatar"
-                src={user.profile}
+                style={{ border: '2px solid #666' }}
+                src={user?.profile}
                 onError={() => setImageError(true)}
               />
             )}
