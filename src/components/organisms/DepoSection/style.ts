@@ -35,7 +35,7 @@ export const ContainerDepo = styled.div`
 
 export const ContainerSlider = styled.div`
   .swiper {
-    padding-top: 0.25rem;
+    padding: 0.25rem;
     padding-bottom: 0.75rem;
   }
 
