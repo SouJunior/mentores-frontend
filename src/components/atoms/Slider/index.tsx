@@ -27,8 +27,13 @@ export const Slider = ({ swiperRef }: SliderProps) => {
     <SwiperContainer>
       <Swiper
         modules={[Pagination, Scrollbar, A11y]}
-        spaceBetween={28}
-        slidesPerView={4}
+        spaceBetween={24}
+        slidesPerView={3.5}
+        breakpoints={{
+          1133: {
+            spaceBetween: 32,
+          },
+        }}
         ref={swiperRef}
       >
         {completedProfileMentors?.map((mentor) => {

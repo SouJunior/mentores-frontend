@@ -1,25 +1,28 @@
 import styled from 'styled-components'
-import Image from 'next/image'
 
-export const CardImage = styled(Image)`
-  width: 9.75rem;
-  height: 9.75rem;
+export const CardImage = styled.div`
+  width: 7.5rem;
+  height: 7.5rem;
   border-radius: 50%;
-  box-shadow:
-    0px 2px 4px 0px rgba(0, 0, 0, 0.15),
-    0px 1px 4px 0px rgba(0, 0, 0, 0.25);
-  object-fit: cover;
+  overflow: hidden;
   align-self: center;
+  background-color: ${(props) => props.theme.colors.gray[250]};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `
 
-export const CardTitle = styled.h1`
-  font-family: 'Radio Canada';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 150%;
-  color: ${(props) => props.theme.colors.gray[700]};
-  margin-bottom: 0.25rem;
+export const CardTitle = styled.p`
+  display: flex;
+  flex-direction: column;
+
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: ${(props) => props.theme.colors.black[200]};
 `
 
 export const CardSubtitle = styled.p`
@@ -41,27 +44,16 @@ export const CardSubtitle = styled.p`
 export const CardStacks = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   width: 100%;
-`
 
-export const CardStack = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 12px;
-  background: #5d5f5d;
-  border-radius: 4px;
-  font-family: 'Radio Canada';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 100%;
-  color: #fdfdfd;
-
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  // Button
+  & ~ a,
+  & ~ button {
+    justify-content: center;
+    margin-top: auto;
+  }
 `
 
 export const CardButton = styled.a`

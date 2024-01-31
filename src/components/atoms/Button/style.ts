@@ -13,6 +13,14 @@ const BaseStylesButton = styled.button`
   font-size: 1rem;
   font-weight: 500;
   line-height: 0.5;
+
+  ${(props) => {
+    if (props.disabled) {
+      return css`
+        cursor: not-allowed;
+      `
+    }
+  }}
 `
 
 export interface ButtonStyleProps {
@@ -21,19 +29,21 @@ export interface ButtonStyleProps {
 }
 
 export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
-  ${({ variant, theme }) => {
+  ${({ variant, theme, disabled }) => {
     switch (variant) {
       case 'primary':
         return css`
-          border: 2px solid ${theme.colors.blue[800]};
-          background-color: ${theme.colors.blue[800]};
+          border: 2px solid
+            ${!disabled ? theme.colors.blue[800] : theme.colors.gray[500]};
+          background-color: ${!disabled
+            ? theme.colors.blue[800]
+            : theme.colors.gray[500]};
           color: ${theme.colors.white};
         `
       case 'secondary':
         return css`
           border: 2px solid ${theme.colors.blue[800]};
           color: ${theme.colors.blue[800]};
-          background-color: ${theme.colors.white};
         `
       case 'tertiary':
         return css`

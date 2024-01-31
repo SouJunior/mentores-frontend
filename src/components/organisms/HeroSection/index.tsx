@@ -72,7 +72,7 @@ export function HeroSection() {
             />
             <Search />
           </div>
-          <Button disabled={!queryMentor}>Encontre seu mentor</Button>
+          <Button>Encontre seu mentor</Button>
         </ContainerInputForm>
       </section>
 
