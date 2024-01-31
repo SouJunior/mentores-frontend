@@ -38,6 +38,8 @@ export function Footer() {
   const handleOpenPoliticas = () => setOpenPoliticas(true)
   const handleClosePoliticas = () => setOpenPoliticas(false)
 
+  const currentYear = new Date().getFullYear()
+
   return (
     <FooterContainer>
       <FooterContent className="container">
@@ -179,7 +181,7 @@ export function Footer() {
         </FooterSocialMediaContainer>
 
         <FooterCopyright>
-          © 2023 SouJunior. Todos os direitos reservados.
+          © {currentYear} SouJunior. Todos os direitos reservados.
         </FooterCopyright>
       </FooterContent>
     </FooterContainer>
