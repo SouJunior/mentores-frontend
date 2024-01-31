@@ -1,4 +1,4 @@
-import { Header } from '@/components/molecules/Header'
+import { Header } from '@/components/organisms/Header'
 import { ReactNode } from 'react'
 
 type LayoutProps = {

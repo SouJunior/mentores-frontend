@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { ModalPrivacyPolicy } from '../ModalPrivacyPolicy'
-import ModalTerms from '../ModalTerms'
+import { ModalPrivacyPolicy } from '@/components/molecules/ModalPrivacyPolicy'
+import ModalTerms from '@/components/molecules/ModalTerms'
 
 import {
   FooterBtn,

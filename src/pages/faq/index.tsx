@@ -11,7 +11,7 @@ import Image from 'next/image'
 import ImagemFAQ from '@/assets/seo.svg'
 import { AccordionDetails, AccordionSummary } from '@mui/material'
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
-import { Footer } from '@/components/molecules/Footer'
+import { Footer } from '@/components/organisms/Footer'
 import Link from 'next/link'
 
 export default function FaqPage() {

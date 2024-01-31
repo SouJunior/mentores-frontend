@@ -17,7 +17,7 @@ import {
   Content,
 } from '@/styles/pages/mentors'
 import Link from 'next/link'
-import { Footer } from '@/components/molecules/Footer'
+import { Footer } from '@/components/organisms/Footer'
 import { useMentorsService } from '@/services/user/useMentorsService'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
 import InputSearch from '@/components/atoms/InputSearch'

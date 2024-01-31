@@ -1,4 +1,4 @@
-import { Footer } from '@/components/molecules/Footer'
+import { Footer } from '@/components/organisms/Footer'
 import { DepoSection } from '@/components/organisms/DepoSection'
 import { MentorSection } from '@/components/organisms/MentorSection'
 import { Onboarding } from '@/components/organisms/Onboarding'
