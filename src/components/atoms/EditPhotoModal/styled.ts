@@ -39,7 +39,7 @@ export const StyledButton = styled.button`
   padding: 0px 12px;
   border-radius: 8px;
   border: none;
-  background-color: ${(props) => props.theme.colors.gray1.neutral};
+  background-color: ${(props) => props.theme.colors.gray[200]};
   color: #666;
   font-weight: bold;
 
@@ -58,7 +58,7 @@ export const EditButton = styled.button`
   padding: 0px 12px;
   border-radius: 8px;
   border: none;
-  background-color: ${(props) => props.theme.colors.gray1.neutral};
+  background-color: ${(props) => props.theme.colors.gray[200]};
   color: ${(props) => (props.disabled ? '#ccc' : '#666')};
   font-weight: bold;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
@@ -92,7 +92,7 @@ export const NextButton = styled.button`
 export const AddPhotoButton = styled.label`
   width: 96px;
   height: 56px;
-  background-color: ${(props) => props.theme.colors.gray1.neutral};
+  background-color: ${(props) => props.theme.colors.gray[200]};
   border-radius: 8px;
   display: flex;
   flex-direction: column;
