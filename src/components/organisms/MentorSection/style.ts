@@ -11,8 +11,8 @@ export const MentorsContentContainer = styled.div`
   padding-right: 0;
 
   @media ${device.desktopM} {
-    max-width: calc(100vw - (100vw - 1280px) / 2);
-    margin-left: auto;
+    max-width: none;
+    padding: 4rem 0;
   }
 `
 
@@ -39,9 +39,13 @@ export const ContainerButtons = styled.div`
   }
 `
 
-export const MentorsTitle = styled.h1`
+export const MentorsTitle = styled.h2`
   color: ${(props) => props.theme.colors.black[200]};
   font-size: ${(props) => props.theme.fontSizes.xxl};
   font-weight: 600;
   line-height: 120%;
+
+  @media ${device.desktopM} {
+    padding: 0 2rem;
+  }
 `

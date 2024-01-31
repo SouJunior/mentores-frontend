@@ -1,57 +1,73 @@
 import styled from 'styled-components'
 
+export const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+  max-width: 19.5rem;
+  height: 18.5rem;
+  padding: 1.5rem 1rem;
+
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+`
+
 export const HeaderCardDepo = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 20px;
+  align-items: flex-end;
+  justify-self: flex-start;
+  gap: 1rem;
+`
 
-  img {
-    width: 56px;
-    height: 56px;
-    object-fit: cover;
-    border-radius: 500%;
-  }
-  div {
-    display: flex;
-    flex-direction: column;
-  }
+export const TestimonyInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
-  h4 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    color: #212121;
-    font-family: 'Radio Canada';
+  .testimony-name {
+    color: ${(props) => props.theme.colors.gray[700]};
+    font-weight: 600;
+    line-height: 1.4rem;
   }
 
-  h5 {
-    font-family: 'Radio Canada';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    color: #5d5f5d;
+  .testimony-role {
+    color: ${(props) => props.theme.colors.gray[600]};
+    line-height: 1.4rem;
+
+    display: block;
+    max-width: 12rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 `
 
-export const GreatContainer = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  height: 280px;
-  width: 302px;
+export const TestimonyImageContainer = styled.div`
+  background-color: ${(props) => props.theme.colors.gray[250]};
+  border-radius: 50%;
+  overflow: hidden;
+
+  width: 4rem;
+  height: 4rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+
+export const TestimonyDescription = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  p {
-    font-family: 'Radio Canada';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    color: #5d5f5d;
-  }
+  font-size: ${(props) => props.theme.fontSizes.xs};
+  line-height: 1.5rem;
+  font-weight: 400;
+  color: ${(props) => props.theme.colors.gray[750]};
 `
