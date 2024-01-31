@@ -1,11 +1,22 @@
 import styled from 'styled-components'
 import { Accordion as MuiAccordion } from '@mui/material'
 
-export const FaqContainer = styled.div`
+export const FaqContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  footer {
+    margin-top: auto;
+  }
+`
+
+export const FaqMain = styled.section`
   display: flex;
   justify-content: center;
   gap: 74px;
-  margin-bottom: 3rem;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
 `
 
 export const ImageContainer = styled.div`
@@ -46,6 +57,10 @@ export const Accordion = styled(MuiAccordion)`
       padding: 1rem 1.5rem;
     }
   }
+
+  a {
+    color: ${(props) => props.theme.colors.blue[500]};
+  }
 `
 
 export const AccordionContent = styled.span`
@@ -65,7 +80,7 @@ export const AccordionTitle = styled.span`
   color: #002c66;
 `
 
-export const TitleSpan = styled.h2`
+export const TitleSpan = styled.h1`
   color: #002c66;
   font-size: 32px;
   font-weight: 600;

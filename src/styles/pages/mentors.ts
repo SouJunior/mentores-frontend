@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background-color: #f1f3f5;
+  background-color: ${(props) => props.theme.colors.blue[25]};
   display: flex;
   flex-direction: column;
-  margin-top: -80px;
   gap: 10px;
 `
 

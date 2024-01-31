@@ -4,6 +4,7 @@ import {
   AccordionContainer,
   AccordionTitle,
   FaqContainer,
+  FaqMain,
   ImageContainer,
   TitleSpan,
 } from '@/styles/pages/faq'
@@ -22,8 +23,8 @@ export default function FaqPage() {
   }
 
   return (
-    <>
-      <FaqContainer>
+    <FaqContainer>
+      <FaqMain>
         <ImageContainer>
           <Image src={ImagemFAQ} alt="Image" width={493} height={324} />
         </ImageContainer>
@@ -132,8 +133,9 @@ export default function FaqPage() {
             </AccordionDetails>
           </Accordion>
         </AccordionContainer>
-      </FaqContainer>
+      </FaqMain>
+
       <Footer />
-    </>
+    </FaqContainer>
   )
 }
