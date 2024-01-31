@@ -100,7 +100,7 @@ export const DatePickerContainer = styled.label`
   }
 
   [data-placeholder] {
-    color: ${(props) => props.theme.colors.gray[300]};
+    color: ${(props) => props.theme.colors.gray[250]};
   }
 `
 

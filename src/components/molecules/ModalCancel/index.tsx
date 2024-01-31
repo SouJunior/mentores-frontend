@@ -30,12 +30,11 @@ export function ModalCancel({
         <HeadingModal>Deseja descartar o cadastro?</HeadingModal>
         <p>As informações inseridas não serão salvas.</p>
         <ContainerBtn>
-          <Button
-            onClick={onClose}
-            content={'Cancelar'}
-            btnRole={'modal-secondary'}
-          />
-          <Button content={'Descartar'} btnRole={'modal-default'} />
+          <Button onClick={onClose} variant="secondary">
+            Cancelar
+          </Button>
+
+          <button>Descartar</button>
         </ContainerBtn>
       </ContainerModalCancel>
     </Modal>

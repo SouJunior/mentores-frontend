@@ -234,17 +234,13 @@ export function FormRegister() {
               />
               <TxtTerms htmlFor="checkbox-terms-and-policies">
                 Concordo com os{' '}
-                <Button
-                  content={'Termos de uso'}
-                  btnRole={'unstyled'}
-                  onClick={handleOpenTermos}
-                />{' '}
+                <Button variant="tertiary" onClick={handleOpenTermos}>
+                  Termos de uso
+                </Button>{' '}
                 e{' '}
-                <Button
-                  btnRole={'unstyled'}
-                  content={'	Políticas de privacidade'}
-                  onClick={handleOpenPoliticas}
-                />{' '}
+                <Button variant="tertiary" onClick={handleOpenPoliticas}>
+                  Políticas de privacidade
+                </Button>{' '}
                 do SouJunior.
               </TxtTerms>
             </ContainerTerms>
@@ -274,18 +270,12 @@ export function FormRegister() {
                   <span className="loader" />
                 </ButtonLoading>
               ) : (
-                <Button
-                  btnRole={'form'}
-                  content={'Concluir'}
-                  disabled={isButtonDisabled}
-                />
+                <Button disabled={isButtonDisabled}>Concluir</Button>
               )}
 
-              <Button
-                btnRole={'form-secondary'}
-                content={'Cancelar'}
-                onClick={handleModalCancel}
-              />
+              <button type="button" onClick={handleModalCancel}>
+                Cancelar
+              </button>
             </ContainerBtn>
 
             <ModalCancel

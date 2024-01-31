@@ -6,7 +6,7 @@ import { InfoTooltip } from '@/components/atoms/InfoTooltip'
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, MouseEvent, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ContainerForm,
   FormWrapper,
@@ -100,7 +100,7 @@ export default function FormNewPass() {
               />
             </WrapperInput>
 
-            <Button btnRole={'form'} content={'Redefinir senha'} />
+            <Button>Redefinir senha</Button>
           </Form>
         </FormikProvider>
         <Link href="/login">Voltar ao login</Link>

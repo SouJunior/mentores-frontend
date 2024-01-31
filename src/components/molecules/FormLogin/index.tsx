@@ -142,22 +142,18 @@ export function FormLogin() {
                   </Link>
                 </ContainerCheckbox>
 
-                <Button
-                  disabled={submitButton}
-                  btnRole={'form'}
-                  content={
-                    loading ? (
-                      <Image
-                        alt="loading"
-                        src={CardLoading}
-                        width={24}
-                        height={24}
-                      />
-                    ) : (
-                      'Entrar'
-                    )
-                  }
-                />
+                <Button disabled={submitButton}>
+                  {loading ? (
+                    <Image
+                      alt="loading"
+                      src={CardLoading}
+                      width={24}
+                      height={24}
+                    />
+                  ) : (
+                    'Entrar'
+                  )}
+                </Button>
 
                 <CallToRegisterText>
                   Ainda não possui cadastro?{' '}

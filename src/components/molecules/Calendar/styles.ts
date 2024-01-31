@@ -78,7 +78,7 @@ export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
   width: 1.1rem;
   transition: 0.3s;
   text-align: center;
-  color: ${(props) => props.isDisabled && props.theme.colors.gray[300]};
+  color: ${(props) => props.isDisabled && props.theme.colors.gray[250]};
 
   line-height: 150%;
   padding: 0.5rem;

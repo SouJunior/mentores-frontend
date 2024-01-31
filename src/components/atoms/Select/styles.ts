@@ -56,7 +56,7 @@ export const SelectItemContainer = styled(Select.Item)`
   outline: none;
 
   &:hover {
-    background: ${(props) => props.theme.colors.gray[300]};
+    background: ${(props) => props.theme.colors.gray[250]};
   }
 
   &:focus-visible {
@@ -79,5 +79,5 @@ export const ScrollAreaBar = styled(ScrollArea.Scrollbar)`
 
 export const ScrollAreaThumb = styled(ScrollArea.Thumb)`
   border-radius: 0.25rem;
-  background: ${(props) => props.theme.colors.gray[300]};
+  background: ${(props) => props.theme.colors.gray[250]};
 `

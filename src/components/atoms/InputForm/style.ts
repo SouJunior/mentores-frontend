@@ -28,7 +28,7 @@ export const ContainerInput = styled.div`
           : props.theme.colors.gray[700]};
     border-radius: 8px;
     background: ${(props) => props.theme.colors.white};
-    color: ${(props) => props.theme.colors.gray[300]};
+    color: ${(props) => props.theme.colors.gray[250]};
 
     &:hover {
       box-shadow: 0px 3px 6px rgba(17, 101, 186, 0.6);
@@ -66,6 +66,6 @@ export const Field = styled(FieldComponent)`
   color: ${(props) => props.theme.colors.gray[700]} !important;
 
   &::placeholder {
-    color: ${(props) => props.theme.colors.gray[300]};
+    color: ${(props) => props.theme.colors.gray[250]};
   }
 `

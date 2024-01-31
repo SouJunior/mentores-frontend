@@ -51,7 +51,7 @@ export default function FormEmailToReset() {
               isRequired={false}
             />
 
-            <Button btnRole={'form'} content={'Enviar'} />
+            <Button type="submit">Enviar</Button>
           </Form>
         </FormikProvider>
         <Link href="/login">Voltar ao login</Link>
