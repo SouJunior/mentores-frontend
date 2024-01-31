@@ -65,8 +65,8 @@ export const ContainerInputForm = styled.form`
 
     svg {
       align-self: center;
-      width: 2rem;
-      height: 2rem;
+      width: 1.5rem;
+      height: 1.5rem;
 
       position: absolute;
       right: 1rem;

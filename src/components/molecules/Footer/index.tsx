@@ -42,13 +42,15 @@ export function Footer() {
     <FooterContainer>
       <FooterContent className="container">
         <FooterMainInfo>
-          <Image
-            src={logo}
-            alt="SouJunior logo"
-            width={248}
-            height={40}
-            quality={100}
-          />
+          <Link href="/" title="Início">
+            <Image
+              src={logo}
+              alt="SouJunior logo"
+              width={248}
+              height={40}
+              quality={100}
+            />
+          </Link>
 
           <FooterSitemap>
             <FooterTitleContainer>

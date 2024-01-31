@@ -3,9 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FormEvent, useEffect, useState } from 'react'
 import { AnimationTextHero } from '../../../styles/animations'
 import { ContainerHero, ContainerInputForm, Title } from './style'
-import Search from '@mui/icons-material/Search'
 import { useRouter } from 'next/router'
 import { Button } from '@/components/atoms/Button'
+import { MagnifyingGlass } from 'phosphor-react'
 
 const text = ['mentorias personalizadas', 'profissionais experientes']
 
@@ -70,7 +70,7 @@ export function HeroSection() {
               value={queryMentor}
               onChange={(e) => setQueryMentor(e.target.value)}
             />
-            <Search />
+            <MagnifyingGlass weight="bold" />
           </div>
           <Button>Encontre seu mentor</Button>
         </ContainerInputForm>
