@@ -24,7 +24,7 @@ export const ContainerInput = styled.div`
     border: 1px solid
       ${(props) =>
         props.className?.includes('error')
-          ? props.theme.colors.error
+          ? props.theme.colors.red[500]
           : props.theme.colors.gray[700]};
     border-radius: 8px;
     background: ${(props) => props.theme.colors.white};
@@ -47,7 +47,7 @@ export const ContainerInput = styled.div`
 `
 
 export const ContainerError = styled.span`
-  color: ${(props) => props.theme.colors.error};
+  color: ${(props) => props.theme.colors.red[500]};
   font-weight: bold;
   font-size: 0.75rem;
 `
@@ -59,7 +59,7 @@ export const StyledLabel = styled.span`
 `
 
 export const StyledLabelError = styled(StyledLabel)`
-  color: ${(props) => props.theme.colors.error};
+  color: ${(props) => props.theme.colors.red[500]};
 `
 
 export const Field = styled(FieldComponent)`

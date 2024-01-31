@@ -45,7 +45,7 @@ export const ContainerInput = styled.div`
 
   &.error span,
   &.error svg {
-    color: ${(props) => props.theme.colors.error} !important;
+    color: ${(props) => props.theme.colors.red[500]} !important;
   }
 
   svg {
@@ -103,7 +103,7 @@ export const CallToRegisterText = styled.p`
 `
 
 export const BlockedAccountError = styled.p`
-  color: ${(props) => props.theme.colors.error};
+  color: ${(props) => props.theme.colors.red[500]};
   font-size: 0.875rem;
   margin-top: 0.5rem;
 `
