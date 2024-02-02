@@ -202,7 +202,8 @@ export const MenuBurgerOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.25);
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
+  margin-top: 5rem; // Height's header
 
   @media ${device.desktopXS} {
     display: block;
