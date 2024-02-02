@@ -242,6 +242,10 @@ export const MenuBurgerContent = styled(DropdownMenu.Content)`
       line-height: 1.2rem;
     }
   }
+
+  [role='menuitem'] {
+    outline: 0;
+  }
 `
 
 export const Divider = styled.hr`
