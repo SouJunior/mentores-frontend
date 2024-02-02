@@ -1,33 +1,34 @@
+import { device } from '@/styles/theme'
 import styled from 'styled-components'
 
-export const ItemInvisible = styled.div`
+const BaseItemStyles = styled.div`
   height: 5.5rem;
   width: 5.5rem;
-  border-radius: '12px';
+  border-radius: 24px;
+
+  @media ${device.mobileL} {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 12px;
+  }
+`
+
+export const ItemInvisible = styled(BaseItemStyles)`
   display: none;
 `
 
-export const ItemPrimary = styled.div`
-  height: 5.5rem;
-  width: 5.5rem;
+export const ItemPrimary = styled(BaseItemStyles)`
   background-color: ${(props) => props.theme.colors.blue[800]};
   border: 4px solid ${(props) => props.theme.colors.blue[800]};
-  border-radius: '12px';
 `
 
-export const ItemSecondary = styled.div`
-  height: 5.5rem;
-  width: 5.5rem;
+export const ItemSecondary = styled(BaseItemStyles)`
   border: 4px solid ${(props) => props.theme.colors.blue[800]};
   background-color: transparent;
-  border-radius: '12px';
 `
 
-export const ItemImage = styled.div`
-  height: 5.5rem;
-  width: 5.5rem;
+export const ItemImage = styled(BaseItemStyles)`
   border: none;
-  border-radius: '12px';
 
   img {
     width: 100%;

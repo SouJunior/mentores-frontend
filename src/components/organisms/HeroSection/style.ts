@@ -14,6 +14,17 @@ export const ContainerHero = styled.div`
     padding-right: 1rem;
   }
 
+  @media ${device.desktopXS} {
+    flex-direction: column-reverse;
+    gap: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    .list-items-hero {
+      align-self: flex-end;
+    }
+  }
+
   .hero-texts {
     display: flex;
     flex-direction: column;
@@ -30,6 +41,12 @@ export const ContainerHero = styled.div`
     @media (max-width: 1230px) {
       margin-top: 2.5rem;
     }
+
+    @media ${device.mobileL} {
+      font-size: ${(props) => props.theme.fontSizes.sm};
+      color: ${(props) => props.theme.colors.black[200]};
+      line-height: 1.4rem;
+    }
   }
 `
 
@@ -42,6 +59,16 @@ export const Title = styled.h1`
   span {
     display: block;
     color: ${(props) => props.theme.colors.blue[800]};
+  }
+
+  @media ${device.mobileL} {
+    font-size: ${(props) => props.theme.fontSizes.lg};
+    line-height: 1.8rem;
+    max-width: 18.5rem;
+  }
+
+  @media ${device.mobileS} {
+    max-width: 17rem;
   }
 `
 
@@ -58,6 +85,16 @@ export const ContainerInputForm = styled.form`
   max-width: 42.7rem;
   padding: 0.5rem;
   margin-top: auto;
+
+  @media ${device.desktopXS} {
+    margin-top: 4rem;
+  }
+
+  @media (max-width: 615px) {
+    .button-find-mentor {
+      display: none;
+    }
+  }
 
   div {
     display: flex;

@@ -1,3 +1,4 @@
+import { device } from '@/styles/theme'
 import styled from 'styled-components'
 
 export const ContainerCard = styled.div`
@@ -14,6 +15,11 @@ export const ContainerCard = styled.div`
   img {
     width: 10rem;
     height: 10rem;
+
+    @media ${device.mobileL} {
+      width: 7.875rem;
+      height: 7.875rem;
+    }
   }
 
   section {

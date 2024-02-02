@@ -65,18 +65,18 @@ export function HeroSection() {
           <div>
             <input
               type="text"
-              placeholder="Pesquisar por nome ou especialidade"
-              aria-label="Pesquisar por nome ou especialidade"
+              placeholder="Encontre seu mentor"
+              aria-label="Encontre seu mentor"
               value={queryMentor}
               onChange={(e) => setQueryMentor(e.target.value)}
             />
             <MagnifyingGlass weight="bold" />
           </div>
-          <Button>Encontre seu mentor</Button>
+          <Button className="button-find-mentor">Encontre seu mentor</Button>
         </ContainerInputForm>
       </section>
 
-      <ListItemsHero />
+      <ListItemsHero className="list-items-hero" />
     </ContainerHero>
   )
 }

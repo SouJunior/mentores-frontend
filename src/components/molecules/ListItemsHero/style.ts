@@ -1,3 +1,4 @@
+import { device } from '@/styles/theme'
 import styled from 'styled-components'
 
 export const ContainerList = styled.div`
@@ -8,6 +9,13 @@ export const ContainerList = styled.div`
   div {
     display: flex;
     gap: 20px;
-    border-radius: 24px;
+  }
+
+  @media ${device.mobileL} {
+    gap: 0.6rem;
+
+    div {
+      gap: 0.6rem;
+    }
   }
 `

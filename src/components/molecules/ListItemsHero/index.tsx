@@ -3,10 +3,13 @@ import mentor2Img from '@/assets/homepage/heroSection/mentor2.webp'
 import mentor3Img from '@/assets/homepage/heroSection/mentor3.webp'
 import { ItemHero } from '@/components/atoms/ItemHero'
 import { ContainerList } from './style'
+import { ComponentProps } from 'react'
 
-export function ListItemsHero() {
+type ListItemsHeroProps = ComponentProps<'div'>
+
+export function ListItemsHero(props: ListItemsHeroProps) {
   return (
-    <ContainerList>
+    <ContainerList {...props}>
       <div>
         <ItemHero type={'invisible'} />
         <ItemHero type={'image'} imageSrc={mentor1Img} />
