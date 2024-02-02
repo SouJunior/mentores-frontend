@@ -30,6 +30,11 @@ export const ContainerHeader = styled.header`
       width: 15.5rem;
       height: 2.5rem;
 
+      @media ${device.mobileL} {
+        width: 11.9rem;
+        height: 2rem;
+      }
+
       img {
         width: 100%;
         height: 100%;
@@ -55,12 +60,23 @@ export const ContainerHeader = styled.header`
         }
       }
     }
+
+    @media ${device.desktopXS} {
+      .mySpan,
+      .nav-links {
+        display: none;
+      }
+    }
   }
 `
 
 export const GroupBtn = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media ${device.desktopXS} {
+    display: none;
+  }
 `
 
 export const AvatarGroup = styled.div`
@@ -159,4 +175,83 @@ export const LinkUserAccount = styled(Link)`
 export const SignOutBtn = styled(DropdownMenu.Item)`
   ${baseBtnStyles}
   color: ${(props) => props.theme.colors.red[300]};
+`
+
+// Menu Burger
+export const MenuBurgerTrigger = styled(DropdownMenu.Trigger)`
+  all: unset;
+  display: none;
+  cursor: pointer;
+  align-self: center;
+
+  color: ${(props) => props.theme.colors.blue[800]};
+  line-height: 0;
+
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  @media ${device.desktopXS} {
+    display: block;
+  }
+`
+
+export const MenuBurgerOverlay = styled.div`
+  display: none;
+  background-color: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  @media ${device.desktopXS} {
+    display: block;
+  }
+`
+
+export const MenuBurgerContent = styled(DropdownMenu.Content)`
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1;
+
+  @media ${device.desktopXS} {
+    display: flex;
+  }
+
+  @media ${device.mobileL} {
+    margin-top: -4px;
+  }
+
+  background-color: ${(props) => props.theme.colors.white};
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-top: 2px solid ${(props) => props.theme.colors.gray[500]};
+
+  padding: 1rem 0;
+  color: ${(props) => props.theme.colors.blue[800]};
+  width: var(--radix-dropdown-menu-content-available-width);
+
+  .menu-burger-links {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      padding: 1rem;
+      line-height: 1.2rem;
+    }
+  }
+`
+
+export const Divider = styled.hr`
+  border: 0;
+  border-top: 2px solid ${(props) => props.theme.colors.gray[500]};
+`
+
+export const GroupBtnMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 0;
 `

@@ -4,19 +4,27 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   ContainerHeader,
+  Divider,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   GroupBtn,
+  GroupBtnMobile,
   LinkUserAccount,
+  MenuBurgerContent,
+  MenuBurgerOverlay,
+  MenuBurgerTrigger,
   SignOutBtn,
 } from './style'
 import { UserAvatar } from '@/components/atoms/UserAvatar'
 import useUser from '@/context/Auth/useUser'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { Menu } from '@mui/icons-material'
+import { useState } from 'react'
 
 export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { user, logout } = useUser()
 
   return (
@@ -61,6 +69,42 @@ export function Header() {
           </Button>
         </GroupBtn>
       )}
+
+      {/* Mobile menu */}
+      <DropdownMenu.Root open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+        <MenuBurgerTrigger>
+          <Menu />
+        </MenuBurgerTrigger>
+
+        {isMenuOpen && <MenuBurgerOverlay aria-hidden />}
+
+        <MenuBurgerContent sideOffset={20}>
+          <div className="menu-burger-links">
+            <DropdownMenu.Item asChild>
+              <Link href="/#onboarding">Como Funciona</Link>
+            </DropdownMenu.Item>
+
+            <DropdownMenu.Item asChild>
+              <Link href="/#mentor">Encontre Seu Mentor</Link>
+            </DropdownMenu.Item>
+          </div>
+
+          <Divider />
+
+          <GroupBtnMobile>
+            <DropdownMenu.Item asChild>
+              <Button as={Link} href="/login" variant="secondary">
+                Login mentores
+              </Button>
+            </DropdownMenu.Item>
+            <DropdownMenu.Item asChild>
+              <Button as={Link} href="/cadastro">
+                Cadastro mentores
+              </Button>
+            </DropdownMenu.Item>
+          </GroupBtnMobile>
+        </MenuBurgerContent>
+      </DropdownMenu.Root>
     </ContainerHeader>
   )
 }

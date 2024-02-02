@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  position: relative;
+  z-index: -2; // To apply menu burger overlay of Header
   background: ${(props) => props.theme.colors.blue[600]};
 `
 

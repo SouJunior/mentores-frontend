@@ -17,6 +17,7 @@ export const ContainerHero = styled.div`
   .hero-texts {
     display: flex;
     flex-direction: column;
+    z-index: -2; // To apply menu burger overlay of Header
   }
 
   p {
