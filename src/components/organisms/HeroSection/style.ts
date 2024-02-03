@@ -93,6 +93,10 @@ export const ContainerInputForm = styled.form`
     .button-find-mentor {
       display: none;
     }
+
+    .search-form-icon.only-icon {
+      display: none;
+    }
   }
 
   div {
@@ -100,17 +104,19 @@ export const ContainerInputForm = styled.form`
     flex: 1;
     position: relative;
 
-    svg {
-      align-self: center;
+    .search-form-icon {
       width: 1.5rem;
       height: 1.5rem;
 
-      position: absolute;
-      right: 1rem;
-
       color: ${(props) => props.theme.colors.black[200]};
       opacity: 0.6;
+    }
+
+    .search-form-icon.only-icon {
+      position: absolute;
+      right: 1rem;
       pointer-events: none;
+      align-self: center;
     }
 
     input {
@@ -131,5 +137,26 @@ export const ContainerInputForm = styled.form`
         color: ${(props) => props.theme.colors.black[200]};
       }
     }
+  }
+`
+
+export const BtnSearchForm = styled.button`
+  all: unset;
+
+  display: none;
+  line-height: 0;
+  cursor: pointer;
+
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.blue[500]};
+  }
+
+  @media (max-width: 615px) {
+    display: block;
   }
 `

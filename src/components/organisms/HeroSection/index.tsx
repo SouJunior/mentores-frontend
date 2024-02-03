@@ -2,7 +2,12 @@ import { ListItemsHero } from '@/components/molecules/ListItemsHero'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FormEvent, useEffect, useState } from 'react'
 import { AnimationTextHero } from '../../../styles/animations'
-import { ContainerHero, ContainerInputForm, Title } from './style'
+import {
+  BtnSearchForm,
+  ContainerHero,
+  ContainerInputForm,
+  Title,
+} from './style'
 import { useRouter } from 'next/router'
 import { Button } from '@/components/atoms/Button'
 import { MagnifyingGlass } from 'phosphor-react'
@@ -70,7 +75,13 @@ export function HeroSection() {
               value={queryMentor}
               onChange={(e) => setQueryMentor(e.target.value)}
             />
-            <MagnifyingGlass weight="bold" />
+            <MagnifyingGlass
+              weight="bold"
+              className="search-form-icon only-icon"
+            />
+            <BtnSearchForm title="Buscar mentor" aria-label="Buscar mentor">
+              <MagnifyingGlass weight="bold" className="search-form-icon" />
+            </BtnSearchForm>
           </div>
           <Button className="button-find-mentor">Encontre seu mentor</Button>
         </ContainerInputForm>
