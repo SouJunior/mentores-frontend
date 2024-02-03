@@ -16,6 +16,11 @@ export const ContainerDepo = styled.div`
     padding: 4rem 0;
   }
 
+  @media ${device.mobileL} {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
   h2 {
     font-size: ${(props) => props.theme.fontSizes.xxl};
     font-weight: 600;
@@ -23,7 +28,11 @@ export const ContainerDepo = styled.div`
     color: ${(props) => props.theme.colors.black[200]};
 
     @media ${device.desktopM} {
-      padding: 0 2rem;
+      padding: 0 1rem;
+    }
+
+    @media ${device.tablet} {
+      font-size: ${(props) => props.theme.fontSizes.xl};
     }
   }
 
@@ -41,11 +50,24 @@ export const ContainerSlider = styled.div`
 
   .swiper-slide {
     width: max-content !important;
+    padding-left: 2rem;
+  }
+
+  .swiper-slide:first-child {
+    padding-left: 0;
+  }
+
+  .swiper-slide:last-child {
+    padding-right: 1rem;
   }
 
   @media ${device.desktopM} {
+    .swiper-slide {
+      padding-left: 1.5rem;
+    }
+
     .swiper-slide:first-child {
-      padding-left: 2rem;
+      padding-left: 1.5rem;
     }
   }
 `

@@ -6,12 +6,21 @@ export const SwiperContainer = styled.div`
 
   .swiper-slide {
     max-width: 19rem;
-    width: 100% !important;
   }
 
   @media ${device.desktopM} {
     .swiper-slide:first-child {
-      padding-left: 2rem;
+      padding-left: 1rem;
+    }
+  }
+
+  @media ${device.desktopS} {
+    .swiper-slide {
+      padding-left: 1.5rem;
+    }
+
+    .swiper-slide:last-child {
+      padding-right: 1rem;
     }
   }
 `

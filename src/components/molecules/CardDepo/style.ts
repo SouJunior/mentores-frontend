@@ -12,6 +12,10 @@ export const Card = styled.div`
 
   border-radius: 0.5rem;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 348px) {
+    max-width: 17.5rem;
+  }
 `
 
 export const HeaderCardDepo = styled.div`
@@ -37,7 +41,7 @@ export const TestimonyInfo = styled.div`
     line-height: 1.4rem;
 
     display: block;
-    max-width: 12rem;
+    max-width: 10rem;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;

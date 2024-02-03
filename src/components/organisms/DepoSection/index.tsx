@@ -18,7 +18,7 @@ export function DepoSection() {
       <h2>Seja um mentor</h2>
 
       <ContainerSlider>
-        <Swiper modules={[A11y]} spaceBetween={32} slidesPerView={3.5}>
+        <Swiper modules={[A11y]} slidesPerView="auto">
           {testimonies?.length &&
             testimonies?.map((testimony) => {
               return (

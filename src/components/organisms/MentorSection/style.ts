@@ -14,6 +14,11 @@ export const MentorsContentContainer = styled.div`
     max-width: none;
     padding: 4rem 0;
   }
+
+  @media ${device.mobileL} {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
 `
 
 export const MentorsContent = styled.section`
@@ -46,6 +51,10 @@ export const MentorsTitle = styled.h2`
   line-height: 120%;
 
   @media ${device.desktopM} {
-    padding: 0 2rem;
+    padding: 0 1rem;
+  }
+
+  @media ${device.tablet} {
+    font-size: ${(props) => props.theme.fontSizes.xl};
   }
 `
