@@ -15,6 +15,8 @@ const BaseStylesButton = styled.button`
   font-weight: 500;
   line-height: 0.5;
 
+  transition: 0.3s ease;
+
   ${(props) => {
     if (props.disabled) {
       return css`
@@ -40,15 +42,29 @@ export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
             ? theme.colors.blue[800]
             : theme.colors.gray[500]};
           color: ${theme.colors.white};
+
+          &:not(:disabled):hover {
+            border-color: ${theme.colors.blue[850]};
+            background-color: ${theme.colors.blue[850]};
+          }
         `
       case 'secondary':
         return css`
           border: 2px solid ${theme.colors.blue[800]};
           color: ${theme.colors.blue[800]};
+
+          &:not(:disabled):hover {
+            border-color: ${theme.colors.blue[850]};
+            color: ${theme.colors.blue[850]};
+          }
         `
       case 'tertiary':
         return css`
           color: ${theme.colors.blue[800]};
+
+          &:not(:disabled):hover {
+            color: ${theme.colors.blue[850]};
+          }
         `
     }
   }}
