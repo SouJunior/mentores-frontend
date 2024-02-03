@@ -51,6 +51,10 @@ export const MentorsTitle = styled.h2`
   line-height: 120%;
 
   @media ${device.desktopM} {
+    padding: 0 2rem;
+  }
+
+  @media ${device.desktopS} {
     padding: 0 1rem;
   }
 

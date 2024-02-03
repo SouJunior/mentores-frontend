@@ -10,12 +10,13 @@ export const SwiperContainer = styled.div`
 
   @media ${device.desktopM} {
     .swiper-slide:first-child {
-      padding-left: 1rem;
+      padding-left: 2rem;
     }
   }
 
   @media ${device.desktopS} {
-    .swiper-slide {
+    .swiper-slide,
+    .swiper-slide:first-child {
       padding-left: 1.5rem;
     }
 

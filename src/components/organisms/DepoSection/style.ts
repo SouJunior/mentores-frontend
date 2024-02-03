@@ -28,6 +28,10 @@ export const ContainerDepo = styled.div`
     color: ${(props) => props.theme.colors.black[200]};
 
     @media ${device.desktopM} {
+      padding: 0 2rem;
+    }
+
+    @media ${device.desktopS} {
       padding: 0 1rem;
     }
 
@@ -67,7 +71,13 @@ export const ContainerSlider = styled.div`
     }
 
     .swiper-slide:first-child {
-      padding-left: 1.5rem;
+      padding-left: 2rem;
+    }
+  }
+
+  @media ${device.desktopS} {
+    .swiper-slide:first-child {
+      padding-left: 1rem;
     }
   }
 `
