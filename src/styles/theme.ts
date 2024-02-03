@@ -50,7 +50,7 @@ export const fontSizes = {
 const breakpoints = {
   mobileS: '320px',
   mobileM: '375px',
-  mobileL: '425px',
+  mobileL: '438px',
   tablet: '768px',
   desktopXS: '1064px',
   desktopS: '1133px',
