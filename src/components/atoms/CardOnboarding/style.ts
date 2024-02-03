@@ -40,6 +40,10 @@ export const ContainerCard = styled.div`
       font-weight: 400;
       line-height: 1.4rem;
       max-width: 15.75rem;
+
+      @media ${device.mobileL} {
+        max-width: 13.875rem;
+      }
     }
   }
 `
