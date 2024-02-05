@@ -273,9 +273,13 @@ export function FormRegister() {
                 <Button disabled={isButtonDisabled}>Concluir</Button>
               )}
 
-              <button type="button" onClick={handleModalCancel}>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleModalCancel}
+              >
                 Cancelar
-              </button>
+              </Button>
             </ContainerBtn>
 
             <ModalCancel

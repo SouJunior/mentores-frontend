@@ -63,6 +63,19 @@ export const TxtTerms = styled.label`
 
   margin-left: 0.5rem;
   margin-top: -5px; // Align text with checkbox input
+
+  button {
+    display: inline;
+    padding: 0;
+    color: ${(props) => props.theme.colors.blue[500]};
+
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 150%;
+
+    border-bottom: 1px solid ${(props) => props.theme.colors.blue[500]};
+    border-radius: 0;
+  }
 `
 
 export const ContainerBtn = styled.div`

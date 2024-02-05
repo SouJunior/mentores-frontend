@@ -1,6 +1,11 @@
 import { Button } from '@/components/atoms/Button'
 import { Modal } from '@/components/atoms/Modal'
-import { ContainerBtn, ContainerModalCancel, HeadingModal } from './style'
+import {
+  ContainerBtn,
+  ContainerModalCancel,
+  DiscardBtn,
+  HeadingModal,
+} from './style'
 
 interface ModalCancelProps {
   open: boolean
@@ -34,7 +39,9 @@ export function ModalCancel({
             Cancelar
           </Button>
 
-          <button>Descartar</button>
+          <Button as={DiscardBtn} href="/">
+            Descartar
+          </Button>
         </ContainerBtn>
       </ContainerModalCancel>
     </Modal>

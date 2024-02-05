@@ -7,7 +7,7 @@ export const RegisterContainer = styled.div`
   height: fit-content;
   display: flex;
   padding-bottom: 36vh;
-  background: ${(props) => props.theme.colors.gradient};
+  background: ${(props) => props.theme.colors.gradient.primary};
 `
 
 export const ImageRegisterContainer = styled.div`

@@ -30,6 +30,8 @@ export const ContainerInput = styled.div`
     background: ${(props) => props.theme.colors.white};
     color: ${(props) => props.theme.colors.gray[250]};
 
+    transition: 0.3s ease;
+
     &:hover {
       box-shadow: 0px 3px 6px rgba(17, 101, 186, 0.6);
       border: 1px solid ${(props) => props.theme.colors.blue[400]};

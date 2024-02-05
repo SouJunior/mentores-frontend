@@ -105,7 +105,7 @@ export const CalendarTrigger = styled(Popover.Trigger)`
   all: unset;
   cursor: pointer;
   padding: 0.75rem 1rem;
-  border: 1px solid ${(props) => props.theme.colors.gray[700]};
+  border: 1px solid ${(props) => props.theme.colors.gray[600]};
   border-radius: 0.5rem;
   transition: all 0.3s ease;
 
@@ -121,17 +121,16 @@ export const CalendarTrigger = styled(Popover.Trigger)`
   }
 
   &[data-state='closed']:hover {
-    border: 1px solid ${(props) => props.theme.colors.blue[400]};
-    box-shadow: 0 3px 6px 0 rgba(17, 101, 186, 0.6);
+    border: 1px solid ${(props) => props.theme.colors.blue[850]};
   }
 
   &[data-state='open'],
   &:focus-visible {
-    border: 1px solid ${(props) => props.theme.colors.blue[400]};
-    box-shadow: 0 0 0 1px ${(props) => props.theme.colors.blue[400]};
+    border: 1px solid ${(props) => props.theme.colors.blue[850]};
+    box-shadow: 0 0 0 1px ${(props) => props.theme.colors.blue[850]};
 
     svg {
-      color: ${(props) => props.theme.colors.blue[400]};
+      color: ${(props) => props.theme.colors.blue[850]};
     }
   }
 

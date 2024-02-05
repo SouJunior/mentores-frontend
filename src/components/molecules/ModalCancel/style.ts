@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export const ContainerModalCancel = styled.div`
@@ -33,4 +34,14 @@ export const ContainerBtn = styled.div`
   gap: 16px;
   width: 100%;
   color: #c1292e;
+`
+
+export const DiscardBtn = styled(Link)`
+  background-color: ${(props) => props.theme.colors.red[600]};
+  border-color: ${(props) => props.theme.colors.red[600]};
+
+  &:not(:disabled):hover {
+    background-color: ${(props) => props.theme.colors.red[800]};
+    border-color: ${(props) => props.theme.colors.red[800]};
+  }
 `
