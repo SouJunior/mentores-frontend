@@ -13,7 +13,7 @@ const BaseStylesButton = styled.button`
 
   font-size: 1rem;
   font-weight: 500;
-  line-height: 0.5;
+  line-height: 0.7;
 
   transition: 0.3s ease;
 

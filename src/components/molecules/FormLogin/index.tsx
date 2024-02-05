@@ -15,7 +15,7 @@ import {
   ContainerInput,
 } from './style'
 import UserLoginService from '@/services/user/userLoginService'
-import { Field, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import * as yup from 'yup'
 import { InputForm } from '@/components/atoms/InputForm'
 import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material'
@@ -86,14 +86,14 @@ export function FormLogin() {
                   <ContainerInput
                     className={errors.email && touched.email ? 'error' : ''}
                   >
-                    <PersonOutlineRounded />
-                    <Field
-                      as={InputForm}
+                    <InputForm
                       isRequired={false}
                       type="input"
                       name="email"
                       label="E-mail"
-                    />
+                    >
+                      <PersonOutlineRounded />
+                    </InputForm>
                   </ContainerInput>
 
                   <ContainerInput
@@ -101,15 +101,15 @@ export function FormLogin() {
                       errors.password && touched.password ? 'error' : ''
                     }
                   >
-                    <LockOutlined />
-                    <Field
-                      as={InputForm}
+                    <InputForm
                       isRequired={false}
                       type="input"
                       name="password"
                       label="Senha"
                       inputType={isPasswordVisible ? 'text' : 'password'}
-                    />
+                    >
+                      <LockOutlined />
+                    </InputForm>
                     <Eye
                       aria-label="Mostrar senha"
                       pressed={isPasswordVisible}
@@ -134,12 +134,7 @@ export function FormLogin() {
                     id="connected"
                     text="Me manter conectado"
                   />
-                  <Link
-                    href="/resetPassword"
-                    style={{ textDecoration: 'underline' }}
-                  >
-                    Esqueci a senha
-                  </Link>
+                  <Link href="/resetPassword">Esqueci minha senha</Link>
                 </ContainerCheckbox>
 
                 <Button disabled={submitButton}>

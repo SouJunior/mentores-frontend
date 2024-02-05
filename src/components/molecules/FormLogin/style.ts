@@ -6,20 +6,22 @@ export const ContainerForm = styled.div`
 
   display: flex;
   flex-direction: column;
-  background: rgba(253, 253, 253, 0.9);
-  border-radius: 0.75rem;
-  padding: 2rem;
+  background: ${(props) => props.theme.colors.white};
+  border-radius: 0.5rem;
+  padding: 1.5rem;
 
   img {
-    margin-bottom: 40px;
+    margin-bottom: 1rem;
+    width: 16.5rem;
+    height: 3rem;
   }
 
   h2 {
-    font-weight: 600;
+    font-weight: 500;
     font-size: ${(props) => props.theme.fontSizes.lg};
     line-height: 120%;
-    color: ${(props) => props.theme.colors.blue[400]};
-    margin-bottom: 32px;
+    color: ${(props) => props.theme.colors.gray[700]};
+    margin-bottom: 2rem;
   }
 
   form {
@@ -29,12 +31,10 @@ export const ContainerForm = styled.div`
     .group-fields {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     input {
-      padding-left: 2.8rem;
-      background-color: rgba(255, 255, 255, 0.1);
       font-size: 1rem;
     }
   }
@@ -43,23 +43,9 @@ export const ContainerForm = styled.div`
 export const ContainerInput = styled.div`
   position: relative;
 
-  &.error span,
-  &.error svg {
-    color: ${(props) => props.theme.colors.red[500]} !important;
-  }
-
   svg {
-    position: absolute;
-    left: 1rem;
-    top: 2.8rem;
-
     width: 1.5rem;
     height: 1.5rem;
-    color: ${(props) => props.theme.colors.gray[700]};
-  }
-
-  &:focus-within svg {
-    color: ${(props) => props.theme.colors.blue[400]};
   }
 
   label {
@@ -75,12 +61,21 @@ export const ContainerInput = styled.div`
   }
 
   .eye-visibility {
-    right: 3.5rem;
-    top: 1px;
+    right: 1rem;
+    top: 2.8rem;
 
     svg {
-      color: ${(props) => props.theme.colors.blue[400]};
+      color: ${(props) => props.theme.colors.black[200]};
     }
+  }
+
+  &.error span,
+  &.error svg {
+    color: ${(props) => props.theme.colors.red[500]} !important;
+  }
+
+  &:focus-within svg {
+    color: ${(props) => props.theme.colors.blue[800]};
   }
 `
 
@@ -89,16 +84,22 @@ export const ContainerCheckbox = styled.div`
   justify-content: space-between;
   margin-top: 1.5rem;
   margin-bottom: 2rem;
+
+  a {
+    color: ${(props) => props.theme.colors.blue[800]};
+    font-weight: 500;
+  }
 `
 
 export const CallToRegisterText = styled.p`
-  color: ${(props) => props.theme.colors.gray[700]};
+  color: ${(props) => props.theme.colors.black[200]};
   line-height: 150%;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   padding-bottom: 0.5rem;
 
-  span {
-    color: ${(props) => props.theme.colors.blue[500]};
+  a {
+    color: ${(props) => props.theme.colors.blue[800]};
+    font-weight: 500;
   }
 `
 

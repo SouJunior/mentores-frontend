@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styled from 'styled-components'
 
 export const ContainerLogin = styled.div`
-  background: ${(props) => props.theme.colors.gradient};
+  background: ${(props) => props.theme.colors.blue[600]};
 
   main {
     display: flex;

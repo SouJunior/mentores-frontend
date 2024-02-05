@@ -1,19 +1,21 @@
-import { ErrorMessage, useFormikContext } from 'formik'
+import { ErrorMessage, Field, FieldAttributes, useFormikContext } from 'formik'
 import {
   ContainerInputLabel,
   ContainerError,
   ContainerInput,
-  Field,
   StyledLabel,
 } from './style'
+import { ReactNode } from 'react'
 
-interface InputFormProps {
+interface InputFormProps extends FieldAttributes<any> {
   name: string
   type: string
-  placeholder: string
+  placeholder?: string
   label: string
   inputType?: string
   isRequired?: boolean
+  children?: ReactNode
+  className?: string
 }
 
 export function InputForm({
@@ -23,6 +25,7 @@ export function InputForm({
   label,
   inputType,
   isRequired = true,
+  children,
   ...rest
 }: InputFormProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,6 +37,7 @@ export function InputForm({
         {label} {isRequired && <span className="asterisk">*</span>}
       </StyledLabel>
       <ContainerInput className={errors[name] && touched[name] ? 'error' : ''}>
+        {children}
         <Field
           as={type}
           name={name}
