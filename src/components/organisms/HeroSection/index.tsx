@@ -7,6 +7,7 @@ import {
   ContainerHero,
   ContainerInputForm,
   PlaceholderInput,
+  PlaceholderInputMobile,
   QueryInput,
   Title,
 } from './style'
@@ -77,8 +78,11 @@ export function HeroSection() {
               id="query-mentor"
             />
             <PlaceholderInput htmlFor="query-mentor">
-              Encontre seu mentor
+              Pesquisar por nome ou especialidade
             </PlaceholderInput>
+            <PlaceholderInputMobile htmlFor="query-mentor">
+              Encontre seu mentor
+            </PlaceholderInputMobile>
 
             <MagnifyingGlass
               weight="bold"

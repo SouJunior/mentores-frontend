@@ -153,7 +153,7 @@ export const QueryInput = styled.input`
   }}
 `
 
-export const PlaceholderInput = styled.label`
+const PlaceholderInputBaseStyles = styled.label`
   position: absolute;
   left: 1rem;
   top: 50%;
@@ -167,6 +167,19 @@ export const PlaceholderInput = styled.label`
   background-color: ${(props) => props.theme.colors.white};
   transition: all 0.3s;
   pointer-events: none;
+`
+
+export const PlaceholderInput = styled(PlaceholderInputBaseStyles)`
+  @media (max-width: 615px) {
+    display: none;
+  }
+`
+export const PlaceholderInputMobile = styled(PlaceholderInputBaseStyles)`
+  display: none;
+
+  @media (max-width: 615px) {
+    display: inline;
+  }
 `
 
 export const BtnSearchForm = styled.button`
