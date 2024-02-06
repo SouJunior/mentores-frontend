@@ -1,5 +1,5 @@
 import { device } from '@/styles/theme'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ContainerHero = styled.div`
   display: flex;
@@ -118,26 +118,55 @@ export const ContainerInputForm = styled.form`
       pointer-events: none;
       align-self: center;
     }
-
-    input {
-      width: 100%;
-      border: 1px solid ${(props) => props.theme.colors.gray[600]};
-      border-radius: 0.5rem;
-
-      padding: 0.5rem 1rem;
-      padding-right: 3rem;
-
-      font-size: 1rem;
-      line-height: 1.4rem;
-      color: ${(props) => props.theme.colors.black[200]};
-      outline: 0;
-
-      &::placeholder {
-        font-size: 1rem;
-        color: ${(props) => props.theme.colors.black[200]};
-      }
-    }
   }
+`
+
+export const QueryInput = styled.input`
+  width: 100%;
+  border: 1px solid ${(props) => props.theme.colors.gray[600]};
+  border-radius: 0.5rem;
+
+  padding: 0.5rem 1rem;
+  padding-right: 3rem;
+
+  font-size: 1rem;
+  line-height: 1.4rem;
+  color: ${(props) => props.theme.colors.black[200]};
+  outline: 0;
+
+  &:focus ~ label {
+    transform: translateY(-2rem);
+    padding: 0 0.25rem;
+    font-size: ${(props) => props.theme.fontSizes.xs};
+  }
+
+  ${(props) => {
+    if (String(props.value).trim()) {
+      return css`
+        & ~ label {
+          transform: translateY(-2rem);
+          padding: 0 0.25rem;
+          font-size: ${(props) => props.theme.fontSizes.xs};
+        }
+      `
+    }
+  }}
+`
+
+export const PlaceholderInput = styled.label`
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: ${(props) => props.theme.colors.black[200]};
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4rem;
+
+  background-color: ${(props) => props.theme.colors.white};
+  transition: all 0.3s;
+  pointer-events: none;
 `
 
 export const BtnSearchForm = styled.button`

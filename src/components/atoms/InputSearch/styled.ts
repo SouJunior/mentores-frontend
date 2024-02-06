@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 export const ContainerInput = styled.div`
   border-radius: 0.5rem;
   position: relative;
-  border: 1px solid #acacac;
+  border: 1px solid ${(props) => props.theme.colors.gray[600]};
   max-width: 389px;
   width: 100%;
 
@@ -12,10 +12,10 @@ export const ContainerInput = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  color: #323232;
+  color: ${(props) => props.theme.colors.black[200]};
 
   &:focus-within {
-    border-color: #003986;
+    border-color: ${(props) => props.theme.colors.blue[800]};
   }
 `
 

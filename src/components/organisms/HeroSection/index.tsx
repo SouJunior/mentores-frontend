@@ -6,6 +6,8 @@ import {
   BtnSearchForm,
   ContainerHero,
   ContainerInputForm,
+  PlaceholderInput,
+  QueryInput,
   Title,
 } from './style'
 import { useRouter } from 'next/router'
@@ -68,13 +70,16 @@ export function HeroSection() {
 
         <ContainerInputForm onSubmit={handleSearchMentor}>
           <div>
-            <input
+            <QueryInput
               type="text"
-              placeholder="Encontre seu mentor"
-              aria-label="Encontre seu mentor"
               value={queryMentor}
               onChange={(e) => setQueryMentor(e.target.value)}
+              id="query-mentor"
             />
+            <PlaceholderInput htmlFor="query-mentor">
+              Encontre seu mentor
+            </PlaceholderInput>
+
             <MagnifyingGlass
               weight="bold"
               className="search-form-icon only-icon"

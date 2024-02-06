@@ -1,3 +1,4 @@
+import { Button } from '@/components/atoms/Button'
 import styled, { keyframes } from 'styled-components'
 
 export const ContainerForm = styled.div`
@@ -128,25 +129,14 @@ const animloader = keyframes`
   }
 `
 
-export const ButtonLoading = styled.button`
-  display: grid;
-  place-content: center;
-  font-size: ${(props) => props.theme.fontSizes.sm};
-  border-color: ${(props) => props.theme.colors.blue[400]};
-  color: ${(props) => props.theme.colors.white};
-  width: 100%;
-  height: 48px;
-
-  background: ${(props) => props.theme.colors.blue[400]};
-
-  &:not(:disabled):hover {
-    background-color: ${(props) => props.theme.colors.blue[700]};
-    color: ${(props) => props.theme.colors.white};
-    box-shadow: 0px 1px 15px rgba(17, 101, 186, 0.4);
-  }
+export const ButtonLoading = styled(Button)`
+  height: 43px;
+  padding: 0;
 
   &:disabled {
     cursor: wait;
+    background-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${(props) => props.theme.colors.blue[800]};
   }
 
   .loader {
@@ -155,6 +145,7 @@ export const ButtonLoading = styled.button`
     display: inline-block;
     position: relative;
   }
+
   .loader::after,
   .loader::before {
     content: '';
