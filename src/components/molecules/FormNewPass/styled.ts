@@ -67,13 +67,34 @@ export const WrapperInput = styled.div`
   position: relative;
 
   label {
+    span {
+      font-size: ${(props) => props.theme.fontSizes.xs};
+    }
+
     span:first-child {
       font-size: 1rem;
+      line-height: 1.5rem;
+      color: ${(props) => props.theme.colors.gray[750]};
+    }
+
+    input {
+      font-size: 1rem;
+      padding-right: 2rem;
+
+      &::placeholder {
+        color: ${(props) => props.theme.colors.gray[250]};
+      }
     }
   }
 
+  // Eye visibility
   button {
     right: 1rem;
     top: 1.25rem;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 `
