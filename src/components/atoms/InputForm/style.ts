@@ -55,6 +55,10 @@ export const ContainerInput = styled.div`
 
     border: 0;
     border-radius: 8px;
+
+    &::placeholder {
+      color: ${(props) => props.theme.colors.gray[250]};
+    }
   }
 
   textarea {

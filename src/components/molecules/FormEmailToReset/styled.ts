@@ -23,10 +23,6 @@ export const ContainerForm = styled.div`
 
       input {
         font-size: 1rem;
-
-        &::placeholder {
-          color: ${(props) => props.theme.colors.gray[250]};
-        }
       }
     }
 
@@ -37,7 +33,7 @@ export const ContainerForm = styled.div`
 `
 
 export const MessagesContainer = styled.div`
-  margin: 30px 0px;
+  margin: 1.5rem 0px;
 
   h2 {
     color: ${(props) => props.theme.colors.gray[750]};

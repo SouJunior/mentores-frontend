@@ -80,10 +80,6 @@ export const WrapperInput = styled.div`
     input {
       font-size: 1rem;
       padding-right: 2rem;
-
-      &::placeholder {
-        color: ${(props) => props.theme.colors.gray[250]};
-      }
     }
   }
 
