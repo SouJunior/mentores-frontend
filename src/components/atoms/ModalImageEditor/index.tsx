@@ -5,24 +5,35 @@ import {
   Container,
   CropContainer,
   Controls,
-  SaveButton,
   ControlButton,
   CropInfo,
   StyledHR,
-  CancelButtom,
-  ButtomsContainer,
+  ButtonsContainer,
+  CropControlsContainer,
+  CropTitle,
 } from './styled'
 import { Modal } from '../Modal'
+import { Button } from '../Button'
+import { useTheme } from 'styled-components'
+import { Minus, Plus } from 'phosphor-react'
 
-const ModalImageEditor: React.FC<{
+interface ModalImageEditorProps {
   src?: string
   onSave?: (croppedImage: string | null) => void
   isOpen: boolean
   onClose: () => void
-}> = ({ src, onSave, isOpen, onClose }) => {
+}
+
+const ModalImageEditor = ({
+  src,
+  onSave,
+  isOpen,
+  onClose,
+}: ModalImageEditorProps) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [croppedImage, setCroppedImage] = useState<string | null>(null)
+  const { colors } = useTheme()
 
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     const x = croppedAreaPixels.x
@@ -65,15 +76,9 @@ const ModalImageEditor: React.FC<{
   }
 
   return (
-    <Modal
-      bgColor="white"
-      height={528}
-      width={387}
-      open={isOpen}
-      onClose={onClose}
-    >
+    <Modal bgColor="white" width={387} open={isOpen} onClose={onClose}>
       <Container>
-        <CropInfo>Editar foto</CropInfo>
+        <CropTitle>Editar foto</CropTitle>
         <CropContainer>
           <Cropper
             image={src}
@@ -88,25 +93,36 @@ const ModalImageEditor: React.FC<{
             objectFit="horizontal-cover"
           />
         </CropContainer>
-        <CropInfo>Zoom</CropInfo>
-        <Controls>
-          <ControlButton onClick={handleMenusZoom}>-</ControlButton>
-          <Slider
-            style={{ color: '#003986', width: '200px' }}
-            value={zoom}
-            min={1}
-            max={3}
-            step={0.1}
-            aria-labelledby="Zoom"
-            onChange={(e, zoom) => setZoom(Number(zoom))}
-          />
-          <ControlButton onClick={handlePLusZoom}>+</ControlButton>
-        </Controls>
+
+        <CropControlsContainer>
+          <CropInfo>Zoom</CropInfo>
+          <Controls>
+            <ControlButton onClick={handleMenusZoom}>
+              <Minus />
+            </ControlButton>
+            <Slider
+              style={{ color: colors.blue[800] }}
+              value={zoom}
+              min={1}
+              max={3}
+              step={0.1}
+              aria-labelledby="Zoom"
+              onChange={(e, zoom) => setZoom(Number(zoom))}
+            />
+            <ControlButton onClick={handlePLusZoom}>
+              <Plus />
+            </ControlButton>
+          </Controls>
+        </CropControlsContainer>
+
         <StyledHR />
-        <ButtomsContainer>
-          <CancelButtom onClick={onClose}>Descartar</CancelButtom>
-          <SaveButton onClick={handleSaveClick}>Salvar</SaveButton>
-        </ButtomsContainer>
+
+        <ButtonsContainer>
+          <Button variant="tertiary" onClick={onClose}>
+            Descartar
+          </Button>
+          <Button onClick={handleSaveClick}>Salvar</Button>
+        </ButtonsContainer>
       </Container>
     </Modal>
   )

@@ -59,19 +59,12 @@ export default function FormNewPass() {
           <Form>
             <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
             <MessagesContainer>
-              <p>Nova Senha</p>
-              <span>
-                Preencha os campos abaixo com sua nova senha e confirme-a.
-              </span>
+              <h2>Nova Senha</h2>
+              <p>Preencha os campos abaixo com sua nova senha e confirme-a.</p>
             </MessagesContainer>
 
             <WrapperInput className="new-password-field">
               <InfoTooltip right={0} />
-              <Eye
-                aria-label="Mostrar senha"
-                pressed={isPasswordVisible}
-                onPressedChange={setIsPasswordVisible}
-              />
 
               <Field
                 as={InputForm}
@@ -81,15 +74,15 @@ export default function FormNewPass() {
                 isRequired={false}
                 label="Nova senha"
               />
+
+              <Eye
+                aria-label="Mostrar senha"
+                pressed={isPasswordVisible}
+                onPressedChange={setIsPasswordVisible}
+              />
             </WrapperInput>
 
             <WrapperInput>
-              <Eye
-                aria-label="Mostrar confirmação da senha"
-                pressed={isConfirmPasswordVisible}
-                onPressedChange={setIsConfirmPasswordVisible}
-              />
-
               <Field
                 as={InputForm}
                 inputType={isConfirmPasswordVisible ? 'text' : 'password'}
@@ -97,6 +90,12 @@ export default function FormNewPass() {
                 placeholder="*******"
                 isRequired={false}
                 label="Confirmar senha"
+              />
+
+              <Eye
+                aria-label="Mostrar confirmação da senha"
+                pressed={isConfirmPasswordVisible}
+                onPressedChange={setIsConfirmPasswordVisible}
               />
             </WrapperInput>
 

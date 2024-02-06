@@ -27,15 +27,25 @@ export const Tab = styled.div`
   width: 100px;
 `
 
-export const TabLabel = styled.div`
+export const TabLabel = styled.span`
   margin-bottom: 5px;
+  font-weight: 500;
+  line-height: 1.2rem;
+  color: ${(props) => props.theme.colors.gray[600]};
+
+  &[data-active='true'] {
+    color: ${(props) => props.theme.colors.blue[800]};
+  }
 `
 
 export const TabLine = styled.div`
   width: 258px;
   height: 2px;
-  background-color: ${(props) => props.theme.colors.blue[700]};
   transition: width 0.3s ease-in-out;
+
+  &[data-active='true'] {
+    background-color: ${(props) => props.theme.colors.blue[800]};
+  }
 `
 
 export const TabWrapper = styled.div`

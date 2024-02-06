@@ -6,6 +6,5 @@ export const SetPassContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  margin-top: -80px;
-  background: ${(props) => props.theme.colors.gradient};
+  background: ${(props) => props.theme.colors.blue[600]};
 `

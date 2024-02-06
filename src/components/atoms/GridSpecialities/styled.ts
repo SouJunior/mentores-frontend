@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Button } from '../Button'
+
 interface SpecialityItemProps {
   selected: boolean
 }
@@ -17,8 +19,9 @@ export const SpecialityItem = styled.div<SpecialityItemProps>`
   border-radius: 50px;
   padding: 8px 12px 8px 4px;
   background-color: ${(props) =>
-    props.selected ? props.theme.colors.blue[600] : 'gray'};
-  color: white;
+    props.selected ? props.theme.colors.blue[600] : '#CBCBCB'};
+  color: ${(props) =>
+    props.selected ? props.theme.colors.white : props.theme.colors.gray[700]};
   text-align: center;
   cursor: pointer;
   display: flex;
@@ -60,39 +63,27 @@ export const StyledTitle = styled.span`
 `
 
 export const StyledImportant = styled.span`
-  font-size: 14px;
+  font-size: ${(props) => props.theme.fontSizes.xs};
   font-weight: 400;
-  line-height: 17px;
-  letter-spacing: 0em;
+  line-height: 1rem;
   text-align: left;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 1rem;
+  color: ${(props) => props.theme.colors.black[200]};
 
-  &::first-letter {
+  span {
     color: ${(props) => props.theme.colors.blue[600]};
   }
 `
 
 export const StyledHR = styled.div`
   width: 100%;
-  height: 2px;
-  background-color: #6666;
-  margin-top: 30px;
+  height: 1px;
+  background-color: ${(props) => props.theme.colors.gray[700]};
+  margin-top: 2.25rem;
 `
 
-export const NextButton = styled.button`
-  width: 106px;
-  height: 48px;
-  padding: 12px, 16px, 12px, 16px;
-  border-radius: 8px;
-  background-color: ${(props) =>
-    props.disabled ? '#ACACAC' : props.theme.colors.blue[700]};
-  border: none;
-  color: white;
-  font-size: 16px;
+export const NextButton = styled(Button)`
   margin-top: 15px;
   align-self: flex-end;
-
-  && disable {
-  }
 `

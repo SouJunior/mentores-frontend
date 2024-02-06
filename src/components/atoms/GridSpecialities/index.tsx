@@ -100,7 +100,7 @@ export default function GridSpecialities({
         Em quais áreas você deseja mentorar?<span className="last">*</span>
       </StyledTitle>
       <StyledImportant>
-        <>*</> Indica um campo obrigatório
+        <span>*</span> Indica um campo obrigatório
       </StyledImportant>
       <GridContainer>
         {specialties.map((speciality, index) => (

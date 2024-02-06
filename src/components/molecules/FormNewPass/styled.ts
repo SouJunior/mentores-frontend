@@ -1,30 +1,15 @@
 import { styled } from 'styled-components'
 
 export const ContainerForm = styled.div`
-  width: 31.5rem;
+  max-width: 31.5rem;
+  width: 100%;
   height: 36.875rem;
   background: ${(props) => props.theme.colors.white};
   border-radius: 12px;
-  padding: 12px 0px;
 
   form {
-    p {
-      color: ${(props) => props.theme.colors.gray[700]};
-      font-size: 24px;
-      font-weight: 700;
-      line-height: 29px;
-      letter-spacing: 0em;
-      text-align: left;
-    }
-
-    span {
-      color: ${(props) => props.theme.colors.gray[700]};
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0em;
-      text-align: left;
-    }
+    display: flex;
+    flex-direction: column;
 
     button {
       margin-top: 10px;
@@ -37,14 +22,26 @@ export const ContainerForm = styled.div`
 `
 
 export const MessagesContainer = styled.div`
-  margin: 30px 0px;
+  margin: 1.5rem 0px;
+
+  h2 {
+    color: ${(props) => props.theme.colors.gray[750]};
+    font-size: ${(props) => props.theme.fontSizes.lg};
+    font-weight: 700;
+    line-height: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
   p {
-    margin-bottom: 20px;
+    color: ${(props) => props.theme.colors.gray[750]};
+    font-size: ${(props) => props.theme.fontSizes.sm};
+    font-weight: 400;
+    line-height: 1.5rem;
   }
 `
 
 export const FormWrapper = styled.div`
-  padding: 10px 30px;
+  padding: 2rem;
   height: 100%;
   width: 100%;
   display: flex;
@@ -69,8 +66,14 @@ export const FormWrapper = styled.div`
 export const WrapperInput = styled.div`
   position: relative;
 
+  label {
+    span:first-child {
+      font-size: 1rem;
+    }
+  }
+
   button {
     right: 1rem;
-    top: 1.4rem;
+    top: 1.25rem;
   }
 `

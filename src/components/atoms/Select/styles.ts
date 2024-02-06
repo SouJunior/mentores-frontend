@@ -20,7 +20,7 @@ export const SelectTrigger = styled(Select.Trigger)`
   }
 
   &[data-placeholder] {
-    color: ${(props) => props.theme.colors.gray[500]};
+    color: ${(props) => props.theme.colors.gray[600]};
   }
 
   svg {
@@ -29,7 +29,7 @@ export const SelectTrigger = styled(Select.Trigger)`
 
   &:focus-visible {
     border: 1px solid ${(props) => props.theme.colors.blue[400]};
-    box-shadow: 0 0 0 2px rgba(17, 101, 186, 0.6);
+    box-shadow: 0 0 0 1px ${(props) => props.theme.colors.blue[850]};
   }
 `
 
@@ -55,12 +55,9 @@ export const SelectItemContainer = styled(Select.Item)`
   border-radius: 0.25rem;
   outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: ${(props) => props.theme.colors.gray[250]};
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 2px rgba(17, 101, 186, 0.6);
   }
 `
 

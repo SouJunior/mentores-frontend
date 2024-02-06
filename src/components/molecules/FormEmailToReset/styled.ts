@@ -8,6 +8,9 @@ export const ContainerForm = styled.div`
   padding: 12px 0px;
 
   form {
+    display: flex;
+    flex-direction: column;
+
     p {
       color: ${(props) => props.theme.colors.gray[700]};
       font-size: 24px;
@@ -37,8 +40,6 @@ export const MessagesContainer = styled.div`
     margin-bottom: 20px;
   }
 `
-
-// ... seu código anterior ...
 
 export const FormWrapper = styled.div`
   padding: 10px 30px;

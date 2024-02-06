@@ -6,6 +6,5 @@ export const ResetPassContainer = styled.div`
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  margin-top: -80px;
-  background: ${(props) => props.theme.colors.gradient};
+  background: ${(props) => props.theme.colors.blue[600]};
 `

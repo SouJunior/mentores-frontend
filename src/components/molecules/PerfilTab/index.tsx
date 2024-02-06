@@ -10,7 +10,7 @@ export default function PerfilTab({ onStep }: PerfilTabProps) {
   return (
     <PerfilContainer>
       <StyledImportant>
-        <>*</> Indica um campo obrigatório
+        <span>*</span> Indica um campo obrigatório
       </StyledImportant>{' '}
       <FormOnboard2 onStep={onStep} />
     </PerfilContainer>
