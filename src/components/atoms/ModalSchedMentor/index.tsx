@@ -4,7 +4,6 @@ import {
   MentorName,
   ModalContainer,
   PhotoContainer,
-  SchedButton,
   SpecialityContainer,
   Specialitytitle,
   Stack,
@@ -15,8 +14,8 @@ import {
 } from './styled'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
 import UserDefault from '@/assets/userDefault.png'
-import Link from 'next/link'
 import Close from '@mui/icons-material/Close'
+import { Button } from '../Button'
 
 interface ModalSchedProps {
   open: boolean
@@ -33,6 +32,8 @@ export default function ModalSchedMentor({
     `${mentor.calendlyName}/${mentor.agendaName}`,
     'https://calendly.com',
   ).toString()
+
+  const hasValidCalendly = mentor.calendlyName && mentor.agendaName
 
   return (
     <ModalOverlay open={open}>
@@ -61,11 +62,14 @@ export default function ModalSchedMentor({
           </StacksContainer>
         </SpecialityContainer>
         <AboutContainer>{mentor.aboutMe}</AboutContainer>
-        <Link href={calendlyUrl}>
-          <SchedButton disabled={!mentor.calendlyName}>
-            Agendar mentoria
-          </SchedButton>
-        </Link>
+
+        {hasValidCalendly ? (
+          <Button as="a" target="_blank" href={calendlyUrl}>
+            Agendar Mentoria
+          </Button>
+        ) : (
+          <Button disabled>Agendar Mentoria</Button>
+        )}
       </ModalContainer>
     </ModalOverlay>
   )

@@ -1,47 +1,17 @@
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import { MouseEvent } from 'react'
 import { EyeContainer } from './style'
+import { ToggleProps } from '@radix-ui/react-toggle'
 
-interface EyeProps {
-  eye: boolean
-  size: number
-  onClick: (e: MouseEvent<HTMLElement>) => void
-  marginTop?: number
-  color?: string
-  left?: string
-  right?: string
-  top?: string
-  bottom?: string
-}
+type EyeProps = ToggleProps
 
-export function Eye({
-  eye,
-  onClick,
-  marginTop,
-  color,
-  right = '1rem',
-  top = 'auto',
-  left = 'auto',
-  bottom = 'auto',
-}: EyeProps) {
+export function Eye({ pressed, ...props }: EyeProps) {
   return (
-    <EyeContainer
-      type="button"
-      onClick={onClick}
-      marginTop={marginTop}
-      position={{
-        bottom,
-        right,
-        top,
-        left,
-      }}
-    >
-      {' '}
-      {eye === false ? (
-        <VisibilityOffIcon style={{ color }} fontSize={'small'} />
+    <EyeContainer {...props} pressed={pressed} type="button">
+      {pressed ? (
+        <VisibilityOffIcon fontSize={'small'} />
       ) : (
-        <VisibilityIcon style={{ color }} fontSize={'small'} />
+        <VisibilityIcon fontSize={'small'} />
       )}
     </EyeContainer>
   )

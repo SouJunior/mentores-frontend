@@ -1,10 +1,13 @@
-import PhotoButtom from '@/components/atoms/PhotoButtom'
+import PhotoButton from '@/components/atoms/PhotoButton'
 import {
   BackButton,
   ButtonContainer,
+  CharactersWarnInput,
   Dotted,
   FormContainer,
   NextButton,
+  SelectInputContainer,
+  SelectItemStyled,
   StyledHR,
   StyledImportant,
   StyledInfo,
@@ -12,7 +15,7 @@ import {
 } from './styled'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import EditPhotoModal from '@/components/atoms/EditPhotoModal'
-import { Field, Form, FormikProvider, useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { InputForm } from '@/components/atoms/InputForm'
 import UserUpdateService from '@/services/user/userUpdateService'
 import { useRouter } from 'next/router'
@@ -20,6 +23,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import useUser from '@/context/Auth/useUser'
 import { genders } from '@/data/static-info'
+import { Select } from '@/components/atoms/Select'
 
 interface FormOnBoardProps {
   onStep?: Dispatch<SetStateAction<1 | 2>>
@@ -119,7 +123,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
         }}
       />
       <Dotted>
-        <PhotoButtom
+        <PhotoButton
           size={80}
           selectedPhoto={selectedPhoto}
           onClick={handleOpenEditModal}
@@ -129,6 +133,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
         </StyledImportant>
         <StyledInfo>Formato aceito: jpg ou png. Tamanho máx.: 8 MB.</StyledInfo>
       </Dotted>
+
       <EditPhotoModal
         isOpen={isEditModalOpen}
         onAddPhoto={(photo) => setSelectedPhoto(photo)}
@@ -140,38 +145,38 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
       <FormContainer>
         <FormikProvider value={formik}>
           <Form>
-            <Field
-              as={InputForm}
-              label="Conte mais sobre você:"
-              type="textarea"
-              name="description"
-              placeholder="Fale sobre sua trajetória profissional para que possam lhe conhecer melhor;"
-              required
-            />
             <StyledInfoContainer>
-              <StyledInfo>Máximo 600 caracteres.</StyledInfo>
+              <InputForm
+                label="Conte mais sobre você:"
+                type="textarea"
+                name="description"
+                placeholder="Fale sobre sua trajetória profissional para que possam lhe conhecer melhor;"
+                required
+              />
+              <CharactersWarnInput>Máximo 600 caracteres.</CharactersWarnInput>
             </StyledInfoContainer>
-            <Field
-              as={InputForm}
-              label="Gênero:"
-              name="gender"
-              placeholder="Selecione um gênero"
-              type="select"
-              required
-            >
-              <option disabled value="">
+
+            <SelectInputContainer>
+              <span>
                 Gênero
-              </option>
-              {genders.map((gender) => (
-                <option key={gender} value={gender}>
-                  {gender}
-                </option>
-              ))}
-            </Field>
+                <span>*</span>
+              </span>
+              <Select placeholder="Gênero">
+                {genders.map((gender) => (
+                  <SelectItemStyled key={gender} value={gender}>
+                    {gender}
+                  </SelectItemStyled>
+                ))}
+              </Select>
+            </SelectInputContainer>
             <StyledHR />
 
             <ButtonContainer>
-              <BackButton onClick={handleBackToFirstStep} type="button">
+              <BackButton
+                onClick={handleBackToFirstStep}
+                variant="secondary"
+                type="button"
+              >
                 Voltar
               </BackButton>
               <NextButton type="submit" disabled={!isCompleted}>

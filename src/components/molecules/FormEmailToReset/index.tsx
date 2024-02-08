@@ -36,11 +36,11 @@ export default function FormEmailToReset() {
           <Form>
             <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
             <MessagesContainer>
-              <p>Esqueceu a senha?</p>
-              <span>
+              <h2>Esqueceu a senha?</h2>
+              <p>
                 Um e-mail será enviado para o endereço cadastrado com as
                 instruções para redefinir senha.
-              </span>
+              </p>
             </MessagesContainer>
             <Field
               as={InputForm}
@@ -48,10 +48,10 @@ export default function FormEmailToReset() {
               name="email"
               label="Email:"
               placeholder="Preencha com seu email"
-              showAsterisk={false}
+              isRequired={false}
             />
 
-            <Button btnRole={'form'} content={'Enviar'} />
+            <Button type="submit">Enviar</Button>
           </Form>
         </FormikProvider>
         <Link href="/login">Voltar ao login</Link>

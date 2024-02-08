@@ -1,5 +1,4 @@
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
-import { Checkbox } from '@/components/atoms/Checkbox'
 import { Eye } from '@/components/atoms/Eye'
 import { InfoTooltip } from '@/components/atoms/InfoTooltip'
 import ModalEmail from '@/components/molecules/ModalEmail'
@@ -10,7 +9,7 @@ import {
 } from '@/utils/registerSchema'
 import { Field, Form, FormikProvider, useFormik } from 'formik'
 import Image from 'next/image'
-import { MouseEvent, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../../atoms/Button'
 import { InputForm } from '../../atoms/InputForm'
 import { ModalCancel } from '../ModalCancel'
@@ -38,14 +37,11 @@ export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false)
   const [openPoliticas, setOpenPoliticas] = useState(false)
   const [openModalCancel, setOpenModalCancel] = useState(false)
-  const [agree, setIsAgree] = useState(false)
-  const [concluidoDesabilitado, setIsConcluidoDesabilitado] = useState(true)
   const [openEmail, setOpenEmail] = useState(false)
-  const [show, setShow] = useState(true)
-  const [eye, setEye] = useState(true)
-  const [showConfirm, setShowConfirm] = useState(true)
-  const [eyeConfirm, setEyeConfirm] = useState(true)
   const [showCalendar, setShowCalendar] = useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false)
 
   const router = useRouter()
 
@@ -56,22 +52,6 @@ export function FormRegister() {
   const handleModalEmail = () => setOpenEmail(true)
   const closeModalEmail = () => setOpenEmail(false)
   const closeModalCancel = () => setOpenModalCancel(false)
-
-  const handleShowPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
-  ) => {
-    e.preventDefault()
-    setEye(!eye)
-    setShow(!show)
-  }
-
-  const handleConfirmPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
-  ) => {
-    e.preventDefault()
-    setEyeConfirm(!eyeConfirm)
-    setShowConfirm(!showConfirm)
-  }
 
   const handleSubmit = async (
     values: ValuesFormType,
@@ -92,17 +72,15 @@ export function FormRegister() {
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error?.response?.status === 400) {
-          alert(`${error?.response.status} ${error?.response.data.message[0]}`)
+          alert(`${error?.response.status} ${error?.response.data.message}`)
+          console.error(error)
           return
         }
 
         alert(
           'Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.',
         )
-        return
       }
-
-      console.error(error)
     }
   }
 
@@ -113,22 +91,14 @@ export function FormRegister() {
     validateOnChange: true,
   })
 
+  const isButtonDisabled = Object.entries(formik.values).some(
+    ([key, value]) => !value || formik.errors[key as keyof ValuesFormType],
+  )
+
   const handleModalCancel = () => {
-    const {
-      name,
-      password,
-      confirmEmail,
-      confirmPassword,
-      dataBirthday,
-      email,
-    } = formik.values
-    const isSomeFieldFilled =
-      name ||
-      password ||
-      email ||
-      dataBirthday ||
-      confirmEmail ||
-      confirmPassword
+    const isSomeFieldFilled = Object.values(formik.values).some(
+      (field) => field,
+    )
 
     if (isSomeFieldFilled) {
       setOpenModalCancel(true)
@@ -138,27 +108,18 @@ export function FormRegister() {
     router.back()
   }
 
-  useEffect(() => {
-    setIsConcluidoDesabilitado(
-      agree && formik.isValid && Object.keys(formik.touched).length > 0,
-    )
-  }, [agree, formik.isValid, formik.touched])
-
-  const yesterday = new Date()
-  yesterday.setDate(yesterday.getDate() - 1)
-
-  const hundredYearsAgo = new Date()
-  hundredYearsAgo.setFullYear(hundredYearsAgo.getFullYear() - 100)
-
   return (
     <ContainerForm>
       <ContainerRegister>
+        <div className="container-logo-form">
+          <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
+          <p>
+            <span className="asterisk">*</span> Indica um campo obrigatório
+          </p>
+        </div>
+
         <FormikProvider value={formik}>
           <Form>
-            <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
-            <p>
-              <span className="asterisk">*</span> Indica um campo obrigatório
-            </p>
             <Field
               as={InputForm}
               type="input"
@@ -172,11 +133,15 @@ export function FormRegister() {
               open={showCalendar}
               onOpenChange={() => setShowCalendar(!showCalendar)}
             >
-              <DatePickerContainer>
+              <DatePickerContainer
+                className={formik.errors.dataBirthday && 'error'}
+              >
                 <span>
                   Data de nascimento <span>*</span>
                 </span>
-                <Calendar.Control>
+                <Calendar.Control
+                  className={formik.errors.dataBirthday && 'error'}
+                >
                   {formik.values.dataBirthday ? (
                     <span>
                       {dayjs(formik.values.dataBirthday).format('DD/MM/YYYY')}
@@ -186,6 +151,12 @@ export function FormRegister() {
                   )}
                   <EventRoundedIcon />
                 </Calendar.Control>
+
+                {formik.errors.dataBirthday && (
+                  <span className="error-message">
+                    {formik.errors.dataBirthday}
+                  </span>
+                )}
               </DatePickerContainer>
 
               <Calendar.Content
@@ -197,6 +168,8 @@ export function FormRegister() {
                   })
                   setShowCalendar(false)
                 }}
+                avoidCollisions={false}
+                sideOffset={10}
               />
             </Calendar.Root>
 
@@ -218,62 +191,56 @@ export function FormRegister() {
               inputType="email"
             />
 
-            <InfoTooltip right={-6} />
-
             <WrapperInput>
-              <Eye
-                onClick={(e) => handleShowPassword(e)}
-                eye={eye}
-                size={20}
-                right="1rem"
-                top="2.1rem"
-                color={'#5D5F5D'}
-              />
-
+              <InfoTooltip right={0} />
               <Field
                 as={InputForm}
                 type="input"
                 label="Senha"
                 name="password"
                 placeholder="********"
-                inputType={show ? 'password' : 'text'}
+                inputType={isPasswordVisible ? 'text' : 'password'}
+              />
+
+              <Eye
+                aria-label="Mostrar senha"
+                pressed={isPasswordVisible}
+                onPressedChange={setIsPasswordVisible}
               />
             </WrapperInput>
 
             <WrapperInput>
-              <Eye
-                onClick={(e) => handleConfirmPassword(e)}
-                eye={eyeConfirm}
-                size={20}
-                right="1rem"
-                top="2.1rem"
-                color={'#5D5F5D'}
-              />
-
               <Field
                 as={InputForm}
                 type="input"
                 label="Confirmar senha"
                 name="confirmPassword"
                 placeholder="********"
-                inputType={showConfirm ? 'password' : 'text'}
+                inputType={isConfirmPasswordVisible ? 'text' : 'password'}
+              />
+
+              <Eye
+                aria-label="Mostrar confirmação da senha"
+                pressed={isConfirmPasswordVisible}
+                onPressedChange={setIsConfirmPasswordVisible}
               />
             </WrapperInput>
+
             <ContainerTerms>
-              <Checkbox setValue={setIsAgree} isChecked={agree} />
-              <TxtTerms>
+              <Field
+                id="checkbox-terms-and-policies"
+                type="checkbox"
+                name="agreeWithTermsAndPolicies"
+              />
+              <TxtTerms htmlFor="checkbox-terms-and-policies">
                 Concordo com os{' '}
-                <Button
-                  content={'Termos de uso'}
-                  btnRole={'unstyled'}
-                  onClick={handleOpenTermos}
-                />{' '}
+                <Button variant="tertiary" onClick={handleOpenTermos}>
+                  Termos de uso
+                </Button>{' '}
                 e{' '}
-                <Button
-                  btnRole={'unstyled'}
-                  content={'	Políticas de privacidade'}
-                  onClick={handleOpenPoliticas}
-                />{' '}
+                <Button variant="tertiary" onClick={handleOpenPoliticas}>
+                  Políticas de privacidade
+                </Button>{' '}
                 do SouJunior.
               </TxtTerms>
             </ContainerTerms>
@@ -303,18 +270,16 @@ export function FormRegister() {
                   <span className="loader" />
                 </ButtonLoading>
               ) : (
-                <Button
-                  btnRole={'form'}
-                  content={'Concluir'}
-                  disabled={concluidoDesabilitado}
-                />
+                <Button disabled={isButtonDisabled}>Concluir</Button>
               )}
 
               <Button
-                btnRole={'form-secondary'}
-                content={'Cancelar'}
+                type="button"
+                variant="secondary"
                 onClick={handleModalCancel}
-              />
+              >
+                Cancelar
+              </Button>
             </ContainerBtn>
 
             <ModalCancel

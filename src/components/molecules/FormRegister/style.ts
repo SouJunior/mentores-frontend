@@ -1,3 +1,4 @@
+import { Button } from '@/components/atoms/Button'
 import styled, { keyframes } from 'styled-components'
 
 export const ContainerForm = styled.div`
@@ -5,30 +6,35 @@ export const ContainerForm = styled.div`
   max-width: 500px;
   height: fit-content;
   position: absolute;
-  right: 70px;
-  top: 30px;
+  right: 2.7rem;
+  top: 2rem;
   background: ${(props) => props.theme.colors.white};
   border-radius: 12px;
-  padding: 12px 0px;
+  padding: 2rem;
 `
 
 export const ContainerRegister = styled.div`
-  form {
-    margin: 8px 20px;
-    height: 100%;
+  .container-logo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
 
     img {
-      width: 240px;
-      height: 36px;
+      width: 15rem;
+      height: 2.25rem;
+    }
+
+    p {
+      font-size: 0.75rem;
+      color: ${(props) => props.theme.colors.gray[700]};
     }
   }
 
-  p {
-    font-family: 'Radio Canada';
-    font-style: normal;
-    font-size: ${(props) => props.theme.fontSizes.xs};
-    color: ${(props) => props.theme.colors.gray[700]};
-    margin: 8px 0px;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   input[type='radio'] {
@@ -47,13 +53,30 @@ export const ContainerTerms = styled.div`
   text-align: justify;
   align-items: flex-start;
   justify-content: center;
+  margin-top: 0.5rem;
 `
 
-export const TxtTerms = styled.div`
-  font-size: 14px;
+export const TxtTerms = styled.label`
+  font-size: 0.875rem;
   width: 100%;
-  margin-left: 8px;
   color: ${(props) => props.theme.colors.blue[500]};
+  line-height: 150%;
+
+  margin-left: 0.5rem;
+  margin-top: -5px; // Align text with checkbox input
+
+  button {
+    display: inline;
+    padding: 0;
+    color: ${(props) => props.theme.colors.blue[500]};
+
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 150%;
+
+    border-bottom: 1px solid ${(props) => props.theme.colors.blue[500]};
+    border-radius: 0;
+  }
 `
 
 export const ContainerBtn = styled.div`
@@ -72,7 +95,11 @@ export const DatePickerContainer = styled.label`
   font-size: 0.875rem;
   color: ${(props) => props.theme.colors.gray[700]};
 
-  margin-bottom: 1rem;
+  &.error {
+    svg {
+      color: ${(props) => props.theme.colors.red[500]};
+    }
+  }
 
   span {
     span {
@@ -80,8 +107,14 @@ export const DatePickerContainer = styled.label`
     }
   }
 
+  .error-message {
+    color: ${(props) => props.theme.colors.red[500]};
+    font-weight: bold;
+    font-size: 0.75rem;
+  }
+
   [data-placeholder] {
-    color: ${(props) => props.theme.colors.gray[300]};
+    color: ${(props) => props.theme.colors.gray[250]};
   }
 `
 
@@ -96,25 +129,14 @@ const animloader = keyframes`
   }
 `
 
-export const ButtonLoading = styled.button`
-  display: grid;
-  place-content: center;
-  font-size: ${(props) => props.theme.fontSizes.sm};
-  border-color: ${(props) => props.theme.colors.blue[400]};
-  color: ${(props) => props.theme.colors.white};
-  width: 100%;
-  height: 48px;
-
-  background: ${(props) => props.theme.colors.blue[400]};
-
-  &:not(:disabled):hover {
-    background-color: ${(props) => props.theme.colors.blue[700]};
-    color: ${(props) => props.theme.colors.white};
-    box-shadow: 0px 1px 15px rgba(17, 101, 186, 0.4);
-  }
+export const ButtonLoading = styled(Button)`
+  height: 43px;
+  padding: 0;
 
   &:disabled {
     cursor: wait;
+    background-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${(props) => props.theme.colors.blue[800]};
   }
 
   .loader {
@@ -123,6 +145,7 @@ export const ButtonLoading = styled.button`
     display: inline-block;
     position: relative;
   }
+
   .loader::after,
   .loader::before {
     content: '';
@@ -143,4 +166,18 @@ export const ButtonLoading = styled.button`
 
 export const WrapperInput = styled.label`
   position: relative;
+
+  input {
+    padding-right: 2.8rem; // Giving space to Eye icon
+  }
+
+  button {
+    right: 1rem;
+    top: 2.5rem;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
 `

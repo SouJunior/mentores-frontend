@@ -1,16 +1,19 @@
-import { PersonTitle } from '@/components/atoms/PersonTitle'
 import { ListItemsHero } from '@/components/molecules/ListItemsHero'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FormEvent, useEffect, useState } from 'react'
 import { AnimationTextHero } from '../../../styles/animations'
 import {
-  ButtonMentor,
+  BtnSearchForm,
   ContainerHero,
   ContainerInputForm,
-  TextAnimated,
+  PlaceholderInput,
+  PlaceholderInputMobile,
+  QueryInput,
+  Title,
 } from './style'
-import Search from '@mui/icons-material/Search'
 import { useRouter } from 'next/router'
+import { Button } from '@/components/atoms/Button'
+import { MagnifyingGlass } from 'phosphor-react'
 
 const text = ['mentorias personalizadas', 'profissionais experientes']
 
@@ -45,12 +48,11 @@ export function HeroSection() {
 
   return (
     <ContainerHero>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>
-          <AnimatePresence>
-            <PersonTitle text={'Decole sua carreira mais rápido com'} />
-            <TextAnimated
-              as={motion.h3}
+      <section className="hero-texts">
+        <AnimatePresence>
+          <Title>
+            Decole sua carreira mais rápido com
+            <motion.span
               key={textHero}
               variants={AnimationTextHero}
               initial={'initial'}
@@ -58,30 +60,43 @@ export function HeroSection() {
               exit={'exit'}
             >
               {textHero}
-            </TextAnimated>
-          </AnimatePresence>
-          <p>
-            Tenha acesso a mentorias individuais e <br /> gratuitas com
-            profissionais renomados.
-          </p>
-          <ContainerInputForm onSubmit={handleSearchMentor}>
-            <div>
-              <Search />
-              <input
-                type="text"
-                placeholder="Pesquisar por nome ou especialidade"
-                aria-label="Pesquisar por nome ou especialidade"
-                value={queryMentor}
-                onChange={(e) => setQueryMentor(e.target.value)}
-              />
-            </div>
-            <ButtonMentor disabled={!queryMentor}>
+            </motion.span>
+          </Title>
+        </AnimatePresence>
+
+        <p>
+          Tenha acesso a mentorias individuais e gratuitas com profissionais
+          renomados.
+        </p>
+
+        <ContainerInputForm onSubmit={handleSearchMentor}>
+          <div>
+            <QueryInput
+              type="text"
+              value={queryMentor}
+              onChange={(e) => setQueryMentor(e.target.value)}
+              id="query-mentor"
+            />
+            <PlaceholderInput htmlFor="query-mentor">
+              Pesquisar por nome ou especialidade
+            </PlaceholderInput>
+            <PlaceholderInputMobile htmlFor="query-mentor">
               Encontre seu mentor
-            </ButtonMentor>
-          </ContainerInputForm>
-        </div>
-        <ListItemsHero />
-      </div>
+            </PlaceholderInputMobile>
+
+            <MagnifyingGlass
+              weight="bold"
+              className="search-form-icon only-icon"
+            />
+            <BtnSearchForm title="Buscar mentor" aria-label="Buscar mentor">
+              <MagnifyingGlass weight="bold" className="search-form-icon" />
+            </BtnSearchForm>
+          </div>
+          <Button className="button-find-mentor">Encontre seu mentor</Button>
+        </ContainerInputForm>
+      </section>
+
+      <ListItemsHero className="list-items-hero" />
     </ContainerHero>
   )
 }

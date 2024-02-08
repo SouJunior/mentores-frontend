@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 
 export const registerSchema = yup.object({
+  name: yup.string().required(''),
   email: yup
     .string()
     .email('E-mail inválido')
@@ -27,6 +28,11 @@ export const registerSchema = yup.object({
     .required(''),
 
   dataBirthday: yup.date().required(''),
+  agreeWithTermsAndPolicies: yup
+    .boolean()
+    .required(
+      'Você precisa concordar com os Termos de Uso e Políticas de privacidade da SouJunior',
+    ),
 })
 
 export type ValuesFormType = {
@@ -36,6 +42,7 @@ export type ValuesFormType = {
   confirmEmail: string
   password: string
   confirmPassword: string
+  agreeWithTermsAndPolicies: boolean
 }
 
 export const initialValues: ValuesFormType = {
@@ -45,4 +52,5 @@ export const initialValues: ValuesFormType = {
   confirmEmail: '',
   password: '',
   confirmPassword: '',
+  agreeWithTermsAndPolicies: false,
 }

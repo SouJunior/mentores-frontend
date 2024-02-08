@@ -1,26 +1,49 @@
+import { device } from '@/styles/theme'
 import styled from 'styled-components'
 
 export const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: center;
-  justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+
   background-color: ${(props) => props.theme.colors.white};
   border-radius: 8px;
-  gap: 16px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 24px 16px;
-  width: 292px;
-  height: 360px;
+  padding: 1.5rem 1rem;
+  text-align: center;
 
-  h3 {
-    color: ${(props) => props.theme.colors.blue[500]};
-    font-size: ${(props) => props.theme.fontSizes.md};
+  img {
+    width: 10rem;
+    height: 10rem;
+
+    @media ${device.mobileL} {
+      width: 7.875rem;
+      height: 7.875rem;
+    }
   }
 
-  p {
-    color: ${(props) => props.theme.colors.gray[700]} !important;
-    font-size: ${(props) => props.theme.fontSizes.sm} !important;
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    .title {
+      color: ${(props) => props.theme.colors.blue[850]};
+      font-size: 1.25rem;
+      line-height: 1.5rem;
+      font-weight: 500;
+    }
+
+    p {
+      color: ${(props) => props.theme.colors.black[200]};
+      font-size: ${(props) => props.theme.fontSizes.sm};
+      font-weight: 400;
+      line-height: 1.4rem;
+      max-width: 15.75rem;
+
+      @media ${device.mobileL} {
+        max-width: 13.875rem;
+      }
+    }
   }
 `

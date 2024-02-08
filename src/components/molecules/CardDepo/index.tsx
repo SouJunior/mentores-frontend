@@ -1,6 +1,11 @@
-import { Card } from '@/components/atoms/Card'
 import Image from 'next/image'
-import { GreatContainer, HeaderCardDepo } from './style'
+import {
+  Card,
+  HeaderCardDepo,
+  TestimonyDescription,
+  TestimonyImageContainer,
+  TestimonyInfo,
+} from './style'
 import { ITestimony } from '@/services/interfaces/IUseTestimonyService'
 
 interface CardDepoProps {
@@ -9,31 +14,31 @@ interface CardDepoProps {
 
 export function CardDepo({ testimony }: CardDepoProps) {
   return (
-    <div style={{ marginLeft: '20px', paddingBottom: '5px' }}>
-      <Card
-        bgcolor={'#fdfdfd'}
-        height={310}
-        width={330}
-        justifyContent={'flex-start'}
-      >
-        <GreatContainer>
-          <HeaderCardDepo>
-            {testimony.imageUrl && (
-              <Image
-                src={testimony.imageUrl}
-                alt={testimony.userName}
-                width={56}
-                height={56}
-              />
-            )}
-            <div>
-              <h4>{testimony.userName}</h4>
-              <h5>{testimony.role}</h5>
-            </div>
-          </HeaderCardDepo>
-          <p>{testimony.description}</p>
-        </GreatContainer>
-      </Card>
-    </div>
+    <Card>
+      <HeaderCardDepo>
+        <TestimonyImageContainer>
+          {testimony.imageUrl && (
+            <Image
+              src={testimony.imageUrl}
+              alt={testimony.userName}
+              width={64}
+              height={64}
+              quality={100}
+            />
+          )}
+        </TestimonyImageContainer>
+
+        <TestimonyInfo>
+          <span className="testimony-name">{testimony.userName}</span>
+          <span className="testimony-role" title={testimony.role}>
+            {testimony.role}
+          </span>
+        </TestimonyInfo>
+      </HeaderCardDepo>
+
+      <TestimonyDescription title={testimony.description}>
+        {testimony.description}
+      </TestimonyDescription>
+    </Card>
   )
 }

@@ -1,61 +1,49 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: 'Radio Canada', sans-serif;
+  }
 
-.swiper-slide {
-  margin-right: -25px;
-} 
+  :root {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;  
-  font-family: 'Radio Canada',sans-serif;
-  scroll-behavior: smooth;
-}
+  body {
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
 
-body{
+  li { 
+    list-style:none;
+  }
+
+  button,
+  input,
+  textarea,
+  a {
+    color: inherit;
+    font-size: inherit;
+  }
+
+  a {
+    text-decoration:none;
+  }
+
+  a,
+  button {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Global classes */
+  .container {
+    max-width: 1280px;
     width: 100%;
-    max-width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-    background-color: ${(props) => props.theme.colors.white};
-    font-size: ${(props) => props.theme.fontSizes.sm};
-    color: ${(props) => props.theme.colors.black};
-    font: 400 16px Radio Canada, sans-serif;
-     scroll-behavior: smooth;
-
-    button{
-      padding: 12px 16px;
-      text-align: center;
-      border-radius: 8px;
-      border: 2px solid;
-      cursor: pointer;
-      line-height: 150%;
-      scroll-behavior: smooth;
-    }
-  
-    p{
-      font-size: ${(props) => props.theme.fontSizes.sm};
-      color: ${(props) => props.theme.colors.gray};
-    }
-
-    li{
-      list-style:none;
-    }
-
-    a{
-      text-decoration:none;
-      color: ${(props) => props.theme.colors.blue[400]};
-      font-size: ${(props) => props.theme.fontSizes.sm};
-      line-height: 150%;
-      
-
-      &:hover{
-        text-decoration:none;
-         color: ${(props) => props.theme.colors.blue[300]};
-      }
-    }
-}
+    margin: 0 auto;
+  }
 `

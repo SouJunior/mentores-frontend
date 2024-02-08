@@ -1,10 +1,14 @@
 import { Button } from '@/components/atoms/Button'
-import { MarqueeRolagem } from '@/components/atoms/MarqueeRolagem'
 import { CardDepo } from '@/components/molecules/CardDepo'
 import Link from 'next/link'
-import { ContainerBtn, ContainerDepo } from './style'
+import { ContainerDepo, ContainerSlider } from './style'
 import { useTestimonyService } from '../../../services/user/useTestimonyService'
 import { AxiosError } from 'axios'
+
+import { A11y } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+import 'swiper/css'
 
 export function DepoSection() {
   const { data: testimonies, error } = useTestimonyService()
@@ -13,20 +17,24 @@ export function DepoSection() {
     <ContainerDepo>
       <h2>Seja um mentor</h2>
 
-      <MarqueeRolagem pauseOnHover={true} speed={30}>
-        {testimonies?.length &&
-          testimonies?.map((testimony) => {
-            return <CardDepo key={testimony.id} testimony={testimony} />
-          })}
+      <ContainerSlider>
+        <Swiper modules={[A11y]} slidesPerView="auto">
+          {testimonies?.length &&
+            testimonies?.map((testimony) => {
+              return (
+                <SwiperSlide key={testimony.id}>
+                  <CardDepo testimony={testimony} />
+                </SwiperSlide>
+              )
+            })}
+        </Swiper>
+      </ContainerSlider>
 
-        {error instanceof AxiosError && <b>{error?.response?.data.message}</b>}
-      </MarqueeRolagem>
+      {error instanceof AxiosError && <b>{error?.response?.data.message}</b>}
 
-      <ContainerBtn>
-        <Link href={'/cadastro'}>
-          <Button content={'Quero mentorar'} btnRole={'primary'} />
-        </Link>
-      </ContainerBtn>
+      <Button as={Link} href="/cadastro">
+        Quero mentorar
+      </Button>
     </ContainerDepo>
   )
 }

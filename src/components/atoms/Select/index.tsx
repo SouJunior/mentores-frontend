@@ -18,7 +18,7 @@ interface SelectProps extends SelectPrimitive.SelectProps {
 export function Select({ children, placeholder, ...props }: SelectProps) {
   return (
     <SelectPrimitive.Root {...props}>
-      <SelectTrigger>
+      <SelectTrigger className="select-trigger">
         <SelectPrimitive.Value placeholder={placeholder} />
         <SelectPrimitive.Icon asChild>
           <KeyboardArrowDownIcon />
@@ -26,7 +26,11 @@ export function Select({ children, placeholder, ...props }: SelectProps) {
       </SelectTrigger>
 
       <SelectPrimitive.Portal>
-        <SelectContent side="bottom" position="popper">
+        <SelectContent
+          className="select-content"
+          side="bottom"
+          position="popper"
+        >
           <ScrollArea.Root>
             <SelectPrimitive.Viewport>
               <ScrollAreaViewport>

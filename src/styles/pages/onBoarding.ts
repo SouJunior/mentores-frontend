@@ -4,8 +4,7 @@ import styled from 'styled-components'
 export const ContainerOnBoarding = styled.main`
   width: 100%;
   height: 100vh;
-  margin-top: -100px;
-  background: ${(props) => props.theme.colors.gradient};
+  background: ${(props) => props.theme.colors.blue[600]};
   position: relative;
 `
 

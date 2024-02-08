@@ -1,52 +1,66 @@
 import { Card } from '@/components/atoms/Card'
-import {
-  CardButton,
-  CardImage,
-  CardStack,
-  CardStacks,
-  CardSubtitle,
-  CardTitle,
-} from './style'
+import { CardImage, CardStacks, CardTitle } from './style'
 import { IMentors } from '@/services/interfaces/IUseMentorsService'
-import userWithoutImage from '@/assets/userDefault.png'
+import { Tag } from '@/components/atoms/Tag'
+import { useTheme } from 'styled-components'
+import { Button } from '@/components/atoms/Button'
+import Image from 'next/image'
 
 interface CardMentorProps {
   mentor: IMentors
 }
 
-const MAX_SPECIALTIES_NUMBER = 3
-
 export function CardMentor({ mentor }: CardMentorProps) {
-  const specialties = mentor.specialties.slice(0, MAX_SPECIALTIES_NUMBER)
-  const allSpecialtiesString = mentor.specialties.join(', ')
+  const { colors } = useTheme()
+
+  const splitMentorName = mentor.fullName.split(' ')
+  const hasValidCalendly = mentor.calendlyName || mentor.agendaName
 
   return (
-    <Card gap={'1rem'} alignItems={'flex-start'} padding={'1rem'}>
-      <CardImage
-        src={mentor.profile ?? userWithoutImage}
-        width={150}
-        height={150}
-        alt={mentor.fullName}
-        quality={100}
-      />
-      <section>
-        <CardTitle>{mentor.fullName}</CardTitle>
-        <CardSubtitle>{mentor.aboutMe}</CardSubtitle>
-      </section>
-      <CardStacks title={allSpecialtiesString}>
-        {specialties.map((specialty: string) => (
-          <CardStack key={specialty}>{specialty}</CardStack>
+    <Card
+      gap={'1rem'}
+      alignItems={'stretch'}
+      padding={'1.5rem 1rem'}
+      bgcolor={colors.white}
+      border={0}
+      margin={0}
+      boxShadow={'none'}
+      minHeight={'23.5rem'}
+    >
+      <CardImage>
+        {mentor.profile && (
+          <Image
+            src={mentor.profile}
+            width={150}
+            height={150}
+            alt={mentor.fullName}
+            quality={100}
+          />
+        )}
+      </CardImage>
+
+      <CardTitle>
+        <span>{splitMentorName[0]}</span>
+        <span>{splitMentorName[splitMentorName.length - 1]}</span>
+      </CardTitle>
+
+      <CardStacks>
+        {mentor.specialties.map((specialty: string) => (
+          <Tag key={specialty}>{specialty}</Tag>
         ))}
       </CardStacks>
-      <CardButton
-        target="_blank"
-        href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}`}
-      >
-        <button disabled={!mentor.calendlyName || !mentor.agendaName}>
-          {' '}
-          Agendar um horário{' '}
-        </button>
-      </CardButton>
+
+      {hasValidCalendly ? (
+        <Button
+          as="a"
+          target="_blank"
+          href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}`}
+        >
+          Agendar um horário
+        </Button>
+      ) : (
+        <Button disabled={!hasValidCalendly}>Agendar um horário</Button>
+      )}
     </Card>
   )
 }

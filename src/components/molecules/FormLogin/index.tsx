@@ -1,34 +1,44 @@
 import CardLoading from '@/assets/loading.gif'
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
 import { Button } from '@/components/atoms/Button'
-import { InputLogin } from '@/components/atoms/InputLogin'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FormEvent, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Checkbox } from '../../atoms/Checkbox'
-import { ContainerForm } from './style'
+import {
+  BlockedAccountError,
+  CallToRegisterText,
+  ContainerCheckbox,
+  ContainerForm,
+  ContainerInput,
+} from './style'
 import UserLoginService from '@/services/user/userLoginService'
+import { Form, Formik } from 'formik'
+import * as yup from 'yup'
+import { InputForm } from '@/components/atoms/InputForm'
+import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material'
+import { Eye } from '@/components/atoms/Eye'
+
+const loginSchema = yup.object({
+  email: yup.string().email('E-mail inválido').required('Obrigatório'),
+  password: yup
+    .string()
+    .required('A senha é obrigatória')
+    .min(8, 'Senha inválida'),
+})
+
+type LoginDataType = yup.InferType<typeof loginSchema>
 
 export function FormLogin() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [isKeepConnected, setIsKeepConnected] = useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const type = 'mentor'
 
-  const {
-    sendLogin,
-    formState,
-    checkFields,
-    disable,
-    setSubmitButton,
-    submitButton,
-    loading,
-  } = UserLoginService()
+  const { sendLogin, disable, submitButton, loading } = UserLoginService()
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const handleSubmit = async ({ email, password }: LoginDataType) => {
     const user = await sendLogin({ email, password, type })
 
     const userStringify = JSON.stringify(user)
@@ -39,12 +49,6 @@ export function FormLogin() {
       sessionStorage.setItem('user', userStringify)
     }
   }
-
-  useEffect(() => {
-    const data = { email, password, type, isKeepConnected }
-    setSubmitButton(!checkFields(data))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [email, password, type])
 
   return (
     <>
@@ -60,85 +64,100 @@ export function FormLogin() {
           lineHeight: '32px',
         }}
       />
+
       <ContainerForm>
-        <form onSubmit={handleSubmit}>
-          <Image
-            src={souJuniorLogoImg}
-            alt="Logo SouJunior"
-            width={264}
-            height={40}
-          />
+        <Image
+          src={souJuniorLogoImg}
+          alt="Logo SouJunior"
+          width={264}
+          height={40}
+        />
 
-          <h2>Bem-vindo de volta</h2>
+        <h2>Bem-vindo de volta</h2>
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          validationSchema={loginSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched }) => {
+            return (
+              <Form>
+                <div className="group-fields">
+                  <ContainerInput
+                    className={errors.email && touched.email ? 'error' : ''}
+                  >
+                    <InputForm
+                      isRequired={false}
+                      type="input"
+                      name="email"
+                      label="E-mail"
+                    >
+                      <PersonOutlineRounded />
+                    </InputForm>
+                  </ContainerInput>
 
-          <InputLogin
-            error={formState.errors}
-            key={'email'}
-            type="email"
-            value={email}
-            setValue={setEmail}
-            placeholder=""
-            label="E-mail"
-            id="emailID"
-          />
-          <div style={{ position: 'relative' }}>
-            <InputLogin
-              error={formState.errors}
-              key={'pass'}
-              type="password"
-              value={password}
-              setValue={setPassword}
-              placeholder=""
-              label="Senha"
-              id="passID"
-            />
-            {!disable && <span>{formState.errors}</span>}
-          </div>
-          {disable && (
-            <span>
-              Seu acesso a conta continua bloqueado, pois você não redefiniu sua
-              senha após as cinco tentativas de acesso incorretas. Por favor,
-              clique em &lsquo;Esqueci minha senha&rsquo; para realizar a
-              recuperação
-            </span>
-          )}
+                  <ContainerInput
+                    className={
+                      errors.password && touched.password ? 'error' : ''
+                    }
+                  >
+                    <InputForm
+                      isRequired={false}
+                      type="input"
+                      name="password"
+                      label="Senha"
+                      inputType={isPasswordVisible ? 'text' : 'password'}
+                    >
+                      <LockOutlined />
+                    </InputForm>
+                    <Eye
+                      aria-label="Mostrar senha"
+                      pressed={isPasswordVisible}
+                      onPressedChange={setIsPasswordVisible}
+                      className="eye-visibility"
+                    />
+                    {disable && (
+                      <BlockedAccountError>
+                        Seu acesso a conta continua bloqueado, pois você não
+                        redefiniu sua senha após as cinco tentativas de acesso
+                        incorretas. Por favor, clique em &lsquo;Esqueci minha
+                        senha&rsquo; para realizar a recuperação
+                      </BlockedAccountError>
+                    )}
+                  </ContainerInput>
+                </div>
 
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: '16px',
-            }}
-          >
-            <Checkbox
-              isChecked={isKeepConnected}
-              setValue={setIsKeepConnected}
-              id="connected"
-              text="Me manter conectado"
-            />
-            <Link href="/resetPassword" style={{ textDecoration: 'underline' }}>
-              Esqueci a senha
-            </Link>
-          </div>
+                <ContainerCheckbox>
+                  <Checkbox
+                    isChecked={isKeepConnected}
+                    setValue={setIsKeepConnected}
+                    id="connected"
+                    text="Me manter conectado"
+                  />
+                  <Link href="/resetPassword">Esqueci minha senha</Link>
+                </ContainerCheckbox>
 
-          <Button
-            disabled={submitButton}
-            btnRole={'form'}
-            content={
-              loading ? (
-                <Image alt="loading" src={CardLoading} width={24} height={24} />
-              ) : (
-                'Entrar'
-              )
-            }
-          />
+                <Button disabled={submitButton}>
+                  {loading ? (
+                    <Image
+                      alt="loading"
+                      src={CardLoading}
+                      width={24}
+                      height={24}
+                    />
+                  ) : (
+                    'Entrar'
+                  )}
+                </Button>
 
-          <p>
-            Ainda não possui cadastro?{' '}
-            <Link href="/cadastro">Clique aqui e cadastre-se</Link>
-          </p>
-        </form>
+                <CallToRegisterText>
+                  Ainda não possui cadastro?{' '}
+                  <Link href="/cadastro">Clique aqui e cadastre-se</Link>
+                </CallToRegisterText>
+              </Form>
+            )
+          }}
+        </Formik>
       </ContainerForm>
     </>
   )

@@ -1,97 +1,88 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const ButtonDefault = styled.button`
-  font-size: ${(props) => props.theme.fontSizes.sm};
-  border-color: ${(props) => props.theme.colors.blue[400]};
-  color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.blue[400]};
-
-  &:hover {
-    background-color: transparent;
-    color: ${(props) => props.theme.colors.blue[400]};
-  }
-`
-
-export const ButtonVariant = styled(ButtonDefault)`
-  border-color: ${(props) => props.theme.colors.blue[400]};
-  color: ${(props) => props.theme.colors.blue[400]};
-  background-color: transparent;
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.blue[400]};
-    color: ${(props) => props.theme.colors.white};
-  }
-`
-
-export const ButtonForm = styled(ButtonDefault)`
-  width: 100%;
-  height: 48px;
-
-  background: ${(props) => props.theme.colors.blue[400]};
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.blue[700]};
-    color: ${(props) => props.theme.colors.white};
-    box-shadow: 0px 1px 15px rgba(17, 101, 186, 0.4);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    filter: grayscale(100%);
-  }
-`
-
-export const ButtonFormVariant = styled(ButtonForm)`
-  width: 100%;
-  border-color: ${(props) => props.theme.colors.blue[400]};
-  color: ${(props) => props.theme.colors.blue[400]};
-  background-color: ${(props) => props.theme.colors.white};
-`
-
-export const ButtonUnstyled = styled.button`
+const BaseStylesButton = styled.button`
   all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
   cursor: pointer;
-  margin: 0px;
-  text-decoration: underline;
-  transition: all 0.3s ease;
 
-  &:hover {
-    color: ${(props) => props.theme.colors.blue[300]};
-  }
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 0.7;
+
+  transition: 0.3s ease;
+
+  ${(props) => {
+    if (props.disabled) {
+      return css`
+        cursor: not-allowed;
+      `
+    }
+  }}
 `
 
-export const ButtonModal = styled.button`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  color: #fff;
-  padding: 8px 40px;
-  border: 2px solid ${(props) => props.theme.colors.red[500]};
-  background-color: ${(props) => props.theme.colors.red[500]};
+export interface ButtonStyleProps {
+  variant?: 'primary' | 'secondary' | 'tertiary'
+  size?: 'lg' | 'md' | 'sm'
+}
 
-  a {
-    color: #fff;
-    width: 100%;
-    height: 100%;
-    padding: 8px 40px;
-  }
+export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
+  ${({ variant, theme, disabled }) => {
+    switch (variant) {
+      case 'primary':
+        return css`
+          border: 2px solid
+            ${!disabled ? theme.colors.blue[800] : theme.colors.gray[500]};
+          background-color: ${!disabled
+            ? theme.colors.blue[800]
+            : theme.colors.gray[500]};
+          color: ${theme.colors.white};
 
-  &:hover {
-    color: #5d5f5d;
-    background-color: transparent;
-    border-color: #5d5f5d;
-  }
-`
+          &:not(:disabled):hover {
+            border-color: ${theme.colors.blue[850]};
+            background-color: ${theme.colors.blue[850]};
+          }
+        `
+      case 'secondary':
+        return css`
+          border: 2px solid ${theme.colors.blue[800]};
+          color: ${theme.colors.blue[800]};
 
-export const ButtonModalSecondary = styled(ButtonModal)`
-  color: #5d5f5d;
-  background-color: transparent;
-  border: 2px solid #5d5f5d;
+          &:not(:disabled):hover {
+            border-color: ${theme.colors.blue[850]};
+            color: ${theme.colors.blue[850]};
+          }
+        `
+      case 'tertiary':
+        return css`
+          color: ${theme.colors.blue[800]};
 
-  &:hover {
-    background-color: ${(props) => props.theme.colors.red[500]};
-    color: #fff;
-    border-color: ${(props) => props.theme.colors.red[500]};
-  }
+          &:not(:disabled):hover {
+            color: ${theme.colors.blue[850]};
+          }
+        `
+    }
+  }}
+
+  ${({ size }) => {
+    switch (size) {
+      case 'lg':
+        return css`
+          padding: 1rem 1.5rem;
+        `
+      case 'md':
+        return css`
+          padding: 0.75rem 1.5rem;
+        `
+      case 'sm':
+        return css`
+          padding: 0.5rem 1.5rem;
+        `
+    }
+  }}
 `

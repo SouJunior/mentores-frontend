@@ -17,6 +17,11 @@ export const ModalContainer = styled.div<ModalProps>`
   background-color: white;
   border-radius: 1rem;
   padding: 2rem;
+
+  button,
+  a {
+    width: max-content;
+  }
 `
 
 export const TitleContainer = styled.div`
@@ -71,30 +76,6 @@ export const AboutContainer = styled.div`
   font-size: 16px;
   line-height: 24px;
   color: #666666;
-`
-
-export const SchedButton = styled.button`
-  width: 174.5px;
-  height: 44px;
-  padding: 16px 24px 16px 24px;
-  border-radius: 8px;
-  gap: 8px;
-  background-color: #003986;
-  border: none;
-  color: white;
-  font-size: 15px;
-  line-height: 19.2px;
-  display: flex;
-  align-items: center;
-
-  &:not(:disabled):hover {
-    background-color: #002c66;
-  }
-
-  &:disabled {
-    background-color: ${(props) => props.theme.colors.gray[700]};
-    cursor: not-allowed;
-  }
 `
 
 export const ButtonClose = styled.button`

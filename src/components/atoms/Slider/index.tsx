@@ -1,13 +1,11 @@
 import { CardMentor } from '@/components/molecules/CardMentor'
 import { MutableRefObject } from 'react'
-import { A11y, Pagination, Scrollbar } from 'swiper/modules'
+import { A11y, Pagination } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import { SwiperContainer } from './style'
 
 import 'swiper/css'
-import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
 import { useMentorsService } from '@/services/user/useMentorsService'
 
 interface SliderProps {
@@ -26,9 +24,14 @@ export const Slider = ({ swiperRef }: SliderProps) => {
   return (
     <SwiperContainer>
       <Swiper
-        modules={[Pagination, Scrollbar, A11y]}
-        spaceBetween={28}
-        slidesPerView={4}
+        modules={[Pagination, A11y]}
+        spaceBetween={0}
+        slidesPerView="auto"
+        breakpoints={{
+          1133: {
+            spaceBetween: 32,
+          },
+        }}
         ref={swiperRef}
       >
         {completedProfileMentors?.map((mentor) => {

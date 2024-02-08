@@ -1,46 +1,63 @@
-import { Field as FieldComponent } from 'formik'
 import styled from 'styled-components'
 
-export const ContainerDiv = styled.div`
-  div {
-    display: flex;
-    width: 100%;
-  }
+export const ContainerInputLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 `
+
 export const ContainerInput = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border: 1px solid
+    ${(props) =>
+      props.className?.includes('error')
+        ? props.theme.colors.red[500]
+        : props.theme.colors.gray[600]};
+  border-radius: 8px;
+  background: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.black[200]};
+  padding: 0 1rem;
+
+  transition: 0.3s ease;
+
+  &:hover {
+    border: 1px solid ${(props) => props.theme.colors.blue[850]};
+  }
+
+  &:focus-within {
+    border: 1px solid ${(props) => props.theme.colors.blue[850]};
+    box-shadow: 0 0 0 1px ${(props) => props.theme.colors.blue[850]};
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: ${(props) => props.theme.colors.gray[700]};
+  }
+
   input,
   textarea,
   select {
+    flex: 1;
+    outline: none;
     resize: none;
+
     height: 100%;
     width: 100%;
-    margin: 4px 0px 16px;
-    padding: 12px 32px 12px;
-    font-size: 14px;
-    outline: none;
-    border: 1px solid ${(props) => props.theme.colors.gray[700]};
+
+    padding: 0.875rem 0;
+    font-size: 0.875rem;
+    line-height: 150%;
+
+    border: 0;
     border-radius: 8px;
-    background: ${(props) => props.theme.colors.white};
-    color: ${(props) => props.theme.colors.gray[300]};
 
-    &:hover {
-      box-shadow: 0px 3px 6px rgba(17, 101, 186, 0.6);
-      input {
-        border: 1px solid ${(props) => props.theme.colors.blue[400]};
-      }
-    }
-
-    &:focus-within {
-      border-radius: 8px;
-      -moz-border-radius: 8px;
-      -webkit-border-radius: 8px;
-      -webkit-box-shadow: 0px 0px 15px 1px
-        ${(props) => props.theme.colors.blue[700]};
-      -moz-box-shadow: 0px 0px 15px 1px
-        ${(props) => props.theme.colors.blue[700]};
-      box-shadow: 0px 0px 5px 0px ${(props) => props.theme.colors.blue[700]};
-      border: 1px solid ${(props) => props.theme.colors.blue[700]};
-      outline: none;
+    &::placeholder {
+      color: ${(props) => props.theme.colors.gray[250]};
     }
   }
 
@@ -49,29 +66,18 @@ export const ContainerInput = styled.div`
   }
 `
 
-export const ContainerError = styled.div`
-  .error-message {
-    color: ${(props) => props.theme.colors.error};
-    font-weight: bold;
-    font-size: 12px;
-    margin-bottom: 12px;
-    margin-top: -8px;
-  }
+export const ContainerError = styled.span`
+  color: ${(props) => props.theme.colors.red[500]};
+  font-weight: bold;
+  font-size: 0.75rem;
 `
 
-export const StyledLabel = styled.label`
-  font-size: 14px;
+export const StyledLabel = styled.span`
+  font-size: 0.875rem;
+  line-height: 150%;
   color: ${(props) => props.theme.colors.gray[700]};
 `
 
 export const StyledLabelError = styled(StyledLabel)`
-  color: ${(props) => props.theme.colors.error};
-`
-
-export const Field = styled(FieldComponent)`
-  color: ${(props) => props.theme.colors.gray[700]} !important;
-
-  &::placeholder {
-    color: ${(props) => props.theme.colors.gray[300]};
-  }
+  color: ${(props) => props.theme.colors.red[500]};
 `

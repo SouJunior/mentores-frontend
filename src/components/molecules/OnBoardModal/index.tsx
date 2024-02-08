@@ -18,18 +18,22 @@ export default function OnBoardModal() {
   }
 
   return (
-    <ModalContainer style={{ height: step === 1 ? '547px' : '767px' }}>
+    <ModalContainer>
       <TabsContainer>
         <TabWrapper>
           <Tab>
-            <TabLabel>ESPECIALIDADES</TabLabel>
-            <TabLine style={{ width: step === 1 ? '258px' : '0' }} />
+            <TabLabel data-active={step === 1 ? 'true' : 'false'}>
+              ESPECIALIDADES
+            </TabLabel>
+            <TabLine data-active={step === 1 ? 'true' : 'false'} />
           </Tab>
         </TabWrapper>
         <TabWrapper>
           <Tab>
-            <TabLabel>PERFIL</TabLabel>
-            <TabLine style={{ width: step === 2 ? '258px' : '0' }} />
+            <TabLabel data-active={step === 2 ? 'true' : 'false'}>
+              PERFIL
+            </TabLabel>
+            <TabLine data-active={step === 2 ? 'true' : 'false'} />
           </Tab>
         </TabWrapper>{' '}
       </TabsContainer>

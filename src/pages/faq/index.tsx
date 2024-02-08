@@ -4,6 +4,7 @@ import {
   AccordionContainer,
   AccordionTitle,
   FaqContainer,
+  FaqMain,
   ImageContainer,
   TitleSpan,
 } from '@/styles/pages/faq'
@@ -11,7 +12,7 @@ import Image from 'next/image'
 import ImagemFAQ from '@/assets/seo.svg'
 import { AccordionDetails, AccordionSummary } from '@mui/material'
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
-import { Footer } from '@/components/molecules/Footer'
+import { Footer } from '@/components/organisms/Footer'
 import Link from 'next/link'
 
 export default function FaqPage() {
@@ -22,8 +23,8 @@ export default function FaqPage() {
   }
 
   return (
-    <>
-      <FaqContainer>
+    <FaqContainer>
+      <FaqMain>
         <ImageContainer>
           <Image src={ImagemFAQ} alt="Image" width={493} height={324} />
         </ImageContainer>
@@ -132,8 +133,9 @@ export default function FaqPage() {
             </AccordionDetails>
           </Accordion>
         </AccordionContainer>
-      </FaqContainer>
+      </FaqMain>
+
       <Footer />
-    </>
+    </FaqContainer>
   )
 }

@@ -40,36 +40,12 @@ export const StacksContainer = styled.span`
   flex-wrap: wrap;
 `
 
-export const Stack = styled.span`
-  background: #f5f1f3;
-  font-size: 0.75rem;
-  line-height: 0.9rem;
-  color: #001633;
-  padding: 0.5rem;
-  border-radius: 40px;
-  text-align: center;
-`
-
 const BaseButton = styled.button`
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   font-size: 1rem;
   line-height: 0.9rem;
   border: none;
-`
-
-export const SchedButton = styled(BaseButton)`
-  background-color: #003986;
-  color: #fff;
-
-  &:not(:disabled):hover {
-    background-color: #002c66;
-  }
-
-  &:disabled {
-    background-color: ${(props) => props.theme.colors.gray[700]};
-    cursor: not-allowed;
-  }
 `
 
 export const InfoButton = styled(BaseButton)`

@@ -12,6 +12,7 @@ export const SelectTrigger = styled(Select.Trigger)`
   color: #323232;
   padding: 0.75rem 1.5rem;
   border: 1px solid #666;
+  border-radius: 0.5rem;
   cursor: pointer;
   outline: 0;
 

@@ -6,7 +6,6 @@ export const InfoContainer = styled.span<Partial<{ right: number }>>`
   height: 24px;
   position: absolute;
   right: ${(props) => props.right}px;
-  margin-right: 30px;
   cursor: pointer;
   z-index: 40;
 

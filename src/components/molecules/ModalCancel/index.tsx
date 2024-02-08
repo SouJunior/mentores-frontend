@@ -1,6 +1,11 @@
 import { Button } from '@/components/atoms/Button'
 import { Modal } from '@/components/atoms/Modal'
-import { ContainerBtn, ContainerModalCancel, HeadingModal } from './style'
+import {
+  ContainerBtn,
+  ContainerModalCancel,
+  DiscardBtn,
+  HeadingModal,
+} from './style'
 
 interface ModalCancelProps {
   open: boolean
@@ -30,12 +35,13 @@ export function ModalCancel({
         <HeadingModal>Deseja descartar o cadastro?</HeadingModal>
         <p>As informações inseridas não serão salvas.</p>
         <ContainerBtn>
-          <Button
-            onClick={onClose}
-            content={'Cancelar'}
-            btnRole={'modal-secondary'}
-          />
-          <Button content={'Descartar'} btnRole={'modal-default'} />
+          <Button onClick={onClose} variant="secondary">
+            Cancelar
+          </Button>
+
+          <Button as={DiscardBtn} href="/">
+            Descartar
+          </Button>
         </ContainerBtn>
       </ContainerModalCancel>
     </Modal>

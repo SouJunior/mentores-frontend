@@ -1,13 +1,13 @@
-import { Box, Dialog } from '@mui/material'
+import { Box, Dialog, DialogProps } from '@mui/material'
 import { ReactNode } from 'react'
 import { ButtonClose } from './style'
 import CloseIcon from '@mui/icons-material/Close'
 
-interface ModalProps {
+interface ModalProps extends DialogProps {
   open: boolean
   onClose: () => void
   children: ReactNode
-  height: number
+  height?: number
   width?: number
   showBtn?: boolean
   bgColor?: string
@@ -21,6 +21,7 @@ export const Modal = ({
   width,
   showBtn = false,
   bgColor = '#d7d9d7',
+  ...props
 }: ModalProps) => {
   return (
     <Dialog
@@ -38,6 +39,7 @@ export const Modal = ({
           maxHeight: height + 'px',
           ...(width && { maxWidth: width + 'px' }),
         },
+        ...props,
       }}
     >
       <Box

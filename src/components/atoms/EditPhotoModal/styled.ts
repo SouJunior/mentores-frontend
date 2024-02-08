@@ -1,15 +1,14 @@
 import styled from 'styled-components'
+import { Button } from '../Button'
 
 export const EditPhotoContainer = styled.div`
-  width: 387px;
-  height: 388px;
-  padding: 24px;
-  border-radius: 16px;
-  gap: 26px;
-  background-color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1rem;
+
+  width: 387px;
+  padding: 1.5rem;
+  padding-top: 0;
 `
 
 export const StyledInfo = styled.span`
@@ -20,92 +19,62 @@ export const StyledInfo = styled.span`
   letter-spacing: 0em;
   text-align: left;
 `
+export const PhotoContainerActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+`
 
 export const ButtonsContainer = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 10px;
-`
-
-export const StyledButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 96px;
-  height: 56px;
-  padding: 0px 12px;
-  border-radius: 8px;
-  border: none;
-  background-color: ${(props) => props.theme.colors.gray1.neutral};
-  color: #666;
-  font-weight: bold;
-
-  .icon {
-    font-size: 30px;
-  }
-`
-
-export const EditButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 96px;
-  height: 56px;
-  padding: 0px 12px;
-  border-radius: 8px;
-  border: none;
-  background-color: ${(props) => props.theme.colors.gray1.neutral};
-  color: ${(props) => (props.disabled ? '#ccc' : '#666')};
-  font-weight: bold;
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-
-  .icon {
-    font-size: 30px;
-    opacity: ${(props) => (props.disabled ? 0.6 : 1)};
-  }
+  gap: 1rem;
 `
 
 export const StyledHR = styled.div`
   width: 100%;
-  height: 2px;
-  background-color: #6666;
+  height: 1px;
+  background-color: ${(props) => props.theme.colors.gray[700]};
+  margin-top: 0.25rem;
 `
 
-export const NextButton = styled.button`
-  width: 78px;
-  height: 48px;
-  padding: 12px, 16px, 12px, 16px;
-  border-radius: 8px;
-  background-color: ${(props) =>
-    props.disabled ? '#ACACAC' : props.theme.colors.blue[700]};
-  border: none;
-  color: white;
-  font-size: 16px;
-  align-self: flex-end;
-  margin-top: -10px;
+export const SaveButton = styled(Button)`
+  margin-left: auto;
 `
 
-export const AddPhotoButton = styled.label`
-  width: 96px;
-  height: 56px;
-  background-color: ${(props) => props.theme.colors.gray1.neutral};
-  border-radius: 8px;
+export const ActionButton = styled.button`
+  flex: 1;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  color: #666;
 
-  .icon {
-    font-size: 30px;
+  padding: 0.5rem 0.75rem;
+  background-color: ${(props) => props.theme.colors.gray[200]};
+  border-radius: 0.5rem;
+  border: 0;
+
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.gray[700]};
+  font-weight: 600;
+  line-height: 1.2rem;
+  font-size: 1rem;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: ${(props) => props.theme.colors.gray[700]};
   }
 
   input[type='file'] {
     display: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${(props) => props.theme.colors.gray[200]};
+    color: ${(props) => props.theme.colors.gray[600]};
   }
 `

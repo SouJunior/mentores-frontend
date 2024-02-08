@@ -6,11 +6,10 @@ import { InfoTooltip } from '@/components/atoms/InfoTooltip'
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, MouseEvent, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ContainerForm,
   FormWrapper,
-  LabelInput,
   MessagesContainer,
   WrapperInput,
 } from './styled'
@@ -23,10 +22,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import ToastSuccess from '../ToastSuccess'
 
 export default function FormNewPass() {
-  const [show, setShow] = useState(true)
-  const [eye, setEye] = useState(true)
-  const [showConfirm, setShowConfirm] = useState(true)
-  const [eyeConfirm, setEyeConfirm] = useState(true)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false)
   const [toast, setToast] = useState(false)
 
   const router = useRouter()
@@ -39,22 +37,6 @@ export default function FormNewPass() {
     confirmPassword: '',
     code: '',
     email: '',
-  }
-
-  const handleShowPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
-  ) => {
-    e.preventDefault()
-    setEye(!eye)
-    setShow(!show)
-  }
-
-  const handleConfirmPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>,
-  ) => {
-    e.preventDefault()
-    setEyeConfirm(!eyeConfirm)
-    setShowConfirm(!showConfirm)
   }
 
   const { handle } = setNewPasswordService()
@@ -77,55 +59,47 @@ export default function FormNewPass() {
           <Form>
             <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
             <MessagesContainer>
-              <p>Nova Senha</p>
-              <span>
-                Preencha os campos abaixo com sua nova senha e confirme-a.
-              </span>
+              <h2>Nova Senha</h2>
+              <p>Preencha os campos abaixo com sua nova senha e confirme-a.</p>
             </MessagesContainer>
 
-            <WrapperInput>
-              <InfoTooltip right={-30} />
-              <Eye
-                onClick={(e) => handleShowPassword(e)}
-                eye={eye}
-                size={20}
-                top="2rem"
-                color={'#5D5F5D'}
+            <WrapperInput className="new-password-field">
+              <InfoTooltip right={0} />
+
+              <Field
+                as={InputForm}
+                inputType={isPasswordVisible ? 'text' : 'password'}
+                name="password"
+                placeholder="*******"
+                isRequired={false}
+                label="Nova senha"
               />
 
-              <LabelInput>
-                <span>Nova senha</span>
-                <Field
-                  as={InputForm}
-                  inputType={show ? 'password' : 'text'}
-                  name="password"
-                  placeholder="*******"
-                  showAsterisk={false}
-                />
-              </LabelInput>
+              <Eye
+                aria-label="Mostrar senha"
+                pressed={isPasswordVisible}
+                onPressedChange={setIsPasswordVisible}
+              />
             </WrapperInput>
 
             <WrapperInput>
-              <Eye
-                onClick={(e) => handleConfirmPassword(e)}
-                eye={eyeConfirm}
-                size={20}
-                top="2rem"
-                color={'#5D5F5D'}
+              <Field
+                as={InputForm}
+                inputType={isConfirmPasswordVisible ? 'text' : 'password'}
+                name="confirmPassword"
+                placeholder="*******"
+                isRequired={false}
+                label="Confirmar senha"
               />
-              <LabelInput>
-                <span>Confirmar senha</span>
-                <Field
-                  as={InputForm}
-                  inputType={showConfirm ? 'password' : 'text'}
-                  name="confirmPassword"
-                  placeholder="*******"
-                  showAsterisk={false}
-                />
-              </LabelInput>
+
+              <Eye
+                aria-label="Mostrar confirmação da senha"
+                pressed={isConfirmPasswordVisible}
+                onPressedChange={setIsConfirmPasswordVisible}
+              />
             </WrapperInput>
 
-            <Button btnRole={'form'} content={'Redefinir senha'} />
+            <Button>Redefinir senha</Button>
           </Form>
         </FormikProvider>
         <Link href="/login">Voltar ao login</Link>

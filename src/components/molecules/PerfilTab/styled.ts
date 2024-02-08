@@ -9,15 +9,15 @@ export const PerfilContainer = styled.div`
 `
 
 export const StyledImportant = styled.span`
-  font-size: 14px;
+  font-size: ${(props) => props.theme.fontSizes.xs};
   font-weight: 400;
-  line-height: 17px;
-  letter-spacing: 0em;
+  line-height: 1rem;
   text-align: left;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 1rem;
+  color: ${(props) => props.theme.colors.black[200]};
 
-  &::first-letter {
+  span {
     color: ${(props) => props.theme.colors.blue[600]};
   }
 `

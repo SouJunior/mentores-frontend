@@ -1,35 +1,17 @@
-import styled, { css } from 'styled-components'
+import * as Toggle from '@radix-ui/react-toggle'
+import styled from 'styled-components'
 
-export const EyeContainer = styled.button<
-  Partial<{
-    marginTop: number
-    position: {
-      left: string
-      right: string
-      top: string
-      bottom: string
-    }
-  }>
->`
+export const EyeContainer = styled(Toggle.Root)`
+  all: unset;
   position: absolute;
-  border: none;
-  background-color: transparent;
-  color: ${(props) => props.theme.colors.gray[700]};
-  margin-top: ${(props) => props.marginTop}px;
-  cursor: pointer;
   outline: none;
   padding: 0;
   z-index: 1;
   line-height: 0;
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.gray[700]};
 
-  ${(props) => {
-    if (props.position) {
-      return css`
-        top: ${props.position.top};
-        bottom: ${props.position.bottom};
-        left: ${props.position.left};
-        right: ${props.position.right};
-      `
-    }
-  }}
+  &:focus-visible {
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.blue[400]};
+  }
 `
