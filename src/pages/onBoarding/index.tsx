@@ -13,6 +13,8 @@ import onBoardImage from '@/assets/onBoarding/Ilustrações.svg'
 import GridSpecialities from '@/components/atoms/GridSpecialities'
 import PerfilTab from '@/components/molecules/PerfilTab'
 import { useState } from 'react'
+import { OnBoardingProvider } from '@/context/OnBoardingContext'
+import { EditPhotoProvider } from '@/context/EditPhotoContext'
 
 export default function OnBoarding() {
   const [step, setStep] = useState<1 | 2>(1)
@@ -44,8 +46,13 @@ export default function OnBoarding() {
               </Tab>
             </TabWrapper>{' '}
           </TabsContainer>
-          {step === 1 && <GridSpecialities stepNumber={changeSteps} />}
-          {step === 2 && <PerfilTab onStep={setStep} />}
+
+          <OnBoardingProvider>
+            <EditPhotoProvider>
+              {step === 1 && <GridSpecialities stepNumber={changeSteps} />}
+              {step === 2 && <PerfilTab onStep={setStep} />}
+            </EditPhotoProvider>
+          </OnBoardingProvider>
         </ModalContainer>
       </ContainerBoardModal>
     </ContainerOnBoarding>

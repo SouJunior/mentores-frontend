@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Cropper, { Point, Area } from 'react-easy-crop'
+import Cropper, { Area } from 'react-easy-crop'
 import { Slider } from '@mui/material'
 import {
   Container,
@@ -16,6 +16,7 @@ import { Modal } from '../Modal'
 import { Button } from '../Button'
 import { useTheme } from 'styled-components'
 import { Minus, Plus } from 'phosphor-react'
+import { useEditPhotoContext } from '@/context/EditPhotoContext'
 
 interface ModalImageEditorProps {
   src?: string
@@ -30,8 +31,7 @@ const ModalImageEditor = ({
   isOpen,
   onClose,
 }: ModalImageEditorProps) => {
-  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
-  const [zoom, setZoom] = useState(1)
+  const { crop, setCrop, zoom, setZoom } = useEditPhotoContext()
   const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const { colors } = useTheme()
 

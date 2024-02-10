@@ -13,14 +13,15 @@ import { useState } from 'react'
 import ModalImageEditor from '../ModalImageEditor'
 import { handleError } from '@/utils/handleError'
 import { Camera, PencilSimple } from 'phosphor-react'
+import { useEditPhotoContext } from '@/context/EditPhotoContext'
 
 interface EditPhotoModalProps {
   isOpen: boolean
+  selectedPhoto: string | null
   onClose: () => void
   onAddPhoto?: (photo: string | null) => void
   onEditPhoto?: () => void
   onTakePhoto?: () => void
-  hasSelectedPhoto?: boolean
   onImageEdit?: (editedImage: string | null) => void
 }
 
@@ -30,9 +31,11 @@ export default function EditPhotoModal({
   onClose,
   onEditPhoto,
   onImageEdit,
+  selectedPhoto = null,
 }: EditPhotoModalProps) {
-  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null)
   const [modalEditor, setModalEditor] = useState(false)
+  const { setCrop, setZoom, originalImage, setOriginalImage } =
+    useEditPhotoContext()
 
   const handleOpenEditModal = () => {
     if (onEditPhoto) {
@@ -64,8 +67,13 @@ export default function EditPhotoModal({
       }
 
       const reader = new FileReader()
-      reader.onload = async (e) => {
-        await setSelectedPhoto(e.target?.result as string)
+      reader.onload = (e) => {
+        if (onAddPhoto) {
+          onAddPhoto(e.target?.result as string)
+        }
+        setOriginalImage(e.target?.result as string)
+        setCrop({ x: 0, y: 0 })
+        setZoom(1)
       }
       reader.readAsDataURL(file)
     }
@@ -127,7 +135,7 @@ export default function EditPhotoModal({
         </SaveButton>
       </EditPhotoContainer>
       <ModalImageEditor
-        src={selectedPhoto || undefined}
+        src={originalImage}
         onSave={handleSavePhoto}
         isOpen={modalEditor}
         onClose={closeModal}

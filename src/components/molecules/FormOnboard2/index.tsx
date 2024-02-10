@@ -13,58 +13,25 @@ import {
   StyledInfo,
   StyledInfoContainer,
 } from './styled'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import EditPhotoModal from '@/components/atoms/EditPhotoModal'
-import { Form, FormikProvider, useFormik } from 'formik'
+import { Form } from 'formik'
 import { InputForm } from '@/components/atoms/InputForm'
-import UserUpdateService from '@/services/user/userUpdateService'
-import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { genders } from '@/data/static-info'
 import { Select } from '@/components/atoms/Select'
-import { handleError } from '@/utils/handleError'
+import { useOnBoardingContext } from '@/context/OnBoardingContext'
 
 interface FormOnBoardProps {
   onStep?: Dispatch<SetStateAction<1 | 2>>
 }
 
 export default function FormOnboard2({ onStep }: FormOnBoardProps) {
+  const { formik } = useOnBoardingContext()
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null)
-  const [isCompleted, setCompleted] = useState(false)
-  const [requestError, setError] = useState(false)
-
-  const router = useRouter()
-
-  const { handle } = UserUpdateService()
-
-  const initialValues = {
-    imageFile: null,
-    description: '',
-    gender: '',
-  }
-
-  const handleSubmit = async (values: any) => {
-    const data = {
-      aboutMe: values.description,
-      profile: values.imageUrl,
-      gender: values.gender,
-    }
-
-    const response = await handle(data)
-    if (response) {
-      setError(false)
-      router.push('/?connect-calendly=true')
-    } else {
-      setError(true)
-    }
-  }
-
-  const formik = useFormik({
-    initialValues,
-    onSubmit: handleSubmit,
-  })
+  const isCompleted = Object.keys(formik.touched).length > 0
 
   const handleOpenEditModal = () => {
     setIsEditModalOpen(true)
@@ -72,19 +39,8 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
   const closeModal = () => setIsEditModalOpen(false)
 
-  useEffect(() => {
-    setCompleted(Object.keys(formik.touched).length > 0)
-  }, [formik.touched])
-
-  useEffect(() => {
-    if (requestError) {
-      handleError('Algum erro aconteceu. Entre em contato com a gente.')
-    }
-  }, [requestError])
-
   const handleImageEdit = (editedImage: string | null) => {
-    setSelectedPhoto(editedImage)
-    formik.setFieldValue('imageUrl', editedImage || '')
+    formik.setFieldValue('profile', editedImage || '')
   }
 
   const handleBackToFirstStep = () => {
@@ -104,7 +60,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
       <Dotted>
         <PhotoButton
           size={80}
-          selectedPhoto={selectedPhoto}
+          selectedPhoto={formik.values.profile}
           onClick={handleOpenEditModal}
         />
         <StyledImportant>
@@ -115,58 +71,59 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
       <EditPhotoModal
         isOpen={isEditModalOpen}
-        onAddPhoto={(photo) => setSelectedPhoto(photo)}
+        selectedPhoto={formik.values.profile}
+        onAddPhoto={(photo) => {
+          formik.setFieldValue('profile', photo)
+        }}
         onClose={closeModal}
         onImageEdit={handleImageEdit}
         onEditPhoto={() => handleOpenEditModal()}
       />
 
       <FormContainer>
-        <FormikProvider value={formik}>
-          <Form>
-            <StyledInfoContainer>
-              <InputForm
-                label="Conte mais sobre você:"
-                type="textarea"
-                name="description"
-                placeholder="Fale sobre sua trajetória profissional para que possam lhe conhecer melhor;"
-                required
-              />
-              <CharactersWarnInput>Máximo 600 caracteres.</CharactersWarnInput>
-            </StyledInfoContainer>
+        <Form>
+          <StyledInfoContainer>
+            <InputForm
+              label="Conte mais sobre você:"
+              type="textarea"
+              name="description"
+              placeholder="Fale sobre sua trajetória profissional para que possam lhe conhecer melhor;"
+              required
+            />
+            <CharactersWarnInput>Máximo 600 caracteres.</CharactersWarnInput>
+          </StyledInfoContainer>
 
-            <SelectInputContainer>
-              <span>
-                Gênero
-                <span>*</span>
-              </span>
-              <Select
-                placeholder="Gênero"
-                onValueChange={(value) => formik.setFieldValue('gender', value)}
-              >
-                {genders.map((gender) => (
-                  <SelectItemStyled key={gender} value={gender}>
-                    {gender}
-                  </SelectItemStyled>
-                ))}
-              </Select>
-            </SelectInputContainer>
-            <StyledHR />
+          <SelectInputContainer>
+            <span>
+              Gênero
+              <span>*</span>
+            </span>
+            <Select
+              placeholder="Gênero"
+              onValueChange={(value) => formik.setFieldValue('gender', value)}
+            >
+              {genders.map((gender) => (
+                <SelectItemStyled key={gender} value={gender}>
+                  {gender}
+                </SelectItemStyled>
+              ))}
+            </Select>
+          </SelectInputContainer>
+          <StyledHR />
 
-            <ButtonContainer>
-              <BackButton
-                onClick={handleBackToFirstStep}
-                variant="secondary"
-                type="button"
-              >
-                Voltar
-              </BackButton>
-              <NextButton type="submit" disabled={!isCompleted}>
-                Concluir
-              </NextButton>
-            </ButtonContainer>
-          </Form>
-        </FormikProvider>
+          <ButtonContainer>
+            <BackButton
+              onClick={handleBackToFirstStep}
+              variant="secondary"
+              type="button"
+            >
+              Voltar
+            </BackButton>
+            <NextButton type="submit" disabled={!isCompleted}>
+              Concluir
+            </NextButton>
+          </ButtonContainer>
+        </Form>
       </FormContainer>
     </>
   )
