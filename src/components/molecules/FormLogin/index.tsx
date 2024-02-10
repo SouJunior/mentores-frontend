@@ -1,4 +1,3 @@
-import CardLoading from '@/assets/loading.gif'
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
 import { Button } from '@/components/atoms/Button'
 import Image from 'next/image'
@@ -8,7 +7,6 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Checkbox } from '../../atoms/Checkbox'
 import {
-  BlockedAccountError,
   CallToRegisterText,
   ContainerCheckbox,
   ContainerForm,
@@ -20,6 +18,13 @@ import * as yup from 'yup'
 import { InputForm } from '@/components/atoms/InputForm'
 import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material'
 import { Eye } from '@/components/atoms/Eye'
+import { setCookie } from 'cookies-next'
+import { sessionNameUserInfo } from '@/data/static-info'
+import { Spinner } from '@/components/atoms/Spinner'
+import { useRouter } from 'next/router'
+import { AxiosError } from 'axios'
+import { useAuthContext } from '@/context/Auth/AuthContext'
+import { throwErrorMessages } from '@/utils/throw-error-messages'
 
 const loginSchema = yup.object({
   email: yup.string().email('E-mail inválido').required('Obrigatório'),
@@ -36,129 +41,132 @@ export function FormLogin() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const type = 'mentor'
 
-  const { sendLogin, disable, submitButton, loading } = UserLoginService()
+  const { setUserSession } = useAuthContext()
+  const router = useRouter()
 
   const handleSubmit = async ({ email, password }: LoginDataType) => {
-    const user = await sendLogin({ email, password, type })
+    const { login } = UserLoginService()
 
-    const userStringify = JSON.stringify(user)
+    try {
+      const { data } = await login({ email, password, type })
+      const sessionInfo = {
+        id: String(data.info.id),
+        token: data.token,
+      }
 
-    if (isKeepConnected) {
-      localStorage.setItem('user', userStringify)
-    } else {
-      sessionStorage.setItem('user', userStringify)
+      if (isKeepConnected) {
+        setCookie(sessionNameUserInfo, sessionInfo)
+      }
+
+      setUserSession(sessionInfo)
+
+      if (!data.info.registerComplete) {
+        return router.push('/onBoarding')
+      }
+
+      router.push(
+        data.info.registerComplete && data.info.calendlyName
+          ? '/'
+          : '/?connect-calendly=true',
+      )
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        const messageKey = err.response?.data.message.toLowerCase()
+        const messages = {
+          'invalid e-mail or password': 'Email ou senha incorretos.',
+          "you typed the password incorrectly and will be blocked in five tries. to register a new password click on 'forgot my password'":
+            "Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'.",
+          "your account access is still blocked, because you dont redefined your password after five incorrect tries, please, click on 'forgot my password' to begin the account restoration.":
+            "Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em 'Esqueci minha senha'.",
+        }
+        throwErrorMessages({ messages, currentMessageKey: messageKey })
+      }
     }
   }
 
   return (
-    <>
+    <ContainerForm>
       <ToastContainer
         autoClose={3500}
         hideProgressBar={true}
         closeOnClick
         theme="colored"
-        style={{
-          textAlign: 'justify',
-          fontSize: '16px',
-          width: '550px',
-          lineHeight: '32px',
-        }}
+        icon={false}
       />
 
-      <ContainerForm>
-        <Image
-          src={souJuniorLogoImg}
-          alt="Logo SouJunior"
-          width={264}
-          height={40}
-        />
+      <Image
+        src={souJuniorLogoImg}
+        alt="Logo SouJunior"
+        width={264}
+        height={40}
+      />
 
-        <h2>Bem-vindo de volta</h2>
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          validationSchema={loginSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ errors, touched }) => {
-            return (
-              <Form>
-                <div className="group-fields">
-                  <ContainerInput
-                    className={errors.email && touched.email ? 'error' : ''}
+      <h2>Bem-vindo de volta</h2>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validationSchema={loginSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched, isSubmitting }) => {
+          return (
+            <Form>
+              <div className="group-fields">
+                <ContainerInput
+                  className={errors.email && touched.email ? 'error' : ''}
+                >
+                  <InputForm
+                    isRequired={false}
+                    type="input"
+                    name="email"
+                    label="E-mail"
                   >
-                    <InputForm
-                      isRequired={false}
-                      type="input"
-                      name="email"
-                      label="E-mail"
-                    >
-                      <PersonOutlineRounded />
-                    </InputForm>
-                  </ContainerInput>
+                    <PersonOutlineRounded />
+                  </InputForm>
+                </ContainerInput>
 
-                  <ContainerInput
-                    className={
-                      errors.password && touched.password ? 'error' : ''
-                    }
+                <ContainerInput
+                  className={errors.password && touched.password ? 'error' : ''}
+                >
+                  <InputForm
+                    isRequired={false}
+                    type="input"
+                    name="password"
+                    label="Senha"
+                    inputType={isPasswordVisible ? 'text' : 'password'}
                   >
-                    <InputForm
-                      isRequired={false}
-                      type="input"
-                      name="password"
-                      label="Senha"
-                      inputType={isPasswordVisible ? 'text' : 'password'}
-                    >
-                      <LockOutlined />
-                    </InputForm>
-                    <Eye
-                      aria-label="Mostrar senha"
-                      pressed={isPasswordVisible}
-                      onPressedChange={setIsPasswordVisible}
-                      className="eye-visibility"
-                    />
-                    {disable && (
-                      <BlockedAccountError>
-                        Seu acesso a conta continua bloqueado, pois você não
-                        redefiniu sua senha após as cinco tentativas de acesso
-                        incorretas. Por favor, clique em &lsquo;Esqueci minha
-                        senha&rsquo; para realizar a recuperação
-                      </BlockedAccountError>
-                    )}
-                  </ContainerInput>
-                </div>
-
-                <ContainerCheckbox>
-                  <Checkbox
-                    isChecked={isKeepConnected}
-                    setValue={setIsKeepConnected}
-                    id="connected"
-                    text="Me manter conectado"
+                    <LockOutlined />
+                  </InputForm>
+                  <Eye
+                    aria-label="Mostrar senha"
+                    pressed={isPasswordVisible}
+                    onPressedChange={setIsPasswordVisible}
+                    className="eye-visibility"
                   />
-                  <Link href="/resetPassword">Esqueci minha senha</Link>
-                </ContainerCheckbox>
+                </ContainerInput>
+              </div>
 
-                <Button disabled={submitButton}>
-                  {loading ? (
-                    <Image
-                      alt="loading"
-                      src={CardLoading}
-                      width={24}
-                      height={24}
-                    />
-                  ) : (
-                    'Entrar'
-                  )}
-                </Button>
+              <ContainerCheckbox>
+                <Checkbox
+                  isChecked={isKeepConnected}
+                  setValue={setIsKeepConnected}
+                  id="connected"
+                  text="Me manter conectado"
+                />
+                <Link href="/resetPassword">Esqueci minha senha</Link>
+              </ContainerCheckbox>
 
-                <CallToRegisterText>
-                  Ainda não possui cadastro?{' '}
-                  <Link href="/cadastro">Clique aqui e cadastre-se</Link>
-                </CallToRegisterText>
-              </Form>
-            )
-          }}
-        </Formik>
-      </ContainerForm>
-    </>
+              <Button disabled={isSubmitting}>
+                {isSubmitting ? <Spinner /> : 'Entrar'}
+              </Button>
+
+              <CallToRegisterText>
+                Ainda não possui cadastro?{' '}
+                <Link href="/cadastro">Clique aqui e cadastre-se</Link>
+              </CallToRegisterText>
+            </Form>
+          )
+        }}
+      </Formik>
+    </ContainerForm>
   )
 }

@@ -1,31 +1,23 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
-import { IAuthContextType, User } from '../interfaces/IAuth'
-import { useRouter } from 'next/router'
-export const AuthContent = createContext<IAuthContextType | undefined>(
-  undefined,
-)
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+import { IAuthContextType, IMentor, UserSessionInfo } from '../interfaces/IAuth'
+import { getCookie } from 'cookies-next'
+import { sessionNameUserInfo } from '@/data/static-info'
+import { useQuery } from '@tanstack/react-query'
+import { api } from '@/lib/axios'
+
+export const AuthContent = createContext({} as IAuthContextType)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const router = useRouter()
-  const [user, setUser] = useState<User | null>(null)
-
-  const logout = () => {
-    setUser(null)
-    router.push('/login')
-    localStorage.removeItem('user')
-    sessionStorage.removeItem('user')
-  }
-
-  const updateUser = (updatedUser: User | null) => {
-    if (updatedUser) {
-      setUser(updatedUser)
-      localStorage.setItem('user', JSON.stringify(updatedUser))
-    }
-  }
+  const [userSession, setUserSession] = useState<UserSessionInfo | null>(null)
 
   useEffect(() => {
-    const storedUser =
-      localStorage.getItem('user') ?? sessionStorage.getItem('user')
+    const storedUser = getCookie(sessionNameUserInfo)?.toString()
 
     if (storedUser) {
       let userParsed
@@ -34,13 +26,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch {
         userParsed = undefined
       }
-      setUser(userParsed)
+      setUserSession(userParsed)
     }
   }, [])
 
+  const mentorResponse = useQuery({
+    queryKey: ['mentor', userSession?.id],
+    queryFn: async () => {
+      const response = await api.get<IMentor>(`/mentor/${userSession?.id}`)
+      return response.data
+    },
+    enabled: !!userSession?.id,
+  })
+
   return (
-    <AuthContent.Provider value={{ user, setUser, logout, updateUser }}>
+    <AuthContent.Provider
+      value={{ userSession, setUserSession, mentor: { ...mentorResponse } }}
+    >
       {children}
     </AuthContent.Provider>
   )
+}
+
+export const useAuthContext = () => {
+  const context = useContext(AuthContent)
+
+  if (context === undefined) {
+    throw new Error('Ocorreu algum erro no provider!')
+  }
+  return context
 }

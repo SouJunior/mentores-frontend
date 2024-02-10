@@ -19,11 +19,11 @@ import { Form, FormikProvider, useFormik } from 'formik'
 import { InputForm } from '@/components/atoms/InputForm'
 import UserUpdateService from '@/services/user/userUpdateService'
 import { useRouter } from 'next/router'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import useUser from '@/context/Auth/useUser'
 import { genders } from '@/data/static-info'
 import { Select } from '@/components/atoms/Select'
+import { handleError } from '@/utils/handleError'
 
 interface FormOnBoardProps {
   onStep?: Dispatch<SetStateAction<1 | 2>>
@@ -35,23 +35,9 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
   const [isCompleted, setCompleted] = useState(false)
   const [requestError, setError] = useState(false)
 
-  const user = useUser()
   const router = useRouter()
 
   const { handle } = UserUpdateService()
-
-  const handleError = (message: string) => {
-    toast.error(message, {
-      position: toast.POSITION.TOP_CENTER,
-      toastId: 'customId',
-    })
-  }
-
-  const handleNotification = () => {
-    if (requestError) {
-      handleError('Algum erro aconteceu. Entre em contato com a gente.')
-    }
-  }
 
   const initialValues = {
     imageFile: null,
@@ -69,8 +55,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
     const response = await handle(data)
     if (response) {
       setError(false)
-      user.updateUser({ ...user, ...data })
-      router.push('/?connect-calendly')
+      router.push('/?connect-calendly=true')
     } else {
       setError(true)
     }
@@ -93,7 +78,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
   useEffect(() => {
     if (requestError) {
-      handleNotification()
+      handleError('Algum erro aconteceu. Entre em contato com a gente.')
     }
   }, [requestError])
 
@@ -115,12 +100,6 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
         hideProgressBar={true}
         closeOnClick
         theme="colored"
-        style={{
-          textAlign: 'justify',
-          fontSize: '16px',
-          width: '550px',
-          lineHeight: '32px',
-        }}
       />
       <Dotted>
         <PhotoButton
@@ -161,7 +140,10 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
                 Gênero
                 <span>*</span>
               </span>
-              <Select placeholder="Gênero">
+              <Select
+                placeholder="Gênero"
+                onValueChange={(value) => formik.setFieldValue('gender', value)}
+              >
                 {genders.map((gender) => (
                   <SelectItemStyled key={gender} value={gender}>
                     {gender}

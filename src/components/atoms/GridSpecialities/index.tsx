@@ -11,24 +11,29 @@ import {
 } from './styled'
 import CheckIcon from '@mui/icons-material/Check'
 import UserUpdateService from '@/services/user/userUpdateService'
-import useUser from '@/context/Auth/useUser'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { specialties } from '@/data/static-info'
+import { useAuthContext } from '@/context/Auth/AuthContext'
+import { handleError } from '@/utils/handleError'
 
 interface GridSpecialitiesProps {
   stepNumber: (step: number) => void
 }
+
 export default function GridSpecialities({
   stepNumber,
 }: GridSpecialitiesProps) {
-  const { user } = useUser()
-  const { handle } = UserUpdateService()
   const [requestError, setError] = useState(false)
 
   const [selectedSpecialities, setSelectedSpecialities] = useState<string[]>([])
   const [selectedCount, setSelectedCount] = useState<number>(0)
   const [isComplete, setComplete] = useState(false)
+
+  const { handle } = UserUpdateService()
+  const {
+    mentor: { data },
+  } = useAuthContext()
 
   const toggleSpeciality = (speciality: string): void => {
     if (selectedSpecialities.includes(speciality)) {
@@ -42,25 +47,13 @@ export default function GridSpecialities({
     }
   }
 
-  const handleError = (message: string) => {
-    toast.error(message, {
-      position: toast.POSITION.TOP_CENTER,
-      toastId: 'customId',
-    })
-  }
-
-  const handleNotification = () => {
-    if (requestError) {
-      handleError('Algum erro aconteceu. Entre em contato com a gente.')
-    }
-  }
   useEffect(() => {
     selectedCount >= 1 ? setComplete(true) : setComplete(false)
   }, [selectedCount, isComplete])
 
   useEffect(() => {
     if (requestError) {
-      handleNotification()
+      handleError('Algum erro aconteceu. Entre em contato com a gente.')
     }
   }, [requestError])
 
@@ -88,14 +81,8 @@ export default function GridSpecialities({
         hideProgressBar={true}
         closeOnClick
         theme="colored"
-        style={{
-          textAlign: 'justify',
-          fontSize: '16px',
-          width: '550px',
-          lineHeight: '32px',
-        }}
       />
-      <StyledSpan>Olá, {user?.fullName}!</StyledSpan>
+      <StyledSpan>Olá, {data?.fullName}!</StyledSpan>
       <StyledTitle>
         Em quais áreas você deseja mentorar?<span className="last">*</span>
       </StyledTitle>

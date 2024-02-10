@@ -1,17 +1,17 @@
 import UserDefault from '@/assets/userDefault.png'
 import Image from 'next/image'
-import useUser from '@/context/Auth/useUser'
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined'
 import { useState } from 'react'
+import { useAuthContext } from '@/context/Auth/AuthContext'
 
 export function UserAvatar() {
-  const { user } = useUser()
+  const { userSession, mentor } = useAuthContext()
   const [imageError, setImageError] = useState(false)
 
   return (
     <>
-      {user ? (
-        user.profile ? (
+      {userSession ? (
+        userSession.token ? (
           <div>
             {imageError ? (
               <Image alt="User Avatar" src={UserDefault} />
@@ -21,7 +21,7 @@ export function UserAvatar() {
                 height={44}
                 alt="User Avatar"
                 style={{ border: '2px solid #666' }}
-                src={user?.profile}
+                src={mentor.data?.profile ?? ''}
                 onError={() => setImageError(true)}
               />
             )}

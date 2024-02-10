@@ -1,12 +1,12 @@
+import { useAuthContext } from '@/context/Auth/AuthContext'
 import { IUserUpdate, UserUpdateDTO } from '../interfaces/IUserUpdate'
-import useUser from '@/context/Auth/useUser'
 import { api } from '@/lib/axios'
 
 const UserUpdateService = (): IUserUpdate => {
-  const { user } = useUser()
+  const { userSession } = useAuthContext()
 
-  const token = user?.token
-  const id = user?.id
+  const token = userSession?.token
+  const id = userSession?.id
 
   const config = {
     headers: {
@@ -16,7 +16,14 @@ const UserUpdateService = (): IUserUpdate => {
 
   const handle = async (data: UserUpdateDTO) => {
     try {
-      await api.put(`/mentor/${id}`, data, config)
+      await api.put(
+        `/mentor`,
+        {
+          id,
+          ...data,
+        },
+        config,
+      )
       return true
     } catch (error) {
       return false

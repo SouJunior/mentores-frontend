@@ -1,21 +1,35 @@
-export interface User {
+import { UseQueryResult } from '@tanstack/react-query'
+
+export interface IMentor {
   id?: string
-  fullName?: string
-  dateOfBirth?: string
-  email?: string
-  profile?: string | null
-  aboutMe?: string | null
-  gender?: string
-  token?: string
-  specialties?: string[]
+  fullName: string
+  dateOfBirth: string | Date
+  password: string
+  email: string
+  emailConfirmed?: boolean
+  specialties: string[]
+  role: string
+  gender: string
+  aboutMe: string
+  calendlyName?: string
+  agendaName?: string
   registerComplete?: boolean
-  createdAt?: string
-  updatedAt?: string
+  profileKey?: string
+  profile?: string
+  accessAttempt?: number
+  code?: string
+  createdAt?: string | Date
+  updatedAt?: string | Date
+  deleted?: boolean
+}
+
+export interface UserSessionInfo {
+  id: string
+  token: string
 }
 
 export interface IAuthContextType {
-  user: User | null
-  setUser: (user: User | null) => void
-  logout: () => void
-  updateUser: (updatedUser: User) => void
+  userSession: UserSessionInfo | null
+  setUserSession: (user: UserSessionInfo | null) => void
+  mentor: UseQueryResult<IMentor, Error>
 }

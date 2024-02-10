@@ -18,14 +18,21 @@ import {
   SignOutBtn,
 } from './style'
 import { UserAvatar } from '@/components/atoms/UserAvatar'
-import useUser from '@/context/Auth/useUser'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { Menu } from '@mui/icons-material'
 import { useState } from 'react'
+import { useAuthContext } from '@/context/Auth/AuthContext'
+import UserLoginService from '@/services/user/userLoginService'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { user, logout } = useUser()
+  const { userSession, mentor, setUserSession } = useAuthContext()
+  const { logout } = UserLoginService()
+
+  function handleLogoutUser() {
+    logout()
+    setUserSession(null)
+  }
 
   return (
     <ContainerHeader>
@@ -41,7 +48,7 @@ export function Header() {
         </div>
       </nav>
 
-      {user != null ? (
+      {userSession != null ? (
         <DropdownMenu.Root modal={false}>
           <DropdownMenuTrigger>
             <UserAvatar />
@@ -49,13 +56,13 @@ export function Header() {
 
           <DropdownMenu.Portal>
             <DropdownMenuContent side="bottom" align="end" sideOffset={20}>
-              <DropdownMenuLabel>{user?.fullName}</DropdownMenuLabel>
+              <DropdownMenuLabel>{mentor.data?.fullName}</DropdownMenuLabel>
 
               <span>Mentor</span>
               <DropdownMenuSeparator />
 
               <LinkUserAccount href="/genericPage">Minha conta</LinkUserAccount>
-              <SignOutBtn onClick={logout}>Sair</SignOutBtn>
+              <SignOutBtn onClick={handleLogoutUser}>Sair</SignOutBtn>
             </DropdownMenuContent>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>

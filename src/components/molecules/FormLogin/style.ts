@@ -102,9 +102,3 @@ export const CallToRegisterText = styled.p`
     font-weight: 500;
   }
 `
-
-export const BlockedAccountError = styled.p`
-  color: ${(props) => props.theme.colors.red[500]};
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-`

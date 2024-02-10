@@ -24,3 +24,5 @@ export const specialties = [
   'Dev Ops',
   'Dados',
 ]
+
+export const sessionNameUserInfo = '@mentores-soujunior-v1:token'
