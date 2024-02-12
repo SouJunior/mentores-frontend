@@ -20,7 +20,7 @@ export const Modal = ({
   height,
   width,
   showBtn = false,
-  bgColor = '#d7d9d7',
+  bgColor = '#fff',
   ...props
 }: ModalProps) => {
   return (

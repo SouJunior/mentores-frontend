@@ -1,5 +1,6 @@
 import { Button } from '@/components/atoms/Button'
-import styled, { keyframes } from 'styled-components'
+import Link from 'next/link'
+import styled from 'styled-components'
 
 export const ContainerForm = styled.div`
   width: 100%;
@@ -87,48 +88,6 @@ export const ContainerBtn = styled.div`
   gap: 16px;
 `
 
-export const DatePickerContainer = styled.label`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  font-size: 0.875rem;
-  color: ${(props) => props.theme.colors.gray[700]};
-
-  &.error {
-    svg {
-      color: ${(props) => props.theme.colors.red[500]};
-    }
-  }
-
-  span {
-    span {
-      color: ${(props) => props.theme.colors.blue[500]};
-    }
-  }
-
-  .error-message {
-    color: ${(props) => props.theme.colors.red[500]};
-    font-weight: bold;
-    font-size: 0.75rem;
-  }
-
-  [data-placeholder] {
-    color: ${(props) => props.theme.colors.gray[250]};
-  }
-`
-
-const animloader = keyframes`
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-`
-
 export const ButtonLoading = styled(Button)`
   height: 43px;
   padding: 0;
@@ -138,46 +97,47 @@ export const ButtonLoading = styled(Button)`
     background-color: ${(props) => props.theme.colors.blue[800]};
     border-color: ${(props) => props.theme.colors.blue[800]};
   }
+`
 
-  .loader {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    position: relative;
-  }
+export const ModalUserExistsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 26.5rem;
+  padding-bottom: 1.5rem;
 
-  .loader::after,
-  .loader::before {
-    content: '';
-    box-sizing: border-box;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #fff;
-    position: absolute;
-    left: 0;
-    top: 0;
-    animation: ${animloader} 2s linear infinite;
-  }
-  .loader::after {
-    animation-delay: 1s;
+  a + a {
+    margin-top: 1rem;
   }
 `
 
-export const WrapperInput = styled.label`
-  position: relative;
+export const ModalUserExistsTitle = styled.strong`
+  font-size: ${(props) => props.theme.fontSizes.lg};
+  font-weight: 700;
+  line-height: 1.8rem;
+  text-align: center;
+  color: ${(props) => props.theme.colors.red[600]};
 
-  input {
-    padding-right: 2.8rem; // Giving space to Eye icon
-  }
+  margin-bottom: 2rem;
+`
 
-  button {
-    right: 1rem;
-    top: 2.5rem;
+export const ModalUserExistsButton = styled(Link)`
+  max-width: 13.5rem;
+  width: 100%;
+  margin: 0 auto;
 
-    svg {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid ${(props) => props.theme.colors.gray[750]};
+
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-align: center;
+  color: ${(props) => props.theme.colors.gray[750]};
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${(props) => props.theme.colors.blue[800]};
+    color: ${(props) => props.theme.colors.white};
   }
 `

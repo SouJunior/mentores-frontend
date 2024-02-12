@@ -1,6 +1,4 @@
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
-import { Eye } from '@/components/atoms/Eye'
-import { InfoTooltip } from '@/components/atoms/InfoTooltip'
 import ModalEmail from '@/components/molecules/ModalEmail'
 import {
   ValuesFormType,
@@ -11,7 +9,6 @@ import { Field, Form, FormikProvider, useFormik } from 'formik'
 import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from '../../atoms/Button'
-import { InputForm } from '../../atoms/InputForm'
 import { ModalCancel } from '../ModalCancel'
 import { ModalPrivacyPolicy } from '../ModalPrivacyPolicy'
 import ModalTerms from '../ModalTerms'
@@ -22,26 +19,28 @@ import {
   ContainerForm,
   ContainerRegister,
   ContainerTerms,
-  DatePickerContainer,
-  WrapperInput,
+  ModalUserExistsButton,
+  ModalUserExistsContainer,
+  ModalUserExistsTitle,
   TxtTerms,
 } from './style'
 import { api } from '@/lib/axios'
-import { Calendar } from '../Calendar'
-import EventRoundedIcon from '@mui/icons-material/EventRounded'
-import dayjs from 'dayjs'
 import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
+import { throwErrorMessages } from '@/utils/throw-error-messages'
+import { FormRegisterFields } from './FormRegisterFields'
+import { Spinner } from '@/components/atoms/Spinner'
+import { Modal } from '@/components/atoms/Modal'
+
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export function FormRegister() {
   const [openTermos, setOpenTermos] = useState(false)
   const [openPoliticas, setOpenPoliticas] = useState(false)
   const [openModalCancel, setOpenModalCancel] = useState(false)
   const [openEmail, setOpenEmail] = useState(false)
-  const [showCalendar, setShowCalendar] = useState(false)
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false)
+  const [isUserAlreadyExists, setIsUserAlreadyExists] = useState(false)
 
   const router = useRouter()
 
@@ -65,21 +64,25 @@ export function FormRegister() {
         emailConfirm: values.confirmEmail,
         password: values.password,
         passwordConfirmation: values.confirmPassword,
-        specialties: ['Frontend'],
       })
       resetForm()
       handleModalEmail()
     } catch (error) {
       if (error instanceof AxiosError) {
-        if (error?.response?.status === 400) {
-          alert(`${error?.response.status} ${error?.response.data.message}`)
-          console.error(error)
+        const message = error.response?.data.message
+        const messages = {
+          'The date must be before the current date':
+            'Data de nascimento inválida',
+          'Bad Request: User already exists':
+            'O e-mail informado já possui cadastro.',
+        }
+
+        if (message === 'Bad Request: User already exists') {
+          setIsUserAlreadyExists(true)
           return
         }
 
-        alert(
-          'Ocorreu um erro na criação do mentor. Verifique a conexão de internet ou tente novamente mais tarde.',
-        )
+        throwErrorMessages({ messages, currentMessageKey: message })
       }
     }
   }
@@ -109,189 +112,123 @@ export function FormRegister() {
   }
 
   return (
-    <ContainerForm>
-      <ContainerRegister>
-        <div className="container-logo-form">
-          <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
-          <p>
-            <span className="asterisk">*</span> Indica um campo obrigatório
-          </p>
-        </div>
+    <>
+      <ToastContainer
+        autoClose={3500}
+        hideProgressBar={true}
+        closeOnClick
+        theme="colored"
+        icon={false}
+      />
 
-        <FormikProvider value={formik}>
-          <Form>
-            <Field
-              as={InputForm}
-              type="input"
-              name="name"
-              label="Nome completo"
-              placeholder="Preencha com seu nome"
-              inputType="text"
-            />
+      {isUserAlreadyExists && (
+        <Modal
+          open={isUserAlreadyExists}
+          onClose={() => setIsUserAlreadyExists(false)}
+        >
+          <ModalUserExistsContainer>
+            <ModalUserExistsTitle>
+              O e-mail informado já possui cadastro.
+            </ModalUserExistsTitle>
 
-            <Calendar.Root
-              open={showCalendar}
-              onOpenChange={() => setShowCalendar(!showCalendar)}
-            >
-              <DatePickerContainer
-                className={formik.errors.dataBirthday && 'error'}
-              >
-                <span>
-                  Data de nascimento <span>*</span>
-                </span>
-                <Calendar.Control
-                  className={formik.errors.dataBirthday && 'error'}
-                >
-                  {formik.values.dataBirthday ? (
-                    <span>
-                      {dayjs(formik.values.dataBirthday).format('DD/MM/YYYY')}
-                    </span>
-                  ) : (
-                    <span data-placeholder>dd/mm/aaaa</span>
-                  )}
-                  <EventRoundedIcon />
-                </Calendar.Control>
+            <ModalUserExistsButton href="/login">
+              Ir para o login
+            </ModalUserExistsButton>
+            <ModalUserExistsButton href="/resetPassword">
+              Recuperar senha
+            </ModalUserExistsButton>
+          </ModalUserExistsContainer>
+        </Modal>
+      )}
 
-                {formik.errors.dataBirthday && (
-                  <span className="error-message">
-                    {formik.errors.dataBirthday}
-                  </span>
+      <ContainerForm>
+        <ContainerRegister>
+          <div className="container-logo-form">
+            <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
+            <p>
+              <span className="asterisk">*</span> Indica um campo obrigatório
+            </p>
+          </div>
+
+          <FormikProvider value={formik}>
+            <Form>
+              <FormRegisterFields />
+
+              <ContainerTerms>
+                <Field
+                  id="checkbox-terms-and-policies"
+                  type="checkbox"
+                  name="agreeWithTermsAndPolicies"
+                />
+                <TxtTerms htmlFor="checkbox-terms-and-policies">
+                  Concordo com os{' '}
+                  <Button
+                    type="button"
+                    variant="tertiary"
+                    onClick={handleOpenTermos}
+                  >
+                    Termos de uso
+                  </Button>{' '}
+                  e{' '}
+                  <Button
+                    type="button"
+                    variant="tertiary"
+                    onClick={handleOpenPoliticas}
+                  >
+                    Políticas de privacidade
+                  </Button>{' '}
+                  do SouJunior.
+                </TxtTerms>
+              </ContainerTerms>
+
+              <ModalTerms
+                open={openTermos}
+                onClose={handleCloseTermos}
+                height={590}
+                width={600}
+              />
+
+              <ModalPrivacyPolicy
+                open={openPoliticas}
+                onClose={handleClosePoliticas}
+                height={590}
+                width={600}
+              />
+
+              <ModalEmail
+                open={openEmail}
+                onClose={closeModalEmail}
+                height={730}
+              />
+              <ContainerBtn>
+                {formik.isSubmitting ? (
+                  <ButtonLoading disabled>
+                    <Spinner />
+                  </ButtonLoading>
+                ) : (
+                  <Button disabled={isButtonDisabled}>Concluir</Button>
                 )}
-              </DatePickerContainer>
 
-              <Calendar.Content
-                selected={formik.values.dataBirthday}
-                onSelected={(date: Date) => {
-                  formik.setValues({
-                    ...formik.values,
-                    dataBirthday: date,
-                  })
-                  setShowCalendar(false)
-                }}
-                avoidCollisions={false}
-                sideOffset={10}
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={handleModalCancel}
+                >
+                  Cancelar
+                </Button>
+              </ContainerBtn>
+
+              <ModalCancel
+                open={openModalCancel}
+                width={400}
+                height={216}
+                bgColor={'#fff'}
+                onClose={closeModalCancel}
               />
-            </Calendar.Root>
-
-            <Field
-              as={InputForm}
-              type="input"
-              label="E-mail"
-              name="email"
-              placeholder="Preencha com o seu e-mail"
-              inputType="text"
-            />
-
-            <Field
-              as={InputForm}
-              type="input"
-              label="Confirmar E-mail"
-              name="confirmEmail"
-              placeholder="Confirme seu e-mail"
-              inputType="email"
-            />
-
-            <WrapperInput>
-              <InfoTooltip right={0} />
-              <Field
-                as={InputForm}
-                type="input"
-                label="Senha"
-                name="password"
-                placeholder="********"
-                inputType={isPasswordVisible ? 'text' : 'password'}
-              />
-
-              <Eye
-                aria-label="Mostrar senha"
-                pressed={isPasswordVisible}
-                onPressedChange={setIsPasswordVisible}
-              />
-            </WrapperInput>
-
-            <WrapperInput>
-              <Field
-                as={InputForm}
-                type="input"
-                label="Confirmar senha"
-                name="confirmPassword"
-                placeholder="********"
-                inputType={isConfirmPasswordVisible ? 'text' : 'password'}
-              />
-
-              <Eye
-                aria-label="Mostrar confirmação da senha"
-                pressed={isConfirmPasswordVisible}
-                onPressedChange={setIsConfirmPasswordVisible}
-              />
-            </WrapperInput>
-
-            <ContainerTerms>
-              <Field
-                id="checkbox-terms-and-policies"
-                type="checkbox"
-                name="agreeWithTermsAndPolicies"
-              />
-              <TxtTerms htmlFor="checkbox-terms-and-policies">
-                Concordo com os{' '}
-                <Button variant="tertiary" onClick={handleOpenTermos}>
-                  Termos de uso
-                </Button>{' '}
-                e{' '}
-                <Button variant="tertiary" onClick={handleOpenPoliticas}>
-                  Políticas de privacidade
-                </Button>{' '}
-                do SouJunior.
-              </TxtTerms>
-            </ContainerTerms>
-
-            <ModalTerms
-              open={openTermos}
-              onClose={handleCloseTermos}
-              height={590}
-              width={600}
-            />
-
-            <ModalPrivacyPolicy
-              open={openPoliticas}
-              onClose={handleClosePoliticas}
-              height={590}
-              width={600}
-            />
-
-            <ModalEmail
-              open={openEmail}
-              onClose={closeModalEmail}
-              height={730}
-            />
-            <ContainerBtn>
-              {formik.isSubmitting ? (
-                <ButtonLoading disabled>
-                  <span className="loader" />
-                </ButtonLoading>
-              ) : (
-                <Button disabled={isButtonDisabled}>Concluir</Button>
-              )}
-
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={handleModalCancel}
-              >
-                Cancelar
-              </Button>
-            </ContainerBtn>
-
-            <ModalCancel
-              open={openModalCancel}
-              width={400}
-              height={216}
-              bgColor={'#fff'}
-              onClose={closeModalCancel}
-            />
-          </Form>
-        </FormikProvider>
-      </ContainerRegister>
-    </ContainerForm>
+            </Form>
+          </FormikProvider>
+        </ContainerRegister>
+      </ContainerForm>
+    </>
   )
 }
