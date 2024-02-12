@@ -10,8 +10,8 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from '../../atoms/Button'
 import { ModalCancel } from '../ModalCancel'
-import { ModalPrivacyPolicy } from '../ModalPrivacyPolicy'
-import ModalTerms from '../ModalTerms'
+import { ModalPrivacyPolicy } from '../ModalTermsAndPolicies/ModalPrivacyPolicy'
+import ModalTerms from '../ModalTermsAndPolicies/ModalTerms'
 
 import {
   ButtonLoading,
@@ -36,18 +36,12 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 export function FormRegister() {
-  const [openTermos, setOpenTermos] = useState(false)
-  const [openPoliticas, setOpenPoliticas] = useState(false)
   const [openModalCancel, setOpenModalCancel] = useState(false)
   const [openEmail, setOpenEmail] = useState(false)
   const [isUserAlreadyExists, setIsUserAlreadyExists] = useState(false)
 
   const router = useRouter()
 
-  const handleOpenTermos = () => setOpenTermos(true)
-  const handleCloseTermos = () => setOpenTermos(false)
-  const handleOpenPoliticas = () => setOpenPoliticas(true)
-  const handleClosePoliticas = () => setOpenPoliticas(false)
   const handleModalEmail = () => setOpenEmail(true)
   const closeModalEmail = () => setOpenEmail(false)
   const closeModalCancel = () => setOpenModalCancel(false)
@@ -122,9 +116,9 @@ export function FormRegister() {
       />
 
       {isUserAlreadyExists && (
-        <Modal
+        <Modal.Root
           open={isUserAlreadyExists}
-          onClose={() => setIsUserAlreadyExists(false)}
+          onOpenChange={() => setIsUserAlreadyExists(false)}
         >
           <ModalUserExistsContainer>
             <ModalUserExistsTitle>
@@ -138,7 +132,7 @@ export function FormRegister() {
               Recuperar senha
             </ModalUserExistsButton>
           </ModalUserExistsContainer>
-        </Modal>
+        </Modal.Root>
       )}
 
       <ContainerForm>
@@ -162,44 +156,32 @@ export function FormRegister() {
                 />
                 <TxtTerms htmlFor="checkbox-terms-and-policies">
                   Concordo com os{' '}
-                  <Button
-                    type="button"
-                    variant="tertiary"
-                    onClick={handleOpenTermos}
-                  >
-                    Termos de uso
-                  </Button>{' '}
+                  <Modal.Root>
+                    <Modal.Control asChild>
+                      <Button type="button" variant="tertiary">
+                        Termos de uso
+                      </Button>
+                    </Modal.Control>
+
+                    <ModalTerms />
+                  </Modal.Root>{' '}
                   e{' '}
-                  <Button
-                    type="button"
-                    variant="tertiary"
-                    onClick={handleOpenPoliticas}
-                  >
-                    Políticas de privacidade
-                  </Button>{' '}
+                  <Modal.Root>
+                    <Modal.Control asChild>
+                      <Button type="button" variant="tertiary">
+                        Políticas de privacidade
+                      </Button>
+                    </Modal.Control>
+
+                    <ModalPrivacyPolicy />
+                  </Modal.Root>{' '}
                   do SouJunior.
                 </TxtTerms>
               </ContainerTerms>
 
-              <ModalTerms
-                open={openTermos}
-                onClose={handleCloseTermos}
-                height={590}
-                width={600}
-              />
 
-              <ModalPrivacyPolicy
-                open={openPoliticas}
-                onClose={handleClosePoliticas}
-                height={590}
-                width={600}
-              />
-
-              <ModalEmail
-                open={openEmail}
-                onClose={closeModalEmail}
-                height={730}
-              />
+              {/* <ModalEmail
+                /> */}
               <ContainerBtn>
                 {formik.isSubmitting ? (
                   <ButtonLoading disabled>
@@ -218,13 +200,9 @@ export function FormRegister() {
                 </Button>
               </ContainerBtn>
 
-              <ModalCancel
-                open={openModalCancel}
-                width={400}
-                height={216}
-                bgColor={'#fff'}
+              {/* <ModalCancel
                 onClose={closeModalCancel}
-              />
+              /> */}
             </Form>
           </FormikProvider>
         </ContainerRegister>

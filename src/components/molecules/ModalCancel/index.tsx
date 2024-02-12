@@ -1,49 +1,34 @@
 import { Button } from '@/components/atoms/Button'
-import { Modal } from '@/components/atoms/Modal'
 import {
   ContainerBtn,
   ContainerModalCancel,
+  DescriptionModal,
   DiscardBtn,
   HeadingModal,
 } from './style'
+import { DialogContentProps } from '@radix-ui/react-dialog'
 
-interface ModalCancelProps {
-  open: boolean
+interface ModalCancelProps extends DialogContentProps {
   onClose: () => void
-  height: number
-  width: number
-  bgColor: string
 }
 
-export function ModalCancel({
-  open,
-  onClose,
-  height,
-  width,
-  bgColor,
-}: ModalCancelProps) {
+export function ModalCancel({ onClose, ...props }: ModalCancelProps) {
   return (
-    <Modal
-      open={open}
-      width={width}
-      onClose={onClose}
-      bgColor={bgColor}
-      showBtn={true}
-      height={height}
-    >
-      <ContainerModalCancel>
-        <HeadingModal>Deseja descartar o cadastro?</HeadingModal>
-        <p>As informações inseridas não serão salvas.</p>
-        <ContainerBtn>
-          <Button onClick={onClose} variant="secondary">
-            Cancelar
-          </Button>
+    <ContainerModalCancel {...props}>
+      <HeadingModal>Deseja descartar o cadastro?</HeadingModal>
+      <DescriptionModal>
+        As informações inseridas não serão salvas.
+      </DescriptionModal>
 
-          <Button as={DiscardBtn} href="/">
-            Descartar
-          </Button>
-        </ContainerBtn>
-      </ContainerModalCancel>
-    </Modal>
+      <ContainerBtn>
+        <Button onClick={onClose} variant="secondary">
+          Cancelar
+        </Button>
+
+        <Button as={DiscardBtn} href="/">
+          Descartar
+        </Button>
+      </ContainerBtn>
+    </ContainerModalCancel>
   )
 }

@@ -10,16 +10,13 @@ import {
   Message,
   TitleModal,
 } from './style'
+import { DialogProps } from '@radix-ui/react-dialog'
 
-interface ModalEmailProps {
-  open: boolean
-  onClose: () => void
-  height: number
-}
+type ModalEmailProps = DialogProps
 
-export default function ModalEmail({ open, onClose, height }: ModalEmailProps) {
+export default function ModalEmail(props: ModalEmailProps) {
   return (
-    <Modal open={open} onClose={onClose} height={height} bgColor="#fff">
+    <Modal.Root {...props}>
       <ContainerModal>
         <HeaderModal>
           <TitleModal>Cheque seu e-mail</TitleModal>
@@ -37,7 +34,9 @@ export default function ModalEmail({ open, onClose, height }: ModalEmailProps) {
           <Image src={logo} alt="logo da SouJunior" width={108} height={17} />
           <Hash>#MovimentoSouJunior</Hash>
         </FooterModal>
+
+        <Modal.Close />
       </ContainerModal>
-    </Modal>
+    </Modal.Root>
   )
 }

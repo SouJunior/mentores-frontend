@@ -1,26 +1,39 @@
 import styled from 'styled-components'
+import * as Dialog from '@radix-ui/react-dialog'
 
-export const ButtonClose = styled.button<Partial<{ showBtn: boolean }>>`
-  display: ${(props) => (props.showBtn === true ? 'none' : 'flex')};
+export const ModalBtnClose = styled(Dialog.Close)`
+  display: flex;
   justify-content: center;
   align-items: center;
 
-  border: 1px solid red;
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  font-size: 0;
+  line-height: 0;
+
   border: none;
   background-color: transparent;
+  color: ${(props) => props.theme.colors.black[200]};
 
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  color: ${(props) => props.theme.colors.gray[700]};
-
-  background-color: rgba(255, 255, 255, 0);
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
+`
+
+export const ModalOverlay = styled(Dialog.Overlay)`
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+
+  background-color: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  inset: 0;
+  padding: 0 1rem;
+  z-index: 9999;
+`
+
+export const ModalContent = styled(Dialog.Content)`
+  background: ${(props) => props.theme.colors.white};
+  border-radius: 0.5rem;
 `

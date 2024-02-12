@@ -1,7 +1,8 @@
+import { Modal } from '@/components/atoms/Modal'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-export const ContainerModalCancel = styled.div`
+export const ContainerModalCancel = styled(Modal.Content)`
   width: 100%;
   max-width: 400px;
   text-align: center;
@@ -9,23 +10,23 @@ export const ContainerModalCancel = styled.div`
   flex-direction: column;
   gap: 24px;
   padding: 0px 24px 24px;
-
-  p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 150%;
-    color: #5d5f5d;
-  }
 `
 
-export const HeadingModal = styled.h2`
+export const HeadingModal = styled(Modal.Title)`
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 120%;
-  color: #5d5f5d;
+  color: ${(props) => props.theme.colors.gray[750]};
   text-align: center;
+`
+
+export const DescriptionModal = styled(Modal.Description)`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 150%;
+  color: ${(props) => props.theme.colors.gray[750]};
 `
 
 export const ContainerBtn = styled.div`
@@ -33,7 +34,7 @@ export const ContainerBtn = styled.div`
   justify-content: center;
   gap: 16px;
   width: 100%;
-  color: #c1292e;
+  color: ${(props) => props.theme.colors.red[600]};
 `
 
 export const DiscardBtn = styled(Link)`

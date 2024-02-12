@@ -1,5 +1,5 @@
 export const Terms = {
-  title: 'Termos e condições gerais de uso SouJunior',
+  title: 'Políticas de privacidade do SouJunior',
   subtitle1: 'Termos e Condições',
   subtitle2: 'Indenização',
   subtitle3: 'Disposições Gerais',

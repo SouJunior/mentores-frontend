@@ -1,6 +1,7 @@
+import { Modal } from '@/components/atoms/Modal'
 import styled from 'styled-components'
 
-export const ContainerModal = styled.div`
+export const ContainerModal = styled(Modal.Content)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,12 +30,12 @@ export const HeaderModal = styled.header`
   }
 `
 
-export const TitleModal = styled.h1`
+export const TitleModal = styled(Modal.Title)`
   color: ${(props) => props.theme.colors.blue[500]};
   font-size: ${(props) => props.theme.fontSizes.lg};
 `
 
-export const Message = styled.p`
+export const Message = styled(Modal.Description)`
   color: ${(props) => props.theme.colors.gray[700]};
   font-size: 1rem;
   text-align: center;
