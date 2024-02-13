@@ -1,3 +1,4 @@
+import { Button } from '@/components/atoms/Button'
 import styled from 'styled-components'
 
 export const ContainerForm = styled.div`
@@ -100,5 +101,16 @@ export const CallToRegisterText = styled.p`
   a {
     color: ${(props) => props.theme.colors.blue[800]};
     font-weight: 500;
+  }
+`
+
+export const ButtonLoading = styled(Button)`
+  height: 43px;
+  padding: 0;
+
+  &:disabled {
+    cursor: wait;
+    background-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${(props) => props.theme.colors.blue[800]};
   }
 `

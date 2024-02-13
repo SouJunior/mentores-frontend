@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Checkbox } from '../../atoms/Checkbox'
 import {
+  ButtonLoading,
   CallToRegisterText,
   ContainerCheckbox,
   ContainerForm,
@@ -163,9 +164,13 @@ export function FormLogin() {
                 <Link href="/resetPassword">Esqueci minha senha</Link>
               </ContainerCheckbox>
 
-              <Button disabled={isSubmitting}>
-                {isSubmitting ? <Spinner /> : 'Entrar'}
-              </Button>
+              {isSubmitting ? (
+                <ButtonLoading disabled>
+                  <Spinner />
+                </ButtonLoading>
+              ) : (
+                <Button>Entrar</Button>
+              )}
 
               <CallToRegisterText>
                 Ainda não possui cadastro?{' '}
