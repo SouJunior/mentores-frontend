@@ -47,26 +47,26 @@ export const fontSizes = {
   xs: '0.875rem',
 } as const
 
-const breakpoints = {
-  mobileS: '320px',
-  mobileM: '375px',
-  mobileL: '438px',
-  tablet: '768px',
-  desktopXS: '1064px',
-  desktopS: '1133px',
-  desktopM: '1440px',
-  desktopL: '2560px',
+export const breakpoints = {
+  mobileS: 320,
+  mobileM: 375,
+  mobileL: 438,
+  tablet: 768,
+  desktopXS: 1064,
+  desktopS: 1133,
+  desktopM: 1440,
+  desktopL: 2560,
 } as const
 
 export const device = {
-  mobileS: `(max-width: ${breakpoints.mobileS})`,
-  mobileM: `(max-width: ${breakpoints.mobileM})`,
-  mobileL: `(max-width: ${breakpoints.mobileL})`,
-  tablet: `(max-width: ${breakpoints.tablet})`,
-  desktopXS: `(max-width: ${breakpoints.desktopXS})`,
-  desktopS: `(max-width: ${breakpoints.desktopS})`,
-  desktopM: `(max-width: ${breakpoints.desktopM})`,
-  desktopL: `(max-width: ${breakpoints.desktopL})`,
+  mobileS: `(max-width: ${breakpoints.mobileS}px)`,
+  mobileM: `(max-width: ${breakpoints.mobileM}px)`,
+  mobileL: `(max-width: ${breakpoints.mobileL}px)`,
+  tablet: `(max-width: ${breakpoints.tablet}px)`,
+  desktopXS: `(max-width: ${breakpoints.desktopXS}px)`,
+  desktopS: `(max-width: ${breakpoints.desktopS}px)`,
+  desktopM: `(max-width: ${breakpoints.desktopM}px)`,
+  desktopL: `(max-width: ${breakpoints.desktopL}px)`,
 } as const
 
 export const theme = {
