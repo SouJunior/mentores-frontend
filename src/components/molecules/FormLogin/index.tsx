@@ -25,6 +25,8 @@ import { useRouter } from 'next/router'
 import { AxiosError } from 'axios'
 import { useAuthContext } from '@/context/Auth/AuthContext'
 import { throwErrorMessages } from '@/utils/throw-error-messages'
+import { UserAlreadyLoggedIn } from '@/services/errors/user-already-logged-in'
+import { handleError } from '@/utils/handleError'
 
 const loginSchema = yup.object({
   email: yup.string().email('E-mail inválido').required('Obrigatório'),
@@ -80,6 +82,12 @@ export function FormLogin() {
             "Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em 'Esqueci minha senha'.",
         }
         throwErrorMessages({ messages, currentMessageKey: messageKey })
+      }
+
+      if (err instanceof UserAlreadyLoggedIn) {
+        handleError(
+          'Você já está logado na aplicação. Para fazer login de novo, você precisa sair da sessão atual.',
+        )
       }
     }
   }
