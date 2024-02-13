@@ -91,7 +91,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
           <SelectInputContainer>
             <span>
               Gênero
-              <span>*</span>
+              <span className="asterisk">*</span>
             </span>
             <Select
               placeholder="Gênero"

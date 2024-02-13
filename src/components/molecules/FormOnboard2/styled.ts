@@ -110,7 +110,7 @@ export const SelectInputContainer = styled.label`
     font-size: ${(props) => props.theme.fontSizes.xs};
     line-height: 120%;
 
-    span {
+    .asterisk {
       color: ${(props) => props.theme.colors.blue[700]};
     }
   }
