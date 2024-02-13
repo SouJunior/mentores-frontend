@@ -50,6 +50,7 @@ export const GlobalStyle = createGlobalStyle`
   .Toastify__toast-container {
     max-width: 35rem;
     --toastify-toast-width: 100%;
+    --toastify-z-index: 99999;
   }
 
   #toast-error {
