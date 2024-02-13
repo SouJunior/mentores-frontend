@@ -1,4 +1,5 @@
 import { Button } from '@/components/atoms/Button'
+import { Modal } from '@/components/atoms/Modal'
 import Link from 'next/link'
 import styled from 'styled-components'
 
@@ -99,19 +100,20 @@ export const ButtonLoading = styled(Button)`
   }
 `
 
-export const ModalUserExistsContainer = styled.div`
+export const ModalUserExistsContainer = styled(Modal.Content)`
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 26.5rem;
-  padding-bottom: 1.5rem;
+  padding: 1.5rem 0;
+  position: relative;
 
   a + a {
     margin-top: 1rem;
   }
 `
 
-export const ModalUserExistsTitle = styled.strong`
+export const ModalUserExistsTitle = styled(Modal.Title)`
   font-size: ${(props) => props.theme.fontSizes.lg};
   font-weight: 700;
   line-height: 1.8rem;

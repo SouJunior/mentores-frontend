@@ -1,20 +1,12 @@
 import styled from 'styled-components'
+import { Modal } from '../Modal'
 
-interface ModalProps {
-  open: boolean
-}
-
-export const ModalContainer = styled.div<ModalProps>`
-  display: ${({ open }) => (open ? 'flex' : 'none')};
+export const ModalContainer = styled(Modal.Content)`
+  display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  position: fixed;
   max-width: 50.125rem;
   width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
   border-radius: 1rem;
   padding: 2rem;
 
@@ -35,7 +27,7 @@ export const PhotoContainer = styled.div`
   gap: 1.5rem;
 `
 
-export const MentorName = styled.span`
+export const MentorName = styled(Modal.Title)`
   font-size: 2.5rem;
   line-height: 3rem;
   max-width: 15rem;
@@ -72,7 +64,7 @@ export const Stack = styled.span`
   text-align: center;
 `
 
-export const AboutContainer = styled.div`
+export const AboutContainer = styled(Modal.Description)`
   font-size: 16px;
   line-height: 24px;
   color: #666666;
@@ -89,17 +81,4 @@ export const ButtonClose = styled.button`
     width: 100%;
     height: 100%;
   }
-`
-
-export const ModalOverlay = styled.div<ModalProps>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-  display: ${({ open }) => (open ? 'block' : 'none')};
-  justify-content: center;
-  align-items: center;
 `

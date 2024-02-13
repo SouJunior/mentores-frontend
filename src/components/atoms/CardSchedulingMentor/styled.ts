@@ -40,24 +40,6 @@ export const StacksContainer = styled.span`
   flex-wrap: wrap;
 `
 
-const BaseButton = styled.button`
-  padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  line-height: 0.9rem;
-  border: none;
-`
-
-export const InfoButton = styled(BaseButton)`
-  background-color: #ffff;
-  color: #003986;
-  text-align: center;
-
-  &:hover {
-    color: #002c66;
-  }
-`
-
 export const ButtonsContainer = styled.span`
   display: flex;
   gap: 0.5rem;

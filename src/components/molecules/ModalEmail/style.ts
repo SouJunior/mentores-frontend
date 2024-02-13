@@ -6,14 +6,18 @@ export const ContainerModal = styled(Modal.Content)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  position: relative;
+
   width: 100%;
+  max-width: 25rem;
+
   background-color: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   gap: 1.5rem;
 
   padding: 0 3.5rem;
+  padding-top: 1.75rem;
 `
 
 export const HeaderModal = styled.header`

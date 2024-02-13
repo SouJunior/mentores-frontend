@@ -1,48 +1,38 @@
+import { Modal } from '@/components/atoms/Modal'
 import styled from 'styled-components'
 
-export const ModalContainer = styled.section`
-  padding: 1.5rem;
-  padding-top: 0;
+export const ModalContainer = styled(Modal.Content)`
   display: grid;
   gap: 1.5rem;
-  border-radius: 0.5rem;
-  background: #fff;
+  padding: 1.5rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
 `
 
-export const ModalTitle = styled.strong`
+export const ModalTitle = styled(Modal.Title)`
   font-size: 1.5rem;
-  color: #323232;
+  color: ${(props) => props.theme.colors.black[200]};
   font-weight: 600;
   line-height: 140%;
-  font-family: 'Radio Canada', sans-serif;
   text-align: center;
   max-width: 18.75rem;
   margin: 0 auto;
 `
 
-export const ModalDescription = styled.p`
+export const ModalDescription = styled(Modal.Description)`
   font-size: 1.25rem;
-  color: #323232;
+  color: ${(props) => props.theme.colors.black[200]};
   line-height: 140%;
   font-family: 'Radio Canada', sans-serif;
   text-align: center;
+  max-width: 26.875rem;
 `
 
 export const ModalButton = styled.a`
-  background-color: ${(props) => props.theme.colors.blue[400]};
-  border-radius: 0.5rem;
-  color: ${(props) => props.theme.colors.white};
-  border: 0;
-  font-size: 1rem;
-  line-height: 150%;
-  padding: 1rem;
-  width: 100%;
-  text-align: center;
+  line-height: 1.2rem;
+`
 
-  &:hover {
-    background: ${(props) => props.theme.colors.blue[700]};
-    box-shadow: 0px 1px 15px 0px rgba(17, 101, 186, 0.4);
-    color: ${(props) => props.theme.colors.white};
-  }
+export const ModalClose = styled(Modal.Close)`
+  top: 1.5rem;
+  right: 1.5rem;
 `

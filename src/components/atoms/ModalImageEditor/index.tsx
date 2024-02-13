@@ -11,27 +11,21 @@ import {
   ButtonsContainer,
   CropControlsContainer,
   CropTitle,
+  ModalCloseBtn,
+  ModalClose,
 } from './styled'
-import { Modal } from '../Modal'
 import { Button } from '../Button'
 import { useTheme } from 'styled-components'
 import { Minus, Plus } from 'phosphor-react'
 import { useEditPhotoContext } from '@/context/EditPhotoContext'
+import { DialogContentProps } from '@radix-ui/react-dialog'
 
-interface ModalImageEditorProps {
-  src?: string
+interface ModalImageEditorProps extends DialogContentProps {
   onSave?: (croppedImage: string | null) => void
-  isOpen: boolean
-  onClose: () => void
 }
 
-const ModalImageEditor = ({
-  src,
-  onSave,
-  isOpen,
-  onClose,
-}: ModalImageEditorProps) => {
-  const { crop, setCrop, zoom, setZoom } = useEditPhotoContext()
+const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
+  const { crop, setCrop, zoom, setZoom, originalImage } = useEditPhotoContext()
   const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const { colors } = useTheme()
 
@@ -48,7 +42,7 @@ const ModalImageEditor = ({
 
     if (ctx) {
       const image = new Image()
-      image.src = src || ''
+      image.src = originalImage || ''
 
       ctx.drawImage(image, x, y, width, height, 0, 0, width, height)
 
@@ -72,59 +66,63 @@ const ModalImageEditor = ({
     if (onSave) {
       onSave(croppedImage)
     }
-    onClose()
   }
 
   return (
-    <Modal bgColor="white" width={387} open={isOpen} onClose={onClose}>
-      <Container>
-        <CropTitle>Editar foto</CropTitle>
-        <CropContainer>
-          <Cropper
-            image={src}
-            crop={crop}
-            zoom={zoom}
-            aspect={1}
-            cropShape="round"
-            showGrid={false}
-            onCropChange={setCrop}
-            onCropComplete={onCropComplete}
-            onZoomChange={setZoom}
-            objectFit="horizontal-cover"
+    <Container {...props}>
+      <CropTitle>Editar foto</CropTitle>
+      <ModalClose />
+
+      <CropContainer>
+        <Cropper
+          image={originalImage}
+          crop={crop}
+          zoom={zoom}
+          aspect={1}
+          cropShape="round"
+          showGrid={false}
+          onCropChange={setCrop}
+          onCropComplete={onCropComplete}
+          onZoomChange={setZoom}
+          objectFit="horizontal-cover"
+        />
+      </CropContainer>
+
+      <CropControlsContainer>
+        <CropInfo>Zoom</CropInfo>
+        <Controls>
+          <ControlButton onClick={handleMenusZoom}>
+            <Minus />
+          </ControlButton>
+          <Slider
+            style={{ color: colors.blue[800] }}
+            value={zoom}
+            min={1}
+            max={3}
+            step={0.1}
+            aria-labelledby="Zoom"
+            onChange={(e, zoom) => setZoom(Number(zoom))}
           />
-        </CropContainer>
+          <ControlButton onClick={handlePLusZoom}>
+            <Plus />
+          </ControlButton>
+        </Controls>
+      </CropControlsContainer>
 
-        <CropControlsContainer>
-          <CropInfo>Zoom</CropInfo>
-          <Controls>
-            <ControlButton onClick={handleMenusZoom}>
-              <Minus />
-            </ControlButton>
-            <Slider
-              style={{ color: colors.blue[800] }}
-              value={zoom}
-              min={1}
-              max={3}
-              step={0.1}
-              aria-labelledby="Zoom"
-              onChange={(e, zoom) => setZoom(Number(zoom))}
-            />
-            <ControlButton onClick={handlePLusZoom}>
-              <Plus />
-            </ControlButton>
-          </Controls>
-        </CropControlsContainer>
+      <StyledHR />
 
-        <StyledHR />
+      <ButtonsContainer>
+        <ModalCloseBtn asChild>
+          <Button variant="tertiary">Descartar</Button>
+        </ModalCloseBtn>
 
-        <ButtonsContainer>
-          <Button variant="tertiary" onClick={onClose}>
-            Descartar
+        <ModalCloseBtn asChild>
+          <Button className="save-image-editor-btn" onClick={handleSaveClick}>
+            Salvar
           </Button>
-          <Button onClick={handleSaveClick}>Salvar</Button>
-        </ButtonsContainer>
-      </Container>
-    </Modal>
+        </ModalCloseBtn>
+      </ButtonsContainer>
+    </Container>
   )
 }
 

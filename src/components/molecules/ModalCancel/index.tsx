@@ -5,14 +5,13 @@ import {
   DescriptionModal,
   DiscardBtn,
   HeadingModal,
+  ModalCloseCancelBtn,
 } from './style'
 import { DialogContentProps } from '@radix-ui/react-dialog'
 
-interface ModalCancelProps extends DialogContentProps {
-  onClose: () => void
-}
+type ModalCancelProps = DialogContentProps
 
-export function ModalCancel({ onClose, ...props }: ModalCancelProps) {
+export function ModalCancel(props: ModalCancelProps) {
   return (
     <ContainerModalCancel {...props}>
       <HeadingModal>Deseja descartar o cadastro?</HeadingModal>
@@ -21,9 +20,9 @@ export function ModalCancel({ onClose, ...props }: ModalCancelProps) {
       </DescriptionModal>
 
       <ContainerBtn>
-        <Button onClick={onClose} variant="secondary">
-          Cancelar
-        </Button>
+        <ModalCloseCancelBtn asChild>
+          <Button variant="secondary">Cancelar</Button>
+        </ModalCloseCancelBtn>
 
         <Button as={DiscardBtn} href="/">
           Descartar

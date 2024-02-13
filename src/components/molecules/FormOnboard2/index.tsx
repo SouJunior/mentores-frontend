@@ -13,7 +13,7 @@ import {
   StyledInfo,
   StyledInfoContainer,
 } from './styled'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import EditPhotoModal from '@/components/atoms/EditPhotoModal'
 import { Form } from 'formik'
 import { InputForm } from '@/components/atoms/InputForm'
@@ -22,6 +22,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { genders } from '@/data/static-info'
 import { Select } from '@/components/atoms/Select'
 import { useOnBoardingContext } from '@/context/OnBoardingContext'
+import { Modal } from '@/components/atoms/Modal'
 
 interface FormOnBoardProps {
   onStep?: Dispatch<SetStateAction<1 | 2>>
@@ -30,14 +31,7 @@ interface FormOnBoardProps {
 export default function FormOnboard2({ onStep }: FormOnBoardProps) {
   const { formik } = useOnBoardingContext()
 
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const isCompleted = Object.keys(formik.touched).length > 0
-
-  const handleOpenEditModal = () => {
-    setIsEditModalOpen(true)
-  }
-
-  const closeModal = () => setIsEditModalOpen(false)
 
   const handleImageEdit = (editedImage: string | null) => {
     formik.setFieldValue('profile', editedImage || '')
@@ -57,28 +51,29 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
         closeOnClick
         theme="colored"
       />
-      <Dotted>
-        <PhotoButton
-          size={80}
-          selectedPhoto={formik.values.profile}
-          onClick={handleOpenEditModal}
-        />
-        <StyledImportant>
-          Para inserir sua foto, clique aqui.<span className="last">*</span>
-        </StyledImportant>
-        <StyledInfo>Formato aceito: jpg ou png. Tamanho máx.: 8 MB.</StyledInfo>
-      </Dotted>
 
-      <EditPhotoModal
-        isOpen={isEditModalOpen}
-        selectedPhoto={formik.values.profile}
-        onAddPhoto={(photo) => {
-          formik.setFieldValue('profile', photo)
-        }}
-        onClose={closeModal}
-        onImageEdit={handleImageEdit}
-        onEditPhoto={() => handleOpenEditModal()}
-      />
+      <Modal.Root>
+        <Modal.Control asChild>
+          <Dotted>
+            <PhotoButton size={80} selectedPhoto={formik.values.profile} />
+
+            <StyledImportant>
+              Para inserir sua foto, clique aqui.<span className="last">*</span>
+            </StyledImportant>
+            <StyledInfo>
+              Formato aceito: jpg ou png. Tamanho máx.: 8 MB.
+            </StyledInfo>
+          </Dotted>
+        </Modal.Control>
+
+        <EditPhotoModal
+          selectedPhoto={formik.values.profile}
+          onAddPhoto={(photo) => {
+            formik.setFieldValue('profile', photo)
+          }}
+          onImageEdit={handleImageEdit}
+        />
+      </Modal.Root>
 
       <FormContainer>
         <Form>

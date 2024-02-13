@@ -5,7 +5,6 @@ import {
   StyledName,
   TitleContainer,
   ButtonsContainer,
-  InfoButton,
 } from './styled'
 import Image from 'next/image'
 import ModalSchedMentor from '../ModalSchedMentor'
@@ -14,6 +13,7 @@ import { IMentors } from '@/services/interfaces/IUseMentorsService'
 import userWithoutImage from '@/assets/userDefault.png'
 import { Tag } from '../Tag'
 import { Button } from '../Button'
+import { Modal } from '../Modal'
 
 interface MentorsProps {
   mentor: IMentors
@@ -34,7 +34,6 @@ export default function CardScheduling({ mentor }: MentorsProps) {
 
   return (
     <CardContainer>
-      <ModalSchedMentor onClose={handleModal} mentor={mentor} open={open} />
       <TitleContainer>
         <Image
           width={80}
@@ -60,7 +59,14 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         ) : (
           <Button disabled>Agendar Mentoria</Button>
         )}
-        <InfoButton onClick={handleModal}>Saiba mais</InfoButton>
+
+        <Modal.Root open={open} onOpenChange={handleModal}>
+          <Modal.Control asChild>
+            <Button variant="tertiary">Saiba mais</Button>
+          </Modal.Control>
+
+          <ModalSchedMentor mentor={mentor} />
+        </Modal.Root>
       </ButtonsContainer>
     </CardContainer>
   )

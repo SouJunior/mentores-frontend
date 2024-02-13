@@ -8,10 +8,12 @@ import { useRouter } from 'next/router'
 import { Modal } from '@/components/atoms/Modal'
 import {
   ModalButton,
+  ModalClose,
   ModalContainer,
   ModalDescription,
   ModalTitle,
 } from '../../styles/pages/home'
+import { Button } from '@/components/atoms/Button'
 
 export default function HomePage() {
   const [isConnectCalendly, setIsConnectCalendly] = useState(false)
@@ -36,24 +38,24 @@ export default function HomePage() {
       <DepoSection />
       <Footer />
 
-      <Modal
-        open={isConnectCalendly}
-        bgColor="#fff"
-        onClose={handleCloseModal}
-        height={286}
-        width={500}
-      >
+      <Modal.Root open={isConnectCalendly} onOpenChange={handleCloseModal}>
         <ModalContainer>
           <ModalTitle>Falta pouco para você se tornar um mentor.</ModalTitle>
           <ModalDescription>
             Para compartilhar seus horários disponíveis você deve criar a sua
             agenda pelo Calendly.
           </ModalDescription>
-          <ModalButton href="https://calendly.com/pt" target="_blank">
+          <Button
+            as={ModalButton}
+            href="https://calendly.com/pt"
+            target="_blank"
+          >
             Ir para o Calendly
-          </ModalButton>
+          </Button>
+
+          <ModalClose />
         </ModalContainer>
-      </Modal>
+      </Modal.Root>
     </>
   )
 }

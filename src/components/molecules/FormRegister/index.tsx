@@ -42,8 +42,7 @@ export function FormRegister() {
 
   const router = useRouter()
 
-  const handleModalEmail = () => setOpenEmail(true)
-  const closeModalEmail = () => setOpenEmail(false)
+  const handleModalEmail = () => setOpenEmail(!openEmail)
   const closeModalCancel = () => setOpenModalCancel(false)
 
   const handleSubmit = async (
@@ -131,6 +130,7 @@ export function FormRegister() {
             <ModalUserExistsButton href="/resetPassword">
               Recuperar senha
             </ModalUserExistsButton>
+            <Modal.Close />
           </ModalUserExistsContainer>
         </Modal.Root>
       )}
@@ -179,9 +179,10 @@ export function FormRegister() {
                 </TxtTerms>
               </ContainerTerms>
 
+              <Modal.Root open={openEmail} onOpenChange={handleModalEmail}>
+                <ModalEmail />
+              </Modal.Root>
 
-              {/* <ModalEmail
-                /> */}
               <ContainerBtn>
                 {formik.isSubmitting ? (
                   <ButtonLoading disabled>
@@ -198,11 +199,14 @@ export function FormRegister() {
                 >
                   Cancelar
                 </Button>
-              </ContainerBtn>
 
-              {/* <ModalCancel
-                onClose={closeModalCancel}
-              /> */}
+                <Modal.Root
+                  open={openModalCancel}
+                  onOpenChange={closeModalCancel}
+                >
+                  <ModalCancel />
+                </Modal.Root>
+              </ContainerBtn>
             </Form>
           </FormikProvider>
         </ContainerRegister>

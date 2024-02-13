@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const UserProfileButtom = styled.button`
+export const UserProfileContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
