@@ -13,6 +13,7 @@ import {
 } from 'react'
 
 import * as yup from 'yup'
+import { useAuthContext } from './Auth/AuthContext'
 
 const onBoardingSchema = yup.object({
   profile: yup.string().required('Obrigatório'),
@@ -40,6 +41,8 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
   const [specialties, setSpecialties] = useState<string[]>([])
   const [hasError, setHasError] = useState(false)
 
+  const { mentor } = useAuthContext()
+
   const { handle } = UserUpdateService()
   const router = useRouter()
 
@@ -63,6 +66,8 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
         specialties: values.specialties,
       })
       setHasError(false)
+
+      mentor.refetch()
       router.push('/?connect-calendly=true')
     } catch {
       handleError('Algum erro aconteceu. Entre em contato com a gente.')
