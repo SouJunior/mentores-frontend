@@ -19,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export default function MePage() {
   return (
-    <Tabs.Root orientation="vertical">
+    <Tabs.Root orientation="vertical" defaultValue="tab-personal-info">
       <EditPhotoProvider>
         <Container>
           <AsideContainer>
@@ -27,7 +27,7 @@ export default function MePage() {
 
             <AsideDivider />
 
-            <AsideNavContainer defaultValue="tab-personal-info">
+            <AsideNavContainer>
               <AsideNavItem value="tab-personal-info">
                 Informações pessoais
               </AsideNavItem>
