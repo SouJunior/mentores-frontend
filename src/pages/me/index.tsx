@@ -1,4 +1,6 @@
 import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab'
+import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab'
+import { EditPhotoProvider } from '@/context/EditPhotoContext'
 import {
   AsideContainer,
   AsideNavContainer,
@@ -10,33 +12,34 @@ import {
 } from '@/styles/pages/me'
 import * as Tabs from '@radix-ui/react-tabs'
 
-function GenericPage() {
+export default function MePage() {
   return (
     <Tabs.Root orientation="vertical">
-      <Container>
-        <AsideContainer>
-          <AsideTitle>Minha conta</AsideTitle>
+      <EditPhotoProvider>
+        <Container>
+          <AsideContainer>
+            <AsideTitle>Minha conta</AsideTitle>
 
-          <AsideDivider />
+            <AsideDivider />
 
-          <AsideNavContainer defaultValue={'tab-personal-info'}>
-            <AsideNavItem value="tab-personal-info">
-              Informações pessoais
-            </AsideNavItem>
-            <AsideNavItem value="tab-profile">Perfil</AsideNavItem>
-            <AsideNavItem value="tab-schedule">Agenda</AsideNavItem>
-            <AsideNavItem value="tab-password">Senha</AsideNavItem>
-          </AsideNavContainer>
-        </AsideContainer>
+            <AsideNavContainer defaultValue="tab-personal-info">
+              <AsideNavItem value="tab-personal-info">
+                Informações pessoais
+              </AsideNavItem>
+              <AsideNavItem value="tab-profile">Perfil</AsideNavItem>
+              <AsideNavItem value="tab-schedule">Agenda</AsideNavItem>
+              <AsideNavItem value="tab-password">Senha</AsideNavItem>
+            </AsideNavContainer>
+          </AsideContainer>
 
-        <ContentDivider />
+          <ContentDivider />
 
-        <main>
-          <PersonalInfoTab />
-        </main>
-      </Container>
+          <main>
+            <PersonalInfoTab />
+            <ProfileTab />
+          </main>
+        </Container>
+      </EditPhotoProvider>
     </Tabs.Root>
   )
 }
-
-export default GenericPage
