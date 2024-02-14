@@ -10,14 +10,29 @@ import { getCookie } from 'cookies-next'
 import { sessionNameUserInfo } from '@/data/static-info'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
+import { AxiosError } from 'axios'
+import { jwtDecode } from 'jwt-decode'
+import UserLoginService from '@/services/user/userLoginService'
 
 export const AuthContent = createContext({} as IAuthContextType)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [userSession, setUserSession] = useState<UserSessionInfo | null>(null)
+  const { logout } = UserLoginService()
 
   useEffect(() => {
     const storedUser = getCookie(sessionNameUserInfo)?.toString()
+    const decodedToken = storedUser && jwtDecode(JSON.parse(storedUser).token)
+    const isTokenExpires =
+      decodedToken &&
+      decodedToken.exp &&
+      decodedToken.exp <= Math.floor(Date.now() / 1000)
+
+    if (isTokenExpires) {
+      logout()
+      setUserSession(null)
+      return
+    }
 
     if (storedUser) {
       let userParsed
@@ -28,6 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       setUserSession(userParsed)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const mentorResponse = useQuery({
@@ -38,6 +54,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     enabled: !!userSession?.id,
   })
+
+  if (
+    mentorResponse.error instanceof AxiosError &&
+    mentorResponse.error.response?.status === 404
+  ) {
+    logout()
+  }
 
   return (
     <AuthContent.Provider
