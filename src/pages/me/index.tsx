@@ -1,5 +1,6 @@
 import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab'
 import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab'
+import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab'
 import { EditPhotoProvider } from '@/context/EditPhotoContext'
 import {
   AsideContainer,
@@ -37,6 +38,7 @@ export default function MePage() {
           <main>
             <PersonalInfoTab />
             <ProfileTab />
+            <ScheduleTab />
           </main>
         </Container>
       </EditPhotoProvider>
