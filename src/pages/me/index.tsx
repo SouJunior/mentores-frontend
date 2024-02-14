@@ -1,3 +1,4 @@
+import { PasswordTab } from '@/components/organisms/AccountPage/PasswordTab'
 import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab'
 import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab'
 import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab'
@@ -12,6 +13,9 @@ import {
   ContentDivider,
 } from '@/styles/pages/me'
 import * as Tabs from '@radix-ui/react-tabs'
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function MePage() {
   return (
@@ -39,6 +43,14 @@ export default function MePage() {
             <PersonalInfoTab />
             <ProfileTab />
             <ScheduleTab />
+            <PasswordTab />
+
+            <ToastContainer
+              autoClose={3500}
+              hideProgressBar={true}
+              closeOnClick
+              theme="colored"
+            />
           </main>
         </Container>
       </EditPhotoProvider>

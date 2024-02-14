@@ -7,3 +7,9 @@ export type UserUpdateDTO = {
   aboutMe?: string
   fullName?: string
 }
+
+export type UserUpdatePasswordDTO = {
+  oldPassword: string
+  password: string
+  confirmPassword: string
+}
