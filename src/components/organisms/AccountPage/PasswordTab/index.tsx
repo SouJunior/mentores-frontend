@@ -21,6 +21,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Spinner } from '@/components/atoms/Spinner'
 import { throwErrorMessages } from '@/utils/throw-error-messages'
+import { useAuthContext } from '@/context/Auth/AuthContext'
 
 const passwordValidation = yup
   .string()
@@ -44,6 +45,7 @@ export type PasswordFormData = yup.InferType<typeof passwordTabSchema>
 
 export function PasswordTab() {
   const { updatePassword } = UserUpdateService()
+  const { mentor } = useAuthContext()
   const [openModalCancel, setOpenModalCancel] = useState(false)
   const router = useRouter()
 
@@ -58,6 +60,7 @@ export function PasswordTab() {
         confirmPassword: data.confirmNewPassword,
       })
 
+      mentor.refetch()
       resetForm()
     } catch (err) {
       if (err instanceof AxiosError) {

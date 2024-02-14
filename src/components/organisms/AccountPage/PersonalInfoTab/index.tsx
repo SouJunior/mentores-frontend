@@ -22,6 +22,7 @@ import { ModalCancel } from '@/components/molecules/ModalCancel'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Spinner } from '@/components/atoms/Spinner'
+import { useAuthContext } from '@/context/Auth/AuthContext'
 
 const personalInfoSchema = yup.object({
   name: yup.string().optional(),
@@ -34,6 +35,7 @@ export type PersonalInfoFormData = yup.InferType<typeof personalInfoSchema>
 
 export function PersonalInfoTab() {
   const { handle } = UserUpdateService()
+  const { mentor } = useAuthContext()
   const [openModalCancel, setOpenModalCancel] = useState(false)
   const router = useRouter()
 
@@ -47,6 +49,7 @@ export function PersonalInfoTab() {
         gender: data.gender,
       })
 
+      mentor.refetch()
       resetForm()
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -56,7 +59,11 @@ export function PersonalInfoTab() {
   }
 
   const formik = useFormik<PersonalInfoFormData>({
-    initialValues: { gender: '', name: '' },
+    initialValues: {
+      gender: '',
+      name: mentor.data?.fullName,
+      email: mentor.data?.email,
+    },
     onSubmit: handleUpdatePersonalInfo,
     validationSchema: personalInfoSchema,
   })

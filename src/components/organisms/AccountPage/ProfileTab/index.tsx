@@ -48,6 +48,7 @@ export function ProfileTab() {
         profile: data.profile,
       })
 
+      mentor.refetch()
       resetForm()
     } catch (err) {
       if (err instanceof AxiosError) {

@@ -12,10 +12,13 @@ import {
 } from './styles'
 import { useState } from 'react'
 import { PersonalInfoFormData } from '..'
+import { useAuthContext } from '@/context/Auth/AuthContext'
 
 export function FormFields() {
   const [showCalendar, setShowCalendar] = useState(false)
   const formik = useFormikContext<PersonalInfoFormData>()
+
+  const { mentor } = useAuthContext()
 
   return (
     <>
@@ -40,9 +43,11 @@ export function FormFields() {
             disabled
             className={formik.errors.dateOfBirth && 'error'}
           >
-            {formik.values.dateOfBirth ? (
+            {formik.values.dateOfBirth || mentor.data?.dateOfBirth ? (
               <span>
-                {dayjs(formik.values.dateOfBirth).format('DD/MM/YYYY')}
+                {dayjs(
+                  formik.values.dateOfBirth ?? mentor.data?.dateOfBirth,
+                ).format('DD/MM/YYYY')}
               </span>
             ) : (
               <span data-placeholder>dd/mm/aaaa</span>
@@ -76,6 +81,7 @@ export function FormFields() {
         type="input"
         placeholder="Preencha com seu e-mail"
         disabled
+        defaultValue={mentor.data?.email}
       />
 
       <SelectInputContainer>

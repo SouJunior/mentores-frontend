@@ -50,7 +50,9 @@ export function FormFields() {
     <ContentContainer>
       <Modal.Root>
         <ButtonEditPhoto>
-          <PhotoButton selectedPhoto={formik.values.profile ?? ''} />
+          <PhotoButton
+            selectedPhoto={formik.values.profile ?? mentor.data?.profile}
+          />
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
