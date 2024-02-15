@@ -16,8 +16,9 @@ import { Modal } from '@/components/atoms/Modal'
 import CheckIcon from '@mui/icons-material/Check'
 import { specialties as specialtiesOptions } from '@/data/static-info'
 import { useAuthContext } from '@/context/Auth/AuthContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { InputForm } from '@/components/atoms/InputForm'
+import { useEditPhotoContext } from '@/context/EditPhotoContext'
 
 export function FormFields() {
   const { mentor } = useAuthContext()
@@ -46,6 +47,13 @@ export function FormFields() {
     }
   }
 
+  const { setOriginalImage } = useEditPhotoContext()
+
+  useEffect(() => {
+    setOriginalImage(mentor.data?.profile ?? '')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mentor.data?.profile])
+
   return (
     <ContentContainer>
       <Modal.Root>
@@ -70,7 +78,7 @@ export function FormFields() {
         </ButtonEditPhoto>
 
         <EditPhotoModal
-          selectedPhoto={formik.values.profile ?? ''}
+          selectedPhoto={formik.values.profile ?? mentor.data?.profile ?? ''}
           onAddPhoto={(photo) => {
             formik.setFieldValue('profile', photo)
           }}

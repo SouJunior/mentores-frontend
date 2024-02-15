@@ -28,6 +28,7 @@ export function FormFields() {
         name="name"
         type="input"
         placeholder="Preencha com seu nome"
+        defaultValue={mentor.data?.fullName}
       />
 
       <Calendar.Root
@@ -91,7 +92,7 @@ export function FormFields() {
         </span>
         <Select
           placeholder="Gênero"
-          value={formik.values.gender}
+          value={formik.values.gender ?? mentor.data?.gender}
           onValueChange={(value) => formik.setFieldValue('gender', value)}
         >
           {genders.map((gender) => (

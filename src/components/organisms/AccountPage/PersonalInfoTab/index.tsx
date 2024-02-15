@@ -59,11 +59,7 @@ export function PersonalInfoTab() {
   }
 
   const formik = useFormik<PersonalInfoFormData>({
-    initialValues: {
-      gender: '',
-      name: mentor.data?.fullName,
-      email: mentor.data?.email,
-    },
+    initialValues: {},
     onSubmit: handleUpdatePersonalInfo,
     validationSchema: personalInfoSchema,
   })

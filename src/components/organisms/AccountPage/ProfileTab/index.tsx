@@ -58,11 +58,7 @@ export function ProfileTab() {
   }
 
   const formik = useFormik<ProfileFormData>({
-    initialValues: {
-      specialties: mentor.data?.specialties,
-      profile: mentor.data?.profile,
-      description: mentor.data?.aboutMe,
-    },
+    initialValues: {},
     onSubmit: handleUpdateProfile,
     validationSchema: profileSchema,
   })
