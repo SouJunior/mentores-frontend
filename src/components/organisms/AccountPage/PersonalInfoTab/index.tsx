@@ -78,7 +78,7 @@ export function PersonalInfoTab() {
   }
 
   return (
-    <TabContainer value="tab-personal-info">
+    <TabContainer value="personal-info">
       <TitleTab>Informações de cadastro</TitleTab>
       <SubtitleTab>
         <span>*</span> Indica um campo obrigatório

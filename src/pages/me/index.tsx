@@ -16,6 +16,8 @@ import {
   ContainerSpinnerLoading,
 } from '@/styles/pages/me'
 import * as Tabs from '@radix-ui/react-tabs'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -23,8 +25,26 @@ import 'react-toastify/dist/ReactToastify.css'
 export default function MePage() {
   const { mentor } = useAuthContext()
 
+  const router = useRouter()
+  const initialTab = router.query.tab as string
+  const [activeTab, setActiveTab] = useState(initialTab ?? 'personal-info')
+
+  function handleTabChange(value: string) {
+    setActiveTab(value)
+    router.push({ query: { tab: value } })
+  }
+
+  useEffect(() => {
+    setActiveTab(router.query.tab as string)
+  }, [router.query.tab])
+
   return (
-    <Tabs.Root orientation="vertical" defaultValue="tab-personal-info">
+    <Tabs.Root
+      value={activeTab}
+      onValueChange={handleTabChange}
+      defaultValue="personal-info"
+      orientation="vertical"
+    >
       <EditPhotoProvider>
         <Container>
           <AsideContainer>
@@ -33,12 +53,12 @@ export default function MePage() {
             <AsideDivider />
 
             <AsideNavContainer>
-              <AsideNavItem value="tab-personal-info">
+              <AsideNavItem value="personal-info">
                 Informações pessoais
               </AsideNavItem>
-              <AsideNavItem value="tab-profile">Perfil</AsideNavItem>
-              <AsideNavItem value="tab-schedule">Agenda</AsideNavItem>
-              <AsideNavItem value="tab-password">Senha</AsideNavItem>
+              <AsideNavItem value="profile">Perfil</AsideNavItem>
+              <AsideNavItem value="schedule">Agenda</AsideNavItem>
+              <AsideNavItem value="password">Senha</AsideNavItem>
             </AsideNavContainer>
           </AsideContainer>
 

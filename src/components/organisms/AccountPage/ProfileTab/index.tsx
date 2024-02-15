@@ -77,7 +77,7 @@ export function ProfileTab() {
   }
 
   return (
-    <TabContainer value="tab-profile">
+    <TabContainer value="profile">
       <TitleTab>Perfil</TitleTab>
       <SubtitleTab>
         <span>*</span> Indica um campo obrigatório

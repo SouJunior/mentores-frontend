@@ -94,7 +94,7 @@ export function PasswordTab() {
   }
 
   return (
-    <TabContainer value="tab-password">
+    <TabContainer value="password">
       <TitleTab>Senha</TitleTab>
       <SubtitleTab>
         <span>*</span> Indica um campo obrigatório

@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 export function ScheduleTab() {
   return (
-    <ScheduleTabContainer value="tab-schedule">
+    <ScheduleTabContainer value="schedule">
       <TitleTab>Agenda</TitleTab>
 
       <ScheduleContentContainer>
