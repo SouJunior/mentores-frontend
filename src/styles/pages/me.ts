@@ -65,3 +65,21 @@ export const AsideNavItem = styled(Tabs.Trigger)`
     background-color: ${(props) => props.theme.colors.gray[200]};
   }
 `
+
+export const ContainerSpinnerLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  .spinner {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .spinner::before {
+    border-color: ${(props) => props.theme.colors.blue[800]};
+  }
+`

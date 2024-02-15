@@ -1,7 +1,9 @@
+import { Spinner } from '@/components/atoms/Spinner'
 import { PasswordTab } from '@/components/organisms/AccountPage/PasswordTab'
 import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab'
 import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab'
 import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab'
+import { useAuthContext } from '@/context/Auth/AuthContext'
 import { EditPhotoProvider } from '@/context/EditPhotoContext'
 import {
   AsideContainer,
@@ -11,6 +13,7 @@ import {
   Container,
   AsideDivider,
   ContentDivider,
+  ContainerSpinnerLoading,
 } from '@/styles/pages/me'
 import * as Tabs from '@radix-ui/react-tabs'
 import { ToastContainer } from 'react-toastify'
@@ -18,6 +21,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 export default function MePage() {
+  const { mentor } = useAuthContext()
+
   return (
     <Tabs.Root orientation="vertical" defaultValue="tab-personal-info">
       <EditPhotoProvider>
@@ -40,10 +45,18 @@ export default function MePage() {
           <ContentDivider />
 
           <main>
-            <PersonalInfoTab />
-            <ProfileTab />
-            <ScheduleTab />
-            <PasswordTab />
+            {mentor.isLoading ? (
+              <ContainerSpinnerLoading>
+                <Spinner className="spinner" />
+              </ContainerSpinnerLoading>
+            ) : (
+              <>
+                <PersonalInfoTab />
+                <ProfileTab />
+                <ScheduleTab />
+                <PasswordTab />
+              </>
+            )}
 
             <ToastContainer
               autoClose={3500}
