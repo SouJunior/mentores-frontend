@@ -53,7 +53,7 @@ export function FormRegister() {
       await api.post('/mentor', {
         fullName: values.name,
         email: values.email,
-        dateOfBirth: values.dataBirthday,
+        dateOfBirth: values.dateBirthday,
         emailConfirm: values.confirmEmail,
         password: values.password,
         passwordConfirmation: values.confirmPassword,

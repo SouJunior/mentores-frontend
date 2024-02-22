@@ -33,14 +33,14 @@ export function FormRegisterFields() {
         open={showCalendar}
         onOpenChange={() => setShowCalendar(!showCalendar)}
       >
-        <DatePickerContainer className={formik.errors.dataBirthday && 'error'}>
+        <DatePickerContainer className={formik.errors.dateBirthday && 'error'}>
           <span>
             Data de nascimento <span>*</span>
           </span>
-          <Calendar.Control className={formik.errors.dataBirthday && 'error'}>
-            {formik.values.dataBirthday ? (
+          <Calendar.Control className={formik.errors.dateBirthday && 'error'}>
+            {formik.values.dateBirthday ? (
               <span>
-                {dayjs(formik.values.dataBirthday).format('DD/MM/YYYY')}
+                {dayjs(formik.values.dateBirthday).format('DD/MM/YYYY')}
               </span>
             ) : (
               <span data-placeholder>dd/mm/aaaa</span>
@@ -48,17 +48,17 @@ export function FormRegisterFields() {
             <EventRoundedIcon />
           </Calendar.Control>
 
-          {formik.errors.dataBirthday && (
-            <span className="error-message">{formik.errors.dataBirthday}</span>
+          {formik.errors.dateBirthday && (
+            <span className="error-message">{formik.errors.dateBirthday}</span>
           )}
         </DatePickerContainer>
 
         <Calendar.Content
-          selected={formik.values.dataBirthday}
+          selected={formik.values.dateBirthday}
           onSelected={(date: Date) => {
             formik.setValues({
               ...formik.values,
-              dataBirthday: date,
+              dateBirthday: date,
             })
             setShowCalendar(false)
           }}
