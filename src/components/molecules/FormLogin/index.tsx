@@ -28,6 +28,7 @@ import { useAuthContext } from '@/context/Auth/AuthContext'
 import { throwErrorMessages } from '@/utils/throw-error-messages'
 import { UserAlreadyLoggedIn } from '@/services/errors/user-already-logged-in'
 import { handleError } from '@/utils/handleError'
+import { errorTranslations } from '@/services/errors/error-messages-translations'
 
 const loginSchema = yup.object({
   email: yup.string().email('E-mail inválido').required('Obrigatório'),
@@ -75,14 +76,11 @@ export function FormLogin() {
     } catch (err) {
       if (err instanceof AxiosError) {
         const messageKey = err.response?.data.message.toLowerCase()
-        const messages = {
-          'invalid e-mail or password': 'Email ou senha incorretos.',
-          "you typed the password incorrectly and will be blocked in five tries. to register a new password click on 'forgot my password'":
-            "Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'.",
-          "your account access is still blocked, because you dont redefined your password after five incorrect tries, please, click on 'forgot my password' to begin the account restoration.":
-            "Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em 'Esqueci minha senha'.",
-        }
-        throwErrorMessages({ messages, currentMessageKey: messageKey })
+
+        throwErrorMessages({
+          messages: errorTranslations,
+          currentMessageKey: messageKey,
+        })
       }
 
       if (err instanceof UserAlreadyLoggedIn) {

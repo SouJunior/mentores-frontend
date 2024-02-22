@@ -34,6 +34,7 @@ import { Modal } from '@/components/atoms/Modal'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { errorTranslations } from '@/services/errors/error-messages-translations'
 
 export function FormRegister() {
   const [openModalCancel, setOpenModalCancel] = useState(false)
@@ -62,20 +63,17 @@ export function FormRegister() {
       handleModalEmail()
     } catch (error) {
       if (error instanceof AxiosError) {
-        const message = error.response?.data.message
-        const messages = {
-          'The date must be before the current date':
-            'Data de nascimento inválida',
-          'Bad Request: User already exists':
-            'O e-mail informado já possui cadastro.',
-        }
+        const messageKey = error.response?.data.message
 
-        if (message === 'Bad Request: User already exists') {
+        if (messageKey === 'Bad Request: User already exists') {
           setIsUserAlreadyExists(true)
           return
         }
 
-        throwErrorMessages({ messages, currentMessageKey: message })
+        throwErrorMessages({
+          messages: errorTranslations,
+          currentMessageKey: messageKey,
+        })
       }
     }
   }
