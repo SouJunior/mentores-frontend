@@ -1,8 +1,12 @@
 import axios from 'axios'
 
-const serverUrl = 'https://mentores-backend.soujunior.tech'
-// const serverUrl = 'http://localhost:3003'
+type NodeEnv = 'development' | 'production'
+
+const serverUrl = {
+  development: 'http://localhost:3003',
+  production: 'https://mentores-backend.soujunior.tech',
+}
 
 export const api = axios.create({
-  baseURL: serverUrl,
+  baseURL: serverUrl[process.env.NODE_ENV as NodeEnv],
 })
