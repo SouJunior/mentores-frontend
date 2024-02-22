@@ -13,15 +13,11 @@ import onBoardImage from '@/assets/onBoarding/Ilustrações.svg'
 import GridSpecialities from '@/components/atoms/GridSpecialities'
 import PerfilTab from '@/components/molecules/PerfilTab'
 import { useState } from 'react'
-import { OnBoardingProvider } from '@/context/OnBoardingContext'
+import { OnBoardingProvider, StepNumber } from '@/context/OnBoardingContext'
 import { EditPhotoProvider } from '@/context/EditPhotoContext'
 
 export default function OnBoarding() {
-  const [step, setStep] = useState<1 | 2>(1)
-
-  const changeSteps = () => {
-    setStep(2)
-  }
+  const [step, setStep] = useState<StepNumber>(1)
 
   return (
     <ContainerOnBoarding>
@@ -49,7 +45,7 @@ export default function OnBoarding() {
 
           <OnBoardingProvider>
             <EditPhotoProvider>
-              {step === 1 && <GridSpecialities stepNumber={changeSteps} />}
+              {step === 1 && <GridSpecialities onStep={setStep} />}
               {step === 2 && <PerfilTab onStep={setStep} />}
             </EditPhotoProvider>
           </OnBoardingProvider>

@@ -26,6 +26,7 @@ const onBoardingSchema = yup.object({
 })
 
 type OnBoardingDataType = yup.InferType<typeof onBoardingSchema>
+export type StepNumber = 1 | 2
 
 interface OnBoardingContextType {
   specialties: string[]
