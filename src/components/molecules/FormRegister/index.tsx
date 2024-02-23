@@ -65,7 +65,7 @@ export function FormRegister() {
       if (error instanceof AxiosError) {
         const messageKey = error.response?.data.message
 
-        if (messageKey === 'Bad Request: User already exists') {
+        if (messageKey.match(/user|exists/gi)) {
           setIsUserAlreadyExists(true)
           return
         }
