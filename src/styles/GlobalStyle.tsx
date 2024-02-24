@@ -46,4 +46,36 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     margin: 0 auto;
   }
+
+  .Toastify__toast-container {
+    max-width: 35rem;
+    --toastify-toast-width: 100%;
+    --toastify-z-index: 99999;
+  }
+
+  #toast-error {
+    background-color: ${(props) => props.theme.colors.red[600]};
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    .Toastify__toast-body {
+      padding: 0;
+      font-size: 1rem;
+      max-width: 30.875rem;
+      line-height: 2rem;
+    }
+
+    .Toastify__close-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      line-height: 0;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
 `

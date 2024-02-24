@@ -95,10 +95,19 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   cursor: pointer;
   line-height: 0;
 
+  @media ${device.mobileL} {
+    gap: 0.5rem;
+  }
+
   img {
     width: 2.75rem;
     height: 2.75rem;
     border-radius: 50%;
+
+    @media ${device.mobileL} {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   svg {
@@ -121,16 +130,39 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
 export const DropdownMenuContent = styled(DropdownMenu.Content)`
   padding: 0.5rem 0;
   border-radius: 0.5rem;
-  background: #fff;
+  background: ${(props) => props.theme.colors.white};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: #323232;
+  color: ${(props) => props.theme.colors.black[200]};
   display: flex;
   flex-direction: column;
+  z-index: 1;
 
   width: 17rem;
 
+  .menu-burger-links {
+    display: none;
+    flex-direction: column;
+
+    a {
+      padding: 1rem;
+      line-height: 1.2rem;
+      color: ${(props) => props.theme.colors.blue[800]};
+      outline: 0;
+    }
+
+    @media ${device.desktopXS} {
+      display: flex;
+    }
+  }
+
   span {
     padding: 0 1rem;
+  }
+
+  @media ${device.desktopXS} {
+    width: var(--radix-dropdown-menu-content-available-width);
+    border-radius: 0;
+    margin-top: -3px;
   }
 `
 
@@ -145,6 +177,14 @@ export const DropdownMenuSeparator = styled(DropdownMenu.Separator)`
   height: 1px;
   background-color: ${(props) => props.theme.colors.gray[600]};
   margin: 0.5rem 0;
+
+  &.with-user-log-in {
+    display: none;
+
+    @media ${device.desktopXS} {
+      display: block;
+    }
+  }
 `
 
 const baseBtnStyles = css`
@@ -164,6 +204,10 @@ const baseBtnStyles = css`
 
 export const LinkUserAccount = styled(Link)`
   ${baseBtnStyles}
+
+  @media ${device.desktopXS} {
+    display: none;
+  }
 
   &:hover,
   &:focus {
@@ -186,6 +230,11 @@ export const MenuBurgerTrigger = styled(DropdownMenu.Trigger)`
 
   color: ${(props) => props.theme.colors.blue[800]};
   line-height: 0;
+  transition: transform 0.3s;
+
+  &[data-state='open'] {
+    transform: rotate(90deg);
+  }
 
   svg {
     width: 2.5rem;

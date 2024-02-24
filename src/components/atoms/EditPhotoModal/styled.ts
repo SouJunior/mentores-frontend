@@ -1,17 +1,19 @@
 import styled from 'styled-components'
 import { Button } from '../Button'
+import { Modal } from '../Modal'
 
-export const EditPhotoContainer = styled.div`
+export const EditPhotoContainer = styled(Modal.Content)`
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
-  width: 387px;
+  max-width: 387px;
+  width: 100%;
   padding: 1.5rem;
-  padding-top: 0;
+  position: relative;
 `
 
-export const StyledInfo = styled.span`
+export const StyledInfo = styled(Modal.Title)`
   width: 100%;
   font-size: 20px;
   font-weight: 500;
@@ -77,4 +79,16 @@ export const ActionButton = styled.button`
     background-color: ${(props) => props.theme.colors.gray[200]};
     color: ${(props) => props.theme.colors.gray[600]};
   }
+`
+
+export const ModalCloseButton = styled(Modal.Close)`
+  top: 1.5rem;
+  right: 1.5rem;
+`
+
+export const ModalCloseSavePhoto = styled(Modal.Close)`
+  position: static;
+  background-color: ${(props) => props.theme.colors.blue[800]};
+  color: ${(props) => props.theme.colors.white};
+  line-height: 0.7rem;
 `

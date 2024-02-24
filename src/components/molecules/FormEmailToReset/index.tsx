@@ -9,9 +9,12 @@ import { UserPasswordServiceDTO } from '@/services/interfaces/IUsePasswordResetS
 import { resetPasswordSchema } from '../../../utils/resetPassSchema'
 import ModalResetPass from '../ModalResetPass'
 import Link from 'next/link'
+import { useState } from 'react'
+import { Modal } from '@/components/atoms/Modal'
 
 export default function FormEmailToReset() {
-  const { sendResetLink, closeModal, isModalOpen } = usePasswordResetService()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { sendResetLink } = usePasswordResetService()
 
   const initialValues = {
     email: '',
@@ -22,6 +25,7 @@ export default function FormEmailToReset() {
     onSubmit: async (data: UserPasswordServiceDTO, { resetForm }) => {
       try {
         await sendResetLink(data)
+        setIsModalOpen(true)
         resetForm()
       } catch (error) {
         console.log(error)
@@ -57,7 +61,9 @@ export default function FormEmailToReset() {
         <Link href="/login">Voltar ao login</Link>
       </FormWrapper>
 
-      <ModalResetPass open={isModalOpen} onClose={closeModal} height={700} />
+      <Modal.Root open={isModalOpen} onOpenChange={() => setIsModalOpen(false)}>
+        <ModalResetPass />
+      </Modal.Root>
     </ContainerForm>
   )
 }

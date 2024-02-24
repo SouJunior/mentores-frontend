@@ -1,8 +1,9 @@
-import { toast } from 'react-toastify'
+import { ToastOptions, toast } from 'react-toastify'
 
-export const handleError = (message: string) => {
+export const handleError = (message: string, options?: ToastOptions) => {
   toast.error(message, {
     position: toast.POSITION.TOP_CENTER,
-    toastId: 'customId',
+    toastId: 'toast-error',
+    ...options,
   })
 }

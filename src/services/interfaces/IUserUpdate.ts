@@ -5,8 +5,5 @@ export type UserUpdateDTO = {
   profileKey?: string
   registerComplete?: boolean
   gender?: string
-}
-
-export interface IUserUpdate {
-  handle: (data: UserUpdateDTO) => Promise<boolean>
+  aboutMe?: string
 }

@@ -1,3 +1,4 @@
+import { Button } from '@/components/atoms/Button'
 import styled from 'styled-components'
 
 export const ContainerForm = styled.div`
@@ -103,8 +104,13 @@ export const CallToRegisterText = styled.p`
   }
 `
 
-export const BlockedAccountError = styled.p`
-  color: ${(props) => props.theme.colors.red[500]};
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
+export const ButtonLoading = styled(Button)`
+  height: 43px;
+  padding: 0;
+
+  &:disabled {
+    cursor: wait;
+    background-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${(props) => props.theme.colors.blue[800]};
+  }
 `

@@ -18,14 +18,24 @@ import {
   SignOutBtn,
 } from './style'
 import { UserAvatar } from '@/components/atoms/UserAvatar'
-import useUser from '@/context/Auth/useUser'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { Menu } from '@mui/icons-material'
 import { useState } from 'react'
+import { useAuthContext } from '@/context/Auth/AuthContext'
+import UserLoginService from '@/services/user/userLoginService'
+import { useBreakpoint } from '@/hooks/useBreakpoint'
+import { breakpoints } from '@/styles/theme'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { user, logout } = useUser()
+  const { userSession, mentor, setUserSession } = useAuthContext()
+  const { logout } = UserLoginService()
+  const breakpoint = useBreakpoint()
+
+  function handleLogoutUser() {
+    logout()
+    setUserSession(null)
+  }
 
   return (
     <ContainerHeader>
@@ -41,21 +51,50 @@ export function Header() {
         </div>
       </nav>
 
-      {user != null ? (
-        <DropdownMenu.Root modal={false}>
+      {userSession != null ? (
+        <DropdownMenu.Root
+          modal={breakpoint <= breakpoints.desktopXS}
+          open={isMenuOpen}
+          onOpenChange={setIsMenuOpen}
+        >
           <DropdownMenuTrigger>
             <UserAvatar />
           </DropdownMenuTrigger>
 
+          {isMenuOpen && <MenuBurgerOverlay aria-hidden />}
+
           <DropdownMenu.Portal>
-            <DropdownMenuContent side="bottom" align="end" sideOffset={20}>
-              <DropdownMenuLabel>{user?.fullName}</DropdownMenuLabel>
+            <DropdownMenuContent
+              side="bottom"
+              align={breakpoint <= breakpoints.desktopXS ? 'center' : 'end'}
+              sideOffset={20}
+            >
+              <DropdownMenuLabel>{mentor.data?.fullName}</DropdownMenuLabel>
 
               <span>Mentor</span>
               <DropdownMenuSeparator />
 
-              <LinkUserAccount href="/genericPage">Minha conta</LinkUserAccount>
-              <SignOutBtn onClick={logout}>Sair</SignOutBtn>
+              <DropdownMenu.Item asChild>
+                <LinkUserAccount href="/genericPage">
+                  Minha conta
+                </LinkUserAccount>
+              </DropdownMenu.Item>
+
+              <div className="menu-burger-links">
+                <DropdownMenu.Item asChild>
+                  <Link href="/#onboarding">Como Funciona</Link>
+                </DropdownMenu.Item>
+
+                <DropdownMenu.Item asChild>
+                  <Link href="/#mentor">Encontre Seu Mentor</Link>
+                </DropdownMenu.Item>
+              </div>
+
+              <DropdownMenuSeparator className="with-user-log-in" />
+
+              <DropdownMenu.Item asChild>
+                <SignOutBtn onClick={handleLogoutUser}>Sair</SignOutBtn>
+              </DropdownMenu.Item>
             </DropdownMenuContent>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
@@ -71,40 +110,42 @@ export function Header() {
       )}
 
       {/* Mobile menu */}
-      <DropdownMenu.Root open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-        <MenuBurgerTrigger>
-          <Menu />
-        </MenuBurgerTrigger>
+      {!userSession && (
+        <DropdownMenu.Root open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+          <MenuBurgerTrigger>
+            <Menu />
+          </MenuBurgerTrigger>
 
-        {isMenuOpen && <MenuBurgerOverlay aria-hidden />}
+          {isMenuOpen && <MenuBurgerOverlay aria-hidden />}
 
-        <MenuBurgerContent sideOffset={20}>
-          <div className="menu-burger-links">
-            <DropdownMenu.Item asChild>
-              <Link href="/#onboarding">Como Funciona</Link>
-            </DropdownMenu.Item>
+          <MenuBurgerContent sideOffset={20}>
+            <div className="menu-burger-links">
+              <DropdownMenu.Item asChild>
+                <Link href="/#onboarding">Como Funciona</Link>
+              </DropdownMenu.Item>
 
-            <DropdownMenu.Item asChild>
-              <Link href="/#mentor">Encontre Seu Mentor</Link>
-            </DropdownMenu.Item>
-          </div>
+              <DropdownMenu.Item asChild>
+                <Link href="/#mentor">Encontre Seu Mentor</Link>
+              </DropdownMenu.Item>
+            </div>
 
-          <Divider />
+            <Divider />
 
-          <GroupBtnMobile>
-            <DropdownMenu.Item asChild>
-              <Button as={Link} href="/login" variant="secondary">
-                Login mentores
-              </Button>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item asChild>
-              <Button as={Link} href="/cadastro">
-                Cadastro mentores
-              </Button>
-            </DropdownMenu.Item>
-          </GroupBtnMobile>
-        </MenuBurgerContent>
-      </DropdownMenu.Root>
+            <GroupBtnMobile>
+              <DropdownMenu.Item asChild>
+                <Button as={Link} href="/login" variant="secondary">
+                  Login mentores
+                </Button>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item asChild>
+                <Button as={Link} href="/cadastro">
+                  Cadastro mentores
+                </Button>
+              </DropdownMenu.Item>
+            </GroupBtnMobile>
+          </MenuBurgerContent>
+        </DropdownMenu.Root>
+      )}
     </ContainerHeader>
   )
 }

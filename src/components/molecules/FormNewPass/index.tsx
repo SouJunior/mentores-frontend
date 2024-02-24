@@ -13,7 +13,6 @@ import {
   MessagesContainer,
   WrapperInput,
 } from './styled'
-import { setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
 import { SetNewPasswordDTO } from '@/services/interfaces/IUserSetNewPassword'
 import setNewPasswordService from '@/services/user/useSetNewPassword'
@@ -46,7 +45,6 @@ export default function FormNewPass() {
     validationSchema: setNewPassSchema,
     onSubmit: async (data: SetNewPasswordDTO, { resetForm }) => {
       await handle(data, { code, email })
-      setCookie('disable', 'false')
       resetForm()
       setToast(true)
     },

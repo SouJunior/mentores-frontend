@@ -14,7 +14,7 @@ export function CardMentor({ mentor }: CardMentorProps) {
   const { colors } = useTheme()
 
   const splitMentorName = mentor.fullName.split(' ')
-  const hasValidCalendly = mentor.calendlyName || mentor.agendaName
+  const hasValidCalendly = mentor.calendlyName && mentor.agendaName
 
   return (
     <Card

@@ -1,31 +1,14 @@
-import {
-  IUsePasswordService,
-  UserPasswordServiceDTO,
-} from '../interfaces/IUsePasswordResetServices'
-import { useState } from 'react'
+import { UserPasswordServiceDTO } from '../interfaces/IUsePasswordResetServices'
 import { api } from '@/lib/axios'
 
-const usePasswordResetService = (): IUsePasswordService => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
+const usePasswordResetService = () => {
   const sendResetLink = async (data: UserPasswordServiceDTO) => {
-    try {
-      const email = data.email
-      const response = await api.post(`/mentor/restoreAccount/${email}`)
-      if (response.status === 201) {
-        setIsModalOpen(true)
-        console.log('Email de recuperação enviado com sucesso!')
-      }
-    } catch (error) {
-      console.log('Erro ao enviar o email de recuperação:', error)
-    }
+    const email = data.email
+    const response = await api.post(`/mentor/restoreAccount/${email}`)
+    return response
   }
 
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
-
-  return { sendResetLink, closeModal, isModalOpen }
+  return { sendResetLink }
 }
 
 export default usePasswordResetService

@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
-import { ModalPrivacyPolicy } from '@/components/molecules/ModalPrivacyPolicy'
-import ModalTerms from '@/components/molecules/ModalTerms'
+import { ModalPrivacyPolicy } from '@/components/molecules/ModalTermsAndPolicies/ModalPrivacyPolicy'
+import ModalTerms from '@/components/molecules/ModalTermsAndPolicies/ModalTerms'
 
 import {
   FooterBtn,
@@ -28,16 +27,9 @@ import {
   TwitchLogo,
   YoutubeLogo,
 } from 'phosphor-react'
+import { Modal } from '@/components/atoms/Modal'
 
 export function Footer() {
-  const [openTermos, setOpenTermos] = useState(false)
-  const [openPoliticas, setOpenPoliticas] = useState(false)
-
-  const handleOpenTermos = () => setOpenTermos(true)
-  const handleCloseTermos = () => setOpenTermos(false)
-  const handleOpenPoliticas = () => setOpenPoliticas(true)
-  const handleClosePoliticas = () => setOpenPoliticas(false)
-
   const currentYear = new Date().getFullYear()
 
   return (
@@ -73,23 +65,22 @@ export function Footer() {
 
             <FooterTitleContainer>
               <FooterTitle>Legal</FooterTitle>
-              <FooterBtn onClick={handleOpenTermos}>Termo de uso</FooterBtn>
-              <FooterBtn onClick={handleOpenPoliticas}>
-                Política de privacidade
-              </FooterBtn>
 
-              <ModalTerms
-                open={openTermos}
-                onClose={handleCloseTermos}
-                height={590}
-                width={600}
-              />
-              <ModalPrivacyPolicy
-                open={openPoliticas}
-                onClose={handleClosePoliticas}
-                height={590}
-                width={600}
-              />
+              <Modal.Root>
+                <Modal.Control asChild>
+                  <FooterBtn>Termo de uso</FooterBtn>
+                </Modal.Control>
+
+                <ModalTerms />
+              </Modal.Root>
+
+              <Modal.Root>
+                <Modal.Control asChild>
+                  <FooterBtn>Política de privacidade</FooterBtn>
+                </Modal.Control>
+
+                <ModalPrivacyPolicy />
+              </Modal.Root>
             </FooterTitleContainer>
           </FooterSitemap>
         </FooterMainInfo>

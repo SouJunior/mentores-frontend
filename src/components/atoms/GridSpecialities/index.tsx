@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import {
   GridContainer,
   SpecialityItem,
@@ -10,75 +9,42 @@ import {
   NextButton,
 } from './styled'
 import CheckIcon from '@mui/icons-material/Check'
-import UserUpdateService from '@/services/user/userUpdateService'
-import useUser from '@/context/Auth/useUser'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { specialties } from '@/data/static-info'
+import { specialties as specialtiesOptions } from '@/data/static-info'
+import { useAuthContext } from '@/context/Auth/AuthContext'
+import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext'
 
 interface GridSpecialitiesProps {
-  stepNumber: (step: number) => void
+  onStep: (step: StepNumber) => void
 }
-export default function GridSpecialities({
-  stepNumber,
-}: GridSpecialitiesProps) {
-  const { user } = useUser()
-  const { handle } = UserUpdateService()
-  const [requestError, setError] = useState(false)
 
-  const [selectedSpecialities, setSelectedSpecialities] = useState<string[]>([])
-  const [selectedCount, setSelectedCount] = useState<number>(0)
-  const [isComplete, setComplete] = useState(false)
+export default function GridSpecialities({ onStep }: GridSpecialitiesProps) {
+  const { specialties, setSpecialties, formik } = useOnBoardingContext()
 
-  const toggleSpeciality = (speciality: string): void => {
-    if (selectedSpecialities.includes(speciality)) {
-      setSelectedSpecialities(
-        selectedSpecialities.filter((item) => item !== speciality),
+  const selectedCount = specialties.length
+  const isSelectionComplete = specialties.length > 0 && specialties.length < 7
+
+  const {
+    mentor: { data },
+  } = useAuthContext()
+
+  const toggleSpeciality = (value: string): void => {
+    if (specialties.includes(value)) {
+      setSpecialties((state) => state.filter((item) => item !== value))
+
+      formik.setFieldValue(
+        'specialties',
+        specialties.filter((item) => item !== value),
       )
-      setSelectedCount(selectedCount - 1)
     } else if (selectedCount < 6) {
-      setSelectedSpecialities([...selectedSpecialities, speciality])
-      setSelectedCount(selectedCount + 1)
+      setSpecialties((state) => [...state, value])
+      formik.setFieldValue('specialties', [...specialties, value])
     }
   }
 
-  const handleError = (message: string) => {
-    toast.error(message, {
-      position: toast.POSITION.TOP_CENTER,
-      toastId: 'customId',
-    })
-  }
-
-  const handleNotification = () => {
-    if (requestError) {
-      handleError('Algum erro aconteceu. Entre em contato com a gente.')
-    }
-  }
-  useEffect(() => {
-    selectedCount >= 1 ? setComplete(true) : setComplete(false)
-  }, [selectedCount, isComplete])
-
-  useEffect(() => {
-    if (requestError) {
-      handleNotification()
-    }
-  }, [requestError])
-
-  const handleUpdate = async () => {
-    const data = {
-      specialties: selectedSpecialities,
-    }
-    try {
-      const apiRequest = await handle(data)
-      if (apiRequest) {
-        stepNumber(2)
-        setError(false)
-      } else {
-        setError(true)
-      }
-    } catch (error) {
-      console.error('Erro ao atualizar:', error)
-    }
+  const handleMoveToNextStep = () => {
+    onStep(2)
   }
 
   return (
@@ -88,14 +54,8 @@ export default function GridSpecialities({
         hideProgressBar={true}
         closeOnClick
         theme="colored"
-        style={{
-          textAlign: 'justify',
-          fontSize: '16px',
-          width: '550px',
-          lineHeight: '32px',
-        }}
       />
-      <StyledSpan>Olá, {user?.fullName}!</StyledSpan>
+      <StyledSpan>Olá, {data?.fullName}!</StyledSpan>
       <StyledTitle>
         Em quais áreas você deseja mentorar?<span className="last">*</span>
       </StyledTitle>
@@ -103,13 +63,13 @@ export default function GridSpecialities({
         <span>*</span> Indica um campo obrigatório
       </StyledImportant>
       <GridContainer>
-        {specialties.map((speciality, index) => (
+        {specialtiesOptions.map((speciality, index) => (
           <SpecialityItem
             key={index}
             onClick={() => toggleSpeciality(speciality)}
-            selected={selectedSpecialities.includes(speciality)}
+            selected={specialties.includes(speciality)}
           >
-            {selectedSpecialities.includes(speciality) && (
+            {specialties.includes(speciality) && (
               <CheckIcon fontSize={'small'} />
             )}
             {speciality}
@@ -118,7 +78,10 @@ export default function GridSpecialities({
       </GridContainer>
       <StyledCount>{`${selectedCount}/6 especialidades `}</StyledCount>
       <StyledHR />
-      <NextButton onClick={handleUpdate} disabled={!isComplete}>
+      <NextButton
+        onClick={handleMoveToNextStep}
+        disabled={!isSelectionComplete}
+      >
         Continuar
       </NextButton>
     </>

@@ -5,21 +5,8 @@ import {
   ContainerLogin,
   MyImage,
 } from '../../styles/pages/login'
-import { useEffect } from 'react'
-import useUser from '@/context/Auth/useUser'
-import { useRouter } from 'next/router'
 
 export default function LoginPage() {
-  const { user } = useUser()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (user) {
-      router.push('/')
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
-
   return (
     <ContainerLogin>
       <main>

@@ -1,31 +1,38 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
-import { IAuthContextType, User } from '../interfaces/IAuth'
-import { useRouter } from 'next/router'
-export const AuthContent = createContext<IAuthContextType | undefined>(
-  undefined,
-)
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+import { IAuthContextType, IMentor, UserSessionInfo } from '../interfaces/IAuth'
+import { getCookie } from 'cookies-next'
+import { sessionNameUserInfo } from '@/data/static-info'
+import { useQuery } from '@tanstack/react-query'
+import { api } from '@/lib/axios'
+import { AxiosError } from 'axios'
+import { jwtDecode } from 'jwt-decode'
+import UserLoginService from '@/services/user/userLoginService'
+
+export const AuthContent = createContext({} as IAuthContextType)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const router = useRouter()
-  const [user, setUser] = useState<User | null>(null)
-
-  const logout = () => {
-    setUser(null)
-    router.push('/login')
-    localStorage.removeItem('user')
-    sessionStorage.removeItem('user')
-  }
-
-  const updateUser = (updatedUser: User | null) => {
-    if (updatedUser) {
-      setUser(updatedUser)
-      localStorage.setItem('user', JSON.stringify(updatedUser))
-    }
-  }
+  const [userSession, setUserSession] = useState<UserSessionInfo | null>(null)
+  const { logout } = UserLoginService()
 
   useEffect(() => {
-    const storedUser =
-      localStorage.getItem('user') ?? sessionStorage.getItem('user')
+    const storedUser = getCookie(sessionNameUserInfo)?.toString()
+    const decodedToken = storedUser && jwtDecode(JSON.parse(storedUser).token)
+    const isTokenExpires =
+      decodedToken &&
+      decodedToken.exp &&
+      decodedToken.exp <= Math.floor(Date.now() / 1000)
+
+    if (isTokenExpires) {
+      logout()
+      setUserSession(null)
+      return
+    }
 
     if (storedUser) {
       let userParsed
@@ -34,13 +41,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch {
         userParsed = undefined
       }
-      setUser(userParsed)
+      setUserSession(userParsed)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const mentorResponse = useQuery({
+    queryKey: ['mentor', userSession?.id],
+    queryFn: async () => {
+      const response = await api.get<IMentor>(`/mentor/${userSession?.id}`)
+      return response.data
+    },
+    enabled: !!userSession?.id,
+  })
+
+  if (
+    mentorResponse.error instanceof AxiosError &&
+    mentorResponse.error.response?.status === 404
+  ) {
+    logout()
+  }
+
   return (
-    <AuthContent.Provider value={{ user, setUser, logout, updateUser }}>
+    <AuthContent.Provider
+      value={{ userSession, setUserSession, mentor: { ...mentorResponse } }}
+    >
       {children}
     </AuthContent.Provider>
   )
+}
+
+export const useAuthContext = () => {
+  const context = useContext(AuthContent)
+
+  if (context === undefined) {
+    throw new Error('Ocorreu algum erro no provider!')
+  }
+  return context
 }

@@ -2,7 +2,7 @@ import { Button } from '@/components/atoms/Button'
 import { SelectItem } from '@/components/atoms/Select/SelectItem'
 import styled from 'styled-components'
 
-export const Dotted = styled.div`
+export const Dotted = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,9 +10,10 @@ export const Dotted = styled.div`
 
   border-radius: 8px;
   border: 2px dashed ${(props) => props.theme.colors.gray[700]};
+  background-color: transparent;
   text-align: center;
 
-  button {
+  section {
     width: 5rem;
     height: 5rem;
 
@@ -109,7 +110,7 @@ export const SelectInputContainer = styled.label`
     font-size: ${(props) => props.theme.fontSizes.xs};
     line-height: 120%;
 
-    span {
+    .asterisk {
       color: ${(props) => props.theme.colors.blue[700]};
     }
   }

@@ -1,15 +1,19 @@
 import styled from 'styled-components'
+import { Modal } from '../Modal'
 
-export const Container = styled.div`
+export const Container = styled(Modal.Content)`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 387px;
-  padding: 0px 1.5rem 1.5rem;
+
+  max-width: 24.18rem;
+  width: 100%;
+  padding: 1.5rem;
+  position: relative;
 `
 
-export const CropTitle = styled.h4`
+export const CropTitle = styled(Modal.Title)`
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.5rem;
@@ -56,10 +60,18 @@ export const ButtonsContainer = styled.div`
   justify-content: flex-end;
   width: 100%;
   gap: 1rem;
+`
 
-  button {
-    padding-left: 1rem;
-    padding-right: 1rem;
+export const ModalCloseBtn = styled(Modal.Close)`
+  position: static;
+  color: ${(props) => props.theme.colors.blue[800]};
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  &.save-image-editor-btn {
+    background-color: ${(props) => props.theme.colors.blue[800]};
+    color: ${(props) => props.theme.colors.white};
+    line-height: 0.7;
   }
 `
 
@@ -75,4 +87,9 @@ export const StyledHR = styled.div`
   height: 1px;
   background-color: ${(props) => props.theme.colors.gray[700]};
   margin-top: 0.25rem;
+`
+
+export const ModalClose = styled(Modal.Close)`
+  top: 1.5rem;
+  right: 1.5rem;
 `
