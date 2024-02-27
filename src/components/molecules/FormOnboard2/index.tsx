@@ -21,26 +21,25 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { genders } from '@/data/static-info'
 import { Select } from '@/components/atoms/Select'
-import { useOnBoardingContext } from '@/context/OnBoardingContext'
+import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext'
 import { Modal } from '@/components/atoms/Modal'
+import { isEmpty } from '@/utils/is-empty'
 
 interface FormOnBoardProps {
-  onStep?: Dispatch<SetStateAction<1 | 2>>
+  onStep: Dispatch<SetStateAction<StepNumber>>
 }
 
 export default function FormOnboard2({ onStep }: FormOnBoardProps) {
   const { formik } = useOnBoardingContext()
 
-  const isCompleted = Object.keys(formik.touched).length > 0
+  const isCompleted = !isEmpty(formik.touched)
 
   const handleImageEdit = (editedImage: string | null) => {
     formik.setFieldValue('profile', editedImage || '')
   }
 
   const handleBackToFirstStep = () => {
-    if (onStep) {
-      onStep(1)
-    }
+    onStep(1)
   }
 
   return (

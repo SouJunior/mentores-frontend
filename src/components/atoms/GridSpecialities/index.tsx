@@ -13,15 +13,13 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { specialties as specialtiesOptions } from '@/data/static-info'
 import { useAuthContext } from '@/context/Auth/AuthContext'
-import { useOnBoardingContext } from '@/context/OnBoardingContext'
+import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext'
 
 interface GridSpecialitiesProps {
-  stepNumber: (step: number) => void
+  onStep: (step: StepNumber) => void
 }
 
-export default function GridSpecialities({
-  stepNumber,
-}: GridSpecialitiesProps) {
+export default function GridSpecialities({ onStep }: GridSpecialitiesProps) {
   const { specialties, setSpecialties, formik } = useOnBoardingContext()
 
   const selectedCount = specialties.length
@@ -46,7 +44,7 @@ export default function GridSpecialities({
   }
 
   const handleMoveToNextStep = () => {
-    stepNumber(2)
+    onStep(2)
   }
 
   return (

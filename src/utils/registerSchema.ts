@@ -27,7 +27,7 @@ export const registerSchema = yup.object({
     .oneOf([yup.ref('password')], 'Os campos informados não coincidem')
     .required(''),
 
-  dataBirthday: yup.date().required(''),
+  dateBirthday: yup.date().required(''),
   agreeWithTermsAndPolicies: yup
     .boolean()
     .required(
@@ -38,7 +38,7 @@ export const registerSchema = yup.object({
 export type ValuesFormType = {
   name: string
   email: string
-  dataBirthday: Date | null
+  dateBirthday: Date | null
   confirmEmail: string
   password: string
   confirmPassword: string
@@ -48,7 +48,7 @@ export type ValuesFormType = {
 export const initialValues: ValuesFormType = {
   name: '',
   email: '',
-  dataBirthday: null,
+  dateBirthday: null,
   confirmEmail: '',
   password: '',
   confirmPassword: '',
