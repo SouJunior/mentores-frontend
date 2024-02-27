@@ -1,5 +1,5 @@
 import { useAuthContext } from '@/context/Auth/AuthContext'
-import { UserUpdateDTO } from '../interfaces/IUserUpdate'
+import { UserUpdateDTO, UserUpdatePasswordDTO } from '../interfaces/IUserUpdate'
 import { api } from '@/lib/axios'
 
 const UserUpdateService = () => {
@@ -25,7 +25,19 @@ const UserUpdateService = () => {
     )
   }
 
-  return { handle }
+  const updatePassword = async (data: UserUpdatePasswordDTO) => {
+    await api.put(
+      `/mentor/change_password`,
+      {
+        oldPassword: data.oldPassword,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      },
+      config,
+    )
+  }
+
+  return { handle, updatePassword }
 }
 
 export default UserUpdateService

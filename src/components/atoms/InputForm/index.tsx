@@ -16,6 +16,7 @@ interface InputFormProps extends FieldAttributes<any> {
   isRequired?: boolean
   children?: ReactNode
   className?: string
+  disabled?: boolean
 }
 
 export function InputForm({
@@ -26,6 +27,7 @@ export function InputForm({
   inputType,
   isRequired = true,
   children,
+  disabled = false,
   ...rest
 }: InputFormProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,16 +35,21 @@ export function InputForm({
 
   return (
     <ContainerInputLabel>
-      <StyledLabel>
+      <StyledLabel className={disabled ? 'disabled' : ''}>
         {label} {isRequired && <span className="asterisk">*</span>}
       </StyledLabel>
-      <ContainerInput className={errors[name] && touched[name] ? 'error' : ''}>
+      <ContainerInput
+        className={`${errors[name] && touched[name] ? 'error' : ''} ${
+          disabled && 'disabled'
+        }`}
+      >
         {children}
         <Field
           as={type}
           name={name}
           type={inputType}
           placeholder={placeholder}
+          disabled={disabled}
           {...rest}
         />
       </ContainerInput>
