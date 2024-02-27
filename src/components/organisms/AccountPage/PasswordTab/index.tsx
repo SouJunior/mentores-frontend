@@ -22,6 +22,7 @@ import { useRouter } from 'next/router'
 import { Spinner } from '@/components/atoms/Spinner'
 import { throwErrorMessages } from '@/utils/throw-error-messages'
 import { useAuthContext } from '@/context/Auth/AuthContext'
+import { isEmpty } from '@/utils/is-empty'
 
 const passwordValidation = yup
   .string()
@@ -46,7 +47,7 @@ export type PasswordFormData = yup.InferType<typeof passwordTabSchema>
 export function PasswordTab() {
   const { updatePassword } = UserUpdateService()
   const { mentor } = useAuthContext()
-  const [openModalCancel, setOpenModalCancel] = useState(false)
+  const [openWarningModal, setOpenWarningModal] = useState(false)
   const router = useRouter()
 
   async function handleUpdatePassword(
@@ -80,13 +81,11 @@ export function PasswordTab() {
     validationSchema: passwordTabSchema,
   })
 
-  const handleModalCancel = () => {
-    const isSomeFieldFilled = Object.values(formik.values).some(
-      (field) => field,
-    )
+  const handleWarningModal = () => {
+    const isFormEmpty = isEmpty(formik.values)
 
-    if (isSomeFieldFilled) {
-      setOpenModalCancel(true)
+    if (!isFormEmpty) {
+      setOpenWarningModal(true)
       return
     }
 
@@ -110,15 +109,15 @@ export function PasswordTab() {
             <Button
               type="button"
               variant="tertiary"
-              onClick={handleModalCancel}
+              onClick={handleWarningModal}
               disabled={formik.isSubmitting}
             >
               Descartar
             </Button>
 
             <Modal.Root
-              open={openModalCancel}
-              onOpenChange={() => setOpenModalCancel(false)}
+              open={openWarningModal}
+              onOpenChange={() => setOpenWarningModal(false)}
             >
               <ModalCancel />
             </Modal.Root>
