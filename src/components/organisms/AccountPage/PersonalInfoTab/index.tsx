@@ -24,9 +24,11 @@ import { useRouter } from 'next/router'
 import { Spinner } from '@/components/atoms/Spinner'
 import { useAuthContext } from '@/context/Auth/AuthContext'
 import { isEmpty } from '@/utils/is-empty'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { IMentor } from '@/context/interfaces/IAuth'
 
 const personalInfoSchema = yup.object({
-  name: yup.string().optional(),
+  fullName: yup.string().optional(),
   dateOfBirth: yup.date().optional(),
   email: yup.string().email('E-mail inválido').optional(),
   gender: yup.string().oneOf(genders).optional(),
@@ -35,22 +37,40 @@ const personalInfoSchema = yup.object({
 export type PersonalInfoFormData = yup.InferType<typeof personalInfoSchema>
 
 export function PersonalInfoTab() {
-  const { handle } = UserUpdateService()
-  const { mentor } = useAuthContext()
   const [openWarningModal, setOpenWarningModal] = useState(false)
+
+  const queryClient = useQueryClient()
   const router = useRouter()
+
+  const { handle } = UserUpdateService()
+  const { userSession } = useAuthContext()
+
+  const { mutateAsync: updateMentorFn } = useMutation({
+    mutationKey: ['mentor', userSession?.id],
+    mutationFn: handle,
+    onSuccess(_, newUpdatedData) {
+      queryClient.setQueryData(
+        ['mentor', userSession?.id],
+        (cached: IMentor) => {
+          return {
+            ...cached,
+            ...newUpdatedData,
+          }
+        },
+      )
+    },
+  })
 
   async function handleUpdatePersonalInfo(
     data: PersonalInfoFormData,
     { resetForm }: { resetForm: () => void },
   ) {
     try {
-      await handle({
-        fullName: data.name,
+      await updateMentorFn({
+        fullName: data.fullName,
         gender: data.gender,
       })
 
-      mentor.refetch()
       resetForm()
     } catch (err) {
       if (err instanceof AxiosError) {

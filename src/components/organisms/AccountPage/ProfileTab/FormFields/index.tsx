@@ -52,7 +52,7 @@ export function FormFields() {
   useEffect(() => {
     setOriginalImage(mentor.data?.profile ?? '')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mentor.data?.profile])
+  }, [])
 
   return (
     <ContentContainer>
@@ -116,7 +116,7 @@ export function FormFields() {
         <InputForm
           label="Conte mais sobre você:"
           type="textarea"
-          name="description"
+          name="aboutMe"
           placeholder="Fale sobre sua trajetória profissional para que possam lhe conhecer melhor;"
           defaultValue={mentor.data?.aboutMe}
         />

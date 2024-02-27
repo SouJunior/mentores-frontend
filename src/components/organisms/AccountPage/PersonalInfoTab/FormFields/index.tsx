@@ -25,7 +25,7 @@ export function FormFields() {
       <InputForm
         label="Nome completo:"
         isRequired
-        name="name"
+        name="fullName"
         type="input"
         placeholder="Preencha com seu nome"
         defaultValue={mentor.data?.fullName}

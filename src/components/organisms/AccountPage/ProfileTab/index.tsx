@@ -23,33 +23,49 @@ import { useAuthContext } from '@/context/Auth/AuthContext'
 import { ProfileContentForm } from './styles'
 import { FormFields } from './FormFields'
 import { isEmpty } from '@/utils/is-empty'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { IMentor } from '@/context/interfaces/IAuth'
 
 const profileSchema = yup.object({
   specialties: yup.array(yup.string().required('Obrigatório')),
-  description: yup.string().max(600, 'Limite máximo de caracteres atingido'),
+  aboutMe: yup.string().max(600, 'Limite máximo de caracteres atingido'),
   profile: yup.string(),
 })
 
 export type ProfileFormData = yup.InferType<typeof profileSchema>
 
 export function ProfileTab() {
-  const { handle } = UserUpdateService()
-  const { mentor } = useAuthContext()
   const [openWarningModal, setOpenWarningModal] = useState(false)
+
+  const queryClient = useQueryClient()
   const router = useRouter()
+
+  const { handle } = UserUpdateService()
+  const { userSession } = useAuthContext()
+
+  const { mutateAsync: updateMentorFn } = useMutation({
+    mutationKey: ['mentor', userSession?.id],
+    mutationFn: handle,
+    onSuccess(_, newUpdatedData) {
+      queryClient.setQueryData(
+        ['mentor', userSession?.id],
+        (cached: IMentor) => {
+          return {
+            ...cached,
+            ...newUpdatedData,
+          }
+        },
+      )
+    },
+  })
 
   async function handleUpdateProfile(
     data: ProfileFormData,
     { resetForm }: { resetForm: () => void },
   ) {
     try {
-      await handle({
-        specialties: data.specialties,
-        aboutMe: data.description,
-        profile: data.profile,
-      })
+      await updateMentorFn(data)
 
-      mentor.refetch()
       resetForm()
     } catch (err) {
       if (err instanceof AxiosError) {
