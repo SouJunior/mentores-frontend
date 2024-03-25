@@ -35,7 +35,7 @@ export function InputForm({
 
   return (
     <ContainerInputLabel>
-      <StyledLabel className={disabled ? 'disabled' : ''}>
+      <StyledLabel className={disabled && 'disabled'}>
         {label} {isRequired && <span className="asterisk">*</span>}
       </StyledLabel>
       <ContainerInput
