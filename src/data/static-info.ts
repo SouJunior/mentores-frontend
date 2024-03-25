@@ -7,7 +7,7 @@ export const genders = [
   'Gênero Fluido',
   'Não Binário',
   'Agênero',
-  'Outro',
+  'Outros',
 ]
 
 export const specialties = [

@@ -37,7 +37,7 @@ export const SpinnerStyles = styled.span`
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 5px solid #fff;
+    border: 5px solid var(--spinner-color, #fff);
     animation: ${prixClipFix} 2s linear infinite;
   }
 `

@@ -4,7 +4,7 @@ import { sessionNameUserInfo } from './data/static-info'
 // routes where only unauthenticated user can access
 const authRoutes = ['/login', '/cadastro']
 
-const protectedRoutes = ['/onBoarding']
+const protectedRoutes = ['/onBoarding', '/me']
 
 export function middleware(request: NextRequest) {
   const hasAuthToken = request.cookies.has(sessionNameUserInfo)
@@ -19,5 +19,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/onBoarding', '/login', '/cadastro'],
+  matcher: ['/onBoarding', '/login', '/cadastro', '/me'],
 }

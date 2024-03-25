@@ -1,3 +1,3 @@
 export function isEmpty(obj: Record<string, any>) {
-  return Object.keys(obj).length === 0
+  return Object.values(obj).every((value) => !value)
 }

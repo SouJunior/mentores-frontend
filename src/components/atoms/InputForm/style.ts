@@ -24,7 +24,14 @@ export const ContainerInput = styled.div`
 
   transition: 0.3s ease;
 
-  &:hover {
+  &.disabled {
+    color: ${(props) => props.theme.colors.gray[600]};
+    border-color: ${(props) => props.theme.colors.gray[200]};
+    background-color: ${(props) => props.theme.colors.gray[200]};
+    cursor: not-allowed;
+  }
+
+  &:not(.disabled):hover {
     border: 1px solid ${(props) => props.theme.colors.blue[850]};
   }
 
@@ -59,6 +66,15 @@ export const ContainerInput = styled.div`
     &::placeholder {
       color: ${(props) => props.theme.colors.gray[250]};
     }
+
+    &:disabled {
+      background-color: ${(props) => props.theme.colors.gray[200]};
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: ${(props) => props.theme.colors.gray[600]};
+      }
+    }
   }
 
   textarea {
@@ -76,6 +92,15 @@ export const StyledLabel = styled.span`
   font-size: 0.875rem;
   line-height: 150%;
   color: ${(props) => props.theme.colors.gray[700]};
+
+  .asterisk {
+    color: ${(props) => props.theme.colors.blue[700]};
+  }
+
+  &.disabled,
+  &.disabled .asterisk {
+    color: ${(props) => props.theme.colors.gray[600]};
+  }
 `
 
 export const StyledLabelError = styled(StyledLabel)`

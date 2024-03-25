@@ -120,7 +120,14 @@ export const CalendarTrigger = styled(Popover.Trigger)`
     height: 1.25rem;
   }
 
-  &[data-state='closed']:hover {
+  &:disabled {
+    color: ${(props) => props.theme.colors.gray[600]};
+    border-color: ${(props) => props.theme.colors.gray[200]};
+    background-color: ${(props) => props.theme.colors.gray[200]};
+    cursor: not-allowed;
+  }
+
+  &[data-state='closed']:not(:disabled):hover {
     border: 1px solid ${(props) => props.theme.colors.blue[850]};
   }
 
@@ -136,5 +143,9 @@ export const CalendarTrigger = styled(Popover.Trigger)`
 
   &.error {
     border: 1px solid ${(props) => props.theme.colors.red[500]};
+  }
+
+  &:disabled [data-placeholder] {
+    color: ${(props) => props.theme.colors.gray[600]};
   }
 `
