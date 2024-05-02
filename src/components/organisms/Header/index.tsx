@@ -75,9 +75,7 @@ export function Header() {
               <DropdownMenuSeparator />
 
               <DropdownMenu.Item asChild>
-                <LinkUserAccount href="/genericPage">
-                  Minha conta
-                </LinkUserAccount>
+                <LinkUserAccount href="/me">Minha conta</LinkUserAccount>
               </DropdownMenu.Item>
 
               <div className="menu-burger-links">
