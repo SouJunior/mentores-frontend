@@ -10,11 +10,20 @@ import { FC } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/lib/react-query'
+import { deleteCookie, getCookie } from 'cookies-next'
 
 const excludeRoutes = ['/login', '/cadastro']
 
 const App: FC<AppProps> = ({ Component, pageProps, router }) => {
   const shouldRenderLayout = !excludeRoutes.includes(router.pathname)
+
+  if (getCookie('dont_remember')) {
+    window.addEventListener('beforeunload', () => {
+      deleteCookie('@mentores-soujunior-v1:token')
+      deleteCookie('dont_remember')
+    })
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
