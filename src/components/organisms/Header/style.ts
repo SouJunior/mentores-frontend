@@ -205,6 +205,10 @@ const baseBtnStyles = css`
 export const LinkUserAccount = styled(Link)`
   ${baseBtnStyles}
 
+  @media ${device.desktopXS} {
+    display: none;
+  }
+
   &:hover,
   &:focus {
     color: ${(props) => props.theme.colors.black[200]};
