@@ -47,7 +47,7 @@ export default function HomePage() {
           </ModalDescription>
           <Button
             as={ModalButton}
-            href="https://calendly.com/pt"
+            href="https://auth.calendly.com/oauth/authorize?client_id=NxSc0185P1YsodR5qlOvb1F5EBAXDuYds2cRj0r7dlg&response_type=code&redirect_uri=http://localhost:3001/"
             target="_blank"
           >
             Ir para o Calendly

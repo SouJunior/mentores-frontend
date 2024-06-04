@@ -60,6 +60,10 @@ export function FormLogin() {
 
       if (isKeepConnected) {
         setCookie(sessionNameUserInfo, sessionInfo)
+        // localStorage.setItem(sessionNameUserInfo, sessionInfo)
+      } else {
+        setCookie(sessionNameUserInfo, sessionInfo)
+        setCookie('dont_remember', true)
       }
 
       setUserSession(sessionInfo)
