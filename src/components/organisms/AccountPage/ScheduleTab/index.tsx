@@ -18,7 +18,11 @@ export function ScheduleTab() {
           Sua agenda de mentorias é ajustada pelo Calendly.
         </ScheduleDescription>
 
-        <Button as={Link} href="https://calendly.com" target="_blank">
+        <Button
+          as={Link}
+          href="https://auth.calendly.com/oauth/authorize?client_id=utqBbxrK1b8sXSkJqYFi718WdYkDeL-wts84O-n_nzs&response_type=code&redirect_uri=https://localhost:3001/me"
+          target="_blank"
+        >
           Ir para o Calendly
         </Button>
       </ScheduleContentContainer>
