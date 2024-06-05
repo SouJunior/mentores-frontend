@@ -62,6 +62,8 @@ export default function HomePage() {
             <ModalCalendlyStep3
               handleNextStep={handleNextStep}
               handlePreviousStep={handlePreviousStep}
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
             />
           )}
           {currentStep === 4 && (
