@@ -4,7 +4,7 @@ type NodeEnv = 'development' | 'production'
 
 const serverUrl = {
   development: 'http://localhost:3003',
-  production: 'https://mentores-backend.soujunior.tech',
+  production: 'https://mentores-backend-6dkc.onrender.com/',
 }
 
 export const api = axios.create({

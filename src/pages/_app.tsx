@@ -15,6 +15,7 @@ const excludeRoutes = ['/login', '/cadastro']
 
 const App: FC<AppProps> = ({ Component, pageProps, router }) => {
   const shouldRenderLayout = !excludeRoutes.includes(router.pathname)
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
