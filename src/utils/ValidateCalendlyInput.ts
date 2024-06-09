@@ -1,20 +1,14 @@
-export function isValidHttpUrl(link: string) {
+export function isValidHttpsUrl(link: string) {
   try {
     const newUrl = new URL(link)
-    return newUrl.protocol === 'http:' || newUrl.protocol === 'https:'
+    return newUrl.protocol === 'https:'
   } catch (error) {
     return false
   }
 }
 
 export function isCalendlyLink(link: string) {
-  const searchString = 'calendly.com/'
-
-  if (link.includes(searchString)) {
-    return true
-  } else {
-    return false
-  }
+  return link.includes('calendly.com/')
 }
 
 export function splitCalendlyName(link: string) {
