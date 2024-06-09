@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button } from '@/components/atoms/Button'
-import { ModalButton, ModalDescription, ModalTitle } from '@/styles/pages/home'
+import {
+  ModalButton,
+  ModalDescription,
+  ModalTitle,
+} from '@/components/organisms/CalendlyRegister/style'
 import Image from 'next/image'
 import copyLinkEvent from '@/assets/modalCalendly/copyLinkEvent.png'
 import Link from 'next/link'
@@ -14,13 +18,6 @@ export default function ModalCalendlyStep2({
   handleNextStep,
   handlePreviousStep,
 }: ModalCalendlyStep2Props) {
-  const handleNextStepFromChild = () => {
-    handleNextStep()
-  }
-
-  const handlePreviousStepFromChild = () => {
-    handlePreviousStep()
-  }
   return (
     <>
       <ModalTitle>Copie o link da sua agenda.</ModalTitle>
@@ -49,16 +46,12 @@ export default function ModalCalendlyStep2({
         href="https://calendly.com/"
         target="_blank"
         rel="noopener noreferrer"
-        onClick={handleNextStepFromChild}
+        onClick={handleNextStep}
       >
         Ir para o Calendly
       </Button>
 
-      <Button
-        as={ModalButton}
-        onClick={handlePreviousStepFromChild}
-        variant="secondary"
-      >
+      <Button as={ModalButton} onClick={handlePreviousStep} variant="secondary">
         Voltar
       </Button>
     </>

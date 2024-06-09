@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button } from '@/components/atoms/Button'
-import { ModalButton, ModalDescription, ModalTitle } from '@/styles/pages/home'
+import {
+  ModalButton,
+  ModalDescription,
+  ModalTitle,
+} from '@/components/organisms/CalendlyRegister/style'
 import Image from 'next/image'
 import imagemParabens from '@/assets/modalCalendly/parabens.png'
 
@@ -11,10 +15,6 @@ type ModalCalendlyStep4Props = {
 export default function ModalCalendlyStep4({
   handleCloseModal,
 }: ModalCalendlyStep4Props) {
-  const handleCloseFromChild = () => {
-    handleCloseModal()
-  }
-
   return (
     <>
       <ModalTitle>Parabéns!</ModalTitle>
@@ -26,7 +26,7 @@ export default function ModalCalendlyStep4({
         src={imagemParabens}
       />
 
-      <Button as={ModalButton} onClick={handleCloseFromChild}>
+      <Button as={ModalButton} onClick={handleCloseModal}>
         Fechar
       </Button>
     </>

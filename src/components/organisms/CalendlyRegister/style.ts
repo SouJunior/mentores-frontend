@@ -28,7 +28,7 @@ export const ModalDescription = styled(Modal.Description)`
   max-width: 26.875rem;
 `
 
-export const ModalButton = styled.a`
+export const ModalButton = styled.button`
   line-height: 1.2rem;
 `
 

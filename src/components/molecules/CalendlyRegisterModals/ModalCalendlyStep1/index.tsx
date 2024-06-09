@@ -1,6 +1,11 @@
 import React from 'react'
 import { Button } from '@/components/atoms/Button'
-import { ModalButton, ModalDescription, ModalTitle } from '@/styles/pages/home'
+import {
+  ModalButton,
+  ModalDescription,
+  ModalTitle,
+} from '@/components/organisms/CalendlyRegister/style'
+import StepperDots from '@/components/atoms/StepperDots'
 
 type ModalCalendlyStep1Props = {
   handleNextStep: () => void
@@ -9,17 +14,14 @@ type ModalCalendlyStep1Props = {
 export default function ModalCalendlyStep2({
   handleNextStep,
 }: ModalCalendlyStep1Props) {
-  const handleNextStepFromChild = () => {
-    handleNextStep()
-  }
-
   return (
     <>
       <ModalTitle>Falta pouco para você se tornar um mentor.</ModalTitle>
       <ModalDescription>
         Disponibilize seus horários, compartilhando sua agenda do Calendly.
       </ModalDescription>
-      <Button as={ModalButton} onClick={handleNextStepFromChild}>
+      <StepperDots />
+      <Button as={ModalButton} onClick={handleNextStep}>
         Próximo
       </Button>
     </>
