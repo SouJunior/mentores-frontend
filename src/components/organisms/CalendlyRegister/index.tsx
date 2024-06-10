@@ -8,7 +8,16 @@ import {
   ModalClose,
   ModalContainer,
 } from '@/components/organisms/CalendlyRegister/style'
-import { HomePageProps } from '@/pages/home'
+
+type CalendlyRegisterProps = {
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  currentStep: number
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>
+  handleNextStep: () => void
+  handlePreviousStep: () => void
+  handleCloseModal: () => void
+}
 
 export default function CalendlyRegister({
   isOpen,
@@ -17,25 +26,30 @@ export default function CalendlyRegister({
   handleNextStep,
   handlePreviousStep,
   handleCloseModal,
-}: HomePageProps) {
+}: CalendlyRegisterProps) {
   return (
     <>
       <Modal.Root open={isOpen} onOpenChange={handleCloseModal}>
         <ModalContainer>
           {currentStep === 1 && (
-            <ModalCalendlyStep1 handleNextStep={handleNextStep} />
+            <ModalCalendlyStep1
+              handleNextStep={handleNextStep}
+              currentStep={currentStep}
+            />
           )}
 
           {currentStep === 2 && (
             <ModalCalendlyStep2
               handleNextStep={handleNextStep}
               handlePreviousStep={handlePreviousStep}
+              currentStep={currentStep}
             />
           )}
           {currentStep === 3 && (
             <ModalCalendlyStep3
               handleNextStep={handleNextStep}
               handlePreviousStep={handlePreviousStep}
+              currentStep={currentStep}
               setCurrentStep={setCurrentStep}
             />
           )}

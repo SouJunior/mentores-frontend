@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   ContainerStepper,
   CircleStepper,
@@ -11,16 +11,20 @@ export type MovementAnimatorProps = {
   i: number
 }
 
-export default function StepperDots() {
-  const [index, setIndex] = useState(0)
-  const items = [0, 1, 2, 3]
+type StepperDotsProps = {
+  currentStep: number
+}
+
+export default function StepperDots({ currentStep }: StepperDotsProps) {
+  const items = [0, 1, 2]
+
   return (
     <>
       <ContainerStepper>
         {items.map((i) => {
           return (
             <CircleStepper key={i}>
-              <MovementAnimator index={index} i={i}>
+              <MovementAnimator index={currentStep - 1} i={i}>
                 <MovementIndicators />
               </MovementAnimator>
             </CircleStepper>
