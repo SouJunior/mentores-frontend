@@ -1,22 +1,28 @@
 import React from 'react'
 import { Button } from '@/components/atoms/Button'
 import {
-  ModalButton,
   ModalDescription,
+  ModalImageContainer,
   ModalTitle,
+  ButtonsContainer,
+  ModalButtonSecondary,
 } from '@/components/organisms/CalendlyRegister/style'
-import Image from 'next/image'
 import copyLinkEvent from '@/assets/modalCalendly/copyLinkEvent.png'
 import Link from 'next/link'
+import Image from 'next/image'
+import StepperDots from '@/components/atoms/StepperDots'
+import { SubDescription } from './style'
 
-export interface ModalCalendlyStep2Props {
+type ModalCalendlyStep2Props = {
   handleNextStep: () => void
   handlePreviousStep: () => void
+  currentStep: number
 }
 
 export default function ModalCalendlyStep2({
   handleNextStep,
   handlePreviousStep,
+  currentStep,
 }: ModalCalendlyStep2Props) {
   return (
     <>
@@ -25,35 +31,41 @@ export default function ModalCalendlyStep2({
         Acesse sua conta no Calendly e copie o seu link, conforme exemplificado
         abaixo.
       </ModalDescription>
-      <Image
-        alt="Imagem de um evento dentro do Calendly com o mouse apontando para o botão nomeado de copiar link"
-        src={copyLinkEvent}
-      />
-      <p>
-        Ou acesse esse{' '}
+      <ModalImageContainer>
+        <Image
+          alt="Imagem de um evento dentro do Calendly com o mouse apontando para o botão nomeado de copiar link"
+          src={copyLinkEvent}
+          width={400}
+          height={250}
+          loading="eager"
+        />
+      </ModalImageContainer>
+      <SubDescription>
+        Dúvidas? Acesse o{' '}
         <Link
           href="https://help.calendly.com/hc/en-us/articles/223193448-Sharing-your-scheduling-link#sharing-your-scheduling-link-0-0"
           target="_blank"
           rel="noopener noreferrer"
         >
-          tutorial sobre compartilhamento de links do Calendly
+          tutorial completo.
         </Link>{' '}
-        para uma explicação detalhada.
-      </p>
+      </SubDescription>
+      <StepperDots currentStep={currentStep} />
+      <ButtonsContainer>
+        <Button as={ModalButtonSecondary} onClick={handlePreviousStep}>
+          Voltar
+        </Button>
 
-      <Button
-        as={Link}
-        href="https://calendly.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={handleNextStep}
-      >
-        Ir para o Calendly
-      </Button>
-
-      <Button as={ModalButton} onClick={handlePreviousStep} variant="secondary">
-        Voltar
-      </Button>
+        <Button
+          as={Link}
+          href="https://calendly.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleNextStep}
+        >
+          Ir para o Calendly
+        </Button>
+      </ButtonsContainer>
     </>
   )
 }

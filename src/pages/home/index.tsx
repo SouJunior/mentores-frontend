@@ -7,16 +7,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import CalendlyRegister from '@/components/organisms/CalendlyRegister'
 
-export type HomePageProps = {
-  handleCloseModal: () => void
-  handleNextStep: () => void
-  handlePreviousStep: () => void
-  isOpen: boolean
-  currentStep: number
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
-
 export default function HomePage() {
   const [isOpen, setIsOpen] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)

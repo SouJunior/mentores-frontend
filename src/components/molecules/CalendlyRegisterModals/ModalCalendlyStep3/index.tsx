@@ -1,11 +1,12 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Button } from '@/components/atoms/Button'
 import {
+  ButtonsContainer,
   ModalButton,
+  ModalButtonSecondary,
   ModalDescription,
   ModalTitle,
 } from '@/components/organisms/CalendlyRegister/style'
-import { ModalCalendlyStep2Props } from '@/components/molecules/CalendlyRegisterModals/ModalCalendlyStep2'
 import { api } from '@/lib/axios'
 import { Spinner } from '@/components/atoms/Spinner'
 import { ButtonLoading } from '@/components/molecules/FormRegister/style'
@@ -16,14 +17,18 @@ import {
 } from '@/utils/ValidateCalendlyInput'
 import { ContainerErrorInputCalendly, InputCalendlyStyled } from './style'
 import { handleError } from '@/utils/handleError'
+import StepperDots from '@/components/atoms/StepperDots'
 
-interface ModalCalendlyStep3Props extends ModalCalendlyStep2Props {
+type ModalCalendlyStep3Props = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>
+  handlePreviousStep: () => void
+  currentStep: number
 }
 
 export default function ModalCalendlyStep3({
   handlePreviousStep,
   setCurrentStep,
+  currentStep,
 }: ModalCalendlyStep3Props) {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -88,23 +93,23 @@ export default function ModalCalendlyStep3({
           </ContainerErrorInputCalendly>
         )}
 
-        {isLoading ? (
-          <ButtonLoading disabled>
-            <Spinner />
-          </ButtonLoading>
-        ) : (
-          <Button disabled={isButtonDisabled} as={ModalButton} type="submit">
-            Salvar
-          </Button>
-        )}
+        <StepperDots currentStep={currentStep} />
 
-        <Button
-          as={ModalButton}
-          onClick={handlePreviousStep}
-          variant="secondary"
-        >
-          Voltar
-        </Button>
+        <ButtonsContainer>
+          <Button onClick={handlePreviousStep} as={ModalButtonSecondary}>
+            Voltar
+          </Button>
+
+          {isLoading ? (
+            <ButtonLoading disabled>
+              <Spinner />
+            </ButtonLoading>
+          ) : (
+            <Button disabled={isButtonDisabled} as={ModalButton} type="submit">
+              Salvar
+            </Button>
+          )}
+        </ButtonsContainer>
       </form>
     </>
   )
