@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react'
 import { IAuthContextType, IMentor, UserSessionInfo } from '../interfaces/IAuth'
-import { getCookie } from 'cookies-next'
 import { sessionNameUserInfo } from '@/data/static-info'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
@@ -21,7 +20,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { logout } = UserLoginService()
 
   useEffect(() => {
-    const storedUser = getCookie(sessionNameUserInfo)?.toString()
+    const storedUser =
+      localStorage.getItem(sessionNameUserInfo)?.toString() ||
+      sessionStorage.getItem(sessionNameUserInfo)?.toString()
     const decodedToken = storedUser && jwtDecode(JSON.parse(storedUser).token)
     const isTokenExpires =
       decodedToken &&
