@@ -15,7 +15,13 @@ import {
   isValidHttpsUrl,
   splitCalendlyName,
 } from '@/utils/ValidateCalendlyInput'
-import { ContainerErrorInputCalendly, InputCalendlyStyled } from './style'
+import {
+  ContainerInput,
+  ContainerErrorInputCalendly,
+  InputCalendlyStyled,
+  PlaceholderInput,
+  StyledErrorOutlineIcon,
+} from './style'
 import { handleError } from '@/utils/handleError'
 import StepperDots from '@/components/atoms/StepperDots'
 
@@ -67,28 +73,40 @@ export default function ModalCalendlyStep3({
     <>
       <ModalTitle>Compartilhe seus horários.</ModalTitle>
       <ModalDescription>
-        Agora, insira o link da sua agenda do Calendly no campo abaixo.
+        Agora, insira o link da sua agenda <br /> do Calendly no campo abaixo.
       </ModalDescription>
       <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}>
-        <InputCalendlyStyled
-          className={`${isValid === false && inputValue !== '' ? 'error' : ''}`}
-          name="calendlyLink"
-          placeholder="Calendly Link"
-          type="text"
-          value={inputValue}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setInputValue(e.target.value)
-            buttonDisabledVerification()
-          }}
-          onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => {
-            const pastedText = e.clipboardData.getData('text')
-            setInputValue(pastedText)
-            buttonDisabledVerification()
-          }}
-        />
+        <ContainerInput>
+          <InputCalendlyStyled
+            className={`${
+              isValid === false && inputValue !== '' ? 'error' : ''
+            }`}
+            name="calendlyLink"
+            type="text"
+            value={inputValue}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setInputValue(e.target.value)
+              buttonDisabledVerification()
+            }}
+            onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => {
+              const pastedText = e.clipboardData.getData('text')
+              setInputValue(pastedText)
+              buttonDisabledVerification()
+            }}
+            id="link-calendly"
+          />
+          <PlaceholderInput htmlFor="link-calendly">
+            Link Calendly
+          </PlaceholderInput>
+          {isValid === false && inputValue !== '' ? (
+            <StyledErrorOutlineIcon aria-hidden color="error" />
+          ) : (
+            ''
+          )}
+        </ContainerInput>
         {isValid === false && inputValue !== '' && (
           <ContainerErrorInputCalendly>
-            O link precisa ser nesse formato:
+            O link precisa ser nesse formato: <br />
             https://calendly.com/seu-usuario-calendly/nome-do-evento
           </ContainerErrorInputCalendly>
         )}
