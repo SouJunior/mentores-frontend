@@ -94,7 +94,17 @@ export default function ModalCalendlyStep3({
             onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => {
               e.preventDefault()
               const pastedText = e.clipboardData.getData('text')
-              setInputValue(pastedText)
+
+              // Código abaixo é necessário para evitar um bug, então mesmo parecendo que a validação do link está incorretamente duplicada no código (já que o useEffect já está fazendo a validação) é necessário a repetição da validação aqui dentro do onPaste para evitar esse bug: mesmo ao colocar um link correto, por meio segundo o input ficava vermelho e com icone de ErrorOutlineIcon, e depois volta a ficar azul dizendo que o link está correto
+              const temporaryInputValue = pastedText
+              const valid =
+                isValidHttpsUrl(temporaryInputValue) &&
+                isCalendlyLink(temporaryInputValue)
+              setIsValid(valid)
+              setIsButtonDisabled(!valid)
+              if (valid) {
+                setInputValue(temporaryInputValue)
+              }
             }}
             id="link-calendly"
           />
