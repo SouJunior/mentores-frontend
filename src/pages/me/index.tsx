@@ -5,6 +5,7 @@ import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab'
 import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab'
 import { useAuthContext } from '@/context/Auth/AuthContext'
 import { EditPhotoProvider } from '@/context/EditPhotoContext'
+import { useProtectPage } from '@/hooks/useProtectPage'
 import {
   AsideContainer,
   AsideNavContainer,
@@ -24,6 +25,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export default function MePage() {
   const { mentor } = useAuthContext()
+  const loading = useProtectPage()
 
   const router = useRouter()
   const initialTab = router.query.tab as string
@@ -37,6 +39,14 @@ export default function MePage() {
   useEffect(() => {
     setActiveTab(router.query.tab as string)
   }, [router.query.tab])
+
+  if (loading) {
+    return (
+      <ContainerSpinnerLoading>
+        <Spinner className="spinner" />
+      </ContainerSpinnerLoading>
+    )
+  }
 
   return (
     <Tabs.Root

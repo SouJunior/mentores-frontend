@@ -8,6 +8,7 @@ import {
   TabLabel,
   TabWrapper,
   TabLine,
+  ContainerSpinnerLoading,
 } from '@/styles/pages/onBoarding'
 import onBoardImage from '@/assets/onBoarding/Ilustrações.svg'
 import GridSpecialities from '@/components/atoms/GridSpecialities'
@@ -15,9 +16,20 @@ import PerfilTab from '@/components/molecules/PerfilTab'
 import { useState } from 'react'
 import { OnBoardingProvider, StepNumber } from '@/context/OnBoardingContext'
 import { EditPhotoProvider } from '@/context/EditPhotoContext'
+import { useProtectPage } from '@/hooks/useProtectPage'
+import { Spinner } from '@/components/atoms/Spinner'
 
 export default function OnBoarding() {
   const [step, setStep] = useState<StepNumber>(1)
+  const loading = useProtectPage()
+
+  if (loading) {
+    return (
+      <ContainerSpinnerLoading>
+        <Spinner className="spinner" />
+      </ContainerSpinnerLoading>
+    )
+  }
 
   return (
     <ContainerOnBoarding>

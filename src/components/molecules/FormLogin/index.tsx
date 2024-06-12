@@ -19,7 +19,6 @@ import * as yup from 'yup'
 import { InputForm } from '@/components/atoms/InputForm'
 import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material'
 import { Eye } from '@/components/atoms/Eye'
-import { setCookie } from 'cookies-next'
 import { sessionNameUserInfo } from '@/data/static-info'
 import { Spinner } from '@/components/atoms/Spinner'
 import { useRouter } from 'next/router'
@@ -59,7 +58,9 @@ export function FormLogin() {
       }
 
       if (isKeepConnected) {
-        setCookie(sessionNameUserInfo, sessionInfo)
+        localStorage.setItem(sessionNameUserInfo, JSON.stringify(sessionInfo))
+      } else {
+        sessionStorage.setItem(sessionNameUserInfo, JSON.stringify(sessionInfo))
       }
 
       setUserSession(sessionInfo)
