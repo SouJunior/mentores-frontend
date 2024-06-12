@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/atoms/Button'
 import {
   ButtonsContainer,
@@ -41,11 +41,15 @@ export default function ModalCalendlyStep3({
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [isValid, setIsValid] = useState(false)
 
-  const buttonDisabledVerification = () => {
+  const buttonDisabledVerification = useCallback(() => {
     const valid = isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue)
     setIsValid(valid)
     setIsButtonDisabled(!valid)
-  }
+  }, [inputValue])
+
+  useEffect(() => {
+    buttonDisabledVerification()
+  }, [inputValue, buttonDisabledVerification])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -86,12 +90,11 @@ export default function ModalCalendlyStep3({
             value={inputValue}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setInputValue(e.target.value)
-              buttonDisabledVerification()
             }}
             onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => {
+              e.preventDefault()
               const pastedText = e.clipboardData.getData('text')
               setInputValue(pastedText)
-              buttonDisabledVerification()
             }}
             id="link-calendly"
           />
