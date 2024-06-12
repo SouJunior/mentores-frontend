@@ -58,16 +58,30 @@ export default function ModalCalendlyStep3({
       if (isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue)) {
         const { firstPathName, secondPathName } = splitCalendlyName(inputValue)
 
-        await api.post('/mentor', {
-          calendlyName: firstPathName,
-          agendaName: secondPathName,
-        })
-
-        setCurrentStep(4)
+        const response = await api.post(
+          '/mentor',
+          {
+            calendlyName: firstPathName,
+            agendaName: secondPathName,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        if (response.status === 204) {
+          console.log('No content to return, but request was successful')
+        } else if (response.status >= 400) {
+          handleError('Algum erro aconteceu. Entre em contato conosco.')
+          console.log('Bad response from server', response.status)
+        } else {
+          setCurrentStep(4)
+        }
       }
     } catch (error) {
       handleError('Algum erro aconteceu. Entre em contato conosco.')
-      console.log(error)
+      console.error(error)
     } finally {
       setIsLoading(false)
     }
