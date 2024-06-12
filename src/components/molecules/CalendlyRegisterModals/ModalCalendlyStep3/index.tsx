@@ -9,7 +9,6 @@ import {
 } from '@/components/organisms/CalendlyRegister/style'
 import { api } from '@/lib/axios'
 import { Spinner } from '@/components/atoms/Spinner'
-import { ButtonLoading } from '@/components/molecules/FormRegister/style'
 import {
   isCalendlyLink,
   isValidHttpsUrl,
@@ -21,6 +20,7 @@ import {
   InputCalendlyStyled,
   PlaceholderInput,
   StyledErrorOutlineIcon,
+  ButtonLoading,
 } from './style'
 import { handleError } from '@/utils/handleError'
 import StepperDots from '@/components/atoms/StepperDots'

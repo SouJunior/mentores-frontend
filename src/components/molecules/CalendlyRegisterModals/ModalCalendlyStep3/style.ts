@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
+import { Button } from '@/components/atoms/Button'
 
 export const ContainerInput = styled.div`
   position: relative;
@@ -97,4 +98,15 @@ export const StyledErrorOutlineIcon = styled(ErrorOutlineIcon)`
 
   position: absolute;
   left: 0.5rem;
+`
+export const ButtonLoading = styled(Button)`
+  height: 45px;
+  padding: 0;
+  width: 7rem;
+
+  &:disabled {
+    cursor: wait;
+    background-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${(props) => props.theme.colors.blue[800]};
+  }
 `
