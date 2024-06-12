@@ -8,7 +8,19 @@ export function isValidHttpsUrl(link: string) {
 }
 
 export function isCalendlyLink(link: string) {
-  return link.includes('calendly.com/')
+  try {
+    const url = new URL(link)
+    const firstPathName = url.pathname.split('/')[1]
+    const secondPathName = url.pathname.split('/')[2]
+    return (
+      url.hostname === 'calendly.com' &&
+      firstPathName.length > 0 &&
+      secondPathName.length > 0
+    )
+  } catch (error) {
+    console.error('Invalid Url: ', error)
+    return false
+  }
 }
 
 export function splitCalendlyName(link: string) {
