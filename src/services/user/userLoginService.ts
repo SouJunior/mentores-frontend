@@ -2,11 +2,11 @@ import {
   UserCredentialsDTO,
   UserLoginResponse,
 } from '../interfaces/IUserLoginService'
-import { deleteCookie, getCookie } from 'cookies-next'
 import { ResourceNotFound } from '../errors/resource-not-found'
 import { api } from '@/lib/axios'
 import { sessionNameUserInfo } from '@/data/static-info'
 import { UserAlreadyLoggedIn } from '../errors/user-already-logged-in'
+import { getToken } from '@/lib/getToken'
 
 const UserLoginService = () => {
   const login = async (data: UserCredentialsDTO) => {
@@ -14,7 +14,7 @@ const UserLoginService = () => {
       throw new ResourceNotFound()
     }
 
-    const sessionCookie = getCookie(sessionNameUserInfo)
+    const sessionCookie = getToken()
 
     if (sessionCookie) {
       throw new UserAlreadyLoggedIn()
@@ -30,7 +30,8 @@ const UserLoginService = () => {
   }
 
   const logout = () => {
-    deleteCookie(sessionNameUserInfo)
+    localStorage.removeItem(sessionNameUserInfo)
+    sessionStorage.removeItem(sessionNameUserInfo)
   }
 
   return {
