@@ -68,7 +68,7 @@ export default function ModalCalendlyStep3({
             headers: {
               'Content-Type': 'application/json',
             },
-          }
+          },
         )
         if (response.status === 204) {
           console.log('No content to return, but request was successful')

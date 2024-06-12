@@ -47,7 +47,6 @@ export default function CalendlyRegister({
           )}
           {currentStep === 3 && (
             <ModalCalendlyStep3
-              handleNextStep={handleNextStep}
               handlePreviousStep={handlePreviousStep}
               currentStep={currentStep}
               setCurrentStep={setCurrentStep}
