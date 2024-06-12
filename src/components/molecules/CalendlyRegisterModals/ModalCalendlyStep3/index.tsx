@@ -102,9 +102,7 @@ export default function ModalCalendlyStep3({
                 isCalendlyLink(temporaryInputValue)
               setIsValid(valid)
               setIsButtonDisabled(!valid)
-              if (valid) {
-                setInputValue(temporaryInputValue)
-              }
+              setInputValue(temporaryInputValue)
             }}
             id="link-calendly"
           />
