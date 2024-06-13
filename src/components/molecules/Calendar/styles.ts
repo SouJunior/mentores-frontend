@@ -5,12 +5,18 @@ import * as Popover from '@radix-ui/react-popover'
 
 export const Container = styled(PopoverContent)`
   background-color: #fff;
+  position: absolute;
+  z-index: 99;
   border-radius: 0.5rem;
   padding: 1rem 2.5rem 0.5rem;
-  position: relative;
   max-width: 21rem;
   transition: none;
   box-shadow: 2px 0 16px rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: 350px) {
+    max-width: 16rem;
+    padding: 1rem 2.5rem 0.5rem 1.8rem;
+  }
 `
 
 export const CalendarActions = styled.div`
