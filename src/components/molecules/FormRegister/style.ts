@@ -13,6 +13,16 @@ export const ContainerForm = styled.div`
   background: ${(props) => props.theme.colors.white};
   border-radius: 12px;
   padding: 2rem;
+
+  @media screen and (max-width: 600px) {
+    width: 80%;
+    top: 7rem;
+  }
+  @media screen and (max-width: 450px) {
+    width: 90%;
+    margin-right: -20px;
+    top: 4rem;
+  }
 `
 
 export const ContainerRegister = styled.div`
@@ -60,6 +70,7 @@ export const ContainerTerms = styled.div`
 
 export const TxtTerms = styled.label`
   font-size: 0.875rem;
+  text-align: start;
   width: 100%;
   color: ${(props) => props.theme.colors.blue[500]};
   line-height: 150%;
