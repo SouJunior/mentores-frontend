@@ -1,20 +1,20 @@
-import { Card } from '@/components/atoms/Card'
-import { CardImage, CardStacks, CardTitle } from './style'
-import { IMentors } from '@/services/interfaces/IUseMentorsService'
-import { Tag } from '@/components/atoms/Tag'
-import { useTheme } from 'styled-components'
-import { Button } from '@/components/atoms/Button'
-import Image from 'next/image'
+import { Card } from '@/components/atoms/Card';
+import { CardImage, CardStacks, CardTitle } from './style';
+import { IMentors } from '@/services/interfaces/IUseMentorsService';
+import { Tag } from '@/components/atoms/Tag';
+import { useTheme } from 'styled-components';
+import { Button } from '@/components/atoms/Button';
+import Image from 'next/image';
 
 interface CardMentorProps {
-  mentor: IMentors
+  mentor: IMentors;
 }
 
 export function CardMentor({ mentor }: CardMentorProps) {
-  const { colors } = useTheme()
+  const { colors } = useTheme();
 
-  const splitMentorName = mentor.fullName.split(' ')
-  const hasValidCalendly = mentor.calendlyName && mentor.agendaName
+  const splitMentorName = mentor.fullName.split(' ');
+  const hasValidCalendly = mentor.calendlyName && mentor.agendaName;
 
   return (
     <Card
@@ -62,5 +62,5 @@ export function CardMentor({ mentor }: CardMentorProps) {
         <Button disabled={!hasValidCalendly}>Agendar um horário</Button>
       )}
     </Card>
-  )
+  );
 }

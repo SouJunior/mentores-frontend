@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const WrapperInput = styled.label`
   position: relative;
@@ -16,7 +16,7 @@ export const WrapperInput = styled.label`
       height: 1.5rem;
     }
   }
-`
+`;
 
 export const DatePickerContainer = styled.label`
   display: flex;
@@ -24,27 +24,27 @@ export const DatePickerContainer = styled.label`
   gap: 0.5rem;
 
   font-size: 0.875rem;
-  color: ${(props) => props.theme.colors.gray[700]};
+  color: ${props => props.theme.colors.gray[700]};
 
   &.error {
     svg {
-      color: ${(props) => props.theme.colors.red[500]};
+      color: ${props => props.theme.colors.red[500]};
     }
   }
 
   span {
     span {
-      color: ${(props) => props.theme.colors.blue[500]};
+      color: ${props => props.theme.colors.blue[500]};
     }
   }
 
   .error-message {
-    color: ${(props) => props.theme.colors.red[500]};
+    color: ${props => props.theme.colors.red[500]};
     font-weight: bold;
     font-size: 0.75rem;
   }
 
   [data-placeholder] {
-    color: ${(props) => props.theme.colors.gray[250]};
+    color: ${props => props.theme.colors.gray[250]};
   }
-`
+`;

@@ -1,18 +1,18 @@
-import { InputForm } from '@/components/atoms/InputForm'
-import { Eye } from '@/components/atoms/Eye'
-import { InfoTooltip } from '@/components/atoms/InfoTooltip'
-import { WrapperInput } from './styles'
-import { useState } from 'react'
+import { InputForm } from '@/components/atoms/InputForm';
+import { Eye } from '@/components/atoms/Eye';
+import { InfoTooltip } from '@/components/atoms/InfoTooltip';
+import { WrapperInput } from './styles';
+import { useState } from 'react';
 
 export function FormFields() {
   const [isPassword, setIsPassword] = useState({
     current: false,
     new: false,
     confirmNew: false,
-  })
+  });
 
   function handlePasswordVisible(pressed: boolean, name: string) {
-    setIsPassword((state) => ({ ...state, [name]: pressed }))
+    setIsPassword(state => ({ ...state, [name]: pressed }));
   }
 
   return (
@@ -32,9 +32,7 @@ export function FormFields() {
         <Eye
           aria-label="Mostrar senha"
           pressed={isPassword.current}
-          onPressedChange={(pressed) =>
-            handlePasswordVisible(pressed, 'current')
-          }
+          onPressedChange={pressed => handlePasswordVisible(pressed, 'current')}
         />
       </WrapperInput>
 
@@ -51,7 +49,7 @@ export function FormFields() {
         <Eye
           aria-label="Mostrar senha"
           pressed={isPassword.new}
-          onPressedChange={(pressed) => handlePasswordVisible(pressed, 'new')}
+          onPressedChange={pressed => handlePasswordVisible(pressed, 'new')}
         />
       </WrapperInput>
 
@@ -68,11 +66,11 @@ export function FormFields() {
         <Eye
           aria-label="Mostrar confirmação da senha"
           pressed={isPassword.confirmNew}
-          onPressedChange={(pressed) =>
+          onPressedChange={pressed =>
             handlePasswordVisible(pressed, 'confirmNew')
           }
         />
       </WrapperInput>
     </>
-  )
+  );
 }

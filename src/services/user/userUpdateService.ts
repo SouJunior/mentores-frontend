@@ -1,18 +1,21 @@
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import { UserUpdateDTO, UserUpdatePasswordDTO } from '../interfaces/IUserUpdate'
-import { api } from '@/lib/axios'
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import {
+  UserUpdateDTO,
+  UserUpdatePasswordDTO,
+} from '../interfaces/IUserUpdate';
+import { api } from '@/lib/axios';
 
 const UserUpdateService = () => {
-  const { userSession } = useAuthContext()
+  const { userSession } = useAuthContext();
 
-  const token = userSession?.token
-  const id = userSession?.id
+  const token = userSession?.token;
+  const id = userSession?.id;
 
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
   const handle = async (data: UserUpdateDTO) => {
     await api.put(
@@ -21,9 +24,9 @@ const UserUpdateService = () => {
         id,
         ...data,
       },
-      config,
-    )
-  }
+      config
+    );
+  };
 
   const updatePassword = async (data: UserUpdatePasswordDTO) => {
     await api.put(
@@ -33,11 +36,11 @@ const UserUpdateService = () => {
         password: data.password,
         confirmPassword: data.confirmPassword,
       },
-      config,
-    )
-  }
+      config
+    );
+  };
 
-  return { handle, updatePassword }
-}
+  return { handle, updatePassword };
+};
 
-export default UserUpdateService
+export default UserUpdateService;

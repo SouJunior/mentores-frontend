@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import * as yup from 'yup';
 
 export const registerSchema = yup.object({
   name: yup.string().required(''),
@@ -8,7 +8,7 @@ export const registerSchema = yup.object({
     .required('')
     .matches(
       /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
-      'E-mail inválido',
+      'E-mail inválido'
     ),
   confirmEmail: yup
     .string()
@@ -20,7 +20,7 @@ export const registerSchema = yup.object({
     .min(8, 'Senha inválida')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
-      'Senha inválida',
+      'Senha inválida'
     ),
   confirmPassword: yup
     .string()
@@ -31,19 +31,19 @@ export const registerSchema = yup.object({
   agreeWithTermsAndPolicies: yup
     .boolean()
     .required(
-      'Você precisa concordar com os Termos de Uso e Políticas de privacidade da SouJunior',
+      'Você precisa concordar com os Termos de Uso e Políticas de privacidade da SouJunior'
     ),
-})
+});
 
 export type ValuesFormType = {
-  name: string
-  email: string
-  dateBirthday: Date | null
-  confirmEmail: string
-  password: string
-  confirmPassword: string
-  agreeWithTermsAndPolicies: boolean
-}
+  name: string;
+  email: string;
+  dateBirthday: Date | null;
+  confirmEmail: string;
+  password: string;
+  confirmPassword: string;
+  agreeWithTermsAndPolicies: boolean;
+};
 
 export const initialValues: ValuesFormType = {
   name: '',
@@ -53,4 +53,4 @@ export const initialValues: ValuesFormType = {
   password: '',
   confirmPassword: '',
   agreeWithTermsAndPolicies: false,
-}
+};

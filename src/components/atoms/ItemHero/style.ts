@@ -1,5 +1,5 @@
-import { device } from '@/styles/theme'
-import styled from 'styled-components'
+import { device } from '@/styles/theme';
+import styled from 'styled-components';
 
 const BaseItemStyles = styled.div`
   height: 5.5rem;
@@ -11,21 +11,21 @@ const BaseItemStyles = styled.div`
     height: 3rem;
     border-radius: 12px;
   }
-`
+`;
 
 export const ItemInvisible = styled(BaseItemStyles)`
   display: none;
-`
+`;
 
 export const ItemPrimary = styled(BaseItemStyles)`
-  background-color: ${(props) => props.theme.colors.blue[800]};
-  border: 4px solid ${(props) => props.theme.colors.blue[800]};
-`
+  background-color: ${props => props.theme.colors.blue[800]};
+  border: 4px solid ${props => props.theme.colors.blue[800]};
+`;
 
 export const ItemSecondary = styled(BaseItemStyles)`
-  border: 4px solid ${(props) => props.theme.colors.blue[800]};
+  border: 4px solid ${props => props.theme.colors.blue[800]};
   background-color: transparent;
-`
+`;
 
 export const ItemImage = styled(BaseItemStyles)`
   border: none;
@@ -35,4 +35,4 @@ export const ItemImage = styled(BaseItemStyles)`
     height: 100%;
     object-fit: cover;
   }
-`
+`;

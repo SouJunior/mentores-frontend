@@ -1,9 +1,9 @@
-import * as Select from '@radix-ui/react-select'
-import { ReactNode } from 'react'
-import { SelectItemContainer } from './styles'
+import * as Select from '@radix-ui/react-select';
+import { ReactNode } from 'react';
+import { SelectItemContainer } from './styles';
 
 interface SelectItemProps extends Select.SelectItemProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export function SelectItem({ children, ...props }: SelectItemProps) {
@@ -13,5 +13,5 @@ export function SelectItem({ children, ...props }: SelectItemProps) {
         <span>{children}</span>
       </Select.ItemText>
     </SelectItemContainer>
-  )
+  );
 }

@@ -14,4 +14,4 @@ export const AnimationTextHero = {
       duration: 0.3,
     },
   },
-}
+};

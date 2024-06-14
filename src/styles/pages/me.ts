@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import * as Tabs from '@radix-ui/react-tabs'
+import styled from 'styled-components';
+import * as Tabs from '@radix-ui/react-tabs';
 
 export const Container = styled.div`
   display: flex;
@@ -11,38 +11,38 @@ export const Container = styled.div`
   main {
     flex: 1;
   }
-`
+`;
 
 export const AsideContainer = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 
-  color: ${(props) => props.theme.colors.black[200]};
-`
+  color: ${props => props.theme.colors.black[200]};
+`;
 
 export const AsideTitle = styled.h1`
-  font-size: ${(props) => props.theme.fontSizes.xl};
+  font-size: ${props => props.theme.fontSizes.xl};
   font-weight: 600;
   line-height: 2.4rem;
-`
+`;
 
 export const AsideDivider = styled.div`
   height: 1px;
-  background-color: ${(props) => props.theme.colors.gray[600]};
+  background-color: ${props => props.theme.colors.gray[600]};
   width: 100%;
-`
+`;
 
 export const ContentDivider = styled.div`
   width: 2px;
-  background-color: ${(props) => props.theme.colors.gray[250]};
-`
+  background-color: ${props => props.theme.colors.gray[250]};
+`;
 
 export const AsideNavContainer = styled(Tabs.List)`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-`
+`;
 
 export const AsideNavItem = styled(Tabs.Trigger)`
   all: unset;
@@ -58,13 +58,13 @@ export const AsideNavItem = styled(Tabs.Trigger)`
 
   &[data-state='active'] {
     font-weight: 500;
-    color: ${(props) => props.theme.colors.blue[850]};
+    color: ${props => props.theme.colors.blue[850]};
   }
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.gray[200]};
+    background-color: ${props => props.theme.colors.gray[200]};
   }
-`
+`;
 
 export const ContainerSpinnerLoading = styled.div`
   display: flex;
@@ -80,6 +80,6 @@ export const ContainerSpinnerLoading = styled.div`
   }
 
   .spinner::before {
-    border-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${props => props.theme.colors.blue[800]};
   }
-`
+`;

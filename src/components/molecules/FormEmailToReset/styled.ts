@@ -1,9 +1,9 @@
-import { styled } from 'styled-components'
+import { styled } from 'styled-components';
 
 export const ContainerForm = styled.div`
   width: 31.5rem;
   height: 36.875rem;
-  background: ${(props) => props.theme.colors.white};
+  background: ${props => props.theme.colors.white};
   border-radius: 12px;
 
   form {
@@ -12,13 +12,13 @@ export const ContainerForm = styled.div`
 
     label {
       span {
-        font-size: ${(props) => props.theme.fontSizes.xs};
+        font-size: ${props => props.theme.fontSizes.xs};
       }
 
       span:first-child {
         font-size: 1rem;
         line-height: 1.5rem;
-        color: ${(props) => props.theme.colors.gray[750]};
+        color: ${props => props.theme.colors.gray[750]};
       }
 
       input {
@@ -30,14 +30,14 @@ export const ContainerForm = styled.div`
       margin-top: 10px;
     }
   }
-`
+`;
 
 export const MessagesContainer = styled.div`
   margin: 1.5rem 0px;
 
   h2 {
-    color: ${(props) => props.theme.colors.gray[750]};
-    font-size: ${(props) => props.theme.fontSizes.lg};
+    color: ${props => props.theme.colors.gray[750]};
+    font-size: ${props => props.theme.fontSizes.lg};
     font-weight: 700;
     line-height: 1.8rem;
     text-align: left;
@@ -45,12 +45,12 @@ export const MessagesContainer = styled.div`
   }
 
   p {
-    color: ${(props) => props.theme.colors.gray[750]};
+    color: ${props => props.theme.colors.gray[750]};
     font-size: 1rem;
     line-height: 1.5rem;
     text-align: left;
   }
-`
+`;
 
 export const FormWrapper = styled.div`
   padding: 2rem;
@@ -62,7 +62,7 @@ export const FormWrapper = styled.div`
 
   a {
     margin-top: auto;
-    color: ${(props) => props.theme.colors.blue[500]};
+    color: ${props => props.theme.colors.blue[500]};
     text-decoration: underline;
     font-size: 16px;
     font-weight: 400;
@@ -73,4 +73,4 @@ export const FormWrapper = styled.div`
   button {
     margin-top: 1.5rem !important;
   }
-`
+`;

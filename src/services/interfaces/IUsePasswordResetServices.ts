@@ -1,3 +1,3 @@
 export type UserPasswordServiceDTO = {
-  email: string
-}
+  email: string;
+};

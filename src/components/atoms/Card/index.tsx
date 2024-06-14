@@ -1,8 +1,8 @@
-import { Box, BoxProps } from '@mui/material'
-import { ReactNode } from 'react'
+import { Box, BoxProps } from '@mui/material';
+import { ReactNode } from 'react';
 
 interface CardProps extends BoxProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const Card = ({ children, ...props }: CardProps) => {
@@ -15,11 +15,11 @@ export const Card = ({ children, ...props }: CardProps) => {
     padding: '0px',
     marginBottom: '5px',
     border: '1px solid #D7D9D7',
-  }
+  };
 
   return (
     <Box {...propsDefault} {...props}>
       {children}
     </Box>
-  )
-}
+  );
+};

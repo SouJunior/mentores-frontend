@@ -1,42 +1,42 @@
-import { Slider } from '@/components/atoms/Slider'
+import { Slider } from '@/components/atoms/Slider';
 import {
   ContainerButtons,
   MentorsComponent,
   MentorsContent,
   MentorsContentContainer,
   MentorsTitle,
-} from './style'
-import { useEffect, useRef, useState } from 'react'
-import { SwiperClass } from 'swiper/react'
-import { Button } from '@/components/atoms/Button'
-import Link from 'next/link'
+} from './style';
+import { useEffect, useRef, useState } from 'react';
+import { SwiperClass } from 'swiper/react';
+import { Button } from '@/components/atoms/Button';
+import Link from 'next/link';
 
 export const MentorSection = () => {
-  const swiperRef = useRef<{ swiper: SwiperClass } | null>(null)
+  const swiperRef = useRef<{ swiper: SwiperClass } | null>(null);
   const [disabledArrows, setDisabledArrows] = useState({
     left: true,
     right: false,
-  })
+  });
 
   const handleNext = () => {
-    swiperRef.current?.swiper?.slideNext()
-  }
+    swiperRef.current?.swiper?.slideNext();
+  };
 
   const handlePrev = () => {
-    swiperRef.current?.swiper?.slidePrev()
-  }
+    swiperRef.current?.swiper?.slidePrev();
+  };
 
   useEffect(() => {
-    const swiper = swiperRef.current?.swiper
+    const swiper = swiperRef.current?.swiper;
     if (swiper) {
       swiper.on('slideChange', () => {
         setDisabledArrows({
           left: swiper.isBeginning,
           right: swiper.isEnd,
-        })
-      })
+        });
+      });
     }
-  }, [])
+  }, []);
 
   return (
     <MentorsComponent id="mentor">
@@ -71,8 +71,8 @@ export const MentorSection = () => {
         </MentorsContent>
       </MentorsContentContainer>
     </MentorsComponent>
-  )
-}
+  );
+};
 
 function ArrowLeftIcon() {
   return (
@@ -88,7 +88,7 @@ function ArrowLeftIcon() {
         fill="#003986"
       />
     </svg>
-  )
+  );
 }
 
 function ArrowRightIcon() {
@@ -105,5 +105,5 @@ function ArrowRightIcon() {
         fill="#003986"
       />
     </svg>
-  )
+  );
 }

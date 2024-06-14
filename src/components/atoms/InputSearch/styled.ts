@@ -1,10 +1,10 @@
-import styled, { css } from 'styled-components'
-import SearchIcon from '@mui/icons-material/Search'
+import styled, { css } from 'styled-components';
+import SearchIcon from '@mui/icons-material/Search';
 
 export const ContainerInput = styled.div`
   border-radius: 0.5rem;
   position: relative;
-  border: 1px solid ${(props) => props.theme.colors.gray[600]};
+  border: 1px solid ${props => props.theme.colors.gray[600]};
   max-width: 389px;
   width: 100%;
 
@@ -12,12 +12,12 @@ export const ContainerInput = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  color: ${(props) => props.theme.colors.black[200]};
+  color: ${props => props.theme.colors.black[200]};
 
   &:focus-within {
-    border-color: ${(props) => props.theme.colors.blue[800]};
+    border-color: ${props => props.theme.colors.blue[800]};
   }
-`
+`;
 
 export const StyledInputSearch = styled.input`
   border: 0;
@@ -37,7 +37,7 @@ export const StyledInputSearch = styled.input`
   }
 
   & ~ label {
-    ${(props) =>
+    ${props =>
       Boolean(props.value) &&
       css`
         transform: translateY(-1.5rem);
@@ -45,7 +45,7 @@ export const StyledInputSearch = styled.input`
         font-size: 0.75rem;
       `}
   }
-`
+`;
 export const PlaceholderInput = styled.label`
   position: absolute;
   left: 0.5rem;
@@ -54,7 +54,7 @@ export const PlaceholderInput = styled.label`
   background-color: #fff;
   transition: all 0.3s;
   pointer-events: none;
-`
+`;
 
 export const StyledSearchIcon = styled(SearchIcon)`
   width: 1.5rem;
@@ -62,4 +62,4 @@ export const StyledSearchIcon = styled(SearchIcon)`
 
   position: absolute;
   right: 0.5rem;
-`
+`;

@@ -1,11 +1,11 @@
-import mentor1Img from '@/assets/homepage/heroSection/mentor1.webp'
-import mentor2Img from '@/assets/homepage/heroSection/mentor2.webp'
-import mentor3Img from '@/assets/homepage/heroSection/mentor3.webp'
-import { ItemHero } from '@/components/atoms/ItemHero'
-import { ContainerList } from './style'
-import { ComponentProps } from 'react'
+import mentor1Img from '@/assets/homepage/heroSection/mentor1.webp';
+import mentor2Img from '@/assets/homepage/heroSection/mentor2.webp';
+import mentor3Img from '@/assets/homepage/heroSection/mentor3.webp';
+import { ItemHero } from '@/components/atoms/ItemHero';
+import { ContainerList } from './style';
+import { ComponentProps } from 'react';
 
-type ListItemsHeroProps = ComponentProps<'div'>
+type ListItemsHeroProps = ComponentProps<'div'>;
 
 export function ListItemsHero(props: ListItemsHeroProps) {
   return (
@@ -29,5 +29,5 @@ export function ListItemsHero(props: ListItemsHeroProps) {
         <ItemHero type={'invisible'} />
       </div>
     </ContainerList>
-  )
+  );
 }

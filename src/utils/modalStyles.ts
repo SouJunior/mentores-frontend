@@ -6,4 +6,4 @@ export const customStyles = {
     bottom: 'auto',
     trasnform: 'translate(-50%, -50%)',
   },
-}
+};

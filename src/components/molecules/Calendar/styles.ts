@@ -1,7 +1,7 @@
-import { PopoverContent } from '@radix-ui/react-popover'
-import styled from 'styled-components'
-import * as Toggle from '@radix-ui/react-toggle'
-import * as Popover from '@radix-ui/react-popover'
+import { PopoverContent } from '@radix-ui/react-popover';
+import styled from 'styled-components';
+import * as Toggle from '@radix-ui/react-toggle';
+import * as Popover from '@radix-ui/react-popover';
 
 export const Container = styled(PopoverContent)`
   background-color: #fff;
@@ -11,19 +11,19 @@ export const Container = styled(PopoverContent)`
   max-width: 21rem;
   transition: none;
   box-shadow: 2px 0 16px rgba(0, 0, 0, 0.1);
-`
+`;
 
 export const CalendarActions = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
-`
+`;
 
 const BaseCalendarAction = styled.button`
   all: unset;
   line-height: 0;
   cursor: pointer;
-  color: ${(props) => props.theme.colors.gray[700]};
+  color: ${props => props.theme.colors.gray[700]};
   position: absolute;
   top: 1.25rem;
   padding: 0.25rem;
@@ -41,21 +41,21 @@ const BaseCalendarAction = styled.button`
   &:focus-visible {
     box-shadow: 0 0 0 2px rgba(17, 101, 186, 0.6);
   }
-`
+`;
 
 export const LeftCalendarAction = styled(BaseCalendarAction)`
   left: 0.7rem;
-`
+`;
 
 export const RightCalendarAction = styled(BaseCalendarAction)`
   right: 0.5rem;
-`
+`;
 
 export const CalendarTable = styled.table`
   margin-top: 0.5rem;
   table-layout: fixed;
   border-collapse: collapse;
-  color: ${(props) => props.theme.colors.gray[700]};
+  color: ${props => props.theme.colors.gray[700]};
   width: 100%;
 
   thead th {
@@ -66,10 +66,10 @@ export const CalendarTable = styled.table`
   tbody td {
     box-sizing: border-box;
   }
-`
+`;
 
 interface CalendarDayProps {
-  isDisabled: boolean
+  isDisabled: boolean;
 }
 
 export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
@@ -78,7 +78,7 @@ export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
   width: 1.1rem;
   transition: 0.3s;
   text-align: center;
-  color: ${(props) => props.isDisabled && props.theme.colors.gray[250]};
+  color: ${props => props.isDisabled && props.theme.colors.gray[250]};
 
   line-height: 150%;
   padding: 0.5rem;
@@ -88,7 +88,7 @@ export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
   }
 
   &[data-state='on'] {
-    color: ${(props) => props.theme.colors.blue[500]};
+    color: ${props => props.theme.colors.blue[500]};
     font-weight: 700;
   }
 
@@ -99,13 +99,13 @@ export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
   &:focus-visible {
     box-shadow: 0 0 0 2px rgba(17, 101, 186, 0.6);
   }
-`
+`;
 
 export const CalendarTrigger = styled(Popover.Trigger)`
   all: unset;
   cursor: pointer;
   padding: 0.75rem 1rem;
-  border: 1px solid ${(props) => props.theme.colors.gray[600]};
+  border: 1px solid ${props => props.theme.colors.gray[600]};
   border-radius: 0.5rem;
   transition: all 0.3s ease;
 
@@ -121,31 +121,31 @@ export const CalendarTrigger = styled(Popover.Trigger)`
   }
 
   &:disabled {
-    color: ${(props) => props.theme.colors.gray[600]};
-    border-color: ${(props) => props.theme.colors.gray[200]};
-    background-color: ${(props) => props.theme.colors.gray[200]};
+    color: ${props => props.theme.colors.gray[600]};
+    border-color: ${props => props.theme.colors.gray[200]};
+    background-color: ${props => props.theme.colors.gray[200]};
     cursor: not-allowed;
   }
 
   &[data-state='closed']:not(:disabled):hover {
-    border: 1px solid ${(props) => props.theme.colors.blue[850]};
+    border: 1px solid ${props => props.theme.colors.blue[850]};
   }
 
   &[data-state='open'],
   &:focus-visible {
-    border: 1px solid ${(props) => props.theme.colors.blue[850]};
-    box-shadow: 0 0 0 1px ${(props) => props.theme.colors.blue[850]};
+    border: 1px solid ${props => props.theme.colors.blue[850]};
+    box-shadow: 0 0 0 1px ${props => props.theme.colors.blue[850]};
 
     svg {
-      color: ${(props) => props.theme.colors.blue[850]};
+      color: ${props => props.theme.colors.blue[850]};
     }
   }
 
   &.error {
-    border: 1px solid ${(props) => props.theme.colors.red[500]};
+    border: 1px solid ${props => props.theme.colors.red[500]};
   }
 
   &:disabled [data-placeholder] {
-    color: ${(props) => props.theme.colors.gray[600]};
+    color: ${props => props.theme.colors.gray[600]};
   }
-`
+`;

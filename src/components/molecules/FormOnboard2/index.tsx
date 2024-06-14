@@ -1,4 +1,4 @@
-import PhotoButton from '@/components/atoms/PhotoButton'
+import PhotoButton from '@/components/atoms/PhotoButton';
 import {
   BackButton,
   ButtonContainer,
@@ -12,35 +12,35 @@ import {
   StyledImportant,
   StyledInfo,
   StyledInfoContainer,
-} from './styled'
-import { Dispatch, SetStateAction } from 'react'
-import EditPhotoModal from '@/components/atoms/EditPhotoModal'
-import { Form } from 'formik'
-import { InputForm } from '@/components/atoms/InputForm'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { genders } from '@/data/static-info'
-import { Select } from '@/components/atoms/Select'
-import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext'
-import { Modal } from '@/components/atoms/Modal'
-import { isEmpty } from '@/utils/is-empty'
+} from './styled';
+import { Dispatch, SetStateAction } from 'react';
+import EditPhotoModal from '@/components/atoms/EditPhotoModal';
+import { Form } from 'formik';
+import { InputForm } from '@/components/atoms/InputForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { genders } from '@/data/static-info';
+import { Select } from '@/components/atoms/Select';
+import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext';
+import { Modal } from '@/components/atoms/Modal';
+import { isEmpty } from '@/utils/is-empty';
 
 interface FormOnBoardProps {
-  onStep: Dispatch<SetStateAction<StepNumber>>
+  onStep: Dispatch<SetStateAction<StepNumber>>;
 }
 
 export default function FormOnboard2({ onStep }: FormOnBoardProps) {
-  const { formik } = useOnBoardingContext()
+  const { formik } = useOnBoardingContext();
 
-  const isCompleted = !isEmpty(formik.touched)
+  const isCompleted = !isEmpty(formik.touched);
 
   const handleImageEdit = (editedImage: string | null) => {
-    formik.setFieldValue('profile', editedImage || '')
-  }
+    formik.setFieldValue('profile', editedImage || '');
+  };
 
   const handleBackToFirstStep = () => {
-    onStep(1)
-  }
+    onStep(1);
+  };
 
   return (
     <>
@@ -67,8 +67,8 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
         <EditPhotoModal
           selectedPhoto={formik.values.profile}
-          onAddPhoto={(photo) => {
-            formik.setFieldValue('profile', photo)
+          onAddPhoto={photo => {
+            formik.setFieldValue('profile', photo);
           }}
           onImageEdit={handleImageEdit}
         />
@@ -94,9 +94,9 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
             </span>
             <Select
               placeholder="Gênero"
-              onValueChange={(value) => formik.setFieldValue('gender', value)}
+              onValueChange={value => formik.setFieldValue('gender', value)}
             >
-              {genders.map((gender) => (
+              {genders.map(gender => (
                 <SelectItemStyled key={gender} value={gender}>
                   {gender}
                 </SelectItemStyled>
@@ -120,5 +120,5 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
         </Form>
       </FormContainer>
     </>
-  )
+  );
 }

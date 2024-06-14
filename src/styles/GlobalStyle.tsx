@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -54,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   #toast-error {
-    background-color: ${(props) => props.theme.colors.red[600]};
+    background-color: ${props => props.theme.colors.red[600]};
     padding: 1rem;
     border-radius: 0.75rem;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -78,4 +78,4 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
-`
+`;

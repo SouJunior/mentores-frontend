@@ -1,4 +1,4 @@
-import styled, { keyframes, createGlobalStyle } from 'styled-components'
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
 
 const fadeInOut = keyframes`
   from {
@@ -9,13 +9,13 @@ const fadeInOut = keyframes`
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
-`
+`;
 
 export const GlobalStyle = createGlobalStyle<{ overflowDisabled: boolean }>`
   body {
-    overflow-y: ${(props) => (props.overflowDisabled ? 'hidden' : 'auto')};
+    overflow-y: ${props => (props.overflowDisabled ? 'hidden' : 'auto')};
   }
-`
+`;
 
 export const BackgroundOverlay = styled.div<{ visible: boolean }>`
   position: fixed;
@@ -25,8 +25,8 @@ export const BackgroundOverlay = styled.div<{ visible: boolean }>`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 9998;
-  display: ${(props) => (props.visible ? 'block' : 'none')};
-`
+  display: ${props => (props.visible ? 'block' : 'none')};
+`;
 
 export const ToastContainer = styled.div<{ visible: boolean }>`
   display: flex;
@@ -42,10 +42,10 @@ export const ToastContainer = styled.div<{ visible: boolean }>`
   width: 400px;
   height: 207px;
 
-  opacity: ${(props) => (props.visible ? '1' : '0')};
+  opacity: ${props => (props.visible ? '1' : '0')};
   animation: ${fadeInOut} 0.3s ease-in-out;
   background-color: #ffff;
-`
+`;
 
 export const ContainerContentToast = styled.div`
   display: flex;
@@ -53,25 +53,25 @@ export const ContainerContentToast = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 17px;
-`
+`;
 
 export const ContainerToastTitle = styled.div`
   color: #149911;
   font-size: 24px;
   font-weight: 500;
   text-align: center;
-`
+`;
 
 export const ContainerToastIconWrapper = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 export const ContainerToastIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const ContainerToastIconClose = styled.div`
   position: absolute;
@@ -81,7 +81,7 @@ export const ContainerToastIconClose = styled.div`
   .iconClose {
     cursor: pointer;
   }
-`
+`;
 
 export const ContainerButton = styled.button`
   padding: 12px 56px;
@@ -95,4 +95,4 @@ export const ContainerButton = styled.button`
     transition: ease-in-out 0.3s;
     transform: scale(1.1);
   }
-`
+`;

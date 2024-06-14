@@ -1,17 +1,17 @@
-import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
-import ModalEmail from '@/components/molecules/ModalEmail'
+import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
+import ModalEmail from '@/components/molecules/ModalEmail';
 import {
   ValuesFormType,
   registerSchema,
   initialValues,
-} from '@/utils/registerSchema'
-import { Field, Form, FormikProvider, useFormik } from 'formik'
-import Image from 'next/image'
-import { useState } from 'react'
-import { Button } from '../../atoms/Button'
-import { ModalCancel } from '../ModalCancel'
-import { ModalPrivacyPolicy } from '../ModalTermsAndPolicies/ModalPrivacyPolicy'
-import ModalTerms from '../ModalTermsAndPolicies/ModalTerms'
+} from '@/utils/registerSchema';
+import { Field, Form, FormikProvider, useFormik } from 'formik';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Button } from '../../atoms/Button';
+import { ModalCancel } from '../ModalCancel';
+import { ModalPrivacyPolicy } from '../ModalTermsAndPolicies/ModalPrivacyPolicy';
+import ModalTerms from '../ModalTermsAndPolicies/ModalTerms';
 
 import {
   ButtonLoading,
@@ -23,32 +23,32 @@ import {
   ModalUserExistsContainer,
   ModalUserExistsTitle,
   TxtTerms,
-} from './style'
-import { api } from '@/lib/axios'
-import { AxiosError } from 'axios'
-import { useRouter } from 'next/router'
-import { throwErrorMessages } from '@/utils/throw-error-messages'
-import { FormRegisterFields } from './FormRegisterFields'
-import { Spinner } from '@/components/atoms/Spinner'
-import { Modal } from '@/components/atoms/Modal'
+} from './style';
+import { api } from '@/lib/axios';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { FormRegisterFields } from './FormRegisterFields';
+import { Spinner } from '@/components/atoms/Spinner';
+import { Modal } from '@/components/atoms/Modal';
 
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { errorTranslations } from '@/services/errors/error-messages-translations'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { errorTranslations } from '@/services/errors/error-messages-translations';
 
 export function FormRegister() {
-  const [openModalCancel, setOpenModalCancel] = useState(false)
-  const [openEmail, setOpenEmail] = useState(false)
-  const [isUserAlreadyExists, setIsUserAlreadyExists] = useState(false)
+  const [openModalCancel, setOpenModalCancel] = useState(false);
+  const [openEmail, setOpenEmail] = useState(false);
+  const [isUserAlreadyExists, setIsUserAlreadyExists] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleModalEmail = () => setOpenEmail(!openEmail)
-  const closeModalCancel = () => setOpenModalCancel(false)
+  const handleModalEmail = () => setOpenEmail(!openEmail);
+  const closeModalCancel = () => setOpenModalCancel(false);
 
   const handleSubmit = async (
     values: ValuesFormType,
-    { resetForm }: { resetForm: () => void },
+    { resetForm }: { resetForm: () => void }
   ) => {
     try {
       await api.post('/mentor', {
@@ -58,49 +58,47 @@ export function FormRegister() {
         emailConfirm: values.confirmEmail,
         password: values.password,
         passwordConfirmation: values.confirmPassword,
-      })
-      resetForm()
-      handleModalEmail()
+      });
+      resetForm();
+      handleModalEmail();
     } catch (error) {
       if (error instanceof AxiosError) {
-        const messageKey = error.response?.data.message
+        const messageKey = error.response?.data.message;
 
         if (messageKey.match(/user|exists/gi)) {
-          setIsUserAlreadyExists(true)
-          return
+          setIsUserAlreadyExists(true);
+          return;
         }
 
         throwErrorMessages({
           messages: errorTranslations,
           currentMessageKey: messageKey,
-        })
+        });
       }
     }
-  }
+  };
 
   const formik = useFormik({
     initialValues,
     validationSchema: registerSchema,
     onSubmit: handleSubmit,
     validateOnChange: true,
-  })
+  });
 
   const isButtonDisabled = Object.entries(formik.values).some(
-    ([key, value]) => !value || formik.errors[key as keyof ValuesFormType],
-  )
+    ([key, value]) => !value || formik.errors[key as keyof ValuesFormType]
+  );
 
   const handleModalCancel = () => {
-    const isSomeFieldFilled = Object.values(formik.values).some(
-      (field) => field,
-    )
+    const isSomeFieldFilled = Object.values(formik.values).some(field => field);
 
     if (isSomeFieldFilled) {
-      setOpenModalCancel(true)
-      return
+      setOpenModalCancel(true);
+      return;
     }
 
-    router.back()
-  }
+    router.back();
+  };
 
   return (
     <>
@@ -210,5 +208,5 @@ export function FormRegister() {
         </ContainerRegister>
       </ContainerForm>
     </>
-  )
+  );
 }

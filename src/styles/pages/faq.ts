@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { Accordion as MuiAccordion } from '@mui/material'
+import styled from 'styled-components';
+import { Accordion as MuiAccordion } from '@mui/material';
 
 export const FaqContainer = styled.main`
   display: flex;
@@ -9,7 +9,7 @@ export const FaqContainer = styled.main`
   footer {
     margin-top: auto;
   }
-`
+`;
 
 export const FaqMain = styled.section`
   display: flex;
@@ -17,16 +17,16 @@ export const FaqMain = styled.section`
   gap: 74px;
   padding-top: 6rem;
   padding-bottom: 3rem;
-`
+`;
 
 export const ImageContainer = styled.div`
   margin-top: 80px;
-`
+`;
 export const AccordionContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 43.75rem;
-`
+`;
 
 export const Accordion = styled(MuiAccordion)`
   & + & {
@@ -59,9 +59,9 @@ export const Accordion = styled(MuiAccordion)`
   }
 
   a {
-    color: ${(props) => props.theme.colors.blue[500]};
+    color: ${props => props.theme.colors.blue[500]};
   }
-`
+`;
 
 export const AccordionContent = styled.span`
   font-size: 16px;
@@ -69,7 +69,7 @@ export const AccordionContent = styled.span`
   line-height: 22px;
   letter-spacing: 0em;
   text-align: left;
-`
+`;
 
 export const AccordionTitle = styled.span`
   font-size: 20px;
@@ -78,7 +78,7 @@ export const AccordionTitle = styled.span`
   letter-spacing: 0em;
   text-align: left;
   color: #002c66;
-`
+`;
 
 export const TitleSpan = styled.h1`
   color: #002c66;
@@ -88,4 +88,4 @@ export const TitleSpan = styled.h1`
   letter-spacing: 0em;
   text-align: left;
   margin-bottom: 1.5rem;
-`
+`;

@@ -1,12 +1,12 @@
-import { Button } from '@/components/atoms/Button'
-import { TitleTab } from '../styles'
+import { Button } from '@/components/atoms/Button';
+import { TitleTab } from '../styles';
 
 import {
   ScheduleDescription,
   ScheduleContentContainer,
   ScheduleTabContainer,
-} from './styles'
-import Link from 'next/link'
+} from './styles';
+import Link from 'next/link';
 
 export function ScheduleTab() {
   return (
@@ -23,5 +23,5 @@ export function ScheduleTab() {
         </Button>
       </ScheduleContentContainer>
     </ScheduleTabContainer>
-  )
+  );
 }

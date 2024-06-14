@@ -1,5 +1,5 @@
-import { device } from '@/styles/theme'
-import styled from 'styled-components'
+import { device } from '@/styles/theme';
+import styled from 'styled-components';
 
 export const ContainerDepo = styled.div`
   display: flex;
@@ -22,10 +22,10 @@ export const ContainerDepo = styled.div`
   }
 
   h2 {
-    font-size: ${(props) => props.theme.fontSizes.xxl};
+    font-size: ${props => props.theme.fontSizes.xxl};
     font-weight: 600;
     line-height: 120%;
-    color: ${(props) => props.theme.colors.black[200]};
+    color: ${props => props.theme.colors.black[200]};
 
     @media ${device.desktopM} {
       padding: 0 2rem;
@@ -36,7 +36,7 @@ export const ContainerDepo = styled.div`
     }
 
     @media ${device.tablet} {
-      font-size: ${(props) => props.theme.fontSizes.xl};
+      font-size: ${props => props.theme.fontSizes.xl};
     }
   }
 
@@ -44,7 +44,7 @@ export const ContainerDepo = styled.div`
     width: max-content;
     margin: 0 auto;
   }
-`
+`;
 
 export const ContainerSlider = styled.div`
   .swiper {
@@ -80,4 +80,4 @@ export const ContainerSlider = styled.div`
       padding-left: 1rem;
     }
   }
-`
+`;

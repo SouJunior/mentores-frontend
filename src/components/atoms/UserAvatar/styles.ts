@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const ImageContainer = styled.div`
   width: 2.75rem;
@@ -11,4 +11,4 @@ export const ImageContainer = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;

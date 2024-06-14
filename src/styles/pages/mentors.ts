@@ -1,13 +1,13 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: ${(props) => props.theme.colors.blue[25]};
+  background-color: ${props => props.theme.colors.blue[25]};
   display: flex;
   flex-direction: column;
   gap: 10px;
-`
+`;
 
-export const MainContent = styled.main``
+export const MainContent = styled.main``;
 
 export const SubHeaderContainer = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const SubHeaderContainer = styled.div`
   padding: 1.5rem 2rem;
   max-width: 1280px;
   margin: 0 auto;
-`
+`;
 
 export const TitleContainer = styled.section`
   display: flex;
@@ -41,13 +41,13 @@ export const TitleContainer = styled.section`
     background-color: #666666;
     border-radius: 100%;
   }
-`
+`;
 
 export const SubTitleContainer = styled.span`
   font-size: 0.875rem;
   color: #003986;
   line-height: 1.05rem;
-`
+`;
 
 export const CTAMain = styled.span`
   font-size: 32px;
@@ -56,12 +56,12 @@ export const CTAMain = styled.span`
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
-`
+`;
 export const CTASub = styled.span`
   font-size: 16px;
   color: #666666;
   font-weight: 400;
-`
+`;
 
 export const StacksContainer = styled.span`
   display: flex;
@@ -72,7 +72,7 @@ export const StacksContainer = styled.span`
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-`
+`;
 
 export const Stack = styled.span`
   background: #fff;
@@ -82,14 +82,14 @@ export const Stack = styled.span`
   padding: 0.5rem 1rem;
   border-radius: 2.5rem;
   text-align: center;
-`
+`;
 
 export const Divider = styled.div`
   width: 2px;
   height: 2rem;
 
   background-color: #cbcbcb;
-`
+`;
 
 export const RemoveFiltersBtn = styled.button`
   all: unset;
@@ -104,14 +104,14 @@ export const RemoveFiltersBtn = styled.button`
   &:hover {
     color: #002c66;
   }
-`
+`;
 
 export const ContainerControls = styled.div`
   width: 100%;
   background-color: #fff;
   padding: 2rem 0;
   margin-top: 50px;
-`
+`;
 
 export const Content = styled.div`
   display: flex;
@@ -120,9 +120,9 @@ export const Content = styled.div`
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-`
+`;
 
 export const ContainerSelects = styled.div`
   display: flex;
   gap: 10px;
-`
+`;

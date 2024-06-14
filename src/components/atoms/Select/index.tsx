@@ -1,18 +1,18 @@
-import * as SelectPrimitive from '@radix-ui/react-select'
-import * as ScrollArea from '@radix-ui/react-scroll-area'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import { ReactNode } from 'react'
+import * as SelectPrimitive from '@radix-ui/react-select';
+import * as ScrollArea from '@radix-ui/react-scroll-area';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { ReactNode } from 'react';
 import {
   ScrollAreaBar,
   ScrollAreaThumb,
   ScrollAreaViewport,
   SelectContent,
   SelectTrigger,
-} from './styles'
+} from './styles';
 
 interface SelectProps extends SelectPrimitive.SelectProps {
-  children: ReactNode
-  placeholder: string
+  children: ReactNode;
+  placeholder: string;
 }
 
 export function Select({ children, placeholder, ...props }: SelectProps) {
@@ -45,5 +45,5 @@ export function Select({ children, placeholder, ...props }: SelectProps) {
         </SelectContent>
       </SelectPrimitive.Portal>
     </SelectPrimitive.Root>
-  )
+  );
 }
