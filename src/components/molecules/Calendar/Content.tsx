@@ -1,7 +1,7 @@
-import { getWeekDays } from '@/utils/get-week-days'
-import * as Popover from '@radix-ui/react-popover'
-import dayjs from 'dayjs'
-import { useMemo } from 'react'
+import { getWeekDays } from '@/utils/get-week-days';
+import * as Popover from '@radix-ui/react-popover';
+import dayjs from 'dayjs';
+import { useMemo } from 'react';
 import {
   CalendarActions,
   CalendarDay,
@@ -9,97 +9,97 @@ import {
   Container,
   LeftCalendarAction,
   RightCalendarAction,
-} from './styles'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
-import { useCalendarContext } from './Root'
-import { SelectMonths } from './SelectMonths'
-import { SelectYears } from './SelectYears'
+} from './styles';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { useCalendarContext } from './Root';
+import { SelectMonths } from './SelectMonths';
+import { SelectYears } from './SelectYears';
 
 interface CalendarWeek {
-  week: number
+  week: number;
   days: {
-    date: dayjs.Dayjs
-    disabled?: boolean
-  }[]
+    date: dayjs.Dayjs;
+    disabled?: boolean;
+  }[];
 }
 
-type CalendarWeeks = CalendarWeek[]
+type CalendarWeeks = CalendarWeek[];
 
 interface ContentProps extends Popover.PopoverContentProps {
-  selected?: Date | null
-  onSelected?: (value: Date) => void
+  selected?: Date | null;
+  onSelected?: (value: Date) => void;
 }
 
 export function Content({ onSelected, selected, ...props }: ContentProps) {
-  const { currentDate, setCurrentDate } = useCalendarContext()
+  const { currentDate, setCurrentDate } = useCalendarContext();
 
-  const shortWeekDays = getWeekDays()
+  const shortWeekDays = getWeekDays();
 
   const calendarWeeks = useMemo(() => {
     const daysInMonthArray = Array.from({
       length: currentDate.daysInMonth(),
-    }).map((_, index) => currentDate.set('date', index + 1))
+    }).map((_, index) => currentDate.set('date', index + 1));
 
-    const firstWeekDay = currentDate.get('day')
+    const firstWeekDay = currentDate.get('day');
 
     const previousMonthFillArray = Array.from({
       length: firstWeekDay,
     })
       .map((_, index) => currentDate.subtract(index + 1, 'day'))
-      .reverse()
+      .reverse();
 
     const lastDayInCurrentMonth = currentDate.set(
       'date',
-      currentDate.daysInMonth(),
-    )
-    const lastWeekDay = lastDayInCurrentMonth.get('day')
+      currentDate.daysInMonth()
+    );
+    const lastWeekDay = lastDayInCurrentMonth.get('day');
 
     const nextMonthFillArray = Array.from({
       length: 6 - lastWeekDay,
     }).map((_, index) => {
-      return lastDayInCurrentMonth.add(index + 1, 'day')
-    })
+      return lastDayInCurrentMonth.add(index + 1, 'day');
+    });
 
     const calendarDays = [
-      ...previousMonthFillArray.map((date) => ({
+      ...previousMonthFillArray.map(date => ({
         date,
         disabled: true,
       })),
-      ...daysInMonthArray.map((date) => {
-        const isDateAfterCurrentDate = date.isAfter(dayjs())
-        return { date, disabled: isDateAfterCurrentDate }
+      ...daysInMonthArray.map(date => {
+        const isDateAfterCurrentDate = date.isAfter(dayjs());
+        return { date, disabled: isDateAfterCurrentDate };
       }),
-      ...nextMonthFillArray.map((date) => ({ date, disabled: true })),
-    ]
+      ...nextMonthFillArray.map(date => ({ date, disabled: true })),
+    ];
 
     const calendarWeeks = calendarDays.reduce<CalendarWeeks>(
       (weeks, _, i, original) => {
-        const isNewWeek = i % 7 === 0
+        const isNewWeek = i % 7 === 0;
 
         if (isNewWeek) {
           weeks.push({
             week: i / 7 + 1,
             days: original.slice(i, i + 7),
-          })
+          });
         }
 
-        return weeks
+        return weeks;
       },
-      [],
-    )
+      []
+    );
 
-    return calendarWeeks
-  }, [currentDate])
+    return calendarWeeks;
+  }, [currentDate]);
 
   function handlePreviousMonth() {
-    const previousMonthDate = currentDate.subtract(1, 'month')
-    setCurrentDate(previousMonthDate)
+    const previousMonthDate = currentDate.subtract(1, 'month');
+    setCurrentDate(previousMonthDate);
   }
 
   function handleNextMonth() {
-    const nextMonthDate = currentDate.add(1, 'month')
-    setCurrentDate(nextMonthDate)
+    const nextMonthDate = currentDate.add(1, 'month');
+    setCurrentDate(nextMonthDate);
   }
 
   return (
@@ -152,5 +152,5 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
         </CalendarTable>
       </Container>
     </Popover.Portal>
-  )
+  );
 }

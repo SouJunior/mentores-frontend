@@ -1,10 +1,10 @@
-import FormOnboard2 from '@/components/molecules/FormOnboard2'
-import { PerfilContainer, StyledImportant } from './styled'
-import { Dispatch, SetStateAction } from 'react'
-import { StepNumber } from '@/context/OnBoardingContext'
+import FormOnboard2 from '@/components/molecules/FormOnboard2';
+import { PerfilContainer, StyledImportant } from './styled';
+import { Dispatch, SetStateAction } from 'react';
+import { StepNumber } from '@/context/OnBoardingContext';
 
 interface PerfilTabProps {
-  onStep: Dispatch<SetStateAction<StepNumber>>
+  onStep: Dispatch<SetStateAction<StepNumber>>;
 }
 
 export default function PerfilTab({ onStep }: PerfilTabProps) {
@@ -15,5 +15,5 @@ export default function PerfilTab({ onStep }: PerfilTabProps) {
       </StyledImportant>{' '}
       <FormOnboard2 onStep={onStep} />
     </PerfilContainer>
-  )
+  );
 }

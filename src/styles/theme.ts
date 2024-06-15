@@ -35,7 +35,7 @@ export const colors = {
     primary:
       'linear-gradient(303.77deg, rgba(17, 101, 186, 0.79) 34.68%, rgba(90, 156, 255, 0.79) 79.96%), linear-gradient(303.77deg, rgba(217, 217, 217, 0) -1.3%, rgba(17, 101, 186, 0.79) 54.57%), linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(17, 101, 186, 0.79) 68.75%)',
   },
-} as const
+} as const;
 
 export const fontSizes = {
   xxxl: '3rem',
@@ -45,7 +45,7 @@ export const fontSizes = {
   md: '1.125rem',
   sm: '1rem',
   xs: '0.875rem',
-} as const
+} as const;
 
 export const breakpoints = {
   mobileS: 320,
@@ -56,7 +56,7 @@ export const breakpoints = {
   desktopS: 1133,
   desktopM: 1440,
   desktopL: 2560,
-} as const
+} as const;
 
 export const device = {
   mobileS: `(max-width: ${breakpoints.mobileS}px)`,
@@ -67,9 +67,9 @@ export const device = {
   desktopS: `(max-width: ${breakpoints.desktopS}px)`,
   desktopM: `(max-width: ${breakpoints.desktopM}px)`,
   desktopL: `(max-width: ${breakpoints.desktopL}px)`,
-} as const
+} as const;
 
 export const theme = {
   colors,
   fontSizes,
-}
+};

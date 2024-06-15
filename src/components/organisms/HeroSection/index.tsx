@@ -1,7 +1,7 @@
-import { ListItemsHero } from '@/components/molecules/ListItemsHero'
-import { AnimatePresence, motion } from 'framer-motion'
-import { FormEvent, useEffect, useState } from 'react'
-import { AnimationTextHero } from '../../../styles/animations'
+import { ListItemsHero } from '@/components/molecules/ListItemsHero';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FormEvent, useEffect, useState } from 'react';
+import { AnimationTextHero } from '../../../styles/animations';
 import {
   BtnSearchForm,
   ContainerHero,
@@ -10,41 +10,41 @@ import {
   PlaceholderInputMobile,
   QueryInput,
   Title,
-} from './style'
-import { useRouter } from 'next/router'
-import { Button } from '@/components/atoms/Button'
-import { MagnifyingGlass } from 'phosphor-react'
+} from './style';
+import { useRouter } from 'next/router';
+import { Button } from '@/components/atoms/Button';
+import { MagnifyingGlass } from 'phosphor-react';
 
-const text = ['mentorias personalizadas', 'profissionais experientes']
+const text = ['mentorias personalizadas', 'profissionais experientes'];
 
 export function HeroSection() {
-  const router = useRouter()
-  const [textHero, setTextHero] = useState(text[0])
-  const [queryMentor, setQueryMentor] = useState('')
+  const router = useRouter();
+  const [textHero, setTextHero] = useState(text[0]);
+  const [queryMentor, setQueryMentor] = useState('');
 
   function textSwitch() {
     setTimeout(() => {
       if (textHero === text[0]) {
-        setTextHero(text[1])
+        setTextHero(text[1]);
       }
-    }, 1500)
+    }, 1500);
 
     setTimeout(() => {
       if (textHero === text[1]) {
-        setTextHero(text[0])
+        setTextHero(text[0]);
       }
-    }, 1500)
+    }, 1500);
   }
 
   function handleSearchMentor(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    router.push(`/mentores?q=${queryMentor}`)
+    e.preventDefault();
+    router.push(`/mentores?q=${queryMentor}`);
   }
 
   useEffect(() => {
-    textSwitch()
+    textSwitch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [textHero])
+  }, [textHero]);
 
   return (
     <ContainerHero>
@@ -74,7 +74,7 @@ export function HeroSection() {
             <QueryInput
               type="text"
               value={queryMentor}
-              onChange={(e) => setQueryMentor(e.target.value)}
+              onChange={e => setQueryMentor(e.target.value)}
               id="query-mentor"
             />
             <PlaceholderInput htmlFor="query-mentor">
@@ -98,5 +98,5 @@ export function HeroSection() {
 
       <ListItemsHero className="list-items-hero" />
     </ContainerHero>
-  )
+  );
 }

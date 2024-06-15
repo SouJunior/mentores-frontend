@@ -1,10 +1,10 @@
-import { styled } from 'styled-components'
+import { styled } from 'styled-components';
 
 export const ContainerForm = styled.div`
   max-width: 31.5rem;
   width: 100%;
   height: 36.875rem;
-  background: ${(props) => props.theme.colors.white};
+  background: ${props => props.theme.colors.white};
   border-radius: 12px;
 
   form {
@@ -19,26 +19,26 @@ export const ContainerForm = styled.div`
       margin-bottom: 1rem;
     }
   }
-`
+`;
 
 export const MessagesContainer = styled.div`
   margin: 1.5rem 0px;
 
   h2 {
-    color: ${(props) => props.theme.colors.gray[750]};
-    font-size: ${(props) => props.theme.fontSizes.lg};
+    color: ${props => props.theme.colors.gray[750]};
+    font-size: ${props => props.theme.fontSizes.lg};
     font-weight: 700;
     line-height: 1.8rem;
     margin-bottom: 1rem;
   }
 
   p {
-    color: ${(props) => props.theme.colors.gray[750]};
-    font-size: ${(props) => props.theme.fontSizes.sm};
+    color: ${props => props.theme.colors.gray[750]};
+    font-size: ${props => props.theme.fontSizes.sm};
     font-weight: 400;
     line-height: 1.5rem;
   }
-`
+`;
 
 export const FormWrapper = styled.div`
   padding: 2rem;
@@ -50,7 +50,7 @@ export const FormWrapper = styled.div`
 
   a {
     margin-top: auto;
-    color: ${(props) => props.theme.colors.blue[500]};
+    color: ${props => props.theme.colors.blue[500]};
     text-decoration: underline;
     font-size: 16px;
     font-weight: 400;
@@ -61,20 +61,20 @@ export const FormWrapper = styled.div`
   button {
     margin-top: 1.5rem !important;
   }
-`
+`;
 
 export const WrapperInput = styled.div`
   position: relative;
 
   label {
     span {
-      font-size: ${(props) => props.theme.fontSizes.xs};
+      font-size: ${props => props.theme.fontSizes.xs};
     }
 
     span:first-child {
       font-size: 1rem;
       line-height: 1.5rem;
-      color: ${(props) => props.theme.colors.gray[750]};
+      color: ${props => props.theme.colors.gray[750]};
     }
 
     input {
@@ -93,4 +93,4 @@ export const WrapperInput = styled.div`
       height: 1.5rem;
     }
   }
-`
+`;

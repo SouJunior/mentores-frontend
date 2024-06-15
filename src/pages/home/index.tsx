@@ -1,37 +1,37 @@
-import { Footer } from '@/components/organisms/Footer'
-import { DepoSection } from '@/components/organisms/DepoSection'
-import { MentorSection } from '@/components/organisms/MentorSection'
-import { Onboarding } from '@/components/organisms/Onboarding'
-import { HeroSection } from '@/components/organisms/HeroSection'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import CalendlyRegister from '@/components/organisms/CalendlyRegister'
+import { Footer } from '@/components/organisms/Footer';
+import { DepoSection } from '@/components/organisms/DepoSection';
+import { MentorSection } from '@/components/organisms/MentorSection';
+import { Onboarding } from '@/components/organisms/Onboarding';
+import { HeroSection } from '@/components/organisms/HeroSection';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import CalendlyRegister from '@/components/organisms/CalendlyRegister';
 
 export default function HomePage() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [currentStep, setCurrentStep] = useState(1)
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
 
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    const openStatus = Boolean(router.query['connect-calendly'])
-    setIsOpen(openStatus)
-  }, [router.query])
+    const openStatus = Boolean(router.query['connect-calendly']);
+    setIsOpen(openStatus);
+  }, [router.query]);
 
   const handleCloseModal = () => {
     router.replace('/', undefined, {
       shallow: true,
     })
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   const handleNextStep = () => {
-    setCurrentStep((prev) => prev + 1)
-  }
+    setCurrentStep((prev) => prev + 1);
+  };
 
   const handlePreviousStep = () => {
-    setCurrentStep((prev) => prev - 1)
-  }
+    setCurrentStep((prev) => prev - 1);
+  };
 
   return (
     <>
@@ -50,5 +50,5 @@ export default function HomePage() {
         handleCloseModal={handleCloseModal}
       />
     </>
-  )
+  );
 }

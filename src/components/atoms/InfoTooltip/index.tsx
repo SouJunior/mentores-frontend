@@ -1,5 +1,5 @@
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import { useState } from 'react'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useState } from 'react';
 import {
   CriteriaList,
   Criterion,
@@ -7,24 +7,24 @@ import {
   Line,
   Title,
   Tooltip,
-} from './style'
+} from './style';
 
 interface ToolTipProps {
-  right?: number
+  right?: number;
 }
 
 export function InfoTooltip({ right }: ToolTipProps) {
-  const [tooltipVisible, setTooltipVisible] = useState(false)
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const handleMouseEnter = () => {
-    setTooltipVisible(true)
-  }
+    setTooltipVisible(true);
+  };
 
   const handleMouseLeave = () => {
     setTimeout(() => {
-      setTooltipVisible(false)
-    }, 2000)
-  }
+      setTooltipVisible(false);
+    }, 2000);
+  };
   return (
     <InfoContainer right={right}>
       <InfoOutlinedIcon
@@ -42,5 +42,5 @@ export function InfoTooltip({ right }: ToolTipProps) {
         </CriteriaList>
       </Tooltip>
     </InfoContainer>
-  )
+  );
 }

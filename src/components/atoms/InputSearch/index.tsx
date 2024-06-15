@@ -1,12 +1,12 @@
-import React, { ComponentProps } from 'react'
+import React, { ComponentProps } from 'react';
 import {
   ContainerInput,
   PlaceholderInput,
   StyledInputSearch,
   StyledSearchIcon,
-} from './styled'
+} from './styled';
 
-type InputSearchProps = ComponentProps<'input'>
+type InputSearchProps = ComponentProps<'input'>;
 
 export default function InputSearch(props: InputSearchProps) {
   return (
@@ -17,5 +17,5 @@ export default function InputSearch(props: InputSearchProps) {
       </PlaceholderInput>
       <StyledSearchIcon aria-hidden />
     </ContainerInput>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 const BaseStylesButton = styled.button`
   all: unset;
@@ -17,18 +17,18 @@ const BaseStylesButton = styled.button`
 
   transition: 0.3s ease;
 
-  ${(props) => {
+  ${props => {
     if (props.disabled) {
       return css`
         cursor: not-allowed;
-      `
+      `;
     }
   }}
-`
+`;
 
 export interface ButtonStyleProps {
-  variant?: 'primary' | 'secondary' | 'tertiary'
-  size?: 'lg' | 'md' | 'sm'
+  variant?: 'primary' | 'secondary' | 'tertiary';
+  size?: 'lg' | 'md' | 'sm';
 }
 
 export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
@@ -47,7 +47,7 @@ export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
             border-color: ${theme.colors.blue[850]};
             background-color: ${theme.colors.blue[850]};
           }
-        `
+        `;
       case 'secondary':
         return css`
           border: 2px solid ${theme.colors.blue[800]};
@@ -57,7 +57,7 @@ export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
             border-color: ${theme.colors.blue[850]};
             color: ${theme.colors.blue[850]};
           }
-        `
+        `;
       case 'tertiary':
         return css`
           color: ${theme.colors.blue[800]};
@@ -65,7 +65,7 @@ export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
           &:not(:disabled):hover {
             color: ${theme.colors.blue[850]};
           }
-        `
+        `;
     }
   }}
 
@@ -74,15 +74,15 @@ export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
       case 'lg':
         return css`
           padding: 1rem 1.5rem;
-        `
+        `;
       case 'md':
         return css`
           padding: 0.75rem 1.5rem;
-        `
+        `;
       case 'sm':
         return css`
           padding: 0.5rem 1.5rem;
-        `
+        `;
     }
   }}
-`
+`;

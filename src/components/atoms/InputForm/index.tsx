@@ -1,22 +1,22 @@
-import { ErrorMessage, Field, FieldAttributes, useFormikContext } from 'formik'
+import { ErrorMessage, Field, FieldAttributes, useFormikContext } from 'formik';
 import {
   ContainerInputLabel,
   ContainerError,
   ContainerInput,
   StyledLabel,
-} from './style'
-import { ReactNode } from 'react'
+} from './style';
+import { ReactNode } from 'react';
 
 interface InputFormProps extends FieldAttributes<any> {
-  name: string
-  type: string
-  placeholder?: string
-  label: string
-  inputType?: string
-  isRequired?: boolean
-  children?: ReactNode
-  className?: string
-  disabled?: boolean
+  name: string;
+  type: string;
+  placeholder?: string;
+  label: string;
+  inputType?: string;
+  isRequired?: boolean;
+  children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
 }
 
 export function InputForm({
@@ -31,7 +31,7 @@ export function InputForm({
   ...rest
 }: InputFormProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { errors, touched } = useFormikContext<any>()
+  const { errors, touched } = useFormikContext<any>();
 
   return (
     <ContainerInputLabel>
@@ -59,5 +59,5 @@ export function InputForm({
         </ContainerError>
       )}
     </ContainerInputLabel>
-  )
+  );
 }

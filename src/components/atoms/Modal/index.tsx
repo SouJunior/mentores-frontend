@@ -1,9 +1,9 @@
-import { ModalClose } from './ModalClose'
-import { ModalContent } from './ModalContent'
-import { ModalControl } from './ModalControl'
-import { ModalDescription } from './ModalDescription'
-import { ModalRoot } from './ModalRoot'
-import { ModalTitle } from './ModalTitle'
+import { ModalClose } from './ModalClose';
+import { ModalContent } from './ModalContent';
+import { ModalControl } from './ModalControl';
+import { ModalDescription } from './ModalDescription';
+import { ModalRoot } from './ModalRoot';
+import { ModalTitle } from './ModalTitle';
 
 export const Modal = {
   Root: ModalRoot,
@@ -12,4 +12,4 @@ export const Modal = {
   Close: ModalClose,
   Title: ModalTitle,
   Description: ModalDescription,
-}
+};

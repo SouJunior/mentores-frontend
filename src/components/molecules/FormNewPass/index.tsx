@@ -1,54 +1,54 @@
-import { Field, Form, FormikProvider, useFormik } from 'formik'
-import { InputForm } from '@/components/atoms/InputForm'
-import { Button } from '@/components/atoms/Button'
-import { Eye } from '@/components/atoms/Eye'
-import { InfoTooltip } from '@/components/atoms/InfoTooltip'
-import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { Field, Form, FormikProvider, useFormik } from 'formik';
+import { InputForm } from '@/components/atoms/InputForm';
+import { Button } from '@/components/atoms/Button';
+import { Eye } from '@/components/atoms/Eye';
+import { InfoTooltip } from '@/components/atoms/InfoTooltip';
+import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import {
   ContainerForm,
   FormWrapper,
   MessagesContainer,
   WrapperInput,
-} from './styled'
-import { useRouter } from 'next/router'
-import { SetNewPasswordDTO } from '@/services/interfaces/IUserSetNewPassword'
-import setNewPasswordService from '@/services/user/useSetNewPassword'
-import { setNewPassSchema } from '@/utils/setNewPassschema'
-import 'react-toastify/dist/ReactToastify.css'
-import ToastSuccess from '../ToastSuccess'
+} from './styled';
+import { useRouter } from 'next/router';
+import { SetNewPasswordDTO } from '@/services/interfaces/IUserSetNewPassword';
+import setNewPasswordService from '@/services/user/useSetNewPassword';
+import { setNewPassSchema } from '@/utils/setNewPassschema';
+import 'react-toastify/dist/ReactToastify.css';
+import ToastSuccess from '../ToastSuccess';
 
 export default function FormNewPass() {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false)
-  const [toast, setToast] = useState(false)
+    useState(false);
+  const [toast, setToast] = useState(false);
 
-  const router = useRouter()
-  const { code, email } = router.query as { code: string; email: string }
+  const router = useRouter();
+  const { code, email } = router.query as { code: string; email: string };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  useEffect(() => {}, [code, email])
+  useEffect(() => {}, [code, email]);
 
   const initialValues = {
     password: '',
     confirmPassword: '',
     code: '',
     email: '',
-  }
+  };
 
-  const { handle } = setNewPasswordService()
+  const { handle } = setNewPasswordService();
 
   const formik = useFormik({
     initialValues,
     validationSchema: setNewPassSchema,
     onSubmit: async (data: SetNewPasswordDTO, { resetForm }) => {
-      await handle(data, { code, email })
-      resetForm()
-      setToast(true)
+      await handle(data, { code, email });
+      resetForm();
+      setToast(true);
     },
-  })
+  });
   return (
     <ContainerForm>
       {toast && <ToastSuccess message="Ok" />}
@@ -103,5 +103,5 @@ export default function FormNewPass() {
         <Link href="/login">Voltar ao login</Link>
       </FormWrapper>
     </ContainerForm>
-  )
+  );
 }

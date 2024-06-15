@@ -1,10 +1,10 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components';
 
 const rotate = keyframes`
   100% {
       transform: rotate(360deg);
     }
-`
+`;
 
 const prixClipFix = keyframes`
   0% {
@@ -22,7 +22,7 @@ const prixClipFix = keyframes`
   100% {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
-`
+`;
 
 export const SpinnerStyles = styled.span`
   width: 1.5rem;
@@ -40,4 +40,4 @@ export const SpinnerStyles = styled.span`
     border: 5px solid var(--spinner-color, #fff);
     animation: ${prixClipFix} 2s linear infinite;
   }
-`
+`;

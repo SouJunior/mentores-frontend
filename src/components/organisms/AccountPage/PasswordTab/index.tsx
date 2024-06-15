@@ -1,4 +1,4 @@
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button';
 import {
   ButtonLoading,
   ButtonsContainer,
@@ -7,21 +7,21 @@ import {
   SubtitleTab,
   TabContainer,
   TitleTab,
-} from '../styles'
+} from '../styles';
 
-import { FormikProvider, useFormik } from 'formik'
-import { FormFields } from './FormFields'
+import { FormikProvider, useFormik } from 'formik';
+import { FormFields } from './FormFields';
 
-import * as yup from 'yup'
-import UserUpdateService from '@/services/user/userUpdateService'
-import { AxiosError } from 'axios'
-import { Modal } from '@/components/atoms/Modal'
-import { ModalCancel } from '@/components/molecules/ModalCancel'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { Spinner } from '@/components/atoms/Spinner'
-import { throwErrorMessages } from '@/utils/throw-error-messages'
-import { isEmpty } from '@/utils/is-empty'
+import * as yup from 'yup';
+import UserUpdateService from '@/services/user/userUpdateService';
+import { AxiosError } from 'axios';
+import { Modal } from '@/components/atoms/Modal';
+import { ModalCancel } from '@/components/molecules/ModalCancel';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { Spinner } from '@/components/atoms/Spinner';
+import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { isEmpty } from '@/utils/is-empty';
 
 const passwordValidation = yup
   .string()
@@ -29,46 +29,46 @@ const passwordValidation = yup
   .min(8, 'Senha inválida')
   .matches(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
-    'Senha inválida',
-  )
+    'Senha inválida'
+  );
 
 const passwordTabSchema = yup.object({
   password: passwordValidation,
   newPassword: passwordValidation,
   confirmNewPassword: passwordValidation.oneOf(
     [yup.ref('newPassword')],
-    'Os campos informados não coincidem',
+    'Os campos informados não coincidem'
   ),
-})
+});
 
-export type PasswordFormData = yup.InferType<typeof passwordTabSchema>
+export type PasswordFormData = yup.InferType<typeof passwordTabSchema>;
 
 export function PasswordTab() {
-  const [openWarningModal, setOpenWarningModal] = useState(false)
+  const [openWarningModal, setOpenWarningModal] = useState(false);
 
-  const { updatePassword } = UserUpdateService()
-  const router = useRouter()
+  const { updatePassword } = UserUpdateService();
+  const router = useRouter();
 
   async function handleUpdatePassword(
     data: PasswordFormData,
-    { resetForm }: { resetForm: () => void },
+    { resetForm }: { resetForm: () => void }
   ) {
     try {
       await updatePassword({
         oldPassword: data.password,
         password: data.newPassword,
         confirmPassword: data.confirmNewPassword,
-      })
+      });
 
-      resetForm()
+      resetForm();
     } catch (err) {
       if (err instanceof AxiosError) {
-        const currentMessage = err.response?.data.message
+        const currentMessage = err.response?.data.message;
         const messages = {
           'Incorrect old password': 'Senha inválida',
-        }
+        };
 
-        throwErrorMessages({ messages, currentMessageKey: currentMessage })
+        throwErrorMessages({ messages, currentMessageKey: currentMessage });
       }
     }
   }
@@ -77,18 +77,18 @@ export function PasswordTab() {
     initialValues: { password: '', newPassword: '', confirmNewPassword: '' },
     onSubmit: handleUpdatePassword,
     validationSchema: passwordTabSchema,
-  })
+  });
 
   const handleWarningModal = () => {
-    const isFormEmpty = isEmpty(formik.values)
+    const isFormEmpty = isEmpty(formik.values);
 
     if (!isFormEmpty) {
-      setOpenWarningModal(true)
-      return
+      setOpenWarningModal(true);
+      return;
     }
 
-    router.push('/')
-  }
+    router.push('/');
+  };
 
   return (
     <TabContainer value="password">
@@ -131,5 +131,5 @@ export function PasswordTab() {
         </PersonalInfoContent>
       </FormikProvider>
     </TabContainer>
-  )
+  );
 }

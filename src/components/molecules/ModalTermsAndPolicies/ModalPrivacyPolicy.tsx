@@ -1,4 +1,4 @@
-import { Modal } from '@/components/atoms/Modal'
+import { Modal } from '@/components/atoms/Modal';
 import {
   ModalBox,
   ModalBoxContainer,
@@ -7,11 +7,11 @@ import {
   ModalCloseBtnSecondary,
   ModalContainer,
   ModalDescription,
-} from './styles'
-import { DialogContentProps } from '@radix-ui/react-dialog'
-import { ModalHeader } from './ModalHeader'
+} from './styles';
+import { DialogContentProps } from '@radix-ui/react-dialog';
+import { ModalHeader } from './ModalHeader';
 
-type ModalPrivacyPolicyProps = DialogContentProps
+type ModalPrivacyPolicyProps = DialogContentProps;
 
 export function ModalPrivacyPolicy(props: ModalPrivacyPolicyProps) {
   return (
@@ -178,5 +178,5 @@ export function ModalPrivacyPolicy(props: ModalPrivacyPolicyProps) {
 
       <ModalCloseBtn />
     </ModalContainer>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Accordion,
   AccordionContainer,
@@ -7,19 +7,19 @@ import {
   FaqMain,
   ImageContainer,
   TitleSpan,
-} from '@/styles/pages/faq'
-import Image from 'next/image'
-import ImagemFAQ from '@/assets/seo.svg'
-import { AccordionDetails, AccordionSummary } from '@mui/material'
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
-import { Footer } from '@/components/organisms/Footer'
-import Link from 'next/link'
+} from '@/styles/pages/faq';
+import Image from 'next/image';
+import ImagemFAQ from '@/assets/seo.svg';
+import { AccordionDetails, AccordionSummary } from '@mui/material';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import { Footer } from '@/components/organisms/Footer';
+import Link from 'next/link';
 
 export default function FaqPage() {
-  const [expanded, setExpanded] = useState<null | number>(null)
+  const [expanded, setExpanded] = useState<null | number>(null);
 
   function handleChangeAccordion(id: number) {
-    setExpanded(expanded === id ? null : id)
+    setExpanded(expanded === id ? null : id);
   }
 
   return (
@@ -137,5 +137,5 @@ export default function FaqPage() {
 
       <Footer />
     </FaqContainer>
-  )
+  );
 }

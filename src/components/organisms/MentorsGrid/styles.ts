@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const MentorsContainer = styled.div`
   display: grid;
@@ -14,7 +14,7 @@ export const MentorsContainer = styled.div`
   min-height: 100vh;
   padding: 2rem;
   position: relative;
-`
+`;
 
 export const NoResultContainer = styled.div`
   position: absolute;
@@ -25,17 +25,17 @@ export const NoResultContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3px;
-`
+`;
 
 export const NoResultMain = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
   color: #003986;
   margin-top: 10px;
-`
+`;
 
 export const CTASub = styled.span`
   font-size: 1rem;
   color: #666666;
   font-weight: 400;
-`
+`;

@@ -4,61 +4,65 @@ import {
   useContext,
   useEffect,
   useState,
-} from 'react'
-import { IAuthContextType, IMentor, UserSessionInfo } from '../interfaces/IAuth'
-import { useQuery } from '@tanstack/react-query'
-import { api } from '@/lib/axios'
-import { AxiosError } from 'axios'
-import { jwtDecode } from 'jwt-decode'
-import UserLoginService from '@/services/user/userLoginService'
-import { getToken } from '@/lib/getToken'
+} from 'react';
+import {
+  IAuthContextType,
+  IMentor,
+  UserSessionInfo,
+} from '../interfaces/IAuth';
+import { useQuery } from '@tanstack/react-query';
+import { api } from '@/lib/axios';
+import { AxiosError } from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import UserLoginService from '@/services/user/userLoginService';
+import { getToken } from '@/lib/getToken';
 
-export const AuthContent = createContext({} as IAuthContextType)
+export const AuthContent = createContext({} as IAuthContextType);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [userSession, setUserSession] = useState<UserSessionInfo | null>(null)
-  const { logout } = UserLoginService()
+  const [userSession, setUserSession] = useState<UserSessionInfo | null>(null);
+  const { logout } = UserLoginService();
 
   useEffect(() => {
-    const storedUser = getToken()
-    const decodedToken = storedUser && jwtDecode(JSON.parse(storedUser).token)
+    const storedUser = getToken();
+    const decodedToken = storedUser && jwtDecode(JSON.parse(storedUser).token);
     const isTokenExpires =
       decodedToken &&
       decodedToken.exp &&
-      decodedToken.exp <= Math.floor(Date.now() / 1000)
+      decodedToken.exp <= Math.floor(Date.now() / 1000);
 
     if (isTokenExpires) {
-      logout()
-      setUserSession(null)
-      return
+      logout();
+      setUserSession(null);
+      return;
     }
 
     if (storedUser) {
-      let userParsed
+      let userParsed;
       try {
-        userParsed = JSON.parse(storedUser)
+        userParsed = JSON.parse(storedUser);
       } catch {
-        userParsed = undefined
+        userParsed = undefined;
       }
-      setUserSession(userParsed)
+      setUserSession(userParsed);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const mentorResponse = useQuery({
     queryKey: ['mentor', userSession?.id],
     queryFn: async () => {
-      const response = await api.get<IMentor>(`/mentor/${userSession?.id}`)
-      return response.data
+      const response = await api.get<IMentor>(`/mentor/${userSession?.id}`);
+      return response.data;
     },
     enabled: !!userSession?.id,
-  })
+  });
 
   if (
     mentorResponse.error instanceof AxiosError &&
     mentorResponse.error.response?.status === 404
   ) {
-    logout()
+    logout();
   }
 
   return (
@@ -67,14 +71,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     >
       {children}
     </AuthContent.Provider>
-  )
+  );
 }
 
 export const useAuthContext = () => {
-  const context = useContext(AuthContent)
+  const context = useContext(AuthContent);
 
   if (context === undefined) {
-    throw new Error('Ocorreu algum erro no provider!')
+    throw new Error('Ocorreu algum erro no provider!');
   }
-  return context
-}
+  return context;
+};

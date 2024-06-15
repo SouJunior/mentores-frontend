@@ -1,5 +1,5 @@
-import { device } from '@/styles/theme'
-import styled, { css } from 'styled-components'
+import { device } from '@/styles/theme';
+import styled, { css } from 'styled-components';
 
 export const ContainerHero = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ export const ContainerHero = styled.div`
     max-width: 23rem;
     font-size: 1.25rem;
     line-height: 1.75rem;
-    color: ${(props) => props.theme.colors.gray[700]};
+    color: ${props => props.theme.colors.gray[700]};
     margin-top: 3.5rem;
 
     @media (max-width: 1230px) {
@@ -42,26 +42,26 @@ export const ContainerHero = styled.div`
     }
 
     @media ${device.mobileL} {
-      font-size: ${(props) => props.theme.fontSizes.sm};
-      color: ${(props) => props.theme.colors.black[200]};
+      font-size: ${props => props.theme.fontSizes.sm};
+      color: ${props => props.theme.colors.black[200]};
       line-height: 1.4rem;
     }
   }
-`
+`;
 
 export const Title = styled.h1`
-  color: ${(props) => props.theme.colors.gray[750]};
-  font-size: ${(props) => props.theme.fontSizes.xxl};
+  color: ${props => props.theme.colors.gray[750]};
+  font-size: ${props => props.theme.fontSizes.xxl};
   font-weight: 600;
   line-height: 3rem;
 
   span {
     display: block;
-    color: ${(props) => props.theme.colors.blue[800]};
+    color: ${props => props.theme.colors.blue[800]};
   }
 
   @media ${device.mobileL} {
-    font-size: ${(props) => props.theme.fontSizes.lg};
+    font-size: ${props => props.theme.fontSizes.lg};
     line-height: 1.8rem;
     max-width: 18.5rem;
   }
@@ -69,7 +69,7 @@ export const Title = styled.h1`
   @media ${device.mobileS} {
     max-width: 17rem;
   }
-`
+`;
 
 export const ContainerInputForm = styled.form`
   display: flex;
@@ -78,7 +78,7 @@ export const ContainerInputForm = styled.form`
 
   border-radius: 8px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.white};
 
   width: 100%;
   max-width: 42.7rem;
@@ -108,7 +108,7 @@ export const ContainerInputForm = styled.form`
       width: 1.5rem;
       height: 1.5rem;
 
-      color: ${(props) => props.theme.colors.black[200]};
+      color: ${props => props.theme.colors.black[200]};
       opacity: 0.6;
     }
 
@@ -119,11 +119,11 @@ export const ContainerInputForm = styled.form`
       align-self: center;
     }
   }
-`
+`;
 
 export const QueryInput = styled.input`
   width: 100%;
-  border: 1px solid ${(props) => props.theme.colors.gray[600]};
+  border: 1px solid ${props => props.theme.colors.gray[600]};
   border-radius: 0.5rem;
 
   padding: 0.5rem 1rem;
@@ -131,27 +131,27 @@ export const QueryInput = styled.input`
 
   font-size: 1rem;
   line-height: 1.4rem;
-  color: ${(props) => props.theme.colors.black[200]};
+  color: ${props => props.theme.colors.black[200]};
   outline: 0;
 
   &:focus ~ label {
     transform: translateY(-2rem);
     padding: 0 0.25rem;
-    font-size: ${(props) => props.theme.fontSizes.xs};
+    font-size: ${props => props.theme.fontSizes.xs};
   }
 
-  ${(props) => {
+  ${props => {
     if (String(props.value).trim()) {
       return css`
         & ~ label {
           transform: translateY(-2rem);
           padding: 0 0.25rem;
-          font-size: ${(props) => props.theme.fontSizes.xs};
+          font-size: ${props => props.theme.fontSizes.xs};
         }
-      `
+      `;
     }
   }}
-`
+`;
 
 const PlaceholderInputBaseStyles = styled.label`
   position: absolute;
@@ -159,28 +159,28 @@ const PlaceholderInputBaseStyles = styled.label`
   top: 50%;
   transform: translateY(-50%);
 
-  color: ${(props) => props.theme.colors.black[200]};
+  color: ${props => props.theme.colors.black[200]};
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.4rem;
 
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.white};
   transition: all 0.3s;
   pointer-events: none;
-`
+`;
 
 export const PlaceholderInput = styled(PlaceholderInputBaseStyles)`
   @media (max-width: 615px) {
     display: none;
   }
-`
+`;
 export const PlaceholderInputMobile = styled(PlaceholderInputBaseStyles)`
   display: none;
 
   @media (max-width: 615px) {
     display: inline;
   }
-`
+`;
 
 export const BtnSearchForm = styled.button`
   all: unset;
@@ -195,10 +195,10 @@ export const BtnSearchForm = styled.button`
   transform: translateY(-50%);
 
   &:focus-visible {
-    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.blue[500]};
+    box-shadow: 0 0 0 2px ${props => props.theme.colors.blue[500]};
   }
 
   @media (max-width: 615px) {
     display: block;
   }
-`
+`;

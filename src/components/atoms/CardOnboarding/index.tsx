@@ -1,11 +1,11 @@
-import Image from 'next/image'
-import { ContainerCard } from './style'
-import { ReactNode } from 'react'
+import Image from 'next/image';
+import { ContainerCard } from './style';
+import { ReactNode } from 'react';
 
 interface CardOnboardingProps {
-  title: string
-  children: ReactNode
-  img: string
+  title: string;
+  children: ReactNode;
+  img: string;
 }
 
 export function CardOnboarding({
@@ -22,5 +22,5 @@ export function CardOnboarding({
         <p>{description}</p>
       </section>
     </ContainerCard>
-  )
+  );
 }

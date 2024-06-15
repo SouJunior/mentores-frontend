@@ -1,54 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
-	<link href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;500;600;700&display=swap" rel="stylesheet" />
-</head>
-<body style="background-color: #eeeeee; font-family: 'Radio Canada', sans-serif; color:#5D5F5D;">
-	<table style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
-		<tr>
-			<td align="center" valign="top">
-				<table class="container" cellpadding="0" cellspacing="0" border="0" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
-					<tr>
-						<td align="center" valign="top">
-							<img src="https://res.cloudinary.com/dja1rct0m/image/upload/v1705506394/souJunior/vbcechsuw9gb0sihb8oi.svg" alt="logo SouJunior" style="max-width: 100%;" />
-						</td>
-					</tr>
-					<tr>
-						<td align="center" valign="top">
-							<h2 style="margin: 28px 0px 16px; font-size: 24px; font-weight: 700;">Seja bem-vindo!</h2>
-						</td>
-					</tr>
-					<tr>
-						<td align="center" valign="top">
-							<img src="https://res.cloudinary.com/dja1rct0m/image/upload/v1705506384/souJunior/cnbmrjhheza1bknzt5yg.png" alt="Garota acenando" style="max-width: 100%;" />
-						</td>
-					</tr>
-					<tr>
-						<td align="center" valign="top">
-							<p style="margin: 24px 0px 48px; font-size: 16px; max-width: 360px; line-height: 24px;">
-								Para confirmar o e-mail meuemail@mail.com e concluir o seu cadastro, clique no botão abaixo:
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<td align="center" valign="top">
-							<a href="https://mentoria-online.vercel.app/confirmacao?code=${code}&email=${encodedEmail}" target="_blank" style="font-size: 16px; font-weight: 400; font-family: 'Radio Canada', sans-serif; border-color: #046AD0; color: #fff; background-color:#046AD0; padding: 12px 40px; border-radius: 8px; display: flex; justify-content: center; align-items: center; line-height: 150%; cursor: pointer; text-decoration: none;">Concluir Cadastro</a>						</td>
-					</tr>
-					<tr>
-						<td align="center" valign="top">
-							<div class="container-small" style="max-width: 340px; text-align: center; font-size: 12px; display: flex; flex-direction: column; gap:8px; line-height: 18px; margin-top: 4px;">
-								<small>Caso o e-mail tenha sido enviado por engano, apenas ignore.</br>Por favor não responda a este e-mail.</small>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="true"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    style="
+      background-color: #eeeeee;
+      font-family: 'Radio Canada', sans-serif;
+      color: #5d5f5d;
+    "
+  >
+    <table style="width: 100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td align="center" valign="top">
+          <table
+            class="container"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              width: 100vw;
+            "
+          >
+            <tr>
+              <td align="center" valign="top">
+                <img
+                  src="https://res.cloudinary.com/dja1rct0m/image/upload/v1705506394/souJunior/vbcechsuw9gb0sihb8oi.svg"
+                  alt="logo SouJunior"
+                  style="max-width: 100%"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+                <h2
+                  style="
+                    margin: 28px 0px 16px;
+                    font-size: 24px;
+                    font-weight: 700;
+                  "
+                >
+                  Seja bem-vindo!
+                </h2>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+                <img
+                  src="https://res.cloudinary.com/dja1rct0m/image/upload/v1705506384/souJunior/cnbmrjhheza1bknzt5yg.png"
+                  alt="Garota acenando"
+                  style="max-width: 100%"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+                <p
+                  style="
+                    margin: 24px 0px 48px;
+                    font-size: 16px;
+                    max-width: 360px;
+                    line-height: 24px;
+                  "
+                >
+                  Para confirmar o e-mail meuemail@mail.com e concluir o seu
+                  cadastro, clique no botão abaixo:
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+                <a
+                  href="https://mentoria-online.vercel.app/confirmacao?code=${code}&email=${encodedEmail}"
+                  target="_blank"
+                  style="
+                    font-size: 16px;
+                    font-weight: 400;
+                    font-family: 'Radio Canada', sans-serif;
+                    border-color: #046ad0;
+                    color: #fff;
+                    background-color: #046ad0;
+                    padding: 12px 40px;
+                    border-radius: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    line-height: 150%;
+                    cursor: pointer;
+                    text-decoration: none;
+                  "
+                >
+                  Concluir Cadastro
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+                <div
+                  class="container-small"
+                  style="
+                    max-width: 340px;
+                    text-align: center;
+                    font-size: 12px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    line-height: 18px;
+                    margin-top: 4px;
+                  "
+                >
+                  <small>
+                    Caso o e-mail tenha sido enviado por engano, apenas ignore.
+                    <br />
+                    Por favor não responda a este e-mail.
+                  </small>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

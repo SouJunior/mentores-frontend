@@ -1,15 +1,15 @@
-import Image from 'next/image'
+import Image from 'next/image';
 import {
   Card,
   HeaderCardDepo,
   TestimonyDescription,
   TestimonyImageContainer,
   TestimonyInfo,
-} from './style'
-import { ITestimony } from '@/services/interfaces/IUseTestimonyService'
+} from './style';
+import { ITestimony } from '@/services/interfaces/IUseTestimonyService';
 
 interface CardDepoProps {
-  testimony: ITestimony
+  testimony: ITestimony;
 }
 
 export function CardDepo({ testimony }: CardDepoProps) {
@@ -40,5 +40,5 @@ export function CardDepo({ testimony }: CardDepoProps) {
         {testimony.description}
       </TestimonyDescription>
     </Card>
-  )
+  );
 }

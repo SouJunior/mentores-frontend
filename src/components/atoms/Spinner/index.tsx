@@ -1,10 +1,10 @@
-import { SpinnerStyles } from './styles'
-import { ComponentProps } from 'react'
+import { SpinnerStyles } from './styles';
+import { ComponentProps } from 'react';
 
 interface SpinnerProps extends ComponentProps<'span'> {
-  as?: string
+  as?: string;
 }
 
 export function Spinner(props: SpinnerProps) {
-  return <SpinnerStyles {...props} />
+  return <SpinnerStyles {...props} />;
 }

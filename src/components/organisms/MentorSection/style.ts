@@ -1,9 +1,9 @@
-import { device } from '@/styles/theme'
-import styled from 'styled-components'
+import { device } from '@/styles/theme';
+import styled from 'styled-components';
 
 export const MentorsComponent = styled.section`
-  background: ${(props) => props.theme.colors.blue[25]};
-`
+  background: ${props => props.theme.colors.blue[25]};
+`;
 
 export const MentorsContentContainer = styled.div`
   position: relative;
@@ -19,14 +19,14 @@ export const MentorsContentContainer = styled.div`
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
   }
-`
+`;
 
 export const MentorsContent = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 2rem;
-`
+`;
 
 export const ContainerButtons = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ export const ContainerButtons = styled.div`
   gap: 1.5rem;
 
   .arrow-slider {
-    color: ${(props) => props.theme.colors.blue[800]};
+    color: ${props => props.theme.colors.blue[800]};
     padding: 0.5rem;
 
     svg {
@@ -42,11 +42,11 @@ export const ContainerButtons = styled.div`
       height: 1.5rem;
     }
   }
-`
+`;
 
 export const MentorsTitle = styled.h2`
-  color: ${(props) => props.theme.colors.black[200]};
-  font-size: ${(props) => props.theme.fontSizes.xxl};
+  color: ${props => props.theme.colors.black[200]};
+  font-size: ${props => props.theme.fontSizes.xxl};
   font-weight: 600;
   line-height: 120%;
 
@@ -59,6 +59,6 @@ export const MentorsTitle = styled.h2`
   }
 
   @media ${device.tablet} {
-    font-size: ${(props) => props.theme.fontSizes.xl};
+    font-size: ${props => props.theme.fontSizes.xl};
   }
-`
+`;

@@ -1,15 +1,15 @@
-import { Select } from '@/components/atoms/Select'
-import { SelectItem } from '@/components/atoms/Select/SelectItem'
-import { useCalendarContext } from '../Root'
+import { Select } from '@/components/atoms/Select';
+import { SelectItem } from '@/components/atoms/Select/SelectItem';
+import { useCalendarContext } from '../Root';
 
 export function SelectMonths() {
-  const { months, currentDate, setCurrentDate } = useCalendarContext()
+  const { months, currentDate, setCurrentDate } = useCalendarContext();
 
   function handleMonthSelect(index: string) {
-    setCurrentDate(currentDate.set('month', Number(index)))
+    setCurrentDate(currentDate.set('month', Number(index)));
   }
 
-  const currentMonth = String(currentDate.month())
+  const currentMonth = String(currentDate.month());
   return (
     <Select
       value={currentMonth}
@@ -22,5 +22,5 @@ export function SelectMonths() {
         </SelectItem>
       ))}
     </Select>
-  )
+  );
 }

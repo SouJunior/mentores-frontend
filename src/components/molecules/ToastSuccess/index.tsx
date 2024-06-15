@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import ArrowSuccess from '../../../assets/icons/arrowSuccess.svg'
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import ArrowSuccess from '../../../assets/icons/arrowSuccess.svg';
 import {
   BackgroundOverlay,
   ToastContainer,
@@ -11,22 +11,22 @@ import {
   ContainerContentToast,
   ContainerToastIconWrapper,
   ContainerToastIconClose,
-} from './styles'
-import CloseIcon from '@mui/icons-material/Close'
+} from './styles';
+import CloseIcon from '@mui/icons-material/Close';
 interface CustomToastProps {
-  message: string
-  onClose?: () => void
+  message: string;
+  onClose?: () => void;
 }
 
 const ToastSuccess: React.FC<CustomToastProps> = ({ onClose }) => {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true);
 
   const handleOverlayClick = () => {
     if (onClose) {
-      onClose()
+      onClose();
     }
-    setVisible(false)
-  }
+    setVisible(false);
+  };
 
   return (
     <>
@@ -56,7 +56,7 @@ const ToastSuccess: React.FC<CustomToastProps> = ({ onClose }) => {
         </ToastContainer>
       )}
     </>
-  )
-}
+  );
+};
 
-export default ToastSuccess
+export default ToastSuccess;

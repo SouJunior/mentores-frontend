@@ -1,9 +1,9 @@
-import { Header } from '@/components/organisms/Header'
-import { ReactNode } from 'react'
+import { Header } from '@/components/organisms/Header';
+import { ReactNode } from 'react';
 
 type LayoutProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
@@ -11,5 +11,5 @@ export const Layout = ({ children }: LayoutProps) => {
       <Header />
       {children}
     </>
-  )
-}
+  );
+};

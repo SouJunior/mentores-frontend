@@ -1,7 +1,7 @@
-import { Modal } from '@/components/atoms/Modal'
-import Image from 'next/image'
-import confirmEmail from '@/assets/ConfirmEmail.png'
-import logo from '@/assets/logos/sou-junior.svg'
+import { Modal } from '@/components/atoms/Modal';
+import Image from 'next/image';
+import confirmEmail from '@/assets/ConfirmEmail.png';
+import logo from '@/assets/logos/sou-junior.svg';
 import {
   ContainerModal,
   FooterModal,
@@ -9,10 +9,10 @@ import {
   HeaderModal,
   Message,
   TitleModal,
-} from './style'
-import { DialogContentProps } from '@radix-ui/react-dialog'
+} from './style';
+import { DialogContentProps } from '@radix-ui/react-dialog';
 
-type ModalEmailProps = DialogContentProps
+type ModalEmailProps = DialogContentProps;
 
 export default function ModalEmail(props: ModalEmailProps) {
   return (
@@ -36,5 +36,5 @@ export default function ModalEmail(props: ModalEmailProps) {
 
       <Modal.Close />
     </ContainerModal>
-  )
+  );
 }

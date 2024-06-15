@@ -1,10 +1,10 @@
-import { UserProfileContainer } from './styled'
-import Image from 'next/image'
-import { User } from 'phosphor-react'
+import { UserProfileContainer } from './styled';
+import Image from 'next/image';
+import { User } from 'phosphor-react';
 
 interface PhotoButtonProps {
-  selectedPhoto?: string | null
-  size?: number
+  selectedPhoto?: string | null;
+  size?: number;
 }
 
 export default function PhotoButton({
@@ -19,5 +19,5 @@ export default function PhotoButton({
         <User weight="bold" className="icon-without-img" />
       )}
     </UserProfileContainer>
-  )
+  );
 }

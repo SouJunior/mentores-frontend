@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { ModalPrivacyPolicy } from '@/components/molecules/ModalTermsAndPolicies/ModalPrivacyPolicy'
-import ModalTerms from '@/components/molecules/ModalTermsAndPolicies/ModalTerms'
+import Image from 'next/image';
+import Link from 'next/link';
+import { ModalPrivacyPolicy } from '@/components/molecules/ModalTermsAndPolicies/ModalPrivacyPolicy';
+import ModalTerms from '@/components/molecules/ModalTermsAndPolicies/ModalTerms';
 
 import {
   FooterBtn,
@@ -14,9 +14,9 @@ import {
   FooterSocialMediaContainer,
   FooterTitle,
   FooterTitleContainer,
-} from './style'
+} from './style';
 
-import logo from '@/assets/logos/sou-junior-black.webp'
+import logo from '@/assets/logos/sou-junior-black.webp';
 import {
   DiscordLogo,
   FacebookLogo,
@@ -26,11 +26,11 @@ import {
   TelegramLogo,
   TwitchLogo,
   YoutubeLogo,
-} from 'phosphor-react'
-import { Modal } from '@/components/atoms/Modal'
+} from 'phosphor-react';
+import { Modal } from '@/components/atoms/Modal';
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <FooterContainer>
@@ -176,5 +176,5 @@ export function Footer() {
         </FooterCopyright>
       </FooterContent>
     </FooterContainer>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import souJuniorLogoBlack from '@/assets/logos/sou-junior-black.svg'
-import { ModalHeaderContainer, ModalLogo } from './styles'
+import souJuniorLogoBlack from '@/assets/logos/sou-junior-black.svg';
+import { ModalHeaderContainer, ModalLogo } from './styles';
 
 export function ModalHeader() {
   return (
@@ -12,5 +12,5 @@ export function ModalHeader() {
         quality={100}
       />
     </ModalHeaderContainer>
-  )
+  );
 }

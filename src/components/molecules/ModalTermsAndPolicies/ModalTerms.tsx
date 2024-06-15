@@ -1,4 +1,4 @@
-import { DialogContentProps } from '@radix-ui/react-dialog'
+import { DialogContentProps } from '@radix-ui/react-dialog';
 import {
   ModalBox,
   ModalBoxContainer,
@@ -7,12 +7,12 @@ import {
   ModalCloseBtnSecondary,
   ModalContainer,
   ModalDescription,
-} from './styles'
+} from './styles';
 
-import { Modal } from '@/components/atoms/Modal'
-import { ModalHeader } from './ModalHeader'
+import { Modal } from '@/components/atoms/Modal';
+import { ModalHeader } from './ModalHeader';
 
-type ModalTermsProps = DialogContentProps
+type ModalTermsProps = DialogContentProps;
 
 export default function ModalTerms(props: ModalTermsProps) {
   return (
@@ -190,5 +190,5 @@ export default function ModalTerms(props: ModalTermsProps) {
 
       <ModalCloseBtn />
     </ModalContainer>
-  )
+  );
 }

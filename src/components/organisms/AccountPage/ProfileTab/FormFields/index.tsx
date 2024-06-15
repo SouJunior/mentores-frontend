@@ -6,53 +6,53 @@ import {
   SectionLegend,
   SelectedSpecialtyCount,
   SpecialtyItem,
-} from '../styles'
-import PhotoButton from '@/components/atoms/PhotoButton'
-import EditPhotoModal from '@/components/atoms/EditPhotoModal'
-import { useFormikContext } from 'formik'
-import { ProfileFormData } from '..'
-import { Modal } from '@/components/atoms/Modal'
+} from '../styles';
+import PhotoButton from '@/components/atoms/PhotoButton';
+import EditPhotoModal from '@/components/atoms/EditPhotoModal';
+import { useFormikContext } from 'formik';
+import { ProfileFormData } from '..';
+import { Modal } from '@/components/atoms/Modal';
 
-import CheckIcon from '@mui/icons-material/Check'
-import { specialties as specialtiesOptions } from '@/data/static-info'
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import { useEffect, useState } from 'react'
-import { InputForm } from '@/components/atoms/InputForm'
-import { useEditPhotoContext } from '@/context/EditPhotoContext'
+import CheckIcon from '@mui/icons-material/Check';
+import { specialties as specialtiesOptions } from '@/data/static-info';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { useEffect, useState } from 'react';
+import { InputForm } from '@/components/atoms/InputForm';
+import { useEditPhotoContext } from '@/context/EditPhotoContext';
 
 export function FormFields() {
-  const { mentor } = useAuthContext()
+  const { mentor } = useAuthContext();
   const [specialties, setSpecialties] = useState<string[]>(
-    mentor.data?.specialties ?? [],
-  )
-  const formik = useFormikContext<ProfileFormData>()
+    mentor.data?.specialties ?? []
+  );
+  const formik = useFormikContext<ProfileFormData>();
 
   const handleImageEdit = (editedImage: string | null) => {
-    formik.setFieldValue('profile', editedImage || '')
-  }
+    formik.setFieldValue('profile', editedImage || '');
+  };
 
-  const selectedCount = specialties.length ?? mentor.data?.specialties
+  const selectedCount = specialties.length ?? mentor.data?.specialties;
 
   const toggleSpecialty = (value: string): void => {
     if (specialties.includes(value)) {
-      setSpecialties((state) => state.filter((item) => item !== value))
+      setSpecialties(state => state.filter(item => item !== value));
 
       formik.setFieldValue(
         'specialties',
-        specialties.filter((item) => item !== value),
-      )
+        specialties.filter(item => item !== value)
+      );
     } else if (selectedCount < 6) {
-      setSpecialties((state) => [...state, value])
-      formik.setFieldValue('specialties', [...specialties, value])
+      setSpecialties(state => [...state, value]);
+      formik.setFieldValue('specialties', [...specialties, value]);
     }
-  }
+  };
 
-  const { setOriginalImage } = useEditPhotoContext()
+  const { setOriginalImage } = useEditPhotoContext();
 
   useEffect(() => {
-    setOriginalImage(mentor.data?.profile ?? '')
+    setOriginalImage(mentor.data?.profile ?? '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <ContentContainer>
@@ -79,8 +79,8 @@ export function FormFields() {
 
         <EditPhotoModal
           selectedPhoto={formik.values.profile ?? mentor.data?.profile ?? ''}
-          onAddPhoto={(photo) => {
-            formik.setFieldValue('profile', photo)
+          onAddPhoto={photo => {
+            formik.setFieldValue('profile', photo);
           }}
           onImageEdit={handleImageEdit}
         />
@@ -91,7 +91,7 @@ export function FormFields() {
           As áreas que você mentora: <span>*</span>
         </SectionLegend>
         <GridSpecialties>
-          {specialtiesOptions.map((specialty) => (
+          {specialtiesOptions.map(specialty => (
             <SpecialtyItem
               key={specialty}
               selected={
@@ -124,5 +124,5 @@ export function FormFields() {
         <SectionLegend>Máximo 600 caracteres.</SectionLegend>
       </DescriptionContainer>
     </ContentContainer>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import { EyeContainer } from './style'
-import { ToggleProps } from '@radix-ui/react-toggle'
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { EyeContainer } from './style';
+import { ToggleProps } from '@radix-ui/react-toggle';
 
-type EyeProps = ToggleProps
+type EyeProps = ToggleProps;
 
 export function Eye({ pressed, ...props }: EyeProps) {
   return (
@@ -14,5 +14,5 @@ export function Eye({ pressed, ...props }: EyeProps) {
         <VisibilityIcon fontSize={'small'} />
       )}
     </EyeContainer>
-  )
+  );
 }

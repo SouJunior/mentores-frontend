@@ -8,7 +8,7 @@ export const genders = [
   'Não Binário',
   'Agênero',
   'Outros',
-]
+];
 
 export const specialties = [
   'Carreira',
@@ -23,6 +23,6 @@ export const specialties = [
   'QA',
   'Dev Ops',
   'Dados',
-]
+];
 
-export const sessionNameUserInfo = '@mentores-soujunior-v1:token'
+export const sessionNameUserInfo = '@mentores-soujunior-v1:token';

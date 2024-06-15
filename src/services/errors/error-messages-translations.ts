@@ -6,4 +6,4 @@ export const errorTranslations = {
     "Por questões de segurança, bloqueamos sua conta após você ter atingido a quantidade máxima de tentativas de acesso. Para cadastrar uma nova senha, clique em 'Esqueci minha senha'.",
   'The date must be before the current date': 'Data de nascimento inválida',
   'Bad Request: User already exists': 'O e-mail informado já possui cadastro.',
-}
+};

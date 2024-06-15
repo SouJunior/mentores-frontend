@@ -1,5 +1,5 @@
-import { device } from '@/styles/theme'
-import styled from 'styled-components'
+import { device } from '@/styles/theme';
+import styled from 'styled-components';
 
 export const SwiperContainer = styled.div`
   position: relative;
@@ -24,4 +24,4 @@ export const SwiperContainer = styled.div`
       padding-right: 1rem;
     }
   }
-`
+`;
