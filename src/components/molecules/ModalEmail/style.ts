@@ -1,5 +1,5 @@
-import { Modal } from '@/components/atoms/Modal'
-import styled from 'styled-components'
+import { Modal } from '@/components/atoms/Modal';
+import styled from 'styled-components';
 
 export const ContainerModal = styled(Modal.Content)`
   display: flex;
@@ -18,7 +18,7 @@ export const ContainerModal = styled(Modal.Content)`
 
   padding: 0 3.5rem;
   padding-top: 1.75rem;
-`
+`;
 
 export const HeaderModal = styled.header`
   display: flex;
@@ -32,26 +32,26 @@ export const HeaderModal = styled.header`
     margin-top: -0.5rem;
     margin-bottom: -1.3rem;
   }
-`
+`;
 
 export const TitleModal = styled(Modal.Title)`
-  color: ${(props) => props.theme.colors.blue[500]};
-  font-size: ${(props) => props.theme.fontSizes.lg};
-`
+  color: ${props => props.theme.colors.blue[500]};
+  font-size: ${props => props.theme.fontSizes.lg};
+`;
 
 export const Message = styled(Modal.Description)`
-  color: ${(props) => props.theme.colors.gray[700]};
+  color: ${props => props.theme.colors.gray[700]};
   font-size: 1rem;
   text-align: center;
   line-height: 150%;
   max-width: 15.5rem;
-`
+`;
 
 export const Hash = styled.span`
-  color: ${(props) => props.theme.colors.blue[500]};
+  color: ${props => props.theme.colors.blue[500]};
   font-size: 0.875rem;
   line-height: 150%;
-`
+`;
 
 export const FooterModal = styled.div`
   display: flex;
@@ -64,4 +64,4 @@ export const FooterModal = styled.div`
     width: 6.75rem;
     height: 1rem;
   }
-`
+`;

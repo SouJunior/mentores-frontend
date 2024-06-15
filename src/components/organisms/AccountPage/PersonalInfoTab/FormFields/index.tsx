@@ -1,24 +1,24 @@
-import { Calendar } from '@/components/molecules/Calendar'
-import EventRoundedIcon from '@mui/icons-material/EventRounded'
-import dayjs from 'dayjs'
-import { useFormikContext } from 'formik'
-import { InputForm } from '@/components/atoms/InputForm'
-import { Select } from '@/components/atoms/Select'
-import { genders } from '@/data/static-info'
+import { Calendar } from '@/components/molecules/Calendar';
+import EventRoundedIcon from '@mui/icons-material/EventRounded';
+import dayjs from 'dayjs';
+import { useFormikContext } from 'formik';
+import { InputForm } from '@/components/atoms/InputForm';
+import { Select } from '@/components/atoms/Select';
+import { genders } from '@/data/static-info';
 import {
   DatePickerContainer,
   SelectInputContainer,
   SelectItemStyled,
-} from './styles'
-import { useState } from 'react'
-import { PersonalInfoFormData } from '..'
-import { useAuthContext } from '@/context/Auth/AuthContext'
+} from './styles';
+import { useState } from 'react';
+import { PersonalInfoFormData } from '..';
+import { useAuthContext } from '@/context/Auth/AuthContext';
 
 export function FormFields() {
-  const [showCalendar, setShowCalendar] = useState(false)
-  const formik = useFormikContext<PersonalInfoFormData>()
+  const [showCalendar, setShowCalendar] = useState(false);
+  const formik = useFormikContext<PersonalInfoFormData>();
 
-  const { mentor } = useAuthContext()
+  const { mentor } = useAuthContext();
 
   return (
     <>
@@ -47,7 +47,7 @@ export function FormFields() {
             {formik.values.dateOfBirth || mentor.data?.dateOfBirth ? (
               <span>
                 {dayjs(
-                  formik.values.dateOfBirth ?? mentor.data?.dateOfBirth,
+                  formik.values.dateOfBirth ?? mentor.data?.dateOfBirth
                 ).format('DD/MM/YYYY')}
               </span>
             ) : (
@@ -67,8 +67,8 @@ export function FormFields() {
             formik.setValues({
               ...formik.values,
               dateOfBirth: date,
-            })
-            setShowCalendar(false)
+            });
+            setShowCalendar(false);
           }}
           avoidCollisions={false}
           sideOffset={10}
@@ -93,9 +93,9 @@ export function FormFields() {
         <Select
           placeholder="Gênero"
           value={formik.values.gender ?? mentor.data?.gender}
-          onValueChange={(value) => formik.setFieldValue('gender', value)}
+          onValueChange={value => formik.setFieldValue('gender', value)}
         >
-          {genders.map((gender) => (
+          {genders.map(gender => (
             <SelectItemStyled key={gender} value={gender}>
               {gender}
             </SelectItemStyled>
@@ -103,5 +103,5 @@ export function FormFields() {
         </Select>
       </SelectInputContainer>
     </>
-  )
+  );
 }

@@ -1,26 +1,26 @@
-import NoResult from '@/assets/noresult.svg'
-import Loading from '@/assets/loading.gif'
-import Image from 'next/image'
+import NoResult from '@/assets/noresult.svg';
+import Loading from '@/assets/loading.gif';
+import Image from 'next/image';
 
-import dynamic from 'next/dynamic'
-import { IMentors } from '@/services/interfaces/IUseMentorsService'
+import dynamic from 'next/dynamic';
+import { IMentors } from '@/services/interfaces/IUseMentorsService';
 import {
   CTASub,
   MentorsContainer,
   NoResultContainer,
   NoResultMain,
-} from './styles'
+} from './styles';
 
 const CardScheduling = dynamic(
   () => import('@/components/atoms/CardSchedulingMentor'),
   {
     ssr: false,
-  },
-)
+  }
+);
 
 interface MentorsGridProps {
-  loading: boolean
-  mentors: IMentors[]
+  loading: boolean;
+  mentors: IMentors[];
 }
 
 export function MentorsGrid({ loading, mentors }: MentorsGridProps) {
@@ -47,5 +47,5 @@ export function MentorsGrid({ loading, mentors }: MentorsGridProps) {
         </NoResultContainer>
       )}
     </MentorsContainer>
-  )
+  );
 }

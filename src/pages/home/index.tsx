@@ -1,34 +1,34 @@
-import { Footer } from '@/components/organisms/Footer'
-import { DepoSection } from '@/components/organisms/DepoSection'
-import { MentorSection } from '@/components/organisms/MentorSection'
-import { Onboarding } from '@/components/organisms/Onboarding'
-import { HeroSection } from '../../components/organisms/HeroSection'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { Modal } from '@/components/atoms/Modal'
+import { Footer } from '@/components/organisms/Footer';
+import { DepoSection } from '@/components/organisms/DepoSection';
+import { MentorSection } from '@/components/organisms/MentorSection';
+import { Onboarding } from '@/components/organisms/Onboarding';
+import { HeroSection } from '../../components/organisms/HeroSection';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { Modal } from '@/components/atoms/Modal';
 import {
   ModalButton,
   ModalClose,
   ModalContainer,
   ModalDescription,
   ModalTitle,
-} from '../../styles/pages/home'
-import { Button } from '@/components/atoms/Button'
+} from '../../styles/pages/home';
+import { Button } from '@/components/atoms/Button';
 
 export default function HomePage() {
-  const [isConnectCalendly, setIsConnectCalendly] = useState(false)
-  const router = useRouter()
+  const [isConnectCalendly, setIsConnectCalendly] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    setIsConnectCalendly(Boolean(router.query['connect-calendly']))
-  }, [router.query])
+    setIsConnectCalendly(Boolean(router.query['connect-calendly']));
+  }, [router.query]);
 
   const handleCloseModal = () => {
     router.replace('/', undefined, {
       shallow: true,
-    })
-    setIsConnectCalendly(false)
-  }
+    });
+    setIsConnectCalendly(false);
+  };
 
   return (
     <>
@@ -57,5 +57,5 @@ export default function HomePage() {
         </ModalContainer>
       </Modal.Root>
     </>
-  )
+  );
 }

@@ -1,25 +1,25 @@
-import { CardMentor } from '@/components/molecules/CardMentor'
-import { MutableRefObject } from 'react'
-import { A11y, Pagination } from 'swiper/modules'
-import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
-import { SwiperContainer } from './style'
+import { CardMentor } from '@/components/molecules/CardMentor';
+import { MutableRefObject } from 'react';
+import { A11y, Pagination } from 'swiper/modules';
+import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
+import { SwiperContainer } from './style';
 
-import 'swiper/css'
-import 'swiper/css/pagination'
-import { useMentorsService } from '@/services/user/useMentorsService'
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { useMentorsService } from '@/services/user/useMentorsService';
 
 interface SliderProps {
   swiperRef: MutableRefObject<{
-    swiper: SwiperClass
-  } | null>
+    swiper: SwiperClass;
+  } | null>;
 }
 
 export const Slider = ({ swiperRef }: SliderProps) => {
-  const { data: mentors } = useMentorsService()
+  const { data: mentors } = useMentorsService();
 
   const completedProfileMentors = mentors?.filter(
-    (mentor) => mentor.registerComplete,
-  )
+    mentor => mentor.registerComplete
+  );
 
   return (
     <SwiperContainer>
@@ -34,14 +34,14 @@ export const Slider = ({ swiperRef }: SliderProps) => {
         }}
         ref={swiperRef}
       >
-        {completedProfileMentors?.map((mentor) => {
+        {completedProfileMentors?.map(mentor => {
           return (
             <SwiperSlide key={mentor.id}>
               <CardMentor mentor={mentor} />
             </SwiperSlide>
-          )
+          );
         })}
       </Swiper>
     </SwiperContainer>
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const PerfilContainer = styled.div`
   display: flex;
@@ -6,18 +6,18 @@ export const PerfilContainer = styled.div`
   width: 100%;
   align-items: center;
   gap: 20px;
-`
+`;
 
 export const StyledImportant = styled.span`
-  font-size: ${(props) => props.theme.fontSizes.xs};
+  font-size: ${props => props.theme.fontSizes.xs};
   font-weight: 400;
   line-height: 1rem;
   text-align: left;
   width: 100%;
   margin-top: 1rem;
-  color: ${(props) => props.theme.colors.black[200]};
+  color: ${props => props.theme.colors.black[200]};
 
   span {
-    color: ${(props) => props.theme.colors.blue[600]};
+    color: ${props => props.theme.colors.blue[600]};
   }
-`
+`;

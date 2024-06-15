@@ -1,7 +1,7 @@
-import logoImg from '@/assets/logos/sou-junior.svg'
-import { Button } from '@/components/atoms/Button'
-import Image from 'next/image'
-import Link from 'next/link'
+import logoImg from '@/assets/logos/sou-junior.svg';
+import { Button } from '@/components/atoms/Button';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   ContainerHeader,
   Divider,
@@ -16,25 +16,25 @@ import {
   MenuBurgerOverlay,
   MenuBurgerTrigger,
   SignOutBtn,
-} from './style'
-import { UserAvatar } from '@/components/atoms/UserAvatar'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { Menu } from '@mui/icons-material'
-import { useState } from 'react'
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import UserLoginService from '@/services/user/userLoginService'
-import { useBreakpoint } from '@/hooks/useBreakpoint'
-import { breakpoints } from '@/styles/theme'
+} from './style';
+import { UserAvatar } from '@/components/atoms/UserAvatar';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Menu } from '@mui/icons-material';
+import { useState } from 'react';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import UserLoginService from '@/services/user/userLoginService';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { breakpoints } from '@/styles/theme';
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { userSession, mentor, setUserSession } = useAuthContext()
-  const { logout } = UserLoginService()
-  const breakpoint = useBreakpoint()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userSession, mentor, setUserSession } = useAuthContext();
+  const { logout } = UserLoginService();
+  const breakpoint = useBreakpoint();
 
   function handleLogoutUser() {
-    logout()
-    setUserSession(null)
+    logout();
+    setUserSession(null);
   }
 
   return (
@@ -145,5 +145,5 @@ export function Header() {
         </DropdownMenu.Root>
       )}
     </ContainerHeader>
-  )
+  );
 }

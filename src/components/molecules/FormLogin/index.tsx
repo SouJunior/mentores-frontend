@@ -1,33 +1,33 @@
-import souJuniorLogoImg from '@/assets/logos/sou-junior.svg'
-import { Button } from '@/components/atoms/Button'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { Checkbox } from '../../atoms/Checkbox'
+import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
+import { Button } from '@/components/atoms/Button';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Checkbox } from '../../atoms/Checkbox';
 import {
   ButtonLoading,
   CallToRegisterText,
   ContainerCheckbox,
   ContainerForm,
   ContainerInput,
-} from './style'
-import UserLoginService from '@/services/user/userLoginService'
-import { Form, Formik } from 'formik'
-import * as yup from 'yup'
-import { InputForm } from '@/components/atoms/InputForm'
-import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material'
-import { Eye } from '@/components/atoms/Eye'
-import { sessionNameUserInfo } from '@/data/static-info'
-import { Spinner } from '@/components/atoms/Spinner'
-import { useRouter } from 'next/router'
-import { AxiosError } from 'axios'
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import { throwErrorMessages } from '@/utils/throw-error-messages'
-import { UserAlreadyLoggedIn } from '@/services/errors/user-already-logged-in'
-import { handleError } from '@/utils/handleError'
-import { errorTranslations } from '@/services/errors/error-messages-translations'
+} from './style';
+import UserLoginService from '@/services/user/userLoginService';
+import { Form, Formik } from 'formik';
+import * as yup from 'yup';
+import { InputForm } from '@/components/atoms/InputForm';
+import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material';
+import { Eye } from '@/components/atoms/Eye';
+import { sessionNameUserInfo } from '@/data/static-info';
+import { Spinner } from '@/components/atoms/Spinner';
+import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { UserAlreadyLoggedIn } from '@/services/errors/user-already-logged-in';
+import { handleError } from '@/utils/handleError';
+import { errorTranslations } from '@/services/errors/error-messages-translations';
 
 const loginSchema = yup.object({
   email: yup.string().email('E-mail inválido').required('Obrigatório'),
@@ -35,62 +35,65 @@ const loginSchema = yup.object({
     .string()
     .required('A senha é obrigatória')
     .min(8, 'Senha inválida'),
-})
+});
 
-type LoginDataType = yup.InferType<typeof loginSchema>
+type LoginDataType = yup.InferType<typeof loginSchema>;
 
 export function FormLogin() {
-  const [isKeepConnected, setIsKeepConnected] = useState(false)
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-  const type = 'mentor'
+  const [isKeepConnected, setIsKeepConnected] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const type = 'mentor';
 
-  const { setUserSession } = useAuthContext()
-  const router = useRouter()
+  const { setUserSession } = useAuthContext();
+  const router = useRouter();
 
   const handleSubmit = async ({ email, password }: LoginDataType) => {
-    const { login } = UserLoginService()
+    const { login } = UserLoginService();
 
     try {
-      const { data } = await login({ email, password, type })
+      const { data } = await login({ email, password, type });
       const sessionInfo = {
         id: String(data.info.id),
         token: data.token,
-      }
+      };
 
       if (isKeepConnected) {
-        localStorage.setItem(sessionNameUserInfo, JSON.stringify(sessionInfo))
+        localStorage.setItem(sessionNameUserInfo, JSON.stringify(sessionInfo));
       } else {
-        sessionStorage.setItem(sessionNameUserInfo, JSON.stringify(sessionInfo))
+        sessionStorage.setItem(
+          sessionNameUserInfo,
+          JSON.stringify(sessionInfo)
+        );
       }
 
-      setUserSession(sessionInfo)
+      setUserSession(sessionInfo);
 
       if (!data.info.registerComplete) {
-        return router.push('/onBoarding')
+        return router.push('/onBoarding');
       }
 
       router.push(
         data.info.registerComplete && data.info.calendlyName
           ? '/'
-          : '/?connect-calendly=true',
-      )
+          : '/?connect-calendly=true'
+      );
     } catch (err) {
       if (err instanceof AxiosError) {
-        const messageKey = err.response?.data.message.toLowerCase()
+        const messageKey = err.response?.data.message.toLowerCase();
 
         throwErrorMessages({
           messages: errorTranslations,
           currentMessageKey: messageKey,
-        })
+        });
       }
 
       if (err instanceof UserAlreadyLoggedIn) {
         handleError(
-          'Você já está logado na aplicação. Para fazer login de novo, você precisa sair da sessão atual.',
-        )
+          'Você já está logado na aplicação. Para fazer login de novo, você precisa sair da sessão atual.'
+        );
       }
     }
-  }
+  };
 
   return (
     <ContainerForm>
@@ -176,9 +179,9 @@ export function FormLogin() {
                 <Link href="/cadastro">Clique aqui e cadastre-se</Link>
               </CallToRegisterText>
             </Form>
-          )
+          );
         }}
       </Formik>
     </ContainerForm>
-  )
+  );
 }

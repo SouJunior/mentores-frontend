@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Card = styled.div`
   display: flex;
@@ -16,14 +16,14 @@ export const Card = styled.div`
   @media (max-width: 348px) {
     max-width: 17.5rem;
   }
-`
+`;
 
 export const HeaderCardDepo = styled.div`
   display: flex;
   align-items: flex-end;
   justify-self: flex-start;
   gap: 1rem;
-`
+`;
 
 export const TestimonyInfo = styled.div`
   display: flex;
@@ -31,13 +31,13 @@ export const TestimonyInfo = styled.div`
   flex: 1;
 
   .testimony-name {
-    color: ${(props) => props.theme.colors.gray[700]};
+    color: ${props => props.theme.colors.gray[700]};
     font-weight: 600;
     line-height: 1.4rem;
   }
 
   .testimony-role {
-    color: ${(props) => props.theme.colors.gray[600]};
+    color: ${props => props.theme.colors.gray[600]};
     line-height: 1.4rem;
 
     display: block;
@@ -46,10 +46,10 @@ export const TestimonyInfo = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
   }
-`
+`;
 
 export const TestimonyImageContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.gray[250]};
+  background-color: ${props => props.theme.colors.gray[250]};
   border-radius: 50%;
   overflow: hidden;
 
@@ -61,7 +61,7 @@ export const TestimonyImageContainer = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;
 
 export const TestimonyDescription = styled.p`
   display: -webkit-box;
@@ -70,8 +70,8 @@ export const TestimonyDescription = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  font-size: ${(props) => props.theme.fontSizes.xs};
+  font-size: ${props => props.theme.fontSizes.xs};
   line-height: 1.5rem;
   font-weight: 400;
-  color: ${(props) => props.theme.colors.gray[750]};
-`
+  color: ${props => props.theme.colors.gray[750]};
+`;

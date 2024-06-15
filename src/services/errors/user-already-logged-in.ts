@@ -1,5 +1,5 @@
 export class UserAlreadyLoggedIn extends Error {
   constructor() {
-    super('User already logged in.')
+    super('User already logged in.');
   }
 }

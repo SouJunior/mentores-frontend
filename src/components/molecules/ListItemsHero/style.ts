@@ -1,5 +1,5 @@
-import { device } from '@/styles/theme'
-import styled from 'styled-components'
+import { device } from '@/styles/theme';
+import styled from 'styled-components';
 
 export const ContainerList = styled.div`
   display: flex;
@@ -18,4 +18,4 @@ export const ContainerList = styled.div`
       gap: 0.6rem;
     }
   }
-`
+`;

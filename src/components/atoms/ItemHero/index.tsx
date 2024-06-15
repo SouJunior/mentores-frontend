@@ -1,28 +1,28 @@
-import Image, { StaticImageData } from 'next/image'
-import { ItemImage, ItemInvisible, ItemPrimary, ItemSecondary } from './style'
+import Image, { StaticImageData } from 'next/image';
+import { ItemImage, ItemInvisible, ItemPrimary, ItemSecondary } from './style';
 
 interface ItemHeroProps<
   T extends 'invisible' | 'primary' | 'secondary' | 'image',
 > {
-  type: T
-  imageSrc?: T extends 'image' ? StaticImageData : never
+  type: T;
+  imageSrc?: T extends 'image' ? StaticImageData : never;
 }
 
 export function ItemHero<
   T extends 'invisible' | 'primary' | 'secondary' | 'image',
 >({ type, imageSrc }: ItemHeroProps<T>) {
   if (type === 'invisible') {
-    return <ItemInvisible />
+    return <ItemInvisible />;
   }
   if (type === 'primary') {
-    return <ItemPrimary />
+    return <ItemPrimary />;
   }
   if (type === 'secondary') {
-    return <ItemSecondary />
+    return <ItemSecondary />;
   }
   if (type === 'image') {
     if (!imageSrc) {
-      return null
+      return null;
     }
     return (
       <ItemImage>
@@ -35,8 +35,8 @@ export function ItemHero<
           quality={100}
         />
       </ItemImage>
-    )
+    );
   }
 
-  return null
+  return null;
 }

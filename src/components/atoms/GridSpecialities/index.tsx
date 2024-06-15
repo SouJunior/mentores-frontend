@@ -7,45 +7,45 @@ import {
   StyledImportant,
   StyledHR,
   NextButton,
-} from './styled'
-import CheckIcon from '@mui/icons-material/Check'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { specialties as specialtiesOptions } from '@/data/static-info'
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext'
+} from './styled';
+import CheckIcon from '@mui/icons-material/Check';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { specialties as specialtiesOptions } from '@/data/static-info';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext';
 
 interface GridSpecialitiesProps {
-  onStep: (step: StepNumber) => void
+  onStep: (step: StepNumber) => void;
 }
 
 export default function GridSpecialities({ onStep }: GridSpecialitiesProps) {
-  const { specialties, setSpecialties, formik } = useOnBoardingContext()
+  const { specialties, setSpecialties, formik } = useOnBoardingContext();
 
-  const selectedCount = specialties.length
-  const isSelectionComplete = specialties.length > 0 && specialties.length < 7
+  const selectedCount = specialties.length;
+  const isSelectionComplete = specialties.length > 0 && specialties.length < 7;
 
   const {
     mentor: { data },
-  } = useAuthContext()
+  } = useAuthContext();
 
   const toggleSpeciality = (value: string): void => {
     if (specialties.includes(value)) {
-      setSpecialties((state) => state.filter((item) => item !== value))
+      setSpecialties(state => state.filter(item => item !== value));
 
       formik.setFieldValue(
         'specialties',
-        specialties.filter((item) => item !== value),
-      )
+        specialties.filter(item => item !== value)
+      );
     } else if (selectedCount < 6) {
-      setSpecialties((state) => [...state, value])
-      formik.setFieldValue('specialties', [...specialties, value])
+      setSpecialties(state => [...state, value]);
+      formik.setFieldValue('specialties', [...specialties, value]);
     }
-  }
+  };
 
   const handleMoveToNextStep = () => {
-    onStep(2)
-  }
+    onStep(2);
+  };
 
   return (
     <>
@@ -85,5 +85,5 @@ export default function GridSpecialities({ onStep }: GridSpecialitiesProps) {
         Continuar
       </NextButton>
     </>
-  )
+  );
 }

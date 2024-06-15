@@ -1,17 +1,17 @@
-import { Button } from '@/components/atoms/Button'
-import { CardDepo } from '@/components/molecules/CardDepo'
-import Link from 'next/link'
-import { ContainerDepo, ContainerSlider } from './style'
-import { useTestimonyService } from '../../../services/user/useTestimonyService'
-import { AxiosError } from 'axios'
+import { Button } from '@/components/atoms/Button';
+import { CardDepo } from '@/components/molecules/CardDepo';
+import Link from 'next/link';
+import { ContainerDepo, ContainerSlider } from './style';
+import { useTestimonyService } from '../../../services/user/useTestimonyService';
+import { AxiosError } from 'axios';
 
-import { A11y } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import 'swiper/css'
+import 'swiper/css';
 
 export function DepoSection() {
-  const { data: testimonies, error } = useTestimonyService()
+  const { data: testimonies, error } = useTestimonyService();
 
   return (
     <ContainerDepo>
@@ -20,12 +20,12 @@ export function DepoSection() {
       <ContainerSlider>
         <Swiper modules={[A11y]} slidesPerView="auto">
           {testimonies?.length &&
-            testimonies?.map((testimony) => {
+            testimonies?.map(testimony => {
               return (
                 <SwiperSlide key={testimony.id}>
                   <CardDepo testimony={testimony} />
                 </SwiperSlide>
-              )
+              );
             })}
         </Swiper>
       </ContainerSlider>
@@ -36,5 +36,5 @@ export function DepoSection() {
         Quero mentorar
       </Button>
     </ContainerDepo>
-  )
+  );
 }

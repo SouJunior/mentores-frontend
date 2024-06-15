@@ -1,14 +1,14 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const WrapperInput = styled.div`
   position: relative;
 
   label {
     span:first-child {
-      color: ${(props) => props.theme.colors.black[200]};
+      color: ${props => props.theme.colors.black[200]};
 
       .asterisk {
-        color: ${(props) => props.theme.colors.blue[700]};
+        color: ${props => props.theme.colors.blue[700]};
       }
     }
 
@@ -28,4 +28,4 @@ export const WrapperInput = styled.div`
       height: 1.5rem;
     }
   }
-`
+`;

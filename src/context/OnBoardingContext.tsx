@@ -1,8 +1,8 @@
-import { genders } from '@/data/static-info'
-import UserUpdateService from '@/services/user/userUpdateService'
-import { handleError } from '@/utils/handleError'
-import { FormikProps, FormikProvider, useFormik } from 'formik'
-import { useRouter } from 'next/router'
+import { genders } from '@/data/static-info';
+import UserUpdateService from '@/services/user/userUpdateService';
+import { handleError } from '@/utils/handleError';
+import { FormikProps, FormikProvider, useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import {
   Dispatch,
   ReactNode,
@@ -10,10 +10,10 @@ import {
   createContext,
   useContext,
   useState,
-} from 'react'
+} from 'react';
 
-import * as yup from 'yup'
-import { useAuthContext } from './Auth/AuthContext'
+import * as yup from 'yup';
+import { useAuthContext } from './Auth/AuthContext';
 
 const onBoardingSchema = yup.object({
   profile: yup.string().required('Obrigatório'),
@@ -23,29 +23,29 @@ const onBoardingSchema = yup.object({
     .required('Obrigatório'),
   gender: yup.string().oneOf(genders).required('Obrigatório'),
   specialties: yup.array(yup.string().required('Obrigatório')),
-})
+});
 
-type OnBoardingDataType = yup.InferType<typeof onBoardingSchema>
-export type StepNumber = 1 | 2
+type OnBoardingDataType = yup.InferType<typeof onBoardingSchema>;
+export type StepNumber = 1 | 2;
 
 interface OnBoardingContextType {
-  specialties: string[]
-  formik: FormikProps<OnBoardingDataType>
-  hasError: boolean
-  setSpecialties: Dispatch<SetStateAction<string[]>>
-  setHasError: Dispatch<SetStateAction<boolean>>
+  specialties: string[];
+  formik: FormikProps<OnBoardingDataType>;
+  hasError: boolean;
+  setSpecialties: Dispatch<SetStateAction<string[]>>;
+  setHasError: Dispatch<SetStateAction<boolean>>;
 }
 
-const OnBoardingContext = createContext({} as OnBoardingContextType)
+const OnBoardingContext = createContext({} as OnBoardingContextType);
 
 export function OnBoardingProvider({ children }: { children: ReactNode }) {
-  const [specialties, setSpecialties] = useState<string[]>([])
-  const [hasError, setHasError] = useState(false)
+  const [specialties, setSpecialties] = useState<string[]>([]);
+  const [hasError, setHasError] = useState(false);
 
-  const { mentor } = useAuthContext()
+  const { mentor } = useAuthContext();
 
-  const { handle } = UserUpdateService()
-  const router = useRouter()
+  const { handle } = UserUpdateService();
+  const router = useRouter();
 
   const formik = useFormik<OnBoardingDataType>({
     validationSchema: onBoardingSchema,
@@ -56,7 +56,7 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
       specialties,
     },
     onSubmit: handleSubmit,
-  })
+  });
 
   async function handleSubmit(values: OnBoardingDataType) {
     try {
@@ -65,14 +65,14 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
         profile: values.profile,
         gender: values.gender,
         specialties: values.specialties,
-      })
-      setHasError(false)
+      });
+      setHasError(false);
 
-      mentor.refetch()
-      router.push('/?connect-calendly=true')
+      mentor.refetch();
+      router.push('/?connect-calendly=true');
     } catch {
-      handleError('Algum erro aconteceu. Entre em contato com a gente.')
-      setHasError(true)
+      handleError('Algum erro aconteceu. Entre em contato com a gente.');
+      setHasError(true);
     }
   }
 
@@ -88,7 +88,7 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
     >
       <FormikProvider value={formik}>{children}</FormikProvider>
     </OnBoardingContext.Provider>
-  )
+  );
 }
 
-export const useOnBoardingContext = () => useContext(OnBoardingContext)
+export const useOnBoardingContext = () => useContext(OnBoardingContext);

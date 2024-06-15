@@ -1,14 +1,14 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const UserProfileContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border: 2px solid ${(props) => props.theme.colors.gray[700]};
-  background-color: ${(props) => props.theme.colors.white};
+  border: 2px solid ${props => props.theme.colors.gray[700]};
+  background-color: ${props => props.theme.colors.white};
   border-radius: 50%;
-  color: ${(props) => props.theme.colors.gray[700]};
+  color: ${props => props.theme.colors.gray[700]};
 
   width: 8rem;
   height: 8rem;
@@ -24,4 +24,4 @@ export const UserProfileContainer = styled.section`
     height: 100%;
     object-fit: cover;
   }
-`
+`;

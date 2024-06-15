@@ -1,5 +1,5 @@
-import { Button } from '@/components/atoms/Button'
-import styled from 'styled-components'
+import { Button } from '@/components/atoms/Button';
+import styled from 'styled-components';
 
 export const ContainerForm = styled.div`
   max-width: 31.5rem;
@@ -7,7 +7,7 @@ export const ContainerForm = styled.div`
 
   display: flex;
   flex-direction: column;
-  background: ${(props) => props.theme.colors.white};
+  background: ${props => props.theme.colors.white};
   border-radius: 0.5rem;
   padding: 1.5rem;
 
@@ -19,9 +19,9 @@ export const ContainerForm = styled.div`
 
   h2 {
     font-weight: 500;
-    font-size: ${(props) => props.theme.fontSizes.lg};
+    font-size: ${props => props.theme.fontSizes.lg};
     line-height: 120%;
-    color: ${(props) => props.theme.colors.gray[700]};
+    color: ${props => props.theme.colors.gray[700]};
     margin-bottom: 2rem;
   }
 
@@ -39,7 +39,7 @@ export const ContainerForm = styled.div`
       font-size: 1rem;
     }
   }
-`
+`;
 
 export const ContainerInput = styled.div`
   position: relative;
@@ -51,7 +51,7 @@ export const ContainerInput = styled.div`
 
   label {
     span:first-child {
-      color: ${(props) => props.theme.colors.gray[700]};
+      color: ${props => props.theme.colors.gray[700]};
     }
 
     span {
@@ -66,19 +66,19 @@ export const ContainerInput = styled.div`
     top: 2.8rem;
 
     svg {
-      color: ${(props) => props.theme.colors.black[200]};
+      color: ${props => props.theme.colors.black[200]};
     }
   }
 
   &.error span,
   &.error svg {
-    color: ${(props) => props.theme.colors.red[500]} !important;
+    color: ${props => props.theme.colors.red[500]} !important;
   }
 
   &:focus-within svg {
-    color: ${(props) => props.theme.colors.blue[800]};
+    color: ${props => props.theme.colors.blue[800]};
   }
-`
+`;
 
 export const ContainerCheckbox = styled.div`
   display: flex;
@@ -87,22 +87,22 @@ export const ContainerCheckbox = styled.div`
   margin-bottom: 2rem;
 
   a {
-    color: ${(props) => props.theme.colors.blue[800]};
+    color: ${props => props.theme.colors.blue[800]};
     font-weight: 500;
   }
-`
+`;
 
 export const CallToRegisterText = styled.p`
-  color: ${(props) => props.theme.colors.black[200]};
+  color: ${props => props.theme.colors.black[200]};
   line-height: 150%;
   margin-top: 2.5rem;
   padding-bottom: 0.5rem;
 
   a {
-    color: ${(props) => props.theme.colors.blue[800]};
+    color: ${props => props.theme.colors.blue[800]};
     font-weight: 500;
   }
-`
+`;
 
 export const ButtonLoading = styled(Button)`
   height: 43px;
@@ -110,7 +110,7 @@ export const ButtonLoading = styled(Button)`
 
   &:disabled {
     cursor: wait;
-    background-color: ${(props) => props.theme.colors.blue[800]};
-    border-color: ${(props) => props.theme.colors.blue[800]};
+    background-color: ${props => props.theme.colors.blue[800]};
+    border-color: ${props => props.theme.colors.blue[800]};
   }
-`
+`;

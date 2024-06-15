@@ -1,10 +1,10 @@
-import { api } from '@/lib/axios'
+import { api } from '@/lib/axios';
 import {
   QueryKey,
   UndefinedInitialDataOptions,
   useQuery,
-} from '@tanstack/react-query'
-import { ITestimony } from '../interfaces/IUseTestimonyService'
+} from '@tanstack/react-query';
+import { ITestimony } from '../interfaces/IUseTestimonyService';
 
 export const useTestimonyService = (
   options?: UndefinedInitialDataOptions<
@@ -12,14 +12,14 @@ export const useTestimonyService = (
     Error,
     ITestimony[],
     QueryKey
-  >,
+  >
 ) => {
   return useQuery<ITestimony[]>({
     queryKey: ['testimonies'],
     queryFn: async () => {
-      const response = await api.get('/testimony')
-      return response.data
+      const response = await api.get('/testimony');
+      return response.data;
     },
     ...options,
-  })
-}
+  });
+};

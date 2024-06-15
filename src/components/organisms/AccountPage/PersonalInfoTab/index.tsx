@@ -1,4 +1,4 @@
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button';
 import {
   ButtonLoading,
   ButtonsContainer,
@@ -7,43 +7,43 @@ import {
   SubtitleTab,
   TabContainer,
   TitleTab,
-} from '../styles'
+} from '../styles';
 
-import { FormikProvider, useFormik } from 'formik'
-import { FormFields } from './FormFields'
+import { FormikProvider, useFormik } from 'formik';
+import { FormFields } from './FormFields';
 
-import * as yup from 'yup'
-import { genders } from '@/data/static-info'
-import UserUpdateService from '@/services/user/userUpdateService'
-import { handleError } from '@/utils/handleError'
-import { AxiosError } from 'axios'
-import { Modal } from '@/components/atoms/Modal'
-import { ModalCancel } from '@/components/molecules/ModalCancel'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { Spinner } from '@/components/atoms/Spinner'
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import { isEmpty } from '@/utils/is-empty'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { IMentor } from '@/context/interfaces/IAuth'
+import * as yup from 'yup';
+import { genders } from '@/data/static-info';
+import UserUpdateService from '@/services/user/userUpdateService';
+import { handleError } from '@/utils/handleError';
+import { AxiosError } from 'axios';
+import { Modal } from '@/components/atoms/Modal';
+import { ModalCancel } from '@/components/molecules/ModalCancel';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { Spinner } from '@/components/atoms/Spinner';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { isEmpty } from '@/utils/is-empty';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { IMentor } from '@/context/interfaces/IAuth';
 
 const personalInfoSchema = yup.object({
   fullName: yup.string().optional(),
   dateOfBirth: yup.date().optional(),
   email: yup.string().email('E-mail inválido').optional(),
   gender: yup.string().oneOf(genders).optional(),
-})
+});
 
-export type PersonalInfoFormData = yup.InferType<typeof personalInfoSchema>
+export type PersonalInfoFormData = yup.InferType<typeof personalInfoSchema>;
 
 export function PersonalInfoTab() {
-  const [openWarningModal, setOpenWarningModal] = useState(false)
+  const [openWarningModal, setOpenWarningModal] = useState(false);
 
-  const queryClient = useQueryClient()
-  const router = useRouter()
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
-  const { handle } = UserUpdateService()
-  const { userSession } = useAuthContext()
+  const { handle } = UserUpdateService();
+  const { userSession } = useAuthContext();
 
   const { mutateAsync: updateMentorFn } = useMutation({
     mutationKey: ['mentor', userSession?.id],
@@ -55,26 +55,26 @@ export function PersonalInfoTab() {
           return {
             ...cached,
             ...newUpdatedData,
-          }
-        },
-      )
+          };
+        }
+      );
     },
-  })
+  });
 
   async function handleUpdatePersonalInfo(
     data: PersonalInfoFormData,
-    { resetForm }: { resetForm: () => void },
+    { resetForm }: { resetForm: () => void }
   ) {
     try {
       await updateMentorFn({
         fullName: data.fullName,
         gender: data.gender,
-      })
+      });
 
-      resetForm()
+      resetForm();
     } catch (err) {
       if (err instanceof AxiosError) {
-        handleError(JSON.stringify(err.response?.data))
+        handleError(JSON.stringify(err.response?.data));
       }
     }
   }
@@ -83,18 +83,18 @@ export function PersonalInfoTab() {
     initialValues: {},
     onSubmit: handleUpdatePersonalInfo,
     validationSchema: personalInfoSchema,
-  })
+  });
 
   const handleWarningModal = () => {
-    const isFormEmpty = isEmpty(formik.values)
+    const isFormEmpty = isEmpty(formik.values);
 
     if (!isFormEmpty) {
-      setOpenWarningModal(true)
-      return
+      setOpenWarningModal(true);
+      return;
     }
 
-    router.push('/')
-  }
+    router.push('/');
+  };
 
   return (
     <TabContainer value="personal-info">
@@ -137,5 +137,5 @@ export function PersonalInfoTab() {
         </PersonalInfoContent>
       </FormikProvider>
     </TabContainer>
-  )
+  );
 }

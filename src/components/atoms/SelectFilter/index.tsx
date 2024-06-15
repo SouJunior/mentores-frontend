@@ -1,7 +1,7 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import * as Select from '@radix-ui/react-select'
-import * as Checkbox from '@radix-ui/react-checkbox'
+import * as Select from '@radix-ui/react-select';
+import * as Checkbox from '@radix-ui/react-checkbox';
 
 import {
   CheckboxIndicator,
@@ -9,13 +9,13 @@ import {
   CheckboxRoot,
   SelectContent,
   SelectTrigger,
-} from './styled'
+} from './styled';
 
 interface SelectFilterProps extends Select.SelectProps {
-  options: string[]
-  selectName?: string
-  onChange: (selectedOptions: string[]) => void
-  selectedOptions: string[]
+  options: string[];
+  selectName?: string;
+  onChange: (selectedOptions: string[]) => void;
+  selectedOptions: string[];
 }
 
 export default function SelectFilter({
@@ -26,14 +26,14 @@ export default function SelectFilter({
   ...props
 }: SelectFilterProps) {
   const handleOptionChange = (option: string) => {
-    const newSelectedOptions = [...selectedOptions]
+    const newSelectedOptions = [...selectedOptions];
     if (newSelectedOptions.includes(option)) {
-      newSelectedOptions.splice(newSelectedOptions.indexOf(option), 1)
+      newSelectedOptions.splice(newSelectedOptions.indexOf(option), 1);
     } else {
-      newSelectedOptions.push(option)
+      newSelectedOptions.push(option);
     }
-    onChange(newSelectedOptions)
-  }
+    onChange(newSelectedOptions);
+  };
 
   return (
     <Select.Root {...props}>
@@ -52,7 +52,7 @@ export default function SelectFilter({
           avoidCollisions={false}
         >
           <Select.Viewport>
-            {options.map((option) => (
+            {options.map(option => (
               <CheckboxLabel key={option}>
                 <CheckboxRoot
                   checked={selectedOptions.includes(option)}
@@ -69,5 +69,5 @@ export default function SelectFilter({
         </SelectContent>
       </Select.Portal>
     </Select.Root>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import { Spinner } from '@/components/atoms/Spinner'
-import { PasswordTab } from '@/components/organisms/AccountPage/PasswordTab'
-import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab'
-import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab'
-import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab'
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import { EditPhotoProvider } from '@/context/EditPhotoContext'
-import { useProtectPage } from '@/hooks/useProtectPage'
+import { Spinner } from '@/components/atoms/Spinner';
+import { PasswordTab } from '@/components/organisms/AccountPage/PasswordTab';
+import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab';
+import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab';
+import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { EditPhotoProvider } from '@/context/EditPhotoContext';
+import { useProtectPage } from '@/hooks/useProtectPage';
 import {
   AsideContainer,
   AsideNavContainer,
@@ -15,37 +15,37 @@ import {
   AsideDivider,
   ContentDivider,
   ContainerSpinnerLoading,
-} from '@/styles/pages/me'
-import * as Tabs from '@radix-ui/react-tabs'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { ToastContainer } from 'react-toastify'
+} from '@/styles/pages/me';
+import * as Tabs from '@radix-ui/react-tabs';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MePage() {
-  const { mentor } = useAuthContext()
-  const loading = useProtectPage()
+  const { mentor } = useAuthContext();
+  const loading = useProtectPage();
 
-  const router = useRouter()
-  const initialTab = router.query.tab as string
-  const [activeTab, setActiveTab] = useState(initialTab ?? 'personal-info')
+  const router = useRouter();
+  const initialTab = router.query.tab as string;
+  const [activeTab, setActiveTab] = useState(initialTab ?? 'personal-info');
 
   function handleTabChange(value: string) {
-    setActiveTab(value)
-    router.push({ query: { tab: value } })
+    setActiveTab(value);
+    router.push({ query: { tab: value } });
   }
 
   useEffect(() => {
-    setActiveTab(router.query.tab as string)
-  }, [router.query.tab])
+    setActiveTab(router.query.tab as string);
+  }, [router.query.tab]);
 
   if (loading) {
     return (
       <ContainerSpinnerLoading>
         <Spinner className="spinner" />
       </ContainerSpinnerLoading>
-    )
+    );
   }
 
   return (
@@ -98,5 +98,5 @@ export default function MePage() {
         </Container>
       </EditPhotoProvider>
     </Tabs.Root>
-  )
+  );
 }

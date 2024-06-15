@@ -1,9 +1,9 @@
-import { CardOnboarding } from '@/components/atoms/CardOnboarding'
-import { Container, ContainerListCard, ContainerOnboarding } from './style'
+import { CardOnboarding } from '@/components/atoms/CardOnboarding';
+import { Container, ContainerListCard, ContainerOnboarding } from './style';
 
-import girlWithMagnifyingGlass from '@/assets/homepage/onboarding/encontre.svg'
-import scheduleImg from '@/assets/homepage/onboarding/marque.svg'
-import describeImg from '@/assets/homepage/onboarding/descreva.svg'
+import girlWithMagnifyingGlass from '@/assets/homepage/onboarding/encontre.svg';
+import scheduleImg from '@/assets/homepage/onboarding/marque.svg';
+import describeImg from '@/assets/homepage/onboarding/descreva.svg';
 
 export function Onboarding() {
   return (
@@ -36,5 +36,5 @@ export function Onboarding() {
         </ContainerListCard>
       </ContainerOnboarding>
     </Container>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import Link from 'next/link'
-import { device } from '@/styles/theme'
+import styled, { css } from 'styled-components';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import Link from 'next/link';
+import { device } from '@/styles/theme';
 
 export const ContainerHeader = styled.header`
   display: flex;
@@ -21,7 +21,7 @@ export const ContainerHeader = styled.header`
     padding: 0.25rem 0;
 
     .mySpan {
-      background-color: ${(props) => props.theme.colors.blue[800]};
+      background-color: ${props => props.theme.colors.blue[800]};
       width: 2px;
       height: 2.5rem;
     }
@@ -50,7 +50,7 @@ export const ContainerHeader = styled.header`
         padding: 0.25rem 0.5rem;
         font-size: 1.25rem;
         line-height: 1.75rem;
-        color: ${(props) => props.theme.colors.blue[800]};
+        color: ${props => props.theme.colors.blue[800]};
         border-top: 2px solid transparent;
         border-bottom: 2px solid transparent;
 
@@ -68,7 +68,7 @@ export const ContainerHeader = styled.header`
       }
     }
   }
-`
+`;
 
 export const GroupBtn = styled.div`
   display: flex;
@@ -77,14 +77,14 @@ export const GroupBtn = styled.div`
   @media ${device.desktopXS} {
     display: none;
   }
-`
+`;
 
 export const AvatarGroup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100px;
-`
+`;
 
 export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   all: unset;
@@ -125,14 +125,14 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   &:focus-visible {
     box-shadow: 0 0 0 2px rgba(17, 101, 186, 0.6);
   }
-`
+`;
 
 export const DropdownMenuContent = styled(DropdownMenu.Content)`
   padding: 0.5rem 0;
   border-radius: 0.5rem;
-  background: ${(props) => props.theme.colors.white};
+  background: ${props => props.theme.colors.white};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: ${(props) => props.theme.colors.black[200]};
+  color: ${props => props.theme.colors.black[200]};
   display: flex;
   flex-direction: column;
   z-index: 1;
@@ -146,7 +146,7 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
     a {
       padding: 1rem;
       line-height: 1.2rem;
-      color: ${(props) => props.theme.colors.blue[800]};
+      color: ${props => props.theme.colors.blue[800]};
       outline: 0;
     }
 
@@ -164,18 +164,18 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
     border-radius: 0;
     margin-top: -3px;
   }
-`
+`;
 
 export const DropdownMenuLabel = styled.strong`
   font: 500 1.25rem 'Radio Canada';
   line-height: 120%;
   padding: 0.5rem 1rem;
-`
+`;
 
 export const DropdownMenuSeparator = styled(DropdownMenu.Separator)`
   width: 100%;
   height: 1px;
-  background-color: ${(props) => props.theme.colors.gray[600]};
+  background-color: ${props => props.theme.colors.gray[600]};
   margin: 0.5rem 0;
 
   &.with-user-log-in {
@@ -185,7 +185,7 @@ export const DropdownMenuSeparator = styled(DropdownMenu.Separator)`
       display: block;
     }
   }
-`
+`;
 
 const baseBtnStyles = css`
   all: unset;
@@ -198,9 +198,9 @@ const baseBtnStyles = css`
 
   &:hover,
   &:focus {
-    background-color: ${(props) => props.theme.colors.gray[250]};
+    background-color: ${props => props.theme.colors.gray[250]};
   }
-`
+`;
 
 export const LinkUserAccount = styled(Link)`
   ${baseBtnStyles}
@@ -211,15 +211,15 @@ export const LinkUserAccount = styled(Link)`
 
   &:hover,
   &:focus {
-    color: ${(props) => props.theme.colors.black[200]};
-    background-color: ${(props) => props.theme.colors.gray[250]};
+    color: ${props => props.theme.colors.black[200]};
+    background-color: ${props => props.theme.colors.gray[250]};
   }
-`
+`;
 
 export const SignOutBtn = styled(DropdownMenu.Item)`
   ${baseBtnStyles}
-  color: ${(props) => props.theme.colors.red[300]};
-`
+  color: ${props => props.theme.colors.red[300]};
+`;
 
 // Menu Burger
 export const MenuBurgerTrigger = styled(DropdownMenu.Trigger)`
@@ -228,7 +228,7 @@ export const MenuBurgerTrigger = styled(DropdownMenu.Trigger)`
   cursor: pointer;
   align-self: center;
 
-  color: ${(props) => props.theme.colors.blue[800]};
+  color: ${props => props.theme.colors.blue[800]};
   line-height: 0;
   transition: transform 0.3s;
 
@@ -244,7 +244,7 @@ export const MenuBurgerTrigger = styled(DropdownMenu.Trigger)`
   @media ${device.desktopXS} {
     display: block;
   }
-`
+`;
 
 export const MenuBurgerOverlay = styled.div`
   display: none;
@@ -257,7 +257,7 @@ export const MenuBurgerOverlay = styled.div`
   @media ${device.desktopXS} {
     display: block;
   }
-`
+`;
 
 export const MenuBurgerContent = styled(DropdownMenu.Content)`
   display: none;
@@ -273,14 +273,14 @@ export const MenuBurgerContent = styled(DropdownMenu.Content)`
     margin-top: -4px;
   }
 
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.white};
   border-bottom-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-top: 2px solid ${(props) => props.theme.colors.gray[500]};
+  border-top: 2px solid ${props => props.theme.colors.gray[500]};
 
   padding: 1rem 0;
-  color: ${(props) => props.theme.colors.blue[800]};
+  color: ${props => props.theme.colors.blue[800]};
   width: var(--radix-dropdown-menu-content-available-width);
 
   .menu-burger-links {
@@ -296,16 +296,16 @@ export const MenuBurgerContent = styled(DropdownMenu.Content)`
   [role='menuitem'] {
     outline: 0;
   }
-`
+`;
 
 export const Divider = styled.hr`
   border: 0;
-  border-top: 2px solid ${(props) => props.theme.colors.gray[500]};
-`
+  border-top: 2px solid ${props => props.theme.colors.gray[500]};
+`;
 
 export const GroupBtnMobile = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.5rem 1rem 0;
-`
+`;

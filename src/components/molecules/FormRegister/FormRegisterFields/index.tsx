@@ -1,22 +1,22 @@
-import { Eye } from '@/components/atoms/Eye'
-import { InfoTooltip } from '@/components/atoms/InfoTooltip'
-import { DatePickerContainer, WrapperInput } from './styles'
-import { InputForm } from '../../../atoms/InputForm'
-import { Calendar } from '../../Calendar'
-import { Field, useFormikContext } from 'formik'
-import { useState } from 'react'
-import { ValuesFormType } from '@/utils/registerSchema'
+import { Eye } from '@/components/atoms/Eye';
+import { InfoTooltip } from '@/components/atoms/InfoTooltip';
+import { DatePickerContainer, WrapperInput } from './styles';
+import { InputForm } from '../../../atoms/InputForm';
+import { Calendar } from '../../Calendar';
+import { Field, useFormikContext } from 'formik';
+import { useState } from 'react';
+import { ValuesFormType } from '@/utils/registerSchema';
 
-import EventRoundedIcon from '@mui/icons-material/EventRounded'
-import dayjs from 'dayjs'
+import EventRoundedIcon from '@mui/icons-material/EventRounded';
+import dayjs from 'dayjs';
 
 export function FormRegisterFields() {
-  const [showCalendar, setShowCalendar] = useState(false)
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false)
+    useState(false);
 
-  const formik = useFormikContext<ValuesFormType>()
+  const formik = useFormikContext<ValuesFormType>();
 
   return (
     <>
@@ -59,8 +59,8 @@ export function FormRegisterFields() {
             formik.setValues({
               ...formik.values,
               dateBirthday: date,
-            })
-            setShowCalendar(false)
+            });
+            setShowCalendar(false);
           }}
           avoidCollisions={false}
           sideOffset={10}
@@ -120,5 +120,5 @@ export function FormRegisterFields() {
         />
       </WrapperInput>
     </>
-  )
+  );
 }

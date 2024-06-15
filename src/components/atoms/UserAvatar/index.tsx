@@ -1,11 +1,11 @@
-import UserDefault from '@/assets/userDefault.png'
-import Image from 'next/image'
-import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined'
-import { useAuthContext } from '@/context/Auth/AuthContext'
-import { ImageContainer } from './styles'
+import UserDefault from '@/assets/userDefault.png';
+import Image from 'next/image';
+import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { ImageContainer } from './styles';
 
 export function UserAvatar() {
-  const { mentor } = useAuthContext()
+  const { mentor } = useAuthContext();
 
   return (
     <>
@@ -20,5 +20,5 @@ export function UserAvatar() {
 
       <ArrowBackIosOutlinedIcon />
     </>
-  )
+  );
 }

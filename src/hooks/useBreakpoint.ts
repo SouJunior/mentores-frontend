@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export function useBreakpoint() {
-  const [breakpoint, setBreakpoint] = useState(0)
+  const [breakpoint, setBreakpoint] = useState(0);
 
   useEffect(() => {
     const calcWindowWidth = () => {
-      setBreakpoint(window.innerWidth)
-    }
+      setBreakpoint(window.innerWidth);
+    };
 
-    window.addEventListener('resize', calcWindowWidth)
+    window.addEventListener('resize', calcWindowWidth);
 
-    return () => window.removeEventListener('resize', calcWindowWidth)
-  }, [])
+    return () => window.removeEventListener('resize', calcWindowWidth);
+  }, []);
 
-  return breakpoint
+  return breakpoint;
 }

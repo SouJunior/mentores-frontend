@@ -1,4 +1,4 @@
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button';
 import {
   ContainerBtn,
   ContainerModalCancel,
@@ -6,10 +6,10 @@ import {
   DiscardBtn,
   HeadingModal,
   ModalCloseCancelBtn,
-} from './style'
-import { DialogContentProps } from '@radix-ui/react-dialog'
+} from './style';
+import { DialogContentProps } from '@radix-ui/react-dialog';
 
-type ModalCancelProps = DialogContentProps
+type ModalCancelProps = DialogContentProps;
 
 export function ModalCancel(props: ModalCancelProps) {
   return (
@@ -29,5 +29,5 @@ export function ModalCancel(props: ModalCancelProps) {
         </Button>
       </ContainerBtn>
     </ContainerModalCancel>
-  )
+  );
 }
