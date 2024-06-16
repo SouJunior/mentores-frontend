@@ -1,23 +1,22 @@
-import React from 'react'
-import { Button } from '@/components/atoms/Button'
+import copyLinkEvent from '@/assets/modalCalendly/copyLinkEvent-v2.png';
+import { Button } from '@/components/atoms/Button';
+import StepperDots from '@/components/atoms/StepperDots';
 import {
+  ButtonsContainer,
+  ModalButtonSecondary,
   ModalDescription,
   ModalImageContainer,
   ModalTitle,
-  ButtonsContainer,
-  ModalButtonSecondary,
-} from '@/components/organisms/CalendlyRegister/style'
-import copyLinkEvent from '@/assets/modalCalendly/copyLinkEvent.png'
-import Link from 'next/link'
-import Image from 'next/image'
-import StepperDots from '@/components/atoms/StepperDots'
-import { SubDescription } from './style'
+} from '@/components/organisms/CalendlyRegister/style';
+import Image from 'next/image';
+import Link from 'next/link';
+import { SubDescription } from './style';
 
 type ModalCalendlyStep2Props = {
-  handleNextStep: () => void
-  handlePreviousStep: () => void
-  currentStep: number
-}
+  handleNextStep: () => void;
+  handlePreviousStep: () => void;
+  currentStep: number;
+};
 
 export default function ModalCalendlyStep2({
   handleNextStep,
@@ -67,5 +66,5 @@ export default function ModalCalendlyStep2({
         </Button>
       </ButtonsContainer>
     </>
-  )
+  );
 }
