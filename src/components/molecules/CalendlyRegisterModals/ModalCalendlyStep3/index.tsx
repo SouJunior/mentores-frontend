@@ -1,91 +1,82 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button';
+import { Spinner } from '@/components/atoms/Spinner';
+import StepperDots from '@/components/atoms/StepperDots';
 import {
   ButtonsContainer,
   ModalButton,
   ModalButtonSecondary,
   ModalDescription,
   ModalTitle,
-} from '@/components/organisms/CalendlyRegister/style'
-import { api } from '@/lib/axios'
-import { Spinner } from '@/components/atoms/Spinner'
+} from '@/components/organisms/CalendlyRegister/style';
+import UserUpdateService from '@/services/user/userUpdateService';
 import {
   isCalendlyLink,
   isValidHttpsUrl,
   splitCalendlyName,
-} from '@/utils/ValidateCalendlyInput'
+} from '@/utils/ValidateCalendlyInput';
+import { handleError } from '@/utils/handleError';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
-  ContainerInput,
+  ButtonLoading,
   ContainerErrorInputCalendly,
+  ContainerInput,
   InputCalendlyStyled,
   PlaceholderInput,
   StyledErrorOutlineIcon,
-  ButtonLoading,
-} from './style'
-import { handleError } from '@/utils/handleError'
-import StepperDots from '@/components/atoms/StepperDots'
+} from './style';
+import { useAuthContext } from '@/context/Auth/AuthContext';
 
 type ModalCalendlyStep3Props = {
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>
-  handlePreviousStep: () => void
-  currentStep: number
-}
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+  handlePreviousStep: () => void;
+  currentStep: number;
+};
 
 export default function ModalCalendlyStep3({
   handlePreviousStep,
   setCurrentStep,
   currentStep,
 }: ModalCalendlyStep3Props) {
-  const [inputValue, setInputValue] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-  const [isValid, setIsValid] = useState(false)
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isValid, setIsValid] = useState(false);
+
+  const { handle } = UserUpdateService();
+  const { mentor } = useAuthContext()
 
   const buttonDisabledVerification = useCallback(() => {
-    const valid = isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue)
-    setIsValid(valid)
-    setIsButtonDisabled(!valid)
-  }, [inputValue])
+    const valid = isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue);
+    setIsValid(valid);
+    setIsButtonDisabled(!valid);
+  }, [inputValue]);
 
   useEffect(() => {
-    buttonDisabledVerification()
-  }, [inputValue, buttonDisabledVerification])
+    buttonDisabledVerification();
+  }, [inputValue, buttonDisabledVerification]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
     try {
       if (isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue)) {
-        const { firstPathName, secondPathName } = splitCalendlyName(inputValue)
+        const { firstPathName, secondPathName } = splitCalendlyName(inputValue);
 
-        const response = await api.post(
-          '/mentor',
-          {
-            calendlyName: firstPathName,
-            agendaName: secondPathName,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          },
-        )
-        if (response.status === 204) {
-          console.log('No content to return, but request was successful')
-        } else if (response.status >= 400) {
-          handleError('Algum erro aconteceu. Entre em contato conosco.')
-          console.log('Bad response from server', response.status)
-        } else {
-          setCurrentStep(4)
-        }
+        await handle({
+          calendlyName: firstPathName,
+          agendaName: secondPathName,
+        });
+
+        setCurrentStep(4);
+        mentor.refetch()
       }
     } catch (error) {
-      handleError('Algum erro aconteceu. Entre em contato conosco.')
-      console.error(error)
+      handleError('Algum erro aconteceu. Entre em contato conosco.');
+      console.error(error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -103,20 +94,20 @@ export default function ModalCalendlyStep3({
             type="text"
             value={inputValue}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              setInputValue(e.target.value)
+              setInputValue(e.target.value);
             }}
             onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => {
-              e.preventDefault()
-              const pastedText = e.clipboardData.getData('text')
+              e.preventDefault();
+              const pastedText = e.clipboardData.getData('text');
 
               // Código abaixo é necessário para evitar um bug, então mesmo parecendo que a validação do link está incorretamente duplicada no código (já que o useEffect já está fazendo a validação) é necessário a repetição da validação aqui dentro do onPaste para evitar esse bug: mesmo ao colocar um link correto, por meio segundo o input ficava vermelho e com icone de ErrorOutlineIcon, e depois volta a ficar azul dizendo que o link está correto
-              const temporaryInputValue = pastedText
+              const temporaryInputValue = pastedText;
               const valid =
                 isValidHttpsUrl(temporaryInputValue) &&
-                isCalendlyLink(temporaryInputValue)
-              setIsValid(valid)
-              setIsButtonDisabled(!valid)
-              setInputValue(temporaryInputValue)
+                isCalendlyLink(temporaryInputValue);
+              setIsValid(valid);
+              setIsButtonDisabled(!valid);
+              setInputValue(temporaryInputValue);
             }}
             id="link-calendly"
           />
@@ -155,5 +146,5 @@ export default function ModalCalendlyStep3({
         </ButtonsContainer>
       </form>
     </>
-  )
+  );
 }
