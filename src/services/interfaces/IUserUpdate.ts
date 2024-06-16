@@ -6,6 +6,8 @@ export type UserUpdateDTO = {
   gender?: string;
   aboutMe?: string;
   fullName?: string;
+  calendlyName?: string;
+  agendaName?: string;
 };
 
 export type UserUpdatePasswordDTO = {
