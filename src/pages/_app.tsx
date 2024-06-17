@@ -2,14 +2,14 @@ import '@/lib/dayjs';
 
 import { Layout } from '@/components/organisms/Global/layout';
 import { AuthProvider } from '@/context/Auth/AuthContext';
+import { queryClient } from '@/lib/react-query';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '@/lib/react-query';
 
 const excludeRoutes = ['/login', '/cadastro'];
 
