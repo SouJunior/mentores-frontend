@@ -12,16 +12,16 @@ import {
 import { FormikProvider, useFormik } from 'formik';
 import { FormFields } from './FormFields';
 
-import * as yup from 'yup';
-import UserUpdateService from '@/services/user/userUpdateService';
-import { AxiosError } from 'axios';
 import { Modal } from '@/components/atoms/Modal';
-import { ModalCancel } from '@/components/molecules/ModalCancel';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { Spinner } from '@/components/atoms/Spinner';
-import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { ModalCancel } from '@/components/molecules/ModalCancel';
+import UserUpdateService from '@/services/user/userUpdateService';
 import { isEmpty } from '@/utils/is-empty';
+import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import * as yup from 'yup';
 
 const passwordValidation = yup
   .string()
@@ -75,9 +75,14 @@ export function PasswordTab() {
 
   const formik = useFormik<PasswordFormData>({
     initialValues: { password: '', newPassword: '', confirmNewPassword: '' },
-    onSubmit: handleUpdatePassword,
     validationSchema: passwordTabSchema,
+    onSubmit: handleUpdatePassword,
+    validateOnChange: true,
   });
+
+  const isButtonDisabled = Object.entries(formik.values).some(
+    ([key, value]) => !value || formik.errors[key as keyof PasswordFormData]
+  );
 
   const handleWarningModal = () => {
     const isFormEmpty = isEmpty(formik.values);
@@ -125,7 +130,9 @@ export function PasswordTab() {
                 <Spinner />
               </ButtonLoading>
             ) : (
-              <Button type="submit">Salvar</Button>
+              <Button type="submit" disabled={isButtonDisabled}>
+                Salvar
+              </Button>
             )}
           </ButtonsContainer>
         </PersonalInfoContent>
