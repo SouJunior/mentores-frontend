@@ -66,10 +66,7 @@ export function PersonalInfoTab() {
     { resetForm }: { resetForm: () => void }
   ) {
     try {
-      await updateMentorFn({
-        fullName: data.fullName,
-        gender: data.gender,
-      });
+      await updateMentorFn(data);
 
       resetForm();
     } catch (err) {
