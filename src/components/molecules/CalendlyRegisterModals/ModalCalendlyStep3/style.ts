@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import styled, { css } from 'styled-components';
 
 export const ContainerInput = styled.div`
   position: relative;
@@ -9,7 +9,7 @@ export const ContainerInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
 export const InputCalendlyStyled = styled.input`
   display: flex;
@@ -17,23 +17,23 @@ export const InputCalendlyStyled = styled.input`
   gap: 0.5rem;
 
   border: 1px solid
-    ${(props) =>
+    ${props =>
       props.className?.includes('error')
         ? props.theme.colors.red[500]
         : props.theme.colors.gray[600]};
   border-radius: 8px;
-  background: ${(props) => props.theme.colors.white};
-  color: ${(props) => props.theme.colors.black[200]};
+  background: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.black[200]};
 
   &:focus {
     border: 1px solid
-      ${(props) =>
+      ${props =>
         props.className?.includes('error')
           ? props.theme.colors.red[500]
           : props.theme.colors.blue[850]};
 
     box-shadow: 0 0 0 1px
-      ${(props) =>
+      ${props =>
         props.className?.includes('error')
           ? props.theme.colors.red[500]
           : props.theme.colors.blue[850]};
@@ -47,13 +47,13 @@ export const InputCalendlyStyled = styled.input`
   width: 100%;
 
   padding: 0.875rem 0.875rem 0.875rem
-    ${(props) => (props.className?.includes('error') ? `2.3rem` : `0.875rem`)};
+    ${props => (props.className?.includes('error') ? `2.3rem` : `0.875rem`)};
 
   font-size: 1rem;
   line-height: 150%;
 
   &::placeholder {
-    color: ${(props) => props.theme.colors.gray[250]};
+    color: ${props => props.theme.colors.gray[250]};
   }
 
   &:focus ~ label {
@@ -63,7 +63,7 @@ export const InputCalendlyStyled = styled.input`
   }
 
   & ~ label {
-    ${(props) =>
+    ${props =>
       Boolean(props.value) &&
       css`
         transform: translateY(-1.5rem);
@@ -71,7 +71,7 @@ export const InputCalendlyStyled = styled.input`
         font-size: 0.75rem;
       `}
   }
-`
+`;
 export const PlaceholderInput = styled.label`
   position: absolute;
   left: 0.5rem;
@@ -81,16 +81,16 @@ export const PlaceholderInput = styled.label`
   transition: all 0.3s;
   pointer-events: none;
   padding-left: 12px;
-`
+`;
 
 export const ContainerErrorInputCalendly = styled.span`
   display: block;
-  color: ${(props) => props.theme.colors.red[500]};
+  color: ${props => props.theme.colors.red[500]};
   font-weight: bold;
   font-size: 0.75rem;
   text-align: center;
   padding: 1rem 0;
-`
+`;
 
 export const StyledErrorOutlineIcon = styled(ErrorOutlineIcon)`
   width: 1.5rem;
@@ -98,7 +98,7 @@ export const StyledErrorOutlineIcon = styled(ErrorOutlineIcon)`
 
   position: absolute;
   left: 0.5rem;
-`
+`;
 export const ButtonLoading = styled(Button)`
   height: 45px;
   padding: 0;
@@ -106,7 +106,7 @@ export const ButtonLoading = styled(Button)`
 
   &:disabled {
     cursor: wait;
-    background-color: ${(props) => props.theme.colors.blue[800]};
-    border-color: ${(props) => props.theme.colors.blue[800]};
+    background-color: ${props => props.theme.colors.blue[800]};
+    border-color: ${props => props.theme.colors.blue[800]};
   }
-`
+`;
