@@ -1,5 +1,11 @@
+import EditPhotoModal from '@/components/atoms/EditPhotoModal';
+import { Modal } from '@/components/atoms/Modal';
+import PhotoButton from '@/components/atoms/PhotoButton';
+import { useFormikContext } from 'formik';
+import { ProfileFormData } from '..';
 import {
   ButtonEditPhoto,
+  CharacterSectionLegend,
   ContentContainer,
   DescriptionContainer,
   GridSpecialties,
@@ -7,20 +13,16 @@ import {
   SelectedSpecialtyCount,
   SpecialtyItem,
 } from '../styles';
-import PhotoButton from '@/components/atoms/PhotoButton';
-import EditPhotoModal from '@/components/atoms/EditPhotoModal';
-import { useFormikContext } from 'formik';
-import { ProfileFormData } from '..';
-import { Modal } from '@/components/atoms/Modal';
 
-import CheckIcon from '@mui/icons-material/Check';
-import { specialties as specialtiesOptions } from '@/data/static-info';
-import { useAuthContext } from '@/context/Auth/AuthContext';
-import { useEffect, useState } from 'react';
 import { InputForm } from '@/components/atoms/InputForm';
+import { useAuthContext } from '@/context/Auth/AuthContext';
 import { useEditPhotoContext } from '@/context/EditPhotoContext';
+import { specialties as specialtiesOptions } from '@/data/static-info';
+import CheckIcon from '@mui/icons-material/Check';
+import { useEffect, useState } from 'react';
 
 export function FormFields() {
+  const [isMaxCharactersExceeded, setIsMaxCharactersExceeded] = useState(false);
   const { mentor } = useAuthContext();
   const [specialties, setSpecialties] = useState<string[]>(
     mentor.data?.specialties ?? []
@@ -53,6 +55,30 @@ export function FormFields() {
     setOriginalImage(mentor.data?.profile ?? '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
+  useEffect(() => {
+    const aboutMeLength =
+      formik.values.aboutMe?.length ?? mentor.data?.aboutMe?.length ?? 0;
+  
+    if (aboutMeLength > 600) {
+      setIsMaxCharactersExceeded(true);
+    } else {
+      setIsMaxCharactersExceeded(false);
+    }
+  }, [formik.values.aboutMe, mentor.data?.aboutMe]);
+
+  const handleMaxCharacters = () => {
+    const aboutMeLength =
+      formik.values.aboutMe?.length ?? mentor.data?.aboutMe?.length ?? 0;
+    const maxCharactersExceeded = 600 - aboutMeLength;
+
+    if (aboutMeLength <= 600) {
+      return `${aboutMeLength} / 600`;
+    } else {
+      return `${maxCharactersExceeded}`;
+    }
+  };
 
   return (
     <ContentContainer>
@@ -121,7 +147,11 @@ export function FormFields() {
           defaultValue={mentor.data?.aboutMe}
         />
 
-        <SectionLegend>Máximo 600 caracteres.</SectionLegend>
+        <CharacterSectionLegend
+          className={`${isMaxCharactersExceeded === true ? 'error' : ''}`}
+        >
+          {handleMaxCharacters()}
+        </CharacterSectionLegend>
       </DescriptionContainer>
     </ContentContainer>
   );
