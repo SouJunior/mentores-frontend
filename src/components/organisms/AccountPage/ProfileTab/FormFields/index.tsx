@@ -56,11 +56,10 @@ export function FormFields() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   useEffect(() => {
     const aboutMeLength =
       formik.values.aboutMe?.length ?? mentor.data?.aboutMe?.length ?? 0;
-  
+
     if (aboutMeLength > 600) {
       setIsMaxCharactersExceeded(true);
     } else {
@@ -75,9 +74,8 @@ export function FormFields() {
 
     if (aboutMeLength <= 600) {
       return `${aboutMeLength} / 600`;
-    } else {
-      return `${maxCharactersExceeded}`;
     }
+    return maxCharactersExceeded;
   };
 
   return (
@@ -148,7 +146,7 @@ export function FormFields() {
         />
 
         <CharacterSectionLegend
-          className={`${isMaxCharactersExceeded === true ? 'error' : ''}`}
+          className={`${isMaxCharactersExceeded ? 'error' : ''}`}
         >
           {handleMaxCharacters()}
         </CharacterSectionLegend>
