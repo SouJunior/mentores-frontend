@@ -10,21 +10,21 @@ import {
 
 import { FormikProvider, useFormik } from 'formik';
 
-import * as yup from 'yup';
+import { Modal } from '@/components/atoms/Modal';
+import { Spinner } from '@/components/atoms/Spinner';
+import { ModalCancel } from '@/components/molecules/ModalCancel';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { IMentor } from '@/context/interfaces/IAuth';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
-import { AxiosError } from 'axios';
-import { Modal } from '@/components/atoms/Modal';
-import { ModalCancel } from '@/components/molecules/ModalCancel';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { Spinner } from '@/components/atoms/Spinner';
-import { useAuthContext } from '@/context/Auth/AuthContext';
-import { ProfileContentForm } from './styles';
-import { FormFields } from './FormFields';
 import { isEmpty } from '@/utils/is-empty';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { IMentor } from '@/context/interfaces/IAuth';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import * as yup from 'yup';
+import { FormFields } from './FormFields';
+import { ProfileContentForm } from './styles';
 
 const profileSchema = yup.object({
   specialties: yup.array(yup.string().required('Obrigatório')),
@@ -67,6 +67,7 @@ export function ProfileTab() {
       await updateMentorFn(data);
 
       resetForm();
+      router.push('/');
     } catch (err) {
       if (err instanceof AxiosError) {
         handleError(JSON.stringify(err.response?.data));
@@ -76,9 +77,14 @@ export function ProfileTab() {
 
   const formik = useFormik<ProfileFormData>({
     initialValues: {},
-    onSubmit: handleUpdateProfile,
     validationSchema: profileSchema,
+    onSubmit: handleUpdateProfile,
+    validateOnChange: true,
   });
+
+  const isButtonDisabled = Object.entries(formik.values).some(
+    ([key, value]) => !value || formik.errors[key as keyof ProfileFormData]
+  );
 
   const handleWarningModal = () => {
     const isFormEmpty = isEmpty(formik.values);
@@ -126,7 +132,9 @@ export function ProfileTab() {
                 <Spinner />
               </ButtonLoading>
             ) : (
-              <Button type="submit">Salvar</Button>
+              <Button type="submit" disabled={isButtonDisabled}>
+                Salvar
+              </Button>
             )}
           </ButtonsContainer>
         </ProfileContentForm>

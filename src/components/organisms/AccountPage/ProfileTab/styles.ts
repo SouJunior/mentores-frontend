@@ -59,6 +59,15 @@ export const SectionLegend = styled.p`
     color: ${props => props.theme.colors.blue[700]};
   }
 `;
+export const CharacterSectionLegend = styled.p`
+  font-size: 0.875rem;
+  line-height: 1rem;
+
+  color: ${props =>
+    props.className?.includes('error')
+      ? props.theme.colors.red[500]
+      : props.theme.colors.black[200]};
+`;
 
 export const GridSpecialties = styled.div`
   display: grid;
