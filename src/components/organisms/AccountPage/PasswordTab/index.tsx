@@ -61,6 +61,7 @@ export function PasswordTab() {
       });
 
       resetForm();
+      router.push('/');
     } catch (err) {
       if (err instanceof AxiosError) {
         const currentMessage = err.response?.data.message;

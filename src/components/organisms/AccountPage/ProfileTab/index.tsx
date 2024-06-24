@@ -67,6 +67,7 @@ export function ProfileTab() {
       await updateMentorFn(data);
 
       resetForm();
+      router.push('/');
     } catch (err) {
       if (err instanceof AxiosError) {
         handleError(JSON.stringify(err.response?.data));
