@@ -1,5 +1,7 @@
 export const errorTranslations = {
   'invalid e-mail or password': 'Email ou senha incorretos.',
+  'your account is not activated yet. check your e-mail inbox for instructions':
+    'Sua conta ainda não foi ativada. Verifique sua caixa de entrada de e-mail para instruções.',
   "you typed the password incorrectly and will be blocked in five tries. to register a new password click on 'forgot my password'":
     "Você digitou a senha incorretamente e será bloqueado após cinco tentativas. Para cadastrar um nova senha clique em 'Esqueci a senha'.",
   "your account access is still blocked, because you dont redefined your password after five incorrect tries, please, click on 'forgot my password' to begin the account restoration.":
