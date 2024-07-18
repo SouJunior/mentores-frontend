@@ -116,7 +116,8 @@ export function Header() {
 
           {isMenuOpen && <MenuBurgerOverlay aria-hidden />}
 
-          <MenuBurgerContent sideOffset={20}>
+          <DropdownMenu.Portal>
+          <MenuBurgerContent sideOffset={12}>
             <div className="menu-burger-links">
               <DropdownMenu.Item asChild>
                 <Link href="/#onboarding">Como Funciona</Link>
@@ -142,6 +143,7 @@ export function Header() {
               </DropdownMenu.Item>
             </GroupBtnMobile>
           </MenuBurgerContent>
+          </DropdownMenu.Portal>
         </DropdownMenu.Root>
       )}
     </ContainerHeader>
