@@ -1,27 +1,26 @@
-import { Button } from '@/components/atoms/Button';
 import { TitleTab } from '../styles';
 
 import {
-  ScheduleDescription,
-  ScheduleContentContainer,
+  ScheduleContent,
+  AlertContainer,
+  ErrorOutlineRoundedIconStyled,
   ScheduleTabContainer,
 } from './styles';
-import Link from 'next/link';
 
 export function ScheduleTab() {
   return (
     <ScheduleTabContainer value="schedule">
       <TitleTab>Agenda</TitleTab>
 
-      <ScheduleContentContainer>
-        <ScheduleDescription>
-          Sua agenda de mentorias é ajustada pelo Calendly.
-        </ScheduleDescription>
-
-        <Button as={Link} href="https://calendly.com" target="_blank">
-          Ir para o Calendly
-        </Button>
-      </ScheduleContentContainer>
+      <ScheduleContent>
+        <AlertContainer>
+          <ErrorOutlineRoundedIconStyled />
+          <p>
+            Caso altere o link da sua agenda no Calendly, é necessário
+            atualizá-lo também nessa página.
+          </p>
+        </AlertContainer>
+      </ScheduleContent>
     </ScheduleTabContainer>
   );
 }

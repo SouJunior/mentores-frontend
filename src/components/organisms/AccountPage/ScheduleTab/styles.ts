@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
 import * as Tabs from '@radix-ui/react-tabs';
+import styled from 'styled-components';
 
 export const ScheduleTabContainer = styled(Tabs.Content)`
   display: flex;
@@ -11,18 +12,34 @@ export const ScheduleTabContainer = styled(Tabs.Content)`
   }
 `;
 
-export const ScheduleContentContainer = styled.section`
+export const ScheduleContent = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  justify-items: center;
+  gap: 1rem;
+  max-width: 43rem;
+`
+
+export const AlertContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
   align-items: center;
-  margin: auto 0;
+
+  padding-left: 1rem;
+  padding-right: 0.80rem;
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  background-color: ${props => props.theme.colors.yellow};
+
+  border-radius: 0.5rem;
+
+  p {
+    color: ${props => props.theme.colors.brown[300]};
+    font-size: 0.9rem;
+  }
 `;
 
-export const ScheduleDescription = styled.p`
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  text-align: center;
-  max-width: 14.75rem;
+export const ErrorOutlineRoundedIconStyled = styled(ErrorOutlineRoundedIcon)`
+  color: ${props => props.theme.colors.brown[700]};
 `;
