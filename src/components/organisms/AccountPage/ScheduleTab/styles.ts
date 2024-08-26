@@ -15,9 +15,9 @@ export const ScheduleTabContainer = styled(Tabs.Content)`
 export const ScheduleContent = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   max-width: 43rem;
-`
+`;
 
 export const AlertContainer = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const AlertContainer = styled.div`
   align-items: center;
 
   padding-left: 1rem;
-  padding-right: 0.80rem;
+  padding-right: 0.8rem;
 
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -42,4 +42,8 @@ export const AlertContainer = styled.div`
 
 export const ErrorOutlineRoundedIconStyled = styled(ErrorOutlineRoundedIcon)`
   color: ${props => props.theme.colors.brown[700]};
+`;
+
+export const ButtonContainer = styled.div`
+  max-width: 12rem;
 `;

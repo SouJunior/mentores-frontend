@@ -1,10 +1,12 @@
+import { Button } from '@/components/atoms/Button';
 import { TitleTab } from '../styles';
 
 import {
-  ScheduleContent,
   AlertContainer,
   ErrorOutlineRoundedIconStyled,
+  ScheduleContent,
   ScheduleTabContainer,
+  ButtonContainer,
 } from './styles';
 
 export function ScheduleTab() {
@@ -20,6 +22,18 @@ export function ScheduleTab() {
             atualizá-lo também nessa página.
           </p>
         </AlertContainer>
+
+        <ButtonContainer>
+          <Button
+            as="a"
+            href="https://calendly.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="secondary"
+          >
+            Ir para o Calendly
+          </Button>
+        </ButtonContainer>
       </ScheduleContent>
     </ScheduleTabContainer>
   );
