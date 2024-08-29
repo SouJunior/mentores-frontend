@@ -1,20 +1,25 @@
 import { Button } from '@/components/atoms/Button';
+import { DialogContentProps } from '@radix-ui/react-dialog';
 import {
   ContainerBtn,
   ContainerModalCancel,
   DescriptionModal,
-  DiscardBtn,
   HeadingModal,
-  ModalCloseCancelBtn,
+  ModalCloseButton,
+  ModalCloseCancelBtn,  
+  ModalCloseDiscardBtn,
 } from './style';
-import { DialogContentProps } from '@radix-ui/react-dialog';
 
-type ModalCancelProps = DialogContentProps;
 
-export function ModalCancel(props: ModalCancelProps) {
+interface ModalCancelKeepRouteProps extends DialogContentProps {
+  handleDiscard: () => void,
+}
+
+export function ModalCancelKeepRoute({handleDiscard, ...props}: ModalCancelKeepRouteProps) {
   return (
     <ContainerModalCancel {...props}>
       <HeadingModal>Deseja descartar as alterações?</HeadingModal>
+      <ModalCloseButton />
       <DescriptionModal>
         As informações inseridas não serão salvas.
       </DescriptionModal>
@@ -24,9 +29,11 @@ export function ModalCancel(props: ModalCancelProps) {
           <Button variant="secondary">Cancelar</Button>
         </ModalCloseCancelBtn>
 
-        <Button as={DiscardBtn} href="/">
-          Descartar
-        </Button>
+        <ModalCloseDiscardBtn asChild>
+          <Button
+          onClick={handleDiscard}
+          >Descartar</Button>
+        </ModalCloseDiscardBtn>
       </ContainerBtn>
     </ContainerModalCancel>
   );

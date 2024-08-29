@@ -117,7 +117,7 @@ export function ProfileTab() {
               onClick={handleWarningModal}
               disabled={formik.isSubmitting}
             >
-              Descartar
+              Cancelar
             </Button>
 
             <Modal.Root

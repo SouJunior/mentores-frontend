@@ -119,7 +119,7 @@ export function PersonalInfoTab() {
               onClick={handleWarningModal}
               disabled={formik.isSubmitting}
             >
-              Descartar
+              Cancelar
             </Button>
 
             <Modal.Root
