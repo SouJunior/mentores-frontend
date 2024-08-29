@@ -14,7 +14,7 @@ type ModalCancelProps = DialogContentProps;
 export function ModalCancel(props: ModalCancelProps) {
   return (
     <ContainerModalCancel {...props}>
-      <HeadingModal>Deseja descartar o cadastro?</HeadingModal>
+      <HeadingModal>Deseja descartar as alterações?</HeadingModal>
       <DescriptionModal>
         As informações inseridas não serão salvas.
       </DescriptionModal>
