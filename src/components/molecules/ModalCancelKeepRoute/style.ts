@@ -1,6 +1,5 @@
 import { Modal } from '@/components/atoms/Modal';
 import styled, { css } from 'styled-components';
-import { Button } from '@/components/atoms/Button';
 
 
 export const ContainerModalCancel = styled(Modal.Content)`
