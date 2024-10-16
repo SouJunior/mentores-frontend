@@ -127,6 +127,14 @@ export function ScheduleTab() {
     }
   };
 
+  const startOAuthCalendlySync = () => {
+    const calendlyClientId = '0FCoWFaytwSPcPUI2FSxLAxmGHNfLaXrye7in6WXkmY';
+    const redirectUri = "http://localhost:3003/auth/callback";
+    const calendlyAuthUrl = `https://auth.calendly.com/oauth/authorize?client_id=${calendlyClientId}&response_type=code&redirect_uri=${redirectUri}`;
+
+    window.location.href = calendlyAuthUrl;
+  };
+
   return (
     <ScheduleTabContainer value="schedule">
       <TitleTab>Agenda</TitleTab>
@@ -148,6 +156,9 @@ export function ScheduleTab() {
             variant="secondary"
           >
             Ir para o Calendly
+          </Button>
+          <Button onClick={startOAuthCalendlySync} variant="secondary">
+            Vincular Calendly OAuth
           </Button>
         </ButtonContainer>
 
