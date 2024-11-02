@@ -7,4 +7,5 @@ const serverUrl = {
 
 export const api = axios.create({
   baseURL: serverUrl.development,
+  withCredentials: true
 });

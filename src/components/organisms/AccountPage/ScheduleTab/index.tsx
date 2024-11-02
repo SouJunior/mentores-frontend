@@ -5,11 +5,7 @@ import { ModalCancelKeepRoute } from '@/components/molecules/ModalCancelKeepRout
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
-import {
-  isCalendlyLink,
-  isValidHttpsUrl,
-  splitCalendlyName,
-} from '@/utils/ValidateCalendlyInput';
+import { isCalendlyLink, isValidHttpsUrl, splitCalendlyName } from '@/utils/ValidateCalendlyInput';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -38,19 +34,20 @@ export function ScheduleTab() {
   const [inputValue, setInputValue] = useState('');
   const [openWarningModal, setOpenWarningModal] = useState(false);
 
-  const { handle } = UserUpdateService();
-  const { mentor } = useAuthContext();
+  const { handleMentorCalendlyInfo } = UserUpdateService();
+  const { mentor, mentorCalendlyInfo } = useAuthContext();
+
+  const generateCalendlyLink = () => {
+    if (mentorCalendlyInfo.data?.calendlyName && mentorCalendlyInfo.data?.agendaName) {
+      return `https://calendly.com/${mentorCalendlyInfo.data.calendlyName}/${mentorCalendlyInfo.data.agendaName}`;
+    }
+    return '';
+  };
 
   useEffect(() => {
-    const checkIfHasLink = () => {
-      if (mentor.data?.agendaName && mentor.data?.calendlyName) {
-        const link = `https://calendly.com/${mentor.data?.calendlyName}/${mentor.data?.agendaName}`;
-
-        setInputValue(link);
-      }
-    };
-    checkIfHasLink();
-  }, [mentor.data?.calendlyName, mentor.data?.agendaName]);
+    const link = generateCalendlyLink();
+    setInputValue(link);
+  }, [mentorCalendlyInfo.data?.calendlyName, mentorCalendlyInfo.data?.agendaName]);
 
   const buttonDisabledVerification = useCallback(() => {
     const valid = isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue);
@@ -94,13 +91,12 @@ export function ScheduleTab() {
     try {
       if (isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue)) {
         const { firstPathName, secondPathName } = splitCalendlyName(inputValue);
-
-        await handle({
+        await handleMentorCalendlyInfo({
           calendlyName: firstPathName,
           agendaName: secondPathName,
         });
 
-        mentor.refetch();
+        mentorCalendlyInfo.refetch();
         toastMessageSuccess();
       }
     } catch (error) {
@@ -116,21 +112,15 @@ export function ScheduleTab() {
   };
 
   const handleDiscard = () => {
-    if (mentor.data?.agendaName && mentor.data?.calendlyName) {
-      const link = `https://calendly.com/${mentor.data?.calendlyName}/${mentor.data?.agendaName}`;
-
-      setInputValue(link);
-      toastMessageDiscarded();
-    } else {
-      setInputValue('');
-      toastMessageDiscarded();
-    }
+    const link = generateCalendlyLink();
+    setInputValue(link);
+    toastMessageDiscarded();
   };
 
   const startOAuthCalendlySync = () => {
     const calendlyClientId = '0FCoWFaytwSPcPUI2FSxLAxmGHNfLaXrye7in6WXkmY';
-    const redirectUri = "http://localhost:3000/auth/callback";
-    const calendlyAuthUrl = `https://auth.calendly.com/oauth/authorize?client_id=${calendlyClientId}&response_type=code&redirect_uri=${redirectUri}&state=${encodeURIComponent(String(mentor.data?.email))}`;
+    const redirectUri = "http://localhost:3000/calendly/callback";
+    const calendlyAuthUrl = `https://auth.calendly.com/oauth/authorize?client_id=${calendlyClientId}&response_type=code&redirect_uri=${redirectUri}&state=${encodeURIComponent(String(mentor.data?.id))}`;
 
     window.location.href = calendlyAuthUrl;
   };
@@ -162,14 +152,10 @@ export function ScheduleTab() {
           </Button>
         </ButtonContainer>
 
-        <form
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
-        >
+        <form onSubmit={handleSubmit}>
           <ContainerInput>
             <InputCalendlyStyled
-              className={`${
-                isValid === false && inputValue !== '' ? 'error' : ''
-              }`}
+              className={`${isValid === false && inputValue !== '' ? 'error' : ''}`}
               name="calendlyLink"
               type="text"
               value={inputValue}
@@ -179,26 +165,15 @@ export function ScheduleTab() {
               onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => {
                 e.preventDefault();
                 const pastedText = e.clipboardData.getData('text');
-
-                // Código abaixo é necessário para evitar um bug, então mesmo parecendo que a validação do link está incorretamente duplicada no código (já que o useEffect já está fazendo a validação) é necessário a repetição da validação aqui dentro do onPaste para evitar esse bug: mesmo ao colocar um link correto, por meio segundo o input ficava vermelho e com icone de ErrorOutlineIcon, e depois volta a ficar azul dizendo que o link está correto
-                const temporaryInputValue = pastedText;
-                const valid =
-                  isValidHttpsUrl(temporaryInputValue) &&
-                  isCalendlyLink(temporaryInputValue);
+                const valid = isValidHttpsUrl(pastedText) && isCalendlyLink(pastedText);
                 setIsValid(valid);
                 setIsButtonDisabled(!valid);
-                setInputValue(temporaryInputValue);
+                setInputValue(pastedText);
               }}
               id="link-calendly"
             />
-            <PlaceholderInput htmlFor="link-calendly">
-              Link da agenda do Calendly
-            </PlaceholderInput>
-            {isValid === false && inputValue !== '' ? (
-              <StyledErrorOutlineRoundedIcon aria-hidden color="error" />
-            ) : (
-              ''
-            )}
+            <PlaceholderInput htmlFor="link-calendly">Link da agenda do Calendly</PlaceholderInput>
+            {isValid === false && inputValue !== '' && <StyledErrorOutlineRoundedIcon aria-hidden color="error" />}
           </ContainerInput>
           {isValid === false && inputValue !== '' && (
             <ContainerErrorInputCalendly>
@@ -210,19 +185,11 @@ export function ScheduleTab() {
           <Divider />
 
           <ButtonsContainer>
-            <Button
-              type="button"
-              variant="tertiary"
-              onClick={handleWarningModal}
-              disabled={isLoading}
-            >
+            <Button type="button" variant="tertiary" onClick={handleWarningModal} disabled={isLoading}>
               Cancelar
             </Button>
 
-            <Modal.Root
-              open={openWarningModal}
-              onOpenChange={() => setOpenWarningModal(false)}
-            >
+            <Modal.Root open={openWarningModal} onOpenChange={() => setOpenWarningModal(false)}>
               <ModalCancelKeepRoute handleDiscard={handleDiscard} />
             </Modal.Root>
 

@@ -12,10 +12,9 @@ export interface UserLoginInfoResponse {
   specialties: string[];
   role: string | null;
   aboutMe: string | null;
-  calendlyName: string | null;
-  agendaName: string | null;
   gender: string;
   registerComplete: boolean;
+  calendlyName: string;
   profile: string | null;
   profileKey: string | null;
   createdAt: string;
