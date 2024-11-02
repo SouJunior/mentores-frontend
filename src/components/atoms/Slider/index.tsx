@@ -4,9 +4,10 @@ import { A11y, Pagination } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import { SwiperContainer } from './style';
 
+import { useMentorsCalendlyInfoService } from '@/services/user/useMentorsCalendlyInfoService';
+import { useMentorsService } from '@/services/user/useMentorsService';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useMentorsService } from '@/services/user/useMentorsService';
 
 interface SliderProps {
   swiperRef: MutableRefObject<{
@@ -15,11 +16,10 @@ interface SliderProps {
 }
 
 export const Slider = ({ swiperRef }: SliderProps) => {
-  const { data: mentors } = useMentorsService();
+  const { data: mentors = [] } = useMentorsService();
+  const { data: mentorsCalendlyInfo } = useMentorsCalendlyInfoService()
 
-  const completedProfileMentors = mentors?.filter(
-    mentor => mentor.registerComplete
-  );
+  const mentorsCalendlyInfoArray = Array.isArray(mentorsCalendlyInfo) ? mentorsCalendlyInfo : [];
 
   return (
     <SwiperContainer>
@@ -34,10 +34,15 @@ export const Slider = ({ swiperRef }: SliderProps) => {
         }}
         ref={swiperRef}
       >
-        {completedProfileMentors?.map(mentor => {
+  { mentors.map((mentor) => {
+      const mentorCalendlyInfo = mentorsCalendlyInfoArray.find(info => info.mentorId === mentor.id);
+
           return (
             <SwiperSlide key={mentor.id}>
-              <CardMentor mentor={mentor} />
+              <CardMentor
+                mentorCalendlyInfo={mentorCalendlyInfo} 
+                mentor={mentor}
+              />
             </SwiperSlide>
           );
         })}

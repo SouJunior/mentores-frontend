@@ -1,10 +1,25 @@
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
 import { Button } from '@/components/atoms/Button';
+import { Eye } from '@/components/atoms/Eye';
+import { InputForm } from '@/components/atoms/InputForm';
+import { Spinner } from '@/components/atoms/Spinner';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { sessionNameUserInfo } from '@/data/static-info';
+import { errorTranslations } from '@/services/errors/error-messages-translations';
+import { UserAlreadyLoggedIn } from '@/services/errors/user-already-logged-in';
+import UserLoginService from '@/services/user/userLoginService';
+import { handleError } from '@/utils/handleError';
+import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material';
+import { AxiosError } from 'axios';
+import { Form, Formik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as yup from 'yup';
 import { Checkbox } from '../../atoms/Checkbox';
 import {
   ButtonLoading,
@@ -13,21 +28,6 @@ import {
   ContainerForm,
   ContainerInput,
 } from './style';
-import UserLoginService from '@/services/user/userLoginService';
-import { Form, Formik } from 'formik';
-import * as yup from 'yup';
-import { InputForm } from '@/components/atoms/InputForm';
-import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material';
-import { Eye } from '@/components/atoms/Eye';
-import { sessionNameUserInfo } from '@/data/static-info';
-import { Spinner } from '@/components/atoms/Spinner';
-import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
-import { useAuthContext } from '@/context/Auth/AuthContext';
-import { throwErrorMessages } from '@/utils/throw-error-messages';
-import { UserAlreadyLoggedIn } from '@/services/errors/user-already-logged-in';
-import { handleError } from '@/utils/handleError';
-import { errorTranslations } from '@/services/errors/error-messages-translations';
 
 const loginSchema = yup.object({
   email: yup.string().email('E-mail inválido').required('Obrigatório'),
@@ -73,7 +73,7 @@ export function FormLogin() {
       }
 
       router.push(
-        data.info.registerComplete && data.info.calendlyName
+        data.info.calendlyName
           ? '/'
           : '/?connect-calendly=true'
       );

@@ -1,20 +1,26 @@
-import { Card } from '@/components/atoms/Card';
-import { CardImage, CardStacks, CardTitle } from './style';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { Tag } from '@/components/atoms/Tag';
-import { useTheme } from 'styled-components';
 import { Button } from '@/components/atoms/Button';
+import { Card } from '@/components/atoms/Card';
+import { Tag } from '@/components/atoms/Tag';
+import { IMentors } from '@/services/interfaces/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import Image from 'next/image';
+import { useTheme } from 'styled-components';
+import { CardImage, CardStacks, CardTitle } from './style';
 
 interface CardMentorProps {
-  mentor: IMentors;
+  mentor?: IMentors;
+  mentorCalendlyInfo?: ICalendlyUserInfo
 }
 
-export function CardMentor({ mentor }: CardMentorProps) {
+export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
   const { colors } = useTheme();
 
+  if (!mentor) {
+    return <p>No mentor information available</p>;
+  }
+
   const splitMentorName = mentor.fullName.split(' ');
-  const hasValidCalendly = mentor.calendlyName && mentor.agendaName;
+  const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo.agendaName;
 
   return (
     <Card
@@ -28,12 +34,12 @@ export function CardMentor({ mentor }: CardMentorProps) {
       minHeight={'23.5rem'}
     >
       <CardImage>
-        {mentor.profile && (
+        {mentor?.profile && (
           <Image
-            src={mentor.profile}
+            src={mentor?.profile}
             width={150}
             height={150}
-            alt={mentor.fullName}
+            alt={mentor?.fullName}
             quality={100}
           />
         )}
@@ -54,7 +60,7 @@ export function CardMentor({ mentor }: CardMentorProps) {
         <Button
           as="a"
           target="_blank"
-          href={`https://calendly.com/${mentor.calendlyName}/${mentor.agendaName}`}
+          href={`https://calendly.com/${mentorCalendlyInfo.calendlyName}/${mentorCalendlyInfo.agendaName}`}
         >
           Agendar um horário
         </Button>
