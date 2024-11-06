@@ -24,9 +24,6 @@ interface CalendlyAndMentorProps {
 export default function CardScheduling({ mentorCalendlyInfo, mentor }: CalendlyAndMentorProps) {
   const [open, setOpen] = useState(false);
 
-  console.log('mentorCalendlyInfo:', mentorCalendlyInfo);
-
-
   const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo?.agendaName;
 
   const calendlyUrl = hasValidCalendly
@@ -39,8 +36,6 @@ export default function CardScheduling({ mentorCalendlyInfo, mentor }: CalendlyA
   function handleModal() {
     setOpen(!open);
   }
-
-  console.log('hasValidCalendly:', hasValidCalendly);
 
   return (
     <CardContainer>
@@ -55,7 +50,7 @@ export default function CardScheduling({ mentorCalendlyInfo, mentor }: CalendlyA
         <StyledName>{mentor.fullName}</StyledName>
       </TitleContainer>
       <StacksContainer>
-        {mentor.specialties.map((specialty) => (
+        {mentor.specialties && Array.isArray(mentor.specialties) && mentor.specialties.map((specialty) => (
           <Tag key={specialty}>{specialty}</Tag>
         ))}
       </StacksContainer>

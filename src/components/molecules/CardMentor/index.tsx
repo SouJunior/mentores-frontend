@@ -51,7 +51,7 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
       </CardTitle>
 
       <CardStacks>
-        {mentor.specialties.map((specialty: string) => (
+        {mentor.specialties && Array.isArray(mentor.specialties) && mentor.specialties.map((specialty: string) => (
           <Tag key={specialty}>{specialty}</Tag>
         ))}
       </CardStacks>

@@ -59,7 +59,7 @@ export default function ModalSchedMentor({
       <SpecialityContainer>
         <Specialitytitle>Especialidades</Specialitytitle>
         <StacksContainer>
-          {mentor.specialties.map(stack => {
+          {mentor.specialties && Array.isArray(mentor.specialties) && mentor.specialties.map(stack => {
             return <Stack key={stack}>{stack}</Stack>;
           })}
         </StacksContainer>
