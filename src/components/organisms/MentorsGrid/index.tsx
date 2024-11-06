@@ -36,7 +36,7 @@ export function MentorsGrid({ loading, mentors, mentorCalendlyInfo }: MentorsGri
           />
         </>
       ) : mentors.length > 0 ? (
-        mentors.map((mentor: IMentors) => {
+        mentors && Array.isArray(mentors) && mentors.map((mentor: IMentors) => {
           const calendlyInfo = mentorCalendlyInfo?.find(info => info.mentorId === mentor.id);
           return (
             <CardScheduling key={mentor.id} mentorCalendlyInfo={calendlyInfo} mentor={mentor} />

@@ -34,7 +34,7 @@ export const Slider = ({ swiperRef }: SliderProps) => {
         }}
         ref={swiperRef}
       >
-  { mentors.map((mentor) => {
+  { mentors && Array.isArray(mentors) && mentors.map((mentor) => {
       const mentorCalendlyInfo = mentorsCalendlyInfoArray.find(info => info.mentorId === mentor.id);
 
           return (
