@@ -1,61 +1,81 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: 'Radio Canada', sans-serif;
+  }
 
-.swiper-slide {
-  margin-right: -25px;
-} 
+  :root {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  transition: all 0.3s ease;  
-  font-family: 'Radio Canada',sans-serif;
-  scroll-behavior: smooth;
-}
+  body {
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
 
-body{
+  li { 
+    list-style:none;
+  }
+
+  button,
+  input,
+  textarea,
+  a {
+    color: inherit;
+    font-size: inherit;
+  }
+
+  a {
+    text-decoration:none;
+  }
+
+  a,
+  button {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Global classes */
+  .container {
+    max-width: 1280px;
     width: 100%;
-    max-width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-    background-color: ${(props) => props.theme.colors.white};
-    font-size: ${(props) => props.theme.fontSizes.sm};
-    color: ${(props) => props.theme.colors.black};
-    font: 400 16px Radio Canada, sans-serif;
-     scroll-behavior: smooth;
+    margin: 0 auto;
+  }
 
-    button{
-      padding: 12px 16px;
-      text-align: center;
-      border-radius: 8px;
-      border: 2px solid;
-      cursor: pointer;
-      line-height: 150%;
-      scroll-behavior: smooth;
-    }
-  
-    p{
-      font-size: ${(props) => props.theme.fontSizes.sm};
-      color: ${(props) => props.theme.colors.gray};
+  .Toastify__toast-container {
+    max-width: 35rem;
+    --toastify-toast-width: 100%;
+    --toastify-z-index: 99999;
+  }
+
+  #toast-error {
+    background-color: ${props => props.theme.colors.red[600]};
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    .Toastify__toast-body {
+      padding: 0;
+      font-size: 1rem;
+      max-width: 30.875rem;
+      line-height: 2rem;
     }
 
-    li{
-      list-style:none;
-    }
+    .Toastify__close-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      line-height: 0;
 
-    a{
-      text-decoration:none;
-      color: ${(props) => props.theme.colors.blue[400]};
-      font-size: ${(props) => props.theme.fontSizes.sm};
-      line-height: 150%;
-      
-
-      &:hover{
-        text-decoration:none;
-         color: ${(props) => props.theme.colors.blue[300]};
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
       }
     }
-}
+  }
 `;

@@ -1,20 +1,27 @@
-export interface IUserLoginService {
-  sendLogin: (data: UserLoginDTO) => Promise<void>;
-  validateForm: (data: UserLoginDTO) => Promise<boolean>;
-  formState:{
-    email:string,
-    password:string,
-    errors:string
-  };
-  countError: number;
-  submitButton: boolean;
-  disable:boolean;
-  loading:boolean;
-  checkFields:(data:UserLoginDTO) => boolean;
-  setSubmitButton: (isEnabled: boolean) => void;
-} 
-
-export type UserLoginDTO = {
+export type UserCredentialsDTO = {
   email: string;
   password: string;
+  type: string;
 };
+
+export interface UserLoginInfoResponse {
+  id: string;
+  fullName: string;
+  dateOfBirth: string;
+  email: string;
+  specialties: string[];
+  role: string | null;
+  aboutMe: string | null;
+  gender: string;
+  registerComplete: boolean;
+  calendlyName: string;
+  profile: string | null;
+  profileKey: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserLoginResponse {
+  token: string;
+  info: UserLoginInfoResponse;
+}

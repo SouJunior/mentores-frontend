@@ -1,5 +1,5 @@
-import FormNewPass from "@/components/molecules/FormNewPass";
-import { SetPassContainer } from "../../styles/pages/setNewPassword";
+import FormNewPass from '@/components/molecules/FormNewPass';
+import { SetPassContainer } from '../../styles/pages/setNewPassword';
 
 function SetNewPassword() {
   return (
@@ -9,4 +9,4 @@ function SetNewPassword() {
   );
 }
 
-export default SetNewPassword
+export default SetNewPassword;

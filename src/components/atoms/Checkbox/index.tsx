@@ -1,4 +1,4 @@
-import { CheckboxContainer } from "./style";
+import { CheckboxContainer } from './style';
 
 interface CheckboxProps {
   id?: string;
@@ -12,8 +12,8 @@ export function Checkbox({ id, text, isChecked, setValue }: CheckboxProps) {
     <CheckboxContainer>
       <input
         type="checkbox"
-        {...(id && { id: id })}
-        onChange={(e) => setValue(e.target.checked)}
+        {...(id && { id })}
+        onChange={e => setValue(e.target.checked)}
         checked={isChecked}
       />
       {text && <label htmlFor={id}>{text}</label>}

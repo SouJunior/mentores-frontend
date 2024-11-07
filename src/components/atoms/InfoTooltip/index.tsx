@@ -1,5 +1,5 @@
-import { InfoIcon } from "lucide-react";
-import { useState } from "react";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useState } from 'react';
 import {
   CriteriaList,
   Criterion,
@@ -7,8 +7,7 @@ import {
   Line,
   Title,
   Tooltip,
-  TooltipContainer,
-} from "./style";
+} from './style';
 
 interface ToolTipProps {
   right?: number;
@@ -28,22 +27,19 @@ export function InfoTooltip({ right }: ToolTipProps) {
   };
   return (
     <InfoContainer right={right}>
-      <InfoIcon
-        size={16}
+      <InfoOutlinedIcon
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
       <Tooltip isVisible={tooltipVisible}>
-        <TooltipContainer>
-          <Title>Sua senha deve conter:</Title>
-          <Line />
-          <CriteriaList>
-            <Criterion>Mínimo 8 caracteres.</Criterion>
-            <Criterion>Pelo menos uma letra maiúsculo.</Criterion>
-            <Criterion>Pelo menos um número.</Criterion>
-            <Criterion>Pelo menos um caractere especial (ex: @#$)</Criterion>
-          </CriteriaList>
-        </TooltipContainer>
+        <Title>Sua senha deve conter:</Title>
+        <CriteriaList>
+          <Line aria-hidden />
+          <Criterion>Mínimo 8 caracteres.</Criterion>
+          <Criterion>Pelo menos uma letra maiúscula.</Criterion>
+          <Criterion>Pelo menos um número.</Criterion>
+          <Criterion>Pelo menos um caractere especial (ex: @#$)</Criterion>
+        </CriteriaList>
       </Tooltip>
     </InfoContainer>
   );

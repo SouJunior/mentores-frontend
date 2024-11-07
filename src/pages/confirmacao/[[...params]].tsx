@@ -1,8 +1,7 @@
-import axios from "axios";
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
+import { api } from '@/lib/axios';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 interface ConfirmationPageProps {
   code: string;
@@ -15,12 +14,11 @@ const ConfirmationPage = ({ code, email }: ConfirmationPageProps) => {
   const handleConfirmation = async () => {
     try {
       const encodedEmail = encodeURIComponent(email);
-      const response = await axios.patch(
-        `https://mentores-backend.onrender.com/user/active?code=${code}&email=${encodedEmail}`
-      );
-      router.push("/login");
+      await api.patch(`/mentor/active?code=${code}&email=${encodedEmail}`);
+      router.push('/login');
     } catch (error) {
-      router.push("/login");
+      console.log(error);
+      router.push('/login');
     }
   };
 
@@ -32,13 +30,13 @@ const ConfirmationPage = ({ code, email }: ConfirmationPageProps) => {
   return <></>;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
   const { code, email } = context.query;
 
   if (!code || !email) {
     return {
       redirect: {
-        destination: "/login",
+        destination: '/login',
         permanent: false,
       },
     };
@@ -46,8 +44,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      code: code,
-      email: email,
+      code,
+      email,
     },
   };
 };

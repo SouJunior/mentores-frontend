@@ -1,43 +1,40 @@
-import { Modal } from "@/components/atoms/Modal";
-import Image from "next/image";
-import confirmEmail from "@/assets/ConfirmEmail.png";
-import logo from "@/assets/logos/sou-junior.svg";
+import { Modal } from '@/components/atoms/Modal';
+import Image from 'next/image';
+import confirmEmail from '@/assets/ConfirmEmail.png';
+import logo from '@/assets/logos/sou-junior.svg';
 import {
   ContainerModal,
   FooterModal,
   Hash,
+  HeaderModal,
   Message,
   TitleModal,
-} from "./style";
+} from './style';
+import { DialogContentProps } from '@radix-ui/react-dialog';
 
-interface ModalEmailProps {
-  open: boolean;
-  onClose: () => void;
-  height: number;
-}
+type ModalEmailProps = DialogContentProps;
 
-export default function ModalEmail({ open, onClose, height }: ModalEmailProps) {
+export default function ModalEmail(props: ModalEmailProps) {
   return (
-    <Modal open={open} onClose={onClose} height={height} bgColor="#fff">
-      <ContainerModal>
-        <TitleModal>Cheque seu email</TitleModal>
+    <ContainerModal {...props}>
+      <HeaderModal>
+        <TitleModal>Cheque seu e-mail</TitleModal>
         <Image
-            src={confirmEmail}
-            alt="Garoto mexendo em nootebook"
-            width={285}
-            height={278}
-          />
+          src={confirmEmail}
+          alt="Garoto mexendo em nootebook"
+          width={285}
+          height={278}
+        />
+
         <Message>Enviamos um email para você de confirmação.</Message>
-        <FooterModal>
-          <Image
-            src={logo}
-            alt="logo da SouJunior"
-            width={108}
-            height={17}
-          />
-          <Hash>#MovimentoSouJunior</Hash>
-        </FooterModal>
-      </ContainerModal>
-    </Modal>
+      </HeaderModal>
+
+      <FooterModal>
+        <Image src={logo} alt="logo da SouJunior" width={108} height={17} />
+        <Hash>#MovimentoSouJunior</Hash>
+      </FooterModal>
+
+      <Modal.Close />
+    </ContainerModal>
   );
 }

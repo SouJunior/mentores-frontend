@@ -1,8 +1,10 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const ResetPassContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100vh;
-  background: ${(props) => props.theme.colors.gradient};
+  min-height: 100vh;
+  background: ${props => props.theme.colors.blue[600]};
 `;

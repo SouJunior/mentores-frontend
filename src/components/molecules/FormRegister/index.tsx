@@ -1,258 +1,212 @@
-import souJuniorLogoImg from "@/assets/logos/sou-junior.svg";
-import { Checkbox } from "@/components/atoms/Checkbox";
-import { Eye } from "@/components/atoms/Eye";
-import { InfoTooltip } from "@/components/atoms/InfoTooltip";
-import ModalEmail from "@/components/molecules/ModalEmail";
-import { ValuesFormType, registerSchema, initialValues } from "@/utils/registerSchema";
-import axios from "axios";
-import { Field, Form, FormikProvider, useFormik } from "formik";
-import Image from "next/image";
-import { KeyboardEvent, MouseEvent, useEffect, useState } from "react";
-import { Button } from "../../atoms/Button";
-import { InputForm } from "../../atoms/InputForm";
-import { ModalCancel } from "../ModalCancel";
-import { ModalPrivacyPolicy } from "../ModalPrivacyPolicy";
-import ModalTerms from "../ModalTerms";
+import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
+import ModalEmail from '@/components/molecules/ModalEmail';
+import {
+  ValuesFormType,
+  registerSchema,
+  initialValues,
+} from '@/utils/registerSchema';
+import { Field, Form, FormikProvider, useFormik } from 'formik';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Button } from '../../atoms/Button';
+import { ModalCancel } from '../ModalCancel';
+import { ModalPrivacyPolicy } from '../ModalTermsAndPolicies/ModalPrivacyPolicy';
+import ModalTerms from '../ModalTermsAndPolicies/ModalTerms';
 
 import {
+  ButtonLoading,
   ContainerBtn,
   ContainerForm,
   ContainerRegister,
   ContainerTerms,
+  ModalUserExistsButton,
+  ModalUserExistsContainer,
+  ModalUserExistsTitle,
   TxtTerms,
-} from "./style";
+} from './style';
+import { api } from '@/lib/axios';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { FormRegisterFields } from './FormRegisterFields';
+import { Spinner } from '@/components/atoms/Spinner';
+import { Modal } from '@/components/atoms/Modal';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { errorTranslations } from '@/services/errors/error-messages-translations';
 
 export function FormRegister() {
-  const [openTermos, setOpenTermos] = useState(false);
-  const [openPoliticas, setOpenPoliticas] = useState(false);
   const [openModalCancel, setOpenModalCancel] = useState(false);
-  const [agree, setIsAgree] = useState(false);
-  const [concluidoDesabilitado, setIsConcluidoDesabilitado] = useState(true);
   const [openEmail, setOpenEmail] = useState(false);
-  const [show, setShow] = useState(true);
-  const [eye, setEye] = useState(true);
-  const [showConfirm, setShowConfirm] = useState(true);
-  const [eyeConfirm, setEyeConfirm] = useState(true);
+  const [isUserAlreadyExists, setIsUserAlreadyExists] = useState(false);
 
-  const handleOpenTermos = () => setOpenTermos(true);
-  const handleCloseTermos = () => setOpenTermos(false);
-  const handleOpenPoliticas = () => setOpenPoliticas(true);
-  const handleClosePoliticas = () => setOpenPoliticas(false);
-  const handleModalEmail = () => setOpenEmail(true);
-  const handleModalCancel = () => setOpenModalCancel(true);
-  const closeModalEmail = () => setOpenEmail(false);
+  const router = useRouter();
+
+  const handleModalEmail = () => setOpenEmail(!openEmail);
   const closeModalCancel = () => setOpenModalCancel(false);
-
-  const handleShowPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>
-  ) => {
-    e.preventDefault();
-    setEye(!eye);
-    setShow(!show);
-  };
-
-  const handleConfirmPassword = (
-    e: MouseEvent<HTMLElement, globalThis.MouseEvent>
-  ) => {
-    e.preventDefault();
-    setEyeConfirm(!eyeConfirm);
-    setShowConfirm(!showConfirm);
-  };
 
   const handleSubmit = async (
     values: ValuesFormType,
     { resetForm }: { resetForm: () => void }
   ) => {
     try {
-      const response = await axios.post(
-        "https://mentores-backend.onrender.com/user",
-        {
-          fullName: values.name,
-          email: values.email,
-          dateOfBirth: values.dataBirthday,
-          emailConfirm: values.confirmEmail,
-          password: values.password,
-          passwordConfirmation: values.confirmPassword,
-        }
-      );
-      console.log("CADASTRADO");
+      await api.post('/mentor', {
+        fullName: values.name,
+        email: values.email,
+        dateOfBirth: values.dateBirthday,
+        emailConfirm: values.confirmEmail,
+        password: values.password,
+        passwordConfirmation: values.confirmPassword,
+      });
       resetForm();
       handleModalEmail();
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        const messageKey = error.response?.data.message;
+
+        if (messageKey.match(/user|exists/gi)) {
+          setIsUserAlreadyExists(true);
+          return;
+        }
+
+        throwErrorMessages({
+          messages: errorTranslations,
+          currentMessageKey: messageKey,
+        });
+      }
     }
   };
 
-  
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues,
     validationSchema: registerSchema,
     onSubmit: handleSubmit,
-    validateOnChange: true,   
+    validateOnChange: true,
   });
 
-  useEffect(() => {
-    if (agree && formik.isValid && Object.keys(formik.touched).length > 0) {
-      setIsConcluidoDesabilitado(false);
-    } else {
-      setIsConcluidoDesabilitado(true);
+  const isButtonDisabled = Object.entries(formik.values).some(
+    ([key, value]) => !value || formik.errors[key as keyof ValuesFormType]
+  );
+
+  const handleModalCancel = () => {
+    const isSomeFieldFilled = Object.values(formik.values).some(field => field);
+
+    if (isSomeFieldFilled) {
+      setOpenModalCancel(true);
+      return;
     }
-  }, [agree, formik.isValid, formik.touched]);
 
-
-
-
-
-
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  const maxDate = yesterday.toISOString().split("T")[0];
-
- 
-  const hundredYearsAgo = new Date();
-  hundredYearsAgo.setFullYear(hundredYearsAgo.getFullYear() - 100);
-  const minDate = hundredYearsAgo.toISOString().split("T")[0];
+    router.back();
+  };
 
   return (
-    <ContainerForm>
-      <ContainerRegister>
-        <FormikProvider value={formik}>
-          <Form>
+    <>
+      <ToastContainer
+        autoClose={3500}
+        hideProgressBar={true}
+        closeOnClick
+        theme="colored"
+        icon={false}
+      />
+
+      {isUserAlreadyExists && (
+        <Modal.Root
+          open={isUserAlreadyExists}
+          onOpenChange={() => setIsUserAlreadyExists(false)}
+        >
+          <ModalUserExistsContainer>
+            <ModalUserExistsTitle>
+              O e-mail informado já possui cadastro.
+            </ModalUserExistsTitle>
+
+            <ModalUserExistsButton href="/login">
+              Ir para o login
+            </ModalUserExistsButton>
+            <ModalUserExistsButton href="/resetPassword">
+              Recuperar senha
+            </ModalUserExistsButton>
+            <Modal.Close />
+          </ModalUserExistsContainer>
+        </Modal.Root>
+      )}
+
+      <ContainerForm>
+        <ContainerRegister>
+          <div className="container-logo-form">
             <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
             <p>
               <span className="asterisk">*</span> Indica um campo obrigatório
             </p>
-            <Field
-              as={InputForm}
-              type="text"
-              name="name"
-              label="Nome completo"
-              placeholder="Preencha com seu nome"
-            />
+          </div>
 
-            <Field
-              as={InputForm}
-              type="date"
-              name="dataBirthday"
-              label="Data de nascimento"
-              placeholder="DD/MM/YYY"
-              min={minDate}
-              max={maxDate}
-              onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
-                event.preventDefault()
-              }
-            />
+          <FormikProvider value={formik}>
+            <Form>
+              <FormRegisterFields />
 
-            <Field
-              as={InputForm}
-              type="email"
-              label="E-mail"
-              name="email"
-              placeholder="Preencha com o seu e-mail"
-            />
+              <ContainerTerms>
+                <Field
+                  id="checkbox-terms-and-policies"
+                  type="checkbox"
+                  name="agreeWithTermsAndPolicies"
+                />
+                <TxtTerms htmlFor="checkbox-terms-and-policies">
+                  Concordo com os{' '}
+                  <Modal.Root>
+                    <Modal.Control asChild>
+                      <Button type="button" variant="tertiary">
+                        Termos de uso
+                      </Button>
+                    </Modal.Control>
 
-            <Field
-              as={InputForm}
-              type="email"
-              label="Confirmar E-mail"
-              name="confirmEmail"
-              placeholder="Confirme seu e-mail"
-            />
-            <InfoTooltip right={15}/>
-            <Eye
-              onClick={(e) => handleShowPassword(e)}
-              eye={eye}
-              size={20}
-              left={410}
-              marginTop={23}
-              color={"#5D5F5D"}
-            />
-            <Field
-              as={InputForm}
-              type={show ? "password" : "text"}
-              label="Senha"
-              name="password"
-              placeholder="********"
-            />
-            <Eye
-              onClick={(e) => handleConfirmPassword(e)}
-              eye={eyeConfirm}
-              size={20}
-              left={410}
-              marginTop={23}
-              color={"#5D5F5D"}
-            />
+                    <ModalTerms />
+                  </Modal.Root>{' '}
+                  e{' '}
+                  <Modal.Root>
+                    <Modal.Control asChild>
+                      <Button type="button" variant="tertiary">
+                        Políticas de privacidade
+                      </Button>
+                    </Modal.Control>
 
-            <Field
-              as={InputForm}
-              type={showConfirm ? "password" : "text"}
-              label="Confirmar Senha"
-              name="confirmPassword"
-              placeholder="********"
-            />
-            <ContainerTerms>
-              <Checkbox setValue={setIsAgree} isChecked={agree} />
-              <TxtTerms>
-                Concordo com os{" "}
+                    <ModalPrivacyPolicy />
+                  </Modal.Root>{' '}
+                  do SouJunior.
+                </TxtTerms>
+              </ContainerTerms>
+
+              <Modal.Root open={openEmail} onOpenChange={handleModalEmail}>
+                <ModalEmail />
+              </Modal.Root>
+
+              <ContainerBtn>
+                {formik.isSubmitting ? (
+                  <ButtonLoading disabled>
+                    <Spinner />
+                  </ButtonLoading>
+                ) : (
+                  <Button disabled={isButtonDisabled}>Concluir</Button>
+                )}
+
                 <Button
-                  content={"Termos de uso"}
-                  btnRole={"unstyled"}
-                  onClick={handleOpenTermos}
-                />{" "}
-                e{" "}
-                <Button
-                  btnRole={"unstyled"}
-                  content={"	Políticas de privacidade"}
-                  onClick={handleOpenPoliticas}
-                />{" "}
-                do SouJunior.
-              </TxtTerms>
-            </ContainerTerms>
+                  type="button"
+                  variant="secondary"
+                  onClick={handleModalCancel}
+                >
+                  Cancelar
+                </Button>
 
-            <ModalTerms
-              open={openTermos}
-              onClose={handleCloseTermos}
-              height={590}
-              width={600}
-            />
-
-            <ModalPrivacyPolicy
-              open={openPoliticas}
-              onClose={handleClosePoliticas}
-              height={590}
-              width={600}
-            />
-
-            <ModalEmail
-              open={openEmail}
-              onClose={closeModalEmail}
-              height={730}
-            />
-            <ContainerBtn>
-              <Button
-                btnRole={"form"}
-                content={"Concluir"}
-                disabled={concluidoDesabilitado}
-              />
-
-              <Button
-                btnRole={"form-secondary"}
-                content={"Cancelar"}
-                onClick={handleModalCancel}
-              />
-            </ContainerBtn>
-
-            <ModalCancel
-              open={openModalCancel}
-              width={400}
-              height={216}
-              bgColor={"#fff"}
-              onClose={closeModalCancel}
-            />
-          </Form>
-        </FormikProvider>
-      </ContainerRegister>
-    </ContainerForm>
+                <Modal.Root
+                  open={openModalCancel}
+                  onOpenChange={closeModalCancel}
+                >
+                  <ModalCancel />
+                </Modal.Root>
+              </ContainerBtn>
+            </Form>
+          </FormikProvider>
+        </ContainerRegister>
+      </ContainerForm>
+    </>
   );
 }

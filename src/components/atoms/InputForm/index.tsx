@@ -1,13 +1,22 @@
-import { ErrorMessage } from "formik";
-import { Label } from "./label";
-import { ContainerDiv, ContainerError, ContainerInput, Field } from "./style";
+import { ErrorMessage, Field, FieldAttributes, useFormikContext } from 'formik';
+import { ReactNode } from 'react';
+import {
+  ContainerError,
+  ContainerInput,
+  ContainerInputLabel,
+  StyledLabel,
+} from './style';
 
-interface InputFormProps {
+interface InputFormProps extends FieldAttributes<any> {
   name: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
   label: string;
-  showAsterisk?: boolean;
+  inputType?: string;
+  isRequired?: boolean;
+  children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
 }
 
 export function InputForm({
@@ -15,25 +24,40 @@ export function InputForm({
   type,
   placeholder,
   label,
-  showAsterisk = true,
+  inputType,
+  isRequired = true,
+  children,
+  disabled = false,
   ...rest
 }: InputFormProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { errors, touched } = useFormikContext<any>();
+
   return (
-    <ContainerDiv>
-      <Label name={label} />
-      {showAsterisk && <span className="asterisk">*</span>}
-      <ContainerInput>
+    <ContainerInputLabel>
+      <StyledLabel className={disabled ? 'disabled' : ''}>
+        {label} {isRequired && <span className="asterisk">*</span>}
+      </StyledLabel>
+      <ContainerInput
+        className={`${errors[name] && touched[name] ? 'error' : ''} ${
+          disabled && 'disabled'
+        }`}
+      >
+        {children}
         <Field
-          as="input"
+          as={type}
           name={name}
-          type={type}
+          type={inputType}
           placeholder={placeholder}
+          disabled={disabled}
           {...rest}
         />
       </ContainerInput>
-      <ContainerError>
-        <ErrorMessage name={name} component="div" className="error-message" />
-      </ContainerError>
-    </ContainerDiv>
+      {errors[name] && touched[name] && (
+        <ContainerError>
+          <ErrorMessage name={name} className="error-message" />
+        </ContainerError>
+      )}
+    </ContainerInputLabel>
   );
 }

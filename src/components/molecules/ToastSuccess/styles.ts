@@ -55,7 +55,6 @@ export const ContainerContentToast = styled.div`
   gap: 17px;
 `;
 
-
 export const ContainerToastTitle = styled.div`
   color: #149911;
   font-size: 24px;
@@ -66,7 +65,7 @@ export const ContainerToastTitle = styled.div`
 export const ContainerToastIconWrapper = styled.div`
   display: flex;
   align-items: center;
-  `;
+`;
 
 export const ContainerToastIcon = styled.div`
   display: flex;
@@ -79,15 +78,15 @@ export const ContainerToastIconClose = styled.div`
   right: 3%;
   top: 5%;
 
-  .iconClose{
+  .iconClose {
     cursor: pointer;
   }
 `;
 
 export const ContainerButton = styled.button`
   padding: 12px 56px;
-  border-color: #5D5F5D;
-  color: #5D5F5D;
+  border-color: #5d5f5d;
+  color: #5d5f5d;
   transition: ease-in-out 0.3s;
   background-color: transparent;
   font-size: 16px;
@@ -97,4 +96,3 @@ export const ContainerButton = styled.button`
     transform: scale(1.1);
   }
 `;
-

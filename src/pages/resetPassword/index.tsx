@@ -1,7 +1,7 @@
-import FormEmailToReset from "@/components/molecules/FormEmailToReset";
-import { ResetPassContainer } from "../../styles/pages/resetPassword";
+import FormEmailToReset from '@/components/molecules/FormEmailToReset';
+import { ResetPassContainer } from '../../styles/pages/resetPassword';
 
- function ResetPassword() {
+function ResetPassword() {
   return (
     <ResetPassContainer>
       <FormEmailToReset />
@@ -9,4 +9,4 @@ import { ResetPassContainer } from "../../styles/pages/resetPassword";
   );
 }
 
-export default ResetPassword
+export default ResetPassword;

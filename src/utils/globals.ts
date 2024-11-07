@@ -1,1 +1,0 @@
-export const apiURL = "https://mentores-backend.onrender.com"

@@ -1,17 +1,26 @@
-import lupa from "@/assets/icons/Lupa.svg";
-import { Button } from "@/components/atoms/Button";
-import { PersonTitle } from "@/components/atoms/PersonTitle";
-import { Header } from "@/components/molecules/Header";
-import { ListItemsHero } from "@/components/molecules/ListItemsHero";
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { AnimationTextHero } from "../../../styles/animations";
-import { ContainerHero, ContainerInput, TextAnimated } from "./style";
+import { ListItemsHero } from '@/components/molecules/ListItemsHero';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FormEvent, useEffect, useState } from 'react';
+import { AnimationTextHero } from '../../../styles/animations';
+import {
+  BtnSearchForm,
+  ContainerHero,
+  ContainerInputForm,
+  PlaceholderInput,
+  PlaceholderInputMobile,
+  QueryInput,
+  Title,
+} from './style';
+import { useRouter } from 'next/router';
+import { Button } from '@/components/atoms/Button';
+import { MagnifyingGlass } from 'phosphor-react';
+
+const text = ['mentorias personalizadas', 'profissionais experientes'];
 
 export function HeroSection() {
-  const text = ["mentorias personalizadas", "profissionais experientes"];
+  const router = useRouter();
   const [textHero, setTextHero] = useState(text[0]);
+  const [queryMentor, setQueryMentor] = useState('');
 
   function textSwitch() {
     setTimeout(() => {
@@ -27,6 +36,11 @@ export function HeroSection() {
     }, 1500);
   }
 
+  function handleSearchMentor(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    router.push(`/mentores?q=${queryMentor}`);
+  }
+
   useEffect(() => {
     textSwitch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,39 +48,55 @@ export function HeroSection() {
 
   return (
     <ContainerHero>
-      <Header />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
-          <AnimatePresence>
-            <PersonTitle text={"Decole sua carreira mais rápido com"} />
-            <TextAnimated
-              as={motion.h3}
+      <section className="hero-texts">
+        <AnimatePresence>
+          <Title>
+            Decole sua carreira mais rápido com
+            <motion.span
               key={textHero}
               variants={AnimationTextHero}
-              initial={"initial"}
-              animate={"animate"}
-              exit={"exit"}
+              initial={'initial'}
+              animate={'animate'}
+              exit={'exit'}
             >
               {textHero}
-            </TextAnimated>
-          </AnimatePresence>
-          <p>
-            Tenha acesso a mentorias individuais e <br /> gratuitas com
-            profissionais renomados.
-          </p>
-          <ContainerInput>
-            <div>
-              <Image src={lupa} alt="Lupa" />
-              <input
-                type="text"
-                placeholder="Pesquisar por nome ou especialidade"
-              />
-            </div>
-            <Button content="Encontrar mentor" btnRole={"primary"} />
-          </ContainerInput>
-        </div>
-        <ListItemsHero />
-      </div>
+            </motion.span>
+          </Title>
+        </AnimatePresence>
+
+        <p>
+          Tenha acesso a mentorias individuais e gratuitas com profissionais
+          renomados.
+        </p>
+
+        <ContainerInputForm onSubmit={handleSearchMentor}>
+          <div>
+            <QueryInput
+              type="text"
+              value={queryMentor}
+              onChange={e => setQueryMentor(e.target.value)}
+              id="query-mentor"
+            />
+            <PlaceholderInput htmlFor="query-mentor">
+              Pesquisar por nome ou especialidade
+            </PlaceholderInput>
+            <PlaceholderInputMobile htmlFor="query-mentor">
+              Encontre seu mentor
+            </PlaceholderInputMobile>
+
+            <MagnifyingGlass
+              weight="bold"
+              className="search-form-icon only-icon"
+            />
+            <BtnSearchForm title="Buscar mentor" aria-label="Buscar mentor">
+              <MagnifyingGlass weight="bold" className="search-form-icon" />
+            </BtnSearchForm>
+          </div>
+          <Button className="button-find-mentor">Encontre seu mentor</Button>
+        </ContainerInputForm>
+      </section>
+
+      <ListItemsHero className="list-items-hero" />
     </ContainerHero>
   );
 }

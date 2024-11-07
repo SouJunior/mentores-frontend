@@ -1,26 +1,26 @@
-import Image, { StaticImageData } from "next/image";
-import { ItemImage, ItemInvisible, ItemPrimary, ItemSecondary } from "./style";
+import Image, { StaticImageData } from 'next/image';
+import { ItemImage, ItemInvisible, ItemPrimary, ItemSecondary } from './style';
 
 interface ItemHeroProps<
-  T extends "invisible" | "primary" | "secondary" | "image"
+  T extends 'invisible' | 'primary' | 'secondary' | 'image',
 > {
   type: T;
-  imageSrc?: T extends "image" ? StaticImageData : never;
+  imageSrc?: T extends 'image' ? StaticImageData : never;
 }
 
 export function ItemHero<
-  T extends "invisible" | "primary" | "secondary" | "image"
+  T extends 'invisible' | 'primary' | 'secondary' | 'image',
 >({ type, imageSrc }: ItemHeroProps<T>) {
-  if (type === "invisible") {
+  if (type === 'invisible') {
     return <ItemInvisible />;
   }
-  if (type === "primary") {
+  if (type === 'primary') {
     return <ItemPrimary />;
   }
-  if (type === "secondary") {
+  if (type === 'secondary') {
     return <ItemSecondary />;
   }
-  if (type === "image") {
+  if (type === 'image') {
     if (!imageSrc) {
       return null;
     }
@@ -32,6 +32,7 @@ export function ItemHero<
           src={imageSrc}
           alt="Imagem de um Mentor"
           loading="eager"
+          quality={100}
         />
       </ItemImage>
     );

@@ -1,43 +1,32 @@
-import { Modal } from "@/components/atoms/Modal";
-import Image from "next/image";
-import confirmEmail from "@/assets/ConfirmEmail.png";
-import logo from "@/assets/logos/sou-junior.svg";
-import {
-  ContainerModal,
-  FooterModal,
-  Hash,
-  Message,
-  TitleModal,
-} from "./style";
+import Image from 'next/image';
+import confirmEmail from '@/assets/ConfirmEmail.png';
+import logo from '@/assets/logos/sou-junior.svg';
+import { ContainerModal, ImageContainer, Message, TitleModal } from './style';
+import { DialogContentProps } from '@radix-ui/react-dialog';
+import { Modal } from '@/components/atoms/Modal';
 
-interface ModalResetPass {
-  open: boolean;
-  onClose: () => void;
-  height: number;
-}
+type ModalResetPass = DialogContentProps;
 
-export default function ModalResetPass({ open, onClose, height }: ModalResetPass) {
+export default function ModalResetPass(props: ModalResetPass) {
   return (
-    <Modal open={open} onClose={onClose} height={height} bgColor="#fff">
-      <ContainerModal>
-        <TitleModal>Cheque seu email</TitleModal>
+    <ContainerModal {...props}>
+      <TitleModal>Cheque seu email</TitleModal>
+      <Modal.Close />
+
+      <ImageContainer>
         <Image
-            src={confirmEmail}
-            alt="Garoto mexendo em nootebook"
-            width={285}
-            height={278}
-          />
-        <Message>Enviamos para você um e-mail com as instruções para redefinir sua senha.</Message>
-        <FooterModal>
-          <Image
-            src={logo}
-            alt="logo da SouJunior"
-            width={108}
-            height={17}
-          />
-          <Hash>#MovimentoSouJunior</Hash>
-        </FooterModal>
-      </ContainerModal>
-    </Modal>
+          src={confirmEmail}
+          alt="Garoto mexendo em notebook"
+          width={285}
+          height={278}
+        />
+      </ImageContainer>
+      <Message>
+        Enviamos para você um e-mail com as instruções para redefinir sua senha.
+      </Message>
+      <div>
+        <Image src={logo} alt="logo da SouJunior" width={108} height={17} />
+      </div>
+    </ContainerModal>
   );
 }

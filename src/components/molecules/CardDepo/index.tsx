@@ -1,37 +1,44 @@
-import { Card } from "@/components/atoms/Card";
-import { MentorType } from "@/mockups/mentores";
-import Image from "next/image";
-import { GreatContainer, HeaderCardDepo } from "./style";
+import Image from 'next/image';
+import {
+  Card,
+  HeaderCardDepo,
+  TestimonyDescription,
+  TestimonyImageContainer,
+  TestimonyInfo,
+} from './style';
+import { ITestimony } from '@/services/interfaces/IUseTestimonyService';
 
 interface CardDepoProps {
-  mentor: MentorType;
+  testimony: ITestimony;
 }
 
-export function CardDepo({ mentor }: CardDepoProps) {
+export function CardDepo({ testimony }: CardDepoProps) {
   return (
-    <div style={{ marginLeft: "20px", paddingBottom: "5px" }}>
-      <Card
-        backgroundColor={"#fdfdfd"}
-        height={310}
-        width={330}
-        justifyContent={"flex-start"}
-      >
-        <GreatContainer>
-          <HeaderCardDepo>
+    <Card>
+      <HeaderCardDepo>
+        <TestimonyImageContainer>
+          {testimony.imageUrl && (
             <Image
-              src={mentor.image}
-              alt={mentor.name}
-              width={56}
-              height={56}
+              src={testimony.imageUrl}
+              alt={testimony.userName}
+              width={64}
+              height={64}
+              quality={100}
             />
-            <div>
-              <h4>{mentor.name}</h4>
-              <h5>{mentor.role}</h5>
-            </div>
-          </HeaderCardDepo>
-          <p>{mentor.description}</p>
-        </GreatContainer>
-      </Card>
-    </div>
+          )}
+        </TestimonyImageContainer>
+
+        <TestimonyInfo>
+          <span className="testimony-name">{testimony.userName}</span>
+          <span className="testimony-role" title={testimony.role}>
+            {testimony.role}
+          </span>
+        </TestimonyInfo>
+      </HeaderCardDepo>
+
+      <TestimonyDescription title={testimony.description}>
+        {testimony.description}
+      </TestimonyDescription>
+    </Card>
   );
 }
