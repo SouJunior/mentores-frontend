@@ -1,3 +1,9 @@
+import { api } from '@/lib/axios';
+import { getToken } from '@/lib/getToken';
+import UserLoginService from '@/services/user/userLoginService';
+import { useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import {
   createContext,
   ReactNode,
@@ -10,12 +16,6 @@ import {
   IMentor,
   UserSessionInfo,
 } from '../interfaces/IAuth';
-import { useQuery } from '@tanstack/react-query';
-import { api } from '@/lib/axios';
-import { AxiosError } from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import UserLoginService from '@/services/user/userLoginService';
-import { getToken } from '@/lib/getToken';
 
 export const AuthContent = createContext({} as IAuthContextType);
 

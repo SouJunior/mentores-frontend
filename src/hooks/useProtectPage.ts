@@ -1,8 +1,8 @@
 'use client';
 
+import { getToken } from '@/lib/getToken';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getToken } from '@/lib/getToken';
 
 export function useProtectPage() {
   const navigate = useRouter();
@@ -10,10 +10,9 @@ export function useProtectPage() {
 
   useEffect(() => {
     if (!getToken()) {
-      navigate.push('/');
-    } else {
-      setLoading(false);
+      // navigate.push('/');
     }
+    setLoading(false);
   }, [navigate, setLoading]);
 
   return loading;

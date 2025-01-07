@@ -1,17 +1,17 @@
 import { ErrorMessage, Field, FieldAttributes, useFormikContext } from 'formik';
+import { ReactNode } from 'react';
 import {
-  ContainerInputLabel,
   ContainerError,
   ContainerInput,
+  ContainerInputLabel,
   StyledLabel,
 } from './style';
-import { ReactNode } from 'react';
 
 interface InputFormProps extends FieldAttributes<any> {
   name: string;
   type: string;
   placeholder?: string;
-  label: string;
+  label?: string;
   inputType?: string;
   isRequired?: boolean;
   children?: ReactNode;
@@ -39,9 +39,8 @@ export function InputForm({
         {label} {isRequired && <span className="asterisk">*</span>}
       </StyledLabel>
       <ContainerInput
-        className={`${errors[name] && touched[name] ? 'error' : ''} ${
-          disabled && 'disabled'
-        }`}
+        className={`${errors[name] && touched[name] ? 'error' : ''} ${disabled && 'disabled'
+          }`}
       >
         {children}
         <Field
