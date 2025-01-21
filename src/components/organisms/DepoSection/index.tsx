@@ -1,9 +1,9 @@
 import { Button } from '@/components/atoms/Button';
 import { CardDepo } from '@/components/molecules/CardDepo';
-import Link from 'next/link';
-import { ContainerDepo, ContainerSlider } from './style';
-import { useTestimonyService } from '../../../services/user/useTestimonyService';
 import { AxiosError } from 'axios';
+import Link from 'next/link';
+import { useTestimonyService } from '../../../services/user/useTestimonyService';
+import { ContainerDepo, ContainerSlider } from './style';
 
 import { A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,7 +19,7 @@ export function DepoSection() {
 
       <ContainerSlider>
         <Swiper modules={[A11y]} slidesPerView="auto">
-          {testimonies?.length &&
+          {testimonies?.length > 0 &&
             testimonies?.map(testimony => {
               return (
                 <SwiperSlide key={testimony.id}>
