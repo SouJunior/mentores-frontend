@@ -1,13 +1,16 @@
 import { InputForm } from '@/components/atoms/InputForm';
 import { reasons, reviewOptions } from '@/data/static-info';
+import { isObject } from 'formik';
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { FormValues } from '..';
 import {
   CharactersLegend,
   ContentContainer,
   DropdownItemStyled,
   DropdownStyled,
   DropdownWrapper,
+  ErrorLegend,
   EyeStyled,
   FieldLabel,
   InputWrapper,
@@ -16,7 +19,17 @@ import {
   RadioButtonWrapper,
 } from '../styles';
 
-export default function FormFields() {
+interface FormFieldsProps {
+  setFormValues: Dispatch<SetStateAction<FormValues>>;
+  formErrors: FormValues;
+  setFormErrors: Dispatch<SetStateAction<FormValues>>;
+}
+
+export default function FormFields({
+  setFormValues,
+  formErrors,
+  setFormErrors,
+}: FormFieldsProps) {
   const [otherOptionSelected, setOtherOptionSelected] =
     useState<boolean>(false);
   const [reasonText, setReasonText] = useState<string>('');
@@ -27,9 +40,15 @@ export default function FormFields() {
     inputExperience: false,
   });
 
-  // '5' is the "Outros" option
-  const handleSelectChange = (option: string) => {
-    setOtherOptionSelected(option === '5');
+  const handleSelectChange = (e: any, name: string) => {
+    setFormValues((prevState: FormValues) => ({
+      ...prevState,
+      [name ?? e?.target?.name]: isObject(e) ? e?.target?.value : e,
+    }));
+
+    // '5' is the "Outros" option
+    name === 'reasonOption' ? setOtherOptionSelected(e === '5') : '';
+    handleError(name);
   };
 
   const togglePasswordVisibility = () =>
@@ -44,6 +63,24 @@ export default function FormFields() {
       ...prevState,
       [name]: value.length > 600,
     }));
+
+    setFormValues((prevState: FormValues) => ({
+      ...prevState,
+      [name ?? event?.target?.name]: isObject(event)
+        ? event?.target?.value
+        : event,
+    }));
+
+    if (value.length <= 600) {
+      handleError(name);
+    }
+  };
+
+  const handleError = (name: string) => {
+    setFormErrors((prevState: FormValues) => ({
+      ...prevState,
+      [name]: '',
+    }));
   };
 
   return (
@@ -51,13 +88,16 @@ export default function FormFields() {
       <FieldLabel>
         O que o motivou a excluir sua conta na plataforma para mentores?
         <span>*</span>
+        {formErrors.reasonOption && (
+          <ErrorLegend className="error">{formErrors.reasonOption}</ErrorLegend>
+        )}
       </FieldLabel>
 
       <DropdownWrapper>
         <DropdownStyled
           placeholder=""
           name="reasonOption"
-          onValueChange={handleSelectChange}
+          onValueChange={e => handleSelectChange(e, 'reasonOption')}
         >
           {reasons.map(reason => (
             <DropdownItemStyled key={reason.id} value={String(reason.id)}>
@@ -79,7 +119,9 @@ export default function FormFields() {
           isRequired={false}
           onChange={handleInputChange}
         />
-
+        {formErrors.inputReason && (
+          <ErrorLegend className="error">{formErrors.inputReason}</ErrorLegend>
+        )}
         <CharactersLegend
           className={`${maxCharsExceeded.inputReason ? 'error' : ''}`}
         >
@@ -90,12 +132,20 @@ export default function FormFields() {
       <FieldLabel>
         Como você avaliaria a facilidade de uso da plataforma?
         <span>*</span>
+        {formErrors.useReview && (
+          <ErrorLegend className="error">{formErrors.useReview}</ErrorLegend>
+        )}
       </FieldLabel>
 
       <InputWrapper $flexDirection="column" $gap={1}>
         {[...reviewOptions].reverse().map(item => (
           <RadioButtonWrapper key={item.id}>
-            <input type="radio" name="useReview" value={item.id} />
+            <input
+              type="radio"
+              name="useReview"
+              value={item.id}
+              onClick={e => handleSelectChange(e, 'useReview')}
+            />
 
             <RadioButtonLabel>{item.description}</RadioButtonLabel>
           </RadioButtonWrapper>
@@ -105,8 +155,12 @@ export default function FormFields() {
       <FieldLabel>
         Em uma escala de 1 a 7, o quão satisfeito você estava com a plataforma?
         <span>*</span>
+        {formErrors.platformReview && (
+          <ErrorLegend className="error">
+            {formErrors.platformReview}
+          </ErrorLegend>
+        )}
       </FieldLabel>
-
       <InputWrapper $justifyContent="space-evenly">
         {reviewOptions.map(item => (
           <RadioButtonWrapper
@@ -124,7 +178,12 @@ export default function FormFields() {
               />
             </RadioButtonLabel>
 
-            <input type="radio" name="platformReview" value={item.id} />
+            <input
+              type="radio"
+              name="platformReview"
+              value={item.id}
+              onClick={e => handleSelectChange(e, 'platformReview')}
+            />
           </RadioButtonWrapper>
         ))}
       </InputWrapper>
@@ -141,7 +200,11 @@ export default function FormFields() {
           isRequired={false}
           onChange={handleInputChange}
         />
-
+        {formErrors.inputExperience && (
+          <ErrorLegend className="error">
+            {formErrors.inputExperience}
+          </ErrorLegend>
+        )}
         <CharactersLegend
           className={`${maxCharsExceeded.inputExperience ? 'error' : ''}`}
         >

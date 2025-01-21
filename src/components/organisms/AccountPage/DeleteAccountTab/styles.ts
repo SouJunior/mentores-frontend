@@ -138,3 +138,14 @@ export const ModalCancelStyled = styled(ModalCancelKeepRoute)`
     margin-bottom: 1rem;
   }
 `;
+
+export const ErrorLegend = styled.p`
+  color: ${props =>
+    props.className?.includes('error')
+      ? props.theme.colors.red[400]
+      : props.theme.colors.black[200]};
+  font-size: 0.75rem;
+  line-height: 1.05rem;
+  margin-top: 0.25rem;
+  font-weight: bold;
+`;
