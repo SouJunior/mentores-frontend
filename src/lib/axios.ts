@@ -3,7 +3,7 @@ import axios from 'axios';
 type NodeEnv = 'development' | 'production';
 
 const serverUrl = {
-  development: 'http://localhost:3003',
+  development: 'http://localhost:8080',
   production: 'https://mentores-backend-6dkc.onrender.com/',
 };
 
