@@ -10,9 +10,10 @@ export function useProtectPage() {
 
   useEffect(() => {
     if (!getToken()) {
-      // navigate.push('/');
+      navigate.push('/');
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, [navigate, setLoading]);
 
   return loading;
