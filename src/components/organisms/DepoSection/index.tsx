@@ -19,7 +19,8 @@ export function DepoSection() {
 
       <ContainerSlider>
         <Swiper modules={[A11y]} slidesPerView="auto">
-          {testimonies?.length > 0 &&
+          {testimonies &&
+            testimonies?.length > 0 &&
             testimonies?.map(testimony => {
               return (
                 <SwiperSlide key={testimony.id}>
