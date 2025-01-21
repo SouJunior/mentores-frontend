@@ -63,21 +63,9 @@ export const ButtonStyled = styled(Button)<{
     props.$variant === 'delete'
       ? props.theme.colors.white
       : props.theme.colors.gray[700]};
-  padding-left: ${props => (props.$variant === 'delete' ? '2.5rem' : '')};
-  position: ${props => (props.$variant === 'delete' ? 'relative' : '')};
   width: 100%;
-
-  &::before {
-    background-color: white;
-    background-repeat: no-repeat;
-    background-size: contain;
-    content: '';
-    display: inline-block;
-    height: 24px;
-    left: 24px;
-    position: absolute;
-    width: 24px;
-  }
+  gap: 1px;
+  padding: 0.5rem 0 0.5rem 0;
 
   &:not(:disabled):hover {
     background-color: ${props =>

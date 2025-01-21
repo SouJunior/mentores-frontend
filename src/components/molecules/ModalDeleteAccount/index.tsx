@@ -1,4 +1,6 @@
+import binIcon from '@/assets/icons/bin.png';
 import * as Dialog from '@radix-ui/react-dialog';
+import Image from 'next/image';
 import {
   ButtonsContainer,
   ButtonStyled,
@@ -14,10 +16,9 @@ interface ModalDeleteAccountProps extends Dialog.DialogContentProps {
 
 export function ModalDeleteAccount({
   handleDeleteAccount,
-  ...props
 }: ModalDeleteAccountProps) {
   return (
-    <ContainerModalDeleteAccount {...props}>
+    <ContainerModalDeleteAccount>
       <ModalTitle>Você tem certeza que deseja fazer isso?</ModalTitle>
 
       <ModalCloseButton />
@@ -46,6 +47,7 @@ export function ModalDeleteAccount({
             onClick={handleDeleteAccount}
             $variant="delete"
           >
+            <Image src={binIcon} alt="Delete Icon" width={24} height={24} />
             Excluir conta
           </ButtonStyled>
         </Dialog.Close>
