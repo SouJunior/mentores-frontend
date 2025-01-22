@@ -136,10 +136,10 @@ export function DeleteAccountTab() {
       } catch (error) {
         if (error instanceof AxiosError) {
           const currentMessage = error.response?.data.message;
+          const errorMessage = 'Senha inválida';
           const messages = {
-            'Incorrect old password': 'Senha inválida',
+            'Incorrect password': errorMessage,
           };
-
           throwErrorMessages({ messages, currentMessageKey: currentMessage });
         }
       }
