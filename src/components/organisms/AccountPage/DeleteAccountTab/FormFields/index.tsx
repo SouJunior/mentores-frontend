@@ -47,7 +47,9 @@ export default function FormFields({
     }));
 
     // '5' is the "Outros" option
-    name === 'reasonOption' ? setOtherOptionSelected(e === '5') : '';
+    if (name === 'reasonOption') {
+      setOtherOptionSelected(e === '5');
+    }
     handleError(name);
   };
 
