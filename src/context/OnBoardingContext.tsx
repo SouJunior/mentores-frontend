@@ -44,7 +44,7 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
 
   const { mentor } = useAuthContext();
 
-  const { handle } = UserUpdateService();
+  const { handleMentorData } = UserUpdateService();
   const router = useRouter();
 
   const formik = useFormik<OnBoardingDataType>({
@@ -60,7 +60,7 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
 
   async function handleSubmit(values: OnBoardingDataType) {
     try {
-      await handle({
+      await handleMentorData({
         aboutMe: values.description,
         profile: values.profile,
         gender: values.gender,
