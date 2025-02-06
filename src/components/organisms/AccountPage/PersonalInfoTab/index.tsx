@@ -42,12 +42,12 @@ export function PersonalInfoTab() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { handle } = UserUpdateService();
+  const { handleMentorData } = UserUpdateService();
   const { userSession } = useAuthContext();
 
   const { mutateAsync: updateMentorFn } = useMutation({
     mutationKey: ['mentor', userSession?.id],
-    mutationFn: handle,
+    mutationFn: handleMentorData,
     onSuccess(_, newUpdatedData) {
       queryClient.setQueryData(
         ['mentor', userSession?.id],

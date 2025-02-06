@@ -10,7 +10,7 @@ const setNewPasswordService = (): IUserSetNewPassword => {
     { code, email }: { code: string; email: string }
   ) => {
     try {
-      const response = await api.patch(
+      await api.patch(
         `/mentor/restoreAccount/redefinePass`,
         {
           password: data.password,
@@ -23,8 +23,6 @@ const setNewPasswordService = (): IUserSetNewPassword => {
           },
         }
       );
-
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
