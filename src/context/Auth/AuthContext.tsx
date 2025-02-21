@@ -70,24 +70,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const calendlyResponse = useQuery({
     queryKey: ['calendlyInfo', userSession?.id],
     queryFn: async () => {
-      const response = await api.get<ICalendlyUserInfo>(`/calendly/mentorInfo`, config);
+      const response = await api.get<ICalendlyUserInfo>(
+        `/calendly/mentorInfo`,
+        config
+      );
       return response.data;
     },
     enabled: !!userSession?.id,
   });
 
   if (
-    mentorResponse.error instanceof AxiosError &&
-    mentorResponse.error.response?.status === 404 ||
-    calendlyResponse.error instanceof AxiosError &&
-    calendlyResponse.error.response?.status === 404
+    (mentorResponse.error instanceof AxiosError &&
+      mentorResponse.error.response?.status === 404) ||
+    (calendlyResponse.error instanceof AxiosError &&
+      calendlyResponse.error.response?.status === 404)
   ) {
     logout();
   }
 
   return (
     <AuthContent.Provider
-      value={{ userSession, setUserSession, mentor: { ...mentorResponse }, mentorCalendlyInfo: { ... calendlyResponse} }}
+      value={{
+        userSession,
+        setUserSession,
+        mentor: { ...mentorResponse },
+        mentorCalendlyInfo: { ...calendlyResponse },
+      }}
     >
       {children}
     </AuthContent.Provider>

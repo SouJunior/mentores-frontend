@@ -43,7 +43,7 @@ export default function ModalCalendlyStep3({
   const [isValid, setIsValid] = useState(false);
 
   const { handleMentorCalendlyInfo } = UserUpdateService();
-  const { mentor } = useAuthContext()
+  const { mentor } = useAuthContext();
 
   const buttonDisabledVerification = useCallback(() => {
     const valid = isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue);
@@ -68,7 +68,7 @@ export default function ModalCalendlyStep3({
         });
 
         setCurrentStep(4);
-        mentor.refetch()
+        mentor.refetch();
       }
     } catch (error) {
       handleError('Algum erro aconteceu. Entre em contato conosco.');

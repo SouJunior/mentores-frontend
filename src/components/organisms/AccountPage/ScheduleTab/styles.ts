@@ -1,4 +1,5 @@
 import { Button } from '@/components/atoms/Button';
+import { theme } from '@/styles/theme';
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
 import * as Tabs from '@radix-ui/react-tabs';
 import styled, { css } from 'styled-components';
@@ -22,32 +23,43 @@ export const ScheduleContent = styled.section`
 
 export const AlertContainer = styled.div`
   display: flex;
-  gap: 0.5rem;
   align-items: center;
-
-  padding-left: 1rem;
-  padding-right: 0.8rem;
-
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  background-color: ${props => props.theme.colors.yellow};
-
-  border-radius: 0.5rem;
-
+  gap: 0.5rem;
   p {
-    color: ${props => props.theme.colors.brown[300]};
-    font-size: 0.9rem;
+    color: ${theme.colors.black[200]};
+    font-size: 0.875rem;
+    line-height: 1rem;
   }
 `;
 
 export const ErrorOutlineRoundedIconStyled = styled(ErrorOutlineRoundedIcon)`
-  color: ${props => props.theme.colors.brown[700]};
+  color: ${theme.colors.red[300]};
+`;
+
+export const Navegation = styled.nav`
+  display: flex;
+  gap: 1rem;
+`;
+
+export const NavBtn = styled.button<{
+  select: boolean;
+}>`
+  background-color: transparent;
+  line-height: 1rem;
+  border: none;
+  padding-bottom: 0.5rem;
+  color: ${({ select, theme }) =>
+    select ? theme.colors.blue[800] : theme.colors.black[200]};
+  border-bottom: ${({ select, theme }) =>
+    select ? `2px solid ${theme.colors.blue[800]}` : ''};
+  font-weight: ${({ select }) => (select ? '500' : '')};
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
   max-width: 28rem;
 `;
 
@@ -146,7 +158,6 @@ export const ContainerErrorInputCalendly = styled.span`
   color: ${props => props.theme.colors.red[500]};
   font-weight: bold;
   font-size: 0.75rem;
-  text-align: center;
   padding: 1rem 0;
 `;
 
@@ -174,4 +185,30 @@ export const Divider = styled.div`
   width: 100%;
   background-color: ${props => props.theme.colors.gray[700]};
   margin: 1.5rem 0;
+`;
+
+export const EventList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+export const DailyEvents = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const DailyEventsTitle = styled.p`
+  font-size: 0.875rem;
+  line-height: 1rem;
+  padding: 1rem 0;
+`;
+
+export const ListEnd = styled.p`
+  border-top: 1px solid ${theme.colors.gray[200]};
+  padding-top: 1rem;
+  color: ${theme.colors.gray[700]};
+  font-size: 1rem;
+  text-align: center;
 `;

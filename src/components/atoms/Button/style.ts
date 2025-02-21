@@ -27,7 +27,7 @@ const BaseStylesButton = styled.button`
 `;
 
 export interface ButtonStyleProps {
-  variant?: 'primary' | 'secondary' | 'tertiary';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
   size?: 'lg' | 'md' | 'sm';
 }
 
@@ -64,6 +64,17 @@ export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
 
           &:not(:disabled):hover {
             color: ${theme.colors.blue[850]};
+          }
+        `;
+      case 'danger':
+        return css`
+          border: 2px solid
+            ${!disabled ? theme.colors.red[400] : theme.colors.gray[500]};
+          color: ${!disabled ? theme.colors.red[400] : theme.colors.gray[500]};
+
+          &:not(:disabled):hover {
+            border-color: ${theme.colors.red[800]};
+            color: ${theme.colors.red[800]};
           }
         `;
     }
