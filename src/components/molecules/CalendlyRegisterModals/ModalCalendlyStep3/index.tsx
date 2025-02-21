@@ -8,6 +8,7 @@ import {
   ModalDescription,
   ModalTitle,
 } from '@/components/organisms/CalendlyRegister/style';
+import { useAuthContext } from '@/context/Auth/AuthContext';
 import UserUpdateService from '@/services/user/userUpdateService';
 import {
   isCalendlyLink,
@@ -24,7 +25,6 @@ import {
   PlaceholderInput,
   StyledErrorOutlineIcon,
 } from './style';
-import { useAuthContext } from '@/context/Auth/AuthContext';
 
 type ModalCalendlyStep3Props = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
@@ -42,8 +42,8 @@ export default function ModalCalendlyStep3({
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isValid, setIsValid] = useState(false);
 
-  const { handle } = UserUpdateService();
-  const { mentor } = useAuthContext()
+  const { handleMentorCalendlyInfo } = UserUpdateService();
+  const { mentor } = useAuthContext();
 
   const buttonDisabledVerification = useCallback(() => {
     const valid = isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue);
@@ -62,13 +62,13 @@ export default function ModalCalendlyStep3({
       if (isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue)) {
         const { firstPathName, secondPathName } = splitCalendlyName(inputValue);
 
-        await handle({
+        await handleMentorCalendlyInfo({
           calendlyName: firstPathName,
           agendaName: secondPathName,
         });
 
         setCurrentStep(4);
-        mentor.refetch()
+        mentor.refetch();
       }
     } catch (error) {
       handleError('Algum erro aconteceu. Entre em contato conosco.');

@@ -1,44 +1,41 @@
 import { Button } from '@/components/atoms/Button';
 import {
-  ContainerBtn,
-  ContainerModalCancel,
-  DescriptionModal,
-  HeadingModal,
-  ModalCloseButton,
-  ModalCloseCancelBtn,
-  ModalCloseDiscardBtn,
+  CloseButton,
+  ContainerButtons,
+  ContainerModal,
+  Description,
+  DiscardButton,
+  Heading,
+  SaveButton,
 } from './style';
 
-export function ModalSave({
-  title,
-  text,
-  onSave,
-  onDiscard,
-}: {
+interface ModalSaveProps {
   title: string;
   text: string;
   onSave: () => void;
   onDiscard: () => void;
-}) {
-  return (
-    <ContainerModalCancel>
-      <HeadingModal>{title}</HeadingModal>
-      <ModalCloseButton />
-      <DescriptionModal>{text}</DescriptionModal>
+}
 
-      <ContainerBtn>
-        <ModalCloseCancelBtn asChild>
+export function ModalSave({ title, text, onSave, onDiscard }: ModalSaveProps) {
+  return (
+    <ContainerModal>
+      <Heading>{title}</Heading>
+      <CloseButton />
+      <Description>{text}</Description>
+
+      <ContainerButtons>
+        <DiscardButton asChild>
           <Button variant="secondary" onClick={() => onDiscard()}>
             Não
           </Button>
-        </ModalCloseCancelBtn>
+        </DiscardButton>
 
-        <ModalCloseDiscardBtn asChild>
+        <SaveButton asChild>
           <Button type="submit" onClick={() => onSave()}>
             Sim
           </Button>
-        </ModalCloseDiscardBtn>
-      </ContainerBtn>
-    </ContainerModalCancel>
+        </SaveButton>
+      </ContainerButtons>
+    </ContainerModal>
   );
 }
