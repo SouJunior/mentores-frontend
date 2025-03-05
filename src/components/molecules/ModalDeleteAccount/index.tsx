@@ -38,7 +38,9 @@ export function ModalDeleteAccount({
 
       <ButtonsContainer>
         <Dialog.Close asChild>
-          <ButtonStyled variant="secondary">Cancelar</ButtonStyled>
+          <ButtonStyled type="button" variant="secondary">
+            Cancelar
+          </ButtonStyled>
         </Dialog.Close>
 
         <Dialog.Close asChild>
