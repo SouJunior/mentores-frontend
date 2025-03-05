@@ -1,4 +1,6 @@
 import { Spinner } from '@/components/atoms/Spinner';
+import AccountManagementTab from '@/components/organisms/AccountPage/AccountManagement';
+import { DeleteAccountTab } from '@/components/organisms/AccountPage/DeleteAccountTab';
 import { PasswordTab } from '@/components/organisms/AccountPage/PasswordTab';
 import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab';
 import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab';
@@ -8,13 +10,13 @@ import { EditPhotoProvider } from '@/context/EditPhotoContext';
 import { useProtectPage } from '@/hooks/useProtectPage';
 import {
   AsideContainer,
+  AsideDivider,
   AsideNavContainer,
   AsideNavItem,
   AsideTitle,
   Container,
-  AsideDivider,
-  ContentDivider,
   ContainerSpinnerLoading,
+  ContentDivider,
 } from '@/styles/pages/me';
 import * as Tabs from '@radix-ui/react-tabs';
 import { useRouter } from 'next/router';
@@ -69,6 +71,9 @@ export default function MePage() {
               <AsideNavItem value="profile">Perfil</AsideNavItem>
               <AsideNavItem value="schedule">Agenda</AsideNavItem>
               <AsideNavItem value="password">Senha</AsideNavItem>
+              <AsideNavItem value="account-management">
+                Gestão de conta
+              </AsideNavItem>
             </AsideNavContainer>
           </AsideContainer>
 
@@ -85,6 +90,8 @@ export default function MePage() {
                 <ProfileTab />
                 <ScheduleTab />
                 <PasswordTab />
+                <AccountManagementTab />
+                <DeleteAccountTab />
               </>
             )}
 
