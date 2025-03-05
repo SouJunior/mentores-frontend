@@ -5,12 +5,24 @@ import { ModalCancelKeepRoute } from '@/components/molecules/ModalCancelKeepRout
 import { Form } from 'formik';
 import styled from 'styled-components';
 
+export const Breadcrumbs = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  text-align: left;
+  font-weight: 500;
+  border: none;
+  padding: 1rem 0;
+  color: #003986;
+  padding: 0.5rem 0;
+`;
+
 export const Disclaimer = styled.p`
   color: ${props => props.theme.colors.gray[700]};
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.4rem;
-  padding: 0.5rem 0;
 `;
 
 export const DeleteAccountContentForm = styled(Form)`

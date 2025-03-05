@@ -11,10 +11,8 @@ import {
   DropdownStyled,
   DropdownWrapper,
   ErrorLegend,
-  EyeStyled,
   FieldLabel,
   InputWrapper,
-  PasswordLabel,
   RadioButtonLabel,
   RadioButtonWrapper,
 } from '../styles';
@@ -34,32 +32,33 @@ export default function FormFields({
     useState<boolean>(false);
   const [reasonText, setReasonText] = useState<string>('');
   const [experienceText, setExperienceText] = useState<string>('');
-  const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
+  // const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
   const [maxCharsExceeded, setMaxCharsExceeded] = useState({
-    inputReason: false,
-    inputExperience: false,
+    reasonText: false,
+    userExperienceFeedback: false,
   });
 
-  const handleSelectChange = (e: any, name: string) => {
+  const handleSelectChange = (e: any, attributeName: string) => {
     setFormValues((prevState: FormValues) => ({
       ...prevState,
-      [name ?? e?.target?.name]: isObject(e) ? e?.target?.value : e,
+      [attributeName ?? e?.target?.name]: isObject(e) ? e?.target?.value : e,
     }));
 
-    // '5' is the "Outros" option
-    if (name === 'reasonOption') {
+    // Opção Outros = 5
+    if (attributeName === 'reasonOption') {
       setOtherOptionSelected(e === '5');
     }
-    handleError(name);
+
+    handleError(attributeName);
   };
 
-  const togglePasswordVisibility = () =>
-    setHiddenPassword(prevState => !prevState);
+  // const togglePasswordVisibility = () =>
+  //   setHiddenPassword(prevState => !prevState);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    name === 'inputReason' ? setReasonText(value) : setExperienceText(value);
+    name === 'reasonText' ? setReasonText(value) : setExperienceText(value);
 
     setMaxCharsExceeded(prevState => ({
       ...prevState,
@@ -78,10 +77,10 @@ export default function FormFields({
     }
   };
 
-  const handleError = (name: string) => {
+  const handleError = (attributeName: string) => {
     setFormErrors((prevState: FormValues) => ({
       ...prevState,
-      [name]: '',
+      [attributeName]: null,
     }));
   };
 
@@ -116,16 +115,16 @@ export default function FormFields({
       >
         <InputForm
           type="textarea"
-          name="inputReason"
+          name="reasonText"
           placeholder="Escreva seu motivo"
           isRequired={false}
           onChange={handleInputChange}
         />
-        {formErrors.inputReason && (
-          <ErrorLegend className="error">{formErrors.inputReason}</ErrorLegend>
+        {formErrors.reasonText && (
+          <ErrorLegend className="error">{formErrors.reasonText}</ErrorLegend>
         )}
         <CharactersLegend
-          className={`${maxCharsExceeded.inputReason ? 'error' : ''}`}
+          className={`${maxCharsExceeded.reasonText ? 'error' : ''}`}
         >
           {reasonText.length}/600
         </CharactersLegend>
@@ -134,8 +133,10 @@ export default function FormFields({
       <FieldLabel>
         Como você avaliaria a facilidade de uso da plataforma?
         <span>*</span>
-        {formErrors.useReview && (
-          <ErrorLegend className="error">{formErrors.useReview}</ErrorLegend>
+        {formErrors.usabilityRating && (
+          <ErrorLegend className="error">
+            {formErrors.usabilityRating}
+          </ErrorLegend>
         )}
       </FieldLabel>
 
@@ -144,9 +145,9 @@ export default function FormFields({
           <RadioButtonWrapper key={item.id}>
             <input
               type="radio"
-              name="useReview"
+              name="usabilityRating"
               value={item.id}
-              onClick={e => handleSelectChange(e, 'useReview')}
+              onClick={e => handleSelectChange(e, 'usabilityRating')}
             />
 
             <RadioButtonLabel>{item.description}</RadioButtonLabel>
@@ -157,9 +158,9 @@ export default function FormFields({
       <FieldLabel>
         Em uma escala de 1 a 7, o quão satisfeito você estava com a plataforma?
         <span>*</span>
-        {formErrors.platformReview && (
+        {formErrors.satisfactionRating && (
           <ErrorLegend className="error">
-            {formErrors.platformReview}
+            {formErrors.satisfactionRating}
           </ErrorLegend>
         )}
       </FieldLabel>
@@ -182,9 +183,9 @@ export default function FormFields({
 
             <input
               type="radio"
-              name="platformReview"
+              name="satisfactionRating"
               value={item.id}
-              onClick={e => handleSelectChange(e, 'platformReview')}
+              onClick={e => handleSelectChange(e, 'satisfactionRating')}
             />
           </RadioButtonWrapper>
         ))}
@@ -198,23 +199,23 @@ export default function FormFields({
       <InputWrapper $flexDirection="column" $alignItems="end">
         <InputForm
           type="textarea"
-          name="inputExperience"
+          name="userExperienceFeedback"
           isRequired={false}
           onChange={handleInputChange}
         />
-        {formErrors.inputExperience && (
+        {formErrors.userExperienceFeedback && (
           <ErrorLegend className="error">
-            {formErrors.inputExperience}
+            {formErrors.userExperienceFeedback}
           </ErrorLegend>
         )}
         <CharactersLegend
-          className={`${maxCharsExceeded.inputExperience ? 'error' : ''}`}
+          className={`${maxCharsExceeded.userExperienceFeedback ? 'error' : ''}`}
         >
           {experienceText.length}/600
         </CharactersLegend>
       </InputWrapper>
 
-      <InputWrapper
+      {/* <InputWrapper
         $flexDirection="column"
         $alignItems="start"
         $relative={true}
@@ -232,7 +233,7 @@ export default function FormFields({
           onPressedChange={togglePasswordVisibility}
         />
         <PasswordLabel>Insira a senha para excluir sua conta</PasswordLabel>
-      </InputWrapper>
+      </InputWrapper> */}
     </ContentContainer>
   );
 }

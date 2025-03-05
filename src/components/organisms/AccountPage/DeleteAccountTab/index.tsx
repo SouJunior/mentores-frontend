@@ -4,11 +4,11 @@ import { ModalDeleteAccount } from '@/components/molecules/ModalDeleteAccount';
 import { FormValuesDeleteAccountDTO } from '@/services/interfaces/IUserDeleteAccount';
 import { UserDeleteAccount } from '@/services/user/userDeleteAccount';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AxiosError } from 'axios';
 import { FormikProvider, useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import * as yup from 'yup';
 import {
   ButtonsContainer,
   Divider,
@@ -18,145 +18,111 @@ import {
 } from '../styles';
 import FormFields from './FormFields';
 import {
+  Breadcrumbs,
   DeleteAccountContentForm,
   Disclaimer,
   ModalCancelStyled,
 } from './styles';
 
-const passwordValidation = yup
-  .string()
-  .required('Obrigatório')
-  .min(8, 'Senha inválida')
-  .matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
-    'Senha inválida'
-  );
-
-const deleteAccountTabSchema = yup.object({
-  password: passwordValidation,
-});
-
-export type DeleteAccountFormData = yup.InferType<
-  typeof deleteAccountTabSchema
->;
-
 export interface FormValues {
   reasonOption: string | null;
-  inputReason: string | null;
-  useReview: string | null;
-  platformReview: string | null;
-  inputExperience: string | null;
+  reasonText: string | null;
+  usabilityRating: string | null;
+  satisfactionRating: string | null;
+  userExperienceFeedback: string | null;
 }
 
 export function DeleteAccountTab() {
   const router = useRouter();
   const { deleteAccount } = UserDeleteAccount();
 
-  const [openModalCancel, setOpenModalCancel] = useState(false);
-  const [openModalDeleteAccount, setOpenModalDeleteAccount] = useState(false);
-  const [formValues, setFormValues] = useState<FormValues>({
+  const initialFormValues: FormValues = {
     reasonOption: null,
-    inputReason: null,
-    useReview: null,
-    platformReview: null,
-    inputExperience: null,
-  });
-  const [formErrors, setFormErrors] = useState<FormValues>({
-    reasonOption: '',
-    inputReason: '',
-    useReview: '',
-    platformReview: '',
-    inputExperience: '',
-  });
+    reasonText: null,
+    usabilityRating: null,
+    satisfactionRating: null,
+    userExperienceFeedback: null,
+  };
+
+  const [openModalCancel, setOpenModalCancel] = useState<boolean>(false);
+  const [openModalDeleteAccount, setOpenModalDeleteAccount] =
+    useState<boolean>(false);
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+  const [formErrors, setFormErrors] = useState<FormValues>(initialFormValues);
 
   const handleModalCancel = () => setOpenModalCancel(true);
   const handleModalDeleteAccount = () => setOpenModalDeleteAccount(true);
 
   const handleDiscard = () => {
-    setFormValues({
-      reasonOption: null,
-      inputReason: null,
-      useReview: null,
-      platformReview: null,
-      inputExperience: null,
-    });
-    setFormErrors({
-      reasonOption: '',
-      inputReason: '',
-      useReview: '',
-      platformReview: '',
-      inputExperience: '',
-    });
+    setFormValues(initialFormValues);
+    setFormErrors(initialFormValues);
+
     if (window.history.length > 1) {
-      router.push('/me?tab=personal-info');
+      router.push('/me?tab=account-management');
     } else {
       router.push('/');
     }
   };
 
-  async function handleDeleteAccount(data: DeleteAccountFormData) {
-    const errors: FormValues = {
-      reasonOption: '',
-      inputReason: '',
-      useReview: '',
-      platformReview: '',
-      inputExperience: '',
-    };
+  async function handleDeleteAccount() {
+    const errors: FormValues = initialFormValues;
 
     // Validações de obrigatoriedade
     if (!formValues.reasonOption) {
       errors.reasonOption = 'Você precisa escolher uma das opções abaixo';
     }
-    if (!formValues.platformReview) {
-      errors.platformReview = 'Você precisa escolher uma das opções abaixo';
+    if (!formValues.satisfactionRating) {
+      errors.satisfactionRating = 'Você precisa escolher uma das opções abaixo';
     }
-    if (!formValues.useReview) {
-      errors.useReview = 'Você precisa escolher uma das opções abaixo';
+    if (!formValues.usabilityRating) {
+      errors.usabilityRating = 'Você precisa escolher uma das opções abaixo';
     }
     // Validações de limite de caracteres
-    if (formValues.inputExperience && formValues.inputExperience.length > 600) {
-      errors.inputExperience = 'Excedeu o limite máximo de caracteres ';
+    if (
+      formValues.userExperienceFeedback &&
+      formValues.userExperienceFeedback.length > 600
+    ) {
+      errors.userExperienceFeedback = 'Excedeu o limite máximo de caracteres ';
     }
-    if (formValues.inputReason && formValues.inputReason.length > 600) {
-      errors.inputReason = 'Excedeu o limite máximo de caracteres ';
+    if (formValues.reasonText && formValues.reasonText.length > 600) {
+      errors.reasonText = 'Excedeu o limite máximo de caracteres ';
     }
 
     setFormErrors(errors);
 
     // Verifica se há erros
-    const hasErrors = Object.values(errors).some(error => error !== '');
+    const hasErrors = Object.values(errors).some(error => error !== null);
 
     if (!hasErrors) {
       try {
-        await deleteAccount(
-          data.password,
-          formValues as FormValuesDeleteAccountDTO
-        );
+        await deleteAccount(formValues as FormValuesDeleteAccountDTO, {
+          action: 'delete',
+        });
         router.push('/?account-deleted=true');
       } catch (error) {
         if (error instanceof AxiosError) {
           const currentMessage = error.response?.data.message;
-          const errorMessage = 'Senha inválida';
-          const messages = {
-            'Incorrect password': errorMessage,
-          };
-          throwErrorMessages({ messages, currentMessageKey: currentMessage });
+          throwErrorMessages({
+            messages: {},
+            currentMessageKey: currentMessage,
+          });
         }
       }
     }
   }
 
-  const formik = useFormik<DeleteAccountFormData>({
-    initialValues: {
-      password: '',
-    },
-    validationSchema: deleteAccountTabSchema,
+  const formik = useFormik({
+    initialValues: {},
     onSubmit: handleDeleteAccount,
     validateOnChange: true,
   });
 
   return (
     <TabContainer value="delete-account">
+      <Breadcrumbs onClick={() => router.push('/me?tab=account-management')}>
+        <ArrowBackIcon />
+        Voltar
+      </Breadcrumbs>
       <TitleTab>Exclusão de conta</TitleTab>
 
       <SubtitleTab>

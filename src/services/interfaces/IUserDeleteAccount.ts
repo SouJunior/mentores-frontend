@@ -1,7 +1,7 @@
 export type FormValuesDeleteAccountDTO = {
   reasonOption: string;
-  inputReason: string | null;
-  useReview: string;
-  platformReview: string;
-  inputExperience: string | null;
+  reasonText: string | null;
+  usabilityRating: string;
+  satisfactionRating: string;
+  userExperienceFeedback: string | null;
 };

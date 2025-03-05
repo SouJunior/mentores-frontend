@@ -9,20 +9,24 @@ export function UserDeleteAccount() {
 
   const id = userSession?.id;
 
+  type ActionFlag = {
+    action: 'delete' | 'disable';
+  };
+
   async function deleteAccount(
-    password: string,
-    data: FormValuesDeleteAccountDTO
+    data: FormValuesDeleteAccountDTO,
+    action: ActionFlag
   ) {
     try {
-      const response = await api.put(`/mentor/${id}`, {
-        password: password,
-        data: data,
+      await api.patch(`/mentor/${id}`, {
+        data,
+        action,
       });
-      console.log(response.data);
       logout();
       setUserSession(null);
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 
