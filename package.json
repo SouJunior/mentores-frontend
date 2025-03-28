@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "dotenv -e .env -- next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix"
   },
@@ -15,6 +15,7 @@
     "@types/react-dom": "18.2.7",
     "@types/react-easy-crop": "^2.0.0",
     "@types/swiper": "^6.0.0",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
