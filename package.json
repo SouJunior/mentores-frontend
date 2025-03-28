@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "dotenv -e .env -- next dev",
-    "build": "next build",
+    "build": "dotenv -e .env -- next build",
     "start": "dotenv -e .env -- next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix"
