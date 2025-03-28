@@ -2,7 +2,7 @@
   "name": "portal-mentoria",
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "dotenv -e .env -- next dev",
     "build": "next build",
     "start": "dotenv -e .env -- next start",
     "lint": "next lint",
