@@ -1,9 +1,10 @@
 import { useAuthContext } from '@/context/Auth/AuthContext';
+import { api } from '@/lib/axios';
 import {
   UserUpdateDTO,
   UserUpdatePasswordDTO,
 } from '../interfaces/IUserUpdate';
-import { api } from '@/lib/axios';
+import { ICalendlyUserInfo } from '../interfaces/IUseUserCalendlyInfoService';
 
 const UserUpdateService = () => {
   const { userSession } = useAuthContext();
@@ -17,11 +18,21 @@ const UserUpdateService = () => {
     },
   };
 
-  const handle = async (data: UserUpdateDTO) => {
+  const handleMentorData = async (data: UserUpdateDTO) => {
     await api.put(
       `/mentor`,
       {
         id,
+        ...data,
+      },
+      config
+    );
+  };
+
+  const handleMentorCalendlyInfo = async (data: ICalendlyUserInfo) => {
+    await api.post(
+      `/calendly`,
+      {
         ...data,
       },
       config
@@ -40,7 +51,7 @@ const UserUpdateService = () => {
     );
   };
 
-  return { handle, updatePassword };
+  return { handleMentorData, handleMentorCalendlyInfo, updatePassword };
 };
 
 export default UserUpdateService;

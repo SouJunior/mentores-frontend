@@ -1,10 +1,10 @@
 import { api } from '@/lib/axios';
-import { IMentors } from '../interfaces/IUseMentorsService';
 import {
   QueryKey,
   UndefinedInitialDataOptions,
   useQuery,
 } from '@tanstack/react-query';
+import { IMentors } from '../interfaces/IUseMentorsService';
 
 export const useMentorsService = (
   options?: UndefinedInitialDataOptions<IMentors[], Error, IMentors[], QueryKey>
@@ -12,7 +12,7 @@ export const useMentorsService = (
   return useQuery<IMentors[]>({
     queryKey: ['mentors'],
     queryFn: async () => {
-      const response = await api.get('/mentor');
+      const response = await api.get('/mentor/registered');
       return response.data;
     },
     ...options,

@@ -1,3 +1,4 @@
+import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import { UseQueryResult } from '@tanstack/react-query';
 
 export interface IMentor {
@@ -11,8 +12,6 @@ export interface IMentor {
   role: string;
   gender: string;
   aboutMe: string;
-  calendlyName?: string;
-  agendaName?: string;
   registerComplete?: boolean;
   profileKey?: string;
   profile?: string;
@@ -32,4 +31,5 @@ export interface IAuthContextType {
   userSession: UserSessionInfo | null;
   setUserSession: (user: UserSessionInfo | null) => void;
   mentor: UseQueryResult<IMentor, Error>;
+  mentorCalendlyInfo: UseQueryResult<ICalendlyUserInfo, Error>
 }

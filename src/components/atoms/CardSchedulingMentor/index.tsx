@@ -1,32 +1,37 @@
 'use client';
+import userWithoutImage from '@/assets/userDefault.png';
+import { IMentors } from '@/services/interfaces/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Button } from '../Button';
+import { Modal } from '../Modal';
+import ModalSchedMentor from '../ModalSchedMentor';
+import { Tag } from '../Tag';
 import {
+  ButtonsContainer,
   CardContainer,
   StacksContainer,
   StyledName,
   TitleContainer,
-  ButtonsContainer,
 } from './styled';
-import Image from 'next/image';
-import ModalSchedMentor from '../ModalSchedMentor';
-import { useState } from 'react';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import userWithoutImage from '@/assets/userDefault.png';
-import { Tag } from '../Tag';
-import { Button } from '../Button';
-import { Modal } from '../Modal';
 
-interface MentorsProps {
+interface CalendlyAndMentorProps {
+  mentorCalendlyInfo?: ICalendlyUserInfo;
   mentor: IMentors;
 }
 
-export default function CardScheduling({ mentor }: MentorsProps) {
+export default function CardScheduling({ mentorCalendlyInfo, mentor }: CalendlyAndMentorProps) {
   const [open, setOpen] = useState(false);
-  const calendlyUrl = new URL(
-    `${mentor.calendlyName}/${mentor.agendaName}`,
-    'https://calendly.com'
-  ).toString();
 
-  const hasValidCalendly = mentor.calendlyName && mentor.agendaName;
+  const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo?.agendaName;
+
+  const calendlyUrl = hasValidCalendly
+    ? new URL(
+        `${mentorCalendlyInfo.calendlyName}/${mentorCalendlyInfo.agendaName}`,
+        'https://calendly.com'
+      ).toString()
+    : '';
 
   function handleModal() {
     setOpen(!open);
@@ -45,11 +50,9 @@ export default function CardScheduling({ mentor }: MentorsProps) {
         <StyledName>{mentor.fullName}</StyledName>
       </TitleContainer>
       <StacksContainer>
-        <>
-          {mentor.specialties.map(specialty => {
-            return <Tag key={specialty}>{specialty}</Tag>;
-          })}
-        </>
+        {mentor.specialties && Array.isArray(mentor.specialties) && mentor.specialties.map((specialty) => (
+          <Tag key={specialty}>{specialty}</Tag>
+        ))}
       </StacksContainer>
       <ButtonsContainer>
         {hasValidCalendly ? (
@@ -65,7 +68,7 @@ export default function CardScheduling({ mentor }: MentorsProps) {
             <Button variant="tertiary">Saiba mais</Button>
           </Modal.Control>
 
-          <ModalSchedMentor mentor={mentor} />
+          <ModalSchedMentor mentorCalendlyInfo={mentorCalendlyInfo} mentor={mentor} />
         </Modal.Root>
       </ButtonsContainer>
     </CardContainer>

@@ -1,30 +1,30 @@
-import { useState, useEffect } from 'react';
-
+import InputSearch from '@/components/atoms/InputSearch';
+import SelectFilter from '@/components/atoms/SelectFilter';
+import { Footer } from '@/components/organisms/Footer';
+import { MentorsGrid } from '@/components/organisms/MentorsGrid';
+import { genders, specialties } from '@/data/static-info';
+import { IMentors } from '@/services/interfaces/IUseMentorsService';
+import { useMentorsCalendlyInfoService } from '@/services/user/useMentorsCalendlyInfoService';
+import { useMentorsService } from '@/services/user/useMentorsService';
 import {
   Container,
-  SubHeaderContainer,
-  TitleContainer,
-  SubTitleContainer,
-  CTAMain,
-  CTASub,
-  StacksContainer,
-  Stack,
-  MainContent,
-  Divider,
-  RemoveFiltersBtn,
   ContainerControls,
   ContainerSelects,
   Content,
+  CTAMain,
+  CTASub,
+  Divider,
+  MainContent,
+  RemoveFiltersBtn,
+  Stack,
+  StacksContainer,
+  SubHeaderContainer,
+  SubTitleContainer,
+  TitleContainer,
 } from '@/styles/pages/mentors';
 import Link from 'next/link';
-import { Footer } from '@/components/organisms/Footer';
-import { useMentorsService } from '@/services/user/useMentorsService';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import InputSearch from '@/components/atoms/InputSearch';
-import SelectFilter from '@/components/atoms/SelectFilter';
-import { genders, specialties } from '@/data/static-info';
-import { MentorsGrid } from '@/components/organisms/MentorsGrid';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export default function MentorPage() {
   const router = useRouter();
@@ -34,6 +34,7 @@ export default function MentorPage() {
   const [queryMentor, setQueryMentor] = useState('');
 
   const { data: mentors, isLoading } = useMentorsService();
+  const { data: mentorCalendlyInfo } = useMentorsCalendlyInfoService();
 
   const mentorsFiltered = mentors?.filter((mentor: IMentors) => {
     const nameFilter = queryMentor.toLowerCase();
@@ -135,7 +136,11 @@ export default function MentorPage() {
             </StacksContainer>
           )}
 
-          <MentorsGrid loading={isLoading} mentors={mentorsFiltered ?? []} />
+          <MentorsGrid
+            loading={isLoading}
+            mentors={mentorsFiltered ?? []}
+            mentorCalendlyInfo={mentorCalendlyInfo}
+          />
         </MainContent>
       </Container>
       <Footer />
