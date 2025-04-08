@@ -1,11 +1,11 @@
 import { ErrorMessage, Field, FieldAttributes, useFormikContext } from 'formik';
+import { ReactNode } from 'react';
 import {
-  ContainerInputLabel,
   ContainerError,
   ContainerInput,
+  ContainerInputLabel,
   StyledLabel,
 } from './style';
-import { ReactNode } from 'react';
 
 interface InputFormProps extends FieldAttributes<any> {
   name: string;
