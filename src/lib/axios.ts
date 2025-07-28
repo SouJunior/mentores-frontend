@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const serverUrl = {
-  development: 'http://localhost:3000',
+  development: 'https://p01--mentores-backend-api--brg9tw85vflp.code.run/',
   production: 'https://mentores-backend-6dkc.onrender.com/',
 };
 
