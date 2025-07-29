@@ -46,7 +46,9 @@ export const ErrorOutlineRoundedIconStyled = styled(ErrorOutlineRoundedIcon)`
 `;
 
 export const ButtonContainer = styled.div`
-  max-width: 12rem;
+  display: flex;
+  justify-content: space-between;
+  max-width: 28rem;
 `;
 
 export const ContainerInput = styled.div`
