@@ -119,7 +119,7 @@ export function ScheduleTab() {
 
   const startOAuthCalendlySync = () => {
     const calendlyClientId = '0FCoWFaytwSPcPUI2FSxLAxmGHNfLaXrye7in6WXkmY';
-    const redirectUri = "http://localhost:3000/calendly/callback";
+    const redirectUri = "https://p01--mentores-backend-api--brg9tw85vflp.code.run/calendly/callback";
     const calendlyAuthUrl = `https://auth.calendly.com/oauth/authorize?client_id=${calendlyClientId}&response_type=code&redirect_uri=${redirectUri}&state=${encodeURIComponent(String(mentor.data?.id))}`;
 
     window.location.href = calendlyAuthUrl;
