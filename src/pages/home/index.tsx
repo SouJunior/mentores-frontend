@@ -8,6 +8,7 @@ import { Onboarding } from '@/components/organisms/Onboarding';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,16 @@ export default function HomePage() {
 
     const accountDeletedStatus = Boolean(router.query['account-deleted']);
     setIsAccountDeleted(accountDeletedStatus);
+
+    const calendlyStatus = router.query['calendly'];
+    if (calendlyStatus === 'success') {
+      toast.success('Calendly conectado com sucesso!');
+      setIsOpen(true);
+    }
+
+    if (calendlyStatus === 'error') {
+      toast.error('Ocorreu um erro ao conectar com o Calendly.');
+    }
   }, [router.query]);
 
   const handleCloseModal = () => {
