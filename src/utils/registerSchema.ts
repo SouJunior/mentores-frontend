@@ -34,17 +34,17 @@ export const registerSchema = yup.object({
   dateBirthday: yup
     .date()
     .required('Data de nascimento obrigatória')
-    .test('is-18', 'Você precisa ter pelo menos 18 anos', value => {
+    .test('is-25', 'Você precisa ter pelo menos 25 anos', value => {
       if (!value) return false;
 
       const today = new Date();
-      const eighteenYearsAgo = new Date(
-        today.getFullYear() - 18,
+      const twentyFiveYearsAgo = new Date(
+        today.getFullYear() - 25,
         today.getMonth(),
         today.getDate()
       );
 
-      return value <= eighteenYearsAgo;
+      return value <= twentyFiveYearsAgo;
     }),
 
   agreeWithTermsAndPolicies: yup
