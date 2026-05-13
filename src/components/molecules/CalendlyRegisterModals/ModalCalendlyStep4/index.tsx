@@ -1,18 +1,17 @@
-import React from 'react'
-import { Button } from '@/components/atoms/Button'
+import imagemParabens from '@/assets/modalCalendly/parabens.png';
+import { Button } from '@/components/atoms/Button';
 import {
   ButtonsContainer,
   ModalButton,
   ModalDescription,
   ModalImageContainer,
   ModalTitle,
-} from '@/components/organisms/CalendlyRegister/style'
-import Image from 'next/image'
-import imagemParabens from '@/assets/modalCalendly/parabens.png'
+} from '@/components/organisms/CalendlyRegister/style';
+import Image from 'next/image';
 
 type ModalCalendlyStep4Props = {
-  handleCloseModal: () => void
-}
+  handleCloseModal: () => void;
+};
 
 export default function ModalCalendlyStep4({
   handleCloseModal,
@@ -38,5 +37,5 @@ export default function ModalCalendlyStep4({
         </Button>
       </ButtonsContainer>
     </>
-  )
+  );
 }

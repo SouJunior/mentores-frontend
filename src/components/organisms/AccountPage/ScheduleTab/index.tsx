@@ -39,7 +39,7 @@ export function ScheduleTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
 
   const { handleMentorCalendlyInfo } = UserUpdateService();
-  const { mentor, mentorCalendlyInfo } = useAuthContext();
+  const { mentorCalendlyInfo } = useAuthContext();
 
   const generateCalendlyLink = () => {
     if (
@@ -158,9 +158,6 @@ export function ScheduleTab() {
             variant="secondary"
           >
             Ir para o Calendly
-          </Button>
-          <Button onClick={startOAuthCalendlySync} variant="secondary">
-            Vincular Calendly OAuth
           </Button>
         </ButtonContainer>
 
