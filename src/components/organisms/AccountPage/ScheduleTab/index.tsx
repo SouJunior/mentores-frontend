@@ -139,6 +139,7 @@ export function ScheduleTab() {
   return (
     <ScheduleTabContainer value="schedule">
       <TitleTab>Agenda</TitleTab>
+
       <ScheduleContent>
         <AlertContainer>
           <ErrorOutlineRoundedIconStyled />

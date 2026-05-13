@@ -72,11 +72,7 @@ export function FormLogin() {
         return router.push('/onBoarding');
       }
 
-      router.push(
-        data.info.calendlyName
-          ? '/'
-          : '/?connect-calendly=true'
-      );
+      router.push('/');
     } catch (err) {
       if (err instanceof AxiosError) {
         const messageKey = err.response?.data.message.toLowerCase();

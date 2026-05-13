@@ -7,6 +7,6 @@ const serverUrl = {
 };
 
 export const api = axios.create({
-  baseURL: serverUrl.development,
+  baseURL: serverUrl.developmentLocal,
   withCredentials: true,
 });
