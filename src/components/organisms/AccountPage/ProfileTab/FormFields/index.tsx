@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 
 export function FormFields() {
   const [isMaxCharactersExceeded, setIsMaxCharactersExceeded] = useState(false);
+  const [isEditPhotoModalOpen, setIsEditPhotoModalOpen] = useState(false);
   const { mentor } = useAuthContext();
   const [specialties, setSpecialties] = useState<string[]>(
     mentor.data?.specialties ?? []
@@ -31,6 +32,7 @@ export function FormFields() {
 
   const handleImageEdit = (editedImage: string | null) => {
     formik.setFieldValue('profile', editedImage || '');
+    setIsEditPhotoModalOpen(false);
   };
 
   const selectedCount = specialties.length ?? mentor.data?.specialties;
@@ -80,7 +82,10 @@ export function FormFields() {
 
   return (
     <ContentContainer>
-      <Modal.Root>
+      <Modal.Root
+        open={isEditPhotoModalOpen}
+        onOpenChange={setIsEditPhotoModalOpen}
+      >
         <ButtonEditPhoto>
           <PhotoButton
             selectedPhoto={formik.values.profile ?? mentor.data?.profile}
@@ -105,6 +110,7 @@ export function FormFields() {
           selectedPhoto={formik.values.profile ?? mentor.data?.profile ?? ''}
           onAddPhoto={photo => {
             formik.setFieldValue('profile', photo);
+            setIsEditPhotoModalOpen(false);
           }}
           onImageEdit={handleImageEdit}
         />
