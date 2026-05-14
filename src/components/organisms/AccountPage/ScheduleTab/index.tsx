@@ -187,9 +187,6 @@ export function ScheduleTab() {
           >
             Ir para o Calendly
           </Button>
-          <Button onClick={startOAuthCalendlySync} variant="secondary">
-            Vincular Calendly OAuth
-          </Button>
         </ButtonContainer>
 
         <form onSubmit={handleSubmit}>

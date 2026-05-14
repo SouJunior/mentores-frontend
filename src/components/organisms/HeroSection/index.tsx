@@ -1,5 +1,8 @@
+import { Button } from '@/components/atoms/Button';
 import { ListItemsHero } from '@/components/molecules/ListItemsHero';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import { MagnifyingGlass } from 'phosphor-react';
 import { FormEvent, useEffect, useState } from 'react';
 import { AnimationTextHero } from '../../../styles/animations';
 import {
@@ -11,9 +14,6 @@ import {
   QueryInput,
   Title,
 } from './style';
-import { useRouter } from 'next/router';
-import { Button } from '@/components/atoms/Button';
-import { MagnifyingGlass } from 'phosphor-react';
 
 const text = ['mentorias personalizadas', 'profissionais experientes'];
 
@@ -27,13 +27,13 @@ export function HeroSection() {
       if (textHero === text[0]) {
         setTextHero(text[1]);
       }
-    }, 1500);
+    }, 4500);
 
     setTimeout(() => {
       if (textHero === text[1]) {
         setTextHero(text[0]);
       }
-    }, 1500);
+    }, 4500);
   }
 
   function handleSearchMentor(e: FormEvent<HTMLFormElement>) {
