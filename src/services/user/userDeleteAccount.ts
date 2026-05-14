@@ -1,27 +1,22 @@
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { api } from '@/lib/axios';
-import { FormValuesDeleteAccountDTO } from '../interfaces/IUserDeleteAccount';
 import UserLoginService from './userLoginService';
 
 export function UserDeleteAccount() {
-  const { userSession, setUserSession } = useAuthContext();
+  const { setUserSession, userSession } = useAuthContext();
   const { logout } = UserLoginService();
 
-  const id = userSession?.id;
+  const token = userSession?.token;
 
-  type ActionFlag = {
-    action: 'delete' | 'disable';
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   };
 
-  async function deleteAccount(
-    data: FormValuesDeleteAccountDTO,
-    action: ActionFlag
-  ) {
+  async function deleteAccount() {
     try {
-      await api.patch(`/mentor/${id}`, {
-        data,
-        action,
-      });
+      await api.patch(`/mentor/delete-mentor`, {}, config);
       logout();
       setUserSession(null);
     } catch (error) {

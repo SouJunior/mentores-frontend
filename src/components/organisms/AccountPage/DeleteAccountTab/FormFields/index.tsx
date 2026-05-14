@@ -32,7 +32,6 @@ export default function FormFields({
     useState<boolean>(false);
   const [reasonText, setReasonText] = useState<string>('');
   const [experienceText, setExperienceText] = useState<string>('');
-  // const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
   const [maxCharsExceeded, setMaxCharsExceeded] = useState({
     reasonText: false,
     userExperienceFeedback: false,

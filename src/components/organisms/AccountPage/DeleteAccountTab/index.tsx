@@ -2,6 +2,7 @@ import { Button } from '@/components/atoms/Button';
 import { Modal } from '@/components/atoms/Modal';
 import { ModalDeleteAccount } from '@/components/molecules/ModalDeleteAccount';
 import { FormValuesDeleteAccountDTO } from '@/services/interfaces/IUserDeleteAccount';
+import { UserAccountDeleteFeedback } from '@/services/user/userAccountDeleteFeedback';
 import { UserDeleteAccount } from '@/services/user/userDeleteAccount';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -34,6 +35,7 @@ export interface FormValues {
 
 export function DeleteAccountTab() {
   const router = useRouter();
+  const { accountDeleteFeedback } = UserAccountDeleteFeedback();
   const { deleteAccount } = UserDeleteAccount();
 
   const initialFormValues: FormValues = {
@@ -95,9 +97,9 @@ export function DeleteAccountTab() {
 
     if (!hasErrors) {
       try {
-        await deleteAccount(formValues as FormValuesDeleteAccountDTO, {
-          action: 'delete',
-        });
+        await accountDeleteFeedback(formValues as FormValuesDeleteAccountDTO);
+
+        await deleteAccount();
         router.push('/?account-deleted=true');
       } catch (error) {
         if (error instanceof AxiosError) {

@@ -9,22 +9,22 @@ import {
   TitleTab,
 } from '../styles';
 
-import { FormikProvider, useFormik } from 'formik';
+import { FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { FormFields } from './FormFields';
 
 import { Modal } from '@/components/atoms/Modal';
 import { Spinner } from '@/components/atoms/Spinner';
-import { ModalCancel } from '@/components/molecules/ModalCancel';
+import { ModalCancelKeepRoute } from '@/components/molecules/ModalCancelKeepRoute';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { IMentor } from '@/context/interfaces/IAuth';
 import { genders } from '@/data/static-info';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
 import { isEmpty } from '@/utils/is-empty';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 const personalInfoSchema = yup.object({
@@ -36,14 +36,47 @@ const personalInfoSchema = yup.object({
 
 export type PersonalInfoFormData = yup.InferType<typeof personalInfoSchema>;
 
+const normalizeDate = (date?: Date | string) => {
+  if (!date) {
+    return '';
+  }
+
+  return new Date(date).toISOString().split('T')[0];
+};
+
 export function PersonalInfoTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
 
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const { handleMentorData } = UserUpdateService();
-  const { userSession } = useAuthContext();
+  const { mentor, userSession } = useAuthContext();
+
+  const toastMessageSuccess = () =>
+    toast('Dados salvos com sucesso', {
+      icon: <CheckCircleOutlineRoundedIcon />,
+      position: 'top-center',
+      closeButton: false,
+      style: {
+        backgroundColor: '#72c270',
+        color: '#175116',
+        fontWeight: 500,
+        marginTop: '5rem',
+      },
+    });
+
+  const toastMessageDiscarded = () =>
+    toast('Alterações descartadas', {
+      icon: false,
+      position: 'top-center',
+      closeButton: false,
+      style: {
+        backgroundColor: '#f5dc66',
+        color: '#705e0b',
+        fontWeight: 500,
+        marginTop: '5rem',
+      },
+    });
 
   const { mutateAsync: updateMentorFn } = useMutation({
     mutationKey: ['mentor', userSession?.id],
@@ -63,17 +96,15 @@ export function PersonalInfoTab() {
 
   async function handleUpdatePersonalInfo(
     data: PersonalInfoFormData,
-    { resetForm }: { resetForm: () => void }
+    { resetForm }: FormikHelpers<PersonalInfoFormData>
   ) {
     try {
       await updateMentorFn(data);
 
-      resetForm();
-      router.push('/');
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        handleError(JSON.stringify(err.response?.data));
-      }
+      resetForm({ values: data });
+      toastMessageSuccess();
+    } catch {
+      handleError('Não foi possível salvar os dados. Tente novamente.');
     }
   }
 
@@ -84,19 +115,32 @@ export function PersonalInfoTab() {
     validateOnChange: true,
   });
 
-  const isButtonDisabled = Object.entries(formik.values).some(
-    ([key, value]) => !value || formik.errors[key as keyof PersonalInfoFormData]
-  );
+  const hasPersonalInfoChanges =
+    (formik.values.fullName !== undefined &&
+      formik.values.fullName !== (mentor.data?.fullName ?? '')) ||
+    (formik.values.email !== undefined &&
+      formik.values.email !== (mentor.data?.email ?? '')) ||
+    (formik.values.gender !== undefined &&
+      formik.values.gender !== (mentor.data?.gender ?? '')) ||
+    (formik.values.dateOfBirth !== undefined &&
+      normalizeDate(formik.values.dateOfBirth) !==
+        normalizeDate(mentor.data?.dateOfBirth));
+
+  const hasFormErrors = Object.keys(formik.errors).length > 0;
+  const isButtonDisabled =
+    !hasPersonalInfoChanges || hasFormErrors || formik.isSubmitting;
 
   const handleWarningModal = () => {
     const isFormEmpty = isEmpty(formik.values);
 
     if (!isFormEmpty) {
       setOpenWarningModal(true);
-      return;
     }
+  };
 
-    router.push('/');
+  const handleDiscard = () => {
+    formik.resetForm();
+    toastMessageDiscarded();
   };
 
   return (
@@ -117,7 +161,7 @@ export function PersonalInfoTab() {
               type="button"
               variant="tertiary"
               onClick={handleWarningModal}
-              disabled={formik.isSubmitting}
+              disabled={!hasPersonalInfoChanges || formik.isSubmitting}
             >
               Cancelar
             </Button>
@@ -126,7 +170,7 @@ export function PersonalInfoTab() {
               open={openWarningModal}
               onOpenChange={() => setOpenWarningModal(false)}
             >
-              <ModalCancel />
+              <ModalCancelKeepRoute handleDiscard={handleDiscard} />
             </Modal.Root>
 
             {formik.isSubmitting ? (
