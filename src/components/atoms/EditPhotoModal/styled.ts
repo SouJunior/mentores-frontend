@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Button } from '../Button';
 import { Modal } from '../Modal';
 
 export const EditPhotoContainer = styled(Modal.Content)`
@@ -32,17 +31,6 @@ export const ButtonsContainer = styled.div`
   width: 100%;
   display: flex;
   gap: 1rem;
-`;
-
-export const StyledHR = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: ${props => props.theme.colors.gray[700]};
-  margin-top: 0.25rem;
-`;
-
-export const SaveButton = styled(Button)`
-  margin-left: auto;
 `;
 
 export const ActionButton = styled.button`
@@ -84,11 +72,4 @@ export const ActionButton = styled.button`
 export const ModalCloseButton = styled(Modal.Close)`
   top: 1.5rem;
   right: 1.5rem;
-`;
-
-export const ModalCloseSavePhoto = styled(Modal.Close)`
-  position: static;
-  background-color: ${props => props.theme.colors.blue[800]};
-  color: ${props => props.theme.colors.white};
-  line-height: 0.7rem;
 `;
