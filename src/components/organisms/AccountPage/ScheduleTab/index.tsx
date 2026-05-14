@@ -33,15 +33,16 @@ import {
 
 export function ScheduleTab() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isValid, setIsValid] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [savedInputValue, setSavedInputValue] = useState('');
   const [openWarningModal, setOpenWarningModal] = useState(false);
 
-  const { handleMentorCalendlyInfo } = UserUpdateService();
+  const { handleMentorCalendlyInfo, updateMentorCalendlyInfo } =
+    UserUpdateService();
   const { mentor, mentorCalendlyInfo } = useAuthContext();
 
-  const generateCalendlyLink = () => {
+  const generateCalendlyLink = useCallback(() => {
     if (
       mentorCalendlyInfo.data?.calendlyName &&
       mentorCalendlyInfo.data?.agendaName
@@ -49,25 +50,30 @@ export function ScheduleTab() {
       return `https://calendly.com/${mentorCalendlyInfo.data.calendlyName}/${mentorCalendlyInfo.data.agendaName}`;
     }
     return '';
-  };
+  }, [
+    mentorCalendlyInfo.data?.agendaName,
+    mentorCalendlyInfo.data?.calendlyName,
+  ]);
 
   useEffect(() => {
     const link = generateCalendlyLink();
     setInputValue(link);
-  }, [
-    mentorCalendlyInfo.data?.calendlyName,
-    mentorCalendlyInfo.data?.agendaName,
-  ]);
+    setSavedInputValue(link);
+  }, [generateCalendlyLink]);
 
   const buttonDisabledVerification = useCallback(() => {
-    const valid = isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue);
+    const valid =
+      inputValue.trim() === '' ||
+      (isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue));
     setIsValid(valid);
-    setIsButtonDisabled(!valid);
   }, [inputValue]);
 
   useEffect(() => {
     buttonDisabledVerification();
   }, [inputValue, buttonDisabledVerification]);
+
+  const hasScheduleChanges = inputValue !== savedInputValue;
+  const isButtonDisabled = !hasScheduleChanges || !isValid || isLoading;
 
   const toastMessageSuccess = () =>
     toast('Alterações salvas', {
@@ -99,13 +105,34 @@ export function ScheduleTab() {
     e.preventDefault();
     setIsLoading(true);
     try {
+      if (inputValue.trim() === '') {
+        await updateMentorCalendlyInfo(
+          {
+            calendlyName: '',
+            agendaName: '',
+          }
+        );
+
+        setSavedInputValue('');
+        mentorCalendlyInfo.refetch();
+        toastMessageSuccess();
+        return;
+      }
+
       if (isValidHttpsUrl(inputValue) && isCalendlyLink(inputValue)) {
         const { firstPathName, secondPathName } = splitCalendlyName(inputValue);
-        await handleMentorCalendlyInfo({
+        const calendlyData = {
           calendlyName: firstPathName,
           agendaName: secondPathName,
-        });
+        };
 
+        if (mentorCalendlyInfo.data?.id) {
+          await updateMentorCalendlyInfo(calendlyData);
+        } else {
+          await handleMentorCalendlyInfo(calendlyData);
+        }
+
+        setSavedInputValue(inputValue);
         mentorCalendlyInfo.refetch();
         toastMessageSuccess();
       }
@@ -118,12 +145,13 @@ export function ScheduleTab() {
   };
 
   const handleWarningModal = () => {
-    setOpenWarningModal(true);
+    if (hasScheduleChanges) {
+      setOpenWarningModal(true);
+    }
   };
 
   const handleDiscard = () => {
-    const link = generateCalendlyLink();
-    setInputValue(link);
+    setInputValue(savedInputValue);
     toastMessageDiscarded();
   };
 
@@ -139,6 +167,7 @@ export function ScheduleTab() {
   return (
     <ScheduleTabContainer value="schedule">
       <TitleTab>Agenda</TitleTab>
+
       <ScheduleContent>
         <AlertContainer>
           <ErrorOutlineRoundedIconStyled />
@@ -158,9 +187,6 @@ export function ScheduleTab() {
           >
             Ir para o Calendly
           </Button>
-          <Button onClick={startOAuthCalendlySync} variant="secondary">
-            Vincular Calendly OAuth
-          </Button>
         </ButtonContainer>
 
         <form onSubmit={handleSubmit}>
@@ -179,7 +205,6 @@ export function ScheduleTab() {
                 const valid =
                   isValidHttpsUrl(pastedText) && isCalendlyLink(pastedText);
                 setIsValid(valid);
-                setIsButtonDisabled(!valid);
                 setInputValue(pastedText);
               }}
               id="link-calendly"
@@ -205,7 +230,7 @@ export function ScheduleTab() {
               type="button"
               variant="tertiary"
               onClick={handleWarningModal}
-              disabled={isLoading}
+              disabled={!hasScheduleChanges || isLoading}
             >
               Cancelar
             </Button>

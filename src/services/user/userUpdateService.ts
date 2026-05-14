@@ -39,6 +39,16 @@ const UserUpdateService = () => {
     );
   };
 
+  const updateMentorCalendlyInfo = async (data: ICalendlyUserInfo) => {
+    await api.put(
+      `/calendly/mentorInfo`,
+      {
+        ...data,
+      },
+      config
+    );
+  };
+
   const updatePassword = async (data: UserUpdatePasswordDTO) => {
     await api.put(
       `/mentor/change_password`,
@@ -51,7 +61,12 @@ const UserUpdateService = () => {
     );
   };
 
-  return { handleMentorData, handleMentorCalendlyInfo, updatePassword };
+  return {
+    handleMentorData,
+    handleMentorCalendlyInfo,
+    updateMentorCalendlyInfo,
+    updatePassword,
+  };
 };
 
 export default UserUpdateService;

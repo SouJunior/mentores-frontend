@@ -14,12 +14,30 @@ export default function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [isAccountDeleted, setIsAccountDeleted] = useState(false);
-  const { mentor } = useAuthContext();
+  const { mentor, userSession } = useAuthContext();
 
   const router = useRouter();
 
   useEffect(() => {
-    const openStatus = Boolean(router.query['connect-calendly']);
+    if (
+      router.isReady &&
+      router.query['connect-calendly'] &&
+      router.query['connect-calendly'] !== 'true'
+    ) {
+      const query = { ...router.query };
+      delete query['connect-calendly'];
+
+      router.replace({ pathname: '/', query }, undefined, {
+        shallow: true,
+      });
+      return;
+    }
+
+    const openStatus =
+      router.query['connect-calendly'] === 'true' &&
+      Boolean(userSession) &&
+      mentor.data?.registerComplete === true;
+
     setIsOpen(openStatus);
 
     const accountDeletedStatus = Boolean(router.query['account-deleted']);
@@ -28,18 +46,16 @@ export default function HomePage() {
     const calendlyStatus = router.query['calendly'];
     if (calendlyStatus === 'success') {
       toast.success('Calendly conectado com sucesso!');
-      setIsOpen(true);
     }
 
     if (calendlyStatus === 'error') {
       toast.error('Ocorreu um erro ao conectar com o Calendly.');
     }
-  }, [router.query]);
+  }, [mentor.data?.registerComplete, router, router.query, userSession]);
 
   const handleCloseModal = () => {
-    const calendlyClientId = 'Vx2DRKhKAvTcl5y8N1SqGg0OQ-9HR4KTO62t29C5L8M';
-    const redirectUri =
-      'https://p01--mentores-backend-api-dev--bj8pjy8s82zl.code.run/calendly/callback';
+    const calendlyClientId = 'N24tR3RHkxh41T1wX2Gxm0cK7BdyIWicqVuLGDLrVSo';
+    const redirectUri = 'http://localhost:3000/calendly/callback';
     const calendlyAuthUrl = `https://auth.calendly.com/oauth/authorize?client_id=${calendlyClientId}&response_type=code&redirect_uri=${redirectUri}&state=${encodeURIComponent(String(mentor.data?.id))}`;
 
     window.location.href = calendlyAuthUrl;
