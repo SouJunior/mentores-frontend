@@ -40,7 +40,7 @@ export function ScheduleTab() {
 
   const { handleMentorCalendlyInfo, updateMentorCalendlyInfo } =
     UserUpdateService();
-  const { mentor, mentorCalendlyInfo } = useAuthContext();
+  const { mentorCalendlyInfo } = useAuthContext();
 
   const generateCalendlyLink = useCallback(() => {
     if (
