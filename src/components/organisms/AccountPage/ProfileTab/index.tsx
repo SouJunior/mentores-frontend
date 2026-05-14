@@ -8,20 +8,20 @@ import {
   TitleTab,
 } from '../styles';
 
-import { FormikProvider, useFormik } from 'formik';
+import { FormikHelpers, FormikProvider, useFormik } from 'formik';
 
 import { Modal } from '@/components/atoms/Modal';
 import { Spinner } from '@/components/atoms/Spinner';
-import { ModalCancel } from '@/components/molecules/ModalCancel';
+import { ModalCancelKeepRoute } from '@/components/molecules/ModalCancelKeepRoute';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { IMentor } from '@/context/interfaces/IAuth';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
 import { isEmpty } from '@/utils/is-empty';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { FormFields } from './FormFields';
 import { ProfileContentForm } from './styles';
@@ -36,12 +36,38 @@ export type ProfileFormData = yup.InferType<typeof profileSchema>;
 
 export function ProfileTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
+  const [formFieldsKey, setFormFieldsKey] = useState(0);
 
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const { handleMentorData } = UserUpdateService();
   const { userSession } = useAuthContext();
+
+  const toastMessageSuccess = () =>
+    toast('Dados salvos com sucesso', {
+      icon: <CheckCircleOutlineRoundedIcon />,
+      position: 'top-center',
+      closeButton: false,
+      style: {
+        backgroundColor: '#72c270',
+        color: '#175116',
+        fontWeight: 500,
+        marginTop: '5rem',
+      },
+    });
+
+  const toastMessageDiscarded = () =>
+    toast('Alterações descartadas', {
+      icon: false,
+      position: 'top-center',
+      closeButton: false,
+      style: {
+        backgroundColor: '#f5dc66',
+        color: '#705e0b',
+        fontWeight: 500,
+        marginTop: '5rem',
+      },
+    });
 
   const { mutateAsync: updateMentorFn } = useMutation({
     mutationKey: ['mentor', userSession?.id],
@@ -61,17 +87,15 @@ export function ProfileTab() {
 
   async function handleUpdateProfile(
     data: ProfileFormData,
-    { resetForm }: { resetForm: () => void }
+    { resetForm }: FormikHelpers<ProfileFormData>
   ) {
     try {
       await updateMentorFn(data);
 
-      resetForm();
-      router.push('/');
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        handleError(JSON.stringify(err.response?.data));
-      }
+      resetForm({ values: data });
+      toastMessageSuccess();
+    } catch {
+      handleError('Não foi possível salvar os dados. Tente novamente.');
     }
   }
 
@@ -91,10 +115,13 @@ export function ProfileTab() {
 
     if (!isFormEmpty) {
       setOpenWarningModal(true);
-      return;
     }
+  };
 
-    router.push('/');
+  const handleDiscard = () => {
+    formik.resetForm();
+    setFormFieldsKey(state => state + 1);
+    toastMessageDiscarded();
   };
 
   return (
@@ -106,7 +133,7 @@ export function ProfileTab() {
 
       <FormikProvider value={formik}>
         <ProfileContentForm>
-          <FormFields />
+          <FormFields key={formFieldsKey} />
 
           <Divider />
 
@@ -124,7 +151,7 @@ export function ProfileTab() {
               open={openWarningModal}
               onOpenChange={() => setOpenWarningModal(false)}
             >
-              <ModalCancel />
+              <ModalCancelKeepRoute handleDiscard={handleDiscard} />
             </Modal.Root>
 
             {formik.isSubmitting ? (
