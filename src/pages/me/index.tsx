@@ -21,7 +21,7 @@ import {
 import * as Tabs from '@radix-ui/react-tabs';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -72,6 +72,38 @@ export default function MePage() {
       {
         pathname: '/me',
         query: { tab: 'personal-info' },
+      },
+      undefined,
+      { shallow: true }
+    );
+  }, [router]);
+
+  useEffect(() => {
+    if (!router.isReady) {
+      return;
+    }
+
+    const calendlyStatus = router.query.calendly;
+
+    if (calendlyStatus !== 'success' && calendlyStatus !== 'error') {
+      return;
+    }
+
+    if (calendlyStatus === 'success') {
+      toast.success('Calendly vinculado com sucesso!');
+    }
+
+    if (calendlyStatus === 'error') {
+      toast.error('Não foi possível vincular o Calendly.');
+    }
+
+    const query = { ...router.query };
+    delete query.calendly;
+
+    router.replace(
+      {
+        pathname: '/me',
+        query,
       },
       undefined,
       { shallow: true }

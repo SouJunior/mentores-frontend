@@ -13,6 +13,10 @@ export const Dotted = styled.button`
   background-color: transparent;
   text-align: center;
 
+  &.error {
+    border-color: ${props => props.theme.colors.red[600]};
+  }
+
   section {
     width: 5rem;
     height: 5rem;
@@ -49,6 +53,12 @@ export const StyledInfo = styled.span`
   line-height: 1rem;
   color: ${props => props.theme.colors.black[200]};
   max-width: 9.5rem;
+`;
+
+export const ErrorMessageText = styled.span`
+  color: ${props => props.theme.colors.red[600]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  line-height: 1rem;
 `;
 
 export const CharactersWarnInput = styled(StyledInfo)`
@@ -112,6 +122,12 @@ export const SelectInputContainer = styled.label`
 
     .asterisk {
       color: ${props => props.theme.colors.blue[700]};
+    }
+  }
+
+  &.error {
+    .select-trigger {
+      border-color: ${props => props.theme.colors.red[600]};
     }
   }
 `;
