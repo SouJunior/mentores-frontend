@@ -25,16 +25,20 @@ import { useAuthContext } from '@/context/Auth/AuthContext';
 import UserLoginService from '@/services/user/userLoginService';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { breakpoints } from '@/styles/theme';
+import { useRouter } from 'next/router';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userSession, mentor, setUserSession } = useAuthContext();
   const { logout } = UserLoginService();
   const breakpoint = useBreakpoint();
+  const router = useRouter();
 
   function handleLogoutUser() {
     logout();
     setUserSession(null);
+    setIsMenuOpen(false);
+    router.replace('/');
   }
 
   return (
