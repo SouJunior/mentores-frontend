@@ -39,12 +39,9 @@ const UserUpdateService = () => {
     );
   };
 
-  const updateMentorCalendlyInfo = async (
-    data: ICalendlyUserInfo,
-    calendlyInfoId: string
-  ) => {
+  const updateMentorCalendlyInfo = async (data: ICalendlyUserInfo) => {
     await api.put(
-      `/calendly/${calendlyInfoId}`,
+      `/calendly/mentorInfo`,
       {
         ...data,
       },

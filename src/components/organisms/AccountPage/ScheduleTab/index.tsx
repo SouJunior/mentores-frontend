@@ -110,8 +110,7 @@ export function ScheduleTab() {
           {
             calendlyName: '',
             agendaName: '',
-          },
-          String(mentorCalendlyInfo.data?.id)
+          }
         );
 
         setSavedInputValue('');
@@ -128,10 +127,7 @@ export function ScheduleTab() {
         };
 
         if (mentorCalendlyInfo.data?.id) {
-          await updateMentorCalendlyInfo(
-            calendlyData,
-            mentorCalendlyInfo.data.id
-          );
+          await updateMentorCalendlyInfo(calendlyData);
         } else {
           await handleMentorCalendlyInfo(calendlyData);
         }
