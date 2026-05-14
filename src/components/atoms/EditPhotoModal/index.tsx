@@ -3,12 +3,9 @@ import {
   ButtonsContainer,
   EditPhotoContainer,
   StyledInfo,
-  StyledHR,
-  SaveButton,
   ActionButton,
   PhotoContainerActions,
   ModalCloseButton,
-  ModalCloseSavePhoto,
 } from './styled';
 import PhotoButton from '../PhotoButton';
 import ModalImageEditor from '../ModalImageEditor';
@@ -65,11 +62,15 @@ export default function EditPhotoModal({
   };
 
   const handleSavePhoto = (editedImage: string | null) => {
-    if (selectedPhoto && onAddPhoto) {
-      onAddPhoto(selectedPhoto);
-    }
+    const photo = editedImage ?? selectedPhoto;
+
     if (onImageEdit) {
-      onImageEdit(editedImage);
+      onImageEdit(photo);
+      return;
+    }
+
+    if (onAddPhoto) {
+      onAddPhoto(photo);
     }
   };
 
@@ -113,16 +114,6 @@ export default function EditPhotoModal({
         </ButtonsContainer>
       </PhotoContainerActions>
 
-      <StyledHR aria-hidden />
-
-      <ModalCloseSavePhoto asChild>
-        <SaveButton
-          disabled={!selectedPhoto}
-          onClick={() => handleSavePhoto(selectedPhoto)}
-        >
-          Salvar
-        </SaveButton>
-      </ModalCloseSavePhoto>
     </EditPhotoContainer>
   );
 }
