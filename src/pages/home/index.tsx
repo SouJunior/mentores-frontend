@@ -19,6 +19,20 @@ export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
+    if (
+      router.isReady &&
+      router.query['connect-calendly'] &&
+      router.query['connect-calendly'] !== 'true'
+    ) {
+      const query = { ...router.query };
+      delete query['connect-calendly'];
+
+      router.replace({ pathname: '/', query }, undefined, {
+        shallow: true,
+      });
+      return;
+    }
+
     const openStatus =
       router.query['connect-calendly'] === 'true' &&
       Boolean(userSession) &&
@@ -37,7 +51,7 @@ export default function HomePage() {
     if (calendlyStatus === 'error') {
       toast.error('Ocorreu um erro ao conectar com o Calendly.');
     }
-  }, [mentor.data?.registerComplete, router.query, userSession]);
+  }, [mentor.data?.registerComplete, router, router.query, userSession]);
 
   const handleCloseModal = () => {
     const calendlyClientId = 'N24tR3RHkxh41T1wX2Gxm0cK7BdyIWicqVuLGDLrVSo';
