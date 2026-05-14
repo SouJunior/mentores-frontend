@@ -25,22 +25,58 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+const accountTabs = [
+  'personal-info',
+  'profile',
+  'schedule',
+  'password',
+  'account-management',
+];
+
 export default function MePage() {
   const { mentor } = useAuthContext();
   const loading = useProtectPage();
 
   const router = useRouter();
   const initialTab = router.query.tab as string;
-  const [activeTab, setActiveTab] = useState(initialTab ?? 'personal-info');
+  const [activeTab, setActiveTab] = useState(
+    accountTabs.includes(initialTab) ? initialTab : 'personal-info'
+  );
 
   function handleTabChange(value: string) {
     setActiveTab(value);
-    router.push({ query: { tab: value } });
+    router.push(
+      {
+        pathname: '/me',
+        query: { tab: value },
+      },
+      undefined,
+      { shallow: true }
+    );
   }
 
   useEffect(() => {
-    setActiveTab(router.query.tab as string);
-  }, [router.query.tab]);
+    if (!router.isReady) {
+      return;
+    }
+
+    const currentTab = router.query.tab as string;
+
+    if (accountTabs.includes(currentTab)) {
+      setActiveTab(currentTab);
+      return;
+    }
+
+    setActiveTab('personal-info');
+    router.replace(
+      {
+        pathname: '/me',
+        query: { tab: 'personal-info' },
+      },
+      undefined,
+      { shallow: true }
+    );
+  }, [router]);
 
   if (loading) {
     return (
