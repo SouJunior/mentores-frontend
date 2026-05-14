@@ -34,6 +34,19 @@ const profileSchema = yup.object({
 
 export type ProfileFormData = yup.InferType<typeof profileSchema>;
 
+const areSpecialtiesEqual = (
+  currentSpecialties: string[] = [],
+  newSpecialties: string[] = []
+) => {
+  if (currentSpecialties.length !== newSpecialties.length) {
+    return false;
+  }
+
+  return currentSpecialties.every(specialty =>
+    newSpecialties.includes(specialty)
+  );
+};
+
 export function ProfileTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
   const [formFieldsKey, setFormFieldsKey] = useState(0);
@@ -41,7 +54,7 @@ export function ProfileTab() {
   const queryClient = useQueryClient();
 
   const { handleMentorData } = UserUpdateService();
-  const { userSession } = useAuthContext();
+  const { mentor, userSession } = useAuthContext();
 
   const toastMessageSuccess = () =>
     toast('Dados salvos com sucesso', {
@@ -106,9 +119,20 @@ export function ProfileTab() {
     validateOnChange: true,
   });
 
-  const isButtonDisabled = Object.entries(formik.values).some(
-    ([key, value]) => !value || formik.errors[key as keyof ProfileFormData]
-  );
+  const hasProfileChanges =
+    (formik.values.aboutMe !== undefined &&
+      formik.values.aboutMe !== (mentor.data?.aboutMe ?? '')) ||
+    (formik.values.profile !== undefined &&
+      formik.values.profile !== (mentor.data?.profile ?? '')) ||
+    (formik.values.specialties !== undefined &&
+      !areSpecialtiesEqual(
+        mentor.data?.specialties,
+        formik.values.specialties
+      ));
+
+  const hasFormErrors = Object.keys(formik.errors).length > 0;
+  const isButtonDisabled =
+    !hasProfileChanges || hasFormErrors || formik.isSubmitting;
 
   const handleWarningModal = () => {
     const isFormEmpty = isEmpty(formik.values);
@@ -142,7 +166,7 @@ export function ProfileTab() {
               type="button"
               variant="tertiary"
               onClick={handleWarningModal}
-              disabled={formik.isSubmitting}
+              disabled={!hasProfileChanges || formik.isSubmitting}
             >
               Cancelar
             </Button>

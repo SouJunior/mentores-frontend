@@ -36,13 +36,21 @@ const personalInfoSchema = yup.object({
 
 export type PersonalInfoFormData = yup.InferType<typeof personalInfoSchema>;
 
+const normalizeDate = (date?: Date | string) => {
+  if (!date) {
+    return '';
+  }
+
+  return new Date(date).toISOString().split('T')[0];
+};
+
 export function PersonalInfoTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
 
   const queryClient = useQueryClient();
 
   const { handleMentorData } = UserUpdateService();
-  const { userSession } = useAuthContext();
+  const { mentor, userSession } = useAuthContext();
 
   const toastMessageSuccess = () =>
     toast('Dados salvos com sucesso', {
@@ -107,9 +115,20 @@ export function PersonalInfoTab() {
     validateOnChange: true,
   });
 
-  const isButtonDisabled = Object.entries(formik.values).some(
-    ([key, value]) => !value || formik.errors[key as keyof PersonalInfoFormData]
-  );
+  const hasPersonalInfoChanges =
+    (formik.values.fullName !== undefined &&
+      formik.values.fullName !== (mentor.data?.fullName ?? '')) ||
+    (formik.values.email !== undefined &&
+      formik.values.email !== (mentor.data?.email ?? '')) ||
+    (formik.values.gender !== undefined &&
+      formik.values.gender !== (mentor.data?.gender ?? '')) ||
+    (formik.values.dateOfBirth !== undefined &&
+      normalizeDate(formik.values.dateOfBirth) !==
+        normalizeDate(mentor.data?.dateOfBirth));
+
+  const hasFormErrors = Object.keys(formik.errors).length > 0;
+  const isButtonDisabled =
+    !hasPersonalInfoChanges || hasFormErrors || formik.isSubmitting;
 
   const handleWarningModal = () => {
     const isFormEmpty = isEmpty(formik.values);
@@ -142,7 +161,7 @@ export function PersonalInfoTab() {
               type="button"
               variant="tertiary"
               onClick={handleWarningModal}
-              disabled={formik.isSubmitting}
+              disabled={!hasPersonalInfoChanges || formik.isSubmitting}
             >
               Cancelar
             </Button>
