@@ -37,6 +37,7 @@ export function InfoTooltip({ right }: ToolTipProps) {
           <Line aria-hidden />
           <Criterion>Mínimo 8 caracteres.</Criterion>
           <Criterion>Pelo menos uma letra maiúscula.</Criterion>
+          <Criterion>Pelo menos uma letra minúscula.</Criterion>
           <Criterion>Pelo menos um número.</Criterion>
           <Criterion>Pelo menos um caractere especial (ex: @#$)</Criterion>
         </CriteriaList>
