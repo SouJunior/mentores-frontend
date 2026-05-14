@@ -6,6 +6,7 @@ import { HeroSection } from '@/components/organisms/HeroSection';
 import { MentorSection } from '@/components/organisms/MentorSection';
 import { Onboarding } from '@/components/organisms/Onboarding';
 import { useAuthContext } from '@/context/Auth/AuthContext';
+import { redirectToCalendlyOAuth } from '@/utils/calendlyOAuth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -53,18 +54,36 @@ export default function HomePage() {
     }
   }, [mentor.data?.registerComplete, router, router.query, userSession]);
 
-  const handleCloseModal = () => {
-    const calendlyClientId = 'N24tR3RHkxh41T1wX2Gxm0cK7BdyIWicqVuLGDLrVSo';
-    const redirectUri = 'http://localhost:3000/calendly/callback';
-    const calendlyAuthUrl = `https://auth.calendly.com/oauth/authorize?client_id=${calendlyClientId}&response_type=code&redirect_uri=${redirectUri}&state=${encodeURIComponent(String(mentor.data?.id))}`;
+  const handleDismissCalendlyModal = () => {
+    const query = { ...router.query };
+    delete query['connect-calendly'];
 
-    window.location.href = calendlyAuthUrl;
-
-    router.replace('/', undefined, {
+    router.replace({ pathname: '/', query }, undefined, {
       shallow: true,
     });
     setIsOpen(false);
+    setCurrentStep(1);
+  };
+
+  const handleCloseAccountDeletedModal = () => {
+    const query = { ...router.query };
+    delete query['account-deleted'];
+
+    router.replace({ pathname: '/', query }, undefined, {
+      shallow: true,
+    });
     setIsAccountDeleted(false);
+  };
+
+  const handleCompleteCalendlyModal = () => {
+    const startedOAuth = redirectToCalendlyOAuth(mentor.data?.id);
+
+    if (!startedOAuth) {
+      toast.error('Não foi possível iniciar a conexão com o Calendly.');
+      return;
+    }
+
+    handleDismissCalendlyModal();
   };
 
   const handleNextStep = () => {
@@ -89,11 +108,12 @@ export default function HomePage() {
         setIsOpen={setIsOpen}
         handleNextStep={handleNextStep}
         handlePreviousStep={handlePreviousStep}
-        handleCloseModal={handleCloseModal}
+        handleCloseModal={handleCompleteCalendlyModal}
+        handleDismissModal={handleDismissCalendlyModal}
       />
       <ModalAccountDeleted
         isOpen={isAccountDeleted}
-        handleCloseModal={handleCloseModal}
+        handleCloseModal={handleCloseAccountDeletedModal}
       />
     </>
   );

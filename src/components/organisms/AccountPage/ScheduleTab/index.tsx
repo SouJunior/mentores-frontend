@@ -4,6 +4,7 @@ import { Spinner } from '@/components/atoms/Spinner';
 import { ModalCancelKeepRoute } from '@/components/molecules/ModalCancelKeepRoute';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import UserUpdateService from '@/services/user/userUpdateService';
+import { redirectToCalendlyOAuth } from '@/utils/calendlyOAuth';
 import { handleError } from '@/utils/handleError';
 import {
   isCalendlyLink,
@@ -40,7 +41,7 @@ export function ScheduleTab() {
 
   const { handleMentorCalendlyInfo, updateMentorCalendlyInfo } =
     UserUpdateService();
-  const { mentorCalendlyInfo } = useAuthContext();
+  const { mentor, mentorCalendlyInfo } = useAuthContext();
 
   const generateCalendlyLink = useCallback(() => {
     if (
@@ -73,7 +74,18 @@ export function ScheduleTab() {
   }, [inputValue, buttonDisabledVerification]);
 
   const hasScheduleChanges = inputValue !== savedInputValue;
-  const isButtonDisabled = !hasScheduleChanges || !isValid || isLoading;
+  const hasCalendlyOAuthConnection = Boolean(
+    mentorCalendlyInfo.data?.calendlyAccessToken ||
+      mentorCalendlyInfo.data?.calendlyRefreshToken ||
+      mentorCalendlyInfo.data?.calendlyUserUuid
+  );
+  const shouldConnectCalendlyOAuth = Boolean(
+    inputValue.trim() !== '' && isValid && !hasCalendlyOAuthConnection
+  );
+  const isButtonDisabled =
+    (!hasScheduleChanges && !shouldConnectCalendlyOAuth) ||
+    !isValid ||
+    isLoading;
 
   const toastMessageSuccess = () =>
     toast('Alterações salvas', {
@@ -134,6 +146,17 @@ export function ScheduleTab() {
 
         setSavedInputValue(inputValue);
         mentorCalendlyInfo.refetch();
+
+        if (!hasCalendlyOAuthConnection) {
+          const startedOAuth = redirectToCalendlyOAuth(mentor.data?.id);
+
+          if (!startedOAuth) {
+            handleError('Não foi possível iniciar a conexão com o Calendly.');
+          }
+
+          return;
+        }
+
         toastMessageSuccess();
       }
     } catch (error) {
@@ -239,7 +262,7 @@ export function ScheduleTab() {
               </ButtonLoading>
             ) : (
               <Button disabled={isButtonDisabled} type="submit">
-                Salvar
+                {shouldConnectCalendlyOAuth ? 'Vincular e salvar' : 'Salvar'}
               </Button>
             )}
           </ButtonsContainer>

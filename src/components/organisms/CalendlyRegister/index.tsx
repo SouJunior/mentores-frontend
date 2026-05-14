@@ -17,6 +17,7 @@ type CalendlyRegisterProps = {
   handleNextStep: () => void
   handlePreviousStep: () => void
   handleCloseModal: () => void
+  handleDismissModal: () => void
 }
 
 export default function CalendlyRegister({
@@ -26,10 +27,18 @@ export default function CalendlyRegister({
   handleNextStep,
   handlePreviousStep,
   handleCloseModal,
+  handleDismissModal,
 }: CalendlyRegisterProps) {
   return (
     <>
-      <Modal.Root open={isOpen} onOpenChange={handleCloseModal}>
+      <Modal.Root
+        open={isOpen}
+        onOpenChange={open => {
+          if (!open) {
+            handleDismissModal()
+          }
+        }}
+      >
         <ModalContainer>
           {currentStep === 1 && (
             <ModalCalendlyStep1

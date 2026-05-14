@@ -4,6 +4,7 @@ import {
   ButtonContainer,
   CharactersWarnInput,
   Dotted,
+  ErrorMessageText,
   FormContainer,
   NextButton,
   SelectInputContainer,
@@ -15,7 +16,7 @@ import {
 } from './styled';
 import { Dispatch, SetStateAction } from 'react';
 import EditPhotoModal from '@/components/atoms/EditPhotoModal';
-import { Form } from 'formik';
+import { ErrorMessage, Form } from 'formik';
 import { InputForm } from '@/components/atoms/InputForm';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,7 +24,6 @@ import { genders } from '@/data/static-info';
 import { Select } from '@/components/atoms/Select';
 import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext';
 import { Modal } from '@/components/atoms/Modal';
-import { isEmpty } from '@/utils/is-empty';
 
 interface FormOnBoardProps {
   onStep: Dispatch<SetStateAction<StepNumber>>;
@@ -32,15 +32,31 @@ interface FormOnBoardProps {
 export default function FormOnboard2({ onStep }: FormOnBoardProps) {
   const { formik } = useOnBoardingContext();
 
-  const isCompleted = !isEmpty(formik.touched);
-
   const handleImageEdit = (editedImage: string | null) => {
     formik.setFieldValue('profile', editedImage || '');
+    formik.setFieldTouched('profile', true, false);
   };
 
   const handleBackToFirstStep = () => {
     onStep(1);
   };
+
+  const handleSubmitAttempt = () => {
+    formik.setTouched(
+      {
+        ...formik.touched,
+        profile: true,
+        description: true,
+        gender: true,
+      },
+      true
+    );
+  };
+
+  const hasProfileError = Boolean(
+    formik.errors.profile && formik.touched.profile
+  );
+  const hasGenderError = Boolean(formik.errors.gender && formik.touched.gender);
 
   return (
     <>
@@ -53,7 +69,7 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
       <Modal.Root>
         <Modal.Control asChild>
-          <Dotted>
+          <Dotted className={hasProfileError ? 'error' : ''}>
             <PhotoButton size={80} selectedPhoto={formik.values.profile} />
 
             <StyledImportant>
@@ -64,11 +80,17 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
             </StyledInfo>
           </Dotted>
         </Modal.Control>
+        {hasProfileError && (
+          <ErrorMessageText>
+            <ErrorMessage name="profile" />
+          </ErrorMessageText>
+        )}
 
         <EditPhotoModal
           selectedPhoto={formik.values.profile}
           onAddPhoto={photo => {
             formik.setFieldValue('profile', photo);
+            formik.setFieldTouched('profile', true, false);
           }}
           onImageEdit={handleImageEdit}
         />
@@ -87,14 +109,17 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
             <CharactersWarnInput>Máximo 600 caracteres.</CharactersWarnInput>
           </StyledInfoContainer>
 
-          <SelectInputContainer>
+          <SelectInputContainer className={hasGenderError ? 'error' : ''}>
             <span>
               Gênero
               <span className="asterisk">*</span>
             </span>
             <Select
               placeholder="Gênero"
-              onValueChange={value => formik.setFieldValue('gender', value)}
+              onValueChange={value => {
+                formik.setFieldValue('gender', value);
+                formik.setFieldTouched('gender', true, false);
+              }}
             >
               {genders.map(gender => (
                 <SelectItemStyled key={gender} value={gender}>
@@ -102,6 +127,11 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
                 </SelectItemStyled>
               ))}
             </Select>
+            {hasGenderError && (
+              <ErrorMessageText>
+                <ErrorMessage name="gender" />
+              </ErrorMessageText>
+            )}
           </SelectInputContainer>
           <StyledHR />
 
@@ -113,7 +143,11 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
             >
               Voltar
             </BackButton>
-            <NextButton type="submit" disabled={!isCompleted}>
+            <NextButton
+              type="submit"
+              disabled={formik.isSubmitting}
+              onClick={handleSubmitAttempt}
+            >
               Concluir
             </NextButton>
           </ButtonContainer>

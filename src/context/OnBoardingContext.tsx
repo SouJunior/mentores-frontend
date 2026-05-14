@@ -16,12 +16,15 @@ import * as yup from 'yup';
 import { useAuthContext } from './Auth/AuthContext';
 
 const onBoardingSchema = yup.object({
-  profile: yup.string().required('Obrigatório'),
+  profile: yup.string().required('Adicione uma foto para continuar.'),
   description: yup
     .string()
     .max(600, 'Limite máximo de caracteres excedido.')
-    .required('Obrigatório'),
-  gender: yup.string().oneOf(genders).required('Obrigatório'),
+    .required('Preencha o campo "Conte mais sobre você" para continuar.'),
+  gender: yup
+    .string()
+    .oneOf(genders)
+    .required('Selecione um gênero para continuar.'),
   specialties: yup.array(yup.string().required('Obrigatório')),
 });
 
