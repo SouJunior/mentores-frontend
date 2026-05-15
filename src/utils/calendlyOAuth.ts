@@ -1,5 +1,9 @@
-const calendlyClientId = 'N24tR3RHkxh41T1wX2Gxm0cK7BdyIWicqVuLGDLrVSo';
-const calendlyRedirectUri = 'http://localhost:3000/calendly/callback';
+const calendlyClientId =
+  process.env.NEXT_PUBLIC_CALENDLY_CLIENT_ID ??
+  'N24tR3RHkxh41T1wX2Gxm0cK7BdyIWicqVuLGDLrVSo';
+const calendlyRedirectUri =
+  process.env.NEXT_PUBLIC_CALENDLY_REDIRECT_URI ??
+  'http://localhost:3000/calendly/callback';
 
 export function getCalendlyOAuthUrl(mentorId?: string | null) {
   if (!mentorId) {
