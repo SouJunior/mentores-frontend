@@ -31,6 +31,7 @@ const accountTabs = [
   'schedule',
   'password',
   'account-management',
+  'delete-account',
 ];
 
 export default function MePage() {

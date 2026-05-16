@@ -4,6 +4,7 @@ import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoSer
 import Close from '@mui/icons-material/Close';
 import { DialogContentProps } from '@radix-ui/react-dialog';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
 import {
@@ -29,11 +30,6 @@ export default function ModalSchedMentor({
   mentorCalendlyInfo,
   ...props
 }: ModalSchedProps) {
-  const calendlyUrl = new URL(
-    `${mentorCalendlyInfo?.calendlyName}/${mentorCalendlyInfo?.agendaName}`,
-    'https://calendly.com'
-  ).toString();
-
   const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo?.agendaName;
 
   return (
@@ -67,7 +63,7 @@ export default function ModalSchedMentor({
       <AboutContainer>{mentor.aboutMe}</AboutContainer>
 
       {hasValidCalendly ? (
-        <Button as="a" target="_blank" href={calendlyUrl}>
+        <Button as={Link} href={`/agendar-mentoria?mentorId=${mentor.id}`}>
           Agendar Mentoria
         </Button>
       ) : (

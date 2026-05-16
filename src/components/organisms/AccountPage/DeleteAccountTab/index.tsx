@@ -1,15 +1,21 @@
 import { Button } from '@/components/atoms/Button';
 import { Modal } from '@/components/atoms/Modal';
 import { ModalDeleteAccount } from '@/components/molecules/ModalDeleteAccount';
+import { useAuthContext } from '@/context/Auth/AuthContext';
 import { FormValuesDeleteAccountDTO } from '@/services/interfaces/IUserDeleteAccount';
 import { UserAccountDeleteFeedback } from '@/services/user/userAccountDeleteFeedback';
 import { UserDeleteAccount } from '@/services/user/userDeleteAccount';
+import {
+  cancelMentorSchedule,
+  useMentorSchedulesService,
+} from '@/services/user/useMentorSchedulesService';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AxiosError } from 'axios';
 import { FormikProvider, useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import {
   ButtonsContainer,
   Divider,
@@ -35,8 +41,13 @@ export interface FormValues {
 
 export function DeleteAccountTab() {
   const router = useRouter();
+  const { userSession } = useAuthContext();
   const { accountDeleteFeedback } = UserAccountDeleteFeedback();
   const { deleteAccount } = UserDeleteAccount();
+  const mentorSchedules = useMentorSchedulesService(
+    userSession?.token,
+    userSession?.id
+  );
 
   const initialFormValues: FormValues = {
     reasonOption: null,
@@ -51,9 +62,52 @@ export function DeleteAccountTab() {
     useState<boolean>(false);
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
   const [formErrors, setFormErrors] = useState<FormValues>(initialFormValues);
+  const [schedulePendingCancellation, setSchedulePendingCancellation] =
+    useState<string | null>(null);
+  const [isCancelingSchedule, setIsCancelingSchedule] = useState(false);
+  const [hasLoadedSchedulesForDeletion, setHasLoadedSchedulesForDeletion] =
+    useState(false);
 
   const handleModalCancel = () => setOpenModalCancel(true);
-  const handleModalDeleteAccount = () => setOpenModalDeleteAccount(true);
+  const handleModalDeleteAccount = async () => {
+    setSchedulePendingCancellation(null);
+    setHasLoadedSchedulesForDeletion(false);
+    setOpenModalDeleteAccount(true);
+
+    try {
+      await mentorSchedules.refetch();
+    } finally {
+      setHasLoadedSchedulesForDeletion(true);
+    }
+  };
+
+  async function handleCancelSchedule(eventUuid: string) {
+    if (!userSession?.token) {
+      return;
+    }
+
+    try {
+      setIsCancelingSchedule(true);
+      const cancellationResponse = await cancelMentorSchedule(
+        eventUuid,
+        userSession.token,
+        'Cancelado durante o processo de exclusão de conta.'
+      );
+      setHasLoadedSchedulesForDeletion(false);
+      await mentorSchedules.refetch();
+      setSchedulePendingCancellation(null);
+      toast.success(
+        cancellationResponse?.status === 'past_event'
+          ? 'Agendamento já ocorreu e foi removido da lista de pendências.'
+          : 'Agendamento cancelado com sucesso!'
+      );
+    } catch {
+      toast.error('Não foi possível cancelar o agendamento.');
+    } finally {
+      setHasLoadedSchedulesForDeletion(true);
+      setIsCancelingSchedule(false);
+    }
+  }
 
   const handleDiscard = () => {
     setFormValues(initialFormValues);
@@ -181,9 +235,27 @@ export function DeleteAccountTab() {
 
       <Modal.Root
         open={openModalDeleteAccount}
-        onOpenChange={() => setOpenModalDeleteAccount(false)}
+        onOpenChange={isOpen => {
+          if (!isOpen) {
+            setSchedulePendingCancellation(null);
+            setHasLoadedSchedulesForDeletion(false);
+            setOpenModalDeleteAccount(false);
+          }
+        }}
       >
-        <ModalDeleteAccount handleDeleteAccount={formik.submitForm} />
+        <ModalDeleteAccount
+          handleDeleteAccount={formik.submitForm}
+          schedules={mentorSchedules.data}
+          isLoadingSchedules={
+            !hasLoadedSchedulesForDeletion ||
+            mentorSchedules.isLoading ||
+            mentorSchedules.isFetching
+          }
+          isCancelingSchedule={isCancelingSchedule}
+          schedulePendingCancellation={schedulePendingCancellation}
+          onCancelSchedule={handleCancelSchedule}
+          onSelectScheduleToCancel={setSchedulePendingCancellation}
+        />
       </Modal.Root>
     </TabContainer>
   );

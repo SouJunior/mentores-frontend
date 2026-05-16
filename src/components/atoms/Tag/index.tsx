@@ -1,12 +1,9 @@
-import { ComponentType, ElementType, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import { TagStyle } from './styles';
 
-type ElementOrComponentType = ElementType<any> | ComponentType<any>;
-
-interface TagProps {
+interface TagProps extends ComponentPropsWithoutRef<'span'> {
   children: ReactNode;
-  as?: ElementOrComponentType;
-  [key: string]: any;
+  as?: ElementType;
 }
 
 export function Tag({ children, ...props }: TagProps) {
