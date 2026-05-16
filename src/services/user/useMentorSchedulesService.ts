@@ -8,13 +8,14 @@ import {
 
 export const useMentorSchedulesService = (
   token: string | undefined,
+  mentorId: string | undefined,
   options?: Omit<
     UseQueryOptions<IMentorSchedule[], Error, IMentorSchedule[], QueryKey>,
     'queryKey' | 'queryFn'
   >
 ) => {
   return useQuery<IMentorSchedule[]>({
-    queryKey: ['mentorSchedules'],
+    queryKey: ['mentorSchedules', mentorId],
     queryFn: async () => {
       const response = await api.get('/calendly/schedules', {
         headers: {
@@ -24,7 +25,7 @@ export const useMentorSchedulesService = (
 
       return response.data;
     },
-    enabled: Boolean(token),
+    enabled: Boolean(token && mentorId),
     ...options,
   });
 };

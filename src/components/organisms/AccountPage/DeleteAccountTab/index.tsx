@@ -44,7 +44,10 @@ export function DeleteAccountTab() {
   const { userSession } = useAuthContext();
   const { accountDeleteFeedback } = UserAccountDeleteFeedback();
   const { deleteAccount } = UserDeleteAccount();
-  const mentorSchedules = useMentorSchedulesService(userSession?.token);
+  const mentorSchedules = useMentorSchedulesService(
+    userSession?.token,
+    userSession?.id
+  );
 
   const initialFormValues: FormValues = {
     reasonOption: null,

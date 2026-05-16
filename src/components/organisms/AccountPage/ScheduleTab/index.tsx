@@ -105,7 +105,10 @@ export function ScheduleTab() {
   const { handleMentorCalendlyInfo, updateMentorCalendlyInfo } =
     UserUpdateService();
   const { mentor, mentorCalendlyInfo, userSession } = useAuthContext();
-  const mentorSchedules = useMentorSchedulesService(userSession?.token);
+  const mentorSchedules = useMentorSchedulesService(
+    userSession?.token,
+    userSession?.id
+  );
 
   const generateCalendlyLink = useCallback(() => {
     if (
