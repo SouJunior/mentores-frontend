@@ -37,7 +37,7 @@ export default function HomePage() {
     const openStatus =
       router.query['connect-calendly'] === 'true' &&
       Boolean(userSession) &&
-      mentor.data?.registerComplete === true;
+      mentor?.data?.registerComplete === true;
 
     setIsOpen(openStatus);
 
@@ -52,7 +52,7 @@ export default function HomePage() {
     if (calendlyStatus === 'error') {
       toast.error('Ocorreu um erro ao conectar com o Calendly.');
     }
-  }, [mentor.data?.registerComplete, router, router.query, userSession]);
+  }, [mentor?.data?.registerComplete, router, router.query, userSession]);
 
   const handleDismissCalendlyModal = () => {
     const query = { ...router.query };
@@ -76,7 +76,7 @@ export default function HomePage() {
   };
 
   const handleCompleteCalendlyModal = () => {
-    const startedOAuth = redirectToCalendlyOAuth(mentor.data?.id);
+    const startedOAuth = redirectToCalendlyOAuth(mentor?.data?.id);
 
     if (!startedOAuth) {
       toast.error('Não foi possível iniciar a conexão com o Calendly.');
