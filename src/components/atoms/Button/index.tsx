@@ -1,16 +1,17 @@
-import { ComponentType, ElementType, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import { ButtonStyle, ButtonStyleProps } from './style';
 
-type ElementOrComponentType = ElementType<any> | ComponentType<any>;
 type ButtonVariant = NonNullable<ButtonStyleProps['$variant']>;
 type ButtonSize = NonNullable<ButtonStyleProps['$size']>;
 
-interface ButtonProps {
+interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   children: ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  as?: ElementOrComponentType;
-  [key: string]: any;
+  as?: ElementType;
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 export function Button({

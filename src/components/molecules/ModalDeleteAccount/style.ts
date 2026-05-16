@@ -50,8 +50,7 @@ export const ModalCloseButton = styled(Modal.Close)`
 `;
 
 export const ButtonStyled = styled(Button)<{
-  $variant?: string;
-  asCloseButton?: boolean;
+  $variant?: 'delete';
 }>`
   background-color: ${props =>
     props.$variant === 'delete' ? props.theme.colors.red[400] : ''};
