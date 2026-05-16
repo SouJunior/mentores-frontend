@@ -142,9 +142,7 @@ export function ScheduleTab() {
 
   const hasScheduleChanges = inputValue !== savedInputValue;
   const hasCalendlyOAuthConnection = Boolean(
-    mentorCalendlyInfo.data?.calendlyAccessToken ||
-      mentorCalendlyInfo.data?.calendlyRefreshToken ||
-      mentorCalendlyInfo.data?.calendlyUserUuid
+    mentorCalendlyInfo.data?.isConnected
   );
   const shouldConnectCalendlyOAuth = Boolean(
     inputValue.trim() !== '' && isValid && !hasCalendlyOAuthConnection
