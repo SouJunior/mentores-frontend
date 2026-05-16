@@ -1,13 +1,16 @@
 import { api } from '@/lib/axios';
 import {
   QueryKey,
-  UndefinedInitialDataOptions,
+  UseQueryOptions,
   useQuery,
 } from '@tanstack/react-query';
 import { ICalendlyUserInfo } from '../interfaces/IUseUserCalendlyInfoService';
 
 export const useMentorsCalendlyInfoService = (
-  options?: UndefinedInitialDataOptions<ICalendlyUserInfo[], Error, ICalendlyUserInfo[], QueryKey>
+  options?: Omit<
+    UseQueryOptions<ICalendlyUserInfo[], Error, ICalendlyUserInfo[], QueryKey>,
+    'queryKey' | 'queryFn'
+  >
 ) => {
 
   return useQuery<ICalendlyUserInfo[]>({

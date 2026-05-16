@@ -21,7 +21,10 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
   }
 
   const splitMentorName = mentor.fullName.split(' ');
-  const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo.agendaName;
+  const hasValidCalendly =
+    mentorCalendlyInfo?.calendlyName &&
+    mentorCalendlyInfo.agendaName &&
+    mentorCalendlyInfo.isConnected;
 
   return (
     <Card

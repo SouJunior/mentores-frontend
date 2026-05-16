@@ -13,6 +13,7 @@ import {
   createMentorInvitee,
   useMentorAvailableTimesService,
 } from '@/services/user/useMentorSchedulingService';
+import { useMentorsCalendlyInfoService } from '@/services/user/useMentorsCalendlyInfoService';
 import {
   CalendarHeader,
   CalendarTitle,
@@ -95,12 +96,30 @@ export default function MentorSchedulingPage() {
     enabled: Boolean(mentorId),
   });
 
+  const mentorCalendlyInfoResponse = useMentorsCalendlyInfoService({
+    enabled: Boolean(mentorId),
+    retry: false,
+  });
+
+  const mentorCalendlyInfo = useMemo(() => {
+    return mentorCalendlyInfoResponse.data?.find(
+      calendlyInfo => calendlyInfo.mentorId === mentorId
+    );
+  }, [mentorCalendlyInfoResponse.data, mentorId]);
+
+  const hasConnectedCalendly = Boolean(
+    mentorCalendlyInfo?.calendlyName &&
+      mentorCalendlyInfo?.agendaName &&
+      mentorCalendlyInfo?.isConnected
+  );
+
   const availableTimesResponse = useMentorAvailableTimesService(
     mentorId,
     monthStart,
     monthEnd,
     {
-      enabled: Boolean(mentorId),
+      enabled: Boolean(mentorId && hasConnectedCalendly),
+      retry: false,
     }
   );
 
@@ -227,7 +246,12 @@ export default function MentorSchedulingPage() {
   }
 
   const mentor = mentorResponse.data;
-  const isLoading = mentorResponse.isLoading || availableTimesResponse.isLoading;
+  const isLoading =
+    mentorResponse.isLoading ||
+    mentorCalendlyInfoResponse.isLoading ||
+    availableTimesResponse.isLoading;
+  const isScheduleUnavailable =
+    !mentorCalendlyInfoResponse.isLoading && !hasConnectedCalendly;
 
   return (
     <>
@@ -317,6 +341,10 @@ export default function MentorSchedulingPage() {
                     <TimesGrid>
                       {isLoading ? (
                         <EmptyMessage>Carregando horários...</EmptyMessage>
+                      ) : isScheduleUnavailable ? (
+                        <EmptyMessage>
+                          Agenda indisponível no momento.
+                        </EmptyMessage>
                       ) : selectedDateTimes.length ? (
                         selectedDateTimes.map(time => (
                           <TimeButton
