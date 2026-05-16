@@ -168,8 +168,8 @@ export const DaysGrid = styled.div`
 `;
 
 interface DayButtonProps {
-  isSelected?: boolean;
-  isOutsideMonth?: boolean;
+  $isSelected?: boolean;
+  $isOutsideMonth?: boolean;
 }
 
 export const DayButton = styled.button<DayButtonProps>`
@@ -184,13 +184,13 @@ export const DayButton = styled.button<DayButtonProps>`
   cursor: pointer;
 
   ${props =>
-    props.isOutsideMonth &&
+    props.$isOutsideMonth &&
     css`
       visibility: hidden;
     `}
 
   ${props =>
-    props.isSelected &&
+    props.$isSelected &&
     css`
       background-color: ${props.theme.colors.blue[800]};
       color: ${props.theme.colors.white};
@@ -223,7 +223,7 @@ export const TimesGrid = styled.div`
 `;
 
 interface TimeButtonProps {
-  isSelected?: boolean;
+  $isSelected?: boolean;
 }
 
 export const TimeButton = styled.button<TimeButtonProps>`
@@ -233,13 +233,13 @@ export const TimeButton = styled.button<TimeButtonProps>`
   border-radius: 0.5rem;
   border: 1px solid
     ${props =>
-      props.isSelected
+      props.$isSelected
         ? props.theme.colors.blue[800]
         : props.theme.colors.gray[600]};
   background-color: ${props =>
-    props.isSelected ? props.theme.colors.blue[800] : props.theme.colors.white};
+    props.$isSelected ? props.theme.colors.blue[800] : props.theme.colors.white};
   color: ${props =>
-    props.isSelected ? props.theme.colors.white : props.theme.colors.black[200]};
+    props.$isSelected ? props.theme.colors.white : props.theme.colors.black[200]};
   display: grid;
   place-items: center;
   cursor: pointer;

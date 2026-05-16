@@ -160,8 +160,6 @@ export default function MentorSchedulingPage() {
     return days;
   }, [currentMonth]);
 
-  const availableDateKeysHash = availableDateKeys.join('|');
-
   useEffect(() => {
     if (!availableDateKeys.length) {
       setSelectedDate('');
@@ -173,7 +171,7 @@ export default function MentorSchedulingPage() {
       setSelectedDate(availableDateKeys[0]);
       setSelectedTime('');
     }
-  }, [availableDateKeys, availableDateKeysHash, selectedDate]);
+  }, [availableDateKeys, selectedDate]);
 
   function handlePreviousMonth() {
     const previousMonth = currentMonth.subtract(1, 'month');
@@ -300,8 +298,8 @@ export default function MentorSchedulingPage() {
                             key={dateKey}
                             type="button"
                             disabled={!hasAvailableTime || isLoading}
-                            isSelected={selectedDate === dateKey}
-                            isOutsideMonth={day.isOutsideMonth}
+                            $isSelected={selectedDate === dateKey}
+                            $isOutsideMonth={day.isOutsideMonth}
                             aria-pressed={selectedDate === dateKey}
                             onClick={() => {
                               setSelectedDate(dateKey);
@@ -324,7 +322,7 @@ export default function MentorSchedulingPage() {
                           <TimeButton
                             key={time.start_time}
                             type="button"
-                            isSelected={selectedTime === time.start_time}
+                            $isSelected={selectedTime === time.start_time}
                             onClick={() => setSelectedTime(time.start_time)}
                           >
                             {dayjs(time.start_time).format('HH:mm')}
