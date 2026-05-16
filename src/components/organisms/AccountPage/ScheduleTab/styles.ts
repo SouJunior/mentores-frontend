@@ -1,5 +1,6 @@
 import { Button } from '@/components/atoms/Button';
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import * as Tabs from '@radix-ui/react-tabs';
 import styled, { css } from 'styled-components';
 
@@ -18,6 +19,221 @@ export const ScheduleContent = styled.section`
   flex-direction: column;
   gap: 1.5rem;
   max-width: 43rem;
+`;
+
+export const ScheduleSubTabsRoot = styled(Tabs.Root)`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+export const ScheduleSubTabsList = styled(Tabs.List)`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+export const ScheduleSubTabsTrigger = styled(Tabs.Trigger)`
+  all: unset;
+  color: ${props => props.theme.colors.black[200]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  line-height: 1rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+
+  &[data-state='active'] {
+    color: ${props => props.theme.colors.blue[800]};
+    border-bottom-color: ${props => props.theme.colors.blue[800]};
+    font-weight: 600;
+  }
+`;
+
+export const ScheduleSubTabsContent = styled(Tabs.Content)`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+export const SchedulesList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 43rem;
+`;
+
+export const ScheduleDateGroup = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`;
+
+export const ScheduleDateTitle = styled.h3`
+  color: ${props => props.theme.colors.black[200]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  font-weight: 500;
+  line-height: 1rem;
+`;
+
+interface ScheduleCardProps {
+  $isExpanded?: boolean;
+}
+
+export const ScheduleCard = styled.article<ScheduleCardProps>`
+  border: 1px solid ${props => props.theme.colors.gray[200]};
+  border-radius: 0.75rem;
+  max-width: 33rem;
+  overflow: hidden;
+
+  ${props =>
+    props.$isExpanded &&
+    css`
+      border-color: ${props.theme.colors.gray[250]};
+    `}
+`;
+
+export const ScheduleSummaryButton = styled.button`
+  all: unset;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+  }
+`;
+
+export const ScheduleTimeRange = styled.span`
+  color: ${props => props.theme.colors.black[200]};
+  font-size: ${props => props.theme.fontSizes.sm};
+  line-height: 1.25rem;
+
+  @media (max-width: 560px) {
+    grid-column: 1 / -1;
+  }
+`;
+
+export const ParticipantSummary = styled.span`
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 0.5rem;
+  color: ${props => props.theme.colors.black[200]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  font-weight: 600;
+  line-height: 1rem;
+`;
+
+export const ParticipantAvatar = styled.span`
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background-color: ${props => props.theme.colors.blue[25]};
+  color: ${props => props.theme.colors.blue[800]};
+  font-size: 0.625rem;
+  font-weight: 700;
+`;
+
+export const ParticipantName = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+interface ScheduleDetailsToggleProps {
+  $isExpanded?: boolean;
+}
+
+export const ScheduleDetailsToggle = styled.span<ScheduleDetailsToggleProps>`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: ${props => props.theme.colors.blue[800]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  font-weight: 600;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s ease;
+    transform: rotate(${props => (props.$isExpanded ? '180deg' : '0deg')});
+  }
+`;
+
+export const ScheduleDetailsIcon = styled(KeyboardArrowDownRoundedIcon)``;
+
+export const ScheduleDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem 1rem 8.5rem;
+
+  @media (max-width: 560px) {
+    padding-left: 1rem;
+  }
+`;
+
+export const ScheduleDetailBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
+export const ScheduleDetailLabel = styled.span`
+  color: ${props => props.theme.colors.gray[700]};
+  font-size: 0.75rem;
+  line-height: 1rem;
+`;
+
+export const ScheduleDetailText = styled.p`
+  color: ${props => props.theme.colors.black[200]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  line-height: 1.25rem;
+  word-break: break-word;
+`;
+
+export const ScheduleDetailLink = styled.a`
+  color: ${props => props.theme.colors.blue[800]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  line-height: 1.25rem;
+  text-decoration: underline;
+  word-break: break-word;
+`;
+
+export const ManageScheduleLink = styled.a`
+  width: fit-content;
+  border: 1px solid ${props => props.theme.colors.blue[800]};
+  border-radius: 0.25rem;
+  color: ${props => props.theme.colors.blue[800]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  font-weight: 600;
+  line-height: 1rem;
+  padding: 0.5rem 0.75rem;
+`;
+
+export const ScheduleEmptyState = styled.p`
+  color: ${props => props.theme.colors.gray[700]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  line-height: 1.25rem;
+`;
+
+export const ScheduleEndMessage = styled.p`
+  max-width: 33rem;
+  border-top: 1px solid ${props => props.theme.colors.gray[200]};
+  color: ${props => props.theme.colors.gray[700]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  line-height: 1.25rem;
+  padding-top: 1rem;
+  text-align: center;
 `;
 
 export const AlertContainer = styled.div`
