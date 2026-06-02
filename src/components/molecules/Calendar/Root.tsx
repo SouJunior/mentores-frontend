@@ -1,8 +1,17 @@
-import * as Popover from '@radix-ui/react-popover';
-import dayjs from 'dayjs';
-import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
+'use client';
 
-interface RootProps extends Popover.PopoverProps {
+import { Popover } from '@/components/ui/popover';
+import dayjs from 'dayjs';
+import {
+  ComponentProps,
+  ReactNode,
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
+
+interface RootProps extends ComponentProps<typeof Popover> {
   children: ReactNode;
 }
 
@@ -48,7 +57,7 @@ export function Root({ children, ...props }: RootProps) {
     <CalendarContext.Provider
       value={{ months, years, currentDate, setCurrentDate }}
     >
-      <Popover.Root {...props}>{children}</Popover.Root>
+      <Popover {...props}>{children}</Popover>
     </CalendarContext.Provider>
   );
 }

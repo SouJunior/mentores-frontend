@@ -1,5 +1,5 @@
 import binIcon from '@/assets/icons/bin.png';
-import * as Dialog from '@radix-ui/react-dialog';
+import { DialogClose } from '@/components/ui/dialog';
 import Image from 'next/image';
 import {
   ButtonsContainer,
@@ -10,7 +10,7 @@ import {
   ModalTitle,
 } from './style';
 
-interface ModalDeleteAccountProps extends Dialog.DialogContentProps {
+interface ModalDeleteAccountProps {
   handleDeleteAccount: () => void;
 }
 
@@ -37,22 +37,26 @@ export function ModalDeleteAccount({
       </ModalDescription>
 
       <ButtonsContainer>
-        <Dialog.Close asChild>
-          <ButtonStyled type="button" variant="secondary">
-            Cancelar
-          </ButtonStyled>
-        </Dialog.Close>
+        <DialogClose
+          render={
+            <ButtonStyled type="button" variant="secondary">
+              Cancelar
+            </ButtonStyled>
+          }
+        />
 
-        <Dialog.Close asChild>
-          <ButtonStyled
-            type="submit"
-            onClick={handleDeleteAccount}
-            $variant="delete"
-          >
-            <Image src={binIcon} alt="Delete Icon" width={24} height={24} />
-            Excluir conta
-          </ButtonStyled>
-        </Dialog.Close>
+        <DialogClose
+          render={
+            <ButtonStyled
+              type="submit"
+              onClick={handleDeleteAccount}
+              $variant="delete"
+            >
+              <Image src={binIcon} alt="Delete Icon" width={24} height={24} />
+              Excluir conta
+            </ButtonStyled>
+          }
+        />
       </ButtonsContainer>
     </ContainerModalDeleteAccount>
   );

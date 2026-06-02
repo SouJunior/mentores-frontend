@@ -1,8 +1,7 @@
 import UserDefault from '@/assets/userDefault.png';
 import { IMentors } from '@/services/interfaces/IUseMentorsService';
 import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
-import Close from '@mui/icons-material/Close';
-import { DialogContentProps } from '@radix-ui/react-dialog';
+import { X as Close } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
@@ -19,7 +18,7 @@ import {
   TitleContainer,
 } from './styled';
 
-interface ModalSchedProps extends DialogContentProps {
+interface ModalSchedProps extends React.HTMLAttributes<HTMLDivElement> {
   mentor: IMentors;
   mentorCalendlyInfo?: ICalendlyUserInfo
 }

@@ -8,7 +8,7 @@ import {
   StyledHR,
   NextButton,
 } from './styled';
-import CheckIcon from '@mui/icons-material/Check';
+import { Check as CheckIcon } from 'lucide-react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { specialties as specialtiesOptions } from '@/data/static-info';

@@ -1,5 +1,5 @@
 import { Button } from '@/components/atoms/Button';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { AlertCircle as ErrorOutlineIcon } from 'lucide-react';
 import styled, { css } from 'styled-components';
 
 export const ContainerInput = styled.div`

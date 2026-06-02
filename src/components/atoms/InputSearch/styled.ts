@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import SearchIcon from '@mui/icons-material/Search';
+import { Search as SearchIcon } from 'lucide-react';
 
 export const ContainerInput = styled.div`
   border-radius: 0.5rem;

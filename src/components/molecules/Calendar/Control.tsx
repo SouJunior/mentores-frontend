@@ -1,8 +1,9 @@
-import * as Popover from '@radix-ui/react-popover';
-import { ReactNode } from 'react';
+'use client';
+
+import { ComponentProps, ReactNode } from 'react';
 import { CalendarTrigger } from './styles';
 
-interface ControlProps extends Popover.PopoverTriggerProps {
+interface ControlProps extends ComponentProps<typeof CalendarTrigger> {
   children: ReactNode;
 }
 

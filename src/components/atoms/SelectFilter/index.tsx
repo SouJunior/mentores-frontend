@@ -1,17 +1,11 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+'use client';
 
-import * as Select from '@radix-ui/react-select';
-import * as Checkbox from '@radix-ui/react-checkbox';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Popover } from '@/components/ui/popover';
+import { ChevronDown as ExpandMoreIcon } from 'lucide-react';
+import { CheckboxLabel, SelectContent, SelectTrigger } from './styled';
 
-import {
-  CheckboxIndicator,
-  CheckboxLabel,
-  CheckboxRoot,
-  SelectContent,
-  SelectTrigger,
-} from './styled';
-
-interface SelectFilterProps extends Select.SelectProps {
+interface SelectFilterProps {
   options: string[];
   selectName?: string;
   onChange: (selectedOptions: string[]) => void;
@@ -23,7 +17,6 @@ export default function SelectFilter({
   selectName,
   onChange,
   selectedOptions,
-  ...props
 }: SelectFilterProps) {
   const handleOptionChange = (option: string) => {
     const newSelectedOptions = [...selectedOptions];
@@ -36,38 +29,23 @@ export default function SelectFilter({
   };
 
   return (
-    <Select.Root {...props}>
+    <Popover>
       <SelectTrigger>
-        <Select.Value placeholder={selectName} />
-        <Select.Icon asChild>
-          <ExpandMoreIcon />
-        </Select.Icon>
+        {selectName}
+        <ExpandMoreIcon size={16} />
       </SelectTrigger>
 
-      <Select.Portal>
-        <SelectContent
-          side="bottom"
-          position="popper"
-          sideOffset={8}
-          avoidCollisions={false}
-        >
-          <Select.Viewport>
-            {options.map(option => (
-              <CheckboxLabel key={option}>
-                <CheckboxRoot
-                  checked={selectedOptions.includes(option)}
-                  onCheckedChange={() => handleOptionChange(option)}
-                >
-                  <Checkbox.Indicator>
-                    <CheckboxIndicator />
-                  </Checkbox.Indicator>
-                </CheckboxRoot>
-                {option}
-              </CheckboxLabel>
-            ))}
-          </Select.Viewport>
-        </SelectContent>
-      </Select.Portal>
-    </Select.Root>
+      <SelectContent side="bottom" sideOffset={0} align="start">
+        {options.map(option => (
+          <CheckboxLabel key={option}>
+            <Checkbox
+              checked={selectedOptions.includes(option)}
+              onCheckedChange={() => handleOptionChange(option)}
+            />
+            {option}
+          </CheckboxLabel>
+        ))}
+      </SelectContent>
+    </Popover>
   );
 }

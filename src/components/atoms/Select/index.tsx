@@ -1,49 +1,27 @@
-import * as SelectPrimitive from '@radix-ui/react-select';
-import * as ScrollArea from '@radix-ui/react-scroll-area';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { ReactNode } from 'react';
+'use client';
+
 import {
-  ScrollAreaBar,
-  ScrollAreaThumb,
-  ScrollAreaViewport,
+  Select as ShadcnSelect,
   SelectContent,
   SelectTrigger,
-} from './styles';
+  SelectValue,
+} from '@/components/ui/select';
+import { ComponentProps, ReactNode } from 'react';
 
-interface SelectProps extends SelectPrimitive.SelectProps {
+interface SelectProps extends ComponentProps<typeof ShadcnSelect> {
   children: ReactNode;
   placeholder: string;
 }
 
 export function Select({ children, placeholder, ...props }: SelectProps) {
   return (
-    <SelectPrimitive.Root {...props}>
-      <SelectTrigger className="select-trigger">
-        <SelectPrimitive.Value placeholder={placeholder} />
-        <SelectPrimitive.Icon asChild>
-          <KeyboardArrowDownIcon />
-        </SelectPrimitive.Icon>
+    <ShadcnSelect {...props}>
+      <SelectTrigger className="select-trigger flex-1 rounded-lg border border-gray-400 px-3 py-1 text-gray-600 focus-visible:border-blue-400 focus-visible:ring-0">
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-
-      <SelectPrimitive.Portal>
-        <SelectContent
-          className="select-content"
-          side="bottom"
-          position="popper"
-        >
-          <ScrollArea.Root>
-            <SelectPrimitive.Viewport>
-              <ScrollAreaViewport>
-                {children}
-
-                <ScrollAreaBar>
-                  <ScrollAreaThumb />
-                </ScrollAreaBar>
-              </ScrollAreaViewport>
-            </SelectPrimitive.Viewport>
-          </ScrollArea.Root>
-        </SelectContent>
-      </SelectPrimitive.Portal>
-    </SelectPrimitive.Root>
+      <SelectContent side="bottom" className="bg-white rounded-lg shadow-md">
+        {children}
+      </SelectContent>
+    </ShadcnSelect>
   );
 }

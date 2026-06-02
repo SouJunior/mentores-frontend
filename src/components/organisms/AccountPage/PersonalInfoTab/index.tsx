@@ -21,7 +21,7 @@ import { genders } from '@/data/static-info';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
 import { isEmpty } from '@/utils/is-empty';
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+import { CheckCircle as CheckCircleOutlineRoundedIcon } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'react-toastify';

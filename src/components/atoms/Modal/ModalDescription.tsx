@@ -1,8 +1,9 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import { DialogDescription } from '@/components/ui/dialog';
+import { ComponentProps } from 'react';
 
 export function ModalDescription({
   children,
   ...props
-}: Dialog.DialogDescriptionProps) {
-  return <Dialog.Description {...props}>{children}</Dialog.Description>;
+}: ComponentProps<typeof DialogDescription>) {
+  return <DialogDescription {...props}>{children}</DialogDescription>;
 }

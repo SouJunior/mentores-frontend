@@ -7,7 +7,7 @@ import { Field, useFormikContext } from 'formik';
 import { useState } from 'react';
 import { ValuesFormType } from '@/utils/registerSchema';
 
-import EventRoundedIcon from '@mui/icons-material/EventRounded';
+import { Calendar as EventRoundedIcon } from 'lucide-react';
 import dayjs from 'dayjs';
 
 export function FormRegisterFields() {

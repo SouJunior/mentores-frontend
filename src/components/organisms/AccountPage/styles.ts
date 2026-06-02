@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import * as Tabs from '@radix-ui/react-tabs';
-import { Form } from 'formik';
+import { TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/atoms/Button';
+import { Form } from 'formik';
+import styled from 'styled-components';
 
-export const TabContainer = styled(Tabs.Content)`
+export const TabContainer = styled(TabsContent)`
   display: flex;
   flex-direction: column;
   gap: 1rem;

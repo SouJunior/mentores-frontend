@@ -1,5 +1,5 @@
+import { TabsList, TabsTrigger } from '@/components/ui/tabs';
 import styled from 'styled-components';
-import * as Tabs from '@radix-ui/react-tabs';
 
 export const Container = styled.div`
   display: flex;
@@ -38,13 +38,17 @@ export const ContentDivider = styled.div`
   background-color: ${props => props.theme.colors.gray[250]};
 `;
 
-export const AsideNavContainer = styled(Tabs.List)`
+export const AsideNavContainer = styled(TabsList)`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: transparent;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
 `;
 
-export const AsideNavItem = styled(Tabs.Trigger)`
+export const AsideNavItem = styled(TabsTrigger)`
   all: unset;
 
   font-size: 1rem;
@@ -56,7 +60,7 @@ export const AsideNavItem = styled(Tabs.Trigger)`
   cursor: pointer;
   transition: 0.3s;
 
-  &[data-state='active'] {
+  &[data-active] {
     font-weight: 500;
     color: ${props => props.theme.colors.blue[850]};
   }

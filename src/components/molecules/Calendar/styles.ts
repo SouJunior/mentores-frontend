@@ -1,7 +1,6 @@
-import { PopoverContent } from '@radix-ui/react-popover';
+import { PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Toggle } from '@/components/ui/toggle';
 import styled from 'styled-components';
-import * as Toggle from '@radix-ui/react-toggle';
-import * as Popover from '@radix-ui/react-popover';
 
 export const Container = styled(PopoverContent)`
   background-color: #fff;
@@ -72,7 +71,7 @@ interface CalendarDayProps {
   isDisabled: boolean;
 }
 
-export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
+export const CalendarDay = styled(Toggle)<CalendarDayProps>`
   all: unset;
   cursor: pointer;
   width: 1.1rem;
@@ -87,6 +86,7 @@ export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
     background-color: rgba(215, 217, 215, 0.3);
   }
 
+  &[aria-pressed='true'],
   &[data-state='on'] {
     color: ${props => props.theme.colors.blue[500]};
     font-weight: 700;
@@ -101,7 +101,7 @@ export const CalendarDay = styled(Toggle.Root)<CalendarDayProps>`
   }
 `;
 
-export const CalendarTrigger = styled(Popover.Trigger)`
+export const CalendarTrigger = styled(PopoverTrigger)`
   all: unset;
   cursor: pointer;
   padding: 0.75rem 1rem;
@@ -127,11 +127,11 @@ export const CalendarTrigger = styled(Popover.Trigger)`
     cursor: not-allowed;
   }
 
-  &[data-state='closed']:not(:disabled):hover {
+  &:not([data-open]):not(:disabled):hover {
     border: 1px solid ${props => props.theme.colors.blue[850]};
   }
 
-  &[data-state='open'],
+  &[data-open],
   &:focus-visible {
     border: 1px solid ${props => props.theme.colors.blue[850]};
     box-shadow: 0 0 0 1px ${props => props.theme.colors.blue[850]};

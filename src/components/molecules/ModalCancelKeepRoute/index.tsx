@@ -1,5 +1,4 @@
 import { Button } from '@/components/atoms/Button';
-import { DialogContentProps } from '@radix-ui/react-dialog';
 import {
   ContainerBtn,
   ContainerModalCancel,
@@ -11,7 +10,7 @@ import {
 } from './style';
 
 
-interface ModalCancelKeepRouteProps extends DialogContentProps {
+interface ModalCancelKeepRouteProps extends React.HTMLAttributes<HTMLDivElement> {
   handleDiscard: () => void,
 }
 

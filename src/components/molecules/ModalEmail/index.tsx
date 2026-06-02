@@ -10,9 +10,8 @@ import {
   Message,
   TitleModal,
 } from './style';
-import { DialogContentProps } from '@radix-ui/react-dialog';
 
-type ModalEmailProps = DialogContentProps;
+type ModalEmailProps = React.HTMLAttributes<HTMLDivElement>;
 
 export default function ModalEmail(props: ModalEmailProps) {
   return (

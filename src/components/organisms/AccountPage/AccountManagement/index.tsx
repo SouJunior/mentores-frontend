@@ -1,4 +1,4 @@
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { ChevronRight as ChevronRightIcon } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { SubtitleTab, TabContainer, TitleTab } from '../styles';
 import {

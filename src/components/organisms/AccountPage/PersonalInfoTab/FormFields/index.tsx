@@ -1,18 +1,18 @@
-import { Calendar } from '@/components/molecules/Calendar';
-import EventRoundedIcon from '@mui/icons-material/EventRounded';
-import dayjs from 'dayjs';
-import { useFormikContext } from 'formik';
 import { InputForm } from '@/components/atoms/InputForm';
 import { Select } from '@/components/atoms/Select';
+import { Calendar } from '@/components/molecules/Calendar';
+import { useAuthContext } from '@/context/Auth/AuthContext';
 import { genders } from '@/data/static-info';
+import { Calendar as EventRoundedIcon } from 'lucide-react';
+import dayjs from 'dayjs';
+import { useFormikContext } from 'formik';
+import { useState } from 'react';
+import { PersonalInfoFormData } from '..';
 import {
   DatePickerContainer,
   SelectInputContainer,
   SelectItemStyled,
 } from './styles';
-import { useState } from 'react';
-import { PersonalInfoFormData } from '..';
-import { useAuthContext } from '@/context/Auth/AuthContext';
 
 export function FormFields() {
   const [showCalendar, setShowCalendar] = useState(false);

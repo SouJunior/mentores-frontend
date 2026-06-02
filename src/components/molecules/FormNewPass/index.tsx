@@ -6,14 +6,14 @@ import { InfoTooltip } from '@/components/atoms/InfoTooltip';
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   ContainerForm,
   FormWrapper,
   MessagesContainer,
   WrapperInput,
 } from './styled';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { SetNewPasswordDTO } from '@/services/interfaces/IUserSetNewPassword';
 import setNewPasswordService from '@/services/user/useSetNewPassword';
 import { setNewPassSchema } from '@/utils/setNewPassschema';
@@ -26,10 +26,9 @@ export default function FormNewPass() {
     useState(false);
   const [toast, setToast] = useState(false);
 
-  const router = useRouter();
-  const { code, email } = router.query as { code: string; email: string };
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  useEffect(() => {}, [code, email]);
+  const searchParams = useSearchParams();
+  const code = searchParams.get('code') ?? '';
+  const email = searchParams.get('email') ?? '';
 
   const initialValues = {
     password: '',

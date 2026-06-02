@@ -1,7 +1,8 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import { Dialog } from '@/components/ui/dialog';
+import { ComponentProps } from 'react';
 
-type ModalRootProps = Dialog.DialogProps;
+type ModalRootProps = ComponentProps<typeof Dialog>;
 
 export const ModalRoot = ({ children, ...props }: ModalRootProps) => {
-  return <Dialog.Root {...props}>{children}</Dialog.Root>;
+  return <Dialog {...props}>{children}</Dialog>;
 };

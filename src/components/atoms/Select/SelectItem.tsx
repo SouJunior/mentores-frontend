@@ -1,17 +1,19 @@
-import * as Select from '@radix-ui/react-select';
-import { ReactNode } from 'react';
-import { SelectItemContainer } from './styles';
+'use client';
 
-interface SelectItemProps extends Select.SelectItemProps {
+import { SelectItem as ShadcnSelectItem } from '@/components/ui/select';
+import { ComponentProps, ReactNode } from 'react';
+
+interface SelectItemProps extends ComponentProps<typeof ShadcnSelectItem> {
   children: ReactNode;
 }
 
 export function SelectItem({ children, ...props }: SelectItemProps) {
   return (
-    <SelectItemContainer {...props}>
-      <Select.ItemText asChild>
-        <span>{children}</span>
-      </Select.ItemText>
-    </SelectItemContainer>
+    <ShadcnSelectItem
+      className="px-2 py-1 text-gray-600 hover:bg-gray-100 cursor-pointer rounded text-center mx-auto"
+      {...props}
+    >
+      {children}
+    </ShadcnSelectItem>
   );
 }

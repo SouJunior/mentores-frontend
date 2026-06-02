@@ -7,9 +7,8 @@ import {
   HeadingModal,
   ModalCloseCancelBtn,
 } from './style';
-import { DialogContentProps } from '@radix-ui/react-dialog';
 
-type ModalCancelProps = DialogContentProps;
+type ModalCancelProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function ModalCancel(props: ModalCancelProps) {
   return (

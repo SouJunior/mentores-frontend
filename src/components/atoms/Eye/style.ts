@@ -1,7 +1,7 @@
-import * as Toggle from '@radix-ui/react-toggle';
+import { Toggle } from '@/components/ui/toggle';
 import styled from 'styled-components';
 
-export const EyeContainer = styled(Toggle.Root)`
+export const EyeContainer = styled(Toggle)`
   all: unset;
   position: absolute;
   outline: none;

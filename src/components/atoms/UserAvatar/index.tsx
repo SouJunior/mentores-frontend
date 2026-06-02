@@ -1,6 +1,6 @@
 import UserDefault from '@/assets/userDefault.png';
 import Image from 'next/image';
-import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
+import { ChevronLeft as ArrowBackIosOutlinedIcon } from 'lucide-react';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { ImageContainer } from './styles';
 

@@ -26,7 +26,7 @@ import {
 } from './style';
 import { api } from '@/lib/axios';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
 import { FormRegisterFields } from './FormRegisterFields';
 import { Spinner } from '@/components/atoms/Spinner';

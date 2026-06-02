@@ -1,8 +1,7 @@
+import { PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import styled from 'styled-components';
-import * as Select from '@radix-ui/react-select';
-import * as Checkbox from '@radix-ui/react-checkbox';
 
-export const SelectTrigger = styled(Select.Trigger)`
+export const SelectTrigger = styled(PopoverTrigger)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,25 +24,27 @@ export const SelectTrigger = styled(Select.Trigger)`
     border-color 0.1s;
 
   &:hover,
-  &[data-state='open'] {
+  &[data-open] {
     border-radius: 8px 8px 0px 0px;
     color: #003986;
     border-color: #003986;
   }
 
-  &[data-state='open'] svg {
+  &[data-open] svg {
     rotate: 180deg;
     transition: all 0.3s;
   }
 `;
 
-export const SelectContent = styled(Select.Content)`
-  width: var(--radix-select-trigger-width);
-  max-height: var(--radix-select-content-available-height);
+export const SelectContent = styled(PopoverContent)`
+  width: 12.25rem;
+  max-height: 16rem;
+  overflow-y: auto;
   background-color: #fff;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   z-index: 9999;
+  padding: 0;
 `;
 
 export const CheckboxLabel = styled.label`
@@ -55,25 +56,4 @@ export const CheckboxLabel = styled.label`
   line-height: 1.4rem;
   color: #323232;
   cursor: pointer;
-
-  label {
-    font-size: 1rem;
-    line-height: 1.4rem;
-  }
-`;
-
-export const CheckboxRoot = styled(Checkbox.Root)`
-  width: 1rem;
-  height: 1rem;
-  border-radius: 0.25rem;
-  border: 1px solid #323232;
-  background-color: #fff;
-  padding: 1px;
-`;
-
-export const CheckboxIndicator = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #003986;
-  border-radius: 0.25rem;
 `;

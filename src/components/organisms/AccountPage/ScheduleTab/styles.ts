@@ -1,14 +1,14 @@
 import { Button } from '@/components/atoms/Button';
-import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
-import * as Tabs from '@radix-ui/react-tabs';
+import { AlertCircle as ErrorOutlineRoundedIcon } from 'lucide-react';
+import { TabsContent } from '@/components/ui/tabs';
 import styled, { css } from 'styled-components';
 
-export const ScheduleTabContainer = styled(Tabs.Content)`
+export const ScheduleTabContainer = styled(TabsContent)`
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
-  &[data-state='active'] {
+  &[data-active] {
     height: 100%;
   }
 `;

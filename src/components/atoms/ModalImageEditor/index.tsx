@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Cropper, { Area } from 'react-easy-crop';
-import { Slider } from '@mui/material';
+import { Slider } from '@/components/ui/slider';
 import {
   Container,
   CropContainer,
@@ -15,19 +15,16 @@ import {
   ModalClose,
 } from './styled';
 import { Button } from '../Button';
-import { useTheme } from 'styled-components';
 import { Minus, Plus } from 'phosphor-react';
 import { useEditPhotoContext } from '@/context/EditPhotoContext';
-import { DialogContentProps } from '@radix-ui/react-dialog';
 
-interface ModalImageEditorProps extends DialogContentProps {
+interface ModalImageEditorProps extends React.HTMLAttributes<HTMLDivElement> {
   onSave?: (croppedImage: string | null) => void;
 }
 
 const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
   const { crop, setCrop, zoom, setZoom, originalImage } = useEditPhotoContext();
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
-  const { colors } = useTheme();
 
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     const x = croppedAreaPixels.x;
@@ -95,13 +92,12 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
             <Minus />
           </ControlButton>
           <Slider
-            style={{ color: colors.blue[800] }}
-            value={zoom}
+            value={[zoom]}
             min={1}
             max={3}
             step={0.1}
             aria-labelledby="Zoom"
-            onChange={(e, zoom) => setZoom(Number(zoom))}
+            onValueChange={values => setZoom(values[0])}
           />
           <ControlButton onClick={handlePLusZoom}>
             <Plus />

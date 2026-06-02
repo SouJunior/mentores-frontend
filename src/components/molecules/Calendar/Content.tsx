@@ -1,7 +1,10 @@
+'use client';
+
 import { getWeekDays } from '@/utils/get-week-days';
-import * as Popover from '@radix-ui/react-popover';
+import { ChevronLeft as ArrowBackIosIcon } from 'lucide-react';
+import { ChevronRight as ArrowForwardIosIcon } from 'lucide-react';
 import dayjs from 'dayjs';
-import { useMemo } from 'react';
+import { ComponentProps, useMemo } from 'react';
 import {
   CalendarActions,
   CalendarDay,
@@ -10,8 +13,6 @@ import {
   LeftCalendarAction,
   RightCalendarAction,
 } from './styles';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useCalendarContext } from './Root';
 import { SelectMonths } from './SelectMonths';
 import { SelectYears } from './SelectYears';
@@ -26,7 +27,7 @@ interface CalendarWeek {
 
 type CalendarWeeks = CalendarWeek[];
 
-interface ContentProps extends Popover.PopoverContentProps {
+interface ContentProps extends ComponentProps<typeof Container> {
   selected?: Date | null;
   onSelected?: (value: Date) => void;
 }
@@ -73,84 +74,73 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
       ...nextMonthFillArray.map(date => ({ date, disabled: true })),
     ];
 
-    const calendarWeeks = calendarDays.reduce<CalendarWeeks>(
-      (weeks, _, i, original) => {
-        const isNewWeek = i % 7 === 0;
-
-        if (isNewWeek) {
-          weeks.push({
-            week: i / 7 + 1,
-            days: original.slice(i, i + 7),
-          });
-        }
-
-        return weeks;
-      },
-      []
-    );
-
-    return calendarWeeks;
+    return calendarDays.reduce<CalendarWeeks>((weeks, _, i, original) => {
+      const isNewWeek = i % 7 === 0;
+      if (isNewWeek) {
+        weeks.push({
+          week: i / 7 + 1,
+          days: original.slice(i, i + 7),
+        });
+      }
+      return weeks;
+    }, []);
   }, [currentDate]);
 
   function handlePreviousMonth() {
-    const previousMonthDate = currentDate.subtract(1, 'month');
-    setCurrentDate(previousMonthDate);
+    setCurrentDate(currentDate.subtract(1, 'month'));
   }
 
   function handleNextMonth() {
-    const nextMonthDate = currentDate.add(1, 'month');
-    setCurrentDate(nextMonthDate);
+    setCurrentDate(currentDate.add(1, 'month'));
   }
 
   return (
-    <Popover.Portal>
-      <Container align="start" {...props}>
-        <CalendarActions>
-          <LeftCalendarAction onClick={handlePreviousMonth}>
-            <ArrowBackIosIcon />
-          </LeftCalendarAction>
-          <RightCalendarAction
-            disabled={currentDate.isAfter(dayjs())}
-            onClick={handleNextMonth}
-          >
-            <ArrowForwardIosIcon />
-          </RightCalendarAction>
+    <Container align="start" {...props}>
+      <CalendarActions>
+        <LeftCalendarAction onClick={handlePreviousMonth}>
+          <ArrowBackIosIcon />
+        </LeftCalendarAction>
+        <RightCalendarAction
+          disabled={currentDate.isAfter(dayjs())}
+          onClick={handleNextMonth}
+        >
+          <ArrowForwardIosIcon />
+        </RightCalendarAction>
 
-          <SelectMonths />
-          <SelectYears />
-        </CalendarActions>
+        <SelectMonths />
+        <SelectYears />
+      </CalendarActions>
 
-        <CalendarTable>
-          <thead>
-            <tr>
-              {shortWeekDays.map((weekDay, index) => (
-                <th key={weekDay + index}>{weekDay}</th>
+      <CalendarTable>
+        <thead>
+          <tr>
+            {shortWeekDays.map((weekDay, index) => (
+              <th key={weekDay + index}>{weekDay}</th>
+            ))}
+          </tr>
+        </thead>
+
+        <tbody>
+          {calendarWeeks.map(({ days, week }) => (
+            <tr key={week}>
+              {days.map(({ date, disabled }) => (
+                <td key={date.toString()}>
+                  <CalendarDay
+                    pressed={date.isSame(dayjs(selected))}
+                    onPressedChange={() =>
+                      onSelected && onSelected(date.toDate())
+                    }
+                    isDisabled={disabled ?? false}
+                    disabled={date.isAfter(dayjs())}
+                  >
+                    {date.get('date')}
+                  </CalendarDay>
+                </td>
               ))}
             </tr>
-          </thead>
-
-          <tbody>
-            {calendarWeeks.map(({ days, week }) => (
-              <tr key={week}>
-                {days.map(({ date, disabled }) => (
-                  <td key={date.toString()}>
-                    <CalendarDay
-                      pressed={date.isSame(dayjs(selected))}
-                      onPressedChange={() =>
-                        onSelected && onSelected(date.toDate())
-                      }
-                      isDisabled={disabled ?? false}
-                      disabled={date.isAfter(dayjs())}
-                    >
-                      {date.get('date')}
-                    </CalendarDay>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </CalendarTable>
-      </Container>
-    </Popover.Portal>
+          ))}
+        </tbody>
+      </CalendarTable>
+    </Container>
   );
 }

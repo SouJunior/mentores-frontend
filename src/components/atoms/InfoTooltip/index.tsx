@@ -1,4 +1,4 @@
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { Info as InfoOutlinedIcon } from 'lucide-react';
 import { useState } from 'react';
 import {
   CriteriaList,

@@ -2,7 +2,7 @@ import { genders } from '@/data/static-info';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
 import { FormikProps, FormikProvider, useFormik } from 'formik';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import {
   Dispatch,
   ReactNode,

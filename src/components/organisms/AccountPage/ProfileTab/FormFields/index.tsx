@@ -18,7 +18,7 @@ import { InputForm } from '@/components/atoms/InputForm';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { useEditPhotoContext } from '@/context/EditPhotoContext';
 import { specialties as specialtiesOptions } from '@/data/static-info';
-import CheckIcon from '@mui/icons-material/Check';
+import { Check as CheckIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function FormFields() {

@@ -15,9 +15,8 @@ import ModalImageEditor from '../ModalImageEditor';
 import { handleError } from '@/utils/handleError';
 import { Camera, PencilSimple } from 'phosphor-react';
 import { useEditPhotoContext } from '@/context/EditPhotoContext';
-import { DialogContentProps } from '@radix-ui/react-dialog';
 
-interface EditPhotoModalProps extends DialogContentProps {
+interface EditPhotoModalProps extends React.HTMLAttributes<HTMLDivElement> {
   selectedPhoto: string | null;
   onAddPhoto?: (photo: string | null) => void;
   onImageEdit?: (editedImage: string | null) => void;

@@ -10,12 +10,12 @@ import { UserAlreadyLoggedIn } from '@/services/errors/user-already-logged-in';
 import UserLoginService from '@/services/user/userLoginService';
 import { handleError } from '@/utils/handleError';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
-import { LockOutlined, PersonOutlineRounded } from '@mui/icons-material';
+import { Lock, User } from 'lucide-react';
 import { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -127,7 +127,7 @@ export function FormLogin() {
                     name="email"
                     label="E-mail"
                   >
-                    <PersonOutlineRounded />
+                    <User />
                   </InputForm>
                 </ContainerInput>
 
@@ -141,7 +141,7 @@ export function FormLogin() {
                     label="Senha"
                     inputType={isPasswordVisible ? 'text' : 'password'}
                   >
-                    <LockOutlined />
+                    <Lock />
                   </InputForm>
                   <Eye
                     aria-label="Mostrar senha"

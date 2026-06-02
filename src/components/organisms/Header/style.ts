@@ -1,7 +1,12 @@
-import styled, { css } from 'styled-components';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import Link from 'next/link';
+import {
+  DropdownMenuContent as DMContent,
+  DropdownMenuItem as DMItem,
+  DropdownMenuSeparator as DMSeparator,
+  DropdownMenuTrigger as DMTrigger,
+} from '@/components/ui/dropdown-menu';
 import { device } from '@/styles/theme';
+import Link from 'next/link';
+import styled, { css } from 'styled-components';
 
 export const ContainerHeader = styled.header`
   display: flex;
@@ -86,7 +91,7 @@ export const AvatarGroup = styled.div`
   width: 100px;
 `;
 
-export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
+export const DropdownMenuTrigger = styled(DMTrigger)`
   all: unset;
 
   display: flex;
@@ -118,7 +123,7 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
     transition: rotate 0.3s;
   }
 
-  &[data-state='open'] svg {
+  &[data-open] svg {
     rotate: 90deg;
   }
 
@@ -127,7 +132,7 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   }
 `;
 
-export const DropdownMenuContent = styled(DropdownMenu.Content)`
+export const DropdownMenuContent = styled(DMContent)`
   padding: 0.5rem 0;
   border-radius: 0.5rem;
   background: ${props => props.theme.colors.white};
@@ -160,7 +165,7 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
   }
 
   @media ${device.desktopXS} {
-    width: var(--radix-dropdown-menu-content-available-width);
+    width: 100%;
     border-radius: 0;
     margin-top: -3px;
   }
@@ -172,7 +177,7 @@ export const DropdownMenuLabel = styled.strong`
   padding: 0.5rem 1rem;
 `;
 
-export const DropdownMenuSeparator = styled(DropdownMenu.Separator)`
+export const DropdownMenuSeparator = styled(DMSeparator)`
   width: 100%;
   height: 1px;
   background-color: ${props => props.theme.colors.gray[600]};
@@ -212,13 +217,12 @@ export const LinkUserAccount = styled(Link)`
   }
 `;
 
-export const SignOutBtn = styled(DropdownMenu.Item)`
+export const SignOutBtn = styled(DMItem)`
   ${baseBtnStyles}
   color: ${props => props.theme.colors.red[300]};
 `;
 
-// Menu Burger
-export const MenuBurgerTrigger = styled(DropdownMenu.Trigger)`
+export const MenuBurgerTrigger = styled(DMTrigger)`
   all: unset;
   display: none;
   cursor: pointer;
@@ -228,7 +232,7 @@ export const MenuBurgerTrigger = styled(DropdownMenu.Trigger)`
   line-height: 0;
   transition: transform 0.3s;
 
-  &[data-state='open'] {
+  &[data-open] {
     transform: rotate(90deg);
   }
 
@@ -248,14 +252,14 @@ export const MenuBurgerOverlay = styled.div`
   position: fixed;
   inset: 0;
   z-index: 1;
-  margin-top: 5rem; // Header's height
+  margin-top: 5rem;
 
   @media ${device.desktopXS} {
     display: block;
   }
 `;
 
-export const MenuBurgerContent = styled(DropdownMenu.Content)`
+export const MenuBurgerContent = styled(DMContent)`
   display: none;
   flex-direction: column;
   gap: 0.5rem;
@@ -277,7 +281,7 @@ export const MenuBurgerContent = styled(DropdownMenu.Content)`
 
   padding: 1rem 0;
   color: ${props => props.theme.colors.blue[800]};
-  width: var(--radix-dropdown-menu-content-available-width);
+  width: 100%;
 
   .menu-burger-links {
     display: flex;

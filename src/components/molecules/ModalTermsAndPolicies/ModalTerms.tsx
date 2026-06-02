@@ -1,4 +1,3 @@
-import { DialogContentProps } from '@radix-ui/react-dialog';
 import {
   ModalBox,
   ModalBoxContainer,
@@ -12,7 +11,7 @@ import {
 import { Modal } from '@/components/atoms/Modal';
 import { ModalHeader } from './ModalHeader';
 
-type ModalTermsProps = DialogContentProps;
+type ModalTermsProps = React.HTMLAttributes<HTMLDivElement>;
 
 export default function ModalTerms(props: ModalTermsProps) {
   return (

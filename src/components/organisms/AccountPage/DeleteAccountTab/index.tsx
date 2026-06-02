@@ -5,10 +5,10 @@ import { FormValuesDeleteAccountDTO } from '@/services/interfaces/IUserDeleteAcc
 import { UserAccountDeleteFeedback } from '@/services/user/userAccountDeleteFeedback';
 import { UserDeleteAccount } from '@/services/user/userDeleteAccount';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ArrowLeft as ArrowBackIcon } from 'lucide-react';
 import { AxiosError } from 'axios';
 import { FormikProvider, useFormik } from 'formik';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import {
   ButtonsContainer,

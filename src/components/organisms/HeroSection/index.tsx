@@ -11,7 +11,7 @@ import {
   QueryInput,
   Title,
 } from './style';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/atoms/Button';
 import { MagnifyingGlass } from 'phosphor-react';
 

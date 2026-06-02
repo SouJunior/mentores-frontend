@@ -12,7 +12,7 @@ import {
   ContainerToastIconWrapper,
   ContainerToastIconClose,
 } from './styles';
-import CloseIcon from '@mui/icons-material/Close';
+import { X as CloseIcon } from 'lucide-react';
 interface CustomToastProps {
   message: string;
   onClose?: () => void;

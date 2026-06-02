@@ -10,7 +10,7 @@ import {
   isValidHttpsUrl,
   splitCalendlyName,
 } from '@/utils/ValidateCalendlyInput';
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+import { CheckCircle as CheckCircleOutlineRoundedIcon } from 'lucide-react';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

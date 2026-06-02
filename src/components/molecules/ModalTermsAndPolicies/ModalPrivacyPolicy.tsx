@@ -8,10 +8,9 @@ import {
   ModalContainer,
   ModalDescription,
 } from './styles';
-import { DialogContentProps } from '@radix-ui/react-dialog';
 import { ModalHeader } from './ModalHeader';
 
-type ModalPrivacyPolicyProps = DialogContentProps;
+type ModalPrivacyPolicyProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function ModalPrivacyPolicy(props: ModalPrivacyPolicyProps) {
   return (

@@ -1,5 +1,9 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import { DialogTitle } from '@/components/ui/dialog';
+import { ComponentProps } from 'react';
 
-export function ModalTitle({ children, ...props }: Dialog.DialogTitleProps) {
-  return <Dialog.Title {...props}>{children}</Dialog.Title>;
+export function ModalTitle({
+  children,
+  ...props
+}: ComponentProps<typeof DialogTitle>) {
+  return <DialogTitle {...props}>{children}</DialogTitle>;
 }

@@ -1,14 +1,16 @@
-import * as Dialog from '@radix-ui/react-dialog';
-import { ModalOverlay, ModalContent as ModalContentContainer } from './style';
+import { DialogContent } from '@/components/ui/dialog';
+import { ComponentProps } from 'react';
 
-type ContentProps = Dialog.DialogContentProps;
+type ContentProps = ComponentProps<typeof DialogContent>;
 
 export function ModalContent({ children, ...props }: ContentProps) {
   return (
-    <Dialog.Portal>
-      <ModalOverlay>
-        <ModalContentContainer {...props}>{children}</ModalContentContainer>
-      </ModalOverlay>
-    </Dialog.Portal>
+    <DialogContent
+      showCloseButton={false}
+      className="bg-white rounded-lg p-0 max-w-fit overflow-hidden"
+      {...props}
+    >
+      {children}
+    </DialogContent>
   );
 }

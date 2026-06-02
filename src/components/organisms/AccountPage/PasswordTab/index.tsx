@@ -19,7 +19,7 @@ import UserUpdateService from '@/services/user/userUpdateService';
 import { isEmpty } from '@/utils/is-empty';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import * as yup from 'yup';
 

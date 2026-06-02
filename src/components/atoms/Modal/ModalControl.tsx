@@ -1,7 +1,14 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import { DialogTrigger } from '@/components/ui/dialog';
+import { ComponentProps, isValidElement, ReactNode } from 'react';
 
-type ControlProps = Dialog.DialogTriggerProps;
+type ControlProps = ComponentProps<typeof DialogTrigger> & {
+  asChild?: boolean;
+  children?: ReactNode;
+};
 
-export function ModalControl({ children, ...props }: ControlProps) {
-  return <Dialog.Trigger {...props}>{children}</Dialog.Trigger>;
+export function ModalControl({ children, asChild, ...props }: ControlProps) {
+  if (asChild && isValidElement(children)) {
+    return <DialogTrigger render={children} {...props} />;
+  }
+  return <DialogTrigger {...props}>{children}</DialogTrigger>;
 }
