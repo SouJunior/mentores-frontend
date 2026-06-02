@@ -1,7 +1,7 @@
 'use client';
 
 import backgroundImg from '@/assets/ilustracao.svg';
-import { FormRegister } from '@/components/molecules/FormRegister';
+import { FormRegister } from '@/features/auth/form-register';
 import {
   ImageRegisterContainer,
   MyImageRegister,

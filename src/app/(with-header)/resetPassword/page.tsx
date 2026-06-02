@@ -1,6 +1,6 @@
 'use client';
 
-import FormEmailToReset from '@/components/molecules/FormEmailToReset';
+import FormEmailToReset from '@/features/auth/form-email-to-reset';
 import { ResetPassContainer } from '@/styles/pages/resetPassword';
 
 export default function ResetPasswordPage() {

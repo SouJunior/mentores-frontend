@@ -1,9 +1,10 @@
 import { api } from '@/lib/axios';
-import {
+import type {
   QueryKey,
   UndefinedInitialDataOptions,
-  useQuery,
+  UseQueryResult,
 } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { ITestimony } from '../interfaces/IUseTestimonyService';
 
 export const useTestimonyService = (
@@ -13,7 +14,7 @@ export const useTestimonyService = (
     ITestimony[],
     QueryKey
   >
-) => {
+): UseQueryResult<ITestimony[], Error> => {
   return useQuery<ITestimony[]>({
     queryKey: ['testimonies'],
     queryFn: async () => {

@@ -1,12 +1,12 @@
 'use client';
 
-import { Spinner } from '@/components/atoms/Spinner';
-import AccountManagementTab from '@/components/organisms/AccountPage/AccountManagement';
-import { DeleteAccountTab } from '@/components/organisms/AccountPage/DeleteAccountTab';
-import { PasswordTab } from '@/components/organisms/AccountPage/PasswordTab';
-import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab';
-import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab';
-import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab';
+import { Spinner } from '@/components/spinner';
+import AccountManagementTab from '@/features/account/account-page/AccountManagement';
+import { DeleteAccountTab } from '@/features/account/account-page/DeleteAccountTab';
+import { PasswordTab } from '@/features/account/account-page/PasswordTab';
+import { PersonalInfoTab } from '@/features/account/account-page/PersonalInfoTab';
+import { ProfileTab } from '@/features/account/account-page/ProfileTab';
+import { ScheduleTab } from '@/features/account/account-page/ScheduleTab';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { EditPhotoProvider } from '@/context/EditPhotoContext';
 import { useProtectPage } from '@/hooks/useProtectPage';

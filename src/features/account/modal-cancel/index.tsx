@@ -1,0 +1,32 @@
+import { Button } from '@/components/button';
+import {
+  ContainerBtn,
+  ContainerModalCancel,
+  DescriptionModal,
+  DiscardBtn,
+  HeadingModal,
+  ModalCloseCancelBtn,
+} from './style';
+
+type ModalCancelProps = React.HTMLAttributes<HTMLDivElement>;
+
+export function ModalCancel(props: ModalCancelProps) {
+  return (
+    <ContainerModalCancel {...props}>
+      <HeadingModal>Deseja descartar as alterações?</HeadingModal>
+      <DescriptionModal>
+        As informações inseridas não serão salvas.
+      </DescriptionModal>
+
+      <ContainerBtn>
+        <ModalCloseCancelBtn asChild>
+          <Button variant="secondary">Cancelar</Button>
+        </ModalCloseCancelBtn>
+
+        <Button as={DiscardBtn} href="/">
+          Descartar
+        </Button>
+      </ContainerBtn>
+    </ContainerModalCancel>
+  );
+}

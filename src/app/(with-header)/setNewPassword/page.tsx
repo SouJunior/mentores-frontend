@@ -1,6 +1,6 @@
 'use client';
 
-import FormNewPass from '@/components/molecules/FormNewPass';
+import FormNewPass from '@/features/auth/form-new-pass';
 import { SetPassContainer } from '@/styles/pages/setNewPassword';
 import { Suspense } from 'react';
 

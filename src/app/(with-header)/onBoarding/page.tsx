@@ -1,9 +1,9 @@
 'use client';
 
 import onBoardImage from '@/assets/onBoarding/Ilustrações.svg';
-import GridSpecialities from '@/components/atoms/GridSpecialities';
-import { Spinner } from '@/components/atoms/Spinner';
-import PerfilTab from '@/components/molecules/PerfilTab';
+import GridSpecialities from '@/features/account/grid-specialities';
+import { Spinner } from '@/components/spinner';
+import PerfilTab from '@/features/account/perfil-tab';
 import { EditPhotoProvider } from '@/context/EditPhotoContext';
 import { OnBoardingProvider, StepNumber } from '@/context/OnBoardingContext';
 import { useProtectPage } from '@/hooks/useProtectPage';

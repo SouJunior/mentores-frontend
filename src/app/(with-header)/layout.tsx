@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from '@/components/organisms/Header';
+import { Header } from '@/layout/header';
 import { ReactNode } from 'react';
 
 export default function WithHeaderLayout({

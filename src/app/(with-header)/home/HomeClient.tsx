@@ -1,12 +1,12 @@
 'use client';
 
-import { ModalAccountDeleted } from '@/components/molecules/ModalAccountDeleted';
-import CalendlyRegister from '@/components/organisms/CalendlyRegister';
-import { DepoSection } from '@/components/organisms/DepoSection';
-import { Footer } from '@/components/organisms/Footer';
-import { HeroSection } from '@/components/organisms/HeroSection';
-import { MentorSection } from '@/components/organisms/MentorSection';
-import { Onboarding } from '@/components/organisms/Onboarding';
+import { ModalAccountDeleted } from '@/features/account/modal-account-deleted';
+import CalendlyRegister from '@/features/account/calendly';
+import { DepoSection } from '@/features/home/depo-section';
+import { Footer } from '@/layout/footer';
+import { HeroSection } from '@/features/home/hero-section';
+import { MentorSection } from '@/features/home/mentor-section';
+import { Onboarding } from '@/features/home/onboarding';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';

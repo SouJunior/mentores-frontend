@@ -1,9 +1,9 @@
 'use client';
 
-import InputSearch from '@/components/atoms/InputSearch';
-import SelectFilter from '@/components/atoms/SelectFilter';
-import { Footer } from '@/components/organisms/Footer';
-import { MentorsGrid } from '@/components/organisms/MentorsGrid';
+import InputSearch from '@/features/mentors/input-search';
+import SelectFilter from '@/components/select-filter';
+import { Footer } from '@/layout/footer';
+import { MentorsGrid } from '@/features/mentors/mentors-grid';
 import { genders, specialties } from '@/data/static-info';
 import { IMentors } from '@/services/interfaces/IUseMentorsService';
 import { useMentorsCalendlyInfoService } from '@/services/user/useMentorsCalendlyInfoService';

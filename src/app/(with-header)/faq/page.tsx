@@ -1,13 +1,13 @@
 'use client';
 
 import ImagemFAQ from '@/assets/seo.svg';
-import { Footer } from '@/components/organisms/Footer';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Footer } from '@/layout/footer';
 import {
   AccordionContainer,
   AccordionTitle,
@@ -54,7 +54,7 @@ const faqItems = [
 ];
 
 export default function FaqPage() {
-  const [expanded, setExpanded] = useState<string>('');
+  const [expanded, setExpanded] = useState<string[]>([]);
 
   return (
     <FaqContainer>
@@ -66,12 +66,7 @@ export default function FaqPage() {
         <AccordionContainer>
           <TitleSpan>Ficou com alguma dúvida?</TitleSpan>
 
-          <Accordion
-            type="single"
-            collapsible
-            value={expanded}
-            onValueChange={setExpanded}
-          >
+          <Accordion value={expanded} onValueChange={setExpanded}>
             {faqItems.map(item => (
               <AccordionItem key={item.id} value={item.id}>
                 <AccordionTrigger>
