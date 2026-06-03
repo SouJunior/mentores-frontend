@@ -4,7 +4,6 @@ import { Tag } from '@/components/tag';
 import { IMentors } from '@/services/interfaces/IUseMentorsService';
 import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import Image from 'next/image';
-import { useTheme } from 'styled-components';
 import { CardImage, CardStacks, CardTitle } from './style';
 
 interface CardMentorProps {
@@ -13,8 +12,6 @@ interface CardMentorProps {
 }
 
 export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
-  const { colors } = useTheme();
-
   if (!mentor) {
     return <p>No mentor information available</p>;
   }
@@ -29,7 +26,7 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
         gap: '1rem',
         alignItems: 'stretch',
         padding: '1.5rem 1rem',
-        backgroundColor: colors.white,
+        backgroundColor: '#fff',
         border: 'none',
         margin: 0,
         boxShadow: 'none',

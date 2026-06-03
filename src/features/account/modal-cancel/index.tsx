@@ -1,32 +1,38 @@
 import { Button } from '@/components/button';
-import {
-  ContainerBtn,
-  ContainerModalCancel,
-  DescriptionModal,
-  DiscardBtn,
-  HeadingModal,
-  ModalCloseCancelBtn,
-} from './style';
+import { Modal } from '@/components/modal';
+import Link from 'next/link';
 
 type ModalCancelProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function ModalCancel(props: ModalCancelProps) {
   return (
-    <ContainerModalCancel {...props}>
-      <HeadingModal>Deseja descartar as alterações?</HeadingModal>
-      <DescriptionModal>
+    <Modal.Content
+      className="text-center flex flex-col gap-6 px-8 py-6 relative"
+      {...props}
+    >
+      <Modal.Title className="font-bold text-2xl leading-[120%] text-[#5D5F5D] text-center">
+        Deseja descartar as alterações?
+      </Modal.Title>
+      <Modal.Description className="font-normal text-[1.125rem] leading-[150%] text-[#5D5F5D] max-w-[17rem] mx-auto">
         As informações inseridas não serão salvas.
-      </DescriptionModal>
+      </Modal.Description>
 
-      <ContainerBtn>
-        <ModalCloseCancelBtn asChild>
+      <div className="flex justify-center gap-4 w-full text-[#C1292E]">
+        <Modal.Close
+          className="static py-2 leading-6 max-w-[9rem] w-full border-[1.5px] border-[#5D5F5D] text-[#5D5F5D]"
+          asChild
+        >
           <Button variant="secondary">Cancelar</Button>
-        </ModalCloseCancelBtn>
+        </Modal.Close>
 
-        <Button as={DiscardBtn} href="/">
+        <Button
+          as={Link}
+          href="/"
+          className="py-2 leading-6 max-w-[9rem] w-full bg-[#C1292E] border-[#C1292E] hover:bg-[#8f1e22] hover:border-[#8f1e22]"
+        >
           Descartar
         </Button>
-      </ContainerBtn>
-    </ContainerModalCancel>
+      </div>
+    </Modal.Content>
   );
 }

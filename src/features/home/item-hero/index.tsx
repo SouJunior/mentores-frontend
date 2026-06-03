@@ -1,5 +1,4 @@
 import Image, { StaticImageData } from 'next/image';
-import { ItemImage, ItemInvisible, ItemPrimary, ItemSecondary } from './style';
 
 interface ItemHeroProps<
   T extends 'invisible' | 'primary' | 'secondary' | 'image',
@@ -8,24 +7,33 @@ interface ItemHeroProps<
   imageSrc?: T extends 'image' ? StaticImageData : never;
 }
 
+const baseClasses =
+  'w-22 h-22 rounded-[24px] max-[438px]:w-12 max-[438px]:h-12 max-[438px]:rounded-[12px]';
+
 export function ItemHero<
   T extends 'invisible' | 'primary' | 'secondary' | 'image',
 >({ type, imageSrc }: ItemHeroProps<T>) {
   if (type === 'invisible') {
-    return <ItemInvisible />;
+    return <div className={`${baseClasses} hidden`} />;
   }
   if (type === 'primary') {
-    return <ItemPrimary />;
+    return (
+      <div
+        className={`${baseClasses} bg-[#003986] border-4 border-[#003986]`}
+      />
+    );
   }
   if (type === 'secondary') {
-    return <ItemSecondary />;
+    return (
+      <div
+        className={`${baseClasses} border-4 border-[#003986] bg-transparent`}
+      />
+    );
   }
   if (type === 'image') {
-    if (!imageSrc) {
-      return null;
-    }
+    if (!imageSrc) return null;
     return (
-      <ItemImage>
+      <div className={`${baseClasses} overflow-hidden`}>
         <Image
           width={100}
           height={100}
@@ -33,8 +41,9 @@ export function ItemHero<
           alt="Imagem de um Mentor"
           loading="eager"
           quality={100}
+          className="w-full h-full object-cover"
         />
-      </ItemImage>
+      </div>
     );
   }
 

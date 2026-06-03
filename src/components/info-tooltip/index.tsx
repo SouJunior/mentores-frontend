@@ -1,13 +1,5 @@
 import { Info as InfoOutlinedIcon } from 'lucide-react';
 import { useState } from 'react';
-import {
-  CriteriaList,
-  Criterion,
-  InfoContainer,
-  Line,
-  Title,
-  Tooltip,
-} from './style';
 
 interface ToolTipProps {
   right?: number;
@@ -16,31 +8,42 @@ interface ToolTipProps {
 export function InfoTooltip({ right }: ToolTipProps) {
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
-  const handleMouseEnter = () => {
-    setTooltipVisible(true);
-  };
-
-  const handleMouseLeave = () => {
-    setTimeout(() => {
-      setTooltipVisible(false);
-    }, 2000);
-  };
   return (
-    <InfoContainer right={right}>
+    <span
+      className="flex justify-end h-6 absolute cursor-pointer z-40 [&_svg]:w-4 [&_svg]:h-4"
+      style={right !== undefined ? { right: `${right}px` } : undefined}
+    >
       <InfoOutlinedIcon
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => setTooltipVisible(true)}
+        onMouseLeave={() => setTimeout(() => setTooltipVisible(false), 2000)}
       />
-      <Tooltip isVisible={tooltipVisible}>
-        <Title>Sua senha deve conter:</Title>
-        <CriteriaList>
-          <Line aria-hidden />
-          <Criterion>Mínimo 8 caracteres.</Criterion>
-          <Criterion>Pelo menos uma letra maiúscula.</Criterion>
-          <Criterion>Pelo menos um número.</Criterion>
-          <Criterion>Pelo menos um caractere especial (ex: @#$)</Criterion>
-        </CriteriaList>
-      </Tooltip>
-    </InfoContainer>
+      <div
+        className={`absolute bg-white rounded-lg z-9999 shadow-md p-4 flex justify-center flex-col w-[400px] transition-opacity duration-300 ease-in-out ${
+          tooltipVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
+      >
+        <h3 className="text-[#046AD0] text-base font-bold">
+          Sua senha deve conter:
+        </h3>
+        <ul className="list-none mt-[0.8rem] relative px-4">
+          <span
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[80%] rounded-full bg-[#666666]"
+            aria-hidden
+          />
+          <li className="text-[#666666] leading-[150%]">
+            Mínimo 8 caracteres.
+          </li>
+          <li className="text-[#666666] leading-[150%]">
+            Pelo menos uma letra maiúscula.
+          </li>
+          <li className="text-[#666666] leading-[150%]">
+            Pelo menos um número.
+          </li>
+          <li className="text-[#666666] leading-[150%]">
+            Pelo menos um caractere especial (ex: @#$)
+          </li>
+        </ul>
+      </div>
+    </span>
   );
 }

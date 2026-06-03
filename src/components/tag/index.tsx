@@ -1,14 +1,17 @@
-import { ComponentType, ElementType, ReactNode } from 'react';
-import { TagStyle } from './styles';
-
-type ElementOrComponentType = ElementType<any> | ComponentType<any>;
+import { ReactNode } from 'react';
 
 interface TagProps {
   children: ReactNode;
-  as?: ElementOrComponentType;
   [key: string]: any;
 }
 
 export function Tag({ children, ...props }: TagProps) {
-  return <TagStyle {...props}>{children}</TagStyle>;
+  return (
+    <span
+      className="rounded-[2.5rem] bg-[#F1F3F5] px-2 py-2 text-[#001633] text-xs font-normal leading-[120%]"
+      {...props}
+    >
+      {children}
+    </span>
+  );
 }

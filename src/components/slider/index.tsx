@@ -2,7 +2,6 @@ import { CardMentor } from '@/features/mentors/card-mentor';
 import { MutableRefObject } from 'react';
 import { A11y, Pagination } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
-import { SwiperContainer } from './style';
 
 import { useMentorsCalendlyInfoService } from '@/services/user/useMentorsCalendlyInfoService';
 import { useMentorsService } from '@/services/user/useMentorsService';
@@ -17,12 +16,14 @@ interface SliderProps {
 
 export const Slider = ({ swiperRef }: SliderProps) => {
   const { data: mentors = [] } = useMentorsService();
-  const { data: mentorsCalendlyInfo } = useMentorsCalendlyInfoService()
+  const { data: mentorsCalendlyInfo } = useMentorsCalendlyInfoService();
 
-  const mentorsCalendlyInfoArray = Array.isArray(mentorsCalendlyInfo) ? mentorsCalendlyInfo : [];
+  const mentorsCalendlyInfoArray = Array.isArray(mentorsCalendlyInfo)
+    ? mentorsCalendlyInfo
+    : [];
 
   return (
-    <SwiperContainer>
+    <div className="swiper-mentor-container relative">
       <Swiper
         modules={[Pagination, A11y]}
         spaceBetween={0}
@@ -34,19 +35,23 @@ export const Slider = ({ swiperRef }: SliderProps) => {
         }}
         ref={swiperRef}
       >
-  { mentors && Array.isArray(mentors) && mentors.map((mentor) => {
-      const mentorCalendlyInfo = mentorsCalendlyInfoArray.find(info => info.mentorId === mentor.id);
+        {mentors &&
+          Array.isArray(mentors) &&
+          mentors.map(mentor => {
+            const mentorCalendlyInfo = mentorsCalendlyInfoArray.find(
+              info => info.mentorId === mentor.id
+            );
 
-          return (
-            <SwiperSlide key={mentor.id}>
-              <CardMentor
-                mentorCalendlyInfo={mentorCalendlyInfo} 
-                mentor={mentor}
-              />
-            </SwiperSlide>
-          );
-        })}
+            return (
+              <SwiperSlide key={mentor.id}>
+                <CardMentor
+                  mentorCalendlyInfo={mentorCalendlyInfo}
+                  mentor={mentor}
+                />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
-    </SwiperContainer>
+    </div>
   );
 };

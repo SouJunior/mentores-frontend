@@ -12,18 +12,6 @@ import { Button } from '@/components/button';
 import { ModalCancel } from '@/features/account/modal-cancel';
 import { ModalPrivacyPolicy } from '@/layout/footer/modal-terms-and-policies/ModalPrivacyPolicy';
 import ModalTerms from '@/layout/footer/modal-terms-and-policies/ModalTerms';
-
-import {
-  ButtonLoading,
-  ContainerBtn,
-  ContainerForm,
-  ContainerRegister,
-  ContainerTerms,
-  ModalUserExistsButton,
-  ModalUserExistsContainer,
-  ModalUserExistsTitle,
-  TxtTerms,
-} from './style';
 import { api } from '@/lib/axios';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -31,6 +19,7 @@ import { throwErrorMessages } from '@/utils/throw-error-messages';
 import { FormRegisterFields } from './FormRegisterFields';
 import { Spinner } from '@/components/spinner';
 import { Modal } from '@/components/modal';
+import Link from 'next/link';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -115,42 +104,59 @@ export function FormRegister() {
           open={isUserAlreadyExists}
           onOpenChange={() => setIsUserAlreadyExists(false)}
         >
-          <ModalUserExistsContainer>
-            <ModalUserExistsTitle>
+          <Modal.Content className="flex flex-col justify-center max-w-[26.5rem] px-0 py-6 relative [&>a+a]:mt-4">
+            <Modal.Title className="text-lg font-bold leading-[1.8rem] text-center text-red-500 mb-8">
               O e-mail informado já possui cadastro.
-            </ModalUserExistsTitle>
+            </Modal.Title>
 
-            <ModalUserExistsButton href="/login">
+            <Link
+              href="/login"
+              className="max-w-[13.5rem] w-full mx-auto px-4 py-3 rounded-lg border-[1.5px] border-[#ACACAC] text-base leading-6 text-center text-[#ACACAC] hover:bg-[#003986] hover:border-[#003986] hover:text-white"
+            >
               Ir para o login
-            </ModalUserExistsButton>
-            <ModalUserExistsButton href="/resetPassword">
+            </Link>
+            <Link
+              href="/resetPassword"
+              className="max-w-[13.5rem] w-full mx-auto px-4 py-3 rounded-lg border-[1.5px] border-[#ACACAC] text-base leading-6 text-center text-[#ACACAC] hover:bg-[#003986] hover:border-[#003986] hover:text-white"
+            >
               Recuperar senha
-            </ModalUserExistsButton>
+            </Link>
             <Modal.Close />
-          </ModalUserExistsContainer>
+          </Modal.Content>
         </Modal.Root>
       )}
 
-      <ContainerForm>
-        <ContainerRegister>
-          <div className="container-logo-form">
-            <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
-            <p>
-              <span className="asterisk">*</span> Indica um campo obrigatório
+      <div className="w-full max-w-[500px] h-fit absolute right-[2.7rem] top-8 bg-white rounded-xl p-8">
+        <div>
+          <div className="container-logo-form flex flex-col gap-6 mb-2">
+            <Image
+              src={souJuniorLogoImg}
+              alt="logo"
+              width={240}
+              height={36}
+              className="w-60 h-9"
+            />
+            <p className="text-xs text-[#666666]">
+              <span className="text-blue-500">*</span> Indica um campo
+              obrigatório
             </p>
           </div>
 
           <FormikProvider value={formik}>
-            <Form>
+            <Form className="flex flex-col gap-4">
               <FormRegisterFields />
 
-              <ContainerTerms>
+              <div className="flex max-h-[100px] text-justify items-start justify-center mt-2">
                 <Field
                   id="checkbox-terms-and-policies"
                   type="checkbox"
                   name="agreeWithTermsAndPolicies"
+                  className="align-middle mr-1"
                 />
-                <TxtTerms htmlFor="checkbox-terms-and-policies">
+                <label
+                  htmlFor="checkbox-terms-and-policies"
+                  className="text-sm w-full text-blue-500 leading-[150%] ml-2 -mt-[5px] [&_button]:inline [&_button]:p-0 [&_button]:text-blue-500 [&_button]:text-sm [&_button]:font-normal [&_button]:leading-[150%] [&_button]:border-b [&_button]:border-blue-500 [&_button]:rounded-none"
+                >
                   Concordo com os{' '}
                   <Modal.Root>
                     <Modal.Control asChild>
@@ -172,18 +178,21 @@ export function FormRegister() {
                     <ModalPrivacyPolicy />
                   </Modal.Root>{' '}
                   do SouJunior.
-                </TxtTerms>
-              </ContainerTerms>
+                </label>
+              </div>
 
               <Modal.Root open={openEmail} onOpenChange={handleModalEmail}>
                 <ModalEmail />
               </Modal.Root>
 
-              <ContainerBtn>
+              <div className="flex flex-col pt-3 gap-4">
                 {formik.isSubmitting ? (
-                  <ButtonLoading disabled>
+                  <Button
+                    disabled
+                    className="h-[43px] p-0 cursor-wait bg-[#003986] border-[#003986]"
+                  >
                     <Spinner />
-                  </ButtonLoading>
+                  </Button>
                 ) : (
                   <Button disabled={isButtonDisabled}>Concluir</Button>
                 )}
@@ -202,11 +211,11 @@ export function FormRegister() {
                 >
                   <ModalCancel />
                 </Modal.Root>
-              </ContainerBtn>
+              </div>
             </Form>
           </FormikProvider>
-        </ContainerRegister>
-      </ContainerForm>
+        </div>
+      </div>
     </>
   );
 }

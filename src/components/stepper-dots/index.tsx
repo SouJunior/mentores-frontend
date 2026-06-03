@@ -1,36 +1,24 @@
-import React from 'react'
-import {
-  ContainerStepper,
-  CircleStepper,
-  MovementIndicators,
-  MovementAnimator,
-} from './style'
-
-export type MovementAnimatorProps = {
-  index: number
-  i: number
-}
-
 type StepperDotsProps = {
-  currentStep: number
-}
+  currentStep: number;
+};
 
 export default function StepperDots({ currentStep }: StepperDotsProps) {
-  const items = [0, 1, 2]
+  const items = [0, 1, 2];
 
   return (
-    <>
-      <ContainerStepper>
-        {items.map((i) => {
-          return (
-            <CircleStepper key={i}>
-              <MovementAnimator index={currentStep - 1} i={i}>
-                <MovementIndicators />
-              </MovementAnimator>
-            </CircleStepper>
-          )
-        })}
-      </ContainerStepper>
-    </>
-  )
+    <div className="flex flex-row items-center justify-center py-6 px-[0.55rem]">
+      {items.map(i => (
+        <ul
+          key={i}
+          className="w-2.75 h-2.75 bg-[#ddd] relative rounded-[20px] mx-2.25 overflow-hidden"
+        >
+          <div
+            style={{ transform: `translateX(${(currentStep - 1 - i) * 40}px)` }}
+          >
+            <div className="absolute left-0 top-0 w-2.75 h-2.75 rounded-[20px] bg-[#003986] transition-transform duration-500 ease-out" />
+          </div>
+        </ul>
+      ))}
+    </div>
+  );
 }

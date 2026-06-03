@@ -8,14 +8,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Footer } from '@/layout/footer';
-import {
-  AccordionContainer,
-  AccordionTitle,
-  FaqContainer,
-  FaqMain,
-  ImageContainer,
-  TitleSpan,
-} from '@/styles/pages/faq';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -57,20 +49,24 @@ export default function FaqPage() {
   const [expanded, setExpanded] = useState<string[]>([]);
 
   return (
-    <FaqContainer>
-      <FaqMain>
-        <ImageContainer>
+    <main className="flex flex-col min-h-screen [&_footer]:mt-auto">
+      <section className="flex justify-center gap-[74px] pt-24 pb-12">
+        <div className="mt-[80px]">
           <Image src={ImagemFAQ} alt="Image" width={493} height={324} />
-        </ImageContainer>
+        </div>
 
-        <AccordionContainer>
-          <TitleSpan>Ficou com alguma dúvida?</TitleSpan>
+        <div className="flex flex-col max-w-[43.75rem]">
+          <h1 className="text-[#002C66] text-[32px] font-semibold leading-[38px] mb-6">
+            Ficou com alguma dúvida?
+          </h1>
 
           <Accordion value={expanded} onValueChange={setExpanded}>
             {faqItems.map(item => (
               <AccordionItem key={item.id} value={item.id}>
                 <AccordionTrigger>
-                  <AccordionTitle>{item.question}</AccordionTitle>
+                  <span className="text-[20px] font-medium leading-[24px] text-[#002C66] text-left">
+                    {item.question}
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent>{item.answer}</AccordionContent>
               </AccordionItem>
@@ -78,7 +74,9 @@ export default function FaqPage() {
 
             <AccordionItem value="5">
               <AccordionTrigger>
-                <AccordionTitle>Onde agendar minha mentoria?</AccordionTitle>
+                <span className="text-[20px] font-medium leading-[24px] text-[#002C66] text-left">
+                  Onde agendar minha mentoria?
+                </span>
               </AccordionTrigger>
               <AccordionContent>
                 Para agendar sua mentoria basta acessar a Página de mentores,
@@ -92,10 +90,10 @@ export default function FaqPage() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </AccordionContainer>
-      </FaqMain>
+        </div>
+      </section>
 
       <Footer />
-    </FaqContainer>
+    </main>
   );
 }

@@ -1,5 +1,4 @@
 import { Field, Form, FormikProvider, useFormik } from 'formik';
-import { ContainerForm, FormWrapper, MessagesContainer } from './styled';
 import { InputForm } from '@/components/input-form';
 import { Button } from '@/components/button';
 import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
@@ -34,18 +33,20 @@ export default function FormEmailToReset() {
   });
 
   return (
-    <ContainerForm>
-      <FormWrapper>
+    <div className="w-[31.5rem] h-[36.875rem] bg-white rounded-xl">
+      <div className="p-8 h-full w-full flex flex-col justify-center [&_a]:mt-auto [&_a]:text-blue-500 [&_a]:underline [&_a]:text-base [&_a]:font-normal [&_a]:text-center [&_a]:cursor-pointer [&_button]:mt-6">
         <FormikProvider value={formik}>
-          <Form>
+          <Form className="flex flex-col [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_button]:mt-[10px]">
             <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
-            <MessagesContainer>
-              <h2>Esqueceu a senha?</h2>
-              <p>
+            <div className="my-6">
+              <h2 className="text-[#666666] text-lg font-bold leading-[1.8rem] text-left mb-4">
+                Esqueceu a senha?
+              </h2>
+              <p className="text-[#666666] text-base leading-6 text-left">
                 Um e-mail será enviado para o endereço cadastrado com as
                 instruções para redefinir senha.
               </p>
-            </MessagesContainer>
+            </div>
             <Field
               as={InputForm}
               inputType="text"
@@ -59,11 +60,11 @@ export default function FormEmailToReset() {
           </Form>
         </FormikProvider>
         <Link href="/login">Voltar ao login</Link>
-      </FormWrapper>
+      </div>
 
       <Modal.Root open={isModalOpen} onOpenChange={() => setIsModalOpen(false)}>
         <ModalResetPass />
       </Modal.Root>
-    </ContainerForm>
+    </div>
   );
 }

@@ -5,7 +5,6 @@ import { Calendar } from '@/features/account/calendar';
 import { ValuesFormType } from '@/utils/registerSchema';
 import { Field, useFormikContext } from 'formik';
 import { useState } from 'react';
-import { DatePickerContainer, WrapperInput } from './styles';
 
 import dayjs from 'dayjs';
 import { Calendar as EventRoundedIcon } from 'lucide-react';
@@ -33,11 +32,15 @@ export function FormRegisterFields() {
         open={showCalendar}
         onOpenChange={() => setShowCalendar(!showCalendar)}
       >
-        <DatePickerContainer className={formik.errors.dateBirthday && 'error'}>
+        <label
+          className={`flex flex-col gap-2 text-sm text-[#666666]${formik.errors.dateBirthday ? ' [&_svg]:text-[#E94242]' : ''} [&_span_span]:text-blue-500 [&_.error-message]:text-[#E94242] [&_.error-message]:font-bold [&_.error-message]:text-xs [&_[data-placeholder]]:text-gray-300`}
+        >
           <span>
             Data de nascimento <span>*</span>
           </span>
-          <Calendar.Control className={formik.errors.dateBirthday && 'error'}>
+          <Calendar.Control
+            className={formik.errors.dateBirthday ? 'error' : ''}
+          >
             {formik.values.dateBirthday ? (
               <span>
                 {dayjs(formik.values.dateBirthday).format('DD/MM/YYYY')}
@@ -51,7 +54,7 @@ export function FormRegisterFields() {
           {formik.errors.dateBirthday && (
             <span className="error-message">{formik.errors.dateBirthday}</span>
           )}
-        </DatePickerContainer>
+        </label>
 
         <Calendar.Content
           selected={formik.values.dateBirthday}
@@ -84,7 +87,7 @@ export function FormRegisterFields() {
         inputType="email"
       />
 
-      <WrapperInput>
+      <label className="relative [&_input]:pr-[2.8rem] [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
         <InfoTooltip right={0} />
         <Field
           as={InputForm}
@@ -100,9 +103,9 @@ export function FormRegisterFields() {
           pressed={isPasswordVisible}
           onPressedChange={setIsPasswordVisible}
         />
-      </WrapperInput>
+      </label>
 
-      <WrapperInput>
+      <label className="relative [&_input]:pr-[2.8rem] [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
         <Field
           as={InputForm}
           type="input"
@@ -117,7 +120,7 @@ export function FormRegisterFields() {
           pressed={isConfirmPasswordVisible}
           onPressedChange={setIsConfirmPasswordVisible}
         />
-      </WrapperInput>
+      </label>
     </>
   );
 }

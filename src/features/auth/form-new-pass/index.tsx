@@ -7,12 +7,6 @@ import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import {
-  ContainerForm,
-  FormWrapper,
-  MessagesContainer,
-  WrapperInput,
-} from './styled';
 import { useSearchParams } from 'next/navigation';
 import { SetNewPasswordDTO } from '@/services/interfaces/IUserSetNewPassword';
 import setNewPasswordService from '@/services/user/useSetNewPassword';
@@ -48,19 +42,24 @@ export default function FormNewPass() {
       setToast(true);
     },
   });
-  return (
-    <ContainerForm>
-      {toast && <ToastSuccess message="Ok" />}
-      <FormWrapper>
-        <FormikProvider value={formik}>
-          <Form>
-            <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
-            <MessagesContainer>
-              <h2>Nova Senha</h2>
-              <p>Preencha os campos abaixo com sua nova senha e confirme-a.</p>
-            </MessagesContainer>
 
-            <WrapperInput className="new-password-field">
+  return (
+    <div className="max-w-[31.5rem] w-full h-[36.875rem] bg-white rounded-xl">
+      {toast && <ToastSuccess message="Ok" />}
+      <div className="p-8 h-full w-full flex flex-col justify-center [&_a]:mt-auto [&_a]:text-blue-500 [&_a]:underline [&_a]:text-base [&_a]:font-normal [&_a]:text-center [&_a]:cursor-pointer [&_button]:mt-6">
+        <FormikProvider value={formik}>
+          <Form className="flex flex-col [&_button]:mt-[10px]">
+            <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
+            <div className="my-6">
+              <h2 className="text-[#666666] text-lg font-bold leading-[1.8rem] mb-4">
+                Nova Senha
+              </h2>
+              <p className="text-[#666666] text-sm font-normal leading-6">
+                Preencha os campos abaixo com sua nova senha e confirme-a.
+              </p>
+            </div>
+
+            <div className="relative mb-4 [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-5 [&_button_svg]:w-6 [&_button_svg]:h-6">
               <InfoTooltip right={0} />
 
               <Field
@@ -77,9 +76,9 @@ export default function FormNewPass() {
                 pressed={isPasswordVisible}
                 onPressedChange={setIsPasswordVisible}
               />
-            </WrapperInput>
+            </div>
 
-            <WrapperInput>
+            <div className="relative [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-5 [&_button_svg]:w-6 [&_button_svg]:h-6">
               <Field
                 as={InputForm}
                 inputType={isConfirmPasswordVisible ? 'text' : 'password'}
@@ -94,13 +93,13 @@ export default function FormNewPass() {
                 pressed={isConfirmPasswordVisible}
                 onPressedChange={setIsConfirmPasswordVisible}
               />
-            </WrapperInput>
+            </div>
 
             <Button>Redefinir senha</Button>
           </Form>
         </FormikProvider>
         <Link href="/login">Voltar ao login</Link>
-      </FormWrapper>
-    </ContainerForm>
+      </div>
+    </div>
   );
 }

@@ -2,19 +2,25 @@
 
 import backgroundImg from '@/assets/ilustracao.svg';
 import { FormRegister } from '@/features/auth/form-register';
-import {
-  ImageRegisterContainer,
-  MyImageRegister,
-  RegisterContainer,
-} from '@/styles/pages/cadastro';
+import Image from 'next/image';
 
 export default function CadastroPage() {
   return (
-    <RegisterContainer>
-      <ImageRegisterContainer>
+    <div
+      className="w-full h-fit pb-[36vh]"
+      style={{
+        background:
+          'linear-gradient(303.77deg, rgba(17, 101, 186, 0.79) 34.68%, rgba(90, 156, 255, 0.79) 79.96%), linear-gradient(303.77deg, rgba(217, 217, 217, 0) -1.3%, rgba(17, 101, 186, 0.79) 54.57%), linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(17, 101, 186, 0.79) 68.75%)',
+      }}
+    >
+      <div className="h-full w-[55%]">
         <FormRegister />
-        <MyImageRegister src={backgroundImg} alt="Figuras do Background" />
-      </ImageRegisterContainer>
-    </RegisterContainer>
+        <Image
+          src={backgroundImg}
+          alt="Figuras do Background"
+          className="w-full h-screen object-contain"
+        />
+      </div>
+    </div>
   );
 }
