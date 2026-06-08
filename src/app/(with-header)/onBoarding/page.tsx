@@ -7,18 +7,7 @@ import PerfilTab from '@/features/account/perfil-tab';
 import { EditPhotoProvider } from '@/context/EditPhotoContext';
 import { OnBoardingProvider, StepNumber } from '@/context/OnBoardingContext';
 import { useProtectPage } from '@/hooks/useProtectPage';
-import {
-  ContainerBoardModal,
-  ContainerOnBoarding,
-  ContainerSpinnerLoading,
-  ModalContainer,
-  OnBoardImage,
-  Tab,
-  TabLabel,
-  TabLine,
-  TabsContainer,
-  TabWrapper,
-} from '@/styles/pages/onBoarding';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function OnBoardingPage() {
@@ -27,35 +16,48 @@ export default function OnBoardingPage() {
 
   if (loading) {
     return (
-      <ContainerSpinnerLoading>
-        <Spinner className="spinner" />
-      </ContainerSpinnerLoading>
+      <div className="flex justify-center items-center h-full [--spinner-color:#003986]">
+        <Spinner className="!w-20 !h-20" />
+      </div>
     );
   }
 
   return (
-    <ContainerOnBoarding>
-      <OnBoardImage src={onBoardImage} alt="Background" />
-      <ContainerBoardModal>
-        <ModalContainer>
-          <TabsContainer>
-            <TabWrapper>
-              <Tab>
-                <TabLabel data-active={step === 1 ? 'true' : 'false'}>
+    <main className="w-full h-screen bg-[#175CB7] relative">
+      <Image
+        src={onBoardImage}
+        alt="Background"
+        fill
+        className="object-contain"
+      />
+      <div className="flex justify-center items-center h-full relative">
+        <div className="flex flex-col items-center max-w-[596px] w-full rounded-2xl p-6 bg-white z-10">
+          <div className="flex items-center justify-around mx-5 w-full">
+            <div className="first:mr-[5px] last:ml-[5px]">
+              <div className="relative flex flex-col items-center w-[100px]">
+                <span
+                  className={`mb-[5px] font-medium leading-[1.2rem] ${step === 1 ? 'text-[#003986]' : 'text-[#ACACAC]'}`}
+                >
                   ESPECIALIDADES
-                </TabLabel>
-                <TabLine data-active={step === 1 ? 'true' : 'false'} />
-              </Tab>
-            </TabWrapper>
-            <TabWrapper>
-              <Tab>
-                <TabLabel data-active={step === 2 ? 'true' : 'false'}>
+                </span>
+                <div
+                  className={`w-[258px] h-0.5 transition-all duration-300 ${step === 1 ? 'bg-[#003986]' : 'bg-transparent'}`}
+                />
+              </div>
+            </div>
+            <div className="first:mr-[5px] last:ml-[5px]">
+              <div className="relative flex flex-col items-center w-[100px]">
+                <span
+                  className={`mb-[5px] font-medium leading-[1.2rem] ${step === 2 ? 'text-[#003986]' : 'text-[#ACACAC]'}`}
+                >
                   PERFIL
-                </TabLabel>
-                <TabLine data-active={step === 2 ? 'true' : 'false'} />
-              </Tab>
-            </TabWrapper>
-          </TabsContainer>
+                </span>
+                <div
+                  className={`w-[258px] h-0.5 transition-all duration-300 ${step === 2 ? 'bg-[#003986]' : 'bg-transparent'}`}
+                />
+              </div>
+            </div>
+          </div>
 
           <OnBoardingProvider>
             <EditPhotoProvider>
@@ -63,8 +65,8 @@ export default function OnBoardingPage() {
               {step === 2 && <PerfilTab onStep={setStep} />}
             </EditPhotoProvider>
           </OnBoardingProvider>
-        </ModalContainer>
-      </ContainerBoardModal>
-    </ContainerOnBoarding>
+        </div>
+      </div>
+    </main>
   );
 }

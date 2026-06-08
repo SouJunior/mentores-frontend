@@ -1,17 +1,7 @@
 import { Button } from '@/components/button';
-import {
-  ButtonLoading,
-  ButtonsContainer,
-  Divider,
-  PersonalInfoContent,
-  SubtitleTab,
-  TabContainer,
-  TitleTab,
-} from '../styles';
-
+import { TabsContent } from '@/components/ui/tabs';
 import { FormikProvider, useFormik } from 'formik';
 import { FormFields } from './FormFields';
-
 import { Modal } from '@/components/modal';
 import { Spinner } from '@/components/spinner';
 import { ModalCancel } from '@/features/account/modal-cancel';
@@ -45,7 +35,6 @@ export type PasswordFormData = yup.InferType<typeof passwordTabSchema>;
 
 export function PasswordTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
-
   const { updatePassword } = UserUpdateService();
   const router = useRouter();
 
@@ -59,16 +48,12 @@ export function PasswordTab() {
         password: data.newPassword,
         confirmPassword: data.confirmNewPassword,
       });
-
       resetForm();
       router.push('/');
     } catch (err) {
       if (err instanceof AxiosError) {
         const currentMessage = err.response?.data.message;
-        const messages = {
-          'Incorrect old password': 'Senha inválida',
-        };
-
+        const messages = { 'Incorrect old password': 'Senha inválida' };
         throwErrorMessages({ messages, currentMessageKey: currentMessage });
       }
     }
@@ -86,30 +71,29 @@ export function PasswordTab() {
   );
 
   const handleWarningModal = () => {
-    const isFormEmpty = isEmpty(formik.values);
-
-    if (!isFormEmpty) {
+    if (!isEmpty(formik.values)) {
       setOpenWarningModal(true);
       return;
     }
-
     router.push('/');
   };
 
   return (
-    <TabContainer value="password">
-      <TitleTab>Senha</TitleTab>
-      <SubtitleTab>
+    <TabsContent value="password" className="flex flex-col gap-4">
+      <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
+        Senha
+      </h2>
+      <p className="text-[0.875rem] leading-4 [&_span]:text-[#338AFF]">
         <span>*</span> Indica um campo obrigatório
-      </SubtitleTab>
+      </p>
 
       <FormikProvider value={formik}>
-        <PersonalInfoContent>
+        <form className="flex flex-col gap-4 max-w-[36.3rem]">
           <FormFields />
 
-          <Divider />
+          <div className="h-px w-full bg-[#666666]" />
 
-          <ButtonsContainer>
+          <div className="flex gap-4 ml-auto">
             <Button
               type="button"
               variant="tertiary"
@@ -127,17 +111,20 @@ export function PasswordTab() {
             </Modal.Root>
 
             {formik.isSubmitting ? (
-              <ButtonLoading disabled>
+              <Button
+                disabled
+                className="h-[43px] p-0 w-24 cursor-wait bg-[#003986] border-[#003986]"
+              >
                 <Spinner />
-              </ButtonLoading>
+              </Button>
             ) : (
               <Button type="submit" disabled={isButtonDisabled}>
                 Salvar
               </Button>
             )}
-          </ButtonsContainer>
-        </PersonalInfoContent>
+          </div>
+        </form>
       </FormikProvider>
-    </TabContainer>
+    </TabsContent>
   );
 }

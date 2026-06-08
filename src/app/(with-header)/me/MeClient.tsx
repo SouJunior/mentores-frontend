@@ -1,26 +1,17 @@
 'use client';
 
 import { Spinner } from '@/components/spinner';
+import { Tabs } from '@/components/ui/tabs';
+import { TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useAuthContext } from '@/context/Auth/AuthContext';
+import { EditPhotoProvider } from '@/context/EditPhotoContext';
 import AccountManagementTab from '@/features/account/account-page/AccountManagement';
 import { DeleteAccountTab } from '@/features/account/account-page/DeleteAccountTab';
 import { PasswordTab } from '@/features/account/account-page/PasswordTab';
 import { PersonalInfoTab } from '@/features/account/account-page/PersonalInfoTab';
 import { ProfileTab } from '@/features/account/account-page/ProfileTab';
 import { ScheduleTab } from '@/features/account/account-page/ScheduleTab';
-import { useAuthContext } from '@/context/Auth/AuthContext';
-import { EditPhotoProvider } from '@/context/EditPhotoContext';
 import { useProtectPage } from '@/hooks/useProtectPage';
-import {
-  AsideContainer,
-  AsideDivider,
-  AsideNavContainer,
-  AsideNavItem,
-  AsideTitle,
-  Container,
-  ContainerSpinnerLoading,
-  ContentDivider,
-} from '@/styles/pages/me';
-import { Tabs } from '@/components/ui/tabs';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
@@ -59,9 +50,9 @@ export default function MeClient() {
 
   if (loading) {
     return (
-      <ContainerSpinnerLoading>
-        <Spinner className="spinner" />
-      </ContainerSpinnerLoading>
+      <div className="flex justify-center items-center h-full [--spinner-color:#003986]">
+        <Spinner className="!w-20 !h-20" />
+      </div>
     );
   }
 
@@ -73,32 +64,55 @@ export default function MeClient() {
       orientation="vertical"
     >
       <EditPhotoProvider>
-        <Container>
-          <AsideContainer>
-            <AsideTitle>Minha conta</AsideTitle>
+        <div className="flex gap-4 p-4 min-h-screen">
+          <aside className="flex flex-col gap-2 text-[#323232]">
+            <h1 className="text-[2rem] font-semibold leading-[2.4rem]">
+              Minha conta
+            </h1>
 
-            <AsideDivider />
+            <div className="h-px bg-[#ACACAC] w-full" />
 
-            <AsideNavContainer>
-              <AsideNavItem value="personal-info">
+            <TabsList className="flex flex-col gap-2 bg-transparent h-auto p-0 rounded-none">
+              <TabsTrigger
+                value="personal-info"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+              >
                 Informações pessoais
-              </AsideNavItem>
-              <AsideNavItem value="profile">Perfil</AsideNavItem>
-              <AsideNavItem value="schedule">Agenda</AsideNavItem>
-              <AsideNavItem value="password">Senha</AsideNavItem>
-              <AsideNavItem value="account-management">
+              </TabsTrigger>
+              <TabsTrigger
+                value="profile"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+              >
+                Perfil
+              </TabsTrigger>
+              <TabsTrigger
+                value="schedule"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+              >
+                Agenda
+              </TabsTrigger>
+              <TabsTrigger
+                value="password"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+              >
+                Senha
+              </TabsTrigger>
+              <TabsTrigger
+                value="account-management"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+              >
                 Gestão de conta
-              </AsideNavItem>
-            </AsideNavContainer>
-          </AsideContainer>
+              </TabsTrigger>
+            </TabsList>
+          </aside>
 
-          <ContentDivider />
+          <div className="w-0.5 bg-[#D9D9D9]" />
 
           <main>
             {mentor.isLoading ? (
-              <ContainerSpinnerLoading>
-                <Spinner className="spinner" />
-              </ContainerSpinnerLoading>
+              <div className="flex justify-center items-center h-full [--spinner-color:#003986]">
+                <Spinner className="!w-20 !h-20" />
+              </div>
             ) : (
               <>
                 <PersonalInfoTab />
@@ -117,7 +131,7 @@ export default function MeClient() {
               theme="colored"
             />
           </main>
-        </Container>
+        </div>
       </EditPhotoProvider>
     </Tabs>
   );

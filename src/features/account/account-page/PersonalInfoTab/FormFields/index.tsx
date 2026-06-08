@@ -1,5 +1,6 @@
 import { InputForm } from '@/components/input-form';
 import { Select } from '@/components/select';
+import { SelectItem } from '@/components/select/SelectItem';
 import { Calendar } from '@/features/account/calendar';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { genders } from '@/data/static-info';
@@ -8,16 +9,10 @@ import dayjs from 'dayjs';
 import { useFormikContext } from 'formik';
 import { useState } from 'react';
 import { PersonalInfoFormData } from '..';
-import {
-  DatePickerContainer,
-  SelectInputContainer,
-  SelectItemStyled,
-} from './styles';
 
 export function FormFields() {
   const [showCalendar, setShowCalendar] = useState(false);
   const formik = useFormikContext<PersonalInfoFormData>();
-
   const { mentor } = useAuthContext();
 
   return (
@@ -36,13 +31,15 @@ export function FormFields() {
         onOpenChange={() => setShowCalendar(!showCalendar)}
         modal={false}
       >
-        <DatePickerContainer className={formik.errors.dateOfBirth && 'error'}>
+        <label
+          className={`flex flex-col gap-2 text-[0.875rem] text-[#666666] [&_span_span]:text-[#338AFF] [&_.disabled]:text-[#ACACAC] [&_.disabled_span]:text-[#ACACAC] [&_.error-message]:text-[#E94242] [&_.error-message]:font-bold [&_.error-message]:text-xs [&_[data-placeholder]]:text-[#D9D9D9]${formik.errors.dateOfBirth ? ' [&_svg]:text-[#E94242]' : ''}`}
+        >
           <span className="disabled">
             Data de nascimento <span>*</span>
           </span>
           <Calendar.Control
             disabled
-            className={formik.errors.dateOfBirth && 'error'}
+            className={formik.errors.dateOfBirth ? 'error' : undefined}
           >
             {formik.values.dateOfBirth || mentor.data?.dateOfBirth ? (
               <span>
@@ -59,15 +56,12 @@ export function FormFields() {
           {formik.errors.dateOfBirth && (
             <span className="error-message">{formik.errors.dateOfBirth}</span>
           )}
-        </DatePickerContainer>
+        </label>
 
         <Calendar.Content
           selected={formik.values.dateOfBirth}
           onSelected={(date: Date) => {
-            formik.setValues({
-              ...formik.values,
-              dateOfBirth: date,
-            });
+            formik.setValues({ ...formik.values, dateOfBirth: date });
             setShowCalendar(false);
           }}
           sideOffset={10}
@@ -84,7 +78,7 @@ export function FormFields() {
         defaultValue={mentor.data?.email}
       />
 
-      <SelectInputContainer>
+      <label className="flex flex-col gap-2 mt-2 [&_span]:text-[#323232] [&_span]:text-[0.875rem] [&_span]:leading-[120%] [&_span_.asterisk]:text-[#338AFF] [&_.select-trigger]:py-3 [&_.select-trigger]:px-4 [&_.select-trigger]:leading-6 [&_.select-trigger]:text-base">
         <span>
           Gênero:
           <span className="asterisk">*</span>
@@ -95,12 +89,12 @@ export function FormFields() {
           onValueChange={value => formik.setFieldValue('gender', value)}
         >
           {genders.map(gender => (
-            <SelectItemStyled key={gender} value={gender}>
+            <SelectItem key={gender} value={gender} className="m-0">
               {gender}
-            </SelectItemStyled>
+            </SelectItem>
           ))}
         </Select>
-      </SelectInputContainer>
+      </label>
     </>
   );
 }

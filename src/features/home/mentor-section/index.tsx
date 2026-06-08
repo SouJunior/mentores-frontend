@@ -1,11 +1,4 @@
 import { Slider } from '@/components/slider';
-import {
-  ContainerButtons,
-  MentorsComponent,
-  MentorsContent,
-  MentorsContentContainer,
-  MentorsTitle,
-} from './style';
 import { useEffect, useRef, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 import { Button } from '@/components/button';
@@ -39,13 +32,15 @@ export const MentorSection = () => {
   }, []);
 
   return (
-    <MentorsComponent id="mentor">
-      <MentorsContentContainer className="container">
-        <MentorsTitle>Encontre seu mentor</MentorsTitle>
+    <section id="mentor" className="bg-[#F1F3F5]">
+      <div className="container relative py-16 pr-0 max-[1440px]:max-w-none max-[1440px]:py-16 max-[1440px]:px-0 max-[438px]:py-14">
+        <h2 className="text-[#323232] text-[2.5rem] font-semibold leading-[120%] max-[1440px]:px-8 max-[1133px]:px-4 max-[768px]:text-[2rem]">
+          Encontre seu mentor
+        </h2>
 
-        <MentorsContent>
+        <div className="flex flex-col gap-6 mt-8">
           <Slider swiperRef={swiperRef} />
-          <ContainerButtons>
+          <div className="flex self-center gap-6 [&_.arrow-slider]:text-[#003986] [&_.arrow-slider]:p-2 [&_.arrow-slider_svg]:w-6 [&_.arrow-slider_svg]:h-6">
             <Button
               variant="secondary"
               onClick={handlePrev}
@@ -67,10 +62,10 @@ export const MentorSection = () => {
             >
               <ArrowRightIcon />
             </Button>
-          </ContainerButtons>
-        </MentorsContent>
-      </MentorsContentContainer>
-    </MentorsComponent>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

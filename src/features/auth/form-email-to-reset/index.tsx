@@ -36,7 +36,7 @@ export default function FormEmailToReset() {
     <div className="w-[31.5rem] h-[36.875rem] bg-white rounded-xl">
       <div className="p-8 h-full w-full flex flex-col justify-center [&_a]:mt-auto [&_a]:text-blue-500 [&_a]:underline [&_a]:text-base [&_a]:font-normal [&_a]:text-center [&_a]:cursor-pointer [&_button]:mt-6">
         <FormikProvider value={formik}>
-          <Form className="flex flex-col [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_button]:mt-[10px]">
+          <Form className="flex flex-col [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_button]:mt-2.5">
             <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
             <div className="my-6">
               <h2 className="text-[#666666] text-lg font-bold leading-[1.8rem] text-left mb-4">

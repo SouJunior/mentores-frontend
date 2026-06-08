@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  Select as ShadcnSelect,
   SelectContent,
   SelectTrigger,
   SelectValue,
+  Select as ShadcnSelect,
 } from '@/components/ui/select';
 import { ComponentProps, ReactNode } from 'react';
 

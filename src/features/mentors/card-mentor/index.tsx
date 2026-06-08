@@ -4,7 +4,6 @@ import { Tag } from '@/components/tag';
 import { IMentors } from '@/services/interfaces/IUseMentorsService';
 import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import Image from 'next/image';
-import { CardImage, CardStacks, CardTitle } from './style';
 
 interface CardMentorProps {
   mentor?: IMentors;
@@ -33,7 +32,7 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
         minHeight: '23.5rem',
       }}
     >
-      <CardImage>
+      <div className="w-30 h-30 rounded-full overflow-hidden self-center bg-[#D9D9D9] [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
         {mentor?.profile && (
           <Image
             src={mentor?.profile}
@@ -43,20 +42,20 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
             quality={100}
           />
         )}
-      </CardImage>
+      </div>
 
-      <CardTitle>
+      <p className="flex flex-col font-medium text-xl leading-[120%] text-[#323232]">
         <span>{splitMentorName[0]}</span>
         <span>{splitMentorName[splitMentorName.length - 1]}</span>
-      </CardTitle>
+      </p>
 
-      <CardStacks>
+      <div className="flex items-center flex-wrap gap-2 w-full [&~a]:justify-center [&~a]:mt-auto [&~button]:justify-center [&~button]:mt-auto">
         {mentor.specialties &&
           Array.isArray(mentor.specialties) &&
           mentor.specialties.map((specialty: string) => (
             <Tag key={specialty}>{specialty}</Tag>
           ))}
-      </CardStacks>
+      </div>
 
       {hasValidCalendly ? (
         <Button

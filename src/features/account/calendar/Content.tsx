@@ -5,14 +5,8 @@ import { ChevronLeft as ArrowBackIosIcon } from 'lucide-react';
 import { ChevronRight as ArrowForwardIosIcon } from 'lucide-react';
 import dayjs from 'dayjs';
 import { ComponentProps, useMemo } from 'react';
-import {
-  CalendarActions,
-  CalendarDay,
-  CalendarTable,
-  Container,
-  LeftCalendarAction,
-  RightCalendarAction,
-} from './styles';
+import { PopoverContent } from '@/components/ui/popover';
+import { Toggle } from '@/components/ui/toggle';
 import { useCalendarContext } from './Root';
 import { SelectMonths } from './SelectMonths';
 import { SelectYears } from './SelectYears';
@@ -27,12 +21,34 @@ interface CalendarWeek {
 
 type CalendarWeeks = CalendarWeek[];
 
-interface ContentProps extends ComponentProps<typeof Container> {
+interface ContentProps extends ComponentProps<typeof PopoverContent> {
   selected?: Date | null;
   onSelected?: (value: Date) => void;
 }
 
-export function Content({ onSelected, selected, ...props }: ContentProps) {
+interface CalendarDayProps extends ComponentProps<typeof Toggle> {
+  isDisabled: boolean;
+}
+
+function CalendarDay({
+  isDisabled,
+  className = '',
+  ...props
+}: CalendarDayProps) {
+  return (
+    <Toggle
+      className={`cursor-pointer w-[1.1rem] transition-[0.3s] text-center leading-[150%] p-2 all-unset hover:not-disabled:bg-[rgba(215,217,215,0.3)] aria-pressed:text-[#1165BA] aria-pressed:font-bold data-[state=on]:text-[#1165BA] data-[state=on]:font-bold data-disabled:cursor-not-allowed focus-visible:shadow-[0_0_0_2px_rgba(17,101,186,0.6)] ${isDisabled ? 'text-[#D9D9D9]' : ''} ${className}`}
+      {...props}
+    />
+  );
+}
+
+export function Content({
+  onSelected,
+  selected,
+  className = '',
+  ...props
+}: ContentProps) {
   const { currentDate, setCurrentDate } = useCalendarContext();
 
   const shortWeekDays = getWeekDays();
@@ -95,23 +111,31 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
   }
 
   return (
-    <Container align="start" {...props}>
-      <CalendarActions>
-        <LeftCalendarAction onClick={handlePreviousMonth}>
+    <PopoverContent
+      align="start"
+      className={`bg-white rounded-lg px-10 pt-4 pb-2 relative max-w-84 transition-none shadow-[2px_0_16px_rgba(0,0,0,0.1)] ${className}`}
+      {...props}
+    >
+      <div className="flex gap-2 items-center">
+        <button
+          onClick={handlePreviousMonth}
+          className="all-unset leading-none cursor-pointer text-[#666666] absolute top-5 left-[0.7rem] p-1 disabled:opacity-60 disabled:cursor-not-allowed [&_svg]:w-4.5 [&_svg]:h-4.5 focus-visible:shadow-[0_0_0_2px_rgba(17,101,186,0.6)]"
+        >
           <ArrowBackIosIcon />
-        </LeftCalendarAction>
-        <RightCalendarAction
+        </button>
+        <button
           disabled={currentDate.isAfter(dayjs())}
           onClick={handleNextMonth}
+          className="all-unset leading-none cursor-pointer text-[#666666] absolute top-5 right-2 p-1 disabled:opacity-60 disabled:cursor-not-allowed [&_svg]:w-4.5 [&_svg]:h-4.5 focus-visible:shadow-[0_0_0_2px_rgba(17,101,186,0.6)]"
         >
           <ArrowForwardIosIcon />
-        </RightCalendarAction>
+        </button>
 
         <SelectMonths />
         <SelectYears />
-      </CalendarActions>
+      </div>
 
-      <CalendarTable>
+      <table className="mt-2 table-fixed border-collapse text-[#666666] w-full [&_thead_th]:font-bold [&_thead_th]:leading-[150%] [&_tbody_td]:box-border">
         <thead>
           <tr>
             {shortWeekDays.map((weekDay, index) => (
@@ -140,7 +164,7 @@ export function Content({ onSelected, selected, ...props }: ContentProps) {
             </tr>
           ))}
         </tbody>
-      </CalendarTable>
-    </Container>
+      </table>
+    </PopoverContent>
   );
 }

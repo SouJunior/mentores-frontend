@@ -1,22 +1,10 @@
+import { Button } from '@/components/button';
+import { Modal } from '@/components/modal';
+import { Slider } from '@/components/ui/slider';
+import { useEditPhotoContext } from '@/context/EditPhotoContext';
+import { Minus, Plus } from 'phosphor-react';
 import React, { useState } from 'react';
 import Cropper, { Area } from 'react-easy-crop';
-import { Slider } from '@/components/ui/slider';
-import {
-  Container,
-  CropContainer,
-  Controls,
-  ControlButton,
-  CropInfo,
-  StyledHR,
-  ButtonsContainer,
-  CropControlsContainer,
-  CropTitle,
-  ModalCloseBtn,
-  ModalClose,
-} from './styled';
-import { Button } from '@/components/button';
-import { Minus, Plus } from 'phosphor-react';
-import { useEditPhotoContext } from '@/context/EditPhotoContext';
 
 interface ModalImageEditorProps extends React.HTMLAttributes<HTMLDivElement> {
   onSave?: (croppedImage: string | null) => void;
@@ -40,37 +28,27 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
     if (ctx) {
       const image = new Image();
       image.src = originalImage || '';
-
       ctx.drawImage(image, x, y, width, height, 0, 0, width, height);
-
       const croppedImageUrl = canvas.toDataURL('image/jpeg');
-
       setCroppedImage(croppedImageUrl);
     }
   };
 
-  const handlePLusZoom = () => {
-    const zoomIncrement = zoom + 0.2;
-    setZoom(zoomIncrement);
-  };
-
-  const handleMenusZoom = () => {
-    const zoomIncrement = zoom - 0.2;
-    setZoom(zoomIncrement);
-  };
-
-  const handleSaveClick = () => {
-    if (onSave) {
-      onSave(croppedImage);
-    }
-  };
+  const handlePLusZoom = () => setZoom(zoom + 0.2);
+  const handleMenusZoom = () => setZoom(zoom - 0.2);
+  const handleSaveClick = () => onSave?.(croppedImage);
 
   return (
-    <Container {...props}>
-      <CropTitle>Editar foto</CropTitle>
-      <ModalClose />
+    <Modal.Content
+      className="flex flex-col items-center gap-4 max-w-[24.18rem] w-full p-6 relative"
+      {...props}
+    >
+      <Modal.Title className="font-medium text-xl leading-6 text-[#323232] mr-auto">
+        Editar foto
+      </Modal.Title>
+      <Modal.Close className="top-6 right-6" />
 
-      <CropContainer>
+      <div className="relative w-75 h-75 overflow-hidden p-2.5">
         <Cropper
           image={originalImage}
           crop={crop}
@@ -83,14 +61,19 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
           onZoomChange={setZoom}
           objectFit="horizontal-cover"
         />
-      </CropContainer>
+      </div>
 
-      <CropControlsContainer>
-        <CropInfo>Zoom</CropInfo>
-        <Controls>
-          <ControlButton onClick={handleMenusZoom}>
+      <div className="w-full">
+        <span className="font-normal text-base leading-[1.4rem] text-[#323232] mr-auto">
+          Zoom
+        </span>
+        <div className="flex items-center gap-3 w-full">
+          <span
+            onClick={handleMenusZoom}
+            className="cursor-pointer w-4 h-4 text-[#323232]"
+          >
             <Minus />
-          </ControlButton>
+          </span>
           <Slider
             value={[zoom]}
             min={1}
@@ -101,26 +84,32 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
               setZoom(Array.isArray(values) ? values[0] : values)
             }
           />
-          <ControlButton onClick={handlePLusZoom}>
+          <span
+            onClick={handlePLusZoom}
+            className="cursor-pointer w-4 h-4 text-[#323232]"
+          >
             <Plus />
-          </ControlButton>
-        </Controls>
-      </CropControlsContainer>
+          </span>
+        </div>
+      </div>
 
-      <StyledHR />
+      <div className="w-full h-px bg-[#666666] mt-1" />
 
-      <ButtonsContainer>
-        <ModalCloseBtn asChild>
+      <div className="flex justify-end w-full gap-4">
+        <Modal.Close asChild>
           <Button variant="tertiary">Descartar</Button>
-        </ModalCloseBtn>
+        </Modal.Close>
 
-        <ModalCloseBtn asChild>
-          <Button className="save-image-editor-btn" onClick={handleSaveClick}>
+        <Modal.Close asChild>
+          <Button
+            className="bg-[#003986] text-white leading-[0.7]"
+            onClick={handleSaveClick}
+          >
             Salvar
           </Button>
-        </ModalCloseBtn>
-      </ButtonsContainer>
-    </Container>
+        </Modal.Close>
+      </div>
+    </Modal.Content>
   );
 };
 

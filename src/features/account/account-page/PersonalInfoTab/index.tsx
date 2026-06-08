@@ -1,31 +1,21 @@
 import { Button } from '@/components/button';
-import {
-  ButtonLoading,
-  ButtonsContainer,
-  Divider,
-  PersonalInfoContent,
-  SubtitleTab,
-  TabContainer,
-  TitleTab,
-} from '../styles';
-
-import { FormikHelpers, FormikProvider, useFormik } from 'formik';
-import { FormFields } from './FormFields';
-
 import { Modal } from '@/components/modal';
 import { Spinner } from '@/components/spinner';
-import { ModalCancelKeepRoute } from '@/features/account/modal-cancel-keep-route';
+import { TabsContent } from '@/components/ui/tabs';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { IMentor } from '@/context/interfaces/IAuth';
 import { genders } from '@/data/static-info';
+import { ModalCancelKeepRoute } from '@/features/account/modal-cancel-keep-route';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
 import { isEmpty } from '@/utils/is-empty';
-import { CheckCircle as CheckCircleOutlineRoundedIcon } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { FormikHelpers, FormikProvider, useFormik } from 'formik';
+import { CheckCircle as CheckCircleOutlineRoundedIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
+import { FormFields } from './FormFields';
 
 const personalInfoSchema = yup.object({
   fullName: yup.string().optional(),
@@ -37,18 +27,13 @@ const personalInfoSchema = yup.object({
 export type PersonalInfoFormData = yup.InferType<typeof personalInfoSchema>;
 
 const normalizeDate = (date?: Date | string) => {
-  if (!date) {
-    return '';
-  }
-
+  if (!date) return '';
   return new Date(date).toISOString().split('T')[0];
 };
 
 export function PersonalInfoTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
-
   const queryClient = useQueryClient();
-
   const { handleMentorData } = UserUpdateService();
   const { mentor, userSession } = useAuthContext();
 
@@ -81,15 +66,10 @@ export function PersonalInfoTab() {
   const { mutateAsync: updateMentorFn } = useMutation({
     mutationKey: ['mentor', userSession?.id],
     mutationFn: handleMentorData,
-    onSuccess(_, newUpdatedData) {
+    onSuccess(_: unknown, newUpdatedData: PersonalInfoFormData) {
       queryClient.setQueryData(
         ['mentor', userSession?.id],
-        (cached: IMentor) => {
-          return {
-            ...cached,
-            ...newUpdatedData,
-          };
-        }
+        (cached: IMentor) => ({ ...cached, ...newUpdatedData })
       );
     },
   });
@@ -100,7 +80,6 @@ export function PersonalInfoTab() {
   ) {
     try {
       await updateMentorFn(data);
-
       resetForm({ values: data });
       toastMessageSuccess();
     } catch {
@@ -131,11 +110,7 @@ export function PersonalInfoTab() {
     !hasPersonalInfoChanges || hasFormErrors || formik.isSubmitting;
 
   const handleWarningModal = () => {
-    const isFormEmpty = isEmpty(formik.values);
-
-    if (!isFormEmpty) {
-      setOpenWarningModal(true);
-    }
+    if (!isEmpty(formik.values)) setOpenWarningModal(true);
   };
 
   const handleDiscard = () => {
@@ -144,19 +119,21 @@ export function PersonalInfoTab() {
   };
 
   return (
-    <TabContainer value="personal-info">
-      <TitleTab>Informações de cadastro</TitleTab>
-      <SubtitleTab>
+    <TabsContent value="personal-info" className="flex flex-col gap-4">
+      <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
+        Informações de cadastro
+      </h2>
+      <p className="text-[0.875rem] leading-4 [&_span]:text-[#338AFF]">
         <span>*</span> Indica um campo obrigatório
-      </SubtitleTab>
+      </p>
 
       <FormikProvider value={formik}>
-        <PersonalInfoContent>
+        <form className="flex flex-col gap-4 max-w-[36.3rem]">
           <FormFields />
 
-          <Divider />
+          <div className="h-px w-full bg-[#666666]" />
 
-          <ButtonsContainer>
+          <div className="flex gap-4 ml-auto">
             <Button
               type="button"
               variant="tertiary"
@@ -174,17 +151,20 @@ export function PersonalInfoTab() {
             </Modal.Root>
 
             {formik.isSubmitting ? (
-              <ButtonLoading disabled>
+              <Button
+                disabled
+                className="h-10.75 p-0 w-24 cursor-wait bg-[#003986] border-[#003986]"
+              >
                 <Spinner />
-              </ButtonLoading>
+              </Button>
             ) : (
               <Button type="submit" disabled={isButtonDisabled}>
                 Salvar
               </Button>
             )}
-          </ButtonsContainer>
-        </PersonalInfoContent>
+          </div>
+        </form>
       </FormikProvider>
-    </TabContainer>
+    </TabsContent>
   );
 }

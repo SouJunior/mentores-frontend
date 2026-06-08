@@ -1,5 +1,4 @@
 import FormOnboard2 from '@/features/home/form-onboard2';
-import { PerfilContainer, StyledImportant } from './styled';
 import { Dispatch, SetStateAction } from 'react';
 import { StepNumber } from '@/context/OnBoardingContext';
 
@@ -9,11 +8,11 @@ interface PerfilTabProps {
 
 export default function PerfilTab({ onStep }: PerfilTabProps) {
   return (
-    <PerfilContainer>
-      <StyledImportant>
+    <div className="flex flex-col w-full items-center gap-5">
+      <span className="text-[0.875rem] font-normal leading-4 text-left w-full mt-4 text-[#323232] [&_span]:text-[#175CB7]">
         <span>*</span> Indica um campo obrigatório
-      </StyledImportant>{' '}
+      </span>{' '}
       <FormOnboard2 onStep={onStep} />
-    </PerfilContainer>
+    </div>
   );
 }

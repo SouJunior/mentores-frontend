@@ -19,7 +19,7 @@ export function ModalCancelKeepRoute({
         Deseja descartar as alterações?
       </Modal.Title>
       <Modal.Close className="top-[0.7rem] right-[0.7rem]" />
-      <Modal.Description className="font-normal text-base text-[#5D5F5D] max-w-[23rem] mx-auto mb-[0.2rem]">
+      <Modal.Description className="font-normal text-base text-[#5D5F5D] max-w-92 mx-auto mb-[0.2rem]">
         As informações inseridas não serão salvas.
       </Modal.Description>
 

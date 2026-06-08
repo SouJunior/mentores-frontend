@@ -1,4 +1,3 @@
-import { UserProfileContainer } from './styled';
 import Image from 'next/image';
 import { User } from 'phosphor-react';
 
@@ -12,12 +11,12 @@ export default function PhotoButton({
   size = 80,
 }: PhotoButtonProps) {
   return (
-    <UserProfileContainer>
+    <section className="flex justify-center items-center border-2 border-[#666666] bg-white rounded-full text-[#666666] w-32 h-32 overflow-hidden [&_.icon-without-img]:w-10 [&_.icon-without-img]:h-10 [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
       {selectedPhoto ? (
         <Image width={size} height={size} src={selectedPhoto} alt="Selected" />
       ) : (
         <User weight="bold" className="icon-without-img" />
       )}
-    </UserProfileContainer>
+    </section>
   );
 }

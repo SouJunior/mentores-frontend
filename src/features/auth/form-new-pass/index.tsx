@@ -48,7 +48,7 @@ export default function FormNewPass() {
       {toast && <ToastSuccess message="Ok" />}
       <div className="p-8 h-full w-full flex flex-col justify-center [&_a]:mt-auto [&_a]:text-blue-500 [&_a]:underline [&_a]:text-base [&_a]:font-normal [&_a]:text-center [&_a]:cursor-pointer [&_button]:mt-6">
         <FormikProvider value={formik}>
-          <Form className="flex flex-col [&_button]:mt-[10px]">
+          <Form className="flex flex-col [&_button]:mt-2.5">
             <Image src={souJuniorLogoImg} alt="logo" width={240} height={36} />
             <div className="my-6">
               <h2 className="text-[#666666] text-lg font-bold leading-[1.8rem] mb-4">

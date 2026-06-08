@@ -3,19 +3,6 @@ import Link from 'next/link';
 import { ModalPrivacyPolicy } from '@/layout/footer/modal-terms-and-policies/ModalPrivacyPolicy';
 import ModalTerms from '@/layout/footer/modal-terms-and-policies/ModalTerms';
 
-import {
-  FooterBtn,
-  FooterContainer,
-  FooterContent,
-  FooterCopyright,
-  FooterLink,
-  FooterMainInfo,
-  FooterSitemap,
-  FooterSocialMediaContainer,
-  FooterTitle,
-  FooterTitleContainer,
-} from './style';
-
 import logo from '@/assets/logos/sou-junior-black.webp';
 import {
   DiscordLogo,
@@ -33,9 +20,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <FooterContainer>
-      <FooterContent className="container">
-        <FooterMainInfo>
+    <footer className="bg-[#666666] text-white">
+      <div className="container flex flex-col gap-10 py-16 px-8 max-[1133px]:px-4 max-[438px]:py-8">
+        <div className="flex justify-between items-start gap-8 flex-wrap">
           <Link href="/" title="Início">
             <Image
               src={logo}
@@ -46,29 +33,51 @@ export function Footer() {
             />
           </Link>
 
-          <FooterSitemap>
-            <FooterTitleContainer>
-              <FooterTitle>Tenha mentorias</FooterTitle>
-              <FooterLink href="/#onboarding">Como funciona</FooterLink>
-            </FooterTitleContainer>
+          <div className="flex items-start flex-wrap gap-x-20 gap-y-8 max-[438px]:flex-col">
+            <section className="flex flex-col gap-6">
+              <h6 className="text-xl font-medium leading-6">Tenha mentorias</h6>
+              <Link
+                href="/#onboarding"
+                className="text-base leading-[1.4rem] font-normal"
+              >
+                Como funciona
+              </Link>
+            </section>
 
-            <FooterTitleContainer>
-              <FooterTitle>Mentores</FooterTitle>
-              <FooterLink href="/cadastro">Cadastrar</FooterLink>
-              <FooterLink href="/login">Login</FooterLink>
-            </FooterTitleContainer>
+            <section className="flex flex-col gap-6">
+              <h6 className="text-xl font-medium leading-6">Mentores</h6>
+              <Link
+                href="/cadastro"
+                className="text-base leading-[1.4rem] font-normal"
+              >
+                Cadastrar
+              </Link>
+              <Link
+                href="/login"
+                className="text-base leading-[1.4rem] font-normal"
+              >
+                Login
+              </Link>
+            </section>
 
-            <FooterTitleContainer>
-              <FooterTitle>Suporte</FooterTitle>
-              <FooterLink href="/faq">FAQ</FooterLink>
-            </FooterTitleContainer>
+            <section className="flex flex-col gap-6">
+              <h6 className="text-xl font-medium leading-6">Suporte</h6>
+              <Link
+                href="/faq"
+                className="text-base leading-[1.4rem] font-normal"
+              >
+                FAQ
+              </Link>
+            </section>
 
-            <FooterTitleContainer>
-              <FooterTitle>Legal</FooterTitle>
+            <section className="flex flex-col gap-6">
+              <h6 className="text-xl font-medium leading-6">Legal</h6>
 
               <Modal.Root>
                 <Modal.Control asChild>
-                  <FooterBtn>Termo de uso</FooterBtn>
+                  <button className="[all:unset] text-base leading-[1.4rem] cursor-pointer">
+                    Termo de uso
+                  </button>
                 </Modal.Control>
 
                 <ModalTerms />
@@ -76,16 +85,18 @@ export function Footer() {
 
               <Modal.Root>
                 <Modal.Control asChild>
-                  <FooterBtn>Política de privacidade</FooterBtn>
+                  <button className="[all:unset] text-base leading-[1.4rem] cursor-pointer">
+                    Política de privacidade
+                  </button>
                 </Modal.Control>
 
                 <ModalPrivacyPolicy />
               </Modal.Root>
-            </FooterTitleContainer>
-          </FooterSitemap>
-        </FooterMainInfo>
+            </section>
+          </div>
+        </div>
 
-        <FooterSocialMediaContainer>
+        <div className="flex items-center gap-4 max-[438px]:gap-2 max-[438px]:justify-center [&_svg]:w-6 [&_svg]:h-6">
           <Link
             target="_blank"
             referrerPolicy="no-referrer"
@@ -169,12 +180,12 @@ export function Footer() {
           >
             <TwitchLogo weight="bold" />
           </Link>
-        </FooterSocialMediaContainer>
+        </div>
 
-        <FooterCopyright>
+        <p className="pt-4 border-t border-[#DEDEDE] text-[0.875rem] leading-5 text-right max-[438px]:text-left">
           © {currentYear} SouJunior. Todos os direitos reservados.
-        </FooterCopyright>
-      </FooterContent>
-    </FooterContainer>
+        </p>
+      </div>
+    </footer>
   );
 }

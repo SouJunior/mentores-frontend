@@ -1,21 +1,11 @@
 import { InputForm } from '@/components/input-form';
+import { Select } from '@/components/select';
+import { SelectItem } from '@/components/select/SelectItem';
 import { reasons, reviewOptions } from '@/data/static-info';
 import { isObject } from 'formik';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { FormValues } from '..';
-import {
-  CharactersLegend,
-  ContentContainer,
-  DropdownItemStyled,
-  DropdownStyled,
-  DropdownWrapper,
-  ErrorLegend,
-  FieldLabel,
-  InputWrapper,
-  RadioButtonLabel,
-  RadioButtonWrapper,
-} from '../styles';
 
 interface FormFieldsProps {
   setFormValues: Dispatch<SetStateAction<FormValues>>;
@@ -28,10 +18,9 @@ export default function FormFields({
   formErrors,
   setFormErrors,
 }: FormFieldsProps) {
-  const [otherOptionSelected, setOtherOptionSelected] =
-    useState<boolean>(false);
-  const [reasonText, setReasonText] = useState<string>('');
-  const [experienceText, setExperienceText] = useState<string>('');
+  const [otherOptionSelected, setOtherOptionSelected] = useState(false);
+  const [reasonText, setReasonText] = useState('');
+  const [experienceText, setExperienceText] = useState('');
   const [maxCharsExceeded, setMaxCharsExceeded] = useState({
     reasonText: false,
     userExperienceFeedback: false,
@@ -42,38 +31,21 @@ export default function FormFields({
       ...prevState,
       [attributeName ?? e?.target?.name]: isObject(e) ? e?.target?.value : e,
     }));
-
-    // Opção Outros = 5
-    if (attributeName === 'reasonOption') {
-      setOtherOptionSelected(e === '5');
-    }
-
+    if (attributeName === 'reasonOption') setOtherOptionSelected(e === '5');
     handleError(attributeName);
   };
 
-  // const togglePasswordVisibility = () =>
-  //   setHiddenPassword(prevState => !prevState);
-
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
     name === 'reasonText' ? setReasonText(value) : setExperienceText(value);
-
-    setMaxCharsExceeded(prevState => ({
-      ...prevState,
-      [name]: value.length > 600,
-    }));
-
+    setMaxCharsExceeded(prev => ({ ...prev, [name]: value.length > 600 }));
     setFormValues((prevState: FormValues) => ({
       ...prevState,
       [name ?? event?.target?.name]: isObject(event)
         ? event?.target?.value
         : event,
     }));
-
-    if (value.length <= 600) {
-      handleError(name);
-    }
+    if (value.length <= 600) handleError(name);
   };
 
   const handleError = (attributeName: string) => {
@@ -84,33 +56,37 @@ export default function FormFields({
   };
 
   return (
-    <ContentContainer>
-      <FieldLabel>
+    <div className="flex flex-col gap-6 max-w-xl">
+      <label className="text-base font-normal leading-[1.4rem] [&_span]:text-[#338AFF]">
         O que o motivou a excluir sua conta na plataforma para mentores?
         <span>*</span>
         {formErrors.reasonOption && (
-          <ErrorLegend className="error">{formErrors.reasonOption}</ErrorLegend>
+          <p className="text-[#E94242] font-bold text-xs leading-[1.05rem] mt-1">
+            {formErrors.reasonOption}
+          </p>
         )}
-      </FieldLabel>
+      </label>
 
-      <DropdownWrapper>
-        <DropdownStyled
+      <label className="flex [&_.select-trigger]:text-[#323232] [&_.select-trigger]:text-base [&_.select-trigger]:leading-[1.4rem] [&_.select-trigger]:py-2.5 [&_.select-trigger]:px-4">
+        <Select
           placeholder=""
           name="reasonOption"
           onValueChange={e => handleSelectChange(e, 'reasonOption')}
         >
           {reasons.map(reason => (
-            <DropdownItemStyled key={reason.id} value={String(reason.id)}>
+            <SelectItem
+              key={reason.id}
+              value={String(reason.id)}
+              className="m-0"
+            >
               {reason.description}
-            </DropdownItemStyled>
+            </SelectItem>
           ))}
-        </DropdownStyled>
-      </DropdownWrapper>
+        </Select>
+      </label>
 
-      <InputWrapper
-        $flexDirection="column"
-        $alignItems="end"
-        className={`${otherOptionSelected ? '' : 'hidden'}`}
+      <div
+        className={`flex-col items-end gap-4 ${otherOptionSelected ? 'flex' : 'hidden'}`}
       >
         <InputForm
           type="textarea"
@@ -120,82 +96,79 @@ export default function FormFields({
           onChange={handleInputChange}
         />
         {formErrors.reasonText && (
-          <ErrorLegend className="error">{formErrors.reasonText}</ErrorLegend>
+          <p className="text-[#E94242] font-bold text-xs leading-[1.05rem] mt-1">
+            {formErrors.reasonText}
+          </p>
         )}
-        <CharactersLegend
-          className={`${maxCharsExceeded.reasonText ? 'error' : ''}`}
+        <p
+          className={`text-xs leading-[1.05rem] mt-1 ${maxCharsExceeded.reasonText ? 'text-[#E94242]' : 'text-[#323232]'}`}
         >
           {reasonText.length}/600
-        </CharactersLegend>
-      </InputWrapper>
+        </p>
+      </div>
 
-      <FieldLabel>
+      <label className="text-base font-normal leading-[1.4rem] [&_span]:text-[#338AFF]">
         Como você avaliaria a facilidade de uso da plataforma?
         <span>*</span>
         {formErrors.usabilityRating && (
-          <ErrorLegend className="error">
+          <p className="text-[#E94242] font-bold text-xs leading-[1.05rem] mt-1">
             {formErrors.usabilityRating}
-          </ErrorLegend>
+          </p>
         )}
-      </FieldLabel>
+      </label>
 
-      <InputWrapper $flexDirection="column" $gap={1}>
+      <div className="flex flex-col gap-4">
         {[...reviewOptions].reverse().map(item => (
-          <RadioButtonWrapper key={item.id}>
+          <div key={item.id} className="flex gap-2 items-start">
             <input
               type="radio"
               name="usabilityRating"
               value={item.id}
               onClick={e => handleSelectChange(e, 'usabilityRating')}
             />
-
-            <RadioButtonLabel>{item.description}</RadioButtonLabel>
-          </RadioButtonWrapper>
+            <label className="text-[0.875rem] font-normal leading-[1.05rem]">
+              {item.description}
+            </label>
+          </div>
         ))}
-      </InputWrapper>
+      </div>
 
-      <FieldLabel>
+      <label className="text-base font-normal leading-[1.4rem] [&_span]:text-[#338AFF]">
         Em uma escala de 1 a 7, o quão satisfeito você estava com a plataforma?
         <span>*</span>
         {formErrors.satisfactionRating && (
-          <ErrorLegend className="error">
+          <p className="text-[#E94242] font-bold text-xs leading-[1.05rem] mt-1">
             {formErrors.satisfactionRating}
-          </ErrorLegend>
+          </p>
         )}
-      </FieldLabel>
-      <InputWrapper $justifyContent="space-evenly">
+      </label>
+      <div className="flex justify-evenly">
         {reviewOptions.map(item => (
-          <RadioButtonWrapper
-            key={item.id}
-            $flexDirection="column"
-            $gap={0.25}
-            $alignItems="center"
-          >
-            <RadioButtonLabel>
+          <div key={item.id} className="flex flex-col gap-1 items-center">
+            <label>
               <Image
                 src={item.imgUrl}
                 alt={item.description}
                 width={20}
                 height={20}
               />
-            </RadioButtonLabel>
-
+            </label>
             <input
               type="radio"
               name="satisfactionRating"
               value={item.id}
               onClick={e => handleSelectChange(e, 'satisfactionRating')}
             />
-          </RadioButtonWrapper>
+          </div>
         ))}
-      </InputWrapper>
+      </div>
 
-      <FieldLabel>
+      <label className="text-base font-normal leading-[1.4rem]">
         Existe algo que você gostaria de compartilhar sobre sua experiência com
         a plataforma de mentores?
-      </FieldLabel>
+      </label>
 
-      <InputWrapper $flexDirection="column" $alignItems="end">
+      <div className="flex flex-col items-end gap-2">
         <InputForm
           type="textarea"
           name="userExperienceFeedback"
@@ -203,36 +176,16 @@ export default function FormFields({
           onChange={handleInputChange}
         />
         {formErrors.userExperienceFeedback && (
-          <ErrorLegend className="error">
+          <p className="text-[#E94242] font-bold text-xs leading-[1.05rem]">
             {formErrors.userExperienceFeedback}
-          </ErrorLegend>
+          </p>
         )}
-        <CharactersLegend
-          className={`${maxCharsExceeded.userExperienceFeedback ? 'error' : ''}`}
+        <p
+          className={`text-xs leading-[1.05rem] ${maxCharsExceeded.userExperienceFeedback ? 'text-[#E94242]' : 'text-[#323232]'}`}
         >
           {experienceText.length}/600
-        </CharactersLegend>
-      </InputWrapper>
-
-      {/* <InputWrapper
-        $flexDirection="column"
-        $alignItems="start"
-        $relative={true}
-      >
-        <InputForm
-          type="input"
-          inputType={hiddenPassword ? 'password' : 'text'}
-          name="password"
-          isRequired={false}
-          placeholder="Senha*"
-        />
-
-        <EyeStyled
-          pressed={!hiddenPassword}
-          onPressedChange={togglePasswordVisibility}
-        />
-        <PasswordLabel>Insira a senha para excluir sua conta</PasswordLabel>
-      </InputWrapper> */}
-    </ContentContainer>
+        </p>
+      </div>
+    </div>
   );
 }

@@ -1,13 +1,4 @@
-import {
-  ModalBox,
-  ModalBoxContainer,
-  ModalBoxTitle,
-  ModalCloseBtn,
-  ModalCloseBtnSecondary,
-  ModalContainer,
-  ModalDescription,
-} from './styles';
-
+import { Button } from '@/components/button';
 import { Modal } from '@/components/modal';
 import { ModalHeader } from './ModalHeader';
 
@@ -15,16 +6,16 @@ type ModalTermsProps = React.HTMLAttributes<HTMLDivElement>;
 
 export default function ModalTerms(props: ModalTermsProps) {
   return (
-    <ModalContainer {...props}>
+    <Modal.Content className="max-w-200 relative" {...props}>
       <ModalHeader />
 
-      <ModalBoxContainer>
-        <ModalBox>
-          <ModalBoxTitle>
+      <div className="pt-4 pr-2">
+        <div className="flex flex-col max-h-148 h-full overflow-auto px-4 pb-6 font-['Radio_Canada'] [&::-webkit-scrollbar]:w-1.75 [&::-webkit-scrollbar-thumb]:bg-[#666666] [&::-webkit-scrollbar-thumb]:rounded-[1rem] [&::-webkit-scrollbar-track]:bg-transparent">
+          <Modal.Title className="max-w-[18rem] text-xl font-medium leading-6 text-[#003986]">
             Termos e condições gerais de uso SouJunior
-          </ModalBoxTitle>
+          </Modal.Title>
 
-          <ModalDescription>
+          <Modal.Description className="text-[#323232] leading-[1.4rem] text-base my-4 [&_ol]:pl-4 [&_li]:list-decimal [&_ol.list-style-type-none]:pl-0 [&_ol.list-style-type-none_li]:list-none">
             Ao navegar neste site e usar os serviços que são fornecidos pelo
             SouJunior, você afirma que leu, compreendeu e concorda com nossos
             Termos e Condições. Estes Termos e Condições abrangem todos os
@@ -87,13 +78,13 @@ export default function ModalTerms(props: ModalTermsProps) {
                 serviços de terceiros. O anunciante é quem permanece responsável
                 por tais bens e/ou serviços, e se você tiver alguma dúvida ou
                 reclamação sobre eles, você deve entrar em contato com o
-                anunciante “Conteúdo do usuário”. Importante salientar que o
-                termo usado &quot;Conteúdo do Usuário&quot; significa qualquer
-                áudio, vídeo, texto, imagens ou outro material ou conteúdo que
-                você decida exibir neste Site. Com relação ao conteúdo do
-                usuário, ao exibi-lo, você concede ao SouJunior uma licença não
-                exclusiva, mundial, irrevogável, isenta de royalties e
-                sublicenciável para usar, reproduzir, adaptar, publicar,
+                anunciante &quot;Conteúdo do usuário&quot;. Importante salientar
+                que o termo usado &quot;Conteúdo do Usuário&quot; significa
+                qualquer áudio, vídeo, texto, imagens ou outro material ou
+                conteúdo que você decida exibir neste Site. Com relação ao
+                conteúdo do usuário, ao exibi-lo, você concede ao SouJunior uma
+                licença não exclusiva, mundial, irrevogável, isenta de royalties
+                e sublicenciável para usar, reproduzir, adaptar, publicar,
                 traduzir e distribuir em qualquer mídia. O Conteúdo do Usuário
                 deve ser seu e não deve infringir os direitos de terceiros.
                 SouJunior reserva-se o direito de remover qualquer parte do seu
@@ -177,17 +168,20 @@ export default function ModalTerms(props: ModalTermsProps) {
                 e-mail: [AVALIAR O E-MAIL]
               </li>
             </ol>
-          </ModalDescription>
+          </Modal.Description>
 
           <Modal.Close asChild>
-            <ModalCloseBtnSecondary variant="secondary">
+            <Button
+              variant="secondary"
+              className="static ml-auto border-[#003986] text-[#003986] hover:border-[#002C66] hover:text-[#002C66]"
+            >
               Fechar
-            </ModalCloseBtnSecondary>
+            </Button>
           </Modal.Close>
-        </ModalBox>
-      </ModalBoxContainer>
+        </div>
+      </div>
 
-      <ModalCloseBtn />
-    </ModalContainer>
+      <Modal.Close className="top-4 right-4" />
+    </Modal.Content>
   );
 }

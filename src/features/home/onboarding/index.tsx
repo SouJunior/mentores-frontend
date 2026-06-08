@@ -1,5 +1,4 @@
 import { CardOnboarding } from '@/features/home/card-onboarding';
-import { Container, ContainerListCard, ContainerOnboarding } from './style';
 
 import girlWithMagnifyingGlass from '@/assets/homepage/onboarding/encontre.svg';
 import scheduleImg from '@/assets/homepage/onboarding/marque.svg';
@@ -7,14 +6,19 @@ import describeImg from '@/assets/homepage/onboarding/descreva.svg';
 
 export function Onboarding() {
   return (
-    <Container>
-      <ContainerOnboarding id="onboarding" className="container">
-        <h2>Conecte-se a um mentor em 4 passos</h2>
-        <p className="description-onboarding">
+    <div className="relative bg-[#175CB7]">
+      <section
+        id="onboarding"
+        className="container w-full h-full py-16 px-4 text-center max-[438px]:py-10"
+      >
+        <h2 className="text-[2.5rem] text-white mb-4 font-semibold max-[438px]:text-[1.5rem] max-[438px]:leading-[1.8rem]">
+          Conecte-se a um mentor em 4 passos
+        </h2>
+        <p className="description-onboarding text-white text-[1.5rem] font-semibold leading-[1.8rem] mb-12 max-[438px]:text-[1.25rem] max-[438px]:leading-6 max-[438px]:mb-6">
           com a facilidade e praticidade oferecida pelo Portal de Mentorias.
         </p>
 
-        <ContainerListCard>
+        <div className="flex gap-6 flex-wrap justify-center">
           <CardOnboarding
             title="Encontre seu mentor"
             img={girlWithMagnifyingGlass}
@@ -33,8 +37,8 @@ export function Onboarding() {
           <CardOnboarding title="Conecte-se" img={girlWithMagnifyingGlass}>
             Compareça no dia e horário agendado e comece a aprender.
           </CardOnboarding>
-        </ContainerListCard>
-      </ContainerOnboarding>
-    </Container>
+        </div>
+      </section>
+    </div>
   );
 }

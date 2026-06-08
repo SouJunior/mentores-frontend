@@ -1,15 +1,6 @@
 import { Button } from '@/components/button';
-import {
-  ButtonLoading,
-  ButtonsContainer,
-  Divider,
-  SubtitleTab,
-  TabContainer,
-  TitleTab,
-} from '../styles';
-
+import { TabsContent } from '@/components/ui/tabs';
 import { FormikHelpers, FormikProvider, useFormik } from 'formik';
-
 import { Modal } from '@/components/modal';
 import { Spinner } from '@/components/spinner';
 import { ModalCancelKeepRoute } from '@/features/account/modal-cancel-keep-route';
@@ -24,7 +15,6 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { FormFields } from './FormFields';
-import { ProfileContentForm } from './styles';
 
 const profileSchema = yup.object({
   specialties: yup.array(yup.string().required('Obrigatório')),
@@ -38,21 +28,14 @@ const areSpecialtiesEqual = (
   currentSpecialties: string[] = [],
   newSpecialties: string[] = []
 ) => {
-  if (currentSpecialties.length !== newSpecialties.length) {
-    return false;
-  }
-
-  return currentSpecialties.every(specialty =>
-    newSpecialties.includes(specialty)
-  );
+  if (currentSpecialties.length !== newSpecialties.length) return false;
+  return currentSpecialties.every(s => newSpecialties.includes(s));
 };
 
 export function ProfileTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
   const [formFieldsKey, setFormFieldsKey] = useState(0);
-
   const queryClient = useQueryClient();
-
   const { handleMentorData } = UserUpdateService();
   const { mentor, userSession } = useAuthContext();
 
@@ -85,15 +68,10 @@ export function ProfileTab() {
   const { mutateAsync: updateMentorFn } = useMutation({
     mutationKey: ['mentor', userSession?.id],
     mutationFn: handleMentorData,
-    onSuccess(_, newUpdatedData) {
+    onSuccess(_: unknown, newUpdatedData: ProfileFormData) {
       queryClient.setQueryData(
         ['mentor', userSession?.id],
-        (cached: IMentor) => {
-          return {
-            ...cached,
-            ...newUpdatedData,
-          };
-        }
+        (cached: IMentor) => ({ ...cached, ...newUpdatedData })
       );
     },
   });
@@ -104,7 +82,6 @@ export function ProfileTab() {
   ) {
     try {
       await updateMentorFn(data);
-
       resetForm({ values: data });
       toastMessageSuccess();
     } catch {
@@ -135,11 +112,7 @@ export function ProfileTab() {
     !hasProfileChanges || hasFormErrors || formik.isSubmitting;
 
   const handleWarningModal = () => {
-    const isFormEmpty = isEmpty(formik.values);
-
-    if (!isFormEmpty) {
-      setOpenWarningModal(true);
-    }
+    if (!isEmpty(formik.values)) setOpenWarningModal(true);
   };
 
   const handleDiscard = () => {
@@ -149,19 +122,21 @@ export function ProfileTab() {
   };
 
   return (
-    <TabContainer value="profile">
-      <TitleTab>Perfil</TitleTab>
-      <SubtitleTab>
+    <TabsContent value="profile" className="flex flex-col gap-4">
+      <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
+        Perfil
+      </h2>
+      <p className="text-[0.875rem] leading-4 [&_span]:text-[#338AFF]">
         <span>*</span> Indica um campo obrigatório
-      </SubtitleTab>
+      </p>
 
       <FormikProvider value={formik}>
-        <ProfileContentForm>
+        <form className="flex flex-col gap-4 max-w-[42.75rem]">
           <FormFields key={formFieldsKey} />
 
-          <Divider />
+          <div className="h-px w-full bg-[#666666]" />
 
-          <ButtonsContainer>
+          <div className="flex gap-4 ml-auto">
             <Button
               type="button"
               variant="tertiary"
@@ -179,17 +154,20 @@ export function ProfileTab() {
             </Modal.Root>
 
             {formik.isSubmitting ? (
-              <ButtonLoading disabled>
+              <Button
+                disabled
+                className="h-[43px] p-0 w-24 cursor-wait bg-[#003986] border-[#003986]"
+              >
                 <Spinner />
-              </ButtonLoading>
+              </Button>
             ) : (
               <Button type="submit" disabled={isButtonDisabled}>
                 Salvar
               </Button>
             )}
-          </ButtonsContainer>
-        </ProfileContentForm>
+          </div>
+        </form>
       </FormikProvider>
-    </TabContainer>
+    </TabsContent>
   );
 }

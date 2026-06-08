@@ -1,20 +1,10 @@
+import { Button } from '@/components/button';
 import { Modal } from '@/components/modal';
-import {
-  ButtonsContainer,
-  EditPhotoContainer,
-  StyledInfo,
-  StyledHR,
-  SaveButton,
-  ActionButton,
-  PhotoContainerActions,
-  ModalCloseButton,
-  ModalCloseSavePhoto,
-} from './styled';
-import PhotoButton from '@/features/account/photo-button';
+import { useEditPhotoContext } from '@/context/EditPhotoContext';
 import ModalImageEditor from '@/features/account/modal-image-editor';
+import PhotoButton from '@/features/account/photo-button';
 import { handleError } from '@/utils/handleError';
 import { Camera, PencilSimple } from 'phosphor-react';
-import { useEditPhotoContext } from '@/context/EditPhotoContext';
 
 interface EditPhotoModalProps extends React.HTMLAttributes<HTMLDivElement> {
   selectedPhoto: string | null;
@@ -42,19 +32,15 @@ export default function EditPhotoModal({
         );
         return;
       }
-
       if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
         handleError(
           'A foto deve estar em um dos formatos permitidos. Formatos aceitos: jpg ou png.'
         );
         return;
       }
-
       const reader = new FileReader();
       reader.onload = e => {
-        if (onAddPhoto) {
-          onAddPhoto(e.target?.result as string);
-        }
+        if (onAddPhoto) onAddPhoto(e.target?.result as string);
         setOriginalImage(e.target?.result as string);
         setCrop({ x: 0, y: 0 });
         setZoom(1);
@@ -64,40 +50,48 @@ export default function EditPhotoModal({
   };
 
   const handleSavePhoto = (editedImage: string | null) => {
-    if (selectedPhoto && onAddPhoto) {
-      onAddPhoto(selectedPhoto);
-    }
-    if (onImageEdit) {
-      onImageEdit(editedImage);
-    }
+    if (selectedPhoto && onAddPhoto) onAddPhoto(selectedPhoto);
+    if (onImageEdit) onImageEdit(editedImage);
   };
 
   return (
-    <EditPhotoContainer {...props}>
-      <StyledInfo>Insira sua foto</StyledInfo>
-      <ModalCloseButton />
+    <Modal.Content
+      className="flex flex-col gap-4 max-w-96.75 w-full p-6 relative"
+      {...props}
+    >
+      <Modal.Title className="w-full text-xl font-medium leading-6 text-left">
+        Insira sua foto
+      </Modal.Title>
+      <Modal.Close className="top-6 right-6" />
 
-      <PhotoContainerActions>
+      <div className="flex flex-col items-center gap-8">
         <PhotoButton size={128} selectedPhoto={selectedPhoto} />
 
-        <ButtonsContainer>
+        <div className="w-full flex gap-4">
           <Modal.Root>
             <Modal.Control asChild>
-              <ActionButton disabled={!selectedPhoto}>
+              <button
+                disabled={!selectedPhoto}
+                className="flex-1 flex flex-col items-center justify-center py-2 px-3 bg-[#DEDEDE] rounded-lg border-0 cursor-pointer text-[#666666] font-semibold leading-[1.2rem] text-base [&_svg]:w-6 [&_svg]:h-6 [&_svg]:fill-[#666666] disabled:cursor-not-allowed disabled:bg-[#DEDEDE] disabled:text-[#ACACAC]"
+              >
                 <PencilSimple weight="bold" />
                 Editar
-              </ActionButton>
+              </button>
             </Modal.Control>
-
             <ModalImageEditor onSave={handleSavePhoto} />
           </Modal.Root>
 
-          <ActionButton>
+          <button className="flex-1 flex flex-col items-center justify-center py-2 px-3 bg-[#DEDEDE] rounded-lg border-0 cursor-pointer text-[#666666] font-semibold leading-[1.2rem] text-base [&_svg]:w-6 [&_svg]:h-6 [&_svg]:fill-[#666666]">
             <Camera weight="bold" />
             Câmera
-          </ActionButton>
-          <ActionButton as="label">
-            <input type="file" accept="image/*" onChange={handleAddPhoto} />
+          </button>
+          <label className="flex-1 flex flex-col items-center justify-center py-2 px-3 bg-[#DEDEDE] rounded-lg border-0 cursor-pointer text-[#666666] font-semibold leading-[1.2rem] text-base [&_svg]:w-6 [&_svg]:h-6 [&_svg]:fill-black">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleAddPhoto}
+              className="hidden"
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="32"
@@ -105,23 +99,24 @@ export default function EditPhotoModal({
               fill="#000000"
               viewBox="0 0 256 256"
             >
-              <path d="M208,52H182.42L170,33.34A12,12,0,0,0,160,28H96a12,12,0,0,0-10,5.34L73.57,52H48A28,28,0,0,0,20,80V192a28,28,0,0,0,28,28H208a28,28,0,0,0,28-28V80A28,28,0,0,0,208,52Zm4,140a4,4,0,0,1-4,4H48a4,4,0,0,1-4-4V80a4,4,0,0,1,4-4H80a12,12,0,0,0,10-5.34L102.42,52h51.15L166,70.66A12,12,0,0,0,176,76h32a4,4,0,0,1,4,4Zm-40-56a12,12,0,0,1-12,12H140v20a12,12,0,0,1-24,0V148H96a12,12,0,0,1,0-24h20V104a12,12,0,0,1,24,0v20h20A12,12,0,0,1,172,136Z"></path>
+              <path d="M208,52H182.42L170,33.34A12,12,0,0,0,160,28H96a12,12,0,0,0-10,5.34L73.57,52H48A28,28,0,0,0,20,80V192a28,28,0,0,0,28,28H208a28,28,0,0,0,28-28V80A28,28,0,0,0,208,52Zm4,140a4,4,0,0,1-4,4H48a4,4,0,0,1-4-4V80a4,4,0,0,1,4-4H80a12,12,0,0,0,10-5.34L102.42,52h51.15L166,70.66A12,12,0,0,0,176,76h32a4,4,0,0,1,4,4Zm-40-56a12,12,0,0,1-12,12H140v20a12,12,0,0,1-24,0V148H96a12,12,0,0,1,0-24h20V104a12,12,0,0,1,24,0v20h20A12,12,0,0,1,172,136Z" />
             </svg>
             Adicionar
-          </ActionButton>
-        </ButtonsContainer>
-      </PhotoContainerActions>
+          </label>
+        </div>
+      </div>
 
-      <StyledHR aria-hidden />
+      <div className="w-full h-px bg-[#666666] mt-1" aria-hidden />
 
-      <ModalCloseSavePhoto asChild>
-        <SaveButton
+      <Modal.Close asChild>
+        <Button
           disabled={!selectedPhoto}
           onClick={() => handleSavePhoto(selectedPhoto)}
+          className="ml-auto"
         >
           Salvar
-        </SaveButton>
-      </ModalCloseSavePhoto>
-    </EditPhotoContainer>
+        </Button>
+      </Modal.Close>
+    </Modal.Content>
   );
 }

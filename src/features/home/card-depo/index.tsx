@@ -27,7 +27,7 @@ export function CardDepo({ testimony }: CardDepoProps) {
             {testimony.userName}
           </span>
           <span
-            className="text-[#ACACAC] leading-[1.4rem] block max-w-[10rem] whitespace-nowrap text-ellipsis overflow-hidden"
+            className="text-[#ACACAC] leading-[1.4rem] block max-w-40 whitespace-nowrap text-ellipsis overflow-hidden"
             title={testimony.role}
           >
             {testimony.role}

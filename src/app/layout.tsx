@@ -1,11 +1,11 @@
-import './globals.css';
+import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
+import { Geist } from 'next/font/google';
 import { ReactNode } from 'react';
+import './globals.css';
 import { Providers } from './providers';
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'Sou Junior | Mentoria Online',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={cn("font-sans", geist.variable)}>
+    <html lang="pt-BR" className={cn('font-sans', geist.variable)}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
