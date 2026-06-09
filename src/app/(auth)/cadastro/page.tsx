@@ -18,6 +18,8 @@ export default function CadastroPage() {
           src={'/ilustracao.svg'}
           alt="Figuras do Background"
           className="w-full h-screen object-contain"
+          width={1000}
+          height={1000}
         />
       </div>
     </div>
