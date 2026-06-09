@@ -35,8 +35,8 @@ export default function CardScheduling({
   }
 
   return (
-    <div className="h-68 w-full bg-white rounded-2xl p-6 px-4 flex flex-col justify-between hover:shadow-[4px_4px_4px_0px_rgba(0,0,0,0.2)] hover:rounded-3xl">
-      <div className="flex items-center gap-4 [&_img]:bg-[#D9D9D9]">
+    <div className="h-68 w-full bg-white rounded-2xl p-6 px-4 flex flex-col justify-between hover:shadow-hover hover:rounded-3xl">
+      <div className="flex items-center gap-4 [&_img]:bg-gray-250">
         <Image
           width={80}
           height={80}

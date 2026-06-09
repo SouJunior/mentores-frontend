@@ -16,7 +16,7 @@ export function FormFields() {
 
   return (
     <>
-      <div className="relative [&_label_span:first-child]:text-[#323232] [&_label_span:first-child_.asterisk]:text-[#338AFF] [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
+      <div className="relative [&_label_span:first-child]:text-black-200 [&_label_span:first-child_.asterisk]:text-blue-700 [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
         <InfoTooltip right={0} />
         <InputForm
           type="input"
@@ -33,7 +33,7 @@ export function FormFields() {
         />
       </div>
 
-      <div className="relative [&_label_span:first-child]:text-[#323232] [&_label_span:first-child_.asterisk]:text-[#338AFF] [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
+      <div className="relative [&_label_span:first-child]:text-black-200 [&_label_span:first-child_.asterisk]:text-blue-700 [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
         <InputForm
           type="input"
           inputType={isPassword.new ? 'text' : 'password'}
@@ -49,7 +49,7 @@ export function FormFields() {
         />
       </div>
 
-      <div className="relative [&_label_span:first-child]:text-[#323232] [&_label_span:first-child_.asterisk]:text-[#338AFF] [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
+      <div className="relative [&_label_span:first-child]:text-black-200 [&_label_span:first-child_.asterisk]:text-blue-700 [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-10 [&_button_svg]:w-6 [&_button_svg]:h-6">
         <InputForm
           type="input"
           inputType={isPassword.confirmNew ? 'text' : 'password'}

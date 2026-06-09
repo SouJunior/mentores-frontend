@@ -80,7 +80,7 @@ export function PasswordTab() {
       <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
         Senha
       </h2>
-      <p className="text-[0.875rem] leading-4 [&_span]:text-[#338AFF]">
+      <p className="text-[0.875rem] leading-4 [&_span]:text-blue-700">
         <span>*</span> Indica um campo obrigatório
       </p>
 
@@ -88,7 +88,7 @@ export function PasswordTab() {
         <form className="flex flex-col gap-4 max-w-[36.3rem]">
           <FormFields />
 
-          <div className="h-px w-full bg-[#666666]" />
+          <div className="h-px w-full bg-gray-700" />
 
           <div className="flex gap-4 ml-auto">
             <Button
@@ -110,7 +110,7 @@ export function PasswordTab() {
             {formik.isSubmitting ? (
               <Button
                 disabled
-                className="h-[43px] p-0 w-24 cursor-wait bg-[#003986] border-[#003986]"
+                className="h-[43px] p-0 w-24 cursor-wait bg-blue-800 border-blue-800"
               >
                 <Spinner />
               </Button>

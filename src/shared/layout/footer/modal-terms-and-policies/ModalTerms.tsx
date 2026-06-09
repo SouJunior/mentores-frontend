@@ -10,12 +10,12 @@ export default function ModalTerms(props: ModalTermsProps) {
       <ModalHeader />
 
       <div className="pt-4 pr-2">
-        <div className="flex flex-col max-h-148 h-full overflow-auto px-4 pb-6 font-['Radio_Canada'] [&::-webkit-scrollbar]:w-1.75 [&::-webkit-scrollbar-thumb]:bg-[#666666] [&::-webkit-scrollbar-thumb]:rounded-[1rem] [&::-webkit-scrollbar-track]:bg-transparent">
-          <Modal.Title className="max-w-[18rem] text-xl font-medium leading-6 text-[#003986]">
+        <div className="flex flex-col max-h-148 h-full overflow-auto px-4 pb-6 font-['Radio_Canada'] [&::-webkit-scrollbar]:w-1.75 [&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-[1rem] [&::-webkit-scrollbar-track]:bg-transparent">
+          <Modal.Title className="max-w-[18rem] text-xl font-medium leading-6 text-blue-800">
             Termos e condições gerais de uso SouJunior
           </Modal.Title>
 
-          <Modal.Description className="text-[#323232] leading-[1.4rem] text-base my-4 [&_ol]:pl-4 [&_li]:list-decimal [&_ol.list-style-type-none]:pl-0 [&_ol.list-style-type-none_li]:list-none">
+          <Modal.Description className="text-black-200 leading-[1.4rem] text-base my-4 [&_ol]:pl-4 [&_li]:list-decimal [&_ol.list-style-type-none]:pl-0 [&_ol.list-style-type-none_li]:list-none">
             Ao navegar neste site e usar os serviços que são fornecidos pelo
             SouJunior, você afirma que leu, compreendeu e concorda com nossos
             Termos e Condições. Estes Termos e Condições abrangem todos os
@@ -173,7 +173,7 @@ export default function ModalTerms(props: ModalTermsProps) {
           <Modal.Close asChild>
             <Button
               variant="secondary"
-              className="static ml-auto border-[#003986] text-[#003986] hover:border-[#002C66] hover:text-[#002C66]"
+              className="static ml-auto border-blue-800 text-blue-800 hover:border-blue-850 hover:text-blue-850"
             >
               Fechar
             </Button>

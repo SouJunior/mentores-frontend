@@ -35,7 +35,7 @@ export function FormFields({ mentor }: FormFieldsProps) {
         modal={false}
       >
         <label
-          className={`flex flex-col gap-2 text-[0.875rem] text-[#666666] [&_span_span]:text-[#338AFF] [&_.disabled]:text-[#ACACAC] [&_.disabled_span]:text-[#ACACAC] [&_.error-message]:text-[#E94242] [&_.error-message]:font-bold [&_.error-message]:text-xs [&_[data-placeholder]]:text-[#D9D9D9]${formik.errors.dateOfBirth ? ' [&_svg]:text-[#E94242]' : ''}`}
+          className={`flex flex-col gap-2 text-[0.875rem] text-gray-700 [&_span_span]:text-blue-700 [&_.disabled]:text-gray-600 [&_.disabled_span]:text-gray-600 [&_.error-message]:text-red-400 [&_.error-message]:font-bold [&_.error-message]:text-xs [&_[data-placeholder]]:text-gray-250${formik.errors.dateOfBirth ? ' [&_svg]:text-red-400' : ''}`}
         >
           <span className="disabled">
             Data de nascimento <span>*</span>
@@ -81,7 +81,7 @@ export function FormFields({ mentor }: FormFieldsProps) {
         defaultValue={mentor.email}
       />
 
-      <label className="flex flex-col gap-2 mt-2 [&_span]:text-[#323232] [&_span]:text-[0.875rem] [&_span]:leading-[120%] [&_span_.asterisk]:text-[#338AFF] [&_.select-trigger]:py-3 [&_.select-trigger]:px-4 [&_.select-trigger]:leading-6 [&_.select-trigger]:text-base">
+      <label className="flex flex-col gap-2 mt-2 [&_span]:text-black-200 [&_span]:text-[0.875rem] [&_span]:leading-[120%] [&_span_.asterisk]:text-blue-700 [&_.select-trigger]:py-3 [&_.select-trigger]:px-4 [&_.select-trigger]:leading-6 [&_.select-trigger]:text-base">
         <span>
           Gênero:
           <span className="asterisk">*</span>

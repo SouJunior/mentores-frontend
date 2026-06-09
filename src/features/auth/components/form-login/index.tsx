@@ -58,7 +58,7 @@ export function FormLogin() {
         className="mb-4 w-[16.5rem] h-12"
       />
 
-      <h2 className="font-medium text-lg leading-[120%] text-[#666666] mb-8">
+      <h2 className="font-medium text-lg leading-[120%] text-gray-700 mb-8">
         Bem-vindo de volta
       </h2>
 
@@ -72,7 +72,7 @@ export function FormLogin() {
             <Form className="flex flex-col">
               <div className="flex flex-col gap-6">
                 <div
-                  className={`relative [&_svg]:w-6 [&_svg]:h-6 [&_label_span:first-child]:text-[#666666] [&_label_span]:font-normal [&_label_span]:text-base [&_label_span]:leading-[150%] [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-[2.8rem] [&_.eye-visibility_svg]:text-[#323232] focus-within:[&_svg]:text-[#003986]${errors.email && touched.email ? ' [&_span]:text-[#E94242] [&_svg]:text-[#E94242]' : ''}`}
+                  className={`relative [&_svg]:w-6 [&_svg]:h-6 [&_label_span:first-child]:text-gray-700 [&_label_span]:font-normal [&_label_span]:text-base [&_label_span]:leading-[150%] [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-[2.8rem] [&_.eye-visibility_svg]:text-black-200 focus-within:[&_svg]:text-blue-800${errors.email && touched.email ? ' [&_span]:text-red-400 [&_svg]:text-red-400' : ''}`}
                 >
                   <InputForm
                     isRequired={false}
@@ -85,7 +85,7 @@ export function FormLogin() {
                 </div>
 
                 <div
-                  className={`relative [&_svg]:w-6 [&_svg]:h-6 [&_label_span:first-child]:text-[#666666] [&_label_span]:font-normal [&_label_span]:text-base [&_label_span]:leading-[150%] [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-[2.8rem] [&_.eye-visibility_svg]:text-[#323232] focus-within:[&_svg]:text-[#003986]${errors.password && touched.password ? ' [&_span]:text-[#E94242] [&_svg]:text-[#E94242]' : ''}`}
+                  className={`relative [&_svg]:w-6 [&_svg]:h-6 [&_label_span:first-child]:text-gray-700 [&_label_span]:font-normal [&_label_span]:text-base [&_label_span]:leading-[150%] [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-[2.8rem] [&_.eye-visibility_svg]:text-black-200 focus-within:[&_svg]:text-blue-800${errors.password && touched.password ? ' [&_span]:text-red-400 [&_svg]:text-red-400' : ''}`}
                 >
                   <InputForm
                     isRequired={false}
@@ -105,7 +105,7 @@ export function FormLogin() {
                 </div>
               </div>
 
-              <div className="flex justify-between mt-6 mb-8 [&_a]:text-[#003986] [&_a]:font-medium">
+              <div className="flex justify-between mt-6 mb-8 [&_a]:text-blue-800 [&_a]:font-medium">
                 <Checkbox
                   isChecked={isKeepConnected}
                   setValue={setIsKeepConnected}
@@ -118,7 +118,7 @@ export function FormLogin() {
               {isSubmitting ? (
                 <Button
                   disabled
-                  className="h-[43px] p-0 cursor-wait bg-[#003986] border-[#003986]"
+                  className="h-[43px] p-0 cursor-wait bg-blue-800 border-blue-800"
                 >
                   <Spinner />
                 </Button>
@@ -126,7 +126,7 @@ export function FormLogin() {
                 <Button>Entrar</Button>
               )}
 
-              <p className="text-[#323232] leading-[150%] mt-10 pb-2 [&_a]:text-[#003986] [&_a]:font-medium">
+              <p className="text-black-200 leading-[150%] mt-10 pb-2 [&_a]:text-blue-800 [&_a]:font-medium">
                 Ainda não possui cadastro?{' '}
                 <Link href="/cadastro">Clique aqui e cadastre-se</Link>
               </p>

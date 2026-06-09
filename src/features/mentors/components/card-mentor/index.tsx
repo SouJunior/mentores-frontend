@@ -25,14 +25,14 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
         gap: '1rem',
         alignItems: 'stretch',
         padding: '1.5rem 1rem',
-        backgroundColor: '#fff',
+        backgroundColor: 'var(--color-white)',
         border: 'none',
         margin: 0,
         boxShadow: 'none',
         minHeight: '23.5rem',
       }}
     >
-      <div className="w-30 h-30 rounded-full overflow-hidden self-center bg-[#D9D9D9] [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
+      <div className="w-30 h-30 rounded-full overflow-hidden self-center bg-gray-250 [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
         {mentor?.profile && (
           <Image
             src={mentor?.profile}
@@ -43,7 +43,7 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
         )}
       </div>
 
-      <p className="flex flex-col font-medium text-xl leading-[120%] text-[#323232]">
+      <p className="flex flex-col font-medium text-xl leading-[120%] text-black-200">
         <span>{splitMentorName[0]}</span>
         <span>{splitMentorName[splitMentorName.length - 1]}</span>
       </p>

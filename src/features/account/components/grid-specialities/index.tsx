@@ -50,10 +50,10 @@ export default function GridSpecialities({
       <span className="mt-5 text-base font-normal leading-[19.2px]">
         Olá, {fullName}!
       </span>
-      <span className="text-xl font-medium leading-6 text-center mt-6.25 [&_.last]:text-[#175CB7]">
+      <span className="text-xl font-medium leading-6 text-center mt-6.25 [&_.last]:text-blue-600">
         Em quais áreas você deseja mentorar?<span className="last">*</span>
       </span>
-      <span className="text-[0.875rem] font-normal leading-4 text-left w-full mt-4 text-[#323232] [&_span]:text-[#175CB7]">
+      <span className="text-[0.875rem] font-normal leading-4 text-left w-full mt-4 text-black-200 [&_span]:text-blue-600">
         <span>*</span> Indica um campo obrigatório
       </span>
       <div className="grid grid-cols-[repeat(3,165px)] gap-5 mt-7.5">
@@ -63,8 +63,8 @@ export default function GridSpecialities({
             onClick={() => toggleSpeciality(speciality)}
             className={`w-43 h-8 rounded-[50px] py-2 pr-3 pl-1 text-center cursor-pointer flex items-center justify-center gap-0.5 ${
               specialties.includes(speciality)
-                ? 'bg-[#175CB7] text-white'
-                : 'bg-[#CBCBCB] text-[#666666]'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-350 text-gray-700'
             }`}
           >
             {specialties.includes(speciality) && (
@@ -77,7 +77,7 @@ export default function GridSpecialities({
       <span className="text-base font-normal leading-4.75 text-right w-full text-green-600 mt-3.75">
         {`${selectedCount}/6 especialidades `}
       </span>
-      <div className="w-full h-px bg-[#666666] mt-9" />
+      <div className="w-full h-px bg-gray-700 mt-9" />
       <Button
         className="mt-3.75 self-end"
         onClick={handleMoveToNextStep}

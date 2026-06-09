@@ -44,16 +44,16 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
       <Modal.Root>
         <Modal.Control asChild>
-          <button className="flex flex-col items-center p-4 rounded-lg border-2 border-dashed border-[#666666] bg-transparent text-center">
+          <button className="flex flex-col items-center p-4 rounded-lg border-2 border-dashed border-gray-700 bg-transparent text-center">
             <div className="w-20 h-20">
               <PhotoButton size={80} selectedPhoto={formik.values.profile} />
             </div>
 
-            <span className="text-[0.875rem] font-normal leading-4 text-[#323232] pt-4 pb-2 max-w-[9.5rem]">
+            <span className="text-[0.875rem] font-normal leading-4 text-black-200 pt-4 pb-2 max-w-[9.5rem]">
               Para inserir sua foto, clique aqui.
-              <span className="text-[#175CB7]">*</span>
+              <span className="text-blue-600">*</span>
             </span>
-            <span className="text-[0.75rem] leading-4 text-[#323232] max-w-[9.5rem]">
+            <span className="text-[0.75rem] leading-4 text-black-200 max-w-[9.5rem]">
               Formato aceito: jpg ou png. Tamanho máx.: 8 MB.
             </span>
           </button>
@@ -78,15 +78,15 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
               placeholder="Fale sobre sua trajetória profissional para que possam lhe conhecer melhor;"
               required
             />
-            <span className="text-[0.75rem] leading-4 text-[#323232] text-right">
+            <span className="text-[0.75rem] leading-4 text-black-200 text-right">
               Máximo 600 caracteres.
             </span>
           </div>
 
           <label className="flex flex-col gap-2 mt-2">
-            <span className="text-[#323232] text-[0.875rem] leading-[120%]">
+            <span className="text-black-200 text-[0.875rem] leading-[120%]">
               Gênero
-              <span className="text-[#338AFF]">*</span>
+              <span className="text-blue-700">*</span>
             </span>
             <Select
               placeholder="Gênero"
@@ -100,14 +100,14 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
             </Select>
           </label>
 
-          <div className="w-full h-px bg-[#666666] mt-9" />
+          <div className="w-full h-px bg-gray-700 mt-9" />
 
           <div className="flex w-full justify-end gap-4 mt-4">
             <Button
               onClick={handleBackToFirstStep}
               variant="secondary"
               type="button"
-              className="self-end text-[#666666] border-[#666666] hover:text-[#666666] hover:border-[#666666]"
+              className="self-end text-gray-700 border-gray-700 hover:text-gray-700 hover:border-gray-700"
             >
               Voltar
             </Button>

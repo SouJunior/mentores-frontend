@@ -5,7 +5,7 @@ type InputSearchProps = ComponentProps<'input'>;
 
 export default function InputSearch(props: InputSearchProps) {
   return (
-    <div className="relative flex items-center justify-between rounded-lg border border-[#ACACAC] max-w-[389px] w-full text-[#323232] focus-within:border-[#003986]">
+    <div className="relative flex items-center justify-between rounded-lg border border-gray-600 max-w-[389px] w-full text-black-200 focus-within:border-blue-800">
       <input
         type="text"
         id="input-search-mentors"

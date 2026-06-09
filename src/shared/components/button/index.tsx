@@ -8,12 +8,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'border-2 border-[#003986] bg-[#003986] text-white hover:border-[#002C66] hover:bg-[#002C66] disabled:border-[#C5C7C5] disabled:bg-[#C5C7C5]',
+          'border-2 border-blue-800 bg-blue-800 text-white hover:border-blue-850 hover:bg-blue-850 disabled:border-gray-500 disabled:bg-gray-500',
         secondary:
-          'border-2 border-[#003986] text-[#003986] hover:border-[#002C66] hover:text-[#002C66]',
-        tertiary: 'text-[#003986] hover:text-[#002C66]',
+          'border-2 border-blue-800 text-blue-800 hover:border-blue-850 hover:text-blue-850',
+        tertiary: 'text-blue-800 hover:text-blue-850',
         danger:
-          'border-2 border-[#E94242] text-[#E94242] hover:border-[#8f1e22] hover:text-[#8f1e22] disabled:border-[#C5C7C5] disabled:text-[#C5C7C5]',
+          'border-2 border-red-400 text-red-400 hover:border-red-800 hover:text-red-800 disabled:border-gray-500 disabled:text-gray-500',
       },
       size: {
         lg: 'px-6 py-4',

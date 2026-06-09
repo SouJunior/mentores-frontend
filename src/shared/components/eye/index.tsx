@@ -16,7 +16,7 @@ export function Eye({ pressed, className, ...props }: EyeProps) {
       {...props}
       pressed={pressed}
       className={cn(
-        'absolute outline-none p-0 z-[1] leading-none cursor-pointer text-[#666666] focus-visible:ring-2 focus-visible:ring-[#046AD0] bg-transparent border-none',
+        'absolute outline-none p-0 z-[1] leading-none cursor-pointer text-gray-700 focus-visible:ring-2 focus-visible:ring-blue-400 bg-transparent border-none',
         className
       )}
     >

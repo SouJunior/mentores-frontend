@@ -31,7 +31,7 @@ export function Header({ session }: HeaderProps) {
   }
 
   return (
-    <header className="flex justify-between px-8 py-4 bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] max-[1133px]:px-4">
+    <header className="flex justify-between px-8 py-4 bg-white shadow-card max-[1133px]:px-4">
       <nav className="flex gap-2 items-center py-1">
         <Link
           href="/"
@@ -47,19 +47,19 @@ export function Header({ session }: HeaderProps) {
         </Link>
         <div
           aria-hidden
-          className="bg-[#003986] w-[2px] h-10 max-[1064px]:hidden"
+          className="bg-blue-800 w-[2px] h-10 max-[1064px]:hidden"
         />
 
         <div className="flex items-center gap-2 max-[1064px]:hidden">
           <Link
             href="/#onboarding"
-            className="px-2 py-1 text-[1.25rem] leading-7 text-[#003986] border-t-2 border-b-2 border-transparent hover:font-semibold hover:text-[1.225rem]"
+            className="px-2 py-1 text-[1.25rem] leading-7 text-blue-800 border-t-2 border-b-2 border-transparent hover:font-semibold hover:text-[1.225rem]"
           >
             Como Funciona
           </Link>
           <Link
             href="/#mentor"
-            className="px-2 py-1 text-[1.25rem] leading-7 text-[#003986] border-t-2 border-b-2 border-transparent hover:font-semibold hover:text-[1.225rem]"
+            className="px-2 py-1 text-[1.25rem] leading-7 text-blue-800 border-t-2 border-b-2 border-transparent hover:font-semibold hover:text-[1.225rem]"
           >
             Encontre Seu Mentor
           </Link>
@@ -68,7 +68,7 @@ export function Header({ session }: HeaderProps) {
 
       {session != null ? (
         <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-          <DropdownMenuTrigger className="flex items-center gap-4 cursor-pointer leading-none [&_img]:w-11 [&_img]:h-11 [&_img]:rounded-full [&_svg]:w-[1.2rem] [&_svg]:h-[1.2rem] [&_svg]:text-[#666] [&_svg]:[rotate:270deg] [&_svg]:transition-all data-[state=open]:[&_svg]:[rotate:90deg] focus-visible:shadow-[0_0_0_2px_rgba(17,101,186,0.6)] max-[438px]:gap-2 max-[438px]:[&_img]:w-8 max-[438px]:[&_img]:h-8">
+          <DropdownMenuTrigger className="flex items-center gap-4 cursor-pointer leading-none [&_img]:w-11 [&_img]:h-11 [&_img]:rounded-full [&_svg]:w-[1.2rem] [&_svg]:h-[1.2rem] [&_svg]:text-gray-700 [&_svg]:[rotate:270deg] [&_svg]:transition-all data-[state=open]:[&_svg]:[rotate:90deg] focus-visible:shadow-focus-ring max-[438px]:gap-2 max-[438px]:[&_img]:w-8 max-[438px]:[&_img]:h-8">
             <UserAvatar profile={session?.profile} />
           </DropdownMenuTrigger>
 
@@ -83,7 +83,7 @@ export function Header({ session }: HeaderProps) {
             side="bottom"
             align={breakpoint <= breakpoints.desktopXS ? 'center' : 'end'}
             sideOffset={20}
-            className="py-2 rounded-lg bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] text-[#323232] flex flex-col z-1 w-full"
+            className="py-2 rounded-lg bg-white shadow-card text-black-200 flex flex-col z-1 w-full"
           >
             <strong
               className="font-medium text-[1.25rem] leading-[120%] px-4 py-2"
@@ -93,13 +93,13 @@ export function Header({ session }: HeaderProps) {
             </strong>
 
             <span className="px-4">Mentor</span>
-            <DropdownMenuSeparator className="w-full h-px bg-[#ACACAC] my-2" />
+            <DropdownMenuSeparator className="w-full h-px bg-gray-600 my-2" />
 
             <DropdownMenuItem
               render={
                 <Link
                   href="/me"
-                  className="block px-4 py-4 leading-[120%] flex-1 transition-[0.2s] hover:bg-[#D9D9D9] focus:bg-[#D9D9D9] hover:text-[#323232] focus:text-[#323232]"
+                  className="block px-4 py-4 leading-[120%] flex-1 transition-[0.2s] hover:bg-gray-250 focus:bg-gray-250 hover:text-black-200 focus:text-black-200"
                 >
                   Minha conta
                 </Link>
@@ -111,7 +111,7 @@ export function Header({ session }: HeaderProps) {
                 render={
                   <Link
                     href="/#onboarding"
-                    className="px-4 py-4 leading-[1.2rem] text-[#003986] outline-none"
+                    className="px-4 py-4 leading-[1.2rem] text-blue-800 outline-none"
                   >
                     Como Funciona
                   </Link>
@@ -121,7 +121,7 @@ export function Header({ session }: HeaderProps) {
                 render={
                   <Link
                     href="/#mentor"
-                    className="px-4 py-4 leading-[1.2rem] text-[#003986] outline-none"
+                    className="px-4 py-4 leading-[1.2rem] text-blue-800 outline-none"
                   >
                     Encontre Seu Mentor
                   </Link>
@@ -129,13 +129,13 @@ export function Header({ session }: HeaderProps) {
               />
             </div>
 
-            <DropdownMenuSeparator className="hidden w-full h-px bg-[#ACACAC] my-2 max-[1064px]:block" />
+            <DropdownMenuSeparator className="hidden w-full h-px bg-gray-600 my-2 max-[1064px]:block" />
 
             <DropdownMenuItem
               render={
                 <button
                   onClick={handleLogoutUser}
-                  className="block px-4 py-4 leading-[120%] flex-1 transition-[0.2s] text-[#db2e34] hover:bg-[#D9D9D9] focus:bg-[#D9D9D9] cursor-pointer"
+                  className="block px-4 py-4 leading-[120%] flex-1 transition-[0.2s] text-red-300 hover:bg-gray-250 focus:bg-gray-250 cursor-pointer"
                 >
                   Sair
                 </button>
@@ -157,7 +157,7 @@ export function Header({ session }: HeaderProps) {
       {/* Mobile menu */}
       {!session && (
         <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-          <DropdownMenuTrigger className="hidden cursor-pointer self-center text-[#003986] leading-none transition-transform duration-300 data-[state=open]:rotate-90 [&_svg]:w-10 [&_svg]:h-10 max-[1064px]:block">
+          <DropdownMenuTrigger className="hidden cursor-pointer self-center text-blue-800 leading-none transition-transform duration-300 data-[state=open]:rotate-90 [&_svg]:w-10 [&_svg]:h-10 max-[1064px]:block">
             <Menu />
           </DropdownMenuTrigger>
 
@@ -170,7 +170,7 @@ export function Header({ session }: HeaderProps) {
 
           <DropdownMenuContent
             sideOffset={12}
-            className="hidden flex-col gap-2 z-[1] bg-white rounded-bl-lg rounded-br-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border-t-2 border-[#C5C7C5] py-4 text-[#003986] w-full max-[1064px]:flex max-[438px]:-mt-[4px]"
+            className="hidden flex-col gap-2 z-[1] bg-white rounded-bl-lg rounded-br-lg shadow-card border-t-2 border-gray-500 py-4 text-blue-800 w-full max-[1064px]:flex max-[438px]:-mt-[4px]"
           >
             <div className="flex flex-col">
               <DropdownMenuItem
@@ -195,7 +195,7 @@ export function Header({ session }: HeaderProps) {
               />
             </div>
 
-            <hr className="border-0 border-t-2 border-[#C5C7C5]" />
+            <hr className="border-0 border-t-2 border-gray-500" />
 
             <div className="flex flex-col gap-2 px-4 pt-2">
               <DropdownMenuItem

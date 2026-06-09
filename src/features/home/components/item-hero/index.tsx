@@ -19,14 +19,14 @@ export function ItemHero<
   if (type === 'primary') {
     return (
       <div
-        className={`${baseClasses} bg-[#003986] border-4 border-[#003986]`}
+        className={`${baseClasses} bg-blue-800 border-4 border-blue-800`}
       />
     );
   }
   if (type === 'secondary') {
     return (
       <div
-        className={`${baseClasses} border-4 border-[#003986] bg-transparent`}
+        className={`${baseClasses} border-4 border-blue-800 bg-transparent`}
       />
     );
   }

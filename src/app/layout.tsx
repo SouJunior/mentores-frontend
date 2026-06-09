@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   abstract:
     'Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia',
-  themeColor: '#000000',
+  themeColor: 'var(--color-black)',
   alternates: {
     canonical: 'https://soujunior.com.br',
   },

@@ -58,48 +58,48 @@ export default function MeClient({ mentor, calendlyInfo }: MeClientProps) {
     >
       <EditPhotoProvider>
         <div className="flex gap-4 p-4 min-h-screen">
-          <aside className="flex flex-col gap-2 text-[#323232]">
+          <aside className="flex flex-col gap-2 text-black-200">
             <h1 className="text-[2rem] font-semibold leading-[2.4rem]">
               Minha conta
             </h1>
 
-            <div className="h-px bg-[#ACACAC] w-full" />
+            <div className="h-px bg-gray-600 w-full" />
 
             <TabsList className="flex flex-col gap-2 bg-transparent h-auto p-0 rounded-none">
               <TabsTrigger
                 value="personal-info"
-                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-blue-850 hover:bg-gray-200"
               >
                 Informações pessoais
               </TabsTrigger>
               <TabsTrigger
                 value="profile"
-                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-blue-850 hover:bg-gray-200"
               >
                 Perfil
               </TabsTrigger>
               <TabsTrigger
                 value="schedule"
-                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-blue-850 hover:bg-gray-200"
               >
                 Agenda
               </TabsTrigger>
               <TabsTrigger
                 value="password"
-                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-blue-850 hover:bg-gray-200"
               >
                 Senha
               </TabsTrigger>
               <TabsTrigger
                 value="account-management"
-                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-[#002C66] hover:bg-[#DEDEDE]"
+                className="[all:unset] text-base leading-[1.2rem] font-normal p-4 pl-0 w-full cursor-pointer transition-all duration-300 data-[state=active]:font-medium data-[state=active]:text-blue-850 hover:bg-gray-200"
               >
                 Gestão de conta
               </TabsTrigger>
             </TabsList>
           </aside>
 
-          <div className="w-0.5 bg-[#D9D9D9]" />
+          <div className="w-0.5 bg-gray-250" />
 
           <main>
             <PersonalInfoTab mentor={mentor} />

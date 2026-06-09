@@ -53,15 +53,15 @@ export default function FormNewPass() {
               height={36}
             />
             <div className="my-6">
-              <h2 className="text-[#666666] text-lg font-bold leading-[1.8rem] mb-4">
+              <h2 className="text-gray-700 text-lg font-bold leading-[1.8rem] mb-4">
                 Nova Senha
               </h2>
-              <p className="text-[#666666] text-sm font-normal leading-6">
+              <p className="text-gray-700 text-sm font-normal leading-6">
                 Preencha os campos abaixo com sua nova senha e confirme-a.
               </p>
             </div>
 
-            <div className="relative mb-4 [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-5 [&_button_svg]:w-6 [&_button_svg]:h-6">
+            <div className="relative mb-4 [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-gray-700 [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-5 [&_button_svg]:w-6 [&_button_svg]:h-6">
               <InfoTooltip right={0} />
 
               <Field
@@ -80,7 +80,7 @@ export default function FormNewPass() {
               />
             </div>
 
-            <div className="relative [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-5 [&_button_svg]:w-6 [&_button_svg]:h-6">
+            <div className="relative [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-gray-700 [&_label_input]:text-base [&_label_input]:pr-8 [&_button]:right-4 [&_button]:top-5 [&_button_svg]:w-6 [&_button_svg]:h-6">
               <Field
                 as={InputForm}
                 inputType={isConfirmPasswordVisible ? 'text' : 'password'}

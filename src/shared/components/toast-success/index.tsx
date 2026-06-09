@@ -36,15 +36,15 @@ const ToastSuccess: React.FC<CustomToastProps> = ({ onClose }) => {
                 <CloseIcon
                   className="cursor-pointer"
                   onClick={handleOverlayClick}
-                  style={{ color: '#5D5F5D' }}
+                  style={{ color: 'var(--color-gray-750)' }}
                 />
               </div>
             </div>
-            <div className="text-[#149911] text-2xl font-medium text-center">
+            <div className="text-green-900 text-2xl font-medium text-center">
               Senha redefinida com sucesso!
             </div>
             <Link href="/login">
-              <button className="px-14 py-3 border border-[#5D5F5D] text-[#5D5F5D] transition-all duration-300 ease-in-out bg-transparent text-base hover:scale-110">
+              <button className="px-14 py-3 border border-gray-750 text-gray-750 transition-all duration-300 ease-in-out bg-transparent text-base hover:scale-110">
                 Ir para o login
               </button>
             </Link>

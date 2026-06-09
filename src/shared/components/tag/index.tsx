@@ -8,7 +8,7 @@ interface TagProps {
 export function Tag({ children, ...props }: TagProps) {
   return (
     <span
-      className="rounded-[2.5rem] bg-[#F1F3F5] px-2 py-2 text-[#001633] text-xs font-normal leading-[120%]"
+      className="rounded-[2.5rem] bg-blue-25 px-2 py-2 text-blue-950 text-xs font-normal leading-[120%]"
       {...props}
     >
       {children}

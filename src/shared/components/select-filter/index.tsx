@@ -30,7 +30,7 @@ export default function SelectFilter({
 
   return (
     <Popover>
-      <PopoverTrigger className="flex items-center justify-between w-[12.25rem] bg-white text-[#323232] px-6 py-3 border border-[#666666] rounded-lg cursor-pointer outline-none text-base font-normal transition-all data-[state=open]:rounded-b-none data-[state=open]:text-[#003986] data-[state=open]:border-[#003986] hover:text-[#003986] hover:border-[#003986] [&[data-state=open]_svg]:rotate-180 [&_svg]:transition-transform [&_svg]:duration-300">
+      <PopoverTrigger className="flex items-center justify-between w-[12.25rem] bg-white text-black-200 px-6 py-3 border border-gray-700 rounded-lg cursor-pointer outline-none text-base font-normal transition-all data-[state=open]:rounded-b-none data-[state=open]:text-blue-800 data-[state=open]:border-blue-800 hover:text-blue-800 hover:border-blue-800 [&[data-state=open]_svg]:rotate-180 [&_svg]:transition-transform [&_svg]:duration-300">
         {selectName}
         <ExpandMoreIcon size={16} />
       </PopoverTrigger>
@@ -43,7 +43,7 @@ export default function SelectFilter({
         {options.map(option => (
           <label
             key={option}
-            className="flex items-center gap-2 px-2 py-2 text-base leading-[1.4rem] text-[#323232] cursor-pointer"
+            className="flex items-center gap-2 px-2 py-2 text-base leading-[1.4rem] text-black-200 cursor-pointer"
           >
             <Checkbox
               checked={selectedOptions.includes(option)}

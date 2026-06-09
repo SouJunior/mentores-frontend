@@ -19,7 +19,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#666666] text-white">
+    <footer className="bg-gray-700 text-white">
       <div className="container flex flex-col gap-10 py-16 px-8 max-[1133px]:px-4 max-[438px]:py-8">
         <div className="flex justify-between items-start gap-8 flex-wrap">
           <Link href="/" title="Início">
@@ -180,7 +180,7 @@ export function Footer() {
           </Link>
         </div>
 
-        <p className="pt-4 border-t border-[#DEDEDE] text-[0.875rem] leading-5 text-right max-[438px]:text-left">
+        <p className="pt-4 border-t border-gray-200 text-[0.875rem] leading-5 text-right max-[438px]:text-left">
           © {currentYear} SouJunior. Todos os direitos reservados.
         </p>
       </div>

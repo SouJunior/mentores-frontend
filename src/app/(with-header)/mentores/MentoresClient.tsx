@@ -70,24 +70,24 @@ export default function MentoresClient({
 
   return (
     <>
-      <div id="__next" className="bg-[#F1F3F5] flex flex-col gap-2.5">
+      <div id="__next" className="bg-blue-25 flex flex-col gap-2.5">
         <main>
           <div className="flex h-[100px] flex-col py-6 px-8 max-w-7xl mx-auto">
             <section className="flex items-center gap-2">
               <Link
                 href="/"
-                className="text-[#666666] font-normal text-sm leading-[1.05rem] hover:underline"
+                className="text-gray-700 font-normal text-sm leading-[1.05rem] hover:underline"
               >
                 Início
               </Link>
-              <div aria-hidden className="w-2 h-2 bg-[#666666] rounded-full" />
-              <span className="text-sm text-[#003986] leading-[1.05rem]">
+              <div aria-hidden className="w-2 h-2 bg-gray-700 rounded-full" />
+              <span className="text-sm text-blue-800 leading-[1.05rem]">
                 Encontre seu mentor
               </span>
             </section>
-            <span className="text-[32px] font-semibold text-[#003986] flex flex-col mt-6">
+            <span className="text-[32px] font-semibold text-blue-800 flex flex-col mt-6">
               Conheça nossos mentores
-              <span className="text-base text-[#666666] font-normal">
+              <span className="text-base text-gray-700 font-normal">
                 Mentorias individuais e personalizadas à um toque de você
               </span>
             </span>
@@ -121,7 +121,7 @@ export default function MentoresClient({
               {specialtyFilter.map(selectedSpecialty => (
                 <span
                   key={selectedSpecialty}
-                  className="bg-white text-sm text-[#323232] px-4 py-2 rounded-[2.5rem] text-center"
+                  className="bg-white text-sm text-black-200 px-4 py-2 rounded-[2.5rem] text-center"
                 >
                   {selectedSpecialty}
                 </span>
@@ -129,16 +129,16 @@ export default function MentoresClient({
               {genderFilter.map(selectedGender => (
                 <span
                   key={selectedGender}
-                  className="bg-white text-sm text-[#323232] px-4 py-2 rounded-[2.5rem] text-center"
+                  className="bg-white text-sm text-black-200 px-4 py-2 rounded-[2.5rem] text-center"
                 >
                   {selectedGender}
                 </span>
               ))}
-              <div aria-hidden className="w-0.5 h-8 bg-[#cbcbcb]" />
+              <div aria-hidden className="w-0.5 h-8 bg-gray-350" />
               <button
                 type="button"
                 onClick={handleClearFilters}
-                className="[all:unset] cursor-pointer rounded-lg text-base text-[#003986] hover:text-[#002C66] transition-colors duration-300"
+                className="[all:unset] cursor-pointer rounded-lg text-base text-blue-800 hover:text-blue-850 transition-colors duration-300"
               >
                 Remover filtros
               </button>

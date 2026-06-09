@@ -55,7 +55,7 @@ export default function FaqPage() {
         </div>
 
         <div className="flex flex-col max-w-[43.75rem]">
-          <h1 className="text-[#002C66] text-[32px] font-semibold leading-[38px] mb-6">
+          <h1 className="text-blue-850 text-[32px] font-semibold leading-[38px] mb-6">
             Ficou com alguma dúvida?
           </h1>
 
@@ -63,7 +63,7 @@ export default function FaqPage() {
             {faqItems.map(item => (
               <AccordionItem key={item.id} value={item.id}>
                 <AccordionTrigger>
-                  <span className="text-[20px] font-medium leading-[24px] text-[#002C66] text-left">
+                  <span className="text-[20px] font-medium leading-[24px] text-blue-850 text-left">
                     {item.question}
                   </span>
                 </AccordionTrigger>
@@ -73,7 +73,7 @@ export default function FaqPage() {
 
             <AccordionItem value="5">
               <AccordionTrigger>
-                <span className="text-[20px] font-medium leading-[24px] text-[#002C66] text-left">
+                <span className="text-[20px] font-medium leading-[24px] text-blue-850 text-left">
                   Onde agendar minha mentoria?
                 </span>
               </AccordionTrigger>

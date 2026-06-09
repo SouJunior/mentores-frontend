@@ -12,18 +12,18 @@ export function ModalDeleteAccount({
 }: ModalDeleteAccountProps) {
   return (
     <Modal.Content className="items-center flex flex-col gap-2 max-w-[400px] p-4 relative text-center">
-      <Modal.Title className="text-[#323232] text-[1.4rem] font-medium leading-6 mb-4 px-16 text-center">
+      <Modal.Title className="text-black-200 text-[1.4rem] font-medium leading-6 mb-4 px-16 text-center">
         Você tem certeza que deseja fazer isso?
       </Modal.Title>
 
       <Modal.Close className="top-[0.7rem] right-[0.7rem]" />
 
-      <Modal.Description className="text-[#323232] text-sm font-normal leading-[1.05rem] max-w-[352px] [&_a]:text-[#003986] [&_a]:underline">
+      <Modal.Description className="text-black-200 text-sm font-normal leading-[1.05rem] max-w-[352px] [&_a]:text-blue-800 [&_a]:underline">
         Se você tiver mentorias abertas no Calendly, elas continuarão ativas.
         Para fechá-las, será necessário excluí-las manualmente.
       </Modal.Description>
 
-      <Modal.Description className="text-[#323232] text-sm font-normal leading-[1.05rem] max-w-[352px] [&_a]:text-[#003986] [&_a]:underline">
+      <Modal.Description className="text-black-200 text-sm font-normal leading-[1.05rem] max-w-[352px] [&_a]:text-blue-800 [&_a]:underline">
         Verifique no{' '}
         <a href="https://calendly.com/" target="_blank">
           Calendly
@@ -37,7 +37,7 @@ export function ModalDeleteAccount({
             <Button
               type="button"
               variant="secondary"
-              className="w-full gap-px py-2 border-[#666666] text-[#666666] hover:border-[#002C66] hover:text-[#002C66]"
+              className="w-full gap-px py-2 border-gray-700 text-gray-700 hover:border-blue-850 hover:text-blue-850"
             >
               Cancelar
             </Button>
@@ -49,7 +49,7 @@ export function ModalDeleteAccount({
             <Button
               type="submit"
               onClick={handleDeleteAccount}
-              className="w-full gap-px py-2 bg-[#E94242] border-[#E94242] text-white hover:bg-[#8f1e22] hover:border-[#8f1e22]"
+              className="w-full gap-px py-2 bg-red-400 border-red-400 text-white hover:bg-red-800 hover:border-red-800"
             >
               <Image
                 src={'/icons/bin.png'}

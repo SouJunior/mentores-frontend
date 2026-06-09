@@ -68,8 +68,8 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
       position: 'top-center',
       closeButton: false,
       style: {
-        backgroundColor: '#72c270',
-        color: '#175116',
+        backgroundColor: 'var(--color-green-400)',
+        color: 'var(--color-green-800)',
         fontWeight: 500,
         marginTop: '5rem',
       },
@@ -81,8 +81,8 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
       position: 'top-center',
       closeButton: false,
       style: {
-        backgroundColor: '#f5dc66',
-        color: '#705e0b',
+        backgroundColor: 'var(--color-yellow)',
+        color: 'var(--color-brown-300)',
         fontWeight: 500,
         marginTop: '5rem',
       },
@@ -153,8 +153,8 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
       </h2>
 
       <div className="flex flex-col gap-6 max-w-172">
-        <div className="flex gap-2 items-center pl-4 pr-[0.8rem] py-4 bg-[#f5dc66] rounded-lg [&_p]:text-[#705e0b] [&_p]:text-[0.9rem]">
-          <ErrorOutlineRoundedIcon className="text-[#604f01]" />
+        <div className="flex gap-2 items-center pl-4 pr-[0.8rem] py-4 bg-yellow rounded-lg [&_p]:text-brown-300 [&_p]:text-[0.9rem]">
+          <ErrorOutlineRoundedIcon className="text-brown-700" />
           <p>
             Caso altere o link da sua agenda no Calendly, é necessário
             atualizá-lo também nessa página.
@@ -179,10 +179,10 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
         <form onSubmit={handleSubmit}>
           <div className="relative w-full flex items-center justify-between">
             <input
-              className={`flex items-center gap-2 border rounded-lg bg-white text-[#323232] focus:outline-none flex-1 w-full h-full text-base leading-[150%] placeholder:text-[#D9D9D9] ${
+              className={`flex items-center gap-2 border rounded-lg bg-white text-black-200 focus:outline-none flex-1 w-full h-full text-base leading-[150%] placeholder:text-gray-250 ${
                 hasError
-                  ? 'border-[#E94242] pl-[2.3rem] py-3.5 pr-3.5 focus:shadow-[0_0_0_1px_#E94242]'
-                  : 'border-[#ACACAC] p-3.5 focus:border-[#002C66] focus:shadow-[0_0_0_1px_#002C66]'
+                  ? 'border-red-400 pl-[2.3rem] py-3.5 pr-3.5 focus:shadow-focus-red'
+                  : 'border-gray-600 p-3.5 focus:border-blue-850 focus:shadow-focus-blue'
               }`}
               name="calendlyLink"
               type="text"
@@ -209,18 +209,18 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
             {hasError && (
               <ErrorOutlineRoundedIcon
                 aria-hidden
-                className="w-6 h-6 absolute left-2 text-[#E94242]"
+                className="w-6 h-6 absolute left-2 text-red-400"
               />
             )}
           </div>
           {hasError && (
-            <span className="block text-[#E94242] font-bold text-xs text-center py-4">
+            <span className="block text-red-400 font-bold text-xs text-center py-4">
               O link precisa ser nesse formato: <br />
               https://calendly.com/seu-usuario-calendly/nome-do-evento
             </span>
           )}
 
-          <div className="h-px w-full bg-[#666666] my-6" />
+          <div className="h-px w-full bg-gray-700 my-6" />
 
           <div className="flex items-center justify-end gap-4">
             <Button
@@ -242,7 +242,7 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
             {isLoading ? (
               <Button
                 disabled
-                className="h-10.75 p-0 w-[5.9rem] cursor-wait bg-[#003986] border-[#003986]"
+                className="h-10.75 p-0 w-[5.9rem] cursor-wait bg-blue-800 border-blue-800"
               >
                 <Spinner />
               </Button>

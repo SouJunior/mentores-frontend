@@ -107,13 +107,13 @@ export function FormRegister() {
 
             <Link
               href="/login"
-              className="max-w-[13.5rem] w-full mx-auto px-4 py-3 rounded-lg border-[1.5px] border-[#ACACAC] text-base leading-6 text-center text-[#ACACAC] hover:bg-[#003986] hover:border-[#003986] hover:text-white"
+              className="max-w-[13.5rem] w-full mx-auto px-4 py-3 rounded-lg border-[1.5px] border-gray-600 text-base leading-6 text-center text-gray-600 hover:bg-blue-800 hover:border-blue-800 hover:text-white"
             >
               Ir para o login
             </Link>
             <Link
               href="/resetPassword"
-              className="max-w-[13.5rem] w-full mx-auto px-4 py-3 rounded-lg border-[1.5px] border-[#ACACAC] text-base leading-6 text-center text-[#ACACAC] hover:bg-[#003986] hover:border-[#003986] hover:text-white"
+              className="max-w-[13.5rem] w-full mx-auto px-4 py-3 rounded-lg border-[1.5px] border-gray-600 text-base leading-6 text-center text-gray-600 hover:bg-blue-800 hover:border-blue-800 hover:text-white"
             >
               Recuperar senha
             </Link>
@@ -132,7 +132,7 @@ export function FormRegister() {
               height={36}
               className="w-60 h-9"
             />
-            <p className="text-xs text-[#666666]">
+            <p className="text-xs text-gray-700">
               <span className="text-blue-500">*</span> Indica um campo
               obrigatório
             </p>
@@ -185,7 +185,7 @@ export function FormRegister() {
                 {formik.isSubmitting ? (
                   <Button
                     disabled
-                    className="h-[43px] p-0 cursor-wait bg-[#003986] border-[#003986]"
+                    className="h-[43px] p-0 cursor-wait bg-blue-800 border-blue-800"
                   >
                     <Spinner />
                   </Button>

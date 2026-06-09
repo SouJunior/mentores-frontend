@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 export default function SetNewPasswordPage() {
   return (
-    <div className="flex justify-center items-center w-full h-screen bg-[#175CB7]">
+    <div className="flex justify-center items-center w-full h-screen bg-blue-600">
       <Suspense>
         <FormNewPass />
       </Suspense>

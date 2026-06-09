@@ -43,7 +43,7 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
       className="flex flex-col items-center gap-4 max-w-[24.18rem] w-full p-6 relative"
       {...props}
     >
-      <Modal.Title className="font-medium text-xl leading-6 text-[#323232] mr-auto">
+      <Modal.Title className="font-medium text-xl leading-6 text-black-200 mr-auto">
         Editar foto
       </Modal.Title>
       <Modal.Close className="top-6 right-6" />
@@ -64,13 +64,13 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
       </div>
 
       <div className="w-full">
-        <span className="font-normal text-base leading-[1.4rem] text-[#323232] mr-auto">
+        <span className="font-normal text-base leading-[1.4rem] text-black-200 mr-auto">
           Zoom
         </span>
         <div className="flex items-center gap-3 w-full">
           <span
             onClick={handleMenusZoom}
-            className="cursor-pointer w-4 h-4 text-[#323232]"
+            className="cursor-pointer w-4 h-4 text-black-200"
           >
             <Minus />
           </span>
@@ -86,14 +86,14 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
           />
           <span
             onClick={handlePLusZoom}
-            className="cursor-pointer w-4 h-4 text-[#323232]"
+            className="cursor-pointer w-4 h-4 text-black-200"
           >
             <Plus />
           </span>
         </div>
       </div>
 
-      <div className="w-full h-px bg-[#666666] mt-1" />
+      <div className="w-full h-px bg-gray-700 mt-1" />
 
       <div className="flex justify-end w-full gap-4">
         <Modal.Close asChild>
@@ -102,7 +102,7 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
 
         <Modal.Close asChild>
           <Button
-            className="bg-[#003986] text-white leading-[0.7]"
+            className="bg-blue-800 text-white leading-[0.7]"
             onClick={handleSaveClick}
           >
             Salvar

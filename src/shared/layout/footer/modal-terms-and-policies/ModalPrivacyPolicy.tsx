@@ -10,12 +10,12 @@ export function ModalPrivacyPolicy(props: ModalPrivacyPolicyProps) {
       <ModalHeader />
 
       <div className="pt-4 pr-2">
-        <div className="flex flex-col max-h-148 h-full overflow-auto px-4 pb-6 font-['Radio_Canada'] [&::-webkit-scrollbar]:w-1.75 [&::-webkit-scrollbar-thumb]:bg-[#666666] [&::-webkit-scrollbar-thumb]:rounded-[1rem] [&::-webkit-scrollbar-track]:bg-transparent">
-          <Modal.Title className="max-w-[18rem] text-xl font-medium leading-6 text-[#003986]">
+        <div className="flex flex-col max-h-148 h-full overflow-auto px-4 pb-6 font-['Radio_Canada'] [&::-webkit-scrollbar]:w-1.75 [&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-[1rem] [&::-webkit-scrollbar-track]:bg-transparent">
+          <Modal.Title className="max-w-[18rem] text-xl font-medium leading-6 text-blue-800">
             Políticas de privacidade do SouJunior
           </Modal.Title>
 
-          <Modal.Description className="text-[#323232] leading-[1.4rem] text-base my-4 [&_ol]:pl-4 [&_li]:list-decimal [&_ol.list-style-type-none]:pl-0 [&_ol.list-style-type-none_li]:list-none">
+          <Modal.Description className="text-black-200 leading-[1.4rem] text-base my-4 [&_ol]:pl-4 [&_li]:list-decimal [&_ol.list-style-type-none]:pl-0 [&_ol.list-style-type-none_li]:list-none">
             A sua privacidade é importante para nós. É política do SouJunior
             respeitar a sua privacidade em relação a qualquer informação sua que
             possamos coletar no site SouJunior e outros sites que possuímos e

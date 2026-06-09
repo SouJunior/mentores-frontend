@@ -18,7 +18,7 @@ export default function OnBoardingClient({ fullName }: OnBoardingClientProps) {
   const [step, setStep] = useState<StepNumber>(1);
 
   return (
-    <main className="w-full h-screen bg-[#175CB7] relative">
+    <main className="w-full h-screen bg-blue-600 relative">
       <Image
         src={'/onBoarding/Ilustrações.svg'}
         alt="Background"
@@ -31,24 +31,24 @@ export default function OnBoardingClient({ fullName }: OnBoardingClientProps) {
             <div className="first:mr-1.25 last:ml-1.25">
               <div className="relative flex flex-col items-center w-25">
                 <span
-                  className={`mb-1.25 font-medium leading-[1.2rem] ${step === 1 ? 'text-[#003986]' : 'text-[#ACACAC]'}`}
+                  className={`mb-1.25 font-medium leading-[1.2rem] ${step === 1 ? 'text-blue-800' : 'text-gray-600'}`}
                 >
                   ESPECIALIDADES
                 </span>
                 <div
-                  className={`w-[258px] h-0.5 transition-all duration-300 ${step === 1 ? 'bg-[#003986]' : 'bg-transparent'}`}
+                  className={`w-[258px] h-0.5 transition-all duration-300 ${step === 1 ? 'bg-blue-800' : 'bg-transparent'}`}
                 />
               </div>
             </div>
             <div className="first:mr-[5px] last:ml-[5px]">
               <div className="relative flex flex-col items-center w-[100px]">
                 <span
-                  className={`mb-[5px] font-medium leading-[1.2rem] ${step === 2 ? 'text-[#003986]' : 'text-[#ACACAC]'}`}
+                  className={`mb-[5px] font-medium leading-[1.2rem] ${step === 2 ? 'text-blue-800' : 'text-gray-600'}`}
                 >
                   PERFIL
                 </span>
                 <div
-                  className={`w-[258px] h-0.5 transition-all duration-300 ${step === 2 ? 'bg-[#003986]' : 'bg-transparent'}`}
+                  className={`w-[258px] h-0.5 transition-all duration-300 ${step === 2 ? 'bg-blue-800' : 'bg-transparent'}`}
                 />
               </div>
             </div>

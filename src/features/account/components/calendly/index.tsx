@@ -25,7 +25,7 @@ export default function CalendlyRegister({
 }: CalendlyRegisterProps) {
   return (
     <Modal.Root open={isOpen} onOpenChange={handleCloseModal}>
-      <Modal.Content className="flex flex-col gap-3 p-6 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] relative max-w-lg">
+      <Modal.Content className="flex flex-col gap-3 p-6 shadow-card relative max-w-lg">
         {currentStep === 1 && (
           <ModalCalendlyStep1
             handleNextStep={handleNextStep}

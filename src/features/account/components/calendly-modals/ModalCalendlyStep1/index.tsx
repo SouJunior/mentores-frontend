@@ -13,10 +13,10 @@ export default function ModalCalendlyStep1({
 }: ModalCalendlyStep1Props) {
   return (
     <>
-      <Modal.Title className="text-[1.4rem] text-[#323232] font-semibold leading-[140%] text-center px-16 mt-6 mx-auto">
+      <Modal.Title className="text-[1.4rem] text-black-200 font-semibold leading-[140%] text-center px-16 mt-6 mx-auto">
         Falta pouco para <br /> você se tornar um mentor.
       </Modal.Title>
-      <Modal.Description className="text-[1.1rem] text-[#323232] leading-[140%] font-['Radio_Canada',sans-serif] text-center px-16">
+      <Modal.Description className="text-[1.1rem] text-black-200 leading-[140%] font-['Radio_Canada',sans-serif] text-center px-16">
         Disponibilize seus horários, compartilhando sua agenda do Calendly.
       </Modal.Description>
       <StepperDots currentStep={currentStep} />

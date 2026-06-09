@@ -31,7 +31,7 @@ export default function FormEmailToReset() {
     <div className="w-[31.5rem] h-[36.875rem] bg-white rounded-xl">
       <div className="p-8 h-full w-full flex flex-col justify-center [&_a]:mt-auto [&_a]:text-blue-500 [&_a]:underline [&_a]:text-base [&_a]:font-normal [&_a]:text-center [&_a]:cursor-pointer [&_button]:mt-6">
         <FormikProvider value={formik}>
-          <Form className="flex flex-col [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-[#666666] [&_label_input]:text-base [&_button]:mt-2.5">
+          <Form className="flex flex-col [&_label_span]:text-xs [&_label_span:first-child]:text-base [&_label_span:first-child]:leading-6 [&_label_span:first-child]:text-gray-700 [&_label_input]:text-base [&_button]:mt-2.5">
             <Image
               src={'/logos/sou-junior.svg'}
               alt="logo"
@@ -39,10 +39,10 @@ export default function FormEmailToReset() {
               height={36}
             />
             <div className="my-6">
-              <h2 className="text-[#666666] text-lg font-bold leading-[1.8rem] text-left mb-4">
+              <h2 className="text-gray-700 text-lg font-bold leading-[1.8rem] text-left mb-4">
                 Esqueceu a senha?
               </h2>
-              <p className="text-[#666666] text-base leading-6 text-left">
+              <p className="text-gray-700 text-base leading-6 text-left">
                 Um e-mail será enviado para o endereço cadastrado com as
                 instruções para redefinir senha.
               </p>

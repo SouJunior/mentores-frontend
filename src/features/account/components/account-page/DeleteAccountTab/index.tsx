@@ -93,7 +93,7 @@ export function DeleteAccountTab() {
     <TabsContent value="delete-account" className="flex flex-col gap-4">
       <button
         onClick={() => router.push('/me?tab=account-management')}
-        className="flex items-center gap-2 bg-transparent text-left font-medium border-none py-2 text-[#003986]"
+        className="flex items-center gap-2 bg-transparent text-left font-medium border-none py-2 text-blue-800"
       >
         <ArrowBackIcon />
         Voltar
@@ -102,18 +102,18 @@ export function DeleteAccountTab() {
         Exclusão de conta
       </h2>
 
-      <p className="text-[0.875rem] leading-4 [&_span]:text-[#338AFF]">
+      <p className="text-[0.875rem] leading-4 [&_span]:text-blue-700">
         Para deletar a conta, responda ao nosso formulário de satisfação
       </p>
 
-      <p className="text-[#666666] leading-[1.4rem]">
+      <p className="text-gray-700 leading-[1.4rem]">
         Ao excluir sua conta, seu perfil não ficará visível para agendamentos.
         <br />
         Você terá 30 dias para reconsiderar antes da exclusão definitiva. <br />
         Caso deseje reativar seu perfil, faça o login antes dos 30 dias.
       </p>
 
-      <p className="text-[0.875rem] leading-4 [&_span]:text-[#338AFF]">
+      <p className="text-[0.875rem] leading-4 [&_span]:text-blue-700">
         <span>*</span> Indica um campo obrigatório
       </p>
 
@@ -125,7 +125,7 @@ export function DeleteAccountTab() {
             setFormErrors={setFormErrors}
           />
 
-          <div className="h-px w-full bg-[#666666]" />
+          <div className="h-px w-full bg-gray-700" />
 
           <div className="flex gap-4 ml-auto">
             <Button

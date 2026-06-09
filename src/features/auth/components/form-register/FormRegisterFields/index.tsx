@@ -33,7 +33,7 @@ export function FormRegisterFields() {
         onOpenChange={() => setShowCalendar(!showCalendar)}
       >
         <label
-          className={`flex flex-col gap-2 text-sm text-[#666666]${formik.errors.dateBirthday ? ' [&_svg]:text-[#E94242]' : ''} [&_span_span]:text-blue-500 [&_.error-message]:text-[#E94242] [&_.error-message]:font-bold [&_.error-message]:text-xs [&_[data-placeholder]]:text-gray-300`}
+          className={`flex flex-col gap-2 text-sm text-gray-700${formik.errors.dateBirthday ? ' [&_svg]:text-red-400' : ''} [&_span_span]:text-blue-500 [&_.error-message]:text-red-400 [&_.error-message]:font-bold [&_.error-message]:text-xs [&_[data-placeholder]]:text-gray-300`}
         >
           <span>
             Data de nascimento <span>*</span>

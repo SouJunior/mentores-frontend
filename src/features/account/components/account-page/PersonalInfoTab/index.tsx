@@ -44,8 +44,8 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
       position: 'top-center',
       closeButton: false,
       style: {
-        backgroundColor: '#72c270',
-        color: '#175116',
+        backgroundColor: 'var(--color-green-400)',
+        color: 'var(--color-green-800)',
         fontWeight: 500,
         marginTop: '5rem',
       },
@@ -57,8 +57,8 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
       position: 'top-center',
       closeButton: false,
       style: {
-        backgroundColor: '#f5dc66',
-        color: '#705e0b',
+        backgroundColor: 'var(--color-yellow)',
+        color: 'var(--color-brown-300)',
         fontWeight: 500,
         marginTop: '5rem',
       },
@@ -114,7 +114,7 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
       <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
         Informações de cadastro
       </h2>
-      <p className="text-[0.875rem] leading-4 [&_span]:text-[#338AFF]">
+      <p className="text-[0.875rem] leading-4 [&_span]:text-blue-700">
         <span>*</span> Indica um campo obrigatório
       </p>
 
@@ -122,7 +122,7 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
         <form className="flex flex-col gap-4 max-w-[36.3rem]">
           <FormFields mentor={mentor} />
 
-          <div className="h-px w-full bg-[#666666]" />
+          <div className="h-px w-full bg-gray-700" />
 
           <div className="flex gap-4 ml-auto">
             <Button
@@ -144,7 +144,7 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
             {formik.isSubmitting ? (
               <Button
                 disabled
-                className="h-10.75 p-0 w-24 cursor-wait bg-[#003986] border-[#003986]"
+                className="h-10.75 p-0 w-24 cursor-wait bg-blue-800 border-blue-800"
               >
                 <Spinner />
               </Button>

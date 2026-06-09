@@ -6,7 +6,7 @@ type ModalResetPass = React.HTMLAttributes<HTMLDivElement>;
 export default function ModalResetPass(props: ModalResetPass) {
   return (
     <Modal.Content
-      className="flex justify-center items-center flex-col max-w-[25rem] w-full shadow-[0px_4px_4px_rgba(0,0,0,0.25)] px-6 pt-7 pb-8 relative"
+      className="flex justify-center items-center flex-col max-w-[25rem] w-full shadow-card px-6 pt-7 pb-8 relative"
       {...props}
     >
       <Modal.Title className="text-blue-500 text-lg">
@@ -22,7 +22,7 @@ export default function ModalResetPass(props: ModalResetPass) {
           height={278}
         />
       </div>
-      <Modal.Description className="text-[#666666] text-sm text-center leading-[150%] -mt-4 mb-4">
+      <Modal.Description className="text-gray-700 text-sm text-center leading-[150%] -mt-4 mb-4">
         Enviamos para você um e-mail com as instruções para redefinir sua senha.
       </Modal.Description>
       <div>

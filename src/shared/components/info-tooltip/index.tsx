@@ -22,24 +22,24 @@ export function InfoTooltip({ right }: ToolTipProps) {
           tooltipVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
-        <h3 className="text-[#046AD0] text-base font-bold">
+        <h3 className="text-blue-400 text-base font-bold">
           Sua senha deve conter:
         </h3>
         <ul className="list-none mt-[0.8rem] relative px-4">
           <span
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[80%] rounded-full bg-[#666666]"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[80%] rounded-full bg-gray-700"
             aria-hidden
           />
-          <li className="text-[#666666] leading-[150%]">
+          <li className="text-gray-700 leading-[150%]">
             Mínimo 8 caracteres.
           </li>
-          <li className="text-[#666666] leading-[150%]">
+          <li className="text-gray-700 leading-[150%]">
             Pelo menos uma letra maiúscula.
           </li>
-          <li className="text-[#666666] leading-[150%]">
+          <li className="text-gray-700 leading-[150%]">
             Pelo menos um número.
           </li>
-          <li className="text-[#666666] leading-[150%]">
+          <li className="text-gray-700 leading-[150%]">
             Pelo menos um caractere especial (ex: @#$)
           </li>
         </ul>

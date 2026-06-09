@@ -23,28 +23,28 @@ export default function AccountManagementTab() {
         excluir sua conta.
       </p>
       <div className="flex flex-col gap-2 max-w-[36rem] py-2">
-        <p className="text-[#666666] leading-[1.4rem]">
+        <p className="text-gray-700 leading-[1.4rem]">
           Desative sua conta e ela será temporariamente suspensa, mantendo seus
           dados e permitindo reativação a qualquer momento.
         </p>
-        <p className="text-[#666666] leading-[1.4rem]">
+        <p className="text-gray-700 leading-[1.4rem]">
           Ao excluir, ela será deletada permanentemente após 30 dias. Após esse
           prazo, seus dados serão removidos definitivamente.
         </p>
       </div>
-      <div className="max-w-[36rem] h-px bg-[#666666]" />
+      <div className="max-w-[36rem] h-px bg-gray-700" />
       <div className="flex flex-col gap-4 max-w-[36rem]">
         <button
           disabled
           style={{ cursor: 'not-allowed' }}
-          className="py-3 px-6 font-medium text-left border-2 border-[#ACACAC] rounded-lg bg-transparent w-full flex items-center justify-between text-[#323232]"
+          className="py-3 px-6 font-medium text-left border-2 border-gray-600 rounded-lg bg-transparent w-full flex items-center justify-between text-black-200"
         >
           Desativar Conta
           <ChevronRightIcon />
         </button>
         <button
           onClick={redirectDeleteAccountTab}
-          className="py-3 px-6 font-medium text-left border-2 border-[#ACACAC] rounded-lg bg-transparent w-full flex items-center justify-between text-[#D10324]"
+          className="py-3 px-6 font-medium text-left border-2 border-gray-600 rounded-lg bg-transparent w-full flex items-center justify-between text-red-700"
         >
           Excluir Conta
           <ChevronRightIcon />

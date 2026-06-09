@@ -10,7 +10,7 @@ export function Checkbox({ id, text, isChecked, setValue }: CheckboxProps) {
     <div className="flex gap-2 items-center justify-start">
       <input
         type="checkbox"
-        className="border border-[#323232] rounded w-4 h-4 text-[#323232] cursor-pointer"
+        className="border border-black-200 rounded w-4 h-4 text-black-200 cursor-pointer"
         {...(id && { id })}
         onChange={e => setValue(e.target.checked)}
         checked={isChecked}
@@ -18,7 +18,7 @@ export function Checkbox({ id, text, isChecked, setValue }: CheckboxProps) {
       {text && (
         <label
           htmlFor={id}
-          className="text-[#323232] text-[0.875rem] cursor-pointer"
+          className="text-black-200 text-[0.875rem] cursor-pointer"
         >
           {text}
         </label>

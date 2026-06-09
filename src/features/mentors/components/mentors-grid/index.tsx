@@ -47,13 +47,13 @@ export function MentorsGrid({
       ) : (
         <div className="absolute left-1/2 top-[10%] -translate-x-1/2 flex flex-col items-center gap-0.75">
           <Image src={'/noresult.svg'} alt="Sem resultado" />
-          <span className="text-2xl font-semibold text-[#003986] mt-2.5">
+          <span className="text-2xl font-semibold text-blue-800 mt-2.5">
             Nada por aqui!
           </span>
-          <span className="text-base text-[#666666] font-normal">
+          <span className="text-base text-gray-700 font-normal">
             Não conseguimos encontrar resultados pra sua busca.
           </span>
-          <span className="text-base text-[#666666] font-normal">
+          <span className="text-base text-gray-700 font-normal">
             Tente alterar os filtros de pesquisa.
           </span>
         </div>

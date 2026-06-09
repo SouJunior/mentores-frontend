@@ -45,6 +45,45 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Project color palette */
+  --color-gray-250: var(--color-gray-250);
+  --color-gray-350: var(--color-gray-350);
+  --color-gray-750: var(--color-gray-750);
+  --color-black-200: var(--color-black-200);
+  --color-black-500: var(--color-black-500);
+  --color-blue-25: var(--color-blue-25);
+  --color-blue-300: var(--color-blue-300);
+  --color-blue-400: var(--color-blue-400);
+  --color-blue-500: var(--color-blue-500);
+  --color-blue-600: var(--color-blue-600);
+  --color-blue-700: var(--color-blue-700);
+  --color-blue-800: var(--color-blue-800);
+  --color-blue-850: var(--color-blue-850);
+  --color-blue-950: var(--color-blue-950);
+  --color-red-25: var(--color-red-25);
+  --color-red-300: var(--color-red-300);
+  --color-red-400: var(--color-red-400);
+  --color-red-600: var(--color-red-600);
+  --color-red-700: var(--color-red-700);
+  --color-red-800: var(--color-red-800);
+  --color-yellow: var(--color-yellow);
+  --color-brown-300: var(--color-brown-300);
+  --color-brown-700: var(--color-brown-700);
+  --color-green-400: var(--color-green-400);
+  --color-green-800: var(--color-green-800);
+  --color-green-900: var(--color-green-900);
+  --color-gray-250-a30: var(--color-gray-250-a30);
+
+  /* Project shadow tokens */
+  --shadow-card: 0px 4px 4px 0px var(--color-shadow-black-25);
+  --shadow-search: 0px 4px 8px 0px var(--color-shadow-black-25);
+  --shadow-header: 0px 3px 15px 0px var(--color-shadow-black-10);
+  --shadow-side: 2px 0 16px var(--color-shadow-black-10);
+  --shadow-hover: 4px 4px 4px 0px var(--color-shadow-black-20);
+  --shadow-focus-blue: 0 0 0 1px var(--color-blue-850);
+  --shadow-focus-red: 0 0 0 1px var(--color-red-400);
+  --shadow-focus-ring: 0 0 0 2px var(--color-blue-500-a60);
 }
 
 :root {
@@ -72,6 +111,50 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
+
+  /* Project color tokens */
+  --color-white: #fff;
+  --color-black: #000000;
+  --color-gray-50: #FDFDFD;
+  --color-gray-200: #DEDEDE;
+  --color-gray-250: #D9D9D9;
+  --color-gray-350: #CBCBCB;
+  --color-gray-500: #C5C7C5;
+  --color-gray-600: #ACACAC;
+  --color-gray-700: #666666;
+  --color-gray-750: #5D5F5D;
+  --color-black-200: #323232;
+  --color-black-500: #212121;
+  --color-blue-25: #F1F3F5;
+  --color-blue-300: #95C6FF;
+  --color-blue-400: #046AD0;
+  --color-blue-500: #1165BA;
+  --color-blue-600: #175CB7;
+  --color-blue-700: #338AFF;
+  --color-blue-800: #003986;
+  --color-blue-850: #002C66;
+  --color-blue-950: #001633;
+  --color-red-25: #F5F1F3;
+  --color-red-300: #db2e34;
+  --color-red-400: #E94242;
+  --color-red-600: #C1292E;
+  --color-red-700: #D10324;
+  --color-red-800: #8f1e22;
+  --color-yellow: #f5dc66;
+  --color-brown-300: #705e0b;
+  --color-brown-700: #604f01;
+  --color-green-400: #72c270;
+  --color-green-800: #175116;
+  --color-green-900: #149911;
+  --color-shadow-black-10: rgba(0, 0, 0, 0.1);
+  --color-shadow-black-20: rgba(0, 0, 0, 0.2);
+  --color-shadow-black-25: rgba(0, 0, 0, 0.25);
+  --color-blue-500-a60: rgba(17, 101, 186, 0.6);
+  --color-blue-500-a79: rgba(17, 101, 186, 0.79);
+  --color-blue-300-a79: rgba(90, 156, 255, 0.79);
+  --color-gray-250-a0: rgba(217, 217, 217, 0);
+  --color-gray-250-a30: rgba(215, 217, 215, 0.3);
+
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -171,10 +254,10 @@
 }
 
 #toast-error {
-  background-color: #c1292e;
+  background-color: var(--color-red-600);
   padding: 1rem;
   border-radius: 0.75rem;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px 0px var(--color-shadow-black-25);
 
   .Toastify__toast-body {
     padding: 0;
@@ -210,7 +293,7 @@
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid var(--spinner-color, #fff);
+  border: 5px solid var(--spinner-color, var(--color-white));
   animation: spinner-clip 2s linear infinite;
 }
 

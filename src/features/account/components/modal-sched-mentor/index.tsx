@@ -37,20 +37,20 @@ export default function ModalSchedMentor({
             alt="Mentor Photo"
             style={{ borderRadius: '80px', objectFit: 'cover' }}
           />
-          <Modal.Title className="text-[2.5rem] leading-[3rem] max-w-[15rem] font-semibold text-[#323232]">
+          <Modal.Title className="text-[2.5rem] leading-[3rem] max-w-[15rem] font-semibold text-black-200">
             {mentor.fullName}
           </Modal.Title>
         </div>
 
         <Modal.Close asChild>
-          <button className="all-unset text-[#cbcbcb] w-8 h-8 cursor-pointer [&_svg]:w-full [&_svg]:h-full bg-transparent border-none p-0">
+          <button className="all-unset text-gray-350 w-8 h-8 cursor-pointer [&_svg]:w-full [&_svg]:h-full bg-transparent border-none p-0">
             <Close />
           </button>
         </Modal.Close>
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-[#666666] leading-[16.8px]">
+        <span className="text-sm text-gray-700 leading-[16.8px]">
           Especialidades
         </span>
         <span className="flex gap-1 w-full flex-wrap">
@@ -59,7 +59,7 @@ export default function ModalSchedMentor({
             mentor.specialties.map(stack => (
               <span
                 key={stack}
-                className="bg-[#f5f1f3] text-xs leading-[0.9rem] text-[#001633] px-2 py-2 rounded-[2.5rem] text-center"
+                className="bg-red-25 text-xs leading-[0.9rem] text-blue-950 px-2 py-2 rounded-[2.5rem] text-center"
               >
                 {stack}
               </span>
@@ -67,7 +67,7 @@ export default function ModalSchedMentor({
         </span>
       </div>
 
-      <Modal.Description className="text-base leading-6 text-[#666666]">
+      <Modal.Description className="text-base leading-6 text-gray-700">
         {mentor.aboutMe}
       </Modal.Description>
 

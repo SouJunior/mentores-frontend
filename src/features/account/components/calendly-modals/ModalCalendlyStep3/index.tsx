@@ -67,19 +67,19 @@ export default function ModalCalendlyStep3({
 
   return (
     <>
-      <Modal.Title className="text-[1.4rem] text-[#323232] font-semibold leading-[140%] text-center px-16 mt-6 mx-auto">
+      <Modal.Title className="text-[1.4rem] text-black-200 font-semibold leading-[140%] text-center px-16 mt-6 mx-auto">
         Compartilhe seus horários.
       </Modal.Title>
-      <Modal.Description className="text-[1.1rem] text-[#323232] leading-[140%] font-['Radio_Canada',sans-serif] text-center px-16">
+      <Modal.Description className="text-[1.1rem] text-black-200 leading-[140%] font-['Radio_Canada',sans-serif] text-center px-16">
         Agora, insira o link da sua agenda <br /> do Calendly no campo abaixo.
       </Modal.Description>
       <form onSubmit={handleSubmit}>
         <div className="relative w-full flex items-center justify-between">
           <input
-            className={`flex items-center gap-2 border rounded-lg bg-white text-[#323232] focus:outline-none flex-1 w-full h-full py-[0.875rem] pr-[0.875rem] text-base leading-[150%] placeholder:text-[#D9D9D9] ${
+            className={`flex items-center gap-2 border rounded-lg bg-white text-black-200 focus:outline-none flex-1 w-full h-full py-[0.875rem] pr-[0.875rem] text-base leading-[150%] placeholder:text-gray-250 ${
               hasError
-                ? 'border-[#E94242] pl-[2.3rem] focus:shadow-[0_0_0_1px_#E94242]'
-                : 'border-[#ACACAC] pl-[0.875rem] focus:border-[#002C66] focus:shadow-[0_0_0_1px_#002C66]'
+                ? 'border-red-400 pl-[2.3rem] focus:shadow-focus-red'
+                : 'border-gray-600 pl-[0.875rem] focus:border-blue-850 focus:shadow-focus-blue'
             }`}
             name="calendlyLink"
             type="text"
@@ -107,12 +107,12 @@ export default function ModalCalendlyStep3({
           {hasError && (
             <ErrorOutlineIcon
               aria-hidden
-              className="w-6 h-6 absolute left-2 text-[#E94242]"
+              className="w-6 h-6 absolute left-2 text-red-400"
             />
           )}
         </div>
         {hasError && (
-          <span className="block text-[#E94242] font-bold text-xs text-center py-4">
+          <span className="block text-red-400 font-bold text-xs text-center py-4">
             O link precisa ser nesse formato: <br />
             https://calendly.com/seu-usuario-calendly/nome-do-evento
           </span>
@@ -131,7 +131,7 @@ export default function ModalCalendlyStep3({
           {isLoading ? (
             <Button
               disabled
-              className="h-[45px] p-0 w-28 cursor-wait bg-[#003986] border-[#003986]"
+              className="h-[45px] p-0 w-28 cursor-wait bg-blue-800 border-blue-800"
             >
               <Spinner />
             </Button>

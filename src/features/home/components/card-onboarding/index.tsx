@@ -24,10 +24,10 @@ export function CardOnboarding({
       />
 
       <section className="flex flex-col gap-[0.6rem]">
-        <h5 className="text-[#002C66] text-[1.25rem] leading-6 font-medium">
+        <h5 className="text-blue-850 text-[1.25rem] leading-6 font-medium">
           {title}
         </h5>
-        <p className="text-[#323232] text-[1rem] font-normal leading-[1.4rem] max-w-[15.75rem] max-[438px]:max-w-[13.875rem]">
+        <p className="text-black-200 text-[1rem] font-normal leading-[1.4rem] max-w-[15.75rem] max-[438px]:max-w-[13.875rem]">
           {description}
         </p>
       </section>

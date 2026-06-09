@@ -2,7 +2,7 @@ import { CardOnboarding } from '@/features/home/components/card-onboarding';
 
 export function Onboarding() {
   return (
-    <div className="relative bg-[#175CB7]">
+    <div className="relative bg-blue-600">
       <section
         id="onboarding"
         className="container w-full h-full py-16 px-4 text-center max-[438px]:py-10"
