@@ -1,3 +1,4 @@
+import { Footer } from '@/shared/layout/footer';
 import { Header } from '@/shared/layout/header';
 import { parseSession } from '@/shared/utils/parse-session';
 import { cookies } from 'next/headers';
@@ -15,6 +16,7 @@ export default async function WithHeaderLayout({
     <>
       <Header session={session} />
       {children}
+      <Footer />
     </>
   );
 }

@@ -4,7 +4,11 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 
-export default async function MeLayout({ children }: { children: ReactNode }) {
+export default async function AccountLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const cookieStore = await cookies();
   const session = parseSession(cookieStore.get('session')?.value);
 

@@ -68,6 +68,11 @@ export async function login(formData: LoginFormData) {
       profile: info.profile,
       profileKey: info.profileKey,
       registerComplete: info.registerComplete,
+      createdAt: info.createdAt,
+      updatedAt: info.updatedAt,
+      deactivatedDays: info.deactivatedDays,
+      deactivatedAt: info.deactivatedAt,
+      calendlyName: info.calendlyName,
     }),
     {
       httpOnly: false,
@@ -76,6 +81,8 @@ export async function login(formData: LoginFormData) {
       path: '/',
     }
   );
+
+  console.log(cookieStore.get('session')?.value);
 
   if (!info.registerComplete) redirect('/onBoarding');
   redirect('/');

@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/shared/components/ui/accordion';
-import { Footer } from '@/shared/layout/footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -91,8 +90,6 @@ export default function FaqPage() {
           </Accordion>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

@@ -6,7 +6,6 @@ import { DepoSection } from '@/features/home/components/depo-section';
 import { HeroSection } from '@/features/home/components/hero-section';
 import { MentorSection } from '@/features/home/components/mentor-section';
 import { Onboarding } from '@/features/home/components/onboarding';
-import { Footer } from '@/shared/layout/footer';
 import { Session } from '@/shared/types/Auth';
 import { IMentors } from '@/shared/types/IUseMentorsService';
 import { ITestimony } from '@/shared/types/IUseTestimonyService';
@@ -92,7 +91,6 @@ export default function HomeClient({
       <Onboarding />
       <MentorSection mentors={mentors} calendlyInfo={calendlyInfo} />
       <DepoSection testimonies={testimonies} />
-      <Footer />
       <CalendlyRegister
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}

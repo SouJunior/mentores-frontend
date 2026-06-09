@@ -17,6 +17,8 @@ export interface UserLoginInfoResponse {
   calendlyName: string;
   profile: string | null;
   profileKey: string | null;
+  deactivatedDays: number | null;
+  deactivatedAt: string | null;
   createdAt: string;
   updatedAt: string;
 }

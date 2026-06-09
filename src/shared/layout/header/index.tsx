@@ -149,10 +149,10 @@ export function Header({ session }: HeaderProps) {
         </DropdownMenu>
       ) : (
         <div className="flex gap-4 max-[1064px]:hidden">
-          <Button as={Link} href="/login" variant="secondary">
+          <Button as={Link} href="/login" size="xl" variant="secondary">
             Login mentores
           </Button>
-          <Button as={Link} href="/cadastro">
+          <Button as={Link} href="/cadastro" size="xl" variant="primary">
             Cadastro mentores
           </Button>
         </div>
@@ -204,14 +204,14 @@ export function Header({ session }: HeaderProps) {
             <div className="flex flex-col gap-2 px-4 pt-2">
               <DropdownMenuItem
                 render={
-                  <Button as={Link} href="/login" variant="secondary">
+                  <Button as={Link} href="/login" size="xl" variant="secondary">
                     Login mentores
                   </Button>
                 }
               />
               <DropdownMenuItem
                 render={
-                  <Button as={Link} href="/cadastro">
+                  <Button as={Link} size="xl" href="/cadastro">
                     Cadastro mentores
                   </Button>
                 }

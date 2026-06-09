@@ -4,7 +4,6 @@ import InputSearch from '@/features/mentors/components/input-search';
 import { MentorsGrid } from '@/features/mentors/components/mentors-grid';
 import SelectFilter from '@/shared/components/select-filter';
 import { genders, specialties } from '@/shared/constants/static-info';
-import { Footer } from '@/shared/layout/footer';
 import { IMentors } from '@/shared/types/IUseMentorsService';
 import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import Link from 'next/link';
@@ -152,7 +151,6 @@ export default function MentoresClient({
           />
         </main>
       </div>
-      <Footer />
     </>
   );
 }

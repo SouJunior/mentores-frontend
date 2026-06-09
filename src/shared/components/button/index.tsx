@@ -16,6 +16,7 @@ const buttonVariants = cva(
           'border-2 border-red-400 text-red-400 hover:border-red-800 hover:text-red-800 disabled:border-gray-500 disabled:text-gray-500',
       },
       size: {
+        xl: 'px-6 py-5',
         lg: 'px-6 py-4',
         md: 'px-6 py-3',
         sm: 'px-6 py-2',

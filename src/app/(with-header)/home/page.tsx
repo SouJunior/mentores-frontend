@@ -4,7 +4,6 @@ import { HeroSection } from '@/features/home/components/hero-section';
 import { MentorSectionLoader } from '@/features/home/components/mentor-section/MentorSectionLoader';
 import { MentorSectionSkeleton } from '@/features/home/components/mentor-section/MentorSectionSkeleton';
 import { Onboarding } from '@/features/home/components/onboarding';
-import { Footer } from '@/shared/layout/footer';
 import { parseSession } from '@/shared/utils/parse-session';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
@@ -24,7 +23,6 @@ export default async function Page() {
       <Suspense fallback={<DepoSectionSkeleton />}>
         <DepoSectionLoader />
       </Suspense>
-      <Footer />
       <Suspense>
         <HomeInteractive session={session} />
       </Suspense>
