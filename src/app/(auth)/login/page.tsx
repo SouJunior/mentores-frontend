@@ -12,6 +12,8 @@ export default function LoginPage() {
             src={'/BackgroundFigures.svg'}
             alt="Figuras do Background"
             className="object-cover w-full h-full"
+            width={1280}
+            height={720}
           />
         </div>
         <FormLogin />

@@ -1,9 +1,11 @@
+'use client';
+
 import { updateCalendlyInfo } from '@/features/account/actions/actions';
 import { ModalCancelKeepRoute } from '@/features/account/components/modal-cancel-keep-route';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
 import { Spinner } from '@/shared/components/spinner';
-import { TabsContent } from '@/shared/components/ui/tabs';
+
 import { IMentor } from '@/shared/types/Auth';
 import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { handleError } from '@/shared/utils/handleError';
@@ -134,9 +136,8 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
   };
 
   const startOAuthCalendlySync = () => {
-    const calendlyClientId = 'Vx2DRKhKAvTcl5y8N1SqGg0OQ-9HR4KTO62t29C5L8M';
-    const redirectUri =
-      'https://p01--mentores-backend-api-dev--bj8pjy8s82zl.code.run/calendly/callback';
+    const calendlyClientId = process.env.CALENDLY_CLIENT_ID || '';
+    const redirectUri = process.env.CALENDLY_REDIRECT_URI || '';
     const calendlyAuthUrl = `https://auth.calendly.com/oauth/authorize?client_id=${calendlyClientId}&response_type=code&redirect_uri=${redirectUri}&state=${encodeURIComponent(String(mentor.id))}`;
     window.location.href = calendlyAuthUrl;
   };
@@ -144,10 +145,7 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
   const hasError = isValid === false && inputValue !== '';
 
   return (
-    <TabsContent
-      value="schedule"
-      className="flex flex-col gap-4 data-active:h-full"
-    >
+    <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
         Agenda
       </h2>
@@ -254,6 +252,6 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
           </div>
         </form>
       </div>
-    </TabsContent>
+    </div>
   );
 }

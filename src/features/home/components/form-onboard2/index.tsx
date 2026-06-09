@@ -44,10 +44,11 @@ export default function FormOnboard2({ onStep }: FormOnBoardProps) {
 
       <Modal.Root>
         <Modal.Control asChild>
-          <button className="flex flex-col items-center p-4 rounded-lg border-2 border-dashed border-gray-700 bg-transparent text-center">
-            <div className="w-20 h-20">
-              <PhotoButton size={80} selectedPhoto={formik.values.profile} />
-            </div>
+          <button
+            type="button"
+            className="flex flex-col items-center p-4 rounded-lg border-2 border-dashed border-gray-700 bg-transparent text-center"
+          >
+            <PhotoButton size={80} selectedPhoto={formik.values.profile} />
 
             <span className="text-[0.875rem] font-normal leading-4 text-black-200 pt-4 pb-2 max-w-[9.5rem]">
               Para inserir sua foto, clique aqui.

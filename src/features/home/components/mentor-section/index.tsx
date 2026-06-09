@@ -1,3 +1,5 @@
+'use client';
+
 import { Slider } from '@/features/mentors/components';
 import { Button } from '@/shared/components/button';
 import { IMentors } from '@/shared/types/IUseMentorsService';

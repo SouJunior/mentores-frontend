@@ -7,7 +7,7 @@ import { ModalDeleteAccount } from '@/features/account/components/modal-delete-a
 import { FormValuesDeleteAccountDTO } from '@/features/account/types/IUserDeleteAccount';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
-import { TabsContent } from '@/shared/components/ui/tabs';
+
 import { handleError } from '@/shared/utils/handleError';
 import { FormikProvider, useFormik } from 'formik';
 import { ArrowLeft as ArrowBackIcon } from 'lucide-react';
@@ -46,7 +46,7 @@ export function DeleteAccountTab() {
     setFormValues(initialFormValues);
     setFormErrors(initialFormValues);
     if (window.history.length > 1) {
-      router.push('/me?tab=account-management');
+      router.push('/account/account-management');
     } else {
       router.push('/');
     }
@@ -90,9 +90,9 @@ export function DeleteAccountTab() {
   });
 
   return (
-    <TabsContent value="delete-account" className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <button
-        onClick={() => router.push('/me?tab=account-management')}
+        onClick={() => router.push('/account/account-management')}
         className="flex items-center gap-2 bg-transparent text-left font-medium border-none py-2 text-blue-800"
       >
         <ArrowBackIcon />
@@ -159,6 +159,6 @@ export function DeleteAccountTab() {
       >
         <ModalDeleteAccount handleDeleteAccount={formik.submitForm} />
       </Modal.Root>
-    </TabsContent>
+    </div>
   );
 }

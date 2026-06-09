@@ -56,7 +56,7 @@ export default function EditPhotoModal({
 
   return (
     <Modal.Content
-      className="flex flex-col gap-4 max-w-96.75 w-full p-6 relative"
+      className="flex flex-col gap-4 max-w-96.75 w-full p-6"
       {...props}
     >
       <Modal.Title className="w-full text-xl font-medium leading-6 text-left">

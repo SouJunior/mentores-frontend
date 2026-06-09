@@ -1,9 +1,11 @@
+'use client';
+
 import { updatePassword } from '@/features/account/actions/actions';
 import { ModalCancel } from '@/features/account/components/modal-cancel';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
 import { Spinner } from '@/shared/components/spinner';
-import { TabsContent } from '@/shared/components/ui/tabs';
+
 import { isEmpty } from '@/shared/utils/is-empty';
 import { throwErrorMessages } from '@/shared/utils/throw-error-messages';
 import { FormikProvider, useFormik } from 'formik';
@@ -76,7 +78,7 @@ export function PasswordTab() {
   };
 
   return (
-    <TabsContent value="password" className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
         Senha
       </h2>
@@ -122,6 +124,6 @@ export function PasswordTab() {
           </div>
         </form>
       </FormikProvider>
-    </TabsContent>
+    </div>
   );
 }

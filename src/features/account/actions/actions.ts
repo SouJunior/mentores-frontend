@@ -7,6 +7,7 @@ import {
 } from '@/features/account/types/IUserUpdate';
 import { safeFetch } from '@/shared/lib/fetch';
 import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
+import { parseSession } from '@/shared/utils/parse-session';
 import { updateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -14,8 +15,7 @@ import { redirect } from 'next/navigation';
 async function getAuth() {
   const cookieStore = await cookies();
   const token = cookieStore.get('token')?.value;
-  const rawSession = cookieStore.get('session')?.value;
-  const session = rawSession ? JSON.parse(rawSession) : null;
+  const session = parseSession(cookieStore.get('session')?.value);
   return { token, id: session?.id as string | undefined };
 }
 

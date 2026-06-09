@@ -1,20 +1,17 @@
-import { TabsContent } from '@/shared/components/ui/tabs';
+'use client';
+
 import { ChevronRight as ChevronRightIcon } from 'lucide-react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function AccountManagementTab() {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const router = useRouter();
 
   const redirectDeleteAccountTab = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('tab', 'delete-account');
-    replace(`${pathname}?${params.toString()}`);
+    router.push('/account/delete-account');
   };
 
   return (
-    <TabsContent value="account-management" className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
         Gestão da conta
       </h2>
@@ -50,6 +47,6 @@ export default function AccountManagementTab() {
           <ChevronRightIcon />
         </button>
       </div>
-    </TabsContent>
+    </div>
   );
 }

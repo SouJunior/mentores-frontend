@@ -31,5 +31,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/me/:path*', '/onBoarding/:path*'],
+  matcher: ['/account/:path*', '/onBoarding/:path*'],
 };

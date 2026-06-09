@@ -98,7 +98,8 @@ export function Header({ session }: HeaderProps) {
             <DropdownMenuItem
               render={
                 <Link
-                  href="/me"
+                  href="/account/personal-info"
+                  role="button"
                   className="block px-4 py-4 leading-[120%] flex-1 transition-[0.2s] hover:bg-gray-250 focus:bg-gray-250 hover:text-black-200 focus:text-black-200"
                 >
                   Minha conta
@@ -112,6 +113,7 @@ export function Header({ session }: HeaderProps) {
                   <Link
                     href="/#onboarding"
                     className="px-4 py-4 leading-[1.2rem] text-blue-800 outline-none"
+                    role="button"
                   >
                     Como Funciona
                   </Link>
@@ -122,6 +124,7 @@ export function Header({ session }: HeaderProps) {
                   <Link
                     href="/#mentor"
                     className="px-4 py-4 leading-[1.2rem] text-blue-800 outline-none"
+                    role="button"
                   >
                     Encontre Seu Mentor
                   </Link>
@@ -133,12 +136,13 @@ export function Header({ session }: HeaderProps) {
 
             <DropdownMenuItem
               render={
-                <button
+                <div
                   onClick={handleLogoutUser}
+                  role="button"
                   className="block px-4 py-4 leading-[120%] flex-1 transition-[0.2s] text-red-300 hover:bg-gray-250 focus:bg-gray-250 cursor-pointer"
                 >
                   Sair
-                </button>
+                </div>
               }
             />
           </DropdownMenuContent>

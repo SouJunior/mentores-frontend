@@ -1,3 +1,5 @@
+'use client';
+
 import { CardDepo } from '@/features/home/components/card-depo';
 import { Button } from '@/shared/components/button';
 import { ITestimony } from '@/shared/types/IUseTestimonyService';

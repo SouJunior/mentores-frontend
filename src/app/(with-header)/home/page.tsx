@@ -1,31 +1,33 @@
-import { serverFetch } from '@/shared/lib/fetch';
-import { Session } from '@/shared/types/Auth';
-import { IMentors } from '@/shared/types/IUseMentorsService';
-import { ITestimony } from '@/shared/types/IUseTestimonyService';
-import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
+import { DepoSectionLoader } from '@/features/home/components/depo-section/DepoSectionLoader';
+import { DepoSectionSkeleton } from '@/features/home/components/depo-section/DepoSectionSkeleton';
+import { HeroSection } from '@/features/home/components/hero-section';
+import { MentorSectionLoader } from '@/features/home/components/mentor-section/MentorSectionLoader';
+import { MentorSectionSkeleton } from '@/features/home/components/mentor-section/MentorSectionSkeleton';
+import { Onboarding } from '@/features/home/components/onboarding';
+import { Footer } from '@/shared/layout/footer';
+import { parseSession } from '@/shared/utils/parse-session';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
-import HomeClient from './HomeClient';
+import { HomeInteractive } from './HomeInteractive';
 
 export default async function Page() {
-  const [testimonies, mentors, calendlyInfo] = await Promise.all([
-    serverFetch<ITestimony[]>('/testimony', { tags: ['testimonies'] }),
-    serverFetch<IMentors[]>('/mentor/registered', { tags: ['mentors'] }),
-    serverFetch<ICalendlyUserInfo[]>('/calendly', { tags: ['calendly'] }),
-  ]);
-
   const cookieStore = await cookies();
-  const raw = cookieStore.get('session')?.value;
-  const session: Session | null = raw ? JSON.parse(raw) : null;
+  const session = parseSession(cookieStore.get('session')?.value);
 
   return (
-    <Suspense>
-      <HomeClient
-        testimonies={testimonies}
-        session={session}
-        mentors={mentors}
-        calendlyInfo={calendlyInfo}
-      />
-    </Suspense>
+    <>
+      <HeroSection />
+      <Onboarding />
+      <Suspense fallback={<MentorSectionSkeleton />}>
+        <MentorSectionLoader />
+      </Suspense>
+      <Suspense fallback={<DepoSectionSkeleton />}>
+        <DepoSectionLoader />
+      </Suspense>
+      <Footer />
+      <Suspense>
+        <HomeInteractive session={session} />
+      </Suspense>
+    </>
   );
 }

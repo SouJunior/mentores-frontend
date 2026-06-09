@@ -1,3 +1,5 @@
+'use client';
+
 import { ModalPrivacyPolicy } from '@/shared/layout/footer/modal-terms-and-policies/ModalPrivacyPolicy';
 import ModalTerms from '@/shared/layout/footer/modal-terms-and-policies/ModalTerms';
 import Image from 'next/image';

@@ -1,11 +1,14 @@
 import '@/shared/lib/dayjs';
 import { cn } from '@/shared/lib/utils';
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
+import { Radio_Canada } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const radioCanada = Radio_Canada({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
 
 export const metadata: Metadata = {
   title: 'Sou Junior | Mentoria Online',
@@ -64,7 +67,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={cn('font-sans', geist.variable)}>
+    <html lang="pt-BR" className={cn('font-sans', radioCanada.variable)}>
       <body>{children}</body>
     </html>
   );

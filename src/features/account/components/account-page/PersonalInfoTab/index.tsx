@@ -1,9 +1,10 @@
+'use client';
+
 import { updateMentorData } from '@/features/account/actions/actions';
 import { ModalCancelKeepRoute } from '@/features/account/components/modal-cancel-keep-route';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
 import { Spinner } from '@/shared/components/spinner';
-import { TabsContent } from '@/shared/components/ui/tabs';
 import { genders } from '@/shared/constants/static-info';
 import { IMentor } from '@/shared/types/Auth';
 import { handleError } from '@/shared/utils/handleError';
@@ -110,7 +111,7 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
   };
 
   return (
-    <TabsContent value="personal-info" className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
         Informações de cadastro
       </h2>
@@ -156,6 +157,6 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
           </div>
         </form>
       </FormikProvider>
-    </TabsContent>
+    </div>
   );
 }

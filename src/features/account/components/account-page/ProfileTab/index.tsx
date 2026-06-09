@@ -1,9 +1,11 @@
+'use client';
+
 import { updateMentorData } from '@/features/account/actions/actions';
 import { ModalCancelKeepRoute } from '@/features/account/components/modal-cancel-keep-route';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
 import { Spinner } from '@/shared/components/spinner';
-import { TabsContent } from '@/shared/components/ui/tabs';
+import { EditPhotoProvider } from '@/shared/context/EditPhotoContext';
 import { IMentor } from '@/shared/types/Auth';
 import { handleError } from '@/shared/utils/handleError';
 import { isEmpty } from '@/shared/utils/is-empty';
@@ -110,7 +112,7 @@ export function ProfileTab({ mentor }: ProfileTabProps) {
   };
 
   return (
-    <TabsContent value="profile" className="flex flex-col gap-4">
+    <EditPhotoProvider>
       <h2 className="text-2xl font-semibold leading-[1.8rem] pt-1 pb-2">
         Perfil
       </h2>
@@ -156,6 +158,6 @@ export function ProfileTab({ mentor }: ProfileTabProps) {
           </div>
         </form>
       </FormikProvider>
-    </TabsContent>
+    </EditPhotoProvider>
   );
 }

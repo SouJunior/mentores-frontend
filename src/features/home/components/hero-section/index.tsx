@@ -2,6 +2,7 @@
 
 import { ListItemsHero } from '@/features/home/components/list-items-hero';
 import { Button } from '@/shared/components/button';
+import { cn } from '@/shared/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { MagnifyingGlass } from 'phosphor-react';
@@ -14,6 +15,8 @@ export function HeroSection() {
   const router = useRouter();
   const [textHero, setTextHero] = useState(text[0]);
   const [queryMentor, setQueryMentor] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const isFloating = isFocused || !!queryMentor;
 
   function textSwitch() {
     setTimeout(() => {
@@ -43,7 +46,7 @@ export function HeroSection() {
     <div className="flex justify-between gap-6 py-50 px-8 relative max-[1133px]:px-4 max-[1064px]:flex-col-reverse max-[1064px]:gap-12 max-[1064px]:py-8 [&_.list-items-hero]:max-[1064px]:self-end">
       <section className="flex flex-col">
         <AnimatePresence>
-          <h1 className="text-gray-750 text-[2.5rem] font-semibold leading-12 max-[438px]:text-[1.5rem] max-[438px]:leading-[1.8rem] max-[438px]:max-w-74 max-[320px]:max-w-68">
+          <h1 className="text-gray-750 flex flex-col text-[2.5rem] font-semibold leading-12 max-[438px]:text-[1.5rem] max-[438px]:leading-[1.8rem] max-[438px]:max-w-74 max-[320px]:max-w-68">
             Decole sua carreira mais rápido com
             <motion.span
               key={textHero}
@@ -51,7 +54,10 @@ export function HeroSection() {
               initial={'initial'}
               animate={'animate'}
               exit={'exit'}
-              style={{ display: 'inline-block', color: 'var(--color-blue-800)' }}
+              style={{
+                display: 'inline-block',
+                color: 'var(--color-blue-800)',
+              }}
             >
               {textHero}
             </motion.span>
@@ -72,20 +78,30 @@ export function HeroSection() {
               type="text"
               value={queryMentor}
               onChange={e => setQueryMentor(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               id="query-mentor"
-              className="w-full border border-gray-600 rounded-lg px-4 py-2 pr-12 text-base leading-[1.4rem] text-black-200 outline-none focus:~label:translate-y-[-2rem]"
+              className="w-full border border-gray-600 rounded-lg px-4 py-2 pr-12 text-base leading-[1.4rem] text-black-200 outline-none"
             />
             <label
               htmlFor="query-mentor"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-black-200 text-base font-normal leading-[1.4rem] bg-white transition-all duration-300 pointer-events-none hidden max-[615px]:hidden"
-              style={{ display: queryMentor ? 'none' : undefined }}
+              className={cn(
+                'absolute left-3 bg-white transition-all duration-300 pointer-events-none px-1 max-[615px]:hidden',
+                isFloating
+                  ? 'top-0 -translate-y-1/2 text-xs text-blue-800'
+                  : 'top-1/2 -translate-y-1/2 text-base text-black-200 font-normal leading-[1.4rem]'
+              )}
             >
               Pesquisar por nome ou especialidade
             </label>
             <label
               htmlFor="query-mentor"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-black-200 text-base font-normal leading-[1.4rem] bg-white transition-all duration-300 pointer-events-none hidden max-[615px]:inline"
-              style={{ display: queryMentor ? 'none' : undefined }}
+              className={cn(
+                'absolute left-3 bg-white transition-all duration-300 pointer-events-none px-1 hidden max-[615px]:inline',
+                isFloating
+                  ? 'top-0 -translate-y-1/2 text-xs text-blue-800'
+                  : 'top-1/2 -translate-y-1/2 text-base text-black-200 font-normal leading-[1.4rem]'
+              )}
             >
               Encontre seu mentor
             </label>
@@ -94,16 +110,6 @@ export function HeroSection() {
               weight="bold"
               className="search-form-icon only-icon w-6 h-6 text-black-200 opacity-60 absolute right-4 pointer-events-none self-center top-1/2 -translate-y-1/2"
             />
-            <button
-              title="Buscar mentor"
-              aria-label="Buscar mentor"
-              className="[all:unset] hidden leading-none cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 focus-visible:shadow-focus-ring max-[615px]:block"
-            >
-              <MagnifyingGlass
-                weight="bold"
-                className="search-form-icon w-6 h-6 text-black-200 opacity-60"
-              />
-            </button>
           </div>
           <Button className="button-find-mentor">Encontre seu mentor</Button>
         </form>

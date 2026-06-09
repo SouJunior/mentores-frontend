@@ -50,7 +50,8 @@ export async function serverFetch<T>(
     throw new Error(`Request to ${path} failed with status ${response.status}`);
   }
 
-  if (response.status === 204) return undefined as T;
+  const text = await response.text();
+  if (!text) return undefined as T;
 
-  return response.json() as Promise<T>;
+  return JSON.parse(text) as T;
 }
