@@ -1,11 +1,3 @@
-import sentimentDissatisfied from '../assets/rate/sentiment_dissatisfied.svg';
-import sentimentExtremelyDissatisfied from '../assets/rate/sentiment_extremely_dissatisfied.svg';
-import sentimentExtremelySatisfied from '../assets/rate/sentiment_extremely_satisfied.svg';
-import sentimentNeutral from '../assets/rate/sentiment_neutral.svg';
-import sentimentSatisfied from '../assets/rate/sentiment_satisfied.svg';
-import sentimentVeryDissatisfied from '../assets/rate/sentiment_very_dissatisfied.svg';
-import sentimentVerySatisfied from '../assets/rate/sentiment_very_satisfied.svg';
-
 export const genders = [
   'Homem Cis',
   'Mulher Cis',
@@ -61,38 +53,36 @@ export const reviewOptions = [
   {
     id: 1,
     description: 'Extremamente Insatisfatória',
-    imgUrl: sentimentExtremelyDissatisfied,
+    imgUrl: '/rate/sentiment_dissatisfied.svg',
   },
   {
     id: 2,
     description: 'Muito Insatisfatória',
-    imgUrl: sentimentVeryDissatisfied,
+    imgUrl: '/rate/sentiment_very_dissatisfied.svg',
   },
   {
     id: 3,
     description: 'Insatisfatória',
-    imgUrl: sentimentDissatisfied,
+    imgUrl: '/rate/sentiment_dissatisfied.svg',
   },
   {
     id: 4,
     description: 'Normal',
-    imgUrl: sentimentNeutral,
+    imgUrl: '/rate/sentiment_neutral.svg',
   },
   {
     id: 5,
     description: 'Satisfatória',
-    imgUrl: sentimentSatisfied,
+    imgUrl: '/rate/sentiment_satisfied.svg',
   },
   {
     id: 6,
     description: 'Muito Satisfatória',
-    imgUrl: sentimentVerySatisfied,
+    imgUrl: '/rate/sentiment_very_satisfied.svg',
   },
   {
     id: 7,
     description: 'Extremamente Satisfatória',
-    imgUrl: sentimentExtremelySatisfied,
+    imgUrl: '/rate/sentiment_extremely_satisfied.svg',
   },
 ];
-
-export const sessionNameUserInfo = '@mentores-soujunior-v1:token';

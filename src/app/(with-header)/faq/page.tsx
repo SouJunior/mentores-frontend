@@ -1,6 +1,5 @@
 'use client';
 
-import ImagemFAQ from '@/assets/seo.svg';
 import {
   Accordion,
   AccordionContent,
@@ -52,7 +51,7 @@ export default function FaqPage() {
     <main className="flex flex-col min-h-screen [&_footer]:mt-auto">
       <section className="flex justify-center gap-[74px] pt-24 pb-12">
         <div className="mt-[80px]">
-          <Image src={ImagemFAQ} alt="Image" width={493} height={324} />
+          <Image src={'/seo.svg'} alt="Image" width={493} height={324} />
         </div>
 
         <div className="flex flex-col max-w-[43.75rem]">

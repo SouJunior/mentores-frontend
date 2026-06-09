@@ -1,6 +1,6 @@
 'use client';
 
-import FormNewPass from '@/features/auth/form-new-pass';
+import FormNewPass from '@/features/auth/components/form-new-pass';
 import { Suspense } from 'react';
 
 export default function SetNewPasswordPage() {

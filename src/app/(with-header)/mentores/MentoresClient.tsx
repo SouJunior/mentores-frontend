@@ -1,27 +1,31 @@
 'use client';
 
-import InputSearch from '@/features/mentors/input-search';
 import SelectFilter from '@/components/select-filter';
-import { Footer } from '@/layout/footer';
-import { MentorsGrid } from '@/features/mentors/mentors-grid';
 import { genders, specialties } from '@/data/static-info';
+import InputSearch from '@/features/mentors/components/input-search';
+import { MentorsGrid } from '@/features/mentors/components/mentors-grid';
+import { Footer } from '@/layout/footer';
 import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { useMentorsCalendlyInfoService } from '@/services/user/useMentorsCalendlyInfoService';
-import { useMentorsService } from '@/services/user/useMentorsService';
+import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function MentoresClient() {
+interface MentoresClientProps {
+  mentors: IMentors[];
+  calendlyInfo: ICalendlyUserInfo[];
+}
+
+export default function MentoresClient({
+  mentors,
+  calendlyInfo,
+}: MentoresClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [genderFilter, setGenderFilter] = useState<string[]>([]);
   const [specialtyFilter, setSpecialtyFilter] = useState<string[]>([]);
   const [queryMentor, setQueryMentor] = useState('');
-
-  const { data: mentors, isLoading } = useMentorsService();
-  const { data: mentorCalendlyInfo } = useMentorsCalendlyInfoService();
 
   const mentorsFiltered = mentors?.filter((mentor: IMentors) => {
     const nameFilter = queryMentor.toLowerCase();
@@ -142,9 +146,9 @@ export default function MentoresClient() {
           )}
 
           <MentorsGrid
-            loading={isLoading}
+            loading={false}
             mentors={mentorsFiltered ?? []}
-            mentorCalendlyInfo={mentorCalendlyInfo}
+            mentorCalendlyInfo={calendlyInfo}
           />
         </main>
       </div>

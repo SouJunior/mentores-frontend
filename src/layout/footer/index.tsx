@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { ModalPrivacyPolicy } from '@/layout/footer/modal-terms-and-policies/ModalPrivacyPolicy';
 import ModalTerms from '@/layout/footer/modal-terms-and-policies/ModalTerms';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import logo from '@/assets/logos/sou-junior-black.webp';
+import { Modal } from '@/components/modal';
 import {
   DiscordLogo,
   FacebookLogo,
@@ -14,7 +14,6 @@ import {
   TwitchLogo,
   YoutubeLogo,
 } from 'phosphor-react';
-import { Modal } from '@/components/modal';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,11 +24,10 @@ export function Footer() {
         <div className="flex justify-between items-start gap-8 flex-wrap">
           <Link href="/" title="Início">
             <Image
-              src={logo}
+              src={'/logos/sou-junior-black.webp'}
               alt="SouJunior logo"
               width={248}
               height={40}
-              quality={100}
             />
           </Link>
 

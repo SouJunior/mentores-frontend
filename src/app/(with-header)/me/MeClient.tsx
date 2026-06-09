@@ -1,17 +1,15 @@
 'use client';
 
-import { Spinner } from '@/components/spinner';
-import { Tabs } from '@/components/ui/tabs';
-import { TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useAuthContext } from '@/context/Auth/AuthContext';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EditPhotoProvider } from '@/context/EditPhotoContext';
-import AccountManagementTab from '@/features/account/account-page/AccountManagement';
-import { DeleteAccountTab } from '@/features/account/account-page/DeleteAccountTab';
-import { PasswordTab } from '@/features/account/account-page/PasswordTab';
-import { PersonalInfoTab } from '@/features/account/account-page/PersonalInfoTab';
-import { ProfileTab } from '@/features/account/account-page/ProfileTab';
-import { ScheduleTab } from '@/features/account/account-page/ScheduleTab';
-import { useProtectPage } from '@/hooks/useProtectPage';
+import AccountManagementTab from '@/features/account/components/account-page/AccountManagement';
+import { DeleteAccountTab } from '@/features/account/components/account-page/DeleteAccountTab';
+import { PasswordTab } from '@/features/account/components/account-page/PasswordTab';
+import { PersonalInfoTab } from '@/features/account/components/account-page/PersonalInfoTab';
+import { ProfileTab } from '@/features/account/components/account-page/ProfileTab';
+import { ScheduleTab } from '@/features/account/components/account-page/ScheduleTab';
+import { IMentor } from '@/features/auth/types/types';
+import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
@@ -26,9 +24,12 @@ const accountTabs = [
   'account-management',
 ];
 
-export default function MeClient() {
-  const { mentor } = useAuthContext();
-  const loading = useProtectPage();
+interface MeClientProps {
+  mentor: IMentor;
+  calendlyInfo: ICalendlyUserInfo;
+}
+
+export default function MeClient({ mentor, calendlyInfo }: MeClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState('personal-info');
@@ -47,14 +48,6 @@ export default function MeClient() {
       router.replace('/me?tab=personal-info');
     }
   }, [searchParams, router]);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-full [--spinner-color:#003986]">
-        <Spinner className="!w-20 !h-20" />
-      </div>
-    );
-  }
 
   return (
     <Tabs
@@ -109,20 +102,12 @@ export default function MeClient() {
           <div className="w-0.5 bg-[#D9D9D9]" />
 
           <main>
-            {mentor.isLoading ? (
-              <div className="flex justify-center items-center h-full [--spinner-color:#003986]">
-                <Spinner className="!w-20 !h-20" />
-              </div>
-            ) : (
-              <>
-                <PersonalInfoTab />
-                <ProfileTab />
-                <ScheduleTab />
-                <PasswordTab />
-                <AccountManagementTab />
-                <DeleteAccountTab />
-              </>
-            )}
+            <PersonalInfoTab mentor={mentor} />
+            <ProfileTab mentor={mentor} />
+            <ScheduleTab mentor={mentor} calendlyInfo={calendlyInfo} />
+            <PasswordTab />
+            <AccountManagementTab />
+            <DeleteAccountTab />
 
             <ToastContainer
               autoClose={3500}

@@ -1,8 +1,6 @@
 'use client';
 
-import logoImg from '@/assets/logos/sou-junior.svg';
 import { Button } from '@/components/button';
-import { UserAvatar } from '@/components/user-avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,24 +8,26 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useAuthContext } from '@/context/Auth/AuthContext';
+import { UserAvatar } from '@/components/user-avatar';
+import { logout } from '@/features/auth/actions/actions';
+import { Session } from '@/features/auth/types/types';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import UserLoginService from '@/services/user/userLoginService';
 import { breakpoints } from '@/styles/theme';
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export function Header() {
+interface HeaderProps {
+  session: Session | null;
+}
+
+export function Header({ session }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { userSession, mentor, setUserSession } = useAuthContext();
-  const { logout } = UserLoginService();
   const breakpoint = useBreakpoint();
 
   function handleLogoutUser() {
     logout();
-    setUserSession(null);
   }
 
   return (
@@ -38,9 +38,11 @@ export function Header() {
           className="w-[15.5rem] h-10 max-[438px]:w-[11.9rem] max-[438px]:h-8"
         >
           <Image
-            src={logoImg}
+            src={'/logos/sou-junior.svg'}
             alt="Logo Sou Júnior"
             className="w-full h-full"
+            width={246}
+            height={64}
           />
         </Link>
         <div
@@ -64,10 +66,10 @@ export function Header() {
         </div>
       </nav>
 
-      {userSession != null ? (
+      {session != null ? (
         <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <DropdownMenuTrigger className="flex items-center gap-4 cursor-pointer leading-none [&_img]:w-11 [&_img]:h-11 [&_img]:rounded-full [&_svg]:w-[1.2rem] [&_svg]:h-[1.2rem] [&_svg]:text-[#666] [&_svg]:[rotate:270deg] [&_svg]:transition-all data-[state=open]:[&_svg]:[rotate:90deg] focus-visible:shadow-[0_0_0_2px_rgba(17,101,186,0.6)] max-[438px]:gap-2 max-[438px]:[&_img]:w-8 max-[438px]:[&_img]:h-8">
-            <UserAvatar />
+            <UserAvatar profile={session?.profile} />
           </DropdownMenuTrigger>
 
           {isMenuOpen && (
@@ -81,13 +83,13 @@ export function Header() {
             side="bottom"
             align={breakpoint <= breakpoints.desktopXS ? 'center' : 'end'}
             sideOffset={20}
-            className="py-2 rounded-lg bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] text-[#323232] flex flex-col z-[1] w-[17rem] max-[1064px]:w-full max-[1064px]:rounded-none max-[1064px]:-mt-[3px]"
+            className="py-2 rounded-lg bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] text-[#323232] flex flex-col z-1 w-full"
           >
             <strong
               className="font-medium text-[1.25rem] leading-[120%] px-4 py-2"
               style={{ fontFamily: 'Radio Canada' }}
             >
-              {mentor.data?.fullName}
+              {session?.fullName}
             </strong>
 
             <span className="px-4">Mentor</span>
@@ -153,7 +155,7 @@ export function Header() {
       )}
 
       {/* Mobile menu */}
-      {!userSession && (
+      {!session && (
         <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <DropdownMenuTrigger className="hidden cursor-pointer self-center text-[#003986] leading-none transition-transform duration-300 data-[state=open]:rotate-90 [&_svg]:w-10 [&_svg]:h-10 max-[1064px]:block">
             <Menu />

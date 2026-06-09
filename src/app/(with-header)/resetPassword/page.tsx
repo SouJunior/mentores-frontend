@@ -1,6 +1,6 @@
 'use client';
 
-import FormEmailToReset from '@/features/auth/form-email-to-reset';
+import FormEmailToReset from '@/features/auth/components/form-email-to-reset';
 
 export default function ResetPasswordPage() {
   return (

@@ -1,7 +1,6 @@
 'use client';
 
-import backgroundImg from '@/assets/ilustracao.svg';
-import { FormRegister } from '@/features/auth/form-register';
+import { FormRegister } from '@/features/auth/components/form-register';
 import Image from 'next/image';
 
 export default function CadastroPage() {
@@ -16,7 +15,7 @@ export default function CadastroPage() {
       <div className="h-full w-[55%]">
         <FormRegister />
         <Image
-          src={backgroundImg}
+          src={'/ilustracao.svg'}
           alt="Figuras do Background"
           className="w-full h-screen object-contain"
         />

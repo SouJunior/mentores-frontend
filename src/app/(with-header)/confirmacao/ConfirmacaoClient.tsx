@@ -1,8 +1,9 @@
 'use client';
 
-import { api } from '@/lib/axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
 export default function ConfirmacaoClient() {
   const router = useRouter();
@@ -20,7 +21,10 @@ export default function ConfirmacaoClient() {
     const handleConfirmation = async () => {
       try {
         const encodedEmail = encodeURIComponent(email);
-        await api.patch(`/mentor/active?code=${code}&email=${encodedEmail}`);
+        await fetch(
+          `${API_URL}/mentor/active?code=${code}&email=${encodedEmail}`,
+          { method: 'PATCH' }
+        );
         router.push('/login');
       } catch {
         router.push('/login');

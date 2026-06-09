@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { X as CloseIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import ArrowSuccess from '@/assets/icons/arrowSuccess.svg';
-import { X as CloseIcon } from 'lucide-react';
+import { useState } from 'react';
 
 interface CustomToastProps {
   message: string;
@@ -28,7 +27,10 @@ const ToastSuccess: React.FC<CustomToastProps> = ({ onClose }) => {
           <div className="flex justify-center flex-col items-center gap-[17px]">
             <div className="flex items-center relative">
               <div className="flex items-center justify-center">
-                <Image src={ArrowSuccess} alt="Icone de Seta Sucesso" />
+                <Image
+                  src={'/icons/arrowSuccess.svg'}
+                  alt="Icone de Seta Sucesso"
+                />
               </div>
               <div className="absolute right-[-12px] top-[-12px]">
                 <CloseIcon

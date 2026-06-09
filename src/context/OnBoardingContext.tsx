@@ -1,5 +1,5 @@
 import { genders } from '@/data/static-info';
-import UserUpdateService from '@/services/user/userUpdateService';
+import { updateMentorData } from '@/features/account/actions/actions';
 import { handleError } from '@/utils/handleError';
 import { FormikProps, FormikProvider, useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
@@ -13,7 +13,6 @@ import {
 } from 'react';
 
 import * as yup from 'yup';
-import { useAuthContext } from './Auth/AuthContext';
 
 const onBoardingSchema = yup.object({
   profile: yup.string().required('Obrigatório'),
@@ -42,9 +41,6 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
   const [specialties, setSpecialties] = useState<string[]>([]);
   const [hasError, setHasError] = useState(false);
 
-  const { mentor } = useAuthContext();
-
-  const { handleMentorData } = UserUpdateService();
   const router = useRouter();
 
   const formik = useFormik<OnBoardingDataType>({
@@ -59,21 +55,22 @@ export function OnBoardingProvider({ children }: { children: ReactNode }) {
   });
 
   async function handleSubmit(values: OnBoardingDataType) {
-    try {
-      await handleMentorData({
-        aboutMe: values.description,
-        profile: values.profile,
-        gender: values.gender,
-        specialties: values.specialties,
-      });
-      setHasError(false);
+    const result = await updateMentorData({
+      aboutMe: values.description,
+      profile: values.profile,
+      gender: values.gender,
+      specialties: values.specialties,
+      registerComplete: true,
+    });
 
-      mentor.refetch();
-      router.push('/?connect-calendly=true');
-    } catch {
+    if (result?.error) {
       handleError('Algum erro aconteceu. Entre em contato com a gente.');
       setHasError(true);
+      return;
     }
+
+    setHasError(false);
+    router.push('/?connect-calendly=true');
   }
 
   return (
