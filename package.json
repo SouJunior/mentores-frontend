@@ -34,6 +34,7 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.11",
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/node": "20.4.4",
     "@types/react": "19.2.16",
@@ -46,5 +47,6 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "prettier": "3.2.5",
     "typescript": "5.1.6"
-  }
+  },
+  "packageManager": "pnpm@10.33.0"
 }
