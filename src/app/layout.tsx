@@ -1,6 +1,6 @@
 import '@/shared/lib/dayjs';
 import { cn } from '@/shared/lib/utils';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Radio_Canada } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
@@ -50,7 +50,6 @@ export const metadata: Metadata = {
   },
   abstract:
     'Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia',
-  themeColor: 'var(--color-black)',
   alternates: {
     canonical: 'https://soujunior.com.br',
   },
@@ -65,9 +64,25 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: 'white',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  colorScheme: 'light',
+  height: 'device-height',
+  minimumScale: 1,
+  viewportFit: 'cover',
+  width: 'device-width',
+};
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={cn('font-sans', radioCanada.variable)}>
+    <html
+      lang="pt-BR"
+      data-scroll-behavior="smooth"
+      className={cn('font-sans', radioCanada.variable)}
+    >
       <body>{children}</body>
     </html>
   );

@@ -18,18 +18,39 @@ function isTokenValid(token: string) {
 
 export function proxy(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
+  const session = request.cookies.get('session')?.value;
 
-  if (!token || !isTokenValid(token)) {
-    const loginUrl = new URL('/login', request.url);
-    const response = NextResponse.redirect(loginUrl);
+  const isAuthenticated = !!token && isTokenValid(token) && !!session;
+
+  const authOnlyRoutes = [
+    '/login',
+    '/cadastro',
+    '/resetPassword',
+    '/setNewPassword',
+  ];
+  const isAuthRoute = authOnlyRoutes.includes(request.nextUrl.pathname);
+
+  if (!isAuthenticated && !isAuthRoute) {
+    const response = NextResponse.redirect(new URL('/login', request.url));
     response.cookies.delete('token');
     response.cookies.delete('session');
     return response;
+  }
+
+  if (isAuthenticated && isAuthRoute) {
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/account/:path*', '/onBoarding/:path*'],
+  matcher: [
+    '/account/:path*',
+    '/onBoarding/:path*',
+    '/login',
+    '/cadastro',
+    '/resetPassword',
+    '/setNewPassword',
+  ],
 };

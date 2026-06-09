@@ -1,9 +1,7 @@
-'use client';
-
 import { FormLogin } from '@/features/auth/components/form-login';
 import Image from 'next/image';
 
-export default function LoginPage() {
+export default async function LoginPage() {
   return (
     <div className="bg-blue-600">
       <main className="flex items-center justify-between relative py-8 pr-11 w-full min-h-screen">

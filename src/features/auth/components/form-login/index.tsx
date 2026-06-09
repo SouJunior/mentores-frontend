@@ -1,3 +1,5 @@
+'use client';
+
 import { login } from '@/features/auth/actions/actions';
 import { authErrorMessages } from '@/features/auth/constants/error-messages';
 import { Button } from '@/shared/components/button';

@@ -62,18 +62,12 @@ export async function login(formData: LoginFormData) {
 
   cookieStore.set(
     'session',
-    JSON.stringify({
-      id: String(info.id),
-      fullName: info.fullName,
-      profile: info.profile,
-      profileKey: info.profileKey,
-      registerComplete: info.registerComplete,
-      createdAt: info.createdAt,
-      updatedAt: info.updatedAt,
-      deactivatedDays: info.deactivatedDays,
-      deactivatedAt: info.deactivatedAt,
-      calendlyName: info.calendlyName,
-    }),
+    encodeURIComponent(
+      JSON.stringify({
+        id: String(info.id),
+        registerComplete: info.registerComplete,
+      })
+    ),
     {
       httpOnly: false,
       secure: isProd,
@@ -82,10 +76,7 @@ export async function login(formData: LoginFormData) {
     }
   );
 
-  console.log(cookieStore.get('session')?.value);
-
-  if (!info.registerComplete) redirect('/onBoarding');
-  redirect('/');
+  redirect(info.registerComplete ? '/' : '/onBoarding');
 }
 
 export async function logout() {

@@ -1,3 +1,5 @@
+'use client';
+
 import { InputForm } from '@/shared/components/input-form';
 import { Select } from '@/shared/components/select';
 import { SelectItem } from '@/shared/components/select/SelectItem';
