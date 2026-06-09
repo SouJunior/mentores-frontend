@@ -1,8 +1,8 @@
 'use server';
 
-import { serverFetch } from '@/lib/fetch';
-import { UserLoginResponse } from '@/services/interfaces/IUserLoginService';
-import { SetNewPasswordDTO } from '@/services/interfaces/IUserSetNewPassword';
+import { UserLoginResponse } from '@/features/auth/types/IUserLoginService';
+import { SetNewPasswordDTO } from '@/features/auth/types/IUserSetNewPassword';
+import { serverFetch } from '@/shared/lib/fetch';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 

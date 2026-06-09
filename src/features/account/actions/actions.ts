@@ -1,12 +1,12 @@
 'use server';
 
-import { serverFetch } from '@/lib/fetch';
-import { FormValuesDeleteAccountDTO } from '@/services/interfaces/IUserDeleteAccount';
+import { FormValuesDeleteAccountDTO } from '@/features/account/types/IUserDeleteAccount';
 import {
   UserUpdateDTO,
   UserUpdatePasswordDTO,
-} from '@/services/interfaces/IUserUpdate';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+} from '@/features/account/types/IUserUpdate';
+import { serverFetch } from '@/shared/lib/fetch';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { updateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';

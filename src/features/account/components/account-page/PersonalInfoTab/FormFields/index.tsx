@@ -1,9 +1,9 @@
-import { InputForm } from '@/components/input-form';
-import { Select } from '@/components/select';
-import { SelectItem } from '@/components/select/SelectItem';
-import { genders } from '@/data/static-info';
 import { Calendar } from '@/features/account/components/calendar';
-import { IMentor } from '@/features/auth/types/types';
+import { InputForm } from '@/shared/components/input-form';
+import { Select } from '@/shared/components/select';
+import { SelectItem } from '@/shared/components/select/SelectItem';
+import { genders } from '@/shared/constants/static-info';
+import { IMentor } from '@/shared/types/Auth';
 import dayjs from 'dayjs';
 import { useFormikContext } from 'formik';
 import { Calendar as EventRoundedIcon } from 'lucide-react';

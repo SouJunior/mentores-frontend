@@ -1,5 +1,5 @@
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 

@@ -1,12 +1,14 @@
 'use client';
 
-import { getWeekDays } from '@/utils/get-week-days';
-import { ChevronLeft as ArrowBackIosIcon } from 'lucide-react';
-import { ChevronRight as ArrowForwardIosIcon } from 'lucide-react';
+import { PopoverContent } from '@/shared/components/ui/popover';
+import { Toggle } from '@/shared/components/ui/toggle';
+import { getWeekDays } from '@/shared/utils/get-week-days';
 import dayjs from 'dayjs';
+import {
+  ChevronLeft as ArrowBackIosIcon,
+  ChevronRight as ArrowForwardIosIcon,
+} from 'lucide-react';
 import { ComponentProps, useMemo } from 'react';
-import { PopoverContent } from '@/components/ui/popover';
-import { Toggle } from '@/components/ui/toggle';
 import { useCalendarContext } from './Root';
 import { SelectMonths } from './SelectMonths';
 import { SelectYears } from './SelectYears';

@@ -1,6 +1,6 @@
-import { serverFetch } from '@/lib/fetch';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { serverFetch } from '@/shared/lib/fetch';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { Suspense } from 'react';
 import MentoresClient from './MentoresClient';
 

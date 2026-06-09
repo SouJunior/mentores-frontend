@@ -1,7 +1,7 @@
-import { InputForm } from '@/components/input-form';
-import { Select } from '@/components/select';
-import { SelectItem } from '@/components/select/SelectItem';
-import { reasons, reviewOptions } from '@/data/static-info';
+import { InputForm } from '@/shared/components/input-form';
+import { Select } from '@/shared/components/select';
+import { SelectItem } from '@/shared/components/select/SelectItem';
+import { reasons, reviewOptions } from '@/shared/constants/static-info';
 import { isObject } from 'formik';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';

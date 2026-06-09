@@ -1,6 +1,6 @@
 'use client';
 
-import { PopoverTrigger } from '@/components/ui/popover';
+import { PopoverTrigger } from '@/shared/components/ui/popover';
 import { ComponentProps, ReactNode } from 'react';
 
 interface ControlProps extends ComponentProps<typeof PopoverTrigger> {

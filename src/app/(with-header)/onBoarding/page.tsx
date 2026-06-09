@@ -1,4 +1,4 @@
-import { Session } from '@/features/auth/types/types';
+import { Session } from '@/shared/types/Auth';
 import { cookies } from 'next/headers';
 import OnBoardingClient from './OnBoardingClient';
 

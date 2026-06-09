@@ -1,11 +1,11 @@
-import { Button } from '@/components/button';
-import { Checkbox } from '@/components/checkbox';
-import { Eye } from '@/components/eye';
-import { InputForm } from '@/components/input-form';
-import { Spinner } from '@/components/spinner';
 import { login } from '@/features/auth/actions/actions';
-import { errorTranslations } from '@/services/errors/error-messages-translations';
-import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { authErrorMessages } from '@/features/auth/constants/error-messages';
+import { Button } from '@/shared/components/button';
+import { Checkbox } from '@/shared/components/checkbox';
+import { Eye } from '@/shared/components/eye';
+import { InputForm } from '@/shared/components/input-form';
+import { Spinner } from '@/shared/components/spinner';
+import { throwErrorMessages } from '@/shared/utils/throw-error-messages';
 import { Form, Formik } from 'formik';
 import { Lock, User } from 'lucide-react';
 import Image from 'next/image';
@@ -34,7 +34,7 @@ export function FormLogin() {
 
     if (result?.error) {
       throwErrorMessages({
-        messages: errorTranslations,
+        messages: authErrorMessages,
         currentMessageKey: result.error.toLowerCase(),
       });
     }

@@ -1,17 +1,17 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { Spinner } from '@/components/spinner';
-import { TabsContent } from '@/components/ui/tabs';
 import { updateCalendlyInfo } from '@/features/account/actions/actions';
 import { ModalCancelKeepRoute } from '@/features/account/components/modal-cancel-keep-route';
-import { IMentor } from '@/features/auth/types/types';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
-import { handleError } from '@/utils/handleError';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { Spinner } from '@/shared/components/spinner';
+import { TabsContent } from '@/shared/components/ui/tabs';
+import { IMentor } from '@/shared/types/Auth';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
+import { handleError } from '@/shared/utils/handleError';
 import {
   isCalendlyLink,
   isValidHttpsUrl,
   splitCalendlyName,
-} from '@/utils/ValidateCalendlyInput';
+} from '@/shared/utils/ValidateCalendlyInput';
 import {
   CheckCircle as CheckCircleOutlineRoundedIcon,
   AlertCircle as ErrorOutlineRoundedIcon,

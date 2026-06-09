@@ -1,13 +1,16 @@
-import { Button } from '@/components/button';
-import { InputForm } from '@/components/input-form';
-import { Modal } from '@/components/modal';
-import { Select } from '@/components/select';
-import { SelectItem } from '@/components/select/SelectItem';
-import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext';
-import { genders } from '@/data/static-info';
 import EditPhotoModal from '@/features/account/components/edit-photo-modal';
 import PhotoButton from '@/features/account/components/photo-button';
-import { isEmpty } from '@/utils/is-empty';
+import { Button } from '@/shared/components/button';
+import { InputForm } from '@/shared/components/input-form';
+import { Modal } from '@/shared/components/modal';
+import { Select } from '@/shared/components/select';
+import { SelectItem } from '@/shared/components/select/SelectItem';
+import { genders } from '@/shared/constants/static-info';
+import {
+  StepNumber,
+  useOnBoardingContext,
+} from '@/shared/context/OnBoardingContext';
+import { isEmpty } from '@/shared/utils/is-empty';
 import { Form } from 'formik';
 import { Dispatch, SetStateAction } from 'react';
 import { ToastContainer } from 'react-toastify';

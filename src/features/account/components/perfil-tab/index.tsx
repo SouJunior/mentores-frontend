@@ -1,5 +1,5 @@
-import { StepNumber } from '@/context/OnBoardingContext';
 import FormOnboard2 from '@/features/home/components/form-onboard2';
+import { StepNumber } from '@/shared/context/OnBoardingContext';
 import { Dispatch, SetStateAction } from 'react';
 
 interface PerfilTabProps {

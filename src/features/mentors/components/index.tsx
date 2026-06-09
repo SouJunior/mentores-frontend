@@ -1,6 +1,6 @@
 import { CardMentor } from '@/features/mentors/components/card-mentor';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { MutableRefObject } from 'react';
 import { A11y, Pagination } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';

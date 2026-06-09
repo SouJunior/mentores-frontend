@@ -1,6 +1,6 @@
-import { IMentor, Session } from '@/features/auth/types/types';
-import { serverFetch } from '@/lib/fetch';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { serverFetch } from '@/shared/lib/fetch';
+import { IMentor, Session } from '@/shared/types/Auth';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';

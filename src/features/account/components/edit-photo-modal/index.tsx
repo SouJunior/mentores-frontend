@@ -1,9 +1,9 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { useEditPhotoContext } from '@/context/EditPhotoContext';
 import ModalImageEditor from '@/features/account/components/modal-image-editor';
 import PhotoButton from '@/features/account/components/photo-button';
-import { handleError } from '@/utils/handleError';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { useEditPhotoContext } from '@/shared/context/EditPhotoContext';
+import { handleError } from '@/shared/utils/handleError';
 import { Camera, PencilSimple } from 'phosphor-react';
 
 interface EditPhotoModalProps extends React.HTMLAttributes<HTMLDivElement> {

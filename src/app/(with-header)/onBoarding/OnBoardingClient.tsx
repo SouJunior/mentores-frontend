@@ -1,9 +1,12 @@
 'use client';
 
-import { EditPhotoProvider } from '@/context/EditPhotoContext';
-import { OnBoardingProvider, StepNumber } from '@/context/OnBoardingContext';
 import GridSpecialities from '@/features/account/components/grid-specialities';
 import PerfilTab from '@/features/account/components/perfil-tab';
+import { EditPhotoProvider } from '@/shared/context/EditPhotoContext';
+import {
+  OnBoardingProvider,
+  StepNumber,
+} from '@/shared/context/OnBoardingContext';
 import Image from 'next/image';
 import { useState } from 'react';
 

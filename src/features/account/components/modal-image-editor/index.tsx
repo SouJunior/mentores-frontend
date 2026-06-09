@@ -1,7 +1,7 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { Slider } from '@/components/ui/slider';
-import { useEditPhotoContext } from '@/context/EditPhotoContext';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { Slider } from '@/shared/components/ui/slider';
+import { useEditPhotoContext } from '@/shared/context/EditPhotoContext';
 import { Minus, Plus } from 'phosphor-react';
 import React, { useState } from 'react';
 import Cropper, { Area } from 'react-easy-crop';

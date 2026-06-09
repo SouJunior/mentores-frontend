@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@/components/button';
 import { ListItemsHero } from '@/features/home/components/list-items-hero';
+import { Button } from '@/shared/components/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { MagnifyingGlass } from 'phosphor-react';
 import { FormEvent, useEffect, useState } from 'react';
-import { AnimationTextHero } from '../../../../styles/animations';
+import { AnimationTextHero } from '../../../../shared/styles/animations';
 
 const text = ['mentorias personalizadas', 'profissionais experientes'];
 

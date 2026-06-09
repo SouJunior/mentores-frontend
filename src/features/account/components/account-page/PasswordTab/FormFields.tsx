@@ -1,6 +1,6 @@
-import { Eye } from '@/components/eye';
-import { InfoTooltip } from '@/components/info-tooltip';
-import { InputForm } from '@/components/input-form';
+import { Eye } from '@/shared/components/eye';
+import { InfoTooltip } from '@/shared/components/info-tooltip';
+import { InputForm } from '@/shared/components/input-form';
 import { useState } from 'react';
 
 export function FormFields() {

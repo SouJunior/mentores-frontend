@@ -1,6 +1,6 @@
 'use client';
 
-import { Popover } from '@/components/ui/popover';
+import { Popover } from '@/shared/components/ui/popover';
 import dayjs from 'dayjs';
 import {
   ComponentProps,

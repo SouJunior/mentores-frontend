@@ -5,8 +5,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { Footer } from '@/layout/footer';
+} from '@/shared/components/ui/accordion';
+import { Footer } from '@/shared/layout/footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';

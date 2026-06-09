@@ -1,9 +1,9 @@
-import { cn } from '@/lib/utils';
+import '@/shared/lib/dayjs';
+import { cn } from '@/shared/lib/utils';
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
-import { Providers } from './providers';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -11,27 +11,61 @@ export const metadata: Metadata = {
   title: 'Sou Junior | Mentoria Online',
   description:
     'Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia',
+  generator: 'Next.js',
+  applicationName: 'Sou Junior',
+  keywords: [
+    'Sou Junior',
+    'Mentoria Online',
+    'Tecnologia',
+    'Mentores',
+    'Profissionais',
+  ],
+  authors: [{ name: 'Sou Junior' }],
+  openGraph: {
+    title: 'Sou Junior | Mentoria Online',
+    description:
+      'Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia',
+    url: 'https://soujunior.com.br',
+    siteName: 'Sou Junior',
+    images: [
+      {
+        url: 'https://soujunior.com.br/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Sou Junior | Mentoria Online',
+      },
+    ],
+    locale: 'pt-BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sou Junior | Mentoria Online',
+    description:
+      'Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia',
+    images: ['https://soujunior.com.br/og-image.png'],
+  },
+  abstract:
+    'Portal oficial da Sou Junior para a comunicação entre mentores e profissionais que estejam ingressando na área de tecnologia',
+  themeColor: '#000000',
+  alternates: {
+    canonical: 'https://soujunior.com.br',
+  },
+  creator: 'Sou Junior',
+  publisher: 'Sou Junior',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className={cn('font-sans', geist.variable)}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="use-credentials"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

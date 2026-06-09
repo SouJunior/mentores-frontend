@@ -1,10 +1,10 @@
-import { Button } from '@/components/button';
-import { InputForm } from '@/components/input-form';
-import { Modal } from '@/components/modal';
 import { sendPasswordResetLink } from '@/features/auth/actions/actions';
 import ModalResetPass from '@/features/auth/components/modal-reset-pass';
-import { UserPasswordServiceDTO } from '@/services/interfaces/IUsePasswordResetServices';
-import { resetPasswordSchema } from '@/utils/resetPassSchema';
+import { UserPasswordServiceDTO } from '@/features/auth/types/IUsePasswordResetServices';
+import { Button } from '@/shared/components/button';
+import { InputForm } from '@/shared/components/input-form';
+import { Modal } from '@/shared/components/modal';
+import { resetPasswordSchema } from '@/shared/utils/resetPassSchema';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';

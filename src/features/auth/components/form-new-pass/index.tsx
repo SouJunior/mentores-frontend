@@ -1,11 +1,11 @@
-import { Button } from '@/components/button';
-import { Eye } from '@/components/eye';
-import { InfoTooltip } from '@/components/info-tooltip';
-import { InputForm } from '@/components/input-form';
-import ToastSuccess from '@/components/toast-success';
 import { setNewPassword } from '@/features/auth/actions/actions';
-import { SetNewPasswordDTO } from '@/services/interfaces/IUserSetNewPassword';
-import { setNewPassSchema } from '@/utils/setNewPassschema';
+import { SetNewPasswordDTO } from '@/features/auth/types/IUserSetNewPassword';
+import { Button } from '@/shared/components/button';
+import { Eye } from '@/shared/components/eye';
+import { InfoTooltip } from '@/shared/components/info-tooltip';
+import { InputForm } from '@/shared/components/input-form';
+import ToastSuccess from '@/shared/components/toast-success';
+import { setNewPassSchema } from '@/shared/utils/setNewPassschema';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';

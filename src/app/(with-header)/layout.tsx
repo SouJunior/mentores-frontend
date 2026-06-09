@@ -1,5 +1,5 @@
-import { Session } from '@/features/auth/types/types';
-import { Header } from '@/layout/header';
+import { Header } from '@/shared/layout/header';
+import { Session } from '@/shared/types/Auth';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
 

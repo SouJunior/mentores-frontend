@@ -1,14 +1,14 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { TabsContent } from '@/components/ui/tabs';
 import {
   accountDeleteFeedback,
   deleteAccount,
 } from '@/features/account/actions/actions';
 import { ModalCancelKeepRoute } from '@/features/account/components/modal-cancel-keep-route';
 import { ModalDeleteAccount } from '@/features/account/components/modal-delete-account';
-import { FormValuesDeleteAccountDTO } from '@/services/interfaces/IUserDeleteAccount';
-import { handleError } from '@/utils/handleError';
+import { FormValuesDeleteAccountDTO } from '@/features/account/types/IUserDeleteAccount';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { TabsContent } from '@/shared/components/ui/tabs';
+import { handleError } from '@/shared/utils/handleError';
 import { FormikProvider, useFormik } from 'formik';
 import { ArrowLeft as ArrowBackIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';

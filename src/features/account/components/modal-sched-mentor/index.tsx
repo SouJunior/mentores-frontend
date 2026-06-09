@@ -1,7 +1,7 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { X as Close } from 'lucide-react';
 import Image from 'next/image';
 

@@ -1,15 +1,15 @@
 'use client';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { EditPhotoProvider } from '@/context/EditPhotoContext';
 import AccountManagementTab from '@/features/account/components/account-page/AccountManagement';
 import { DeleteAccountTab } from '@/features/account/components/account-page/DeleteAccountTab';
 import { PasswordTab } from '@/features/account/components/account-page/PasswordTab';
 import { PersonalInfoTab } from '@/features/account/components/account-page/PersonalInfoTab';
 import { ProfileTab } from '@/features/account/components/account-page/ProfileTab';
 import { ScheduleTab } from '@/features/account/components/account-page/ScheduleTab';
-import { IMentor } from '@/features/auth/types/types';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
+import { EditPhotoProvider } from '@/shared/context/EditPhotoContext';
+import { IMentor } from '@/shared/types/Auth';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';

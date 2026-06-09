@@ -1,8 +1,8 @@
-import { Session } from '@/features/auth/types/types';
-import { serverFetch } from '@/lib/fetch';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ITestimony } from '@/services/interfaces/IUseTestimonyService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { serverFetch } from '@/shared/lib/fetch';
+import { Session } from '@/shared/types/Auth';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ITestimony } from '@/shared/types/IUseTestimonyService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
 import HomeClient from './home/HomeClient';

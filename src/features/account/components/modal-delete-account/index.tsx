@@ -1,6 +1,6 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { DialogClose } from '@/components/ui/dialog';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { DialogClose } from '@/shared/components/ui/dialog';
 import Image from 'next/image';
 
 interface ModalDeleteAccountProps {

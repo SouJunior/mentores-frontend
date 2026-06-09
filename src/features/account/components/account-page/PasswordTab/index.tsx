@@ -1,11 +1,11 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { Spinner } from '@/components/spinner';
-import { TabsContent } from '@/components/ui/tabs';
 import { updatePassword } from '@/features/account/actions/actions';
 import { ModalCancel } from '@/features/account/components/modal-cancel';
-import { isEmpty } from '@/utils/is-empty';
-import { throwErrorMessages } from '@/utils/throw-error-messages';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { Spinner } from '@/shared/components/spinner';
+import { TabsContent } from '@/shared/components/ui/tabs';
+import { isEmpty } from '@/shared/utils/is-empty';
+import { throwErrorMessages } from '@/shared/utils/throw-error-messages';
 import { FormikProvider, useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { Tag } from '@/components/tag';
 import ModalSchedMentor from '@/features/account/components/modal-sched-mentor';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { Tag } from '@/shared/components/tag';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import Image from 'next/image';
 import { useState } from 'react';
 

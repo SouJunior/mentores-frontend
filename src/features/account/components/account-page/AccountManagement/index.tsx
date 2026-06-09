@@ -1,6 +1,6 @@
+import { TabsContent } from '@/shared/components/ui/tabs';
 import { ChevronRight as ChevronRightIcon } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { TabsContent } from '@/components/ui/tabs';
 
 export default function AccountManagementTab() {
   const searchParams = useSearchParams();

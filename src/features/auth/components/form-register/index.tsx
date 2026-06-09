@@ -1,17 +1,17 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { Spinner } from '@/components/spinner';
 import { ModalCancel } from '@/features/account/components/modal-cancel';
 import { register } from '@/features/auth/actions/actions';
 import ModalEmail from '@/features/auth/components/modal-email';
-import { ModalPrivacyPolicy } from '@/layout/footer/modal-terms-and-policies/ModalPrivacyPolicy';
-import ModalTerms from '@/layout/footer/modal-terms-and-policies/ModalTerms';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { Spinner } from '@/shared/components/spinner';
+import { ModalPrivacyPolicy } from '@/shared/layout/footer/modal-terms-and-policies/ModalPrivacyPolicy';
+import ModalTerms from '@/shared/layout/footer/modal-terms-and-policies/ModalTerms';
 import {
   ValuesFormType,
   initialValues,
   registerSchema,
-} from '@/utils/registerSchema';
-import { throwErrorMessages } from '@/utils/throw-error-messages';
+} from '@/shared/utils/registerSchema';
+import { throwErrorMessages } from '@/shared/utils/throw-error-messages';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FormRegisterFields } from './FormRegisterFields';
 
-import { errorTranslations } from '@/services/errors/error-messages-translations';
+import { authErrorMessages } from '@/features/auth/constants/error-messages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -53,7 +53,7 @@ export function FormRegister() {
       }
 
       throwErrorMessages({
-        messages: errorTranslations,
+        messages: authErrorMessages,
         currentMessageKey: result.error,
       });
       return;

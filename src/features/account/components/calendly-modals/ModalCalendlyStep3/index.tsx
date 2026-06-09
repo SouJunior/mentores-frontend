@@ -1,14 +1,14 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import { Spinner } from '@/components/spinner';
-import StepperDots from '@/components/stepper-dots';
 import { updateCalendlyInfo } from '@/features/account/actions/actions';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import { Spinner } from '@/shared/components/spinner';
+import StepperDots from '@/shared/components/stepper-dots';
 import {
   isCalendlyLink,
   isValidHttpsUrl,
   splitCalendlyName,
-} from '@/utils/ValidateCalendlyInput';
-import { handleError } from '@/utils/handleError';
+} from '@/shared/utils/ValidateCalendlyInput';
+import { handleError } from '@/shared/utils/handleError';
 import { AlertCircle as ErrorOutlineIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';

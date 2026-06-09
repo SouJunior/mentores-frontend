@@ -1,5 +1,5 @@
-import { Select } from '@/components/select';
-import { SelectItem } from '@/components/select/SelectItem';
+import { Select } from '@/shared/components/select';
+import { SelectItem } from '@/shared/components/select/SelectItem';
 import { useCalendarContext } from '../Root';
 
 export function SelectYears() {

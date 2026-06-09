@@ -1,4 +1,4 @@
-import { Modal } from '@/components/modal';
+import { Modal } from '@/shared/components/modal';
 import Image from 'next/image';
 
 type ModalEmailProps = React.HTMLAttributes<HTMLDivElement>;

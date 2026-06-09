@@ -1,6 +1,6 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
-import StepperDots from '@/components/stepper-dots';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import StepperDots from '@/shared/components/stepper-dots';
 import Image from 'next/image';
 import Link from 'next/link';
 

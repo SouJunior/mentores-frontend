@@ -1,8 +1,8 @@
-import { Modal } from '@/components/modal';
 import ModalCalendlyStep1 from '@/features/account/components/calendly-modals/ModalCalendlyStep1';
 import ModalCalendlyStep2 from '@/features/account/components/calendly-modals/ModalCalendlyStep2';
 import ModalCalendlyStep3 from '@/features/account/components/calendly-modals/ModalCalendlyStep3';
 import ModalCalendlyStep4 from '@/features/account/components/calendly-modals/ModalCalendlyStep4';
+import { Modal } from '@/shared/components/modal';
 import React from 'react';
 
 type CalendlyRegisterProps = {

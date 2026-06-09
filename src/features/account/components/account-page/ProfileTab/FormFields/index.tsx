@@ -1,10 +1,10 @@
-import { InputForm } from '@/components/input-form';
-import { Modal } from '@/components/modal';
-import { useEditPhotoContext } from '@/context/EditPhotoContext';
-import { specialties as specialtiesOptions } from '@/data/static-info';
 import EditPhotoModal from '@/features/account/components/edit-photo-modal';
 import PhotoButton from '@/features/account/components/photo-button';
-import { IMentor } from '@/features/auth/types/types';
+import { InputForm } from '@/shared/components/input-form';
+import { Modal } from '@/shared/components/modal';
+import { specialties as specialtiesOptions } from '@/shared/constants/static-info';
+import { useEditPhotoContext } from '@/shared/context/EditPhotoContext';
+import { IMentor } from '@/shared/types/Auth';
 import { useFormikContext } from 'formik';
 import { Check as CheckIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';

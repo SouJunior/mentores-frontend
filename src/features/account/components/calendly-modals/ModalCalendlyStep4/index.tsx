@@ -1,5 +1,5 @@
-import { Button } from '@/components/button';
-import { Modal } from '@/components/modal';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
 import Image from 'next/image';
 
 type ModalCalendlyStep4Props = {

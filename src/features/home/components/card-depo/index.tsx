@@ -1,4 +1,4 @@
-import { ITestimony } from '@/services/interfaces/IUseTestimonyService';
+import { ITestimony } from '@/shared/types/IUseTestimonyService';
 import Image from 'next/image';
 
 interface CardDepoProps {

@@ -1,7 +1,7 @@
-import { Button } from '@/components/button';
 import { Slider } from '@/features/mentors/components';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { Button } from '@/shared/components/button';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { SwiperClass } from 'swiper/react';

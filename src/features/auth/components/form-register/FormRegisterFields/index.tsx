@@ -1,8 +1,8 @@
-import { Eye } from '@/components/eye';
-import { InfoTooltip } from '@/components/info-tooltip';
-import { InputForm } from '@/components/input-form';
 import { Calendar } from '@/features/account/components/calendar';
-import { ValuesFormType } from '@/utils/registerSchema';
+import { Eye } from '@/shared/components/eye';
+import { InfoTooltip } from '@/shared/components/info-tooltip';
+import { InputForm } from '@/shared/components/input-form';
+import { ValuesFormType } from '@/shared/utils/registerSchema';
 import { Field, useFormikContext } from 'formik';
 import { useState } from 'react';
 

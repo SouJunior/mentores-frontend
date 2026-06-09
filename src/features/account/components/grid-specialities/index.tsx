@@ -1,6 +1,9 @@
-import { Button } from '@/components/button';
-import { StepNumber, useOnBoardingContext } from '@/context/OnBoardingContext';
-import { specialties as specialtiesOptions } from '@/data/static-info';
+import { Button } from '@/shared/components/button';
+import { specialties as specialtiesOptions } from '@/shared/constants/static-info';
+import {
+  StepNumber,
+  useOnBoardingContext,
+} from '@/shared/context/OnBoardingContext';
 import { Check as CheckIcon } from 'lucide-react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

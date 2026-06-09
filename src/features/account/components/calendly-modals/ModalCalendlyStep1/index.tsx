@@ -1,7 +1,6 @@
-import React from 'react';
-import { Button } from '@/components/button';
-import StepperDots from '@/components/stepper-dots';
-import { Modal } from '@/components/modal';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
+import StepperDots from '@/shared/components/stepper-dots';
 
 type ModalCalendlyStep1Props = {
   handleNextStep: () => void;

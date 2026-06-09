@@ -1,12 +1,12 @@
 'use client';
 
-import SelectFilter from '@/components/select-filter';
-import { genders, specialties } from '@/data/static-info';
 import InputSearch from '@/features/mentors/components/input-search';
 import { MentorsGrid } from '@/features/mentors/components/mentors-grid';
-import { Footer } from '@/layout/footer';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import SelectFilter from '@/shared/components/select-filter';
+import { genders, specialties } from '@/shared/constants/static-info';
+import { Footer } from '@/shared/layout/footer';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';

@@ -2,15 +2,15 @@
 
 import CalendlyRegister from '@/features/account/components/calendly';
 import { ModalAccountDeleted } from '@/features/account/components/modal-account-deleted';
-import { Session } from '@/features/auth/types/types';
 import { DepoSection } from '@/features/home/components/depo-section';
 import { HeroSection } from '@/features/home/components/hero-section';
 import { MentorSection } from '@/features/home/components/mentor-section';
 import { Onboarding } from '@/features/home/components/onboarding';
-import { Footer } from '@/layout/footer';
-import { IMentors } from '@/services/interfaces/IUseMentorsService';
-import { ITestimony } from '@/services/interfaces/IUseTestimonyService';
-import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
+import { Footer } from '@/shared/layout/footer';
+import { Session } from '@/shared/types/Auth';
+import { IMentors } from '@/shared/types/IUseMentorsService';
+import { ITestimony } from '@/shared/types/IUseTestimonyService';
+import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';

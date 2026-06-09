@@ -1,6 +1,6 @@
-import { Button } from '@/components/button';
 import { CardDepo } from '@/features/home/components/card-depo';
-import { ITestimony } from '@/services/interfaces/IUseTestimonyService';
+import { Button } from '@/shared/components/button';
+import { ITestimony } from '@/shared/types/IUseTestimonyService';
 import Link from 'next/link';
 
 import { A11y } from 'swiper/modules';
