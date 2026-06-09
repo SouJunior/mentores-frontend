@@ -1,0 +1,371 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Project color palette */
+  --color-gray-250: var(--color-gray-250);
+  --color-gray-350: var(--color-gray-350);
+  --color-gray-750: var(--color-gray-750);
+  --color-black-200: var(--color-black-200);
+  --color-black-500: var(--color-black-500);
+  --color-blue-25: var(--color-blue-25);
+  --color-blue-300: var(--color-blue-300);
+  --color-blue-400: var(--color-blue-400);
+  --color-blue-500: var(--color-blue-500);
+  --color-blue-600: var(--color-blue-600);
+  --color-blue-700: var(--color-blue-700);
+  --color-blue-800: var(--color-blue-800);
+  --color-blue-850: var(--color-blue-850);
+  --color-blue-950: var(--color-blue-950);
+  --color-red-25: var(--color-red-25);
+  --color-red-300: var(--color-red-300);
+  --color-red-400: var(--color-red-400);
+  --color-red-600: var(--color-red-600);
+  --color-red-700: var(--color-red-700);
+  --color-red-800: var(--color-red-800);
+  --color-yellow: var(--color-yellow);
+  --color-brown-300: var(--color-brown-300);
+  --color-brown-700: var(--color-brown-700);
+  --color-green-400: var(--color-green-400);
+  --color-green-800: var(--color-green-800);
+  --color-green-900: var(--color-green-900);
+  --color-gray-250-a30: var(--color-gray-250-a30);
+
+  /* Project shadow tokens */
+  --shadow-card: 0px 4px 4px 0px var(--color-shadow-black-25);
+  --shadow-search: 0px 4px 8px 0px var(--color-shadow-black-25);
+  --shadow-header: 0px 3px 15px 0px var(--color-shadow-black-10);
+  --shadow-side: 2px 0 16px var(--color-shadow-black-10);
+  --shadow-hover: 4px 4px 4px 0px var(--color-shadow-black-20);
+  --shadow-focus-blue: 0 0 0 1px var(--color-blue-850);
+  --shadow-focus-red: 0 0 0 1px var(--color-red-400);
+  --shadow-focus-ring: 0 0 0 2px var(--color-blue-500-a60);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+
+  /* Project color tokens */
+  --color-white: #fff;
+  --color-black: #000000;
+  --color-gray-50: #fdfdfd;
+  --color-gray-200: #dedede;
+  --color-gray-250: #d9d9d9;
+  --color-gray-350: #cbcbcb;
+  --color-gray-500: #c5c7c5;
+  --color-gray-600: #acacac;
+  --color-gray-700: #666666;
+  --color-gray-750: #5d5f5d;
+  --color-black-200: #323232;
+  --color-black-500: #212121;
+  --color-blue-25: #f1f3f5;
+  --color-blue-300: #95c6ff;
+  --color-blue-400: #046ad0;
+  --color-blue-500: #1165ba;
+  --color-blue-600: #175cb7;
+  --color-blue-700: #338aff;
+  --color-blue-800: #003986;
+  --color-blue-850: #002c66;
+  --color-blue-950: #001633;
+  --color-red-25: #f5f1f3;
+  --color-red-300: #db2e34;
+  --color-red-400: #e94242;
+  --color-red-600: #c1292e;
+  --color-red-700: #d10324;
+  --color-red-800: #8f1e22;
+  --color-yellow: #f5dc66;
+  --color-brown-300: #705e0b;
+  --color-brown-700: #604f01;
+  --color-green-400: #72c270;
+  --color-green-800: #175116;
+  --color-green-900: #149911;
+  --color-shadow-black-10: rgba(0, 0, 0, 0.1);
+  --color-shadow-black-20: rgba(0, 0, 0, 0.2);
+  --color-shadow-black-25: rgba(0, 0, 0, 0.25);
+  --color-blue-500-a60: rgba(17, 101, 186, 0.6);
+  --color-blue-500-a79: rgba(17, 101, 186, 0.79);
+  --color-blue-300-a79: rgba(90, 156, 255, 0.79);
+  --color-gray-250-a0: rgba(217, 217, 217, 0);
+  --color-gray-250-a30: rgba(215, 217, 215, 0.3);
+
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Radio Canada', sans-serif;
+  }
+  :root {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+  }
+  html {
+    @apply font-sans;
+  }
+  li {
+    list-style: none;
+  }
+  button,
+  input,
+  textarea,
+  a {
+    color: inherit;
+    font-size: inherit;
+  }
+  a {
+    text-decoration: none;
+  }
+  a,
+  button {
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+    cursor: pointer;
+  }
+}
+
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.Toastify__toast-container {
+  max-width: 35rem;
+  --toastify-toast-width: 100%;
+  --toastify-z-index: 99999;
+}
+
+#toast-error {
+  background-color: var(--color-red-600);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0px 4px 4px 0px var(--color-shadow-black-25);
+
+  .Toastify__toast-body {
+    padding: 0;
+    font-size: 1rem;
+    max-width: 30.875rem;
+    line-height: 2rem;
+  }
+
+  .Toastify__close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    line-height: 0;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}
+
+/* Spinner */
+.spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  position: relative;
+  animation: spinner-rotate 1s linear infinite;
+}
+.spinner::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid var(--spinner-color, var(--color-white));
+  animation: spinner-clip 2s linear infinite;
+}
+
+/* Slider/Swiper container */
+.swiper-mentor-container .swiper-slide {
+  max-width: 19rem;
+}
+
+/* DepoSection swiper */
+.depo-slider-container .swiper {
+  padding: 0.25rem;
+  padding-bottom: 0.75rem;
+}
+.depo-slider-container .swiper-slide {
+  width: max-content !important;
+  padding-left: 2rem;
+}
+.depo-slider-container .swiper-slide:first-child {
+  padding-left: 0;
+}
+.depo-slider-container .swiper-slide:last-child {
+  padding-right: 1rem;
+}
+@media (max-width: 1440px) {
+  .depo-slider-container .swiper-slide {
+    padding-left: 1.5rem;
+  }
+  .depo-slider-container .swiper-slide:first-child {
+    padding-left: 2rem;
+  }
+}
+@media (max-width: 1133px) {
+  .depo-slider-container .swiper-slide:first-child {
+    padding-left: 1rem;
+  }
+}
+@media (max-width: 1440px) {
+  .swiper-mentor-container .swiper-slide:first-child {
+    padding-left: 2rem;
+  }
+}
+@media (max-width: 1133px) {
+  .swiper-mentor-container .swiper-slide,
+  .swiper-mentor-container .swiper-slide:first-child {
+    padding-left: 1.5rem;
+  }
+  .swiper-mentor-container .swiper-slide:last-child {
+    padding-right: 1rem;
+  }
+}
+
+/* Spinner keyframes */
+@keyframes spinner-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-clip {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+  }
+}
