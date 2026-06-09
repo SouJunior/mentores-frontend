@@ -2,7 +2,7 @@
 
 import { UserLoginResponse } from '@/features/auth/types/IUserLoginService';
 import { SetNewPasswordDTO } from '@/features/auth/types/IUserSetNewPassword';
-import { serverFetch } from '@/shared/lib/fetch';
+import { safeFetch } from '@/shared/lib/fetch';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -34,7 +34,7 @@ async function readErrorMessage(response: Response): Promise<string> {
 }
 
 export async function login(formData: LoginFormData) {
-  const response = await serverFetch(`/auth/login`, {
+  const response = await safeFetch(`/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -89,7 +89,7 @@ export async function logout() {
 }
 
 export async function register(formData: RegisterFormData) {
-  const response = await serverFetch(`/mentor`, {
+  const response = await safeFetch(`/mentor`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -103,7 +103,7 @@ export async function register(formData: RegisterFormData) {
 }
 
 export async function sendPasswordResetLink(email: string) {
-  const response = await serverFetch(
+  const response = await safeFetch(
     `/mentor/restoreAccount/${encodeURIComponent(email)}`,
     { method: 'POST' }
   );
@@ -120,7 +120,7 @@ export async function setNewPassword(
   { code, email }: { code: string; email: string }
 ) {
   const params = new URLSearchParams({ code, email });
-  const response = await serverFetch(
+  const response = await safeFetch(
     `/mentor/restoreAccount/redefinePass?${params.toString()}`,
     {
       method: 'PATCH',

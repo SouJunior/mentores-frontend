@@ -5,13 +5,11 @@ import {
   UserUpdateDTO,
   UserUpdatePasswordDTO,
 } from '@/features/account/types/IUserUpdate';
-import { serverFetch } from '@/shared/lib/fetch';
+import { safeFetch } from '@/shared/lib/fetch';
 import { ICalendlyUserInfo } from '@/shared/types/IUseUserCalendlyInfoService';
 import { updateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
 async function getAuth() {
   const cookieStore = await cookies();
@@ -44,7 +42,7 @@ async function readErrorMessage(response: Response): Promise<string> {
 export async function updateMentorData(data: UserUpdateDTO) {
   const { token, id } = await getAuth();
 
-  const response = await serverFetch(`/mentor`, {
+  const response = await safeFetch(`/mentor`, {
     method: 'PUT',
     headers: authHeaders(token),
     body: JSON.stringify({ id, ...data }),
@@ -64,7 +62,7 @@ export async function updateCalendlyInfo(data: ICalendlyUserInfo) {
   const method = data.id ? 'PUT' : 'POST';
   const path = data.id ? '/calendly/mentorInfo' : '/calendly';
 
-  const response = await serverFetch(`${API_URL}${path}`, {
+  const response = await safeFetch(path, {
     method,
     headers: authHeaders(token),
     body: JSON.stringify(data),
@@ -81,7 +79,7 @@ export async function updateCalendlyInfo(data: ICalendlyUserInfo) {
 export async function updatePassword(data: UserUpdatePasswordDTO) {
   const { token } = await getAuth();
 
-  const response = await serverFetch(`/mentor/change_password`, {
+  const response = await safeFetch(`/mentor/change_password`, {
     method: 'PUT',
     headers: authHeaders(token),
     body: JSON.stringify({
@@ -101,7 +99,7 @@ export async function updatePassword(data: UserUpdatePasswordDTO) {
 export async function accountDeleteFeedback(data: FormValuesDeleteAccountDTO) {
   const { token } = await getAuth();
 
-  const response = await serverFetch(`/account-deletion-feedback`, {
+  const response = await safeFetch(`/account-deletion-feedback`, {
     method: 'POST',
     headers: authHeaders(token),
     body: JSON.stringify(data),
@@ -117,7 +115,7 @@ export async function accountDeleteFeedback(data: FormValuesDeleteAccountDTO) {
 export async function deleteAccount() {
   const { token } = await getAuth();
 
-  await serverFetch(`/mentor/delete-mentor`, {
+  await safeFetch(`/mentor/delete-mentor`, {
     method: 'PATCH',
     headers: authHeaders(token),
     body: JSON.stringify({}),

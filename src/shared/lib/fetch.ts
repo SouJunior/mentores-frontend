@@ -6,6 +6,31 @@ type ServerFetchOptions = RequestInit & {
   tags?: string[];
 };
 
+async function buildHeaders(
+  token?: string,
+  extra?: HeadersInit
+): Promise<HeadersInit> {
+  return {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...extra,
+  };
+}
+
+export async function safeFetch(
+  path: string,
+  options: RequestInit = {}
+): Promise<Response> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('token')?.value;
+  const { headers, ...rest } = options;
+
+  return fetch(`${API_URL}${path}`, {
+    ...rest,
+    headers: await buildHeaders(token, headers),
+  });
+}
+
 export async function serverFetch<T>(
   path: string,
   options: ServerFetchOptions = {}
@@ -17,11 +42,7 @@ export async function serverFetch<T>(
 
   const response = await fetch(`${API_URL}${path}`, {
     ...rest,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...headers,
-    },
+    headers: await buildHeaders(token, headers),
     next: tags ? { tags } : undefined,
   });
 
