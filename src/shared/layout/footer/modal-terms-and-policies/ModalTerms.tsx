@@ -6,7 +6,7 @@ type ModalTermsProps = React.HTMLAttributes<HTMLDivElement>;
 
 export default function ModalTerms(props: ModalTermsProps) {
   return (
-    <Modal.Content className="max-w-200 relative" {...props}>
+    <Modal.Content className="max-w-200" {...props}>
       <ModalHeader />
 
       <div className="pt-4 pr-2">

@@ -6,7 +6,7 @@ type ModalPrivacyPolicyProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function ModalPrivacyPolicy(props: ModalPrivacyPolicyProps) {
   return (
-    <Modal.Content className="max-w-200 relative" {...props}>
+    <Modal.Content className="max-w-200" {...props}>
       <ModalHeader />
 
       <div className="pt-4 pr-2">
