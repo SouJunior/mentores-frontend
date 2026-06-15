@@ -63,7 +63,7 @@ importers:
         version: 11.1.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       shadcn:
         specifier: ^4.10.0
-        version: 4.10.0(@types/node@20.4.4)(babel-plugin-macros@3.1.0)(typescript@5.1.6)
+        version: 4.10.0(@types/node@25.9.3)(babel-plugin-macros@3.1.0)(typescript@5.1.6)
       swiper:
         specifier: ^12.2.0
         version: 12.2.0
@@ -87,8 +87,8 @@ importers:
         specifier: ^2.1.0
         version: 2.2.2(eslint@8.57.1)(typescript@5.1.6)
       '@types/node':
-        specifier: 20.4.4
-        version: 20.4.4
+        specifier: 25.9.3
+        version: 25.9.3
       '@types/react':
         specifier: 19.2.16
         version: 19.2.16
@@ -829,8 +829,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@20.4.4':
-    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
+  '@types/node@25.9.3':
+    resolution: {integrity: sha512-603BddQMv3pUcr4U2dhujk83N2tTDVr/34wII2B6bJy6g+8WD6yUb11jszNs0gdi4PesVWl7ABt8nYMVpnLUcg==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -3267,6 +3267,9 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
+  undici-types@7.24.6:
+    resolution: {integrity: sha512-WRNW+sJgj5OBN4/0JpHFqtqzhpbnV0GuB+OozA9gCL7a993SmU+1JBZCzLNxYsbMfIeDL+lTsphD5jN5N+n0zg==}
+
   unicorn-magic@0.3.0:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
     engines: {node: '>=18'}
@@ -3822,30 +3825,30 @@ snapshots:
 
   '@inquirer/ansi@2.0.7': {}
 
-  '@inquirer/confirm@6.1.1(@types/node@20.4.4)':
+  '@inquirer/confirm@6.1.1(@types/node@25.9.3)':
     dependencies:
-      '@inquirer/core': 11.2.1(@types/node@20.4.4)
-      '@inquirer/type': 4.0.7(@types/node@20.4.4)
+      '@inquirer/core': 11.2.1(@types/node@25.9.3)
+      '@inquirer/type': 4.0.7(@types/node@25.9.3)
     optionalDependencies:
-      '@types/node': 20.4.4
+      '@types/node': 25.9.3
 
-  '@inquirer/core@11.2.1(@types/node@20.4.4)':
+  '@inquirer/core@11.2.1(@types/node@25.9.3)':
     dependencies:
       '@inquirer/ansi': 2.0.7
       '@inquirer/figures': 2.0.7
-      '@inquirer/type': 4.0.7(@types/node@20.4.4)
+      '@inquirer/type': 4.0.7(@types/node@25.9.3)
       cli-width: 4.1.0
       fast-wrap-ansi: 0.2.2
       mute-stream: 3.0.0
       signal-exit: 4.1.0
     optionalDependencies:
-      '@types/node': 20.4.4
+      '@types/node': 25.9.3
 
   '@inquirer/figures@2.0.7': {}
 
-  '@inquirer/type@4.0.7(@types/node@20.4.4)':
+  '@inquirer/type@4.0.7(@types/node@25.9.3)':
     optionalDependencies:
-      '@types/node': 20.4.4
+      '@types/node': 25.9.3
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -4093,7 +4096,9 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@20.4.4': {}
+  '@types/node@25.9.3':
+    dependencies:
+      undici-types: 7.24.6
 
   '@types/parse-json@4.0.2':
     optional: true
@@ -4117,7 +4122,7 @@ snapshots:
 
   '@types/set-cookie-parser@2.4.10':
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 25.9.3
 
   '@types/statuses@2.0.6': {}
 
@@ -5954,9 +5959,9 @@ snapshots:
 
   ms@2.1.3: {}
 
-  msw@2.14.6(@types/node@20.4.4)(typescript@5.1.6):
+  msw@2.14.6(@types/node@25.9.3)(typescript@5.1.6):
     dependencies:
-      '@inquirer/confirm': 6.1.1(@types/node@20.4.4)
+      '@inquirer/confirm': 6.1.1(@types/node@25.9.3)
       '@mswjs/interceptors': 0.41.9
       '@open-draft/deferred-promise': 3.0.0
       '@types/statuses': 2.0.6
@@ -6443,7 +6448,7 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  shadcn@4.10.0(@types/node@20.4.4)(babel-plugin-macros@3.1.0)(typescript@5.1.6):
+  shadcn@4.10.0(@types/node@25.9.3)(babel-plugin-macros@3.1.0)(typescript@5.1.6):
     dependencies:
       '@babel/core': 7.29.7
       '@babel/parser': 7.29.7
@@ -6464,7 +6469,7 @@ snapshots:
       fuzzysort: 3.1.0
       https-proxy-agent: 7.0.6
       kleur: 4.1.5
-      msw: 2.14.6(@types/node@20.4.4)(typescript@5.1.6)
+      msw: 2.14.6(@types/node@25.9.3)(typescript@5.1.6)
       node-fetch: 3.3.2
       open: 11.0.0
       ora: 8.2.0
@@ -6820,6 +6825,8 @@ snapshots:
       has-bigints: 1.1.0
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
+
+  undici-types@7.24.6: {}
 
   unicorn-magic@0.3.0: {}
 
