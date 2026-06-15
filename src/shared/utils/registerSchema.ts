@@ -21,10 +21,22 @@ export const registerSchema = yup.object({
   password: yup
     .string()
     .required('A senha é obrigatória')
-    .min(8, 'Senha inválida')
+    .min(8, 'A senha deve conter no mínimo 8 caracteres')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
-      'Senha inválida'
+      /^(?=.*[a-z])[A-Za-z\d\W_]{8,}$/,
+      'A senha deve conter pelo menos uma letra minúscula'
+    )
+    .matches(
+      /^(?=.*[A-Z])[A-Za-z\d\W_]{8,}$/,
+      'A senha deve conter pelo menos uma letra maiúscula'
+    )
+    .matches(
+      /^(?=.*\d)[A-Za-z\d\W_]{8,}$/,
+      'A senha deve conter pelo menos um número'
+    )
+    .matches(
+      /^(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
+      'A senha deve conter pelo menos um caractere especial'
     ),
   confirmPassword: yup
     .string()
