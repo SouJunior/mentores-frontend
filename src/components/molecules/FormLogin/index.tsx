@@ -42,7 +42,6 @@ type LoginDataType = yup.InferType<typeof loginSchema>;
 export function FormLogin() {
   const [isKeepConnected, setIsKeepConnected] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const type = 'mentor';
 
   const { setUserSession } = useAuthContext();
   const router = useRouter();
@@ -51,10 +50,14 @@ export function FormLogin() {
     const { login } = UserLoginService();
 
     try {
-      const { data } = await login({ email, password, type });
+      const loginResponse = await login({ email, password });
+      const { data } = loginResponse;
+      const profileType: 'mentor' | 'mentee' =
+        data.profileType === 'mentor' ? 'mentor' : 'mentee';
       const sessionInfo = {
         id: String(data.info.id),
         token: data.token,
+        profileType,
       };
 
       if (isKeepConnected) {
@@ -69,13 +72,15 @@ export function FormLogin() {
       setUserSession(sessionInfo);
 
       if (!data.info.registerComplete) {
-        return router.push('/onBoarding');
+        return router.push(
+          profileType === 'mentor' ? '/onBoarding' : '/onboarding-mentee'
+        );
       }
 
       router.push('/');
     } catch (err) {
       if (err instanceof AxiosError) {
-        const messageKey = err.response?.data.message.toLowerCase();
+        const messageKey = err.response?.data.message?.toLowerCase();
 
         throwErrorMessages({
           messages: errorTranslations,

@@ -1,7 +1,7 @@
 export type UserCredentialsDTO = {
   email: string;
   password: string;
-  type: string;
+  type?: string;
 };
 
 export interface UserLoginInfoResponse {
@@ -12,11 +12,13 @@ export interface UserLoginInfoResponse {
   specialties: string[];
   role: string | null;
   aboutMe: string | null;
+  copiedAboutMeFromMentor?: boolean;
   gender: string;
   registerComplete: boolean;
   calendlyName: string;
   profile: string | null;
   profileKey: string | null;
+  copiedProfileFromMentor?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -24,4 +26,5 @@ export interface UserLoginInfoResponse {
 export interface UserLoginResponse {
   token: string;
   info: UserLoginInfoResponse;
+  profileType: 'mentor' | 'user';
 }
