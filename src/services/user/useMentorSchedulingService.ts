@@ -40,6 +40,7 @@ export const useMentorAvailableTimesService = (
       return response.data;
     },
     enabled: Boolean(mentorId && startTime && endTime),
+    retry: false,
     ...options,
   });
 };

@@ -30,7 +30,10 @@ export default function ModalSchedMentor({
   mentorCalendlyInfo,
   ...props
 }: ModalSchedProps) {
-  const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo?.agendaName;
+  const hasValidCalendly =
+    mentorCalendlyInfo?.calendlyName &&
+    mentorCalendlyInfo?.agendaName &&
+    mentorCalendlyInfo?.isConnected;
 
   return (
     <ModalContainer {...props}>

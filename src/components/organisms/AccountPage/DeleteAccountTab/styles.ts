@@ -25,6 +25,50 @@ export const Disclaimer = styled.p`
   line-height: 1.4rem;
 `;
 
+export const DeletionTargetGrid = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 52rem;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const DeletionTargetCard = styled.button<{ $selected?: boolean }>`
+  background: ${props =>
+    props.$selected ? props.theme.colors.blue[25] : props.theme.colors.white};
+  border: 2px solid
+    ${props =>
+      props.$selected ? props.theme.colors.blue[800] : props.theme.colors.gray[200]};
+  border-radius: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 9rem;
+  padding: 1rem;
+  text-align: left;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  strong {
+    color: ${props => props.theme.colors.black[200]};
+    font-size: 1rem;
+    line-height: 1.3rem;
+  }
+
+  span {
+    color: ${props => props.theme.colors.gray[700]};
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+`;
+
 export const DeleteAccountContentForm = styled(Form)`
   display: flex;
   flex-direction: column;

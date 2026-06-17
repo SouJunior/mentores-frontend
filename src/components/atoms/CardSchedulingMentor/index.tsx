@@ -25,7 +25,10 @@ interface CalendlyAndMentorProps {
 export default function CardScheduling({ mentorCalendlyInfo, mentor }: CalendlyAndMentorProps) {
   const [open, setOpen] = useState(false);
 
-  const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo?.agendaName;
+  const hasValidCalendly =
+    mentorCalendlyInfo?.calendlyName &&
+    mentorCalendlyInfo?.agendaName &&
+    mentorCalendlyInfo?.isConnected;
 
   function handleModal() {
     setOpen(!open);

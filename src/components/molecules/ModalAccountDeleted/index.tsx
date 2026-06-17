@@ -27,13 +27,10 @@ export function ModalAccountDeleted({ isOpen, handleCloseModal }: ModalProps) {
               height={166}
             />
           </ModalImageContainer>
-          <ModalTitle>Perfil removido</ModalTitle>
+          <ModalTitle>Exclusão concluída</ModalTitle>
           <ModalDescription>
-            Você tem 30 dias para reconsiderar e evitar a exclusão definitiva de
-            sua conta.
-          </ModalDescription>
-          <ModalDescription>
-            Lembre-se, caso deseje reativar, faça o login novamente.
+            A exclusão solicitada foi concluída com sucesso e não existe
+            reativação automática por login.
           </ModalDescription>
           <ModalClose />
         </ModalContainer>
