@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import Link from 'next/link';
 import { device } from '@/styles/theme';
+import { Modal } from '@/components/atoms/Modal';
 
 export const ContainerHeader = styled.header`
   display: flex;
@@ -95,8 +96,18 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   cursor: pointer;
   line-height: 0;
 
+  .hello-user {
+    color: ${props => props.theme.colors.black[200]};
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+
   @media ${device.mobileL} {
     gap: 0.5rem;
+
+    .hello-user {
+      display: none;
+    }
   }
 
   img {
@@ -124,6 +135,27 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
 
   &:focus-visible {
     box-shadow: 0 0 0 2px rgba(17, 101, 186, 0.6);
+  }
+`;
+
+export const ProfileBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid ${props => props.theme.colors.blue[800]};
+  border-radius: 999px;
+  color: ${props => props.theme.colors.blue[800]};
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1rem;
+  padding: 0.35rem 0.75rem;
+
+  &::before {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: ${props => props.theme.colors.blue[800]};
   }
 `;
 
@@ -164,6 +196,43 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
     border-radius: 0;
     margin-top: -3px;
   }
+`;
+
+export const ProfileSwitchGroup = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem;
+  margin: 0.5rem 1rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  background: ${props => props.theme.colors.gray[200]};
+`;
+
+export const ProfileSwitchButton = styled.button`
+  border: 0;
+  border-radius: 0.35rem;
+  background: transparent;
+  color: ${props => props.theme.colors.gray[700]};
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.6rem 0.75rem;
+
+  &.active {
+    background: ${props => props.theme.colors.blue[800]};
+    color: ${props => props.theme.colors.white};
+  }
+`;
+
+export const ProfileSwitchOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.88);
+  color: ${props => props.theme.colors.blue[800]};
+  font-size: 1.1rem;
+  font-weight: 600;
 `;
 
 export const DropdownMenuLabel = styled.strong`
@@ -215,6 +284,46 @@ export const LinkUserAccount = styled(Link)`
 export const SignOutBtn = styled(DropdownMenu.Item)`
   ${baseBtnStyles}
   color: ${props => props.theme.colors.red[300]};
+`;
+
+export const MenuActionButton = styled(DropdownMenu.Item)`
+  ${baseBtnStyles}
+  color: ${props => props.theme.colors.blue[800]};
+  font-weight: 600;
+`;
+
+export const ProfileStatusModal = styled(Modal.Content)`
+  border-radius: 1rem;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 28rem;
+  padding: 2rem;
+  width: min(100%, 28rem);
+
+  h2 {
+    color: ${props => props.theme.colors.black[200]};
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    margin: 0;
+  }
+
+  p {
+    color: ${props => props.theme.colors.gray[700]};
+    line-height: 1.5rem;
+    margin: 0;
+  }
+`;
+
+export const ProfileStatusActions = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+
+  @media ${device.mobileL} {
+    flex-direction: column;
+  }
 `;
 
 // Menu Burger

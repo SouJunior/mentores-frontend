@@ -16,7 +16,7 @@ import { Modal } from '@/components/atoms/Modal';
 import { Spinner } from '@/components/atoms/Spinner';
 import { ModalCancelKeepRoute } from '@/components/molecules/ModalCancelKeepRoute';
 import { useAuthContext } from '@/context/Auth/AuthContext';
-import { IMentor } from '@/context/interfaces/IAuth';
+import { AccountProfile } from '@/context/interfaces/IAuth';
 import { genders } from '@/data/static-info';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { handleError } from '@/utils/handleError';
@@ -49,8 +49,8 @@ export function PersonalInfoTab() {
 
   const queryClient = useQueryClient();
 
-  const { handleMentorData } = UserUpdateService();
-  const { mentor, userSession } = useAuthContext();
+  const { handleMentorData, handleUserData } = UserUpdateService();
+  const { mentor, userSession, activeProfileType } = useAuthContext();
 
   const toastMessageSuccess = () =>
     toast('Dados salvos com sucesso', {
@@ -79,12 +79,12 @@ export function PersonalInfoTab() {
     });
 
   const { mutateAsync: updateMentorFn } = useMutation({
-    mutationKey: ['mentor', userSession?.id],
-    mutationFn: handleMentorData,
+    mutationKey: ['profile', activeProfileType, userSession?.id],
+    mutationFn: activeProfileType === 'mentor' ? handleMentorData : handleUserData,
     onSuccess(_, newUpdatedData) {
       queryClient.setQueryData(
-        ['mentor', userSession?.id],
-        (cached: IMentor) => {
+        ['profile', activeProfileType, userSession?.id],
+        (cached: AccountProfile) => {
           return {
             ...cached,
             ...newUpdatedData,

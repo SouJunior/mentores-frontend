@@ -3,6 +3,7 @@ import userWithoutImage from '@/assets/userDefault.png';
 import { IMentors } from '@/services/interfaces/IUseMentorsService';
 import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
@@ -24,14 +25,10 @@ interface CalendlyAndMentorProps {
 export default function CardScheduling({ mentorCalendlyInfo, mentor }: CalendlyAndMentorProps) {
   const [open, setOpen] = useState(false);
 
-  const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo?.agendaName;
-
-  const calendlyUrl = hasValidCalendly
-    ? new URL(
-        `${mentorCalendlyInfo.calendlyName}/${mentorCalendlyInfo.agendaName}`,
-        'https://calendly.com'
-      ).toString()
-    : '';
+  const hasValidCalendly =
+    mentorCalendlyInfo?.calendlyName &&
+    mentorCalendlyInfo?.agendaName &&
+    mentorCalendlyInfo?.isConnected;
 
   function handleModal() {
     setOpen(!open);
@@ -56,7 +53,7 @@ export default function CardScheduling({ mentorCalendlyInfo, mentor }: CalendlyA
       </StacksContainer>
       <ButtonsContainer>
         {hasValidCalendly ? (
-          <Button as="a" target="_blank" href={calendlyUrl}>
+          <Button as={Link} href={`/agendar-mentoria?mentorId=${mentor.id}`}>
             Agendar Mentoria
           </Button>
         ) : (

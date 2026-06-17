@@ -27,7 +27,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 export interface ButtonStyleProps {
-  variant?: 'primary' | 'danger';
+  $variant?: 'primary' | 'danger';
 }
 
 export const Button = styled.button<ButtonStyleProps>`
@@ -42,8 +42,8 @@ export const Button = styled.button<ButtonStyleProps>`
   align-items: center;
   justify-content: space-between;
 
-  color: ${({ variant }) => {
-    if (variant === 'danger') return '#D10324';
-    if (variant === 'primary') return '#323232';
+  color: ${({ $variant }) => {
+    if ($variant === 'danger') return '#D10324';
+    if ($variant === 'primary') return '#323232';
   }};
 `;

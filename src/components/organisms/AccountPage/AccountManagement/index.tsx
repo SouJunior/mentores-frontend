@@ -33,17 +33,17 @@ export default function AccountManagementTab() {
           dados e permitindo reativação a qualquer momento.
         </Disclaimer>
         <Disclaimer>
-          Ao excluir, ela será deletada permanentemente após 30 dias. Após esse
-          prazo, seus dados serão removidos definitivamente.
+          Ao excluir, a remoção do perfil é concluída após a confirmação e não
+          há reativação automática por login.
         </Disclaimer>
       </DisclaimerWrapper>
       <Divider />
       <ButtonsContainer>
-        <Button variant="primary" disabled style={{ cursor: 'not-allowed' }}>
+        <Button $variant="primary" disabled style={{ cursor: 'not-allowed' }}>
           Desativar Conta
           <ChevronRightIcon />
         </Button>
-        <Button variant="danger" onClick={redirectDeleteAccountTab}>
+        <Button $variant="danger" onClick={redirectDeleteAccountTab}>
           Excluir Conta
           <ChevronRightIcon />
         </Button>

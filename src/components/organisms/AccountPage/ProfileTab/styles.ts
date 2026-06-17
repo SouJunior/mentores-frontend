@@ -5,16 +5,20 @@ import styled from 'styled-components';
 export const ProfileContentForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 42.75rem;
+  gap: 1.5rem;
+  max-width: 100%;
 `;
 
 export const ContentContainer = styled.div`
   display: grid;
-  grid-template-columns: 8rem 1fr;
+  grid-template-columns: 12rem minmax(0, 1fr);
   align-items: center;
-  row-gap: 3rem;
-  column-gap: 4rem;
+  row-gap: 2rem;
+  column-gap: 3rem;
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const ButtonEditPhoto = styled(Modal.Control)`
@@ -71,9 +75,13 @@ export const CharacterSectionLegend = styled.p`
 
 export const GridSpecialties = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 9.5rem);
+  grid-template-columns: repeat(3, minmax(9.5rem, 1fr));
   gap: 1rem;
   margin-top: 1rem;
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 interface SpecialtyItemProps {
@@ -126,4 +134,36 @@ export const DescriptionContainer = styled.section`
     text-align: right;
     margin-top: 0.5rem;
   }
+`;
+
+export const SharedProfileModal = styled(Modal.Content)`
+  width: min(32rem, calc(100vw - 2rem));
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: ${props => props.theme.colors.white};
+`;
+
+export const SharedProfileModalTitle = styled(Modal.Title)`
+  color: ${props => props.theme.colors.blue[800]};
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+`;
+
+export const SharedProfileModalDescription = styled(Modal.Description)`
+  color: ${props => props.theme.colors.gray[700]};
+  font-size: 1rem;
+  line-height: 1.6;
+`;
+
+export const SharedProfileModalActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 `;
