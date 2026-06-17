@@ -31,8 +31,8 @@ import {
 } from './styles';
 
 const profileSchema = yup.object({
-  specialties: yup.array(yup.string().required('ObrigatÃ³rio')),
-  aboutMe: yup.string().max(600, 'Limite mÃ¡ximo de caracteres atingido'),
+  specialties: yup.array(yup.string().required('Obrigatório')),
+  aboutMe: yup.string().max(600, 'Limite máximo de caracteres atingido'),
   profile: yup.string(),
 });
 
@@ -79,7 +79,7 @@ export function ProfileTab() {
     });
 
   const toastMessageDiscarded = () =>
-    toast('AlteraÃ§Ãµes descartadas', {
+    toast('Alterações descartadas', {
       icon: false,
       position: 'top-center',
       closeButton: false,
@@ -169,7 +169,7 @@ export function ProfileTab() {
     try {
       await updateProfileData(data, helpers);
     } catch {
-      handleError('NÃ£o foi possÃ­vel salvar os dados. Tente novamente.');
+      handleError('Não foi possível salvar os dados. Tente novamente.');
     }
   }
 
@@ -236,7 +236,7 @@ export function ProfileTab() {
       });
       clearPendingSharedSync();
     } catch {
-      handleError('NÃ£o foi possÃ­vel salvar os dados. Tente novamente.');
+      handleError('Não foi possível salvar os dados. Tente novamente.');
     }
   };
 
@@ -268,7 +268,7 @@ export function ProfileTab() {
       });
       clearPendingSharedSync();
     } catch {
-      handleError('NÃ£o foi possÃ­vel salvar os dados. Tente novamente.');
+      handleError('Não foi possível salvar os dados. Tente novamente.');
     }
   };
 
@@ -276,7 +276,7 @@ export function ProfileTab() {
     <TabContainer value="profile">
       <TitleTab>Perfil</TitleTab>
       <SubtitleTab>
-        <span>*</span> Indica um campo obrigatÃ³rio
+        <span>*</span> Indica um campo obrigatório
       </SubtitleTab>
 
       <FormikProvider value={formik}>
@@ -328,12 +328,12 @@ export function ProfileTab() {
       >
         <SharedProfileModal>
           <SharedProfileModalTitle>
-            Aplicar alteraÃ§Ãµes tambÃ©m no outro perfil?
+            Aplicar alterações também no outro perfil?
           </SharedProfileModalTitle>
           <SharedProfileModalDescription>
-            Sua foto e/ou bio deste perfil vieram do perfil de mentor(a). VocÃª
+            Sua foto e/ou bio deste perfil vieram do perfil de mentor(a). Você
             pode manter esses dados sincronizados entre os dois perfis ou salvar
-            a alteraÃ§Ã£o apenas aqui.
+            a alteração apenas aqui.
           </SharedProfileModalDescription>
           <SharedProfileModalActions>
             <Button
@@ -348,7 +348,7 @@ export function ProfileTab() {
               variant="secondary"
               onClick={handleApplyChangesToCurrentProfileOnly}
             >
-              Salvar sÃ³ neste perfil
+              Salvar só neste perfil
             </Button>
             <Button type="button" onClick={handleApplyChangesToBothProfiles}>
               Aplicar nos dois perfis
