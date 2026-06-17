@@ -35,3 +35,9 @@ yarn-error.log*
 next-env.d.ts
 
 .env
+
+# local design/source assets
+/assets/
+
+# Local implementation notes
+docs/mentorado-profile-implementation-notes.md
