@@ -21,9 +21,12 @@ import {
 
 interface ModalDeleteAccountProps extends Dialog.DialogContentProps {
   handleDeleteAccount: () => void | Promise<void>;
+  subjectLabel: string;
+  deleteButtonLabel: string;
   schedules?: IMentorSchedule[];
   isLoadingSchedules?: boolean;
   isCancelingSchedule?: boolean;
+  requiresScheduleCheck?: boolean;
   schedulePendingCancellation?: string | null;
   onCancelSchedule?: (eventUuid: string) => void;
   onSelectScheduleToCancel?: (eventUuid: string | null) => void;
@@ -31,21 +34,24 @@ interface ModalDeleteAccountProps extends Dialog.DialogContentProps {
 
 export function ModalDeleteAccount({
   handleDeleteAccount,
+  subjectLabel,
+  deleteButtonLabel,
   schedules = [],
   isLoadingSchedules = false,
   isCancelingSchedule = false,
+  requiresScheduleCheck = true,
   schedulePendingCancellation = null,
   onCancelSchedule,
   onSelectScheduleToCancel,
 }: ModalDeleteAccountProps) {
   const hasOpenSchedules = schedules.length > 0;
   const isAccountDeletionBlocked =
-    hasOpenSchedules ||
-    isLoadingSchedules ||
-    isCancelingSchedule ||
+    (requiresScheduleCheck && hasOpenSchedules) ||
+    (requiresScheduleCheck && isLoadingSchedules) ||
+    (requiresScheduleCheck && isCancelingSchedule) ||
     Boolean(schedulePendingCancellation);
   const shouldShowLoadingSchedules =
-    isLoadingSchedules && !schedulePendingCancellation;
+    requiresScheduleCheck && isLoadingSchedules && !schedulePendingCancellation;
 
   return (
     <ContainerModalDeleteAccount>
@@ -54,11 +60,16 @@ export function ModalDeleteAccount({
       <ModalCloseButton />
 
       <ModalDescription>
-        Ao excluir sua conta, seu perfil não ficará visível para novos
-        agendamentos.
+        Ao excluir {subjectLabel}, a remoção será concluída logo após a
+        confirmação.
       </ModalDescription>
 
-      {shouldShowLoadingSchedules ? (
+      {!requiresScheduleCheck ? (
+        <ModalDescription>
+          Não existe reativação automática por login depois que a exclusão for
+          concluída.
+        </ModalDescription>
+      ) : shouldShowLoadingSchedules ? (
         <LoadingSchedulesContainer>
           <Spinner />
           <ModalDescription>
@@ -68,7 +79,8 @@ export function ModalDeleteAccount({
       ) : hasOpenSchedules ? (
         <>
           <ModalDescription>
-            Cancele os agendamentos abertos antes de excluir a conta.
+            Cancele os agendamentos abertos do perfil de mentor(a) antes de
+            excluir {subjectLabel}.
           </ModalDescription>
 
           <ScheduleList>
@@ -80,7 +92,7 @@ export function ModalDeleteAccount({
               return (
                 <ScheduleItem key={schedule.eventUuid}>
                   <ScheduleTitle>
-                    {participant?.name || 'Mentorado sem nome'}
+                    {participant?.name || 'Participante sem nome'}
                   </ScheduleTitle>
                   <ScheduleMeta>
                     {dayjs(schedule.startTime).format('DD/MM/YYYY [às] HH:mm')}
@@ -125,7 +137,8 @@ export function ModalDeleteAccount({
         </>
       ) : (
         <ModalDescription>
-          Nenhum agendamento aberto foi encontrado no Calendly.
+          Nenhum agendamento aberto foi encontrado no Calendly. Após confirmar,
+          a exclusão de {subjectLabel} será concluída imediatamente.
         </ModalDescription>
       )}
 
@@ -147,7 +160,7 @@ export function ModalDeleteAccount({
           disabled={isAccountDeletionBlocked}
         >
           <Image src={binIcon} alt="Delete Icon" width={24} height={24} />
-          Excluir conta
+          {deleteButtonLabel}
         </ButtonStyled>
       </ButtonsContainer>
     </ContainerModalDeleteAccount>

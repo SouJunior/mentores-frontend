@@ -4,7 +4,10 @@ import { ModalDeleteAccount } from '@/components/molecules/ModalDeleteAccount';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { FormValuesDeleteAccountDTO } from '@/services/interfaces/IUserDeleteAccount';
 import { UserAccountDeleteFeedback } from '@/services/user/userAccountDeleteFeedback';
-import { UserDeleteAccount } from '@/services/user/userDeleteAccount';
+import {
+  DeleteAccountTarget,
+  UserDeleteAccount,
+} from '@/services/user/userDeleteAccount';
 import {
   cancelMentorSchedule,
   useMentorSchedulesService,
@@ -14,7 +17,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AxiosError } from 'axios';
 import { FormikProvider, useFormik } from 'formik';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   ButtonsContainer,
@@ -26,8 +29,11 @@ import {
 import FormFields from './FormFields';
 import {
   Breadcrumbs,
+  DeletionTargetCard,
+  DeletionTargetGrid,
   DeleteAccountContentForm,
   Disclaimer,
+  ErrorLegend,
   ModalCancelStyled,
 } from './styles';
 
@@ -41,13 +47,30 @@ export interface FormValues {
 
 export function DeleteAccountTab() {
   const router = useRouter();
-  const { userSession } = useAuthContext();
+  const { userSession, activeProfileType, profiles } = useAuthContext();
   const { accountDeleteFeedback } = UserAccountDeleteFeedback();
   const { deleteAccount } = UserDeleteAccount();
   const mentorSchedules = useMentorSchedulesService(
     userSession?.token,
-    userSession?.id
+    userSession?.id,
+    {
+      enabled:
+        activeProfileType === 'mentor' &&
+        Boolean(userSession?.token && userSession?.id),
+    }
   );
+  const isMentorProfile = activeProfileType === 'mentor';
+  const [selectedDeletionTarget, setSelectedDeletionTarget] =
+    useState<DeleteAccountTarget>(
+      activeProfileType === 'mentor' ? 'mentor' : 'mentee',
+    );
+
+  const hasMentorProfile = Boolean(profiles.data?.mentor.exists);
+  const hasMenteeProfile = Boolean(profiles.data?.mentee.exists);
+  const requiresScheduleCheck =
+    isMentorProfile &&
+    (selectedDeletionTarget === 'mentor' ||
+      selectedDeletionTarget === 'account');
 
   const initialFormValues: FormValues = {
     reasonOption: null,
@@ -68,11 +91,77 @@ export function DeleteAccountTab() {
   const [hasLoadedSchedulesForDeletion, setHasLoadedSchedulesForDeletion] =
     useState(false);
 
+  useEffect(() => {
+    if (!profiles.isSuccess) {
+      return;
+    }
+
+    if (selectedDeletionTarget === 'mentor' && !hasMentorProfile) {
+      setSelectedDeletionTarget(hasMenteeProfile ? 'mentee' : 'account');
+    }
+
+    if (selectedDeletionTarget === 'mentee' && !hasMenteeProfile) {
+      setSelectedDeletionTarget(hasMentorProfile ? 'mentor' : 'account');
+    }
+  }, [
+    profiles.isSuccess,
+    hasMenteeProfile,
+    hasMentorProfile,
+    selectedDeletionTarget,
+    setSelectedDeletionTarget,
+  ]);
+
+  const deletionTargetContent: Record<
+    DeleteAccountTarget,
+    {
+      title: string;
+      description: string;
+      disclaimer: string;
+      modalSubject: string;
+      deleteButtonLabel: string;
+    }
+  > = {
+    account: {
+      title: 'Excluir a conta inteira',
+      description:
+        'Remove os perfis ativos e encerra o acesso à plataforma.',
+      disclaimer:
+        'Ao excluir a conta inteira, todos os perfis ativos deixam de ficar disponíveis na plataforma.',
+      modalSubject: 'a conta inteira',
+      deleteButtonLabel: 'Excluir conta',
+    },
+    mentor: {
+      title: 'Excluir o perfil mentor(a)',
+      description:
+        'Remove apenas o perfil de mentor(a) e preserva o acesso como mentorado(a), se existir.',
+      disclaimer:
+        'Ao excluir o perfil de mentor(a), ele deixa de aparecer nos resultados de busca e em novos agendamentos.',
+      modalSubject: 'o perfil de mentor(a)',
+      deleteButtonLabel: 'Excluir perfil',
+    },
+    mentee: {
+      title: 'Excluir o perfil mentorado(a)',
+      description:
+        'Remove apenas o perfil de mentorado(a) e preserva o acesso como mentor(a), se existir.',
+      disclaimer:
+        'Ao excluir o perfil de mentorado(a), esse acesso deixa de ficar disponível na plataforma.',
+      modalSubject: 'o perfil de mentorado(a)',
+      deleteButtonLabel: 'Excluir perfil',
+    },
+  };
+
+  const selectedTargetContent = deletionTargetContent[selectedDeletionTarget];
+
   const handleModalCancel = () => setOpenModalCancel(true);
   const handleModalDeleteAccount = async () => {
     setSchedulePendingCancellation(null);
     setHasLoadedSchedulesForDeletion(false);
     setOpenModalDeleteAccount(true);
+
+    if (!requiresScheduleCheck) {
+      setHasLoadedSchedulesForDeletion(true);
+      return;
+    }
 
     try {
       await mentorSchedules.refetch();
@@ -151,15 +240,31 @@ export function DeleteAccountTab() {
 
     if (!hasErrors) {
       try {
-        await accountDeleteFeedback(formValues as FormValuesDeleteAccountDTO);
+        if (
+          isMentorProfile &&
+          selectedDeletionTarget !== 'mentee'
+        ) {
+          await accountDeleteFeedback(formValues as FormValuesDeleteAccountDTO);
+        }
 
-        await deleteAccount();
+        await deleteAccount(selectedDeletionTarget);
         router.push('/?account-deleted=true');
       } catch (error) {
         if (error instanceof AxiosError) {
           const currentMessage = error.response?.data.message;
           throwErrorMessages({
-            messages: {},
+            messages: {
+              'Cancel open mentor schedules before deleting this profile':
+                'Cancele os agendamentos abertos do perfil de mentor(a) antes de concluir a exclusão.',
+              'Mentor profile not found':
+                'O perfil de mentor(a) não está disponível para exclusão.',
+              'User profile not found':
+                'O perfil de mentorado(a) não está disponível para exclusão.',
+              'No active profile found for deletion':
+                'Não há perfil ativo disponível para exclusão.',
+              'Invalid deletion target':
+                'Selecione uma opção de exclusão válida.',
+            },
             currentMessageKey: currentMessage,
           });
         }
@@ -185,11 +290,53 @@ export function DeleteAccountTab() {
         Para deletar a conta, responda ao nosso formulário de satisfação
       </SubtitleTab>
 
+      <SubtitleTab>Escolha o que você deseja excluir</SubtitleTab>
+
+      <DeletionTargetGrid>
+        <DeletionTargetCard
+          type="button"
+          $selected={selectedDeletionTarget === 'account'}
+          onClick={() => setSelectedDeletionTarget('account')}
+        >
+          <strong>{deletionTargetContent.account.title}</strong>
+          <span>{deletionTargetContent.account.description}</span>
+        </DeletionTargetCard>
+
+        <DeletionTargetCard
+          type="button"
+          $selected={selectedDeletionTarget === 'mentee'}
+          disabled={!hasMenteeProfile}
+          onClick={() => setSelectedDeletionTarget('mentee')}
+        >
+          <strong>{deletionTargetContent.mentee.title}</strong>
+          <span>{deletionTargetContent.mentee.description}</span>
+        </DeletionTargetCard>
+
+        <DeletionTargetCard
+          type="button"
+          $selected={selectedDeletionTarget === 'mentor'}
+          disabled={!hasMentorProfile}
+          onClick={() => setSelectedDeletionTarget('mentor')}
+        >
+          <strong>{deletionTargetContent.mentor.title}</strong>
+          <span>{deletionTargetContent.mentor.description}</span>
+        </DeletionTargetCard>
+      </DeletionTargetGrid>
+
+      {profiles.isSuccess && (!hasMentorProfile || !hasMenteeProfile) && (
+        <ErrorLegend>
+          Perfis indisponíveis ficam desabilitados e não podem ser excluídos
+          por esta tela.
+        </ErrorLegend>
+      )}
+
       <Disclaimer>
-        Ao excluir sua conta, seu perfil não ficará visível para agendamentos.
-        <br></br>Você terá 30 dias para reconsiderar antes da exclusão
-        definitiva. <br></br>Caso deseje reativar seu perfil, faça o login antes
-        dos 30 dias.
+        {selectedTargetContent.disclaimer}
+        <br></br>
+        {selectedDeletionTarget !== 'mentee' &&
+          'Se existirem agendamentos abertos no perfil de mentor(a), a exclusão ficará bloqueada até o cancelamento.'}
+        {selectedDeletionTarget !== 'mentee' && <br></br>}
+        A exclusão é concluída logo após a confirmação e não existe mais reativação automática por login.
       </Disclaimer>
 
       <SubtitleTab>
@@ -220,7 +367,7 @@ export function DeleteAccountTab() {
               variant="danger"
               onClick={handleModalDeleteAccount}
             >
-              Excluir conta
+              {selectedTargetContent.deleteButtonLabel}
             </Button>
           </ButtonsContainer>
         </DeleteAccountContentForm>
@@ -245,13 +392,17 @@ export function DeleteAccountTab() {
       >
         <ModalDeleteAccount
           handleDeleteAccount={formik.submitForm}
-          schedules={mentorSchedules.data}
+          subjectLabel={selectedTargetContent.modalSubject}
+          deleteButtonLabel={selectedTargetContent.deleteButtonLabel}
+          schedules={isMentorProfile ? mentorSchedules.data : []}
           isLoadingSchedules={
-            !hasLoadedSchedulesForDeletion ||
-            mentorSchedules.isLoading ||
-            mentorSchedules.isFetching
+            requiresScheduleCheck &&
+            (!hasLoadedSchedulesForDeletion ||
+              mentorSchedules.isLoading ||
+              mentorSchedules.isFetching)
           }
-          isCancelingSchedule={isCancelingSchedule}
+          isCancelingSchedule={requiresScheduleCheck && isCancelingSchedule}
+          requiresScheduleCheck={requiresScheduleCheck}
           schedulePendingCancellation={schedulePendingCancellation}
           onCancelSchedule={handleCancelSchedule}
           onSelectScheduleToCancel={setSchedulePendingCancellation}

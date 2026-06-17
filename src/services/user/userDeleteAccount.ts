@@ -2,6 +2,8 @@ import { useAuthContext } from '@/context/Auth/AuthContext';
 import { api } from '@/lib/axios';
 import UserLoginService from './userLoginService';
 
+export type DeleteAccountTarget = 'account' | 'mentor' | 'mentee';
+
 export function UserDeleteAccount() {
   const { setUserSession, userSession } = useAuthContext();
   const { logout } = UserLoginService();
@@ -14,9 +16,9 @@ export function UserDeleteAccount() {
     },
   };
 
-  async function deleteAccount() {
+  async function deleteAccount(target: DeleteAccountTarget) {
     try {
-      await api.patch(`/mentor/delete-mentor`, {}, config);
+      await api.patch('/auth/delete-account', { target }, config);
       logout();
       setUserSession(null);
     } catch (error) {
