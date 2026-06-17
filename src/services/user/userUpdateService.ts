@@ -1,13 +1,14 @@
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { api } from '@/lib/axios';
 import {
+  SyncUserProfileSharedFieldsDTO,
   UserUpdateDTO,
   UserUpdatePasswordDTO,
 } from '../interfaces/IUserUpdate';
 import { ICalendlyUserInfo } from '../interfaces/IUseUserCalendlyInfoService';
 
 const UserUpdateService = () => {
-  const { userSession } = useAuthContext();
+  const { userSession, activeProfileType } = useAuthContext();
 
   const token = userSession?.token;
   const id = userSession?.id;
@@ -27,6 +28,31 @@ const UserUpdateService = () => {
       },
       config
     );
+  };
+
+  const handleUserData = async (data: UserUpdateDTO) => {
+    await api.put(
+      `/user/${id}`,
+      {
+        id,
+        ...data,
+      },
+      config
+    );
+  };
+
+  const discardUserProfileDraft = async (tokenOverride?: string) => {
+    await api.delete(`/user/profile/draft`, {
+      headers: {
+        Authorization: `Bearer ${tokenOverride ?? token}`,
+      },
+    });
+  };
+
+  const syncUserProfileSharedFields = async (
+    data: SyncUserProfileSharedFieldsDTO
+  ) => {
+    await api.patch(`/user/profile/shared-fields`, data, config);
   };
 
   const handleMentorCalendlyInfo = async (data: ICalendlyUserInfo) => {
@@ -50,8 +76,13 @@ const UserUpdateService = () => {
   };
 
   const updatePassword = async (data: UserUpdatePasswordDTO) => {
+    const endpoint =
+      activeProfileType === 'mentor'
+        ? `/mentor/change_password`
+        : `/user/change_password`;
+
     await api.put(
-      `/mentor/change_password`,
+      endpoint,
       {
         oldPassword: data.oldPassword,
         password: data.password,
@@ -63,6 +94,9 @@ const UserUpdateService = () => {
 
   return {
     handleMentorData,
+    handleUserData,
+    discardUserProfileDraft,
+    syncUserProfileSharedFields,
     handleMentorCalendlyInfo,
     updateMentorCalendlyInfo,
     updatePassword,
