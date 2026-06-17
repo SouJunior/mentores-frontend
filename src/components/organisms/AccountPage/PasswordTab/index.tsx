@@ -15,6 +15,7 @@ import { FormFields } from './FormFields';
 import { Modal } from '@/components/atoms/Modal';
 import { Spinner } from '@/components/atoms/Spinner';
 import { ModalCancel } from '@/components/molecules/ModalCancel';
+import { useAuthContext } from '@/context/Auth/AuthContext';
 import UserUpdateService from '@/services/user/userUpdateService';
 import { isEmpty } from '@/utils/is-empty';
 import { throwErrorMessages } from '@/utils/throw-error-messages';
@@ -47,6 +48,7 @@ export function PasswordTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
 
   const { updatePassword } = UserUpdateService();
+  const { activeProfileType } = useAuthContext();
   const router = useRouter();
 
   async function handleUpdatePassword(
@@ -98,7 +100,9 @@ export function PasswordTab() {
 
   return (
     <TabContainer value="password">
-      <TitleTab>Senha</TitleTab>
+      <TitleTab>
+        {activeProfileType === 'mentor' ? 'Senha' : 'Senha de acesso'}
+      </TitleTab>
       <SubtitleTab>
         <span>*</span> Indica um campo obrigatório
       </SubtitleTab>

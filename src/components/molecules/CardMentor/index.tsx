@@ -4,6 +4,7 @@ import { Tag } from '@/components/atoms/Tag';
 import { IMentors } from '@/services/interfaces/IUseMentorsService';
 import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTheme } from 'styled-components';
 import { CardImage, CardStacks, CardTitle } from './style';
 
@@ -20,7 +21,10 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
   }
 
   const splitMentorName = mentor.fullName.split(' ');
-  const hasValidCalendly = mentorCalendlyInfo?.calendlyName && mentorCalendlyInfo.agendaName;
+  const hasValidCalendly =
+    mentorCalendlyInfo?.calendlyName &&
+    mentorCalendlyInfo.agendaName &&
+    mentorCalendlyInfo.isConnected;
 
   return (
     <Card
@@ -58,9 +62,8 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
 
       {hasValidCalendly ? (
         <Button
-          as="a"
-          target="_blank"
-          href={`https://calendly.com/${mentorCalendlyInfo.calendlyName}/${mentorCalendlyInfo.agendaName}`}
+          as={Link}
+          href={`/agendar-mentoria?mentorId=${mentor.id}`}
         >
           Agendar um horário
         </Button>

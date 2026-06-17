@@ -1,9 +1,11 @@
 import { Spinner } from '@/components/atoms/Spinner';
 import AccountManagementTab from '@/components/organisms/AccountPage/AccountManagement';
 import { DeleteAccountTab } from '@/components/organisms/AccountPage/DeleteAccountTab';
+import { MenteeAppointmentsTab } from '@/components/organisms/AccountPage/MenteeAppointmentsTab';
 import { PasswordTab } from '@/components/organisms/AccountPage/PasswordTab';
 import { PersonalInfoTab } from '@/components/organisms/AccountPage/PersonalInfoTab';
 import { ProfileTab } from '@/components/organisms/AccountPage/ProfileTab';
+import { ReviewsTab } from '@/components/organisms/AccountPage/ReviewsTab';
 import { ScheduleTab } from '@/components/organisms/AccountPage/ScheduleTab';
 import { useAuthContext } from '@/context/Auth/AuthContext';
 import { EditPhotoProvider } from '@/context/EditPhotoContext';
@@ -16,7 +18,7 @@ import {
   AsideTitle,
   Container,
   ContainerSpinnerLoading,
-  ContentDivider,
+  ContentCard,
 } from '@/styles/pages/me';
 import * as Tabs from '@radix-ui/react-tabs';
 import { useRouter } from 'next/router';
@@ -26,22 +28,25 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const accountTabs = [
-  'personal-info',
-  'profile',
   'schedule',
-  'password',
+  'reviews',
+  'profile',
   'account-management',
+  'personal-info',
+  'password',
+  'delete-account',
 ];
 
 export default function MePage() {
-  const { mentor } = useAuthContext();
+  const { mentor, activeProfileType, profiles } = useAuthContext();
   const loading = useProtectPage();
 
   const router = useRouter();
   const initialTab = router.query.tab as string;
   const [activeTab, setActiveTab] = useState(
-    accountTabs.includes(initialTab) ? initialTab : 'personal-info'
+    accountTabs.includes(initialTab) ? initialTab : 'schedule'
   );
+  const profilesHasMentor = Boolean(profiles.data?.mentor.exists);
 
   function handleTabChange(value: string) {
     setActiveTab(value);
@@ -60,6 +65,17 @@ export default function MePage() {
       return;
     }
 
+    if (
+      activeProfileType === 'mentee' &&
+      mentor.data?.registerComplete === false
+    ) {
+      router.replace({
+        pathname: '/onboarding-mentee',
+        query: profilesHasMentor ? { origin: 'mentor' } : undefined,
+      });
+      return;
+    }
+
     const currentTab = router.query.tab as string;
 
     if (accountTabs.includes(currentTab)) {
@@ -67,16 +83,21 @@ export default function MePage() {
       return;
     }
 
-    setActiveTab('personal-info');
+    setActiveTab('schedule');
     router.replace(
       {
         pathname: '/me',
-        query: { tab: 'personal-info' },
+        query: { tab: 'schedule' },
       },
       undefined,
       { shallow: true }
     );
-  }, [router]);
+  }, [
+    activeProfileType,
+    mentor.data?.registerComplete,
+    profilesHasMentor,
+    router,
+  ]);
 
   useEffect(() => {
     if (!router.isReady) {
@@ -122,7 +143,7 @@ export default function MePage() {
     <Tabs.Root
       value={activeTab}
       onValueChange={handleTabChange}
-      defaultValue="personal-info"
+      defaultValue="schedule"
       orientation="vertical"
     >
       <EditPhotoProvider>
@@ -136,18 +157,20 @@ export default function MePage() {
               <AsideNavItem value="personal-info">
                 Informações pessoais
               </AsideNavItem>
+              <AsideNavItem value="schedule">
+                {activeProfileType === 'mentor' ? 'Agenda' : 'Agendamentos'}
+              </AsideNavItem>
+              <AsideNavItem value="reviews">Avaliações</AsideNavItem>
               <AsideNavItem value="profile">Perfil</AsideNavItem>
-              <AsideNavItem value="schedule">Agenda</AsideNavItem>
               <AsideNavItem value="password">Senha</AsideNavItem>
+              <AsideDivider />
               <AsideNavItem value="account-management">
                 Gestão de conta
               </AsideNavItem>
             </AsideNavContainer>
           </AsideContainer>
 
-          <ContentDivider />
-
-          <main>
+          <ContentCard>
             {mentor.isLoading ? (
               <ContainerSpinnerLoading>
                 <Spinner className="spinner" />
@@ -156,7 +179,12 @@ export default function MePage() {
               <>
                 <PersonalInfoTab />
                 <ProfileTab />
-                <ScheduleTab />
+                {activeProfileType === 'mentor' ? (
+                  <ScheduleTab />
+                ) : (
+                  <MenteeAppointmentsTab />
+                )}
+                <ReviewsTab />
                 <PasswordTab />
                 <AccountManagementTab />
                 <DeleteAccountTab />
@@ -169,7 +197,7 @@ export default function MePage() {
               closeOnClick
               theme="colored"
             />
-          </main>
+          </ContentCard>
         </Container>
       </EditPhotoProvider>
     </Tabs.Root>

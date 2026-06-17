@@ -1,4 +1,5 @@
 import { api } from '@/lib/axios';
+import { sessionNameUserInfo } from '@/data/static-info';
 import { getToken } from '@/lib/getToken';
 import { ICalendlyUserInfo } from '@/services/interfaces/IUseUserCalendlyInfoService';
 import UserLoginService from '@/services/user/userLoginService';
@@ -13,8 +14,10 @@ import {
   useState,
 } from 'react';
 import {
+  AccountProfile,
+  ActiveProfileType,
   IAuthContextType,
-  IMentor,
+  ProfileSwitchResponse,
   UserSessionInfo,
 } from '../interfaces/IAuth';
 
@@ -25,6 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { logout } = UserLoginService();
 
   const token = userSession?.token;
+  const activeProfileType = userSession?.profileType ?? 'mentor';
 
   const config = {
     headers: {
@@ -58,10 +62,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const mentorResponse = useQuery({
-    queryKey: ['mentor', userSession?.id],
+  const persistUserSession = (sessionInfo: UserSessionInfo) => {
+    const currentStorage =
+      localStorage.getItem(sessionNameUserInfo) !== null
+        ? localStorage
+        : sessionStorage;
+
+    currentStorage.setItem(sessionNameUserInfo, JSON.stringify(sessionInfo));
+  };
+
+  const profileResponse = useQuery({
+    queryKey: ['profile', activeProfileType, userSession?.id],
     queryFn: async () => {
-      const response = await api.get<IMentor>(`/mentor/${userSession?.id}`);
+      const endpoint =
+        activeProfileType === 'mentor'
+          ? `/mentor/${userSession?.id}`
+          : `/user/${userSession?.id}`;
+      const response = await api.get<AccountProfile>(endpoint);
       return response.data;
     },
     enabled: !!userSession?.id,
@@ -76,25 +93,70 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       );
       return response.data;
     },
-    enabled: !!userSession?.id,
+    enabled: !!userSession?.id && activeProfileType === 'mentor',
   });
+
+  const profilesResponse = useQuery({
+    queryKey: ['profiles', userSession?.id, userSession?.profileType],
+    queryFn: async () => {
+      const response = await api.get('/auth/profiles', config);
+      return response.data;
+    },
+    enabled: !!userSession?.token,
+  });
+
+  const switchProfile = async (
+    profileType: ActiveProfileType
+  ): Promise<ProfileSwitchResponse | undefined> => {
+    if (!userSession?.token || profileType === activeProfileType) {
+      return undefined;
+    }
+
+    const type = profileType === 'mentor' ? 'mentor' : 'user';
+    const response = await api.post<ProfileSwitchResponse>(
+      '/auth/switch-profile',
+      { type },
+      {
+        headers: {
+          Authorization: `Bearer ${userSession.token}`,
+        },
+      }
+    );
+
+    const nextProfileType: 'mentor' | 'mentee' =
+      response.data.profileType === 'mentor' ? 'mentor' : 'mentee';
+
+    const sessionInfo = {
+      id: String(response.data.info.id),
+      token: response.data.token,
+      profileType: nextProfileType,
+    };
+
+    persistUserSession(sessionInfo);
+    setUserSession(sessionInfo);
+    return response.data;
+  };
 
   useEffect(() => {
     if (
-      mentorResponse.error instanceof AxiosError &&
-      mentorResponse.error.response?.status === 404
+      profileResponse.error instanceof AxiosError &&
+      profileResponse.error.response?.status === 404
     ) {
       logout();
       setUserSession(null);
     }
-  }, [logout, mentorResponse.error]);
+  }, [logout, profileResponse.error]);
 
   return (
     <AuthContent.Provider
       value={{
         userSession,
         setUserSession,
-        mentor: { ...mentorResponse },
+        mentor: { ...profileResponse },
+        activeProfile: { ...profileResponse },
+        activeProfileType,
+        switchProfile,
+        profiles: { ...profilesResponse },
         mentorCalendlyInfo: { ...calendlyResponse },
       }}
     >

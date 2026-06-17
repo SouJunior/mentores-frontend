@@ -12,14 +12,9 @@ export function UserAccountDeleteFeedback() {
       Authorization: `Bearer ${token}`,
     },
   };
+
   async function accountDeleteFeedback(data: FormValuesDeleteAccountDTO) {
-    try {
-      console.log(data);
-      await api.post('/account-deletion-feedback', data, config);
-    } catch (error) {
-      console.error('Erro ao enviar feedback de exclusão:', error);
-      throw error;
-    }
+    await api.post('/account-deletion-feedback', data, config);
   }
 
   return { accountDeleteFeedback };

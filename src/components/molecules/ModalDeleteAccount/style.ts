@@ -7,7 +7,7 @@ export const ContainerModalDeleteAccount = styled(Modal.Content)`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-width: 400px;
+  max-width: 560px;
   padding: 1rem 1rem;
   position: relative;
   text-align: center;
@@ -50,8 +50,7 @@ export const ModalCloseButton = styled(Modal.Close)`
 `;
 
 export const ButtonStyled = styled(Button)<{
-  $variant?: string;
-  asCloseButton?: boolean;
+  $variant?: 'delete';
 }>`
   background-color: ${props =>
     props.$variant === 'delete' ? props.theme.colors.red[400] : ''};
@@ -78,5 +77,58 @@ export const ButtonStyled = styled(Button)<{
       props.$variant === 'delete'
         ? props.theme.colors.white
         : props.theme.colors.blue[850]};
+  }
+`;
+
+export const ScheduleList = styled.div`
+  width: 100%;
+  max-height: 18rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding-right: 0.25rem;
+`;
+
+export const ScheduleItem = styled.div`
+  width: 100%;
+  border: 1px solid ${props => props.theme.colors.gray[200]};
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+`;
+
+export const ScheduleTitle = styled.strong`
+  color: ${props => props.theme.colors.black[200]};
+  font-size: ${props => props.theme.fontSizes.sm};
+  line-height: 1.3rem;
+`;
+
+export const ScheduleMeta = styled.span`
+  color: ${props => props.theme.colors.gray[700]};
+  font-size: ${props => props.theme.fontSizes.xs};
+  line-height: 1.25rem;
+  overflow-wrap: anywhere;
+`;
+
+export const ScheduleActions = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+`;
+
+export const LoadingSchedulesContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 0;
+
+  span {
+    --spinner-color: ${props => props.theme.colors.blue[800]};
   }
 `;

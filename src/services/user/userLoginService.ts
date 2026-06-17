@@ -23,7 +23,7 @@ const UserLoginService = () => {
     const response = await api.post<UserLoginResponse>('/auth/login', {
       email: data.email,
       password: data.password,
-      type: data.type,
+      ...(data.type ? { type: data.type } : {}),
     });
 
     return response;

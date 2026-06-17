@@ -4,15 +4,19 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 export const ContainerForm = styled.div`
-  width: 100%;
-  max-width: 500px;
+  width: min(31.5rem, 100%);
   height: fit-content;
-  position: absolute;
-  right: 2.7rem;
-  top: 2rem;
+  position: relative;
+  margin-left: auto;
   background: ${props => props.theme.colors.white};
-  border-radius: 12px;
-  padding: 2rem;
+  border-radius: 1.5rem;
+  padding: clamp(1.5rem, 3.2vh, 2rem);
+  box-shadow: 0 1.5rem 3rem rgba(0, 32, 80, 0.22);
+
+  @media (max-width: 1024px) {
+    width: min(31.5rem, calc(100vw - 2rem));
+    margin-left: 0;
+  }
 `;
 
 export const ContainerRegister = styled.div`

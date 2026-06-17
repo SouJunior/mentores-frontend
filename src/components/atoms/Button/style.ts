@@ -27,13 +27,13 @@ const BaseStylesButton = styled.button`
 `;
 
 export interface ButtonStyleProps {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
-  size?: 'lg' | 'md' | 'sm';
+  $variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
+  $size?: 'lg' | 'md' | 'sm';
 }
 
 export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
-  ${({ variant, theme, disabled }) => {
-    switch (variant) {
+  ${({ $variant, theme, disabled }) => {
+    switch ($variant) {
       case 'primary':
         return css`
           border: 2px solid
@@ -80,8 +80,8 @@ export const ButtonStyle = styled(BaseStylesButton)<ButtonStyleProps>`
     }
   }}
 
-  ${({ size }) => {
-    switch (size) {
+  ${({ $size }) => {
+    switch ($size) {
       case 'lg':
         return css`
           padding: 1rem 1.5rem;

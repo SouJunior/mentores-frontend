@@ -96,3 +96,30 @@ export const reviewOptions = [
 ];
 
 export const sessionNameUserInfo = '@mentores-soujunior-v1:token';
+export const menteeOnboardingSourceKey =
+  '@mentores-soujunior-v1:mentee-onboarding-source';
+
+export const mentorshipFeedbackQuestions = [
+  {
+    key: 'mentoringRating',
+    label: 'Como você avalia a qualidade geral da mentoria recebida?',
+  },
+  {
+    key: 'mentorClarityRating',
+    label: 'O mentor conseguiu explicar os pontos com clareza?',
+  },
+  {
+    key: 'mentorSupportRating',
+    label: 'Você se sentiu acolhido(a) e apoiado(a) durante a conversa?',
+  },
+  {
+    key: 'goalProgressRating',
+    label:
+      'A mentoria ajudou você a avançar no objetivo que levou para a sessão?',
+  },
+  {
+    key: 'platformExperienceRating',
+    label:
+      'Como foi sua experiência geral usando a plataforma para essa mentoria?',
+  },
+] as const;
