@@ -19,3 +19,24 @@ export interface IMentorSchedule {
   eventUrl: string;
   participants: IMentorScheduleParticipant[];
 }
+
+export interface IMenteeScheduleMentor {
+  id: string;
+  fullName: string;
+}
+
+export interface IMenteeSchedule {
+  eventUuid: string;
+  eventUri: string;
+  eventName: string;
+  description: string;
+  startTime: string;
+  endTime: string | null;
+  duration: string;
+  joinUrl: string;
+  eventUrl: string;
+  cancelUrl?: string;
+  rescheduleUrl?: string;
+  status: 'pending' | 'scheduled' | 'completed';
+  mentor: IMenteeScheduleMentor;
+}
