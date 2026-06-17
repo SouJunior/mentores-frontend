@@ -2,7 +2,8 @@ import souJuniorLogoImg from '@/assets/logos/sou-junior.svg';
 import ModalEmail from '@/components/molecules/ModalEmail';
 import {
   ValuesFormType,
-  registerSchema,
+  RegisterProfileType,
+  createRegisterSchema,
   initialValues,
 } from '@/utils/registerSchema';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
@@ -36,7 +37,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { errorTranslations } from '@/services/errors/error-messages-translations';
 
-export function FormRegister() {
+interface FormRegisterProps {
+  profileType?: RegisterProfileType;
+}
+
+export function FormRegister({ profileType = 'mentor' }: FormRegisterProps) {
   const [openModalCancel, setOpenModalCancel] = useState(false);
   const [openEmail, setOpenEmail] = useState(false);
   const [isUserAlreadyExists, setIsUserAlreadyExists] = useState(false);
@@ -51,7 +56,9 @@ export function FormRegister() {
     { resetForm }: { resetForm: () => void }
   ) => {
     try {
-      await api.post('/mentor', {
+      const endpoint = profileType === 'mentor' ? '/mentor' : '/user';
+
+      await api.post(endpoint, {
         fullName: values.name,
         email: values.email,
         dateOfBirth: values.dateBirthday,
@@ -80,7 +87,7 @@ export function FormRegister() {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: registerSchema,
+    validationSchema: createRegisterSchema(profileType),
     onSubmit: handleSubmit,
     validateOnChange: true,
   });
