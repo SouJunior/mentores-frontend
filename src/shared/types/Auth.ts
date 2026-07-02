@@ -21,6 +21,11 @@ export interface IMentor {
   deleted?: boolean;
 }
 
+export interface CookieSession {
+  id: string;
+  registerComplete?: boolean;
+}
+
 export interface Session {
   id: string;
   fullName: string;

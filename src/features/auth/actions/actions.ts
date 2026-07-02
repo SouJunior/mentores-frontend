@@ -3,8 +3,13 @@
 import { UserLoginResponse } from '@/features/auth/types/IUserLoginService';
 import { SetNewPasswordDTO } from '@/features/auth/types/IUserSetNewPassword';
 import { safeFetch } from '@/shared/lib/fetch';
+import { getSession } from '@/shared/utils/get-session';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+
+export async function fetchSession() {
+  return getSession();
+}
 
 type LoginFormData = {
   email: string;
@@ -62,12 +67,10 @@ export async function login(formData: LoginFormData) {
 
   cookieStore.set(
     'session',
-    encodeURIComponent(
-      JSON.stringify({
-        id: String(info.id),
-        registerComplete: info.registerComplete,
-      })
-    ),
+    JSON.stringify({
+      id: String(info.id),
+      registerComplete: info.registerComplete,
+    }),
     {
       httpOnly: false,
       secure: isProd,
