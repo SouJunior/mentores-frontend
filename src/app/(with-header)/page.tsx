@@ -7,8 +7,6 @@ import { Onboarding } from '@/features/home/components/onboarding';
 import { Suspense } from 'react';
 import { HomeInteractive } from './home/HomeInteractive';
 
-export const revalidate = 60;
-
 export default function Page() {
   return (
     <>
