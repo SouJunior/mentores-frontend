@@ -6,7 +6,7 @@ export async function DepoSectionLoader() {
   const testimonies = await serverFetch<ITestimony[]>('/testimony', {
     tags: ['testimonies'],
     auth: false,
-  });
+  }).catch(() => []);
 
   return <DepoSection testimonies={testimonies} />;
 }

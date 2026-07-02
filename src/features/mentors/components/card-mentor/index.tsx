@@ -32,12 +32,13 @@ export function CardMentor({ mentor, mentorCalendlyInfo }: CardMentorProps) {
         minHeight: '23.5rem',
       }}
     >
-      <div className="w-30 h-30 rounded-full overflow-hidden self-center bg-gray-250 [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
+      <div className="relative w-30 h-30 rounded-full overflow-hidden self-center bg-gray-250">
         {mentor?.profile && (
           <Image
             src={mentor?.profile}
-            width={150}
-            height={150}
+            fill
+            sizes="7.5rem"
+            className="object-cover"
             alt={mentor?.fullName}
           />
         )}

@@ -8,11 +8,11 @@ export async function MentorSectionLoader() {
     serverFetch<IMentors[]>('/mentor/registered', {
       tags: ['mentors'],
       auth: false,
-    }),
+    }).catch(() => []),
     serverFetch<ICalendlyUserInfo[]>('/calendly', {
       tags: ['calendly'],
       auth: false,
-    }),
+    }).catch(() => []),
   ]);
 
   return <MentorSection mentors={mentors} calendlyInfo={calendlyInfo} />;
