@@ -122,7 +122,7 @@ export function FormRegister() {
         </Modal.Root>
       )}
 
-      <div className="w-full max-w-[500px] h-fit absolute right-[2.7rem] top-8 bg-white rounded-xl p-8">
+      <div className="w-full max-w-[500px] bg-white rounded-xl p-8">
         <div>
           <div className="container-logo-form flex flex-col gap-6 mb-2">
             <Image
