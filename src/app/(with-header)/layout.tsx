@@ -1,5 +1,6 @@
 import { Footer } from '@/shared/layout/footer';
 import { Header } from '@/shared/layout/header';
+import { SessionHydrator } from '@/shared/providers/SessionHydrator';
 import { parseSession } from '@/shared/utils/parse-session';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
@@ -14,7 +15,8 @@ export default async function WithHeaderLayout({
 
   return (
     <>
-      <Header session={session} />
+      <SessionHydrator session={session} />
+      <Header />
       {children}
       <Footer />
     </>

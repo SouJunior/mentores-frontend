@@ -4,15 +4,10 @@ import { HeroSection } from '@/features/home/components/hero-section';
 import { MentorSectionLoader } from '@/features/home/components/mentor-section/MentorSectionLoader';
 import { MentorSectionSkeleton } from '@/features/home/components/mentor-section/MentorSectionSkeleton';
 import { Onboarding } from '@/features/home/components/onboarding';
-import { parseSession } from '@/shared/utils/parse-session';
-import { cookies } from 'next/headers';
 import { Suspense } from 'react';
 import { HomeInteractive } from './HomeInteractive';
 
-export default async function Page() {
-  const cookieStore = await cookies();
-  const session = parseSession(cookieStore.get('session')?.value);
-
+export default function Page() {
   return (
     <>
       <HeroSection />
@@ -24,7 +19,7 @@ export default async function Page() {
         <DepoSectionLoader />
       </Suspense>
       <Suspense>
-        <HomeInteractive session={session} />
+        <HomeInteractive />
       </Suspense>
     </>
   );

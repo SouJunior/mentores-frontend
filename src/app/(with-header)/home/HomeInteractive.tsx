@@ -2,16 +2,13 @@
 
 import CalendlyRegister from '@/features/account/components/calendly';
 import { ModalAccountDeleted } from '@/features/account/components/modal-account-deleted';
-import { Session } from '@/shared/types/Auth';
+import { useSession } from '@/shared/hooks/useSession';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-interface HomeInteractiveProps {
-  session: Session | null;
-}
-
-export function HomeInteractive({ session }: HomeInteractiveProps) {
+export function HomeInteractive() {
+  const session = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [isAccountDeleted, setIsAccountDeleted] = useState(false);

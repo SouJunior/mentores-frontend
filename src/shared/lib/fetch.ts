@@ -4,6 +4,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
 type ServerFetchOptions = RequestInit & {
   tags?: string[];
+  auth?: boolean;
 };
 
 async function buildHeaders(
@@ -35,10 +36,9 @@ export async function serverFetch<T>(
   path: string,
   options: ServerFetchOptions = {}
 ): Promise<T> {
-  const { tags, headers, ...rest } = options;
+  const { tags, headers, auth = true, ...rest } = options;
 
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token')?.value;
+  const token = auth ? (await cookies()).get('token')?.value : undefined;
 
   const response = await fetch(`${API_URL}${path}`, {
     ...rest,

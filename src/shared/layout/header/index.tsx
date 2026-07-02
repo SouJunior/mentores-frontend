@@ -11,18 +11,15 @@ import {
 } from '@/shared/components/ui/dropdown-menu';
 import { UserAvatar } from '@/shared/components/user-avatar';
 import { useBreakpoint } from '@/shared/hooks/useBreakpoint';
+import { useSession } from '@/shared/hooks/useSession';
 import { breakpoints } from '@/shared/styles/theme';
-import { Session } from '@/shared/types/Auth';
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-interface HeaderProps {
-  session: Session | null;
-}
-
-export function Header({ session }: HeaderProps) {
+export function Header() {
+  const session = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const breakpoint = useBreakpoint();
 

@@ -5,6 +5,7 @@ import { DepoSection } from './index';
 export async function DepoSectionLoader() {
   const testimonies = await serverFetch<ITestimony[]>('/testimony', {
     tags: ['testimonies'],
+    auth: false,
   });
 
   return <DepoSection testimonies={testimonies} />;

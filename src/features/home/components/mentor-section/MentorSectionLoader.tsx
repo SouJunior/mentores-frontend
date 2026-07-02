@@ -5,8 +5,14 @@ import { MentorSection } from './index';
 
 export async function MentorSectionLoader() {
   const [mentors, calendlyInfo] = await Promise.all([
-    serverFetch<IMentors[]>('/mentor/registered', { tags: ['mentors'] }),
-    serverFetch<ICalendlyUserInfo[]>('/calendly', { tags: ['calendly'] }),
+    serverFetch<IMentors[]>('/mentor/registered', {
+      tags: ['mentors'],
+      auth: false,
+    }),
+    serverFetch<ICalendlyUserInfo[]>('/calendly', {
+      tags: ['calendly'],
+      auth: false,
+    }),
   ]);
 
   return <MentorSection mentors={mentors} calendlyInfo={calendlyInfo} />;
