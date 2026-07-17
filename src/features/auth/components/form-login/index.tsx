@@ -1,20 +1,21 @@
 'use client';
 
 import { login } from '@/features/auth/actions/actions';
-import { authErrorMessages } from '@/features/auth/constants/error-messages';
+import {
+  authErrorAlerts,
+  defaultAuthErrorAlert,
+  type AuthErrorAlert,
+} from '@/features/auth/constants/error-messages';
 import { Button } from '@/shared/components/button';
 import { Checkbox } from '@/shared/components/checkbox';
 import { Eye } from '@/shared/components/eye';
 import { InputForm } from '@/shared/components/input-form';
 import { Spinner } from '@/shared/components/spinner';
-import { throwErrorMessages } from '@/shared/utils/throw-error-messages';
 import { Form, Formik } from 'formik';
-import { Lock, User } from 'lucide-react';
+import { CircleAlert, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import * as yup from 'yup';
 
 const loginSchema = yup.object({
@@ -27,31 +28,72 @@ const loginSchema = yup.object({
 
 type LoginDataType = yup.InferType<typeof loginSchema>;
 
+// erro de validação local também é comunicado pelo banner (não inline)
+const validationErrorAlert: AuthErrorAlert = {
+  title: 'E-mail ou senha incorretos.',
+  description:
+    'Você digitou a senha incorretamente e será bloqueado após 5 tentativas.',
+};
+
+function FormAlert({
+  title,
+  description,
+  onClose,
+}: AuthErrorAlert & { onClose: () => void }) {
+  return (
+    <div
+      role="alert"
+      className="relative mb-6 flex items-start gap-3 rounded-lg bg-[#e3687c] p-4 pr-10 text-white"
+    >
+      <CircleAlert className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
+      <div className="flex flex-col gap-1">
+        <strong className="font-semibold leading-[130%]">{title}</strong>
+        {description && (
+          <span className="text-sm leading-[140%] text-white/90">
+            {description}
+          </span>
+        )}
+      </div>
+      <button
+        type="button"
+        aria-label="Fechar aviso"
+        onClick={onClose}
+        className="absolute right-3 top-3 text-white transition-opacity hover:opacity-80"
+      >
+        <X className="h-5 w-5" />
+      </button>
+    </div>
+  );
+}
+
 export function FormLogin() {
   const [isKeepConnected, setIsKeepConnected] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [errorAlert, setErrorAlert] = useState<AuthErrorAlert | null>(null);
 
-  const handleSubmit = async ({ email, password }: LoginDataType) => {
-    const result = await login({ email, password });
+  const handleSubmit = async (values: LoginDataType) => {
+    setErrorAlert(null);
+
+    // validação local: qualquer falha vira banner (sem texto inline)
+    try {
+      await loginSchema.validate(values, { abortEarly: false });
+    } catch {
+      setErrorAlert(validationErrorAlert);
+      return;
+    }
+
+    const result = await login(values);
 
     if (result?.error) {
-      throwErrorMessages({
-        messages: authErrorMessages,
-        currentMessageKey: result.error.toLowerCase(),
-      });
+      const key = result.error.toLowerCase();
+      setErrorAlert(authErrorAlerts[key] ?? defaultAuthErrorAlert);
     }
   };
 
+  const hasError = errorAlert !== null;
+
   return (
     <div className="max-w-[31.5rem] w-full flex flex-col bg-white rounded-lg p-6">
-      <ToastContainer
-        autoClose={3500}
-        hideProgressBar={true}
-        closeOnClick
-        theme="colored"
-        icon={false}
-      />
-
       <Image
         src={'/logos/sou-junior.svg'}
         alt="Logo SouJunior"
@@ -64,46 +106,52 @@ export function FormLogin() {
         Bem-vindo de volta
       </h2>
 
+      {errorAlert && (
+        <FormAlert
+          title={errorAlert.title}
+          description={errorAlert.description}
+          onClose={() => setErrorAlert(null)}
+        />
+      )}
+
       <Formik
         initialValues={{ email: '', password: '' }}
-        validationSchema={loginSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, isSubmitting }) => {
+        {({ isSubmitting }) => {
           return (
-            <Form className="flex flex-col">
+            <Form
+              className="flex flex-col"
+              // ao editar qualquer campo, limpa o erro (some banner, some vermelho)
+              onChange={() => {
+                if (hasError) setErrorAlert(null);
+              }}
+            >
               <div className="flex flex-col gap-6">
-                <div
-                  className={`relative [&_svg]:w-6 [&_svg]:h-6 [&_label_span:first-child]:text-gray-700 [&_label_span]:font-normal [&_label_span]:text-base [&_label_span]:leading-[150%] [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-[2.8rem] [&_.eye-visibility_svg]:text-black-200 focus-within:[&_svg]:text-blue-800${errors.email && touched.email ? ' [&_span]:text-red-400 [&_svg]:text-red-400' : ''}`}
-                >
-                  <InputForm
-                    isRequired={false}
-                    type="input"
-                    name="email"
-                    label="E-mail"
-                  >
-                    <User />
-                  </InputForm>
-                </div>
+                <InputForm
+                  type="input"
+                  name="email"
+                  label="E-mail"
+                  invalid={hasError}
+                />
 
-                <div
-                  className={`relative [&_svg]:w-6 [&_svg]:h-6 [&_label_span:first-child]:text-gray-700 [&_label_span]:font-normal [&_label_span]:text-base [&_label_span]:leading-[150%] [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-[2.8rem] [&_.eye-visibility_svg]:text-black-200 focus-within:[&_svg]:text-blue-800${errors.password && touched.password ? ' [&_span]:text-red-400 [&_svg]:text-red-400' : ''}`}
-                >
+                <div className="relative [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-1/2 [&_.eye-visibility]:-translate-y-1/2 [&_.eye-visibility_svg]:text-black-200 [&_input]:pr-8">
                   <InputForm
-                    isRequired={false}
                     type="input"
                     name="password"
                     label="Senha"
                     inputType={isPasswordVisible ? 'text' : 'password'}
-                  >
-                    <Lock />
-                  </InputForm>
-                  <Eye
-                    aria-label="Mostrar senha"
-                    pressed={isPasswordVisible}
-                    onPressedChange={setIsPasswordVisible}
-                    className="eye-visibility"
+                    invalid={hasError}
                   />
+                  {/* no erro, o olho dá lugar ao ícone de alerta do InputForm */}
+                  {!hasError && (
+                    <Eye
+                      aria-label="Mostrar senha"
+                      pressed={isPasswordVisible}
+                      onPressedChange={setIsPasswordVisible}
+                      className="eye-visibility"
+                    />
+                  )}
                 </div>
               </div>
 
@@ -123,6 +171,13 @@ export function FormLogin() {
                   className="h-[43px] p-0 cursor-wait bg-blue-800 border-blue-800"
                 >
                   <Spinner />
+                </Button>
+              ) : hasError ? (
+                <Button
+                  disabled
+                  className="cursor-not-allowed bg-gray-300 border-gray-300 text-white hover:bg-gray-300"
+                >
+                  Entrar
                 </Button>
               ) : (
                 <Button>Entrar</Button>
