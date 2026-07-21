@@ -20,7 +20,11 @@ export function Eye({ pressed, className, ...props }: EyeProps) {
         className
       )}
     >
-      {pressed ? <VisibilityOffIcon size={16} /> : <VisibilityIcon size={16} />}
+      {pressed ? (
+        <VisibilityIcon size={16} />
+      ) : (
+        <VisibilityOffIcon size={16} />
+      )}
     </Toggle>
   );
 }

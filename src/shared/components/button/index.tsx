@@ -1,3 +1,4 @@
+import { Spinner } from '@/shared/components/spinner';
 import { cn } from '@/shared/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ElementType, ReactNode } from 'react';
@@ -33,6 +34,8 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
   children: ReactNode;
   as?: ElementType;
   className?: string;
+  loading?: boolean;
+  disabled?: boolean;
   [key: string]: any;
 }
 
@@ -42,14 +45,18 @@ export function Button({
   size,
   as: Component = 'button',
   className,
+  loading = false,
+  disabled = false,
   ...props
 }: ButtonProps) {
   return (
     <Component
-      className={cn(buttonVariants({ variant, size }), className)}
+      className={cn(buttonVariants({ variant, size }), loading && 'cursor-wait', className)}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
       {...props}
     >
-      {children}
+      {loading ? <Spinner /> : children}
     </Component>
   );
 }
