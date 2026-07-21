@@ -20,8 +20,6 @@ export function Eye({ pressed, className, ...props }: EyeProps) {
         className
       )}
     >
-      {/* invertido: senha visível (pressed) → olho aberto;
-          senha oculta → olho cortado */}
       {pressed ? (
         <VisibilityIcon size={16} />
       ) : (

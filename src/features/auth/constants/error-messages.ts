@@ -15,16 +15,13 @@ export type AuthErrorAlert = {
   description?: string;
 };
 
-/**
- * Conteúdo do banner de erro (título + descrição) exibido no formulário.
- * Complementa `authErrorMessages` (usado pelos toasts), sem substituí-lo.
- */
+export const validationErrorAlert: AuthErrorAlert = {
+  title: 'E-mail ou senha incorretos.',
+  description: 'Confira os dados informados e tente novamente.',
+};
+
 export const authErrorAlerts: { [key: string]: AuthErrorAlert } = {
-  'invalid e-mail or password': {
-    title: 'E-mail ou senha incorretos.',
-    description:
-      'Você digitou a senha incorretamente e será bloqueado após 5 tentativas.',
-  },
+  'invalid e-mail or password': validationErrorAlert,
   "you typed the password incorrectly and will be blocked in five tries. to register a new password click on 'forgot my password'":
     {
       title: 'E-mail ou senha incorretos.',
