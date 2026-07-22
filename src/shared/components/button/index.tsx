@@ -51,12 +51,26 @@ export function Button({
 }: ButtonProps) {
   return (
     <Component
-      className={cn(buttonVariants({ variant, size }), loading && 'cursor-wait', className)}
+      className={cn(
+        buttonVariants({ variant, size }),
+        'relative',
+        loading && 'cursor-wait',
+        className
+      )}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...props}
     >
-      {loading ? <Spinner /> : children}
+      {loading && (
+        <span className="absolute inset-0 flex items-center justify-center">
+          <Spinner />
+        </span>
+      )}
+      <span
+        className={cn('inline-flex items-center gap-2', loading && 'invisible')}
+      >
+        {children}
+      </span>
     </Component>
   );
 }

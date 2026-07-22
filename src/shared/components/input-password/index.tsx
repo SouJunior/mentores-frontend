@@ -2,6 +2,7 @@
 
 import { Eye } from '@/shared/components/eye';
 import { InputForm } from '@/shared/components/input-form';
+import { cn } from '@/shared/lib/utils';
 import { useState } from 'react';
 
 interface InputPasswordProps {
@@ -22,7 +23,14 @@ export function InputPassword({
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <div className="relative [&_.eye-visibility]:right-4 [&_.eye-visibility]:top-1/2 [&_.eye-visibility]:-translate-y-1/2 [&_.eye-visibility_svg]:text-black-200 [&_input]:pr-8">
+    <div
+      className={cn(
+        'relative [&_.eye-visibility]:top-1/2 [&_.eye-visibility]:-translate-y-1/2 [&_.eye-visibility_svg]:text-black-200',
+        invalid
+          ? '[&_.eye-visibility]:right-12 [&_input]:pr-14'
+          : '[&_.eye-visibility]:right-4 [&_input]:pr-8'
+      )}
+    >
       <InputForm
         type="input"
         name={name}
@@ -32,14 +40,12 @@ export function InputPassword({
         isRequired={isRequired}
         disabled={disabled}
       />
-      {!invalid && (
-        <Eye
-          aria-label={isVisible ? 'Ocultar senha' : 'Mostrar senha'}
-          pressed={isVisible}
-          onPressedChange={setIsVisible}
-          className="eye-visibility"
-        />
-      )}
+      <Eye
+        aria-label={isVisible ? 'Ocultar senha' : 'Mostrar senha'}
+        pressed={isVisible}
+        onPressedChange={setIsVisible}
+        className="eye-visibility"
+      />
     </div>
   );
 }
