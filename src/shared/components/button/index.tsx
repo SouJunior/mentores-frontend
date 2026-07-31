@@ -51,16 +51,21 @@ export function Button({
 }: ButtonProps) {
   return (
     <Component
+<<<<<<< HEAD
       className={cn(
         buttonVariants({ variant, size }),
         'relative',
         loading && 'disabled:cursor-wait',
         className
       )}
+=======
+      className={cn(buttonVariants({ variant, size }), loading && 'cursor-wait', className)}
+>>>>>>> 8c00da3b24be9791c469f9a4ce8eb37f1a08a64c
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...props}
     >
+<<<<<<< HEAD
       {loading && (
         <span
           aria-hidden="true"
@@ -74,6 +79,9 @@ export function Button({
       >
         {children}
       </span>
+=======
+      {loading ? <Spinner /> : children}
+>>>>>>> 8c00da3b24be9791c469f9a4ce8eb37f1a08a64c
     </Component>
   );
 }
