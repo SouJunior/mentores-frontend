@@ -54,7 +54,7 @@ export function Button({
       className={cn(
         buttonVariants({ variant, size }),
         'relative',
-        loading && 'cursor-wait',
+        loading && 'disabled:cursor-wait',
         className
       )}
       disabled={disabled || loading}
@@ -62,12 +62,15 @@ export function Button({
       {...props}
     >
       {loading && (
-        <span className="absolute inset-0 flex items-center justify-center">
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 flex items-center justify-center"
+        >
           <Spinner />
         </span>
       )}
       <span
-        className={cn('inline-flex items-center gap-2', loading && 'invisible')}
+        className={cn('inline-flex items-center gap-2', loading && 'opacity-0')}
       >
         {children}
       </span>
