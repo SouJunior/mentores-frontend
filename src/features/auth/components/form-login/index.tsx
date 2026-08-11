@@ -72,7 +72,11 @@ export function FormLogin() {
         initialValues={{ email: '', password: '' }}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => {
+        {({ isSubmitting, values }) => {
+          const isFilled =
+            values.email.trim().length > 0 &&
+            values.password.trim().length > 0;
+
           return (
             <Form
               className="flex flex-col"
@@ -105,7 +109,7 @@ export function FormLogin() {
                 <Link href="/resetPassword">Esqueci minha senha</Link>
               </div>
 
-              <Button disabled={hasError} loading={isSubmitting}>
+              <Button disabled={hasError || !isFilled} loading={isSubmitting}>
                 Entrar
               </Button>
 

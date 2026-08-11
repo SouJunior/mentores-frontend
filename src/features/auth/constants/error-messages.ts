@@ -20,14 +20,15 @@ export const validationErrorAlert: AuthErrorAlert = {
   description: 'Confira os dados informados e tente novamente.',
 };
 
+const incorrectCredentialsAlert: AuthErrorAlert = {
+  title: 'E-mail ou senha incorretos.',
+  description: 'Você será bloqueado após 5 tentativas.',
+};
+
 export const authErrorAlerts: { [key: string]: AuthErrorAlert } = {
-  'invalid e-mail or password': validationErrorAlert,
+  'invalid e-mail or password': incorrectCredentialsAlert,
   "you typed the password incorrectly and will be blocked in five tries. to register a new password click on 'forgot my password'":
-    {
-      title: 'E-mail ou senha incorretos.',
-      description:
-        'Você digitou a senha incorretamente e será bloqueado após 5 tentativas.',
-    },
+    incorrectCredentialsAlert,
   'your account is not activated yet. check your e-mail inbox for instructions':
     {
       title: 'Conta ainda não ativada.',
