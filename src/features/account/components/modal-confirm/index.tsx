@@ -19,14 +19,15 @@ export function ModalConfirm({
 }: ModalConfirmProps) {
   return (
     <Modal.Content
-      className="text-center flex flex-col gap-4 px-8 py-6 relative"
+      className="text-center flex flex-col gap-4 px-8 py-6"
       {...props}
     >
-      <Modal.Close className="top-[0.7rem] right-[0.7rem]" />
-
-      <Modal.Title className="font-bold text-2xl leading-[120%] text-black-200 text-center">
-        {title}
-      </Modal.Title>
+      <div className="flex items-start gap-4">
+        <Modal.Title className="flex-1 pl-10 font-bold text-2xl leading-[120%] text-black-200 text-center">
+          {title}
+        </Modal.Title>
+        <Modal.Close className="static shrink-0" />
+      </div>
 
       {description && (
         <Modal.Description className="font-normal text-base text-gray-750 max-w-92 mx-auto">

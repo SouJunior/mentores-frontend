@@ -7,7 +7,7 @@ type ModalCancelProps = React.HTMLAttributes<HTMLDivElement>;
 export function ModalCancel(props: ModalCancelProps) {
   return (
     <Modal.Content
-      className="text-center flex flex-col gap-6 px-8 py-6 relative"
+      className="text-center flex flex-col gap-6 px-8 py-6"
       {...props}
     >
       <Modal.Title className="font-bold text-2xl leading-[120%] text-gray-750 text-center">

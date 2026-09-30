@@ -12,13 +12,15 @@ export function ModalCancelKeepRoute({
 }: ModalCancelKeepRouteProps) {
   return (
     <Modal.Content
-      className="text-center flex flex-col gap-[0.8rem] p-4 relative"
+      className="text-center flex flex-col gap-[0.8rem] p-4"
       {...props}
     >
-      <Modal.Title className="font-medium text-[1.4rem] text-black-200 text-center">
-        Deseja descartar as alterações?
-      </Modal.Title>
-      <Modal.Close className="top-[0.7rem] right-[0.7rem]" />
+      <div className="flex items-start gap-4">
+        <Modal.Title className="flex-1 pl-10 font-medium text-[1.4rem] text-black-200 text-center">
+          Deseja descartar as alterações?
+        </Modal.Title>
+        <Modal.Close className="static shrink-0" />
+      </div>
       <Modal.Description className="font-normal text-base text-gray-750 max-w-92 mx-auto mb-[0.2rem]">
         As informações inseridas não serão salvas.
       </Modal.Description>

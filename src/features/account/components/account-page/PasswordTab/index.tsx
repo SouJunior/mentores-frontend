@@ -1,14 +1,19 @@
 'use client';
 
 import { updatePassword } from '@/features/account/actions/actions';
-import { ModalCancel } from '@/features/account/components/modal-cancel';
+import { ModalCancelKeepRoute } from '@/features/account/components/modal-cancel-keep-route';
+import { ModalConfirm } from '@/features/account/components/modal-confirm';
+import {
+  toastMessageDiscarded,
+  toastMessageSuccess,
+} from '@/features/account/utils/toast-messages';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
 import { Spinner } from '@/shared/components/spinner';
 
+import { handleError } from '@/shared/utils/handleError';
 import { isEmpty } from '@/shared/utils/is-empty';
-import { throwErrorMessages } from '@/shared/utils/throw-error-messages';
-import { FormikProvider, useFormik } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import * as yup from 'yup';
@@ -17,10 +22,22 @@ import { FormFields } from './FormFields';
 const passwordValidation = yup
   .string()
   .required('Obrigatório')
-  .min(8, 'Senha inválida')
+  .min(8, 'A senha deve conter no mínimo 8 caracteres')
   .matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
-    'Senha inválida'
+    /^(?=.*[a-z])[A-Za-z\d\W_]{8,}$/,
+    'A senha deve conter pelo menos uma letra minúscula'
+  )
+  .matches(
+    /^(?=.*[A-Z])[A-Za-z\d\W_]{8,}$/,
+    'A senha deve conter pelo menos uma letra maiúscula'
+  )
+  .matches(
+    /^(?=.*\d)[A-Za-z\d\W_]{8,}$/,
+    'A senha deve conter pelo menos um número'
+  )
+  .matches(
+    /^(?=.*[\W_])[A-Za-z\d\W_]{8,}$/,
+    'A senha deve conter pelo menos um caractere especial'
   );
 
 const passwordTabSchema = yup.object({
@@ -28,7 +45,7 @@ const passwordTabSchema = yup.object({
   newPassword: passwordValidation,
   confirmNewPassword: passwordValidation.oneOf(
     [yup.ref('newPassword')],
-    'Os campos informados não coincidem'
+    'Senhas não coincidem'
   ),
 });
 
@@ -36,45 +53,64 @@ export type PasswordFormData = yup.InferType<typeof passwordTabSchema>;
 
 export function PasswordTab() {
   const [openWarningModal, setOpenWarningModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
-  async function handleUpdatePassword(
-    data: PasswordFormData,
-    { resetForm }: { resetForm: () => void }
-  ) {
-    const result = await updatePassword({
-      oldPassword: data.password,
-      password: data.newPassword,
-      confirmPassword: data.confirmNewPassword,
-    });
-
-    if (result?.error) {
-      const messages = { 'Incorrect old password': 'Senha inválida' };
-      throwErrorMessages({ messages, currentMessageKey: result.error });
-      return;
-    }
-
-    resetForm();
-    router.push('/');
-  }
 
   const formik = useFormik<PasswordFormData>({
     initialValues: { password: '', newPassword: '', confirmNewPassword: '' },
     validationSchema: passwordTabSchema,
-    onSubmit: handleUpdatePassword,
+    onSubmit: (_values, { setSubmitting }) => {
+      setOpenConfirmModal(true);
+      setSubmitting(false);
+    },
     validateOnChange: true,
   });
 
-  const isButtonDisabled = Object.entries(formik.values).some(
-    ([key, value]) => !value || formik.errors[key as keyof PasswordFormData]
-  );
+  const hasPasswordChanges = !isEmpty(formik.values);
+
+  const isButtonDisabled =
+    isLoading ||
+    Object.entries(formik.values).some(
+      ([key, value]) => !value || formik.errors[key as keyof PasswordFormData]
+    );
+
+  async function handleConfirmSave() {
+    setIsLoading(true);
+    try {
+      const result = await updatePassword({
+        oldPassword: formik.values.password,
+        password: formik.values.newPassword,
+        confirmPassword: formik.values.confirmNewPassword,
+      });
+
+      if (result?.error) {
+        if (result.error === 'Incorrect old password') {
+          formik.setFieldTouched('password', true, false);
+          formik.setFieldError('password', 'Senha incorreta');
+          return;
+        }
+        handleError('Algum erro aconteceu. Entre em contato com a gente.');
+        return;
+      }
+
+      formik.resetForm();
+      router.refresh();
+      toastMessageSuccess('Alterações salvas');
+    } catch {
+      handleError('Algum erro aconteceu. Entre em contato com a gente.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   const handleWarningModal = () => {
-    if (!isEmpty(formik.values)) {
-      setOpenWarningModal(true);
-      return;
-    }
-    router.push('/');
+    if (hasPasswordChanges) setOpenWarningModal(true);
+  };
+
+  const handleDiscard = () => {
+    formik.resetForm();
+    toastMessageDiscarded();
   };
 
   return (
@@ -87,7 +123,7 @@ export function PasswordTab() {
       </p>
 
       <FormikProvider value={formik}>
-        <form className="flex flex-col gap-4 max-w-[36.3rem]">
+        <Form className="flex flex-col gap-4 max-w-[36.3rem]">
           <FormFields />
 
           <div className="h-px w-full bg-gray-700" />
@@ -97,7 +133,7 @@ export function PasswordTab() {
               type="button"
               variant="tertiary"
               onClick={handleWarningModal}
-              disabled={formik.isSubmitting}
+              disabled={!hasPasswordChanges || isLoading}
             >
               Cancelar
             </Button>
@@ -106,10 +142,21 @@ export function PasswordTab() {
               open={openWarningModal}
               onOpenChange={() => setOpenWarningModal(false)}
             >
-              <ModalCancel />
+              <ModalCancelKeepRoute handleDiscard={handleDiscard} />
             </Modal.Root>
 
-            {formik.isSubmitting ? (
+            <Modal.Root
+              open={openConfirmModal}
+              onOpenChange={() => setOpenConfirmModal(false)}
+            >
+              <ModalConfirm
+                title="Deseja realmente alterar a senha?"
+                description="A senha antiga será substituída."
+                onConfirm={handleConfirmSave}
+              />
+            </Modal.Root>
+
+            {isLoading ? (
               <Button
                 disabled
                 className="h-[43px] p-0 w-24 cursor-wait bg-blue-800 border-blue-800"
@@ -122,7 +169,7 @@ export function PasswordTab() {
               </Button>
             )}
           </div>
-        </form>
+        </Form>
       </FormikProvider>
     </div>
   );

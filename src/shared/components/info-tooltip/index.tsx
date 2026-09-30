@@ -37,6 +37,9 @@ export function InfoTooltip({ right }: ToolTipProps) {
             Pelo menos uma letra maiúscula.
           </li>
           <li className="text-gray-700 leading-[150%]">
+            Pelo menos uma letra minúscula.
+          </li>
+          <li className="text-gray-700 leading-[150%]">
             Pelo menos um número.
           </li>
           <li className="text-gray-700 leading-[150%]">

@@ -9,7 +9,7 @@ type ModalProps = {
 export function ModalAccountDeleted({ isOpen, handleCloseModal }: ModalProps) {
   return (
     <Modal.Root open={isOpen} onOpenChange={handleCloseModal}>
-      <Modal.Content className="flex flex-col p-4 shadow-card relative max-w-[25rem]">
+      <Modal.Content className="flex flex-col p-4 shadow-card max-w-[25rem]">
         <div className="flex items-center justify-center mt-10 mb-6">
           <Image
             alt="Imagem ilustrativa de um notebook em cima de uma cadeira"

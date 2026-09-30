@@ -5,7 +5,7 @@ export const registerSchema = yup.object({
     .string()
     .required('')
     .matches(/^[A-Za-zÀ-ÿ\s]+$/, 'O nome deve conter apenas letras')
-    .max(50, 'Máximo de 100 caracteres'),
+    .max(100, 'Máximo de 100 caracteres'),
   email: yup
     .string()
     .email('E-mail inválido')

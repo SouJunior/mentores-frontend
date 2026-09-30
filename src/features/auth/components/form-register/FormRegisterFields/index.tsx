@@ -26,6 +26,7 @@ export function FormRegisterFields() {
         label="Nome completo"
         placeholder="Preencha com seu nome"
         inputType="text"
+        maxLength={100}
       />
 
       <Calendar.Root

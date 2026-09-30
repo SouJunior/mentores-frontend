@@ -11,7 +11,7 @@ export function ModalDeleteAccount({
   handleDeleteAccount,
 }: ModalDeleteAccountProps) {
   return (
-    <Modal.Content className="items-center flex flex-col gap-2 max-w-[400px] p-4 relative text-center">
+    <Modal.Content className="items-center flex flex-col gap-2 max-w-[400px] p-4 text-center">
       <Modal.Title className="text-black-200 text-[1.4rem] font-medium leading-6 mb-4 px-16 text-center">
         Você tem certeza que deseja fazer isso?
       </Modal.Title>

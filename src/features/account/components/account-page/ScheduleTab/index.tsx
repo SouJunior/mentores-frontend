@@ -3,6 +3,10 @@
 import { updateCalendlyInfo } from '@/features/account/actions/actions';
 import { ModalCancelKeepRoute } from '@/features/account/components/modal-cancel-keep-route';
 import { ModalConfirm } from '@/features/account/components/modal-confirm';
+import {
+  toastMessageDiscarded,
+  toastMessageSuccess,
+} from '@/features/account/utils/toast-messages';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
 import { Spinner } from '@/shared/components/spinner';
@@ -15,13 +19,9 @@ import {
   isValidHttpsUrl,
   splitCalendlyName,
 } from '@/shared/utils/ValidateCalendlyInput';
-import {
-  CheckCircle as CheckCircleOutlineRoundedIcon,
-  AlertCircle as ErrorOutlineRoundedIcon,
-} from 'lucide-react';
+import { AlertCircle as ErrorOutlineRoundedIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface ScheduleTabProps {
@@ -65,32 +65,6 @@ export function ScheduleTab({ mentor, calendlyInfo }: ScheduleTabProps) {
 
   const hasScheduleChanges = inputValue !== savedInputValue;
   const isButtonDisabled = !hasScheduleChanges || !isValid || isLoading;
-
-  const toastMessageSuccess = () =>
-    toast('Alterações salvas', {
-      icon: <CheckCircleOutlineRoundedIcon />,
-      position: 'top-center',
-      closeButton: false,
-      style: {
-        backgroundColor: 'var(--color-green-400)',
-        color: 'var(--color-green-800)',
-        fontWeight: 500,
-        marginTop: '5rem',
-      },
-    });
-
-  const toastMessageDiscarded = () =>
-    toast('Alterações descartadas', {
-      icon: false,
-      position: 'top-center',
-      closeButton: false,
-      style: {
-        backgroundColor: 'var(--color-yellow)',
-        color: 'var(--color-brown-300)',
-        fontWeight: 500,
-        marginTop: '5rem',
-      },
-    });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
