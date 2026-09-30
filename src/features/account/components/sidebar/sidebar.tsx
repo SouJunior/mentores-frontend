@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/shared/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ToastContainer } from 'react-toastify';
@@ -29,11 +30,12 @@ export default function AccountSidebar() {
             <Link
               key={href}
               href={href}
-              className={`px-2 py-4 rounded-md text-base font-medium transition-all w-full justify-start inline-flex items-center ${
+              className={cn(
+                'inline-flex w-full items-center justify-start rounded-md px-2 py-4 text-base font-medium transition-all',
                 pathname === href
                   ? 'text-foreground'
                   : 'text-foreground/60 hover:bg-gray-100 hover:text-foreground'
-              }`}
+              )}
             >
               {label}
             </Link>
@@ -41,12 +43,12 @@ export default function AccountSidebar() {
 
           <Link
             href="/account/account-management"
-            className={`mt-20 px-2 py-4 rounded-md text-base font-medium transition-all w-full justify-start inline-flex items-center 
-            ${
+            className={cn(
+              'mt-20 inline-flex w-full items-center justify-start rounded-md px-2 py-4 text-base font-medium transition-all',
               pathname === '/account/account-management'
                 ? 'text-foreground'
                 : 'text-foreground/60 hover:bg-gray-100 hover:text-foreground'
-            }`}
+            )}
           >Gestão da conta
           </Link>
         </nav>

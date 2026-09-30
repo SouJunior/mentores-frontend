@@ -6,7 +6,7 @@ import { useEditPhotoContext } from '@/shared/context/EditPhotoContext';
 import { handleError } from '@/shared/utils/handleError';
 import { Camera, PencilSimple } from 'phosphor-react';
 import { useEffect, useRef, useState } from 'react';
-
+import * as yup from 'yup';
 
 interface EditPhotoModalProps extends React.HTMLAttributes<HTMLDivElement> {
   selectedPhoto: string | null;
@@ -38,42 +38,57 @@ export default function EditPhotoModal({
     setZoom(1);
   }
 
-  const handleAddPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const imageFileSchema = yup
+  .mixed<File>()
+  .nullable()
+  .notRequired()
+  .test(
+    'FILE_SIZE',
+    'A foto selecionada ultrapassa o tamanho permitido. Tamanho máximo aceito 8MP', 
+    file => !file || file.size <= MAX_IMAGE_SIZE)
+  .test(
+    'FILE_FORMAT', 
+    'A foto deve estar em um dos formatos permitidos. Formatos aceitos: jpg ou png.', 
+    file => !file || ALLOWED_IMAGE_TYPES.includes(file.type))
+
+  const handleAddPhoto = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.currentTarget;
     const file = event.target.files?.[0];
-    if (file) {
-      let hasError = false;
 
-      if (file.size > MAX_IMAGE_SIZE) {
-        handleError(
-          'A foto selecionada ultrapassa o tamanho permitido. Tamanho máximo aceito 8MP'
-        );
-        hasError = true;
-      }
-      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-        handleError(
-          'A foto deve estar em um dos formatos permitidos. Formatos aceitos: jpg ou png.',
-        );
-        hasError = true;
-      }
+    if (!file) return
 
-      if (hasError)
+    try {
+      await imageFileSchema.validate(file, {abortEarly: false});
+    } catch(error) {
+      if(error instanceof yup.ValidationError) {
+        const validationErros = error.inner.length > 0 ? error.inner : [error];
+
+        validationErros.forEach(validationErros => {
+          handleError(validationErros.message);
+        });
+        input.value = '';
         return;
+      }
 
-      const reader = new FileReader();
-      reader.onload = e => {
-        // if (onAddPhoto) onAddPhoto(e.target?.result as string);
-        // setOriginalImage(e.target?.result as string);
-        // setCrop({ x: 0, y: 0 });
-        // setZoom(1);
-        const photo = e.target?.result;
-        if(typeof photo !== 'string') {
-          handleError('Não foi possível carregar a foto');
-          return;
-        }
-        applyPhoto(photo);
-      };
-      reader.readAsDataURL(file);
+      throw error;
     }
+    const reader = new FileReader();
+
+    reader.onload = e => {
+      const photo = e.target?.result;
+
+      if(typeof photo !== 'string') {
+        handleError('Não foi possível carregar a foto');
+        return;
+      }
+
+      applyPhoto(photo);
+    };
+
+    reader.readAsDataURL(file);
+    input.value = ''
   };
 
   const handleOpenCamera = async () => {
