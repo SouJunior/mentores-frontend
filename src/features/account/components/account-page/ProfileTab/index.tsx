@@ -9,7 +9,7 @@ import { EditPhotoProvider } from '@/shared/context/EditPhotoContext';
 import { IMentor } from '@/shared/types/Auth';
 import { handleError } from '@/shared/utils/handleError';
 import { isEmpty } from '@/shared/utils/is-empty';
-import { FormikHelpers, FormikProvider, useFormik } from 'formik';
+import { Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { CheckCircle as CheckCircleOutlineRoundedIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -121,7 +121,7 @@ export function ProfileTab({ mentor }: ProfileTabProps) {
       </p>
 
       <FormikProvider value={formik}>
-        <form className="flex flex-col gap-4 max-w-[42.75rem]">
+        <Form className="flex w-full min-w-0 max-w-[36.3rem] flex-col gap-4">
           <FormFields key={formFieldsKey} mentor={mentor} />
 
           <div className="h-px w-full bg-gray-700" />
@@ -156,7 +156,7 @@ export function ProfileTab({ mentor }: ProfileTabProps) {
               </Button>
             )}
           </div>
-        </form>
+        </Form>
       </FormikProvider>
     </EditPhotoProvider>
   );

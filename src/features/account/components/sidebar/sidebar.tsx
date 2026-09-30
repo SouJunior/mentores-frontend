@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/shared/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ToastContainer } from 'react-toastify';
@@ -9,8 +10,7 @@ const navItems = [
   { href: '/account/personal-info', label: 'Informações pessoais' },
   { href: '/account/profile', label: 'Perfil' },
   { href: '/account/schedule', label: 'Agenda' },
-  { href: '/account/password', label: 'Senha' },
-  { href: '/account/account-management', label: 'Gestão de conta' },
+  { href: '/account/password', label: 'Alterar senha' },
 ];
 
 export default function AccountSidebar() {
@@ -30,15 +30,27 @@ export default function AccountSidebar() {
             <Link
               key={href}
               href={href}
-              className={`px-2 py-4 rounded-md text-base font-medium transition-all w-full justify-start inline-flex items-center ${
+              className={cn(
+                'inline-flex w-full items-center justify-start rounded-md px-2 py-4 text-base font-medium transition-all',
                 pathname === href
                   ? 'text-foreground'
                   : 'text-foreground/60 hover:bg-gray-100 hover:text-foreground'
-              }`}
+              )}
             >
               {label}
             </Link>
           ))}
+
+          <Link
+            href="/account/account-management"
+            className={cn(
+              'mt-20 inline-flex w-full items-center justify-start rounded-md px-2 py-4 text-base font-medium transition-all',
+              pathname === '/account/account-management'
+                ? 'text-foreground'
+                : 'text-foreground/60 hover:bg-gray-100 hover:text-foreground'
+            )}
+          >Gestão da conta
+          </Link>
         </nav>
       </aside>
 

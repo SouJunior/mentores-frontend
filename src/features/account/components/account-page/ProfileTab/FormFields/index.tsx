@@ -58,12 +58,12 @@ export function FormFields({ mentor }: FormFieldsProps) {
   };
 
   return (
-    <div className="grid grid-cols-[8rem_1fr] items-center gap-y-12 gap-x-16">
+    <div className="mt-5 grid grid-cols-1 items-start gap-x-4 gap-y-8 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-y-12 sm:gap-x-8">
       <Modal.Root>
         <Modal.Control asChild>
           <button
             type="button"
-            className="rounded-full border-0 bg-transparent relative overflow-hidden cursor-pointer hover:after:content-[''] hover:after:bg-white hover:after:opacity-70 hover:after:absolute hover:after:inset-0 [&_svg.camera-icon]:hidden hover:[&_svg.camera-icon]:block"
+            className="m-auto rounded-full border-0 bg-transparent relative overflow-hidden cursor-pointer hover:after:content-[''] hover:after:bg-white hover:after:opacity-70 hover:after:absolute hover:after:inset-0 [&_svg.camera-icon]:hidden hover:[&_svg.camera-icon]:block"
           >
             <PhotoButton
               selectedPhoto={formik.values.profile ?? mentor.profile}
@@ -95,7 +95,8 @@ export function FormFields({ mentor }: FormFieldsProps) {
         <p className="text-[0.875rem] leading-4 [&_span]:text-blue-700">
           As áreas que você mentora: <span>*</span>
         </p>
-        <div className="grid grid-cols-[repeat(3,9.5rem)] gap-4 mt-4">
+        <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        
           {specialtiesOptions.map(specialty => (
             <div
               key={specialty}
@@ -111,10 +112,11 @@ export function FormFields({ mentor }: FormFieldsProps) {
               {specialty}
             </div>
           ))}
-
-          <span className="text-black-200 leading-[1.2rem] [&_strong]:font-semibold">
-            <strong>{selectedCount}/6</strong> especialidades
-          </span>
+          <div className="flex justify-end sm:col-span-2 lg:col-span-3">
+            <span className="text-black-200 leading-[1.2rem] [&_strong]:font-semibold">
+              <strong>{selectedCount}/6</strong> especialidades
+            </span>
+          </div>
         </div>
       </div>
 

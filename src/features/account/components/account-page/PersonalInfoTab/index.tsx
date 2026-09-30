@@ -9,7 +9,7 @@ import { genders } from '@/shared/constants/static-info';
 import { IMentor } from '@/shared/types/Auth';
 import { handleError } from '@/shared/utils/handleError';
 import { isEmpty } from '@/shared/utils/is-empty';
-import { FormikHelpers, FormikProvider, useFormik } from 'formik';
+import { Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { CheckCircle as CheckCircleOutlineRoundedIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -120,7 +120,7 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
       </p>
 
       <FormikProvider value={formik}>
-        <form className="flex flex-col gap-4 max-w-[36.3rem]">
+        <Form className="flex flex-col gap-4 max-w-[36.3rem]">
           <FormFields mentor={mentor} />
 
           <div className="h-px w-full bg-gray-700" />
@@ -155,7 +155,7 @@ export function PersonalInfoTab({ mentor }: PersonalInfoTabProps) {
               </Button>
             )}
           </div>
-        </form>
+        </Form>
       </FormikProvider>
     </div>
   );

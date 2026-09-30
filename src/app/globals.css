@@ -253,7 +253,7 @@
   --toastify-z-index: 99999;
 }
 
-#toast-error {
+.toast-error {
   background-color: var(--color-red-600);
   padding: 1rem;
   border-radius: 0.75rem;

@@ -40,7 +40,7 @@ const ModalImageEditor = ({ onSave, ...props }: ModalImageEditorProps) => {
 
   return (
     <Modal.Content
-      className="flex flex-col items-center gap-4 max-w-[24.18rem] w-full p-6 relative"
+      className="flex flex-col items-center gap-4 max-w-[24.18rem] w-full p-6"
       {...props}
     >
       <Modal.Title className="font-medium text-xl leading-6 text-black-200 mr-auto">

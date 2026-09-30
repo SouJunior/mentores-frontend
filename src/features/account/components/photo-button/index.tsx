@@ -8,7 +8,7 @@ interface PhotoButtonProps {
 
 export default function PhotoButton({
   selectedPhoto,
-  size = 80,
+  size = 128,
 }: PhotoButtonProps) {
   return (
     <section

@@ -5,6 +5,8 @@ import { Modal } from '@/shared/components/modal';
 import { useEditPhotoContext } from '@/shared/context/EditPhotoContext';
 import { handleError } from '@/shared/utils/handleError';
 import { Camera, PencilSimple } from 'phosphor-react';
+import { useEffect, useRef, useState } from 'react';
+import * as yup from 'yup';
 
 interface EditPhotoModalProps extends React.HTMLAttributes<HTMLDivElement> {
   selectedPhoto: string | null;
@@ -20,33 +22,147 @@ export default function EditPhotoModal({
 }: EditPhotoModalProps) {
   const { setCrop, setZoom, setOriginalImage } = useEditPhotoContext();
 
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [cameraError, setCameraError] = useState<string | null>(null);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
   const MAX_IMAGE_SIZE = 8 * 1024 * 1024;
   const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png'];
 
-  const handleAddPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const applyPhoto = (photo: string) => {
+    onAddPhoto?.(photo);
+    setOriginalImage(photo);
+    setCrop({x: 0, y: 0});
+    setZoom(1);
+  }
+
+  const imageFileSchema = yup
+  .mixed<File>()
+  .nullable()
+  .notRequired()
+  .test(
+    'FILE_SIZE',
+    'A foto selecionada ultrapassa o tamanho permitido. Tamanho máximo aceito 8MP', 
+    file => !file || file.size <= MAX_IMAGE_SIZE)
+  .test(
+    'FILE_FORMAT', 
+    'A foto deve estar em um dos formatos permitidos. Formatos aceitos: jpg ou png.', 
+    file => !file || ALLOWED_IMAGE_TYPES.includes(file.type))
+
+  const handleAddPhoto = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.currentTarget;
     const file = event.target.files?.[0];
-    if (file) {
-      if (file.size > MAX_IMAGE_SIZE) {
-        handleError(
-          'A foto selecionada ultrapassa o tamanho permitido. Tamanho máximo aceito 8MP'
-        );
+
+    if (!file) return
+
+    try {
+      await imageFileSchema.validate(file, {abortEarly: false});
+    } catch(error) {
+      if(error instanceof yup.ValidationError) {
+        const validationErros = error.inner.length > 0 ? error.inner : [error];
+
+        validationErros.forEach(validationErros => {
+          handleError(validationErros.message);
+        });
+        input.value = '';
         return;
       }
-      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-        handleError(
-          'A foto deve estar em um dos formatos permitidos. Formatos aceitos: jpg ou png.'
-        );
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = e => {
-        if (onAddPhoto) onAddPhoto(e.target?.result as string);
-        setOriginalImage(e.target?.result as string);
-        setCrop({ x: 0, y: 0 });
-        setZoom(1);
-      };
-      reader.readAsDataURL(file);
+
+      throw error;
     }
+    const reader = new FileReader();
+
+    reader.onload = e => {
+      const photo = e.target?.result;
+
+      if(typeof photo !== 'string') {
+        handleError('Não foi possível carregar a foto');
+        return;
+      }
+
+      applyPhoto(photo);
+    };
+
+    reader.readAsDataURL(file);
+    input.value = ''
+  };
+
+  const handleOpenCamera = async () => {
+    setCameraError(null);
+
+    if(!navigator.mediaDevices?.getUserMedia) {
+     setCameraError('Seu navegador não suporta acesso à câmera.');
+     return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'user',
+        },
+        audio: false,
+      }); 
+      streamRef.current = stream;
+      setIsCameraOpen(true);
+    } catch {
+      setCameraError(
+        'Não foi possível acessar a câmera. Verifique as permissões do navegador.'
+      );
+    }
+  };
+
+  useEffect(() => {
+    if(!isCameraOpen || !videoRef.current || !streamRef.current) {
+      return;
+    }
+    videoRef.current.srcObject = streamRef.current;
+
+    return () => {
+      if(videoRef.current) {
+        videoRef.current.srcObject = null;
+      }
+    };
+  }, [isCameraOpen]);
+
+  const stopCamera = () => {
+    streamRef.current?.getTracks().forEach(track => track.stop());
+    streamRef.current = null;
+    setIsCameraOpen(false);
+  }
+
+  useEffect(() => {
+    return () => {
+      streamRef.current?.getTracks().forEach(track => track.stop());
+    };
+  }, []);
+
+  const handleCapturePhoto = () => {
+    const video = videoRef.current;
+
+    if(!video || video.videoWidth == 0 || video.videoHeight == 0){
+      handleError('A câmera ainda não está pronta.');
+      return;
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const context = canvas.getContext('2d');
+
+    if(!context) {
+      handleError('Não foi possível capturar a foto.');
+      return;
+    }
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const photo = canvas.toDataURL('image/jpeg', 0.9);
+
+    applyPhoto(photo);
+    stopCamera();
   };
 
   const handleSavePhoto = (editedImage: string | null) => {
@@ -67,6 +183,42 @@ export default function EditPhotoModal({
       <div className="flex flex-col items-center gap-8">
         <PhotoButton size={128} selectedPhoto={selectedPhoto} />
 
+        {isCameraOpen && (
+          <div className='flex w-full flex-col items-center gap-4'>
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className='aspect-square w-full max-w-80 rounded-lg object-cover'
+            />
+            <div>
+              <button
+                type='button'
+                onClick={handleCapturePhoto}
+                className='flex-1 rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white'
+              >
+                Tirar Foto
+              </button>
+
+              <button
+                type='button'
+                onClick={stopCamera}
+                className='flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700'
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        )}
+
+        {cameraError && (
+          <p className='w-full text-sm text-red-500' role='alert'>
+            {cameraError}
+          </p>
+        )}
+
+      {!isCameraOpen && (
         <div className="w-full flex gap-4">
           <Modal.Root>
             <Modal.Control asChild>
@@ -81,7 +233,10 @@ export default function EditPhotoModal({
             <ModalImageEditor onSave={handleSavePhoto} />
           </Modal.Root>
 
-          <button className="flex-1 flex flex-col items-center justify-center py-2 px-3 bg-gray-200 rounded-lg border-0 cursor-pointer text-gray-700 font-semibold leading-[1.2rem] text-base [&_svg]:w-6 [&_svg]:h-6 [&_svg]:fill-gray-700">
+          <button 
+            type='button'
+            onClick={handleOpenCamera}
+            className="flex-1 flex flex-col items-center justify-center py-2 px-3 bg-gray-200 rounded-lg border-0 cursor-pointer text-gray-700 font-semibold leading-[1.2rem] text-base [&_svg]:w-6 [&_svg]:h-6 [&_svg]:fill-gray-700">
             <Camera weight="bold" />
             Câmera
           </button>
@@ -104,6 +259,8 @@ export default function EditPhotoModal({
             Adicionar
           </label>
         </div>
+      )}
+
       </div>
 
       <div className="w-full h-px bg-gray-700 mt-1" aria-hidden />
