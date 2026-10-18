@@ -1,6 +1,7 @@
 'use client';
 
 import { InputForm } from '@/shared/components/input-form';
+import { RadioOption } from '@/shared/components/radio-option';
 import { Select } from '@/shared/components/select';
 import { SelectItem } from '@/shared/components/select/SelectItem';
 import { reasons, reviewOptions } from '@/shared/constants/static-info';
@@ -59,7 +60,7 @@ export default function FormFields({
 
   return (
     <div className="flex flex-col gap-6 max-w-xl">
-      <label className="text-base font-normal leading-[1.4rem] [&_span]:text-blue-700">
+      <div className="text-base font-normal leading-[1.4rem] [&_span]:text-blue-700">
         O que o motivou a excluir sua conta na plataforma para mentores?
         <span>*</span>
         {formErrors.reasonOption && (
@@ -67,7 +68,7 @@ export default function FormFields({
             {formErrors.reasonOption}
           </p>
         )}
-      </label>
+      </div>
 
       <label className="flex [&_.select-trigger]:text-black-200 [&_.select-trigger]:text-base [&_.select-trigger]:leading-[1.4rem] [&_.select-trigger]:py-2.5 [&_.select-trigger]:px-4">
         <Select
@@ -109,66 +110,64 @@ export default function FormFields({
         </p>
       </div>
 
-      <label className="text-base font-normal leading-[1.4rem] [&_span]:text-blue-700">
-        Como você avaliaria a facilidade de uso da plataforma?
-        <span>*</span>
+      <fieldset>
+        <legend className="text-base font-normal leading-[1.4rem] [&_span]:text-blue-700">
+          Como você avaliaria a facilidade de uso da plataforma?
+          <span>*</span>
+        </legend>
         {formErrors.usabilityRating && (
           <p className="text-red-400 font-bold text-xs leading-[1.05rem] mt-1">
             {formErrors.usabilityRating}
           </p>
         )}
-      </label>
-
-      <div className="flex flex-col gap-4">
-        {[...reviewOptions].reverse().map(item => (
-          <div key={item.id} className="flex gap-2 items-start">
-            <input
-              type="radio"
+        <div className="flex flex-col mt-2">
+          {[...reviewOptions].reverse().map(item => (
+            <RadioOption
+              key={item.id}
               name="usabilityRating"
               value={item.id}
-              onClick={e => handleSelectChange(e, 'usabilityRating')}
-            />
-            <label className="text-[0.875rem] font-normal leading-[1.05rem]">
+              onChange={e => handleSelectChange(e, 'usabilityRating')}
+            >
               {item.description}
-            </label>
-          </div>
-        ))}
-      </div>
+            </RadioOption>
+          ))}
+        </div>
+      </fieldset>
 
-      <label className="text-base font-normal leading-[1.4rem] [&_span]:text-blue-700">
-        Em uma escala de 1 a 7, o quão satisfeito você estava com a plataforma?
-        <span>*</span>
+      <fieldset>
+        <legend className="text-base font-normal leading-[1.4rem] [&_span]:text-blue-700">
+          Em uma escala de 1 a 7, o quão satisfeito você estava com a plataforma?
+          <span>*</span>
+        </legend>
         {formErrors.satisfactionRating && (
           <p className="text-red-400 font-bold text-xs leading-[1.05rem] mt-1">
             {formErrors.satisfactionRating}
           </p>
         )}
-      </label>
-      <div className="flex justify-evenly">
-        {reviewOptions.map(item => (
-          <div key={item.id} className="flex flex-col gap-1 items-center">
-            <label>
+        <div className="flex justify-evenly mt-6">
+          {reviewOptions.map(item => (
+            <RadioOption
+              key={item.id}
+              name="satisfactionRating"
+              value={item.id}
+              onChange={e => handleSelectChange(e, 'satisfactionRating')}
+              className="flex-col-reverse justify-center gap-1 min-w-11"
+            >
               <Image
                 src={item.imgUrl}
                 alt={item.description}
                 width={20}
                 height={20}
               />
-            </label>
-            <input
-              type="radio"
-              name="satisfactionRating"
-              value={item.id}
-              onClick={e => handleSelectChange(e, 'satisfactionRating')}
-            />
-          </div>
-        ))}
-      </div>
+            </RadioOption>
+          ))}
+        </div>
+      </fieldset>
 
-      <label className="text-base font-normal leading-[1.4rem]">
+      <p className="text-base font-normal leading-[1.4rem]">
         Existe algo que você gostaria de compartilhar sobre sua experiência com
         a plataforma de mentores?
-      </label>
+      </p>
 
       <div className="flex flex-col items-end gap-2">
         <InputForm
