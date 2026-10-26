@@ -1,5 +1,5 @@
 interface CheckboxProps {
-  id?: string;
+  id: string;
   text?: string;
   isChecked: boolean;
   setValue: (e: boolean) => void;
@@ -11,7 +11,7 @@ export function Checkbox({ id, text, isChecked, setValue }: CheckboxProps) {
       <input
         type="checkbox"
         className="border border-black-200 rounded w-4 h-4 text-black-200 cursor-pointer"
-        {...(id && { id })}
+        id={id}
         onChange={e => setValue(e.target.checked)}
         checked={isChecked}
       />
